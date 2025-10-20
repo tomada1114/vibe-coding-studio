@@ -1,0 +1,12 @@
+{
+  "required": [],
+  "optional": [
+    {
+      "key": "NEXT_PUBLIC_SITE_URL",
+      "description": "Canonical site URL used in metadata",
+      "example": "https://yourdomain.com",
+      "group": "App",
+      "mask": false
+    }
+  ]
+}
