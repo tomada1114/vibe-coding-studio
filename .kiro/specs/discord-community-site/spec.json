@@ -1,0 +1,22 @@
+{
+  "feature_name": "discord-community-site",
+  "created_at": "2025-10-20T00:00:00Z",
+  "updated_at": "2025-10-20T15:00:00Z",
+  "language": "ja",
+  "phase": "ready-for-implementation",
+  "approvals": {
+    "requirements": {
+      "generated": true,
+      "approved": true
+    },
+    "design": {
+      "generated": true,
+      "approved": true
+    },
+    "tasks": {
+      "generated": true,
+      "approved": true
+    }
+  },
+  "ready_for_implementation": true
+}

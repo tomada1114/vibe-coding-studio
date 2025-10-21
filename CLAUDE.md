@@ -314,6 +314,15 @@ VS Codeユーザー用：
 
 - Context7
 
+## アクティブな仕様（Active Specifications）
+
+### discord-community-site
+Vibe Coding StudioのDiscordコミュニティへの誘導を目的としたランディングページ。既存デザインを踏襲し、トップページとコミュニティページの2ページ構成。
+
+- **仕様パス**: `.kiro/specs/discord-community-site/`
+- **ステータス**: initialized
+- **作成日**: 2025-10-20
+
 ## 今後の開発
 
 このテンプレートを拡張する際は：
