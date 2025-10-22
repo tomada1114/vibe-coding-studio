@@ -18,10 +18,10 @@ import {
   HashtagIcon,
   LightBulbIcon,
   MegaphoneIcon,
-  SparklesIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/outline"
 import type { Metadata } from "next"
+import Image from "next/image"
 
 export const metadata: Metadata = {
   title: "コミュニティ - Vibe Coding Studio",
@@ -151,12 +151,16 @@ function CommunityDescriptionSection() {
               </p>
             </div>
 
-            <div className="flex items-center justify-center rounded-3xl bg-gray-100 p-12">
-              <div className="text-center">
-                <SparklesIcon className="mx-auto h-20 w-20 text-gray-500" />
-                <p className="mt-4 text-gray-500">
-                  AI駆動開発の未来を一緒に作りましょう
-                </p>
+            {/* とまだのプロフィール画像 */}
+            <div className="flex items-center justify-center">
+              <div className="relative aspect-square w-full max-w-md overflow-hidden rounded-3xl bg-gray-100 ring-1 ring-gray-950/5">
+                <Image
+                  src="/tomada.png"
+                  alt="とまだ（Tomada）のプロフィール画像"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
               </div>
             </div>
           </div>
