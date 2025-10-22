@@ -267,7 +267,7 @@ describe("コミュニティページ（/community）", () => {
       const { container } = render(<CommunityPage />)
       // 初期状態では回答パネルが閉じている（data-open属性がない）
       // またはaria-expanded="false"であることを確認
-      const panels = container.querySelectorAll('[data-headlessui-state]')
+      const panels = container.querySelectorAll("[data-headlessui-state]")
       expect(panels.length).toBeGreaterThan(0)
     })
   })

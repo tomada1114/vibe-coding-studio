@@ -314,7 +314,7 @@ function FAQSection() {
                 </span>
                 <ChevronDownIcon className="size-6 text-gray-950 transition group-data-open:rotate-180" />
               </DisclosureButton>
-              <DisclosurePanel className="px-6 pb-5 pt-2 text-base text-gray-600">
+              <DisclosurePanel className="px-6 pt-2 pb-5 text-base text-gray-600">
                 {item.answer}
               </DisclosurePanel>
             </Disclosure>
