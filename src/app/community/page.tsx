@@ -43,7 +43,7 @@ function CommunityHeroSection() {
         <Navbar />
         <div className="pt-16 pb-24 sm:pt-24 sm:pb-32 md:pt-32 md:pb-48">
           {/* メインメッセージ */}
-          <h1 className="font-display text-6xl/[0.9] font-medium tracking-tight text-balance text-gray-950 sm:text-8xl/[0.8] md:text-9xl/[0.8]">
+          <h1 className="font-display text-6xl/[1.15] font-medium tracking-tight text-balance text-gray-950 sm:text-8xl/[1.1] md:text-9xl/[1.1]">
             AI駆動開発を
             <br />
             一緒に学ぶ仲間が
@@ -53,10 +53,10 @@ function CommunityHeroSection() {
 
           {/* サブメッセージ - 不安解消 */}
           <div className="mt-8 max-w-2xl">
-            <p className="text-xl/7 font-medium text-gray-950/75 sm:text-2xl/8">
+            <p className="text-xl/8 font-medium text-gray-950/75 sm:text-2xl/9">
               初心者大歓迎 | 見るだけでもOK | 温かい雰囲気
             </p>
-            <p className="mt-4 text-lg leading-relaxed text-gray-700">
+            <p className="mt-4 text-lg/8 text-gray-700">
               とまだの最新検証をリアルタイムで見ながら、同じ目標を持つ仲間と一緒に成長できるDiscordコミュニティです。
             </p>
           </div>
@@ -120,11 +120,11 @@ function AnxietyReliefSection() {
               key={anxiety.question}
               className="rounded-3xl bg-gray-50 p-8 ring-1 ring-gray-950/5"
             >
-              <h3 className="text-lg font-semibold text-gray-950">
-                ❓ {anxiety.question}
+              <h3 className="text-lg/7 font-semibold text-gray-950">
+                {anxiety.question}
               </h3>
-              <p className="mt-4 text-base leading-relaxed text-gray-700">
-                ✅ {anxiety.answer}
+              <p className="mt-4 text-base/7 text-gray-700">
+                {anxiety.answer}
               </p>
             </div>
           ))}
@@ -191,17 +191,17 @@ function ValuePropositionSection() {
               className="relative rounded-3xl bg-white p-8 shadow-sm ring-1 ring-gray-950/5"
             >
               <proposition.icon className="h-10 w-10 text-gray-950" />
-              <h3 className="mt-6 text-xl font-semibold text-gray-950">
+              <h3 className="mt-6 text-xl/7 font-semibold text-gray-950">
                 {proposition.title}
               </h3>
-              <p className="mt-2 text-sm font-medium text-gray-600">
+              <p className="mt-2 text-sm/6 font-medium text-gray-600">
                 {proposition.description}
               </p>
               <ul className="mt-6 space-y-3">
                 {proposition.benefits.map(benefit => (
                   <li
                     key={benefit}
-                    className="flex items-start text-sm leading-relaxed text-gray-700"
+                    className="flex items-start text-sm/6 text-gray-700"
                   >
                     <span className="mr-2 text-gray-950">•</span>
                     <span>{benefit}</span>
@@ -233,11 +233,11 @@ function CommunityDescriptionSection() {
         <div className="mt-10 sm:mt-16">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
             <div className="flex flex-col justify-center">
-              <p className="text-base leading-relaxed text-gray-700">
+              <p className="text-base/7 text-gray-700">
                 Vibe Coding Studioは、AI駆動開発を学ぶ仲間が集まる場所です。
                 最新のAI技術を活用した開発手法を、実践を通じて学ぶコミュニティです。
               </p>
-              <p className="mt-4 text-base leading-relaxed text-gray-700">
+              <p className="mt-4 text-base/7 text-gray-700">
                 とまだの最新検証を見ながら一緒に成長できる環境を提供しています。
                 初心者からベテランまで、あらゆるレベルの開発者が参加しています。
               </p>
@@ -270,34 +270,34 @@ function ChannelIntroductionSection() {
   const channels = [
     {
       icon: UserGroupIcon,
-      name: "🎉 自己紹介",
+      name: "自己紹介",
       description: "まずはここで簡単に自己紹介!数行でOKです",
     },
     {
       icon: ChatBubbleLeftRightIcon,
-      name: "💭 times-all",
+      name: "times-all",
       description:
         "各自の個人スレッド(times)が集まる場所。X感覚で気軽につぶやけます",
     },
     {
       icon: LightBulbIcon,
-      name: "📖 学習報告",
+      name: "学習報告",
       description: "学んだことを報告。初歩的な内容も大歓迎です",
     },
     {
       icon: ChatBubbleLeftRightIcon,
-      name: "☕ 雑談",
+      name: "雑談",
       description: "日々の学習や開発の記録を自由に。気軽に交流できます",
     },
     {
       icon: MegaphoneIcon,
-      name: "🧪 とまだの検証部屋",
+      name: "とまだの検証部屋",
       description:
         "YouTube化前の最新情報をリアルタイム共有。失敗も含めた試行錯誤が見られます",
     },
     {
       icon: HashtagIcon,
-      name: "✉️ お問合せ",
+      name: "お問合せ",
       description: "とまだにクローズドで相談できるチャンネル",
     },
   ]
@@ -320,10 +320,10 @@ function ChannelIntroductionSection() {
               className="relative rounded-3xl bg-gray-50 p-8 shadow-sm ring-1 ring-gray-950/5"
             >
               <channel.icon className="h-10 w-10 text-gray-950" />
-              <h3 className="mt-6 text-xl font-semibold text-gray-950">
+              <h3 className="mt-6 text-xl/7 font-semibold text-gray-950">
                 {channel.name}
               </h3>
-              <p className="mt-4 text-base text-gray-600">
+              <p className="mt-4 text-base/7 text-gray-600">
                 {channel.description}
               </p>
             </div>
@@ -412,8 +412,8 @@ function RecommendedForSection() {
               key={person}
               className="flex items-start rounded-2xl bg-white/80 p-6 ring-1 ring-gray-950/5"
             >
-              <span className="mr-4 text-2xl">✅</span>
-              <p className="text-base leading-relaxed text-gray-700">
+              <span className="mr-3 mt-0.5 text-gray-950">•</span>
+              <p className="text-base/7 text-gray-700">
                 {person}
               </p>
             </div>
@@ -476,12 +476,12 @@ function FAQSection() {
           {faqItems.map((item, index) => (
             <Disclosure key={index} as="div" className="rounded-2xl bg-gray-50">
               <DisclosureButton className="group flex w-full items-center justify-between px-6 py-5 text-left">
-                <span className="text-lg font-semibold text-gray-950">
+                <span className="text-lg/7 font-semibold text-gray-950">
                   {item.question}
                 </span>
                 <ChevronDownIcon className="size-6 text-gray-950 transition group-data-open:rotate-180" />
               </DisclosureButton>
-              <DisclosurePanel className="px-6 pt-2 pb-5 text-base text-gray-600">
+              <DisclosurePanel className="px-6 pt-2 pb-5 text-base/7 text-gray-600">
                 {item.answer}
               </DisclosurePanel>
             </Disclosure>

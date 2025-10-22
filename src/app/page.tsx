@@ -41,14 +41,14 @@ function HeroSection() {
           </div>
 
           {/* キャッチコピー */}
-          <h1 className="font-display text-6xl/[0.9] font-medium tracking-tight text-balance text-gray-950 sm:text-8xl/[0.8] md:text-9xl/[0.8]">
+          <h1 className="font-display text-6xl/[1.15] font-medium tracking-tight text-balance text-gray-950 sm:text-8xl/[1.1] md:text-9xl/[1.1]">
             AI駆動開発を
             <br />
             一緒に学ぼう
           </h1>
 
           {/* 説明文 */}
-          <p className="mt-8 max-w-lg text-xl/7 font-medium text-gray-950/75 sm:text-2xl/8">
+          <p className="mt-8 max-w-lg text-xl/8 font-medium text-gray-950/75 sm:text-2xl/9">
             AI駆動開発を学ぶ仲間が集まり、とまだの最新検証を見ながら一緒に成長するDiscordコミュニティ
           </p>
 
@@ -122,10 +122,10 @@ function CommunityOverviewSection() {
               <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gray-950">
                 <feature.icon className="h-8 w-8 text-white" />
               </div>
-              <h3 className="mt-6 text-xl font-semibold text-gray-950">
+              <h3 className="mt-6 text-xl/7 font-semibold text-gray-950">
                 {feature.title}
               </h3>
-              <p className="mt-4 text-base leading-relaxed text-gray-600">
+              <p className="mt-4 text-base/7 text-gray-600">
                 {feature.description}
               </p>
             </div>
@@ -184,10 +184,10 @@ function WorkInProgressSection() {
               className="relative rounded-3xl bg-white p-8 shadow-sm ring-1 ring-gray-950/5"
             >
               <feature.icon className="h-10 w-10 text-gray-950" />
-              <h3 className="mt-6 text-xl font-semibold text-gray-950">
+              <h3 className="mt-6 text-xl/7 font-semibold text-gray-950">
                 {feature.title}
               </h3>
-              <p className="mt-4 text-base text-gray-600">
+              <p className="mt-4 text-base/7 text-gray-600">
                 {feature.description}
               </p>
             </div>
@@ -217,13 +217,13 @@ function ProfileSection() {
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
             {/* プロフィール情報 */}
             <div className="flex flex-col justify-center">
-              <h3 className="text-2xl font-semibold leading-tight text-gray-950">
+              <h3 className="text-2xl/8 font-semibold text-gray-950">
                 主催者: とまだ（Tomada）
               </h3>
-              <p className="mt-6 text-base leading-relaxed text-gray-700">
+              <p className="mt-6 text-base/7 text-gray-700">
                 AI駆動開発の実践者として、最新の技術検証とコミュニティ活動を行っています。
               </p>
-              <p className="mt-4 text-base leading-relaxed text-gray-700">
+              <p className="mt-4 text-base/7 text-gray-700">
                 Discordコミュニティでは、AI駆動開発の最新トレンドや実践的なノウハウを共有し、
                 メンバーと共に成長する場を提供しています。
               </p>
@@ -231,12 +231,12 @@ function ProfileSection() {
 
             {/* プロフィール画像 */}
             <div className="flex items-center justify-center">
-              <div className="relative aspect-square w-full max-w-md overflow-hidden rounded-3xl bg-gray-100 ring-1 ring-gray-950/5">
+              <div className="relative aspect-square w-full max-w-md">
                 <Image
                   src="/tomada.png"
                   alt="とまだ（Tomada）のプロフィール画像"
                   fill
-                  className="object-cover"
+                  className="object-contain"
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   priority
                 />
