@@ -5,25 +5,25 @@ import { Gradient } from "./gradient"
 import { Link } from "./link"
 import { Logo } from "./logo"
 import { Subheading } from "./text"
-import { DISCORD_INVITE_URL, SOCIAL_LINKS } from "@/lib/constants"
 
 function CallToAction() {
   return (
     <div className="relative pt-20 pb-16 text-center sm:py-24">
       <hgroup>
-        <Subheading>コミュニティに参加</Subheading>
+        <Subheading>Get started</Subheading>
         <p className="mt-6 text-3xl font-medium tracking-tight text-gray-950 sm:text-5xl">
-          AI駆動開発を
+          Ready to build?
           <br />
-          一緒に学びませんか？
+          Start your project today.
         </p>
       </hgroup>
       <p className="mx-auto mt-6 max-w-xs text-sm/6 text-gray-500">
-        Discordコミュニティで、とまだの最新検証を見ながら一緒に成長しましょう。
+        A modern, minimal template with everything you need to create amazing
+        web experiences.
       </p>
       <div className="mt-6">
-        <Button className="w-full sm:w-auto" href={DISCORD_INVITE_URL} target="_blank" rel="noopener noreferrer">
-          Discordに参加する
+        <Button className="w-full sm:w-auto" href="https://github.com">
+          View on GitHub
         </Button>
       </div>
     </div>
@@ -53,22 +53,40 @@ function Sitemap() {
   return (
     <>
       <div>
-        <SitemapHeading>サイト</SitemapHeading>
+        <SitemapHeading>Template</SitemapHeading>
         <SitemapLinks>
-          <SitemapLink href="/">ホーム</SitemapLink>
-          <SitemapLink href="/community">コミュニティ</SitemapLink>
+          <SitemapLink href="/">Home</SitemapLink>
+          <SitemapLink href="/#features">Features</SitemapLink>
+          <SitemapLink href="/company">About</SitemapLink>
         </SitemapLinks>
       </div>
       <div>
-        <SitemapHeading>コミュニティ</SitemapHeading>
+        <SitemapHeading>Resources</SitemapHeading>
         <SitemapLinks>
-          <SitemapLink
-            href={DISCORD_INVITE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Discord
+          <SitemapLink href="https://nextjs.org/docs" target="_blank">
+            Next.js Docs
           </SitemapLink>
+          <SitemapLink href="https://tailwindcss.com/docs" target="_blank">
+            Tailwind Docs
+          </SitemapLink>
+        </SitemapLinks>
+      </div>
+      <div>
+        <SitemapHeading>Community</SitemapHeading>
+        <SitemapLinks>
+          <SitemapLink href="https://github.com" target="_blank">
+            GitHub
+          </SitemapLink>
+          <SitemapLink href="https://twitter.com" target="_blank">
+            Twitter
+          </SitemapLink>
+        </SitemapLinks>
+      </div>
+      <div>
+        <SitemapHeading>Legal</SitemapHeading>
+        <SitemapLinks>
+          <SitemapLink href="#">Terms</SitemapLink>
+          <SitemapLink href="#">Privacy</SitemapLink>
         </SitemapLinks>
       </div>
     </>
@@ -103,67 +121,33 @@ function SocialIconLinkedIn(props: React.ComponentPropsWithoutRef<"svg">) {
   )
 }
 
-function SocialIconYouTube(props: React.ComponentPropsWithoutRef<"svg">) {
-  return (
-    <svg viewBox="0 0 16 16" fill="currentColor" {...props}>
-      <path d="M15.841 4.8s-.156-1.103-.636-1.587c-.608-.636-1.29-.638-1.602-.676-2.237-.162-5.594-.162-5.594-.162h-.007s-3.357 0-5.594.162c-.311.038-.994.04-1.602.676C.327 3.697.171 4.8.171 4.8S.015 6.09.015 7.382v1.216c0 1.291.156 2.582.156 2.582s.156 1.103.635 1.587c.608.636 1.407.616 1.762.683 1.279.123 5.436.161 5.436.161s3.362-.005 5.599-.167c.312-.039.994-.041 1.602-.677.48-.484.636-1.587.636-1.587s.156-1.291.156-2.582V7.382c0-1.292-.156-2.582-.156-2.582zM6.352 10.059V4.993l4.322 2.539-4.322 2.527z" />
-    </svg>
-  )
-}
-
-function SocialIconQiita(props: React.ComponentPropsWithoutRef<"svg">) {
-  return (
-    <svg viewBox="0 0 16 16" fill="currentColor" {...props}>
-      <path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.5 11.5h-7v-7h7v7z" />
-    </svg>
-  )
-}
-
-function SocialIconNote(props: React.ComponentPropsWithoutRef<"svg">) {
-  return (
-    <svg viewBox="0 0 16 16" fill="currentColor" {...props}>
-      <path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm-1-10h2v6H7V4zm0 7h2v2H7v-2z" />
-    </svg>
-  )
-}
-
-function SocialIconUdemy(props: React.ComponentPropsWithoutRef<"svg">) {
-  return (
-    <svg viewBox="0 0 16 16" fill="currentColor" {...props}>
-      <path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm4.5 10.5c0 .83-.67 1.5-1.5 1.5H5c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5h6c.83 0 1.5.67 1.5 1.5v5z" />
-    </svg>
-  )
-}
-
-// アイコンマッピング
-const iconMap: Record<string, React.ComponentType<React.ComponentPropsWithoutRef<"svg">>> = {
-  twitter: SocialIconX,
-  youtube: SocialIconYouTube,
-  qiita: SocialIconQiita,
-  note: SocialIconNote,
-  udemy: SocialIconUdemy,
-  facebook: SocialIconFacebook,
-  linkedin: SocialIconLinkedIn,
-}
-
 function SocialLinks() {
   return (
     <>
-      {SOCIAL_LINKS.map((link) => {
-        const IconComponent = iconMap[link.icon.toLowerCase()] || SocialIconX
-        return (
-          <Link
-            key={link.name}
-            href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Visit us on ${link.name}`}
-            className="text-gray-950 data-hover:text-gray-950/75"
-          >
-            <IconComponent className="size-4" />
-          </Link>
-        )
-      })}
+      <Link
+        href="https://facebook.com"
+        target="_blank"
+        aria-label="Visit us on Facebook"
+        className="text-gray-950 data-hover:text-gray-950/75"
+      >
+        <SocialIconFacebook className="size-4" />
+      </Link>
+      <Link
+        href="https://x.com"
+        target="_blank"
+        aria-label="Visit us on X"
+        className="text-gray-950 data-hover:text-gray-950/75"
+      >
+        <SocialIconX className="size-4" />
+      </Link>
+      <Link
+        href="https://linkedin.com"
+        target="_blank"
+        aria-label="Visit us on LinkedIn"
+        className="text-gray-950 data-hover:text-gray-950/75"
+      >
+        <SocialIconLinkedIn className="size-4" />
+      </Link>
     </>
   )
 }
@@ -171,7 +155,7 @@ function SocialLinks() {
 function Copyright() {
   return (
     <div className="text-sm/6 text-gray-950">
-      &copy; {new Date().getFullYear()} Vibe Coding Studio.
+      &copy; {new Date().getFullYear()} Your Company Name.
     </div>
   )
 }
