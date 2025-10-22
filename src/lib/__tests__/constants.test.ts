@@ -4,8 +4,8 @@
  * TDD Red フェーズ: 最初に失敗するテストを作成
  */
 
-import { DISCORD_INVITE_URL, SOCIAL_LINKS, SITE_METADATA } from "../constants"
 import type { SocialLink } from "../constants"
+import { DISCORD_INVITE_URL, SITE_METADATA, SOCIAL_LINKS } from "../constants"
 
 describe("constants.ts", () => {
   describe("DISCORD_INVITE_URL", () => {
@@ -36,7 +36,7 @@ describe("constants.ts", () => {
     })
 
     it("各ソーシャルリンクが必須フィールド（name、url、icon）を持つ", () => {
-      SOCIAL_LINKS.forEach((link) => {
+      SOCIAL_LINKS.forEach(link => {
         expect(link).toHaveProperty("name")
         expect(link).toHaveProperty("url")
         expect(link).toHaveProperty("icon")
@@ -44,49 +44,49 @@ describe("constants.ts", () => {
     })
 
     it("各ソーシャルリンクのURLが有効なHTTPS URL形式である", () => {
-      SOCIAL_LINKS.forEach((link) => {
+      SOCIAL_LINKS.forEach(link => {
         expect(link.url).toMatch(/^https:\/\//)
       })
     })
 
     it("各ソーシャルリンクのnameが空文字列ではない", () => {
-      SOCIAL_LINKS.forEach((link) => {
+      SOCIAL_LINKS.forEach(link => {
         expect(link.name).not.toBe("")
       })
     })
 
     it("各ソーシャルリンクのiconが空文字列ではない", () => {
-      SOCIAL_LINKS.forEach((link) => {
+      SOCIAL_LINKS.forEach(link => {
         expect(link.icon).not.toBe("")
       })
     })
 
     it("SOCIAL_LINKSがTwitterリンクを含む", () => {
-      const twitterLink = SOCIAL_LINKS.find((link) => link.name === "Twitter")
+      const twitterLink = SOCIAL_LINKS.find(link => link.name === "Twitter")
       expect(twitterLink).toBeDefined()
       expect(twitterLink?.url).toMatch(/twitter\.com|x\.com/)
     })
 
     it("SOCIAL_LINKSがYouTubeリンクを含む", () => {
-      const youtubeLink = SOCIAL_LINKS.find((link) => link.name === "YouTube")
+      const youtubeLink = SOCIAL_LINKS.find(link => link.name === "YouTube")
       expect(youtubeLink).toBeDefined()
       expect(youtubeLink?.url).toMatch(/youtube\.com/)
     })
 
     it("SOCIAL_LINKSがQiitaリンクを含む", () => {
-      const qiitaLink = SOCIAL_LINKS.find((link) => link.name === "Qiita")
+      const qiitaLink = SOCIAL_LINKS.find(link => link.name === "Qiita")
       expect(qiitaLink).toBeDefined()
       expect(qiitaLink?.url).toMatch(/qiita\.com/)
     })
 
     it("SOCIAL_LINKSがnoteリンクを含む", () => {
-      const noteLink = SOCIAL_LINKS.find((link) => link.name === "note")
+      const noteLink = SOCIAL_LINKS.find(link => link.name === "note")
       expect(noteLink).toBeDefined()
       expect(noteLink?.url).toMatch(/note\.com/)
     })
 
     it("SOCIAL_LINKSがUdemyリンクを含む", () => {
-      const udemyLink = SOCIAL_LINKS.find((link) => link.name === "Udemy")
+      const udemyLink = SOCIAL_LINKS.find(link => link.name === "Udemy")
       expect(udemyLink).toBeDefined()
       expect(udemyLink?.url).toMatch(/udemy\.com/)
     })
@@ -120,7 +120,7 @@ describe("constants.ts", () => {
 
   describe("型安全性", () => {
     it("SOCIAL_LINKSの各要素がSocialLink型に準拠している", () => {
-      SOCIAL_LINKS.forEach((link) => {
+      SOCIAL_LINKS.forEach(link => {
         // TypeScriptの型チェックで検証されるが、ランタイムでも確認
         const socialLink: SocialLink = link
         expect(socialLink.name).toBeDefined()

@@ -4,8 +4,8 @@ import { AsyncErrorBoundary } from "@/components/error-boundary"
 import { Footer } from "@/components/footer"
 import { Gradient } from "@/components/gradient"
 import { Navbar } from "@/components/navbar"
-import type { Metadata } from "next"
 import { DISCORD_INVITE_URL } from "@/lib/constants"
+import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "コミュニティ - Vibe Coding Studio",

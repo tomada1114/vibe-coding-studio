@@ -5,9 +5,9 @@
  * TDD Red フェーズ: 失敗するテストを作成
  */
 
-import { render, screen } from "@testing-library/react"
 import { Footer } from "@/components/footer"
 import { DISCORD_INVITE_URL, SOCIAL_LINKS } from "@/lib/constants"
+import { render, screen } from "@testing-library/react"
 
 describe("Footer コンポーネント", () => {
   describe("基本構造", () => {
@@ -20,7 +20,9 @@ describe("Footer コンポーネント", () => {
     it("ロゴが表示される", () => {
       render(<Footer />)
       // Logoコンポーネントを探す（SVGまたはimg要素）
-      const logo = document.querySelector("footer svg") || document.querySelector("footer img")
+      const logo =
+        document.querySelector("footer svg") ||
+        document.querySelector("footer img")
       expect(logo).toBeInTheDocument()
     })
   })
@@ -48,8 +50,14 @@ describe("Footer コンポーネント", () => {
         name: /Discord|コミュニティ/i,
       })
       expect(discordLink).toHaveAttribute("target", "_blank")
-      expect(discordLink).toHaveAttribute("rel", expect.stringContaining("noopener"))
-      expect(discordLink).toHaveAttribute("rel", expect.stringContaining("noreferrer"))
+      expect(discordLink).toHaveAttribute(
+        "rel",
+        expect.stringContaining("noopener")
+      )
+      expect(discordLink).toHaveAttribute(
+        "rel",
+        expect.stringContaining("noreferrer")
+      )
     })
   })
 
@@ -57,7 +65,7 @@ describe("Footer コンポーネント", () => {
     it("定数管理ファイルからSOCIAL_LINKSを使用している", () => {
       render(<Footer />)
       // SOCIAL_LINKSの各リンクが表示されることを確認
-      SOCIAL_LINKS.forEach((link) => {
+      SOCIAL_LINKS.forEach(link => {
         const element = screen.getByRole("link", {
           name: new RegExp(link.name, "i"),
         })
@@ -67,7 +75,7 @@ describe("Footer コンポーネント", () => {
 
     it("各ソーシャルメディアリンクが正しいURLを持つ", () => {
       render(<Footer />)
-      SOCIAL_LINKS.forEach((link) => {
+      SOCIAL_LINKS.forEach(link => {
         const element = screen.getByRole("link", {
           name: new RegExp(link.name, "i"),
         })
@@ -77,7 +85,7 @@ describe("Footer コンポーネント", () => {
 
     it("各ソーシャルメディアリンクが新しいタブで開く（要件4.4）", () => {
       render(<Footer />)
-      SOCIAL_LINKS.forEach((link) => {
+      SOCIAL_LINKS.forEach(link => {
         const element = screen.getByRole("link", {
           name: new RegExp(link.name, "i"),
         })
@@ -132,10 +140,11 @@ describe("Footer コンポーネント", () => {
       const externalLinks = screen.getAllByRole("link", {
         name: /Twitter|YouTube|Qiita|note|Udemy|Discord|コミュニティ/i,
       })
-      externalLinks.forEach((link) => {
+      externalLinks.forEach(link => {
         // target="_blank"の外部リンクにはaria-labelまたはテキストコンテンツが必要
         const hasAriaLabel = link.hasAttribute("aria-label")
-        const hasTextContent = link.textContent && link.textContent.trim().length > 0
+        const hasTextContent =
+          link.textContent && link.textContent.trim().length > 0
         expect(hasAriaLabel || hasTextContent).toBe(true)
       })
     })

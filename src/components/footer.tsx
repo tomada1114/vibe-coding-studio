@@ -1,11 +1,11 @@
 import { PlusGrid, PlusGridItem, PlusGridRow } from "@/components/plus-grid"
+import { DISCORD_INVITE_URL, SOCIAL_LINKS } from "@/lib/constants"
 import { Button } from "./button"
 import { Container } from "./container"
 import { Gradient } from "./gradient"
 import { Link } from "./link"
 import { Logo } from "./logo"
 import { Subheading } from "./text"
-import { DISCORD_INVITE_URL, SOCIAL_LINKS } from "@/lib/constants"
 
 function CallToAction() {
   return (
@@ -22,7 +22,12 @@ function CallToAction() {
         Discordコミュニティで、とまだの最新検証を見ながら一緒に成長しましょう。
       </p>
       <div className="mt-6">
-        <Button className="w-full sm:w-auto" href={DISCORD_INVITE_URL} target="_blank" rel="noopener noreferrer">
+        <Button
+          className="w-full sm:w-auto"
+          href={DISCORD_INVITE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Discordに参加する
         </Button>
       </div>
@@ -136,7 +141,10 @@ function SocialIconUdemy(props: React.ComponentPropsWithoutRef<"svg">) {
 }
 
 // アイコンマッピング
-const iconMap: Record<string, React.ComponentType<React.ComponentPropsWithoutRef<"svg">>> = {
+const iconMap: Record<
+  string,
+  React.ComponentType<React.ComponentPropsWithoutRef<"svg">>
+> = {
   twitter: SocialIconX,
   youtube: SocialIconYouTube,
   qiita: SocialIconQiita,
@@ -149,7 +157,7 @@ const iconMap: Record<string, React.ComponentType<React.ComponentPropsWithoutRef
 function SocialLinks() {
   return (
     <>
-      {SOCIAL_LINKS.map((link) => {
+      {SOCIAL_LINKS.map(link => {
         const IconComponent = iconMap[link.icon.toLowerCase()] || SocialIconX
         return (
           <Link

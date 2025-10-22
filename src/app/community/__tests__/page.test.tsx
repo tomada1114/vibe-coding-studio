@@ -4,9 +4,9 @@
  * TDD Red フェーズ: 失敗するテストを作成
  */
 
-import { render, screen } from "@testing-library/react"
 import CommunityPage from "@/app/community/page"
 import { DISCORD_INVITE_URL } from "@/lib/constants"
+import { render, screen } from "@testing-library/react"
 
 // モックを設定
 jest.mock("@/components/logo", () => ({

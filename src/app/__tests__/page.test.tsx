@@ -4,8 +4,8 @@
  * TDD Red フェーズ: 失敗するテストを作成
  */
 
-import { render, screen } from "@testing-library/react"
 import Home from "@/app/page"
+import { render, screen } from "@testing-library/react"
 
 // モックを設定
 jest.mock("@/components/logo", () => ({

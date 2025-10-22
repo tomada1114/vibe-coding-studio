@@ -185,12 +185,11 @@ npm run lint       # コードスタイルチェック
 
 ```bash
 # 🚀 ワンコマンドでコミット前チェック（推奨）
-npm run pre-commit-check
+npm run check:all
 
 # または個別実行
 npm run lint        # ESLint検査
 npm run type-check  # TypeScript型チェック
-npm run validate:env # 環境変数チェック
 
 # オプションだが推奨（時間に余裕がある場合）
 npm run build      # 本番ビルドが動作することを確認
@@ -199,13 +198,10 @@ npm run test       # テスト実行
 
 **📋 コミット前チェックスクリプトの詳細**:
 
-- `npm run pre-commit-check` は以下を自動実行：
-  1. プロジェクト設定確認
-  2. ESLint検査（警告レベルは許可）
-  3. TypeScript型チェック（既存エラーは無視）
-  4. 重要ファイルの存在確認
-  5. 環境変数検証
-  6. Git ステータス表示
+- `npm run check:all` は以下を自動実行：
+  1. ESLint検査（コードスタイルと品質）
+  2. TypeScript型チェック（型安全性）
+  3. すべてのチェックが合格することを確認
 
 **頻繁なコミット**:
 

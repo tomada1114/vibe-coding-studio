@@ -3,13 +3,13 @@ import { Container } from "@/components/container"
 import { AsyncErrorBoundary } from "@/components/error-boundary"
 import { Footer } from "@/components/footer"
 import { Gradient } from "@/components/gradient"
-import { Navbar } from "@/components/navbar"
 import { Logo } from "@/components/logo"
+import { Navbar } from "@/components/navbar"
 import { Heading, Subheading } from "@/components/text"
 import {
-  WrenchScrewdriverIcon,
-  CodeBracketIcon,
   ChatBubbleLeftRightIcon,
+  CodeBracketIcon,
+  WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline"
 import type { Metadata } from "next"
 
@@ -96,7 +96,7 @@ function WorkInProgressSection() {
 
         {/* レスポンシブグリッド */}
         <div className="mt-10 grid grid-cols-1 gap-8 sm:mt-16 md:grid-cols-2 lg:grid-cols-3">
-          {upcomingFeatures.map((feature) => (
+          {upcomingFeatures.map(feature => (
             <div
               key={feature.title}
               className="relative rounded-3xl bg-white p-8 shadow-sm ring-1 ring-gray-950/5"
