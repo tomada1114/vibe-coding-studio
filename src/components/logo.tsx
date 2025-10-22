@@ -1,14 +1,22 @@
 import { clsx } from "clsx"
 import Image from "next/image"
 
-export function Logo({ className }: { className?: string }) {
+export function Logo({
+  className,
+  variant = "default",
+}: {
+  className?: string
+  variant?: "default" | "wide"
+}) {
+  const isWide = variant === "wide"
+
   return (
     <Image
-      src="/logo.png"
+      src={isWide ? "/logo-wide-bg-black.png" : "/logo.png"}
       alt="Vibe Coding Studio"
-      width={127}
-      height={34}
-      className={clsx(className, "object-contain")}
+      width={isWide ? 400 : 127}
+      height={isWide ? 120 : 34}
+      className={clsx(className, "object-contain", isWide && "rounded-lg")}
       priority
     />
   )

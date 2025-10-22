@@ -37,7 +37,7 @@ function HeroSection() {
         <div className="pt-16 pb-24 sm:pt-24 sm:pb-32 md:pt-32 md:pb-48">
           {/* ロゴ */}
           <div className="mb-8 flex justify-center sm:justify-start">
-            <Logo className="h-16 w-auto sm:h-20" />
+            <Logo variant="wide" className="h-16 w-auto sm:h-20" />
           </div>
 
           {/* キャッチコピー */}
