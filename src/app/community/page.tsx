@@ -4,6 +4,7 @@ import { AsyncErrorBoundary } from "@/components/error-boundary"
 import { Footer } from "@/components/footer"
 import { Gradient } from "@/components/gradient"
 import { Navbar } from "@/components/navbar"
+import { Testimonials, type Testimonial } from "@/components/testimonials"
 import { Heading, Subheading } from "@/components/text"
 import { DISCORD_INVITE_URL } from "@/lib/constants"
 import {
@@ -216,11 +217,39 @@ function ChannelIntroductionSection() {
 }
 
 /**
+ * コミュニティメンバーのテスティモニアルデータ（タスク8.1）
+ */
+const communityTestimonials: Testimonial[] = [
+  {
+    img: "/testimonials/community-member-1.jpg",
+    name: "田中 健太",
+    title: "フロントエンドエンジニア",
+    quote:
+      "AI駆動開発の実践的な知識を得られ、とまださんの最新検証が非常に参考になっています。コミュニティの雰囲気も温かく、質問しやすい環境です。",
+  },
+  {
+    img: "/testimonials/community-member-2.jpg",
+    name: "佐藤 美咲",
+    title: "バックエンドエンジニア",
+    quote:
+      "コミュニティメンバーと気軽に質問し合える環境が素晴らしいです。AI技術の最新トレンドをキャッチアップしながら、実践的なスキルも磨けています。",
+  },
+  {
+    img: "/testimonials/community-member-3.jpg",
+    name: "鈴木 大輔",
+    title: "フルスタックエンジニア",
+    quote:
+      "同じ目標を持つ仲間と繋がれて、モチベーションが維持できています。とまださんの検証を見ながら一緒に成長できる環境は他にはないと思います。",
+  },
+]
+
+/**
  * コミュニティページ
  * - ヒーローセクション
  * - 価値提案セクション（タスク5）
  * - コミュニティ説明セクション（タスク6）
  * - チャンネル紹介セクション（タスク7）
+ * - 参加者の声セクション（タスク8）
  * - AsyncErrorBoundaryによるエラーハンドリング
  */
 export default function CommunityPage() {
@@ -238,6 +267,14 @@ export default function CommunityPage() {
         </AsyncErrorBoundary>
         <AsyncErrorBoundary>
           <ChannelIntroductionSection />
+        </AsyncErrorBoundary>
+        <AsyncErrorBoundary>
+          <Testimonials
+            testimonials={communityTestimonials}
+            subheading="コミュニティメンバーの声"
+            heading="参加者の声"
+            hideCallToAction={true}
+          />
         </AsyncErrorBoundary>
       </main>
       <AsyncErrorBoundary>

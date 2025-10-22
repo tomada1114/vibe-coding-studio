@@ -17,13 +17,27 @@ import { Container } from "./container"
 import { Link } from "./link"
 import { Heading, Subheading } from "./text"
 
-const testimonials = [
+/**
+ * テスティモニアルデータの型定義
+ */
+export interface Testimonial {
+  /** 画像パス */
+  img: string
+  /** 参加者名 */
+  name: string
+  /** 所属・役職 */
+  title: string
+  /** コメント */
+  quote: string
+}
+
+const defaultTestimonials: Testimonial[] = [
   {
     img: "/testimonials/tina-yards.jpg",
     name: "Tina Yards",
     title: "VP of Sales, Protocol",
     quote:
-      "Thanks to Radiant, we’re finding new leads that we never would have found with legal methods.",
+      "Thanks to Radiant, we're finding new leads that we never would have found with legal methods.",
   },
   {
     img: "/testimonials/conor-neville.jpg",
@@ -44,7 +58,7 @@ const testimonials = [
     name: "Veronica Winton",
     title: "CSO, Planeteria",
     quote:
-      "We’ve managed to put two of our main competitors out of business in 6 months.",
+      "We've managed to put two of our main competitors out of business in 6 months.",
   },
   {
     img: "/testimonials/dillon-lenora.jpg",
@@ -57,7 +71,7 @@ const testimonials = [
     name: "Harriet Arron",
     title: "Account Manager, Commit",
     quote:
-      "I’ve smashed all my targets without having to speak to a lead in months.",
+      "I've smashed all my targets without having to speak to a lead in months.",
   },
 ]
 
@@ -172,7 +186,26 @@ function CallToAction() {
   )
 }
 
-export function Testimonials() {
+/**
+ * テスティモニアルコンポーネントのプロパティ
+ */
+export interface TestimonialsProps {
+  /** テスティモニアルデータの配列（オプション、デフォルトはRadiant用データ） */
+  testimonials?: Testimonial[]
+  /** サブ見出し（オプション、デフォルトは"What everyone is saying"） */
+  subheading?: string
+  /** メイン見出し（オプション、デフォルトは"Trusted by professionals."） */
+  heading?: string
+  /** CTAセクションを非表示にするか（オプション、デフォルトはfalse） */
+  hideCallToAction?: boolean
+}
+
+export function Testimonials({
+  testimonials = defaultTestimonials,
+  subheading = "What everyone is saying",
+  heading = "Trusted by professionals.",
+  hideCallToAction = false,
+}: TestimonialsProps = {}) {
   let scrollRef = useRef<HTMLDivElement | null>(null)
   let { scrollX } = useScroll({ container: scrollRef })
   let [setReferenceWindowRef, bounds] = useMeasure()
@@ -192,9 +225,9 @@ export function Testimonials() {
     <div className="overflow-hidden py-32">
       <Container>
         <div ref={setReferenceWindowRef}>
-          <Subheading>What everyone is saying</Subheading>
+          <Subheading>{subheading}</Subheading>
           <Heading as="h3" className="mt-2">
-            Trusted by professionals.
+            {heading}
           </Heading>
         </div>
       </Container>
@@ -224,7 +257,7 @@ export function Testimonials() {
       </div>
       <Container className="mt-16">
         <div className="flex justify-between">
-          <CallToAction />
+          {!hideCallToAction && <CallToAction />}
           <div className="hidden sm:flex sm:gap-2">
             {testimonials.map(({ name }, testimonialIndex) => (
               <Headless.Button

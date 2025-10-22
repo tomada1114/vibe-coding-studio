@@ -7,7 +7,7 @@ process.env.NODE_ENV = "test"
 jest.mock("framer-motion", () => ({
   motion: {
     div: ({ children, ...props }) => {
-      const { initial, animate, transition, exit, ...rest } = props
+      const { initial, animate, transition, exit, style, ...rest } = props
       return <div {...rest}>{children}</div>
     },
     span: ({ children, ...props }) => {
@@ -20,9 +20,45 @@ jest.mock("framer-motion", () => ({
     get: () => initialValue,
     set: jest.fn(),
   }),
-  useSpring: value => value,
+  useSpring: value => ({
+    get: () => (typeof value === "object" && value.get ? value.get() : value),
+    set: jest.fn(),
+  }),
   useTransform: (value, transformer) => ({
     get: () => transformer(value.get ? value.get() : value),
   }),
   useInView: () => true,
+  useScroll: () => ({
+    scrollX: {
+      get: () => 0,
+      set: jest.fn(),
+    },
+    scrollY: {
+      get: () => 0,
+      set: jest.fn(),
+    },
+  }),
+  useMotionValueEvent: jest.fn(),
 }))
+
+// Mock react-use-measure
+jest.mock("react-use-measure", () => {
+  return {
+    __esModule: true,
+    default: () => [
+      ref => {
+        // Mock setReferenceWindowRef
+      },
+      {
+        width: 1024,
+        height: 768,
+        top: 0,
+        left: 0,
+        bottom: 768,
+        right: 1024,
+        x: 0,
+        y: 0,
+      },
+    ],
+  }
+})

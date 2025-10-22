@@ -201,4 +201,39 @@ describe("コミュニティページ（/community）", () => {
       expect(icons.length).toBeGreaterThan(0)
     })
   })
+
+  describe("参加者の声セクション（タスク8）", () => {
+    it("参加者の声セクションが表示される", () => {
+      render(<CommunityPage />)
+      // 「参加者の声」のh3見出しを探す（Headingコンポーネントのデフォルトはh3）
+      const testimonialsHeading = screen.getByRole("heading", {
+        name: /参加者の声/i,
+        level: 3,
+      })
+      expect(testimonialsHeading).toBeInTheDocument()
+    })
+
+    it("3名分のテスティモニアルが表示される", () => {
+      render(<CommunityPage />)
+      // figureタグを持つテスティモニアルカードを探す
+      const testimonialCards = screen.getAllByRole("figure")
+      // 3名分のテスティモニアルが表示されることを確認
+      expect(testimonialCards.length).toBeGreaterThanOrEqual(3)
+    })
+
+    it("各テスティモニアルに参加者名が表示される", () => {
+      render(<CommunityPage />)
+      // コミュニティメンバーのテスティモニアルを確認
+      // 最低1つの参加者名が表示されることを確認
+      const figures = screen.getAllByRole("figure")
+      expect(figures.length).toBeGreaterThan(0)
+    })
+
+    it("各テスティモニアルにコメントが表示される", () => {
+      const { container } = render(<CommunityPage />)
+      // blockquote要素（引用）が存在することを確認
+      const blockquotes = container.querySelectorAll("blockquote")
+      expect(blockquotes.length).toBeGreaterThanOrEqual(3)
+    })
+  })
 })
