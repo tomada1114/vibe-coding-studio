@@ -27,6 +27,11 @@ import "@testing-library/jest-dom"
 import { fireEvent, render, screen } from "@testing-library/react"
 import React, { Component } from "react"
 
+// モックを設定
+jest.mock("@/components/logo", () => ({
+  Logo: () => <img alt="Vibe Coding Studio Logo" src="/logo.png" />,
+}))
+
 describe("ErrorBoundary", () => {
   // Component that throws an error
   const ThrowError = ({ shouldThrow }: { shouldThrow: boolean }) => {

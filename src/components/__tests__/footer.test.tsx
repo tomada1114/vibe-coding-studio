@@ -9,6 +9,11 @@ import { Footer } from "@/components/footer"
 import { DISCORD_INVITE_URL, SOCIAL_LINKS } from "@/lib/constants"
 import { render, screen } from "@testing-library/react"
 
+// モックを設定
+jest.mock("@/components/logo", () => ({
+  Logo: () => <img alt="Vibe Coding Studio Logo" src="/logo.png" />,
+}))
+
 describe("Footer コンポーネント", () => {
   describe("基本構造", () => {
     it("footer要素が表示される", () => {
@@ -30,31 +35,34 @@ describe("Footer コンポーネント", () => {
   describe("Discord招待リンク（要件4.2）", () => {
     it("Discord招待リンクが表示される", () => {
       render(<Footer />)
-      const discordLink = screen.getByRole("link", {
+      const discordLinks = screen.getAllByRole("link", {
         name: /Discord|コミュニティ/i,
       })
-      expect(discordLink).toBeInTheDocument()
+      expect(discordLinks.length).toBeGreaterThan(0)
+      expect(discordLinks[0]).toBeInTheDocument()
     })
 
     it("Discord招待リンクが正しいURLを持つ", () => {
       render(<Footer />)
-      const discordLink = screen.getByRole("link", {
+      const discordLinks = screen.getAllByRole("link", {
         name: /Discord|コミュニティ/i,
       })
-      expect(discordLink).toHaveAttribute("href", DISCORD_INVITE_URL)
+      // 最初のDiscordリンクが正しいURLを持つことを確認
+      expect(discordLinks[0]).toHaveAttribute("href", DISCORD_INVITE_URL)
     })
 
     it("Discord招待リンクが新しいタブで開く（要件4.4）", () => {
       render(<Footer />)
-      const discordLink = screen.getByRole("link", {
+      const discordLinks = screen.getAllByRole("link", {
         name: /Discord|コミュニティ/i,
       })
-      expect(discordLink).toHaveAttribute("target", "_blank")
-      expect(discordLink).toHaveAttribute(
+      // 最初のDiscordリンクが新しいタブで開くことを確認
+      expect(discordLinks[0]).toHaveAttribute("target", "_blank")
+      expect(discordLinks[0]).toHaveAttribute(
         "rel",
         expect.stringContaining("noopener")
       )
-      expect(discordLink).toHaveAttribute(
+      expect(discordLinks[0]).toHaveAttribute(
         "rel",
         expect.stringContaining("noreferrer")
       )
