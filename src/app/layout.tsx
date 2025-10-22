@@ -35,11 +35,11 @@ const switzer = localFont({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s - Radiant Template",
-    default: "Radiant - Minimal Next.js Template",
+    template: "%s - Vibe Coding Studio",
+    default: "Vibe Coding Studio - AI駆動開発コミュニティ",
   },
   description:
-    "A minimal Next.js template built with Tailwind CSS v4, TypeScript, and modern best practices.",
+    "AI駆動開発を学ぶ仲間が集まり、とまだの最新検証を見ながら一緒に成長するDiscordコミュニティ",
 }
 
 export default function RootLayout({
@@ -48,7 +48,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={switzer.variable}>
+    <html lang="ja" className={switzer.variable}>
       <head></head>
       <body className={`${switzer.className} text-gray-950 antialiased`}>
         <CSPNonceProvider />

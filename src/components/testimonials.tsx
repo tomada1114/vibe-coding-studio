@@ -33,45 +33,25 @@ export interface Testimonial {
 
 const defaultTestimonials: Testimonial[] = [
   {
-    img: "/testimonials/tina-yards.jpg",
-    name: "Tina Yards",
-    title: "VP of Sales, Protocol",
+    img: "/testimonials/community-member-1.jpg",
+    name: "コミュニティメンバー",
+    title: "開発者",
     quote:
-      "Thanks to Radiant, we're finding new leads that we never would have found with legal methods.",
+      "AI駆動開発を学ぶ仲間と繋がり、とまださんの最新検証を見ながら一緒に成長できています。",
   },
   {
-    img: "/testimonials/conor-neville.jpg",
-    name: "Conor Neville",
-    title: "Head of Customer Success, TaxPal",
+    img: "/testimonials/community-member-2.jpg",
+    name: "コミュニティメンバー",
+    title: "エンジニア",
     quote:
-      "Radiant made undercutting all of our competitors an absolute breeze.",
+      "コミュニティメンバーと気軽に質問し合える環境が素晴らしいです。",
   },
   {
-    img: "/testimonials/amy-chase.jpg",
-    name: "Amy Chase",
-    title: "Head of GTM, Pocket",
+    img: "/testimonials/community-member-3.jpg",
+    name: "コミュニティメンバー",
+    title: "開発者",
     quote:
-      "We closed a deal in literally a few minutes because we knew their exact budget.",
-  },
-  {
-    img: "/testimonials/veronica-winton.jpg",
-    name: "Veronica Winton",
-    title: "CSO, Planeteria",
-    quote:
-      "We've managed to put two of our main competitors out of business in 6 months.",
-  },
-  {
-    img: "/testimonials/dillon-lenora.jpg",
-    name: "Dillon Lenora",
-    title: "VP of Sales, Detax",
-    quote: "I was able to replace 80% of my team with RadiantAI bots.",
-  },
-  {
-    img: "/testimonials/harriet-arron.jpg",
-    name: "Harriet Arron",
-    title: "Account Manager, Commit",
-    quote:
-      "I've smashed all my targets without having to speak to a lead in months.",
+      "同じ目標を持つ仲間と繋がれて、モチベーションが維持できています。",
   },
 ]
 
@@ -170,15 +150,14 @@ function CallToAction() {
   return (
     <div>
       <p className="max-w-sm text-sm/6 text-gray-600">
-        Join the best sellers in the business and start using Radiant to hit
-        your targets today.
+        AI駆動開発を学ぶ仲間が待っています。今すぐコミュニティに参加しましょう。
       </p>
       <div className="mt-2">
         <Link
-          href="#"
+          href="/community"
           className="inline-flex items-center gap-2 text-sm/6 font-medium text-pink-600"
         >
-          Get started
+          参加する
           <ArrowLongRightIcon className="size-5" />
         </Link>
       </div>
@@ -190,7 +169,7 @@ function CallToAction() {
  * テスティモニアルコンポーネントのプロパティ
  */
 export interface TestimonialsProps {
-  /** テスティモニアルデータの配列（オプション、デフォルトはRadiant用データ） */
+  /** テスティモニアルデータの配列（オプション、デフォルトはコミュニティメンバーの声） */
   testimonials?: Testimonial[]
   /** サブ見出し（オプション、デフォルトは"What everyone is saying"） */
   subheading?: string

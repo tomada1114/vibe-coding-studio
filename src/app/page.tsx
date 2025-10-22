@@ -12,6 +12,7 @@ import {
   WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline"
 import type { Metadata } from "next"
+import Image from "next/image"
 
 export const metadata: Metadata = {
   title: "Vibe Coding Studio - AI駆動開発コミュニティ",
@@ -135,24 +136,29 @@ function ProfileSection() {
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
             {/* プロフィール情報 */}
             <div className="flex flex-col justify-center">
-              <h3 className="text-2xl font-semibold text-gray-950">
+              <h3 className="text-2xl font-semibold leading-tight text-gray-950">
                 主催者: とまだ（Tomada）
               </h3>
-              <p className="mt-6 text-lg text-gray-600">
+              <p className="mt-6 text-base leading-relaxed text-gray-700">
                 AI駆動開発の実践者として、最新の技術検証とコミュニティ活動を行っています。
               </p>
-              <p className="mt-4 text-lg text-gray-600">
+              <p className="mt-4 text-base leading-relaxed text-gray-700">
                 Discordコミュニティでは、AI駆動開発の最新トレンドや実践的なノウハウを共有し、
                 メンバーと共に成長する場を提供しています。
               </p>
             </div>
 
-            {/* プレースホルダー（将来的に画像や追加情報を配置） */}
-            <div className="flex items-center justify-center rounded-3xl bg-gray-100 p-12">
-              <div className="text-center">
-                <p className="text-gray-500">
-                  プロフィール画像またはビジュアル要素
-                </p>
+            {/* プロフィール画像 */}
+            <div className="flex items-center justify-center">
+              <div className="relative aspect-square w-full max-w-md overflow-hidden rounded-3xl bg-gray-100 ring-1 ring-gray-950/5">
+                <Image
+                  src="/tomada.png"
+                  alt="とまだ（Tomada）のプロフィール画像"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  priority
+                />
               </div>
             </div>
           </div>

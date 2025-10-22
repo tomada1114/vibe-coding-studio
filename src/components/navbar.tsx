@@ -14,8 +14,8 @@ import { Logo } from "./logo"
 import { PlusGrid, PlusGridItem, PlusGridRow } from "./plus-grid"
 
 const navLinks = [
-  { href: "/#features", label: "Features" },
-  { href: "/company", label: "About" },
+  { href: "/", label: "ホーム" },
+  { href: "/community", label: "コミュニティ" },
 ]
 
 type NavLink = {

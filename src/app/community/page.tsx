@@ -141,11 +141,11 @@ function CommunityDescriptionSection() {
         <div className="mt-10 sm:mt-16">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
             <div className="flex flex-col justify-center">
-              <p className="text-lg text-gray-600">
+              <p className="text-base leading-relaxed text-gray-700">
                 Vibe Coding Studioは、AI駆動開発を学ぶ仲間が集まる場所です。
                 最新のAI技術を活用した開発手法を、実践を通じて学ぶコミュニティです。
               </p>
-              <p className="mt-4 text-lg text-gray-600">
+              <p className="mt-4 text-base leading-relaxed text-gray-700">
                 とまだの最新検証を見ながら一緒に成長できる環境を提供しています。
                 初心者からベテランまで、あらゆるレベルの開発者が参加しています。
               </p>
