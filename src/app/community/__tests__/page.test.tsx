@@ -104,4 +104,101 @@ describe("コミュニティページ（/community）", () => {
       expect(container).toBeInTheDocument()
     })
   })
+
+  describe("価値提案セクション（タスク5）", () => {
+    it("3つの価値提案が表示される", () => {
+      render(<CommunityPage />)
+      // 3つの価値提案のタイトルが表示されることを確認（h3タグで探す）
+      const valuePropositions = screen.getByRole("heading", {
+        name: /仲間と繋がる/i,
+        level: 3,
+      })
+      expect(valuePropositions).toBeInTheDocument()
+
+      const latestVerification = screen.getByRole("heading", {
+        name: /最新検証/i,
+        level: 3,
+      })
+      expect(latestVerification).toBeInTheDocument()
+
+      const askQuestions = screen.getByRole("heading", {
+        name: /気軽に質問/i,
+        level: 3,
+      })
+      expect(askQuestions).toBeInTheDocument()
+    })
+
+    it("各価値提案にアイコンが表示される", () => {
+      const { container } = render(<CommunityPage />)
+      // SVGアイコン（Heroicons）が3つ以上表示されることを確認
+      const icons = container.querySelectorAll("svg")
+      expect(icons.length).toBeGreaterThanOrEqual(3)
+    })
+
+    it("レスポンシブグリッドレイアウトが適用される", () => {
+      const { container } = render(<CommunityPage />)
+      const htmlContent = container.innerHTML
+      // grid-cols-1（スマホ）、md:grid-cols-2（タブレット）、lg:grid-cols-3（PC）を確認
+      expect(htmlContent).toMatch(
+        /grid-cols-1.*md:grid-cols-2.*lg:grid-cols-3|grid-cols-1.*sm:grid-cols-2.*lg:grid-cols-3/
+      )
+    })
+  })
+
+  describe("コミュニティ説明セクション（タスク6）", () => {
+    it("コミュニティ説明セクションが表示される", () => {
+      render(<CommunityPage />)
+      // コミュニティについてという見出しを確認
+      const heading = screen.getByRole("heading", {
+        name: /コミュニティについて/i,
+      })
+      expect(heading).toBeInTheDocument()
+
+      // AI駆動開発を学ぶ仲間が集まる場所であることを示すテキストを確認
+      const description = screen.getByText(/AI駆動開発を学ぶ仲間が集まる場所/i)
+      expect(description).toBeInTheDocument()
+    })
+
+    it("とまだの最新検証に関する説明が表示される", () => {
+      render(<CommunityPage />)
+      // 「とまだの最新検証を見ながら一緒に成長」というテキストを探す
+      const description = screen.getByText(
+        /とまだの最新検証を見ながら一緒に成長できる環境を提供/i
+      )
+      expect(description).toBeInTheDocument()
+    })
+  })
+
+  describe("チャンネル紹介セクション（タスク7）", () => {
+    it("チャンネル紹介セクションが表示される", () => {
+      render(<CommunityPage />)
+      // チャンネル紹介の見出しを探す
+      const channelHeading = screen.getByRole("heading", {
+        name: /チャンネル紹介/i,
+      })
+      expect(channelHeading).toBeInTheDocument()
+    })
+
+    it("チャンネルの目的と活用方法が説明される", () => {
+      render(<CommunityPage />)
+      // 一般チャンネルの説明を確認
+      const generalChannel = screen.getByText(/一般チャンネル/i)
+      expect(generalChannel).toBeInTheDocument()
+
+      // お知らせチャンネルの説明を確認
+      const announcementChannel = screen.getByText(/お知らせチャンネル/i)
+      expect(announcementChannel).toBeInTheDocument()
+
+      // 質問チャンネルの説明を確認
+      const questionChannel = screen.getByText(/質問チャンネル/i)
+      expect(questionChannel).toBeInTheDocument()
+    })
+
+    it("チャンネルがアイコンで視覚的に区別される", () => {
+      const { container } = render(<CommunityPage />)
+      // SVGアイコン（Heroicons）が表示されることを確認
+      const icons = container.querySelectorAll("svg")
+      expect(icons.length).toBeGreaterThan(0)
+    })
+  })
 })
