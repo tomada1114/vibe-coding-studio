@@ -411,7 +411,7 @@ export default function CommunityPage() {
         </AsyncErrorBoundary>
       </main>
       <AsyncErrorBoundary>
-        <Footer />
+        <Footer hideCallToAction={true} />
       </AsyncErrorBoundary>
     </div>
   )
