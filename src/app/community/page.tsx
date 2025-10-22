@@ -32,6 +32,7 @@ export const metadata: Metadata = {
 /**
  * コミュニティページのヒーローセクション
  * - Discord参加への強いCTA
+ * - 初心者歓迎のメッセージを強調
  * - レスポンシブデザイン対応
  */
 function CommunityHeroSection() {
@@ -45,13 +46,20 @@ function CommunityHeroSection() {
           <h1 className="font-display text-6xl/[0.9] font-medium tracking-tight text-balance text-gray-950 sm:text-8xl/[0.8] md:text-9xl/[0.8]">
             AI駆動開発を
             <br />
-            共に学ぶ場へ
+            一緒に学ぶ仲間が
+            <br />
+            待っています
           </h1>
 
-          {/* CTAメッセージ */}
-          <p className="mt-8 max-w-lg text-xl/7 font-medium text-gray-950/75 sm:text-2xl/8">
-            今すぐDiscordコミュニティに参加して、AI駆動開発の最新検証とノウハウを共有しましょう
-          </p>
+          {/* サブメッセージ - 不安解消 */}
+          <div className="mt-8 max-w-2xl">
+            <p className="text-xl/7 font-medium text-gray-950/75 sm:text-2xl/8">
+              初心者大歓迎 | 見るだけでもOK | 温かい雰囲気
+            </p>
+            <p className="mt-4 text-lg leading-relaxed text-gray-700">
+              とまだの最新検証をリアルタイムで見ながら、同じ目標を持つ仲間と一緒に成長できるDiscordコミュニティです。
+            </p>
+          </div>
 
           {/* Discord参加ボタン */}
           <div className="mt-12 flex flex-col gap-x-6 gap-y-4 sm:flex-row">
@@ -70,27 +78,101 @@ function CommunityHeroSection() {
 }
 
 /**
+ * 不安解消セクション
+ * - 訪問者の不安を解消するメッセージ
+ * - FAQ形式で具体的な疑問に回答
+ */
+function AnxietyReliefSection() {
+  const anxieties = [
+    {
+      question: "初心者の自分でも参加して大丈夫?",
+      answer:
+        "もちろんです!プログラミングを始めたばかりの方が多数参加しています。初歩的な質問も大歓迎で、とまだが丁寧に回答します。",
+    },
+    {
+      question: "見ているだけでも価値ある?",
+      answer:
+        "はい!投稿3割、ROM7割の方も多いです。とまだの最新検証を見るだけでも勉強になりますし、他のメンバーの質問と回答から学べます。",
+    },
+    {
+      question: "質問したら迷惑じゃない?",
+      answer:
+        "全く迷惑ではありません。とまだはほぼすべての投稿に反応すると宣言しており、実際に温かく対応しています。知識を持つメンバーも積極的に回答してくれます。",
+    },
+    {
+      question: "忙しくても参加できる?",
+      answer:
+        "大丈夫です!毎日投稿する必要はありません。週1回、月1回の参加でもOK。過去のやり取りはいつでも見返せます。",
+    },
+  ]
+
+  return (
+    <div className="bg-white py-32">
+      <Container>
+        <Subheading>安心してください</Subheading>
+        <Heading as="h2" className="mt-2 max-w-3xl">
+          こんな不安、ありませんか?
+        </Heading>
+
+        <div className="mt-10 grid grid-cols-1 gap-8 sm:mt-16 md:grid-cols-2">
+          {anxieties.map(anxiety => (
+            <div
+              key={anxiety.question}
+              className="rounded-3xl bg-gray-50 p-8 ring-1 ring-gray-950/5"
+            >
+              <h3 className="text-lg font-semibold text-gray-950">
+                ❓ {anxiety.question}
+              </h3>
+              <p className="mt-4 text-base leading-relaxed text-gray-700">
+                ✅ {anxiety.answer}
+              </p>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </div>
+  )
+}
+
+/**
  * 価値提案セクション（タスク5）
- * - 3つの価値提案をレスポンシブグリッドで表示
- * - Heroiconsでアイコン表示
+ * - 3つの価値提案をより詳細に提示
+ * - 具体的なメリットを箇条書きで説明
  */
 function ValuePropositionSection() {
   const valuePropositions = [
     {
       icon: UserGroupIcon,
-      title: "仲間と繋がる",
-      description: "AI駆動開発を学ぶ仲間と交流し、一緒に成長できる場所です",
+      title: "同じ目標を持つ仲間との繋がり",
+      description: "一人じゃない安心感で学習を継続",
+      benefits: [
+        "「こんなことできました!」を気軽に報告",
+        "他のメンバーの成果を見てモチベーションアップ",
+        "つまずいたときは助け合える",
+        "学習の孤独感から解放される",
+      ],
     },
     {
       icon: LightBulbIcon,
-      title: "最新検証",
-      description:
-        "とまだの最新AI技術検証を見ながら、実践的なノウハウを学べます",
+      title: "とまだの最新検証をリアルタイムで",
+      description: "YouTube動画になる前の情報をキャッチ",
+      benefits: [
+        "「今日はこの新機能試してます」をリアルタイム共有",
+        "失敗も含めた試行錯誤のプロセスが見られる",
+        "検証中のツールの生の様子",
+        "ほぼすべての投稿にとまだが反応",
+      ],
     },
     {
       icon: ChatBubbleLeftRightIcon,
-      title: "気軽に質問",
-      description: "わからないことを気軽に質問できる、フレンドリーな環境です",
+      title: "メンバー同士で教え合う文化",
+      description: "知識を持つ人が積極的に回答",
+      benefits: [
+        "とまただけでなく、メンバーも質問に答える",
+        "「自分も同じところで詰まりました!」という共感",
+        "実際に試した人のリアルな感想が聞ける",
+        "気になるツールや記事をシェア",
+      ],
     },
   ]
 
@@ -102,8 +184,7 @@ function ValuePropositionSection() {
           ここで得られること
         </Heading>
 
-        {/* レスポンシブグリッド: スマホ1カラム、タブレット2カラム、PC3カラム */}
-        <div className="mt-10 grid grid-cols-1 gap-8 sm:mt-16 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid grid-cols-1 gap-8 sm:mt-16 lg:grid-cols-3">
           {valuePropositions.map(proposition => (
             <div
               key={proposition.title}
@@ -113,9 +194,20 @@ function ValuePropositionSection() {
               <h3 className="mt-6 text-xl font-semibold text-gray-950">
                 {proposition.title}
               </h3>
-              <p className="mt-4 text-base text-gray-600">
+              <p className="mt-2 text-sm font-medium text-gray-600">
                 {proposition.description}
               </p>
+              <ul className="mt-6 space-y-3">
+                {proposition.benefits.map(benefit => (
+                  <li
+                    key={benefit}
+                    className="flex items-start text-sm leading-relaxed text-gray-700"
+                  >
+                    <span className="mr-2 text-gray-950">•</span>
+                    <span>{benefit}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
@@ -177,20 +269,36 @@ function CommunityDescriptionSection() {
 function ChannelIntroductionSection() {
   const channels = [
     {
-      icon: HashtagIcon,
-      name: "一般チャンネル",
-      description: "日常の開発に関する雑談や情報共有をするチャンネルです",
-    },
-    {
-      icon: MegaphoneIcon,
-      name: "お知らせチャンネル",
-      description:
-        "コミュニティの重要なお知らせや、とまだの最新検証を共有します",
+      icon: UserGroupIcon,
+      name: "🎉 自己紹介",
+      description: "まずはここで簡単に自己紹介!数行でOKです",
     },
     {
       icon: ChatBubbleLeftRightIcon,
-      name: "質問チャンネル",
-      description: "技術的な質問や相談を気軽にできるチャンネルです",
+      name: "💭 times-all",
+      description:
+        "各自の個人スレッド(times)が集まる場所。X感覚で気軽につぶやけます",
+    },
+    {
+      icon: LightBulbIcon,
+      name: "📖 学習報告",
+      description: "学んだことを報告。初歩的な内容も大歓迎です",
+    },
+    {
+      icon: ChatBubbleLeftRightIcon,
+      name: "☕ 雑談",
+      description: "日々の学習や開発の記録を自由に。気軽に交流できます",
+    },
+    {
+      icon: MegaphoneIcon,
+      name: "🧪 とまだの検証部屋",
+      description:
+        "YouTube化前の最新情報をリアルタイム共有。失敗も含めた試行錯誤が見られます",
+    },
+    {
+      icon: HashtagIcon,
+      name: "✉️ お問合せ",
+      description: "とまだにクローズドで相談できるチャンネル",
     },
   ]
 
@@ -205,7 +313,7 @@ function ChannelIntroductionSection() {
           Discordコミュニティには、目的に応じた複数のチャンネルがあります。
         </p>
 
-        <div className="mt-10 grid grid-cols-1 gap-8 sm:mt-16 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid grid-cols-1 gap-8 sm:mt-16 md:grid-cols-2">
           {channels.map(channel => (
             <div
               key={channel.name}
@@ -271,6 +379,50 @@ interface FAQItem {
 //   title: string
 //   quote: string
 // }
+
+/**
+ * こんな人におすすめセクション
+ * - ターゲットユーザーを明確化
+ * - チェックリスト形式で提示
+ */
+function RecommendedForSection() {
+  const recommendedPeople = [
+    "AI駆動開発を学び始めたばかりの初心者",
+    "Claude Code/Cursor/Codex を使いこなしたい",
+    "一人での学習に限界を感じている",
+    "同じ目標を持つ仲間が欲しい",
+    "とまだに直接質問したい",
+    "最新のAIツール情報をいち早くキャッチアップしたい",
+    "見ているだけでも学べる環境が欲しい",
+    "自分のペースで参加したい",
+  ]
+
+  return (
+    <div className="relative py-32">
+      <Gradient className="absolute inset-2 rounded-4xl ring-1 ring-black/5 ring-inset" />
+      <Container className="relative">
+        <Subheading>Who should join</Subheading>
+        <Heading as="h2" className="mt-2 max-w-3xl">
+          こんな人におすすめ
+        </Heading>
+
+        <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 md:grid-cols-2">
+          {recommendedPeople.map(person => (
+            <div
+              key={person}
+              className="flex items-start rounded-2xl bg-white/80 p-6 ring-1 ring-gray-950/5"
+            >
+              <span className="mr-4 text-2xl">✅</span>
+              <p className="text-base leading-relaxed text-gray-700">
+                {person}
+              </p>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </div>
+  )
+}
 
 /**
  * FAQデータ（タスク9.1）
@@ -373,11 +525,12 @@ function FinalCTASection() {
 
 /**
  * コミュニティページ
- * - ヒーローセクション
- * - 価値提案セクション（タスク5）
+ * - ヒーローセクション（詳細化済み）
+ * - 不安解消セクション（新規追加）
+ * - 価値提案セクション（詳細拡張済み）
  * - コミュニティ説明セクション（タスク6）
- * - チャンネル紹介セクション（タスク7）
- * - 参加者の声セクション（タスク8）
+ * - チャンネル紹介セクション（改善済み）
+ * - こんな人におすすめセクション（新規追加）
  * - FAQセクション（タスク9）
  * - 最終CTAセクション（タスク10）
  * - AsyncErrorBoundaryによるエラーハンドリング
@@ -390,6 +543,9 @@ export default function CommunityPage() {
       </AsyncErrorBoundary>
       <main>
         <AsyncErrorBoundary>
+          <AnxietyReliefSection />
+        </AsyncErrorBoundary>
+        <AsyncErrorBoundary>
           <ValuePropositionSection />
         </AsyncErrorBoundary>
         <AsyncErrorBoundary>
@@ -398,15 +554,9 @@ export default function CommunityPage() {
         <AsyncErrorBoundary>
           <ChannelIntroductionSection />
         </AsyncErrorBoundary>
-        {/* 参加者の声セクション - 一旦コメントアウト */}
-        {/* <AsyncErrorBoundary>
-          <Testimonials
-            testimonials={communityTestimonials}
-            subheading="コミュニティメンバーの声"
-            heading="参加者の声"
-            hideCallToAction={true}
-          />
-        </AsyncErrorBoundary> */}
+        <AsyncErrorBoundary>
+          <RecommendedForSection />
+        </AsyncErrorBoundary>
         <AsyncErrorBoundary>
           <FAQSection />
         </AsyncErrorBoundary>

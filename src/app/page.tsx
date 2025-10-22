@@ -9,6 +9,8 @@ import { Heading, Subheading } from "@/components/text"
 import {
   ChatBubbleLeftRightIcon,
   CodeBracketIcon,
+  LightBulbIcon,
+  UserGroupIcon,
   WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline"
 import type { Metadata } from "next"
@@ -54,6 +56,85 @@ function HeroSection() {
           <div className="mt-12 flex flex-col gap-x-6 gap-y-4 sm:flex-row">
             <Button href="/community">コミュニティに参加</Button>
           </div>
+        </div>
+      </Container>
+    </div>
+  )
+}
+
+/**
+ * コミュニティについて知るセクション
+ * - 3つの価値提案をシンプルに提示
+ * - widelogoを薄めの背景で活用
+ * - コミュニティページへの導線
+ */
+function CommunityOverviewSection() {
+  const communityFeatures = [
+    {
+      icon: UserGroupIcon,
+      title: "仲間と繋がる",
+      description:
+        "AI駆動開発を学ぶ仲間と交流し、一緒に成長できる温かいコミュニティ",
+    },
+    {
+      icon: LightBulbIcon,
+      title: "最新検証をリアルタイムで",
+      description:
+        "とまだの最新AI技術検証をYouTube化前に見られる。失敗も含めた試行錯誤のプロセスが学べます",
+    },
+    {
+      icon: ChatBubbleLeftRightIcon,
+      title: "気軽に質問・報告",
+      description:
+        "初心者の質問も大歓迎。ROM参加もOK。自分のペースで関わり方を決められます",
+    },
+  ]
+
+  return (
+    <div className="relative bg-linear-to-b from-white from-50% to-gray-100 py-32">
+      <Container>
+        <Subheading>Community</Subheading>
+        <Heading as="h2" className="mt-2 max-w-3xl">
+          コミュニティについて
+        </Heading>
+        <p className="mt-6 max-w-3xl text-lg text-gray-600">
+          初心者大歓迎 | 見るだけでもOK | 温かい雰囲気
+        </p>
+
+        {/* widelogoを薄めの背景で表示 */}
+        <div className="mt-10 overflow-hidden rounded-3xl bg-gray-950/5 p-12 sm:mt-16">
+          <div className="flex items-center justify-center">
+            <Image
+              src="/logo-wide-bg-black.png"
+              alt="Vibe Coding Studio"
+              width={400}
+              height={120}
+              className="opacity-20"
+              priority={false}
+            />
+          </div>
+        </div>
+
+        {/* 3つの価値提案 */}
+        <div className="mt-10 grid grid-cols-1 gap-8 sm:mt-16 md:grid-cols-3">
+          {communityFeatures.map(feature => (
+            <div key={feature.title} className="text-center">
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gray-950">
+                <feature.icon className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="mt-6 text-xl font-semibold text-gray-950">
+                {feature.title}
+              </h3>
+              <p className="mt-4 text-base leading-relaxed text-gray-600">
+                {feature.description}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* コミュニティページへのリンク */}
+        <div className="mt-12 text-center">
+          <Button href="/community">もっと詳しく</Button>
         </div>
       </Container>
     </div>
@@ -171,6 +252,7 @@ function ProfileSection() {
 /**
  * トップページ
  * - ファーストビュー
+ * - コミュニティ概要セクション（新規追加）
  * - 工事中セクション
  * - プロフィール紹介
  * - AsyncErrorBoundaryによるエラーハンドリング
@@ -182,6 +264,9 @@ export default function Home() {
         <HeroSection />
       </AsyncErrorBoundary>
       <main>
+        <AsyncErrorBoundary>
+          <CommunityOverviewSection />
+        </AsyncErrorBoundary>
         <AsyncErrorBoundary>
           <WorkInProgressSection />
         </AsyncErrorBoundary>
