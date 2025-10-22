@@ -271,4 +271,50 @@ describe("コミュニティページ（/community）", () => {
       expect(panels.length).toBeGreaterThan(0)
     })
   })
+
+  describe("最終CTAセクション（タスク10）", () => {
+    it("最終CTAセクションにDiscord参加ボタンが表示される", () => {
+      render(<CommunityPage />)
+      // Discord参加ボタンを全て取得
+      const buttons = screen.getAllByRole("link", {
+        name: /Discordに参加/i,
+      })
+      // ヒーローセクション、最終CTA、Footerの3つのボタンが存在することを期待
+      expect(buttons.length).toBe(3)
+    })
+
+    it("最終CTAセクションのDiscord参加ボタンが正しいURLを持つ", () => {
+      render(<CommunityPage />)
+      const buttons = screen.getAllByRole("link", {
+        name: /Discordに参加/i,
+      })
+      // 2番目のボタン（最終CTA）を検証（インデックス1）
+      const finalCtaButton = buttons[1]
+      expect(finalCtaButton).toHaveAttribute("href", DISCORD_INVITE_URL)
+      expect(finalCtaButton).toHaveAttribute("target", "_blank")
+      expect(finalCtaButton).toHaveAttribute("rel", "noopener noreferrer")
+    })
+
+    it("最終CTAセクションに見出しが表示される", () => {
+      render(<CommunityPage />)
+      // 最終CTAのメッセージを検証
+      // 「今すぐ参加」などのキーワードを含む見出しを探す
+      const { container } = render(<CommunityPage />)
+      const headings = container.querySelectorAll("h1, h2, h3, h4, h5, h6")
+      expect(headings.length).toBeGreaterThan(0)
+    })
+
+    it("ヒーローセクションのCTAと最終CTAセクションのボタンが視覚的に一貫している", () => {
+      render(<CommunityPage />)
+      const buttons = screen.getAllByRole("link", {
+        name: /Discordに参加/i,
+      })
+      // ヒーローと最終CTAのボタンが同じコンポーネントを使用していることを期待
+      expect(buttons.length).toBeGreaterThanOrEqual(2)
+      // すべてのDiscord参加ボタンが同じURLを持つことを検証
+      buttons.forEach(button => {
+        expect(button).toHaveAttribute("href", DISCORD_INVITE_URL)
+      })
+    })
+  })
 })

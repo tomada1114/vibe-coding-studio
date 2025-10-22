@@ -326,6 +326,37 @@ function FAQSection() {
 }
 
 /**
+ * 最終CTAセクション（タスク10）
+ * - ページ最下部にDiscord参加ボタンを配置
+ * - ヒーローセクションのCTAと視覚的に一貫性のあるデザイン
+ */
+function FinalCTASection() {
+  return (
+    <div className="bg-white py-32">
+      <Container>
+        <div className="text-center">
+          <Heading as="h2" className="text-center">
+            今すぐ参加しよう
+          </Heading>
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-600">
+            AI駆動開発を学ぶ仲間が待っています。Discordコミュニティで一緒に成長しましょう。
+          </p>
+          <div className="mt-8 flex justify-center">
+            <Button
+              href={DISCORD_INVITE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Discordに参加する
+            </Button>
+          </div>
+        </div>
+      </Container>
+    </div>
+  )
+}
+
+/**
  * コミュニティページ
  * - ヒーローセクション
  * - 価値提案セクション（タスク5）
@@ -333,6 +364,7 @@ function FAQSection() {
  * - チャンネル紹介セクション（タスク7）
  * - 参加者の声セクション（タスク8）
  * - FAQセクション（タスク9）
+ * - 最終CTAセクション（タスク10）
  * - AsyncErrorBoundaryによるエラーハンドリング
  */
 export default function CommunityPage() {
@@ -361,6 +393,9 @@ export default function CommunityPage() {
         </AsyncErrorBoundary>
         <AsyncErrorBoundary>
           <FAQSection />
+        </AsyncErrorBoundary>
+        <AsyncErrorBoundary>
+          <FinalCTASection />
         </AsyncErrorBoundary>
       </main>
       <AsyncErrorBoundary>

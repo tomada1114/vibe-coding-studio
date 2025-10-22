@@ -27,6 +27,8 @@ const customJestConfig = {
       statements: 70,
     },
   },
+  // Disable watchman to avoid permission issues
+  watchman: false,
 }
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async

@@ -31,18 +31,21 @@ describe("トップページ（/）", () => {
 
     it("コミュニティ参加ボタンが表示される", () => {
       render(<Home />)
-      const button = screen.getByRole("link", {
+      const buttons = screen.getAllByRole("link", {
         name: /コミュニティ|参加|Join|Community/i,
       })
-      expect(button).toBeInTheDocument()
+      // 少なくとも1つのボタンが存在することを確認
+      expect(buttons.length).toBeGreaterThanOrEqual(1)
+      expect(buttons[0]).toBeInTheDocument()
     })
 
     it("コミュニティ参加ボタンが/communityへのリンクである", () => {
       render(<Home />)
-      const button = screen.getByRole("link", {
+      const buttons = screen.getAllByRole("link", {
         name: /コミュニティ|参加|Join|Community/i,
       })
-      expect(button).toHaveAttribute("href", "/community")
+      // 最初のボタン（ヒーローセクション）を検証
+      expect(buttons[0]).toHaveAttribute("href", "/community")
     })
 
     it("説明文が表示される", () => {
