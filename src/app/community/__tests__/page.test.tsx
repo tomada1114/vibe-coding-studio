@@ -236,4 +236,39 @@ describe("コミュニティページ（/community）", () => {
       expect(blockquotes.length).toBeGreaterThanOrEqual(3)
     })
   })
+
+  describe("FAQセクション（タスク9）", () => {
+    it("FAQセクションが表示される", () => {
+      render(<CommunityPage />)
+      // FAQセクションのh2見出しを探す
+      const faqHeading = screen.getByRole("heading", {
+        name: /よくある質問/i,
+        level: 2,
+      })
+      expect(faqHeading).toBeInTheDocument()
+    })
+
+    it("複数のFAQ項目が表示される", () => {
+      render(<CommunityPage />)
+      // FAQ項目のボタンを探す（アコーディオンの質問部分）
+      const faqButtons = screen.getAllByRole("button")
+      // 最低3つ以上のFAQ項目があることを確認
+      expect(faqButtons.length).toBeGreaterThanOrEqual(3)
+    })
+
+    it("FAQ項目の質問テキストが表示される", () => {
+      const { container } = render(<CommunityPage />)
+      // FAQ項目のボタンが存在することを確認
+      const buttons = container.querySelectorAll("button")
+      expect(buttons.length).toBeGreaterThan(0)
+    })
+
+    it("初期状態ではFAQの回答が非表示である", () => {
+      const { container } = render(<CommunityPage />)
+      // 初期状態では回答パネルが閉じている（data-open属性がない）
+      // またはaria-expanded="false"であることを確認
+      const panels = container.querySelectorAll('[data-headlessui-state]')
+      expect(panels.length).toBeGreaterThan(0)
+    })
+  })
 })

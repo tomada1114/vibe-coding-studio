@@ -8,7 +8,13 @@ import { Testimonials, type Testimonial } from "@/components/testimonials"
 import { Heading, Subheading } from "@/components/text"
 import { DISCORD_INVITE_URL } from "@/lib/constants"
 import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+} from "@headlessui/react"
+import {
   ChatBubbleLeftRightIcon,
+  ChevronDownIcon,
   HashtagIcon,
   LightBulbIcon,
   MegaphoneIcon,
@@ -244,12 +250,89 @@ const communityTestimonials: Testimonial[] = [
 ]
 
 /**
+ * FAQ項目の型定義
+ */
+interface FAQItem {
+  question: string
+  answer: string
+}
+
+/**
+ * FAQデータ（タスク9.1）
+ */
+const faqItems: FAQItem[] = [
+  {
+    question: "Discordコミュニティは無料で参加できますか？",
+    answer:
+      "はい、完全無料で参加できます。Discordアカウントがあれば誰でも参加可能です。",
+  },
+  {
+    question: "初心者でも参加できますか？",
+    answer:
+      "もちろんです！初心者からベテランまで、あらゆるレベルの開発者が参加しています。わからないことは気軽に質問できる環境を提供しています。",
+  },
+  {
+    question: "どのような内容を学べますか？",
+    answer:
+      "AI駆動開発の最新技術、Claude Codeの活用方法、プロンプトエンジニアリング、実践的な開発手法などを学べます。とまださんの最新検証も共有されます。",
+  },
+  {
+    question: "コミュニティのルールはありますか？",
+    answer:
+      "相互尊重とフレンドリーな雰囲気を大切にしています。具体的なルールはDiscord参加後にご確認ください。",
+  },
+  {
+    question: "質問への回答はどのくらいで得られますか？",
+    answer:
+      "コミュニティメンバーの活動状況によりますが、多くの場合、数時間以内に何らかの反応があります。活発なコミュニティなので、すぐに助けを得られることが多いです。",
+  },
+]
+
+/**
+ * FAQセクション（タスク9.2）
+ * - Headless UI Disclosureでアコーディオン実装
+ * - FAQ項目クリックで回答を展開/折りたたみ
+ */
+function FAQSection() {
+  return (
+    <div className="bg-white py-32">
+      <Container>
+        <Subheading>FAQ</Subheading>
+        <Heading as="h2" className="mt-2 max-w-3xl">
+          よくある質問
+        </Heading>
+        <p className="mt-6 max-w-3xl text-lg text-gray-600">
+          コミュニティに関するよくある質問とその回答をまとめました。
+        </p>
+
+        <div className="mt-10 space-y-4 sm:mt-16">
+          {faqItems.map((item, index) => (
+            <Disclosure key={index} as="div" className="rounded-2xl bg-gray-50">
+              <DisclosureButton className="group flex w-full items-center justify-between px-6 py-5 text-left">
+                <span className="text-lg font-semibold text-gray-950">
+                  {item.question}
+                </span>
+                <ChevronDownIcon className="size-6 text-gray-950 transition group-data-open:rotate-180" />
+              </DisclosureButton>
+              <DisclosurePanel className="px-6 pb-5 pt-2 text-base text-gray-600">
+                {item.answer}
+              </DisclosurePanel>
+            </Disclosure>
+          ))}
+        </div>
+      </Container>
+    </div>
+  )
+}
+
+/**
  * コミュニティページ
  * - ヒーローセクション
  * - 価値提案セクション（タスク5）
  * - コミュニティ説明セクション（タスク6）
  * - チャンネル紹介セクション（タスク7）
  * - 参加者の声セクション（タスク8）
+ * - FAQセクション（タスク9）
  * - AsyncErrorBoundaryによるエラーハンドリング
  */
 export default function CommunityPage() {
@@ -275,6 +358,9 @@ export default function CommunityPage() {
             heading="参加者の声"
             hideCallToAction={true}
           />
+        </AsyncErrorBoundary>
+        <AsyncErrorBoundary>
+          <FAQSection />
         </AsyncErrorBoundary>
       </main>
       <AsyncErrorBoundary>
