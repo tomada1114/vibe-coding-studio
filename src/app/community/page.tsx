@@ -4,7 +4,7 @@ import { AsyncErrorBoundary } from "@/components/error-boundary"
 import { Footer } from "@/components/footer"
 import { Gradient } from "@/components/gradient"
 import { Navbar } from "@/components/navbar"
-import { Testimonials, type Testimonial } from "@/components/testimonials"
+// import { Testimonials, type Testimonial } from "@/components/testimonials"
 import { Heading, Subheading } from "@/components/text"
 import { DISCORD_INVITE_URL } from "@/lib/constants"
 import {
@@ -224,30 +224,31 @@ function ChannelIntroductionSection() {
 
 /**
  * コミュニティメンバーのテスティモニアルデータ（タスク8.1）
+ * 一旦コメントアウト
  */
-const communityTestimonials: Testimonial[] = [
-  {
-    img: "/testimonials/community-member-1.jpg",
-    name: "田中 健太",
-    title: "フロントエンドエンジニア",
-    quote:
-      "AI駆動開発の実践的な知識を得られ、とまださんの最新検証が非常に参考になっています。コミュニティの雰囲気も温かく、質問しやすい環境です。",
-  },
-  {
-    img: "/testimonials/community-member-2.jpg",
-    name: "佐藤 美咲",
-    title: "バックエンドエンジニア",
-    quote:
-      "コミュニティメンバーと気軽に質問し合える環境が素晴らしいです。AI技術の最新トレンドをキャッチアップしながら、実践的なスキルも磨けています。",
-  },
-  {
-    img: "/testimonials/community-member-3.jpg",
-    name: "鈴木 大輔",
-    title: "フルスタックエンジニア",
-    quote:
-      "同じ目標を持つ仲間と繋がれて、モチベーションが維持できています。とまださんの検証を見ながら一緒に成長できる環境は他にはないと思います。",
-  },
-]
+// const communityTestimonials: Testimonial[] = [
+//   {
+//     img: "/testimonials/community-member-1.jpg",
+//     name: "田中 健太",
+//     title: "フロントエンドエンジニア",
+//     quote:
+//       "AI駆動開発の実践的な知識を得られ、とまださんの最新検証が非常に参考になっています。コミュニティの雰囲気も温かく、質問しやすい環境です。",
+//   },
+//   {
+//     img: "/testimonials/community-member-2.jpg",
+//     name: "佐藤 美咲",
+//     title: "バックエンドエンジニア",
+//     quote:
+//       "コミュニティメンバーと気軽に質問し合える環境が素晴らしいです。AI技術の最新トレンドをキャッチアップしながら、実践的なスキルも磨けています。",
+//   },
+//   {
+//     img: "/testimonials/community-member-3.jpg",
+//     name: "鈴木 大輔",
+//     title: "フルスタックエンジニア",
+//     quote:
+//       "同じ目標を持つ仲間と繋がれて、モチベーションが維持できています。とまださんの検証を見ながら一緒に成長できる環境は他にはないと思います。",
+//   },
+// ]
 
 /**
  * FAQ項目の型定義
@@ -256,6 +257,16 @@ interface FAQItem {
   question: string
   answer: string
 }
+
+/**
+ * Testimonial型の定義（一旦コメントアウト）
+ */
+// type Testimonial = {
+//   img: string
+//   name: string
+//   title: string
+//   quote: string
+// }
 
 /**
  * FAQデータ（タスク9.1）
@@ -383,14 +394,15 @@ export default function CommunityPage() {
         <AsyncErrorBoundary>
           <ChannelIntroductionSection />
         </AsyncErrorBoundary>
-        <AsyncErrorBoundary>
+        {/* 参加者の声セクション - 一旦コメントアウト */}
+        {/* <AsyncErrorBoundary>
           <Testimonials
             testimonials={communityTestimonials}
             subheading="コミュニティメンバーの声"
             heading="参加者の声"
             hideCallToAction={true}
           />
-        </AsyncErrorBoundary>
+        </AsyncErrorBoundary> */}
         <AsyncErrorBoundary>
           <FAQSection />
         </AsyncErrorBoundary>
