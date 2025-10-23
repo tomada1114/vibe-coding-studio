@@ -81,7 +81,7 @@ function HeroSection() {
  */
 function ExpertiseSection() {
   return (
-    <div className="bg-linear-to-b from-white from-50% to-gray-100 py-32">
+    <div className="bg-gradient-to-b from-white from-50% to-gray-100 py-32">
       <Container>
         <Subheading>Expertise</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
@@ -263,7 +263,7 @@ function CurrentActivitiesSection() {
   ]
 
   return (
-    <div className="bg-linear-to-b from-white from-50% to-gray-100 py-32">
+    <div className="bg-gradient-to-b from-white from-50% to-gray-100 py-32">
       <Container>
         <Subheading>Current Activities</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
@@ -363,7 +363,7 @@ function TechStackSection() {
  */
 function SpeakingSection() {
   return (
-    <div className="bg-linear-to-b from-white from-50% to-gray-100 py-32">
+    <div className="bg-gradient-to-b from-white from-50% to-gray-100 py-32">
       <Container>
         <Subheading>Speaking</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
