@@ -125,7 +125,7 @@ export function Navbar({ banner }: { banner?: React.ReactNode }) {
   const pathname = usePathname()
 
   return (
-    <Disclosure as="header" className="pt-12 sm:pt-16">
+    <Disclosure as="header">
       <PlusGrid>
         <PlusGridRow className="relative flex justify-between">
           <div className="relative flex gap-6">
