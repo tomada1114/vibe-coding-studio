@@ -126,7 +126,7 @@ export function Navbar({ banner }: { banner?: React.ReactNode }) {
 
   return (
     <Disclosure as="header">
-      <PlusGrid>
+      <PlusGrid className="px-6 lg:px-8">
         <PlusGridRow className="relative flex justify-between">
           <div className="relative flex gap-6">
             <div className="py-3">
