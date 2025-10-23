@@ -6,14 +6,12 @@ import { Navbar } from "@/components/navbar"
 import { Heading, Subheading } from "@/components/text"
 import {
   AcademicCapIcon,
-  BeakerIcon,
   BriefcaseIcon,
   CodeBracketIcon,
   GlobeAltIcon,
-  LightBulbIcon,
   MicrophoneIcon,
   RocketLaunchIcon,
-  UserGroupIcon,
+  BookOpenIcon,
 } from "@heroicons/react/24/outline"
 import type { Metadata } from "next"
 import Image from "next/image"
@@ -52,7 +50,7 @@ function HeroSection() {
               </p>
               <p className="mt-6 max-w-2xl text-base/7 text-gray-700">
                 プログラミング未経験から独学とスクールを経てWebエンジニアに転身。
-                現在は日本とアメリカの企業で開発案件に従事しながら、YouTube・Udemy・コミュニティでAI駆動開発の普及に尽力しています。
+                現在は開発案件に従事しつつ、法人向けにAI駆動開発の導入支援、そしてYouTube・Udemy・コミュニティでAI駆動開発の普及に尽力しています。
               </p>
             </div>
 
@@ -78,37 +76,10 @@ function HeroSection() {
 
 /**
  * AI駆動開発のスペシャリストセクション
- * - 実践経験
- * - 開発実績
+ * - 実践経験と開発実績を文章で表現
+ * - 左右レイアウトでビジュアル的な魅力を追加
  */
 function ExpertiseSection() {
-  const experiences = [
-    {
-      icon: CodeBracketIcon,
-      title: "最新AIツールの使いこなし",
-      description:
-        "Claude Code、Codex、Cursor、GitHub Copilot など最新AIツールを日常的に使用",
-    },
-    {
-      icon: RocketLaunchIcon,
-      title: "Vibe Codingの提唱",
-      description:
-        "新しい開発スタイル「Vibe Coding（バイブコーディング）」を実践・提唱",
-    },
-    {
-      icon: BeakerIcon,
-      title: "未経験分野への挑戦",
-      description:
-        "知識ゼロの状態からAIを活用してスマホアプリを開発し、ストア公開まで実現",
-    },
-    {
-      icon: LightBulbIcon,
-      title: "短期間での構築力",
-      description:
-        "プログラミング学習プラットフォーム「Learning Next」をAI駆動開発で短期間に構築",
-    },
-  ]
-
   return (
     <div className="bg-linear-to-b from-white from-50% to-gray-100 py-32">
       <Container>
@@ -116,26 +87,61 @@ function ExpertiseSection() {
         <Heading as="h2" className="mt-2 max-w-3xl">
           AI駆動開発のスペシャリスト
         </Heading>
-        <p className="mt-6 max-w-3xl text-lg text-gray-600">
-          最新のAI技術を活用し、実践と検証を繰り返しながら、
-          新しい開発スタイルを確立しています。
-        </p>
 
-        <div className="mt-10 grid grid-cols-1 gap-8 sm:mt-16 md:grid-cols-2">
-          {experiences.map(experience => (
-            <div
-              key={experience.title}
-              className="relative rounded-3xl bg-white p-8 shadow-sm ring-1 ring-gray-950/5"
-            >
-              <experience.icon className="h-10 w-10 text-gray-950" />
-              <h3 className="mt-6 text-xl/7 font-semibold text-gray-950">
-                {experience.title}
-              </h3>
-              <p className="mt-4 text-base/7 text-gray-600">
-                {experience.description}
-              </p>
+        <div className="mt-10 sm:mt-16">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
+            <div className="flex flex-col justify-center">
+              <div className="inline-flex items-center gap-3">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-950">
+                  <CodeBracketIcon className="h-6 w-6 text-white" />
+                </div>
+                <h3 className="text-2xl/8 font-semibold text-gray-950">
+                  日々の実践と情報発信
+                </h3>
+              </div>
+              <div className="mt-6 space-y-4 text-base/7 text-gray-700">
+                <p>
+                  <strong className="font-semibold text-gray-950">
+                    Claude Code、Codex、Cursor、GitHub Copilot
+                  </strong>
+                  など最新のAIツールを日常的に使いこなし、実務での活用ノウハウを蓄積。
+                  YouTubeやコミュニティで、失敗も含めた検証プロセスをリアルタイムに共有しています。
+                </p>
+                <p>
+                  AI駆動開発は単なるコード補完ではありません。設計から実装、テストまで、
+                  <strong className="font-semibold text-gray-950">
+                    AIと協働することで開発速度と品質を両立
+                  </strong>
+                  できる、新しい開発のあり方を実践しています。
+                </p>
+              </div>
             </div>
-          ))}
+
+            <div className="flex flex-col justify-center">
+              <div className="inline-flex items-center gap-3">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-950">
+                  <RocketLaunchIcon className="h-6 w-6 text-white" />
+                </div>
+                <h3 className="text-2xl/8 font-semibold text-gray-950">
+                  現場と個人開発での実現
+                </h3>
+              </div>
+              <div className="mt-6 space-y-4 text-base/7 text-gray-700">
+                <p>
+                  開発案件では、AI駆動開発により
+                  <strong className="font-semibold text-gray-950">
+                    高速な開発サイクル
+                  </strong>
+                  を実現。個人開発でも、プログラミング学習プラットフォーム「Learning
+                  Next」をはじめ、複数のWebアプリを短期間で構築・運営しています。
+                </p>
+                <p>
+                  未経験の技術領域でも、AIの力を借りることで即座に挑戦可能。
+                  実際にスマホアプリ開発の経験がない状態から、アプリを開発してストア公開まで実現しました。
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </Container>
     </div>
@@ -154,9 +160,9 @@ function EducationSection() {
       icon: AcademicCapIcon,
       title: "Udemy講師",
       description:
-        "AI駆動開発分野で複数のベストセラーコースを運営。Claude Code、Codex、Cursor など最新AIツールの実践的な使い方を解説。",
+        "AI駆動開発分野で複数のベストセラーコースを運営。Claude Code、Codex、Cursor など最新AIツールの実践的な使い方を解説しています。プログラミング未経験の方でも分かりやすく解説していますので、AI駆動開発の基礎から実践までを学べます。",
       link: {
-        text: "コース一覧を見る",
+        text: "コース一覧を見る（クーポン付き）",
         url: "https://school.learning-next.app/coupons",
       },
     },
@@ -164,17 +170,17 @@ function EducationSection() {
       icon: MicrophoneIcon,
       title: "YouTube運営",
       description:
-        "毎週火曜20時、土曜朝9時に最新AI駆動開発ノウハウを配信。実際の開発画面を見せながら、AIツールの使い方を実演。",
+        "最新のAI駆動開発ノウハウを配信。Claude Code や Codex を使った開発方法や、AI駆動開発のベストプラクティスを解説しています。現場での実践ノウハウも含めて紹介していますので、ツールの使い方だけでなく、実際の開発現場での活用方法も学べます。",
       link: {
         text: "チャンネルを見る",
         url: "https://www.youtube.com/@vibe-coding-studio",
       },
     },
     {
-      icon: UserGroupIcon,
+      icon: BookOpenIcon,
       title: "元プログラミングスクール講師",
       description:
-        "100名以上の未経験者を指導した実績。初心者の挫折ポイントを熟知し、技術的な内容を分かりやすく伝えることを得意とする。",
+        "100名以上の未経験者を指導した実績。初心者の挫折ポイントを熟知し、技術的な内容を分かりやすく伝えることを得意としています。常に最新の情報を追いながらも、初心者の方が分かりやすいよう、丁寧すぎるぐらいに解説することを心がけています。",
     },
   ]
 
@@ -240,7 +246,7 @@ function CurrentActivitiesSection() {
       icon: BriefcaseIcon,
       title: "フリーランスエンジニア",
       description:
-        "日本とアメリカの企業で開発案件に従事。カナダから完全リモートで働く自由なスタイルを実現。フルスタックエンジニアとして Ruby on Rails、React、Next.js、Vue.js などを活用。",
+        "開発案件に従事。カナダから完全リモートで働く自由なスタイルを実現。フルスタックエンジニアとして主にWebアプリケーションを開発しています。",
     },
     {
       icon: RocketLaunchIcon,
@@ -252,7 +258,7 @@ function CurrentActivitiesSection() {
       icon: GlobeAltIcon,
       title: "コンテンツ発信",
       description:
-        "Qiita、note で技術記事を執筆（月間数万PV）。X（Twitter）で日々の検証結果や最新AI情報を発信。Voicy でAI駆動開発ラジオ配信。",
+        "XやYoutube、QiitaにZennなど、各種メディアでAI駆動開発の情報を発信しています。AI駆動開発やプログラミングがはじめての方にも分かりやすく解説しています。",
     },
   ]
 
@@ -377,10 +383,10 @@ function SpeakingSection() {
                   東京AI祭 プレイベント（2025年）
                 </h3>
                 <p className="mt-2 text-lg font-medium text-gray-950/75">
-                  Claude Code vs Codex CLI 徹底比較
+                  Claude Code vs Codex CLI 徹底比較（オンライン）
                 </p>
                 <p className="mt-4 text-base/7 text-gray-700">
-                  両ツールを日常的に併用している経験から、カスタムコマンドの柔軟性、サブエージェント機能、IDE拡張対応、コミュニティの充実度など、実務で本当に重要となる機能を徹底比較。
+                  両ツールを日常的に併用している経験から、カスタムコマンドの柔軟性、サブエージェント機能、IDE拡張対応、コミュニティの充実度など、実務で本当に重要となる機能を徹底比較。100名以上に参加いただき、AI駆動開発のツール選定の参考になる内容を提供しました。現場経験を活かした実践的観点を生かした内容であり、参加者の方からも高い評価をいただきました。
                 </p>
                 <a
                   href="https://ai-fest-tokyo.connpass.com/event/369543/"
@@ -388,7 +394,7 @@ function SpeakingSection() {
                   rel="noopener noreferrer"
                   className="mt-4 inline-block text-sm font-medium text-gray-950 underline decoration-gray-950/20 underline-offset-4 data-hover:decoration-gray-950"
                 >
-                  イベント詳細を見る →
+                  過去のイベント詳細を見る →
                 </a>
               </div>
             </div>
@@ -423,15 +429,18 @@ function MissionSection() {
             </blockquote>
             <p className="mx-auto mt-8 max-w-2xl text-base/7 text-gray-700">
               技術的な挑戦を楽しみながら、AIの力を借りてより創造的な開発を実現。
-              エンジニアが
-              <strong className="font-semibold text-gray-950">
-                経済的自由
+              <br />
+              誰もが
+              <strong className="mx-1 font-semibold text-gray-950">
+                「経済的自由」
               </strong>
               と
-              <strong className="font-semibold text-gray-950">
-                働き方の自由
+              <strong className="mx-1 font-semibold text-gray-950">
+                「働き方の自由」
               </strong>
-              を手に入れられる仕組みづくりに貢献していきます。
+              を手に入れられる
+              <br />
+              仕組みづくりに貢献していきます。
             </p>
           </div>
         </div>
