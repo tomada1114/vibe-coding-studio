@@ -109,7 +109,7 @@ function AnxietyReliefSection() {
   return (
     <div className="bg-white py-32">
       <Container>
-        <Subheading>DON'T WORRY</Subheading>
+        <Subheading>DON&apos;T WORRY</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           こんな不安、ありませんか?
         </Heading>
