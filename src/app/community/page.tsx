@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 function CommunityHeroSection() {
   return (
     <div className="relative">
-      <Gradient className="absolute inset-2 bottom-0 rounded-4xl ring-1 ring-black/5 ring-inset" />
+      <Gradient className="absolute inset-0" />
       <Container className="relative">
         <Navbar />
         <div className="pt-16 pb-24 sm:pt-24 sm:pb-32 md:pt-32 md:pb-48">
@@ -223,7 +223,7 @@ function ValuePropositionSection() {
 function CommunityDescriptionSection() {
   return (
     <div className="relative py-32">
-      <Gradient className="absolute inset-2 rounded-4xl ring-1 ring-black/5 ring-inset" />
+      <Gradient className="absolute inset-0" />
       <Container className="relative">
         <Subheading>About Community</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
@@ -399,7 +399,7 @@ function RecommendedForSection() {
 
   return (
     <div className="relative py-32">
-      <Gradient className="absolute inset-2 rounded-4xl ring-1 ring-black/5 ring-inset" />
+      <Gradient className="absolute inset-0" />
       <Container className="relative">
         <Subheading>Who should join</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
