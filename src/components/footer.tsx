@@ -12,14 +12,12 @@ function CallToAction() {
     <div className="relative pt-20 pb-16 text-center sm:py-24">
       <hgroup>
         <Subheading>コミュニティに参加</Subheading>
-        <p className="mt-6 text-3xl font-medium tracking-tight text-gray-950 sm:text-5xl">
-          AI駆動開発を
-          <br />
-          一緒に学びませんか？
+        <p className="mt-6 text-3xl font-medium tracking-tight text-gray-950 sm:text-3xl">
+          AI駆動開発を一緒に学びませんか？
         </p>
       </hgroup>
       <p className="mx-auto mt-6 max-w-xs text-sm/6 text-gray-500">
-        Discordコミュニティで、とまだの最新検証を見ながら一緒に成長しましょう。
+        Discordコミュニティで、最新のAI駆動開発情報を発見・共有しましょう。
       </p>
       <div className="mt-6">
         <Button

@@ -3,7 +3,6 @@ import { Container } from "@/components/container"
 import { AsyncErrorBoundary } from "@/components/error-boundary"
 import { Footer } from "@/components/footer"
 import { Gradient } from "@/components/gradient"
-import { Logo } from "@/components/logo"
 import { Navbar } from "@/components/navbar"
 import { Heading, Subheading } from "@/components/text"
 import {
@@ -11,7 +10,8 @@ import {
   CodeBracketIcon,
   LightBulbIcon,
   UserGroupIcon,
-  WrenchScrewdriverIcon,
+  QuestionMarkCircleIcon,
+  BookOpenIcon,
 } from "@heroicons/react/24/outline"
 import type { Metadata } from "next"
 import Image from "next/image"
@@ -19,7 +19,7 @@ import Image from "next/image"
 export const metadata: Metadata = {
   title: "Vibe Coding Studio - AI駆動開発コミュニティ",
   description:
-    "AI駆動開発を学ぶ仲間が集まり、とまだの最新検証を見ながら一緒に成長するDiscordコミュニティ",
+    "AI駆動開発を学ぶ仲間が集まり、情報を共有し合い、一緒に成長するDiscordコミュニティ",
 }
 
 /**
@@ -35,21 +35,18 @@ function HeroSection() {
       <Container className="relative">
         <Navbar />
         <div className="pt-16 pb-24 sm:pt-24 sm:pb-32 md:pt-32 md:pb-48">
-          {/* ロゴ */}
-          <div className="mb-8 flex justify-center sm:justify-start">
-            <Logo variant="wide" className="h-16 w-auto sm:h-20" />
-          </div>
-
           {/* キャッチコピー */}
           <h1 className="font-display text-6xl/[1.15] font-medium tracking-tight text-balance text-gray-950 sm:text-8xl/[1.1] md:text-9xl/[1.1]">
             AI駆動開発を
             <br />
-            一緒に学ぼう
+            仲間と一緒に学ぼう
           </h1>
 
           {/* 説明文 */}
-          <p className="mt-8 max-w-lg text-xl/8 font-medium text-gray-950/75 sm:text-2xl/9">
-            AI駆動開発を学ぶ仲間が集まり、とまだの最新検証を見ながら一緒に成長するDiscordコミュニティ
+          <p className="mt-8 max-w-2xl text-xl/8 font-medium text-gray-950/75 sm:text-2xl/9">
+            AI駆動開発を学ぶ仲間が集まり、情報を共有し合い、
+            <br />
+            一緒に成長するDiscordコミュニティです
           </p>
 
           {/* コミュニティ参加ボタン */}
@@ -84,9 +81,9 @@ function CommunityOverviewSection() {
     },
     {
       icon: ChatBubbleLeftRightIcon,
-      title: "気軽に質問・報告",
+      title: "気軽に質問・相談",
       description:
-        "初心者の質問も大歓迎。ROM参加もOK。自分のペースで関わり方を決められます",
+        "初心者の質問も大歓迎。見るだけもOK。自分のペースで関わり方を決められます",
     },
   ]
 
@@ -101,17 +98,18 @@ function CommunityOverviewSection() {
           初心者大歓迎 | 見るだけでもOK | 温かい雰囲気
         </p>
 
-        {/* widelogoを薄めの背景で表示 */}
-        <div className="mt-10 overflow-hidden rounded-3xl bg-gray-950/5 p-12 sm:mt-16">
+        {/* widelogo表示 */}
+        <div className="mt-10 sm:mt-16">
           <div className="flex items-center justify-center">
-            <Image
-              src="/logo-wide-bg-black.png"
-              alt="Vibe Coding Studio"
-              width={400}
-              height={120}
-              className="opacity-20"
-              priority={false}
-            />
+            <div className="overflow-hidden rounded-2xl">
+              <Image
+                src="/logo-wide-bg-black.png"
+                alt="Vibe Coding Studio"
+                width={400}
+                height={120}
+                priority={false}
+              />
+            </div>
           </div>
         </div>
 
@@ -149,20 +147,20 @@ function CommunityOverviewSection() {
 function WorkInProgressSection() {
   const upcomingFeatures = [
     {
-      icon: WrenchScrewdriverIcon,
-      title: "プロジェクトショーケース",
-      description: "コミュニティメンバーのプロジェクトを紹介",
-    },
-    {
       icon: CodeBracketIcon,
       title: "学習リソース",
-      description: "AI駆動開発の学習教材とガイド",
+      description: "コピペで使える設定ファイルやテンプレートを提供",
     },
     {
-      icon: ChatBubbleLeftRightIcon,
-      title: "イベント情報",
-      description: "勉強会やワークショップの開催情報",
+      icon: QuestionMarkCircleIcon,
+      title: "FAQ・トラブルシューティング",
+      description: "コミュニティで出た質問やトラブルをまとめて解説",
     },
+    {
+      icon: BookOpenIcon,
+      title: "コンテンツ一覧",
+      description: "AI駆動開発に役立つ動画や記事を探しやすく",
+    }
   ]
 
   return (
@@ -173,7 +171,7 @@ function WorkInProgressSection() {
           準備中のコンテンツ
         </Heading>
         <p className="mt-6 max-w-3xl text-lg text-gray-600">
-          より充実したコミュニティ体験のため、現在以下のコンテンツを準備中です。
+          当サイトでは、コミュニティと連携したコンテンツを準備中です。
         </p>
 
         {/* レスポンシブグリッド */}

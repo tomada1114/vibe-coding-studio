@@ -26,13 +26,13 @@ export interface SocialLink {
  */
 export const SOCIAL_LINKS: readonly SocialLink[] = [
   {
-    name: "Twitter",
-    url: "https://twitter.com/tomadatech",
+    name: "X",
+    url: "https://x.com/muscle_coding",
     icon: "twitter",
   },
   {
     name: "YouTube",
-    url: "https://youtube.com/@tomadatech",
+    url: "https://www.youtube.com/@vibe-coding-studio",
     icon: "youtube",
   },
   {
@@ -47,7 +47,7 @@ export const SOCIAL_LINKS: readonly SocialLink[] = [
   },
   {
     name: "Udemy",
-    url: "https://udemy.com/user/tomada",
+    url: "https://school.learning-next.app/coupons",
     icon: "udemy",
   },
 ] as const
@@ -58,6 +58,6 @@ export const SOCIAL_LINKS: readonly SocialLink[] = [
 export const SITE_METADATA = {
   title: "Vibe Coding Studio",
   description:
-    "AI駆動開発を学ぶ仲間が集まり、とまだの最新検証を見ながら一緒に成長するコミュニティ",
+    "AI駆動開発を学ぶ仲間が集まり、情報を共有し合い、一緒に成長するコミュニティ",
   url: "https://vibecoding.studio",
 } as const

@@ -424,7 +424,7 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Vibe Coding Studio - AI駆動開発コミュニティ",
-  description: "AI駆動開発を学ぶ仲間が集まり、とまだの最新検証を見ながら一緒に成長するDiscordコミュニティ",
+  description: "AI駆動開発を学ぶ仲間が集まり、情報を共有し合い、一緒に成長するDiscordコミュニティ",
 }
 
 // セクションコンポーネント（ページ内定義）
@@ -598,7 +598,7 @@ export const SOCIAL_LINKS: readonly SocialLink[] = [
  */
 export const SITE_METADATA = {
   title: "Vibe Coding Studio",
-  description: "AI駆動開発を学ぶ仲間が集まり、とまだの最新検証を見ながら一緒に成長するコミュニティ",
+  description: "AI駆動開発を学ぶ仲間が集まり、情報を共有し合い、一緒に成長するコミュニティ",
   url: "https://vibecoding.studio",
 } as const
 ```
@@ -640,7 +640,7 @@ const communityTestimonials = [
     img: "/testimonials/community-member-1.jpg",
     name: "参加者A",
     title: "フロントエンドエンジニア",
-    quote: "AI駆動開発の実践的な知識を得られ、とまださんの最新検証が非常に参考になっています。",
+    quote: "AI駆動開発の実践的な知識を得られ、とまだの最新検証が非常に参考になっています。",
   },
   {
     img: "/testimonials/community-member-2.jpg",

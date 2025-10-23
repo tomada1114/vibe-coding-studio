@@ -16,7 +16,7 @@ export function Logo({
       alt="Vibe Coding Studio"
       width={isWide ? 400 : 127}
       height={isWide ? 120 : 34}
-      className={clsx(className, "object-contain", isWide && "rounded-lg")}
+      className={clsx(className, "object-contain", isWide && "rounded-xl")}
       priority
     />
   )

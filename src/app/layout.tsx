@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     default: "Vibe Coding Studio - AI駆動開発コミュニティ",
   },
   description:
-    "AI駆動開発を学ぶ仲間が集まり、とまだの最新検証を見ながら一緒に成長するDiscordコミュニティ",
+    "AI駆動開発を学ぶ仲間が集まり、情報を共有し合い、一緒に成長するDiscordコミュニティ",
 }
 
 export default function RootLayout({

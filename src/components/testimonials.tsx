@@ -37,7 +37,7 @@ const defaultTestimonials: Testimonial[] = [
     name: "コミュニティメンバー",
     title: "開発者",
     quote:
-      "AI駆動開発を学ぶ仲間と繋がり、とまださんの最新検証を見ながら一緒に成長できています。",
+      "AI駆動開発を学ぶ仲間と繋がり、とまだの最新検証を見ながら一緒に成長できています。",
   },
   {
     img: "/testimonials/community-member-2.jpg",
@@ -150,7 +150,9 @@ function CallToAction() {
   return (
     <div>
       <p className="max-w-sm text-sm/6 text-gray-600">
-        AI駆動開発を学ぶ仲間が待っています。今すぐコミュニティに参加しましょう。
+        AI駆動開発を学ぶ仲間が待っています。
+        <br />
+        今すぐコミュニティに参加しましょう
       </p>
       <div className="mt-2">
         <Link
