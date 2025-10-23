@@ -109,7 +109,7 @@ function AnxietyReliefSection() {
   return (
     <div className="bg-white py-32">
       <Container>
-        <Subheading>安心してください</Subheading>
+        <Subheading>DON'T WORRY</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           こんな不安、ありませんか?
         </Heading>
@@ -179,7 +179,7 @@ function ValuePropositionSection() {
   return (
     <div className="bg-linear-to-b from-white from-50% to-gray-100 py-32">
       <Container>
-        <Subheading>コミュニティの価値</Subheading>
+        <Subheading>VALUE PROPOSITION</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           ここで得られること
         </Heading>
@@ -305,7 +305,7 @@ function ChannelIntroductionSection() {
   return (
     <div className="bg-white py-32">
       <Container>
-        <Subheading>Discord チャンネル</Subheading>
+        <Subheading>DISCORD CHANNELS</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           チャンネル紹介
         </Heading>
@@ -436,22 +436,22 @@ const faqItems: FAQItem[] = [
   {
     question: "初心者でも参加できますか？",
     answer:
-      "もちろんです！初心者からベテランまで、あらゆるレベルの開発者が参加しています。わからないことは気軽に質問できる環境を提供しています。",
+      "もちろんです！初心者からベテランまで、あらゆるレベルの開発者が参加しています。プログラミング未経験の方も大歓迎です。わからないことは気軽に質問できる環境を提供しています。",
   },
   {
     question: "どのような内容を学べますか？",
     answer:
-      "AI駆動開発の最新技術、Claude Code / Codex / Cursor の活用方法、プロンプトエンジニアリング、実践的な開発手法などを学べます。とまだの最新検証も共有されます。",
+      "AI駆動開発の最新技術、Claude Code / Codex / Cursor の活用方法、プロンプトエンジニアリング、実践的な開発手法などがシェアされています。とまだの最新検証も共有されますので、試行錯誤のプロセスを含めて学ぶ機会が得られます。",
   },
   {
     question: "コミュニティのルールはありますか？",
     answer:
-      "相互尊重とフレンドリーな雰囲気を大切にしています。具体的なルールはDiscord参加後にご確認ください。",
+      "相互尊重とフレンドリーな雰囲気を大切にしており、厳密なルールは設けておりません。具体的なルールはDiscord参加後にご確認ください。",
   },
   {
     question: "質問への回答はどのくらいで得られますか？",
     answer:
-      "コミュニティメンバーの活動状況によりますが、大抵は数時間以内に何らかの反応があります。活発なコミュニティなので、すぐに助けを得られることが多いです。もちろん、とまだ自信が回答させていただく場合も多いです。"
+      "とまだが気付けば即座に回答しますので、普段は数時間〜半日ぐらいでお答えしています。また、コミュニティメンバーが回答してくださることもあるので、すぐに回答を得られることもあります。",
   },
 ]
 
@@ -506,7 +506,9 @@ function FinalCTASection() {
             今すぐ参加しよう
           </Heading>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-600">
-            AI駆動開発を学ぶ仲間が待っています。Discordコミュニティで一緒に成長しましょう。
+            AI駆動開発を学ぶ仲間が待っています。
+            <br />
+            Discordコミュニティで一緒に成長しましょう！
           </p>
           <div className="mt-8 flex justify-center">
             <Button
