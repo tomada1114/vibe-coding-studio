@@ -127,13 +127,11 @@ export function Navbar({ banner }: { banner?: React.ReactNode }) {
   return (
     <Disclosure as="header">
       <PlusGrid className="px-6 lg:px-8">
-        <PlusGridRow className="relative flex justify-between">
-          <div className="relative flex gap-6">
-            <div className="py-3">
-              <Link href="/" title="Home">
-                <Logo variant="wide" className="h-9" />
-              </Link>
-            </div>
+        <PlusGridRow className="relative flex items-center justify-between">
+          <div className="relative flex items-center gap-6">
+            <Link href="/" title="Home" className="-ml-6 py-3">
+              <Logo variant="wide" className="h-9" />
+            </Link>
             {banner && (
               <div className="relative hidden items-center py-3 lg:flex">
                 {banner}
