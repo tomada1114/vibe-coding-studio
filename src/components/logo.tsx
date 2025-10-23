@@ -14,9 +14,9 @@ export function Logo({
     <Image
       src={isWide ? "/vcs-logo-wide-transparent.png" : "/vcs-logo-square-transparent.png"}
       alt="Vibe Coding Studio"
-      width={isWide ? 400 : 127}
-      height={isWide ? 120 : 34}
-      className={clsx(className, "object-contain", isWide && "rounded-xl")}
+      width={isWide ? 1500 : 127}
+      height={isWide ? 500 : 34}
+      className={clsx(className, "object-contain", isWide && "w-auto")}
       priority
     />
   )
