@@ -125,13 +125,15 @@ export function Navbar({ banner }: { banner?: React.ReactNode }) {
   const pathname = usePathname()
 
   return (
-    <Disclosure as="header">
-      <PlusGrid className="px-6 lg:px-8">
-        <PlusGridRow className="relative flex items-center justify-between">
-          <div className="relative flex items-center gap-6">
-            <Link href="/" title="Home" className="-ml-8 py-3">
-              <Logo variant="wide" className="h-9" />
-            </Link>
+    <Disclosure as="header" className="pt-12 sm:pt-16">
+      <PlusGrid>
+        <PlusGridRow className="relative flex justify-between">
+          <div className="relative flex gap-6">
+            <PlusGridItem className="py-3">
+              <Link href="/" title="Home">
+                <Logo variant="wide" className="h-9" />
+              </Link>
+            </PlusGridItem>
             {banner && (
               <div className="relative hidden items-center py-3 lg:flex">
                 {banner}
