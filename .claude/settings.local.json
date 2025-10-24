@@ -11,7 +11,9 @@
       "Bash(git commit:*)",
       "Bash(npm run type-check:*)",
       "Bash(git fetch:*)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(git log:*)",
+      "WebFetch(domain:registry.npmjs.org)"
     ],
     "deny": [],
     "ask": []
