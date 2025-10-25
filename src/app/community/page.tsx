@@ -123,9 +123,7 @@ function AnxietyReliefSection() {
               <h3 className="text-lg/7 font-semibold text-gray-950">
                 {anxiety.question}
               </h3>
-              <p className="mt-4 text-base/7 text-gray-700">
-                {anxiety.answer}
-              </p>
+              <p className="mt-4 text-base/7 text-gray-700">{anxiety.answer}</p>
             </div>
           ))}
         </div>
@@ -412,10 +410,8 @@ function RecommendedForSection() {
               key={person}
               className="flex items-start rounded-2xl bg-white/80 p-6 ring-1 ring-gray-950/5"
             >
-              <span className="mr-3 mt-0.5 text-gray-950">•</span>
-              <p className="text-base/7 text-gray-700">
-                {person}
-              </p>
+              <span className="mt-0.5 mr-3 text-gray-950">•</span>
+              <p className="text-base/7 text-gray-700">{person}</p>
             </div>
           ))}
         </div>

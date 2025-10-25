@@ -27,7 +27,10 @@ export function CouponDetailSkeleton() {
             <div className="mb-5 h-4 w-24 animate-pulse rounded bg-zinc-200" />
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
               {[...Array(6)].map((_, i) => (
-                <div key={i} className="h-14 animate-pulse rounded-2xl bg-zinc-100" />
+                <div
+                  key={i}
+                  className="h-14 animate-pulse rounded-2xl bg-zinc-100"
+                />
               ))}
             </div>
           </div>
@@ -51,7 +54,10 @@ export function CouponDetailSkeleton() {
           <div className="rounded-3xl bg-zinc-50/50 p-8">
             <div className="mb-8 space-y-2">
               {[...Array(3)].map((_, i) => (
-                <div key={i} className="mx-auto h-5 w-48 animate-pulse rounded bg-zinc-200" />
+                <div
+                  key={i}
+                  className="mx-auto h-5 w-48 animate-pulse rounded bg-zinc-200"
+                />
               ))}
             </div>
             <div className="mx-auto h-14 w-64 animate-pulse rounded-full bg-blue-200" />

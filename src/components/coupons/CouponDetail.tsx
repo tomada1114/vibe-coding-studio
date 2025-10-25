@@ -1,15 +1,24 @@
-'use client'
+"use client"
 
-import Image from 'next/image'
-import Link from 'next/link'
-import { ArrowLeft, Gift, Calendar, Tag, Clock, CheckCircle } from 'lucide-react'
-import type { Coupon } from '@/types/coupon'
-import { TOPIC_INFO } from '@/constants/coupon-courses'
-import { calculateDiscountRate, formatDateToJST } from '@/lib/coupons/coupon-data'
-import { Badge } from '@/components/catalyst/badge'
-import { Button } from '@/components/catalyst/button'
-import { Text } from '@/components/catalyst/text'
-import { Heading } from '@/components/catalyst/heading'
+import { Badge } from "@/components/catalyst/badge"
+import { Button } from "@/components/catalyst/button"
+import { Heading } from "@/components/catalyst/heading"
+import { Text } from "@/components/catalyst/text"
+import { TechStackBadges } from "@/components/coupons/TechStackBadges"
+import {
+  calculateDiscountRate,
+  formatDateToJST,
+} from "@/lib/coupons/coupon-data"
+import type { Coupon } from "@/types/coupon"
+import {
+  ArrowLeft,
+  Calendar,
+  CheckCircle,
+  Clock,
+  Gift,
+  Tag,
+} from "lucide-react"
+import Link from "next/link"
 
 interface CouponDetailProps {
   coupon: Coupon
@@ -17,14 +26,19 @@ interface CouponDetailProps {
 
 export function CouponDetail({ coupon }: CouponDetailProps) {
   const { courseInfo } = coupon
-  const discountRate = calculateDiscountRate(courseInfo.originalPrice, coupon.discountPrice)
+  const discountRate = calculateDiscountRate(
+    courseInfo.originalPrice,
+    coupon.discountPrice
+  )
   const formattedEndDate = formatDateToJST(coupon.endDateTime)
   const savings = courseInfo.originalPrice - coupon.discountPrice
 
   // Calculate days remaining
   const now = new Date()
   const endDate = new Date(coupon.endDateTime)
-  const daysRemaining = Math.ceil((endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24))
+  const daysRemaining = Math.ceil(
+    (endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)
+  )
 
   return (
     <div className="mx-auto max-w-4xl px-4 sm:px-6">
@@ -41,7 +55,10 @@ export function CouponDetail({ coupon }: CouponDetailProps) {
         {/* ヘッダーセクション */}
         <div className="bg-zinc-50 p-6">
           <div>
-            <Heading level={1} className="mb-4 text-xl font-semibold text-zinc-950 sm:text-2xl">
+            <Heading
+              level={1}
+              className="mb-4 text-xl font-semibold text-zinc-950 sm:text-2xl"
+            >
               {courseInfo.title}
             </Heading>
 
@@ -72,47 +89,18 @@ export function CouponDetail({ coupon }: CouponDetailProps) {
         <div className="space-y-6 p-6">
           {/* 技術スタック */}
           <div>
-            <Text className="mb-3 text-base font-semibold text-zinc-950">技術スタック</Text>
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
-              {courseInfo.topics.map(topic => {
-                const info = TOPIC_INFO[topic]
-                return (
-                  <div
-                    key={topic}
-                    className="flex items-center gap-2 rounded-lg border border-zinc-950/10 bg-white px-3 py-2 transition-colors hover:border-zinc-950/20 hover:bg-zinc-50"
-                  >
-                    <div className="flex h-5 w-5 items-center justify-center">
-                      {info.isLocal ? (
-                        <Image
-                          src={info.icon}
-                          alt={info.name}
-                          width={16}
-                          height={16}
-                          className="object-contain"
-                          loading="lazy"
-                        />
-                      ) : (
-                        <Image
-                          src={info.icon}
-                          alt={info.name}
-                          width={16}
-                          height={16}
-                          className="object-contain"
-                          loading="lazy"
-                          unoptimized
-                        />
-                      )}
-                    </div>
-                    <span className="text-xs text-zinc-700">{info.name}</span>
-                  </div>
-                )
-              })}
-            </div>
+            <Text className="mb-3 text-base font-semibold text-zinc-950">
+              技術スタック
+            </Text>
+            <TechStackBadges topics={courseInfo.topics} />
           </div>
 
           {/* 講座説明 */}
           <div>
-            <Heading level={2} className="mb-3 text-base font-semibold text-zinc-950">
+            <Heading
+              level={2}
+              className="mb-3 text-base font-semibold text-zinc-950"
+            >
               この講座で学べること
             </Heading>
             <div className="rounded-lg bg-zinc-50 p-4">
@@ -135,7 +123,9 @@ export function CouponDetail({ coupon }: CouponDetailProps) {
                     </span>
                   </div>
                   <div className="flex items-baseline gap-3">
-                    <span className="text-sm font-medium text-zinc-950">特別価格</span>
+                    <span className="text-sm font-medium text-zinc-950">
+                      特別価格
+                    </span>
                     <span className="text-3xl font-bold text-zinc-950">
                       ¥{coupon.discountPrice.toLocaleString()}
                     </span>
@@ -156,13 +146,17 @@ export function CouponDetail({ coupon }: CouponDetailProps) {
             {/* クーポンコードカード */}
             <div className="rounded-lg border border-blue-200 bg-blue-50 p-6">
               <div className="text-center">
-                <Text className="mb-3 text-sm font-medium text-blue-700">クーポンコード</Text>
+                <Text className="mb-3 text-sm font-medium text-blue-700">
+                  クーポンコード
+                </Text>
                 <div className="rounded-lg border border-blue-200 bg-white p-4">
                   <Text className="font-mono text-xl font-bold tracking-wider text-blue-900">
                     {coupon.couponCode}
                   </Text>
                 </div>
-                <Text className="mt-3 text-xs text-blue-600">コードをコピーしてUdemyで使用</Text>
+                <Text className="mt-3 text-xs text-blue-600">
+                  コードをコピーしてUdemyで使用
+                </Text>
               </div>
             </div>
           </div>

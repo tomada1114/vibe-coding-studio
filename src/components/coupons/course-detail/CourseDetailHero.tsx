@@ -1,9 +1,9 @@
-'use client'
+"use client"
 
-import Image from 'next/image'
-import Link from 'next/link'
-import { ArrowLeft } from 'lucide-react'
-import { TOPIC_INFO } from '@/constants/coupon-courses'
+import { TOPIC_INFO } from "@/constants/coupon-courses"
+import { ArrowLeft } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
 
 interface CourseDetailHeroProps {
   title: string
@@ -12,7 +12,12 @@ interface CourseDetailHeroProps {
   slug?: string
 }
 
-export function CourseDetailHero({ title, subtitle, topics, slug }: CourseDetailHeroProps) {
+export function CourseDetailHero({
+  title,
+  subtitle,
+  topics,
+  slug,
+}: CourseDetailHeroProps) {
   return (
     <div className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600">
       {/* 背景パターン */}
@@ -36,7 +41,9 @@ export function CourseDetailHero({ title, subtitle, topics, slug }: CourseDetail
               {title}
             </h1>
 
-            <p className="mb-6 text-base text-white/90 sm:mb-8 sm:text-lg lg:text-xl">{subtitle}</p>
+            <p className="mb-6 text-base text-white/90 sm:mb-8 sm:text-lg lg:text-xl">
+              {subtitle}
+            </p>
 
             {/* 技術アイコン */}
             <div className="flex flex-wrap items-center gap-3">
@@ -65,7 +72,9 @@ export function CourseDetailHero({ title, subtitle, topics, slug }: CourseDetail
                         unoptimized
                       />
                     )}
-                    <span className="text-sm font-medium text-zinc-900">{info.name}</span>
+                    <span className="text-sm font-medium text-zinc-900">
+                      {info.name}
+                    </span>
                   </div>
                 )
               })}

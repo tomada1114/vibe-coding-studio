@@ -1,13 +1,16 @@
-import { Container } from '@/components/container'
-import { CouponPageLayout } from '@/components/coupons/CouponPageLayout'
-import { AsyncErrorBoundary } from '@/components/error-boundary'
-import { Footer } from '@/components/footer'
-import { Gradient } from '@/components/gradient'
-import { Navbar } from '@/components/navbar'
-import { calculateDiscountRate, getLatestCoupons } from '@/lib/coupons/coupon-data'
-import { ChevronRight } from 'lucide-react'
-import type { Metadata } from 'next'
-import Link from 'next/link'
+import { Container } from "@/components/container"
+import { CouponPageLayout } from "@/components/coupons/CouponPageLayout"
+import { AsyncErrorBoundary } from "@/components/error-boundary"
+import { Footer } from "@/components/footer"
+import { Gradient } from "@/components/gradient"
+import { Navbar } from "@/components/navbar"
+import {
+  calculateDiscountRate,
+  getLatestCoupons,
+} from "@/lib/coupons/coupon-data"
+import { ChevronRight } from "lucide-react"
+import type { Metadata } from "next"
+import Link from "next/link"
 
 // 動的メタデータ生成（サーバー側で生成）
 export async function generateMetadata(): Promise<Metadata> {
@@ -16,7 +19,10 @@ export async function generateMetadata(): Promise<Metadata> {
   // 最大割引率を計算
   const maxDiscountRate = Math.max(
     ...coupons.map(coupon =>
-      calculateDiscountRate(coupon.courseInfo.originalPrice, coupon.discountPrice)
+      calculateDiscountRate(
+        coupon.courseInfo.originalPrice,
+        coupon.discountPrice
+      )
     )
   )
 
@@ -34,11 +40,11 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title,
       description,
-      type: 'website',
-      url: 'https://school.learning-next.app/coupons',
+      type: "website",
+      url: "https://school.learning-next.app/coupons",
       images: [
         {
-          url: 'https://school.learning-next.app/img/author/tomada.png',
+          url: "https://school.learning-next.app/img/author/tomada.png",
           width: 800,
           height: 600,
           alt: title,
@@ -46,10 +52,10 @@ export async function generateMetadata(): Promise<Metadata> {
       ],
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title,
       description,
-      images: ['https://school.learning-next.app/img/author/tomada.png'],
+      images: ["https://school.learning-next.app/img/author/tomada.png"],
     },
   }
 }
@@ -60,7 +66,10 @@ export default function CouponsPage() {
   // 最大割引率を計算
   const maxDiscountRate = Math.max(
     ...coupons.map(coupon =>
-      calculateDiscountRate(coupon.courseInfo.originalPrice, coupon.discountPrice)
+      calculateDiscountRate(
+        coupon.courseInfo.originalPrice,
+        coupon.discountPrice
+      )
     )
   )
 
@@ -71,27 +80,27 @@ export default function CouponsPage() {
 
   // 構造化データの生成（サーバー側で生成）
   const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
+    "@context": "https://schema.org",
+    "@type": "ItemList",
     name: `【${year}年${month}月】当サイト限定！オリジナルUdemy講座の特別割引クーポン一覧`,
     description: `Learning Next限定の特別価格でUdemy講座を受講できます。最大${maxDiscountRate}%OFFのクーポンを配布中。`,
     itemListElement: coupons.map((coupon, index) => ({
-      '@type': 'Course',
+      "@type": "Course",
       position: index + 1,
       name: coupon.courseInfo.title,
       description: coupon.courseInfo.description,
       provider: {
-        '@type': 'Organization',
-        name: 'Udemy',
-        sameAs: 'https://www.udemy.com',
+        "@type": "Organization",
+        name: "Udemy",
+        sameAs: "https://www.udemy.com",
       },
       offers: {
-        '@type': 'Offer',
+        "@type": "Offer",
         price: coupon.discountPrice,
-        priceCurrency: 'JPY',
+        priceCurrency: "JPY",
         url: coupon.courseCouponUrl,
-        priceValidUntil: coupon.endDateTime.toISOString().split('T')[0],
-        availability: 'https://schema.org/InStock',
+        priceValidUntil: coupon.endDateTime.toISOString().split("T")[0],
+        availability: "https://schema.org/InStock",
       },
     })),
   }

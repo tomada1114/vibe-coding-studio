@@ -1,38 +1,38 @@
-import type { Metadata } from 'next'
-import { getLatestCoupons } from '@/lib/coupons/coupon-data'
-import { CourseDetailHero } from '@/components/coupons/course-detail/CourseDetailHero'
-import { CourseContent } from '@/components/coupons/course-detail/CourseContent'
-import { PriceSection } from '@/components/coupons/course-detail/PriceSection'
-import { CourseFeatures } from '@/components/coupons/course-detail/CourseFeatures'
-import { CourseProjects } from '@/components/coupons/course-detail/CourseProjects'
-import { TargetAudience } from '@/components/coupons/course-detail/TargetAudience'
-import { FloatingCTA } from '@/components/coupons/course-detail/FloatingCTA'
-import { Container } from '@/components/container'
-import { Navbar } from '@/components/navbar'
-import { Footer } from '@/components/footer'
-import { Gradient } from '@/components/gradient'
-import { AsyncErrorBoundary } from '@/components/error-boundary'
+import { Container } from "@/components/container"
+import { CourseContent } from "@/components/coupons/course-detail/CourseContent"
+import { CourseDetailHero } from "@/components/coupons/course-detail/CourseDetailHero"
+import { CourseFeatures } from "@/components/coupons/course-detail/CourseFeatures"
+import { CourseProjects } from "@/components/coupons/course-detail/CourseProjects"
+import { FloatingCTA } from "@/components/coupons/course-detail/FloatingCTA"
+import { PriceSection } from "@/components/coupons/course-detail/PriceSection"
+import { TargetAudience } from "@/components/coupons/course-detail/TargetAudience"
+import { AsyncErrorBoundary } from "@/components/error-boundary"
+import { Footer } from "@/components/footer"
+import { Gradient } from "@/components/gradient"
+import { Navbar } from "@/components/navbar"
+import { getLatestCoupons } from "@/lib/coupons/coupon-data"
+import type { Metadata } from "next"
 
 // 静的生成を明示的に設定
-export const dynamic = 'force-static'
+export const dynamic = "force-static"
 export const revalidate = 3600 // 1時間ごとに再生成
 
 const COURSE_TITLE =
-  '【Codex CLI】実践レベルのアプリ開発で学ぶバイブコーディング！カスタムコマンド・MCP連携の完全ガイド'
+  "【Codex CLI】実践レベルのアプリ開発で学ぶバイブコーディング！カスタムコマンド・MCP連携の完全ガイド"
 
 export const metadata: Metadata = {
   title: COURSE_TITLE,
   description:
-    '初心者も安心！OpenAI Codexの基礎から実践まで完全網羅。カスタムコマンドとMCP（Context7・Playwright・Supabase）で開発効率10倍。React/Next.jsアプリを作りながら次世代のAI開発手法を習得！',
+    "初心者も安心！OpenAI Codexの基礎から実践まで完全網羅。カスタムコマンドとMCP（Context7・Playwright・Supabase）で開発効率10倍。React/Next.jsアプリを作りながら次世代のAI開発手法を習得！",
   openGraph: {
     title: COURSE_TITLE,
     description:
-      '初心者も安心！OpenAI Codexの基礎から実践まで完全網羅。カスタムコマンドとMCP（Context7・Playwright・Supabase）で開発効率10倍。React/Next.jsアプリを作りながら次世代のAI開発手法を習得！',
-    type: 'website',
-    url: 'https://school.learning-next.app/coupons/codex-nextjs',
+      "初心者も安心！OpenAI Codexの基礎から実践まで完全網羅。カスタムコマンドとMCP（Context7・Playwright・Supabase）で開発効率10倍。React/Next.jsアプリを作りながら次世代のAI開発手法を習得！",
+    type: "website",
+    url: "https://school.learning-next.app/coupons/codex-nextjs",
     images: [
       {
-        url: '/images/udemy/codex-nextjs.png',
+        url: "/images/udemy/codex-nextjs.png",
         width: 1280,
         height: 720,
         alt: COURSE_TITLE,
@@ -40,18 +40,18 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: "summary_large_image",
     title: COURSE_TITLE,
     description:
-      '初心者も安心！OpenAI Codexの基礎から実践まで完全網羅。カスタムコマンドとMCP（Context7・Playwright・Supabase）で開発効率10倍。React/Next.jsアプリを作りながら次世代のAI開発手法を習得！',
-    images: ['/images/udemy/codex-nextjs.png'],
+      "初心者も安心！OpenAI Codexの基礎から実践まで完全網羅。カスタムコマンドとMCP（Context7・Playwright・Supabase）で開発効率10倍。React/Next.jsアプリを作りながら次世代のAI開発手法を習得！",
+    images: ["/images/udemy/codex-nextjs.png"],
   },
 }
 
 const courseDetails = {
   title: COURSE_TITLE,
   subtitle:
-    '初心者も安心！OpenAI Codexの基礎から実践まで完全網羅。カスタムコマンドとMCP（Context7・Playwright・Supabase）で開発効率10倍。React/Next.jsアプリを作りながら次世代のAI開発手法を習得！',
+    "初心者も安心！OpenAI Codexの基礎から実践まで完全網羅。カスタムコマンドとMCP（Context7・Playwright・Supabase）で開発効率10倍。React/Next.jsアプリを作りながら次世代のAI開発手法を習得！",
   description: `「Claude Codeは使ってるけど、他のAIツールも試してみたい」
 
 「Codexって聞いたことあるけど、どう使えばいいか分からない」
@@ -69,98 +69,105 @@ const courseDetails = {
 分からないことがあれば、Q&Aでいつでも質問してください。必ず解決までサポートします！`,
   features: [
     {
-      title: 'IDE版とCLI版の両方を完全カバー',
+      title: "IDE版とCLI版の両方を完全カバー",
       description:
-        'VS Code拡張機能版とターミナルCLI版の使い方を学習。それぞれの得意分野と使い分けのコツを理解し、状況に応じた最適な選択ができるようになります',
+        "VS Code拡張機能版とターミナルCLI版の使い方を学習。それぞれの得意分野と使い分けのコツを理解し、状況に応じた最適な選択ができるようになります",
     },
     {
-      title: 'カスタムコマンドで開発効率10倍',
+      title: "カスタムコマンドで開発効率10倍",
       description:
-        '/reviewコマンドの作成を通じてカスタマイズ手法を学習。頻繁に使う作業を1コマンドで実行できるようになり、反復作業から解放されます',
+        "/reviewコマンドの作成を通じてカスタマイズ手法を学習。頻繁に使う作業を1コマンドで実行できるようになり、反復作業から解放されます",
     },
     {
-      title: 'MCP連携で外部ツールを自在に操る',
+      title: "MCP連携で外部ツールを自在に操る",
       description:
-        'Context7で最新ドキュメント自動取得、Playwrightでブラウザ操作自動化、Supabaseでデータベース直接操作。複数MCPを組み合わせた強力な開発環境を構築',
+        "Context7で最新ドキュメント自動取得、Playwrightでブラウザ操作自動化、Supabaseでデータベース直接操作。複数MCPを組み合わせた強力な開発環境を構築",
     },
     {
-      title: '実践的なアプリ開発で即戦力スキル',
+      title: "実践的なアプリ開発で即戦力スキル",
       description:
-        'ストップウォッチアプリで基礎を理解し、Next.js 15 x Supabaseで本格メモアプリを開発。マークダウンプレビュー対応、全文検索機能まで実装する実践的な内容',
+        "ストップウォッチアプリで基礎を理解し、Next.js 15 x Supabaseで本格メモアプリを開発。マークダウンプレビュー対応、全文検索機能まで実装する実践的な内容",
     },
   ],
   projects: [
     {
-      title: 'Codex IDE/CLIの基本操作',
-      tech: 'OpenAI Codex',
-      description: 'VS Code拡張機能版とCLI版の導入から基本的な使い方まで段階的に学習',
+      title: "Codex IDE/CLIの基本操作",
+      tech: "OpenAI Codex",
+      description:
+        "VS Code拡張機能版とCLI版の導入から基本的な使い方まで段階的に学習",
     },
     {
-      title: 'カスタムコマンド作成',
-      tech: 'Codex CLI',
-      description: '/reviewコマンドを作成しながら、カスタムコマンドの作成方法と活用法を習得',
+      title: "カスタムコマンド作成",
+      tech: "Codex CLI",
+      description:
+        "/reviewコマンドを作成しながら、カスタムコマンドの作成方法と活用法を習得",
     },
     {
-      title: 'MCP連携 - Context7',
-      tech: 'Context7',
-      description: '最新のライブラリドキュメントを自動取得し、常に最新情報で開発',
+      title: "MCP連携 - Context7",
+      tech: "Context7",
+      description:
+        "最新のライブラリドキュメントを自動取得し、常に最新情報で開発",
     },
     {
-      title: 'MCP連携 - Playwright',
-      tech: 'Playwright',
-      description: 'ブラウザ操作の自動化、スクリーンショット取得、レスポンシブチェック',
+      title: "MCP連携 - Playwright",
+      tech: "Playwright",
+      description:
+        "ブラウザ操作の自動化、スクリーンショット取得、レスポンシブチェック",
     },
     {
-      title: 'MCP連携 - Supabase',
-      tech: 'Supabase',
-      description: 'データベースのテーブル作成からCRUD操作まで、MCP経由で直接実行',
+      title: "MCP連携 - Supabase",
+      tech: "Supabase",
+      description:
+        "データベースのテーブル作成からCRUD操作まで、MCP経由で直接実行",
     },
     {
-      title: 'ストップウォッチアプリ開発',
-      tech: 'Next.js',
-      description: 'バイブコーディングの基礎を実践的に学ぶシンプルなアプリケーション開発',
+      title: "ストップウォッチアプリ開発",
+      tech: "Next.js",
+      description:
+        "バイブコーディングの基礎を実践的に学ぶシンプルなアプリケーション開発",
     },
     {
-      title: 'メモアプリ開発（本格版）',
-      tech: 'Next.js + Supabase',
-      description: '認証機能、マークダウン対応、全文検索、カテゴリ・タグ分類まで実装',
+      title: "メモアプリ開発（本格版）",
+      tech: "Next.js + Supabase",
+      description:
+        "認証機能、マークダウン対応、全文検索、カテゴリ・タグ分類まで実装",
     },
   ],
   targetAudience: [
     {
-      title: '他のAIツールも試してみたい方',
+      title: "他のAIツールも試してみたい方",
       points: [
-        'Claude Code以外の選択肢を探している',
-        'OpenAI Codexの実力を体験したい',
-        '複数のAIツールを使い分けたい',
-        '最新のAI開発手法を学びたい',
+        "Claude Code以外の選択肢を探している",
+        "OpenAI Codexの実力を体験したい",
+        "複数のAIツールを使い分けたい",
+        "最新のAI開発手法を学びたい",
       ],
     },
     {
-      title: 'カスタムコマンド・MCP連携を学びたい方',
+      title: "カスタムコマンド・MCP連携を学びたい方",
       points: [
-        '開発作業を自動化したい',
-        '外部ツールと連携したい',
-        '効率的な開発環境を構築したい',
-        '最新の開発技術を習得したい',
+        "開発作業を自動化したい",
+        "外部ツールと連携したい",
+        "効率的な開発環境を構築したい",
+        "最新の開発技術を習得したい",
       ],
     },
     {
-      title: 'AI駆動開発の実践スキルを身につけたい方',
+      title: "AI駆動開発の実践スキルを身につけたい方",
       points: [
-        'バイブコーディングを実践的に学びたい',
-        '実際のアプリ開発を通じて学習したい',
-        'Next.jsとSupabaseの連携を学びたい',
-        '即戦力となるスキルを習得したい',
+        "バイブコーディングを実践的に学びたい",
+        "実際のアプリ開発を通じて学習したい",
+        "Next.jsとSupabaseの連携を学びたい",
+        "即戦力となるスキルを習得したい",
       ],
     },
     {
-      title: '効率的な開発手法を探している方',
+      title: "効率的な開発手法を探している方",
       points: [
-        '開発時間を大幅に短縮したい',
-        '反復作業から解放されたい',
-        'AIを活用した新しい開発手法を学びたい',
-        'ChatGPT Plusを最大限活用したい',
+        "開発時間を大幅に短縮したい",
+        "反復作業から解放されたい",
+        "AIを活用した新しい開発手法を学びたい",
+        "ChatGPT Plusを最大限活用したい",
       ],
     },
   ],
@@ -176,7 +183,9 @@ export default function CodexNextjsCoursePage() {
   if (!coupon) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p className="text-lg text-zinc-600">クーポン情報が見つかりませんでした</p>
+        <p className="text-lg text-zinc-600">
+          クーポン情報が見つかりませんでした
+        </p>
       </div>
     )
   }

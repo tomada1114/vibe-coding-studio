@@ -1,12 +1,12 @@
-'use client'
+"use client"
 
-import { useState, useEffect, useMemo, useCallback, memo } from 'react'
-import { ChevronUp } from 'lucide-react'
-import type { Coupon } from '@/types/coupon'
-import { CouponCard } from './CouponCard'
-import { TopicFilter } from './TopicFilter'
-import { Button } from '@/components/catalyst/button'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { Button } from "@/components/catalyst/button"
+import type { Coupon } from "@/types/coupon"
+import { ChevronUp } from "lucide-react"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { memo, useCallback, useEffect, useMemo, useState } from "react"
+import { CouponCard } from "./CouponCard"
+import { TopicFilter } from "./TopicFilter"
 
 interface CouponPageLayoutProps {
   coupons: Coupon[]
@@ -21,7 +21,9 @@ const areArraysEqual = (a: string[], b: string[]) => {
   return a.every((value, index) => value === b[index])
 }
 
-export const CouponPageLayout = memo(function CouponPageLayout({ coupons }: CouponPageLayoutProps) {
+export const CouponPageLayout = memo(function CouponPageLayout({
+  coupons,
+}: CouponPageLayoutProps) {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -35,7 +37,7 @@ export const CouponPageLayout = memo(function CouponPageLayout({ coupons }: Coup
   // クライアント側マウント検知
   useEffect(() => {
     setIsMounted(true)
-    const topicsFromParams = normalizeTopics(searchParams.getAll('topic'))
+    const topicsFromParams = normalizeTopics(searchParams.getAll("topic"))
     setSelectedTopics(topicsFromParams)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -60,8 +62,8 @@ export const CouponPageLayout = memo(function CouponPageLayout({ coupons }: Coup
       setSelectedTopics(normalizedTopics)
 
       const params = new URLSearchParams(searchParams.toString())
-      params.delete('topic')
-      normalizedTopics.forEach(topic => params.append('topic', topic))
+      params.delete("topic")
+      normalizedTopics.forEach(topic => params.append("topic", topic))
 
       const queryString = params.toString()
       const nextUrl = queryString ? `${pathname}?${queryString}` : pathname
@@ -86,8 +88,10 @@ export const CouponPageLayout = memo(function CouponPageLayout({ coupons }: Coup
   useEffect(() => {
     if (!isMounted) return
 
-    const topicsFromParams = normalizeTopics(searchParams.getAll('topic'))
-    setSelectedTopics(prev => (areArraysEqual(prev, topicsFromParams) ? prev : topicsFromParams))
+    const topicsFromParams = normalizeTopics(searchParams.getAll("topic"))
+    setSelectedTopics(prev =>
+      areArraysEqual(prev, topicsFromParams) ? prev : topicsFromParams
+    )
   }, [searchParams, isMounted])
 
   useEffect(() => {
@@ -95,12 +99,12 @@ export const CouponPageLayout = memo(function CouponPageLayout({ coupons }: Coup
       setShowScrollButton(window.scrollY > 300)
     }
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
   const scrollToTop = useCallback(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    window.scrollTo({ top: 0, behavior: "smooth" })
   }, [])
 
   return (
@@ -124,7 +128,10 @@ export const CouponPageLayout = memo(function CouponPageLayout({ coupons }: Coup
       {sortedCoupons.length > 0 ? (
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:gap-10">
           {sortedCoupons.map(coupon => (
-            <CouponCard key={`${coupon.courseId}-${coupon.couponCode}`} coupon={coupon} />
+            <CouponCard
+              key={`${coupon.courseId}-${coupon.couponCode}`}
+              coupon={coupon}
+            />
           ))}
         </div>
       ) : (
@@ -132,8 +139,8 @@ export const CouponPageLayout = memo(function CouponPageLayout({ coupons }: Coup
           <div className="mb-4 text-4xl text-zinc-400">🔍</div>
           <p className="text-lg font-medium text-zinc-600">
             {selectedTopics.length > 0
-              ? '選択した技術スタックに該当するクーポンがありません'
-              : '現在利用可能なクーポンがありません'}
+              ? "選択した技術スタックに該当するクーポンがありません"
+              : "現在利用可能なクーポンがありません"}
           </p>
           <p className="mt-2 text-sm text-zinc-500">
             フィルタを調整していただくか、後でもう一度お試しください

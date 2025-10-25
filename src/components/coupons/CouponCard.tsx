@@ -1,19 +1,24 @@
-'use client'
+"use client"
 
-import { calculateDiscountRate } from '@/lib/coupons/coupon-data'
-import type { Coupon } from '@/types/coupon'
-import { Gift } from 'lucide-react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { memo } from 'react'
+import { calculateDiscountRate } from "@/lib/coupons/coupon-data"
+import type { Coupon } from "@/types/coupon"
+import { Gift } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+import { memo } from "react"
 
 interface CouponCardProps {
   coupon: Coupon
 }
 
-export const CouponCard = memo(function CouponCard({ coupon }: CouponCardProps) {
+export const CouponCard = memo(function CouponCard({
+  coupon,
+}: CouponCardProps) {
   const { courseInfo } = coupon
-  const discountRate = calculateDiscountRate(courseInfo.originalPrice, coupon.discountPrice)
+  const discountRate = calculateDiscountRate(
+    courseInfo.originalPrice,
+    coupon.discountPrice
+  )
   const savings = courseInfo.originalPrice - coupon.discountPrice
 
   return (
@@ -57,7 +62,7 @@ export const CouponCard = memo(function CouponCard({ coupon }: CouponCardProps) 
             通常価格 ¥{courseInfo.originalPrice.toLocaleString()}
           </div>
           <div className="text-xl font-bold text-zinc-950">
-            ¥{coupon.discountPrice.toLocaleString()}{' '}
+            ¥{coupon.discountPrice.toLocaleString()}{" "}
             <span className="text-xs font-medium text-green-700">
               (¥{savings.toLocaleString()}お得)
             </span>

@@ -6,13 +6,13 @@ import { Gradient } from "@/components/gradient"
 import { Navbar } from "@/components/navbar"
 import { Heading, Subheading } from "@/components/text"
 import {
+  BookOpenIcon,
   ChatBubbleLeftRightIcon,
   CodeBracketIcon,
   LightBulbIcon,
-  UserGroupIcon,
   QuestionMarkCircleIcon,
-  BookOpenIcon,
   TicketIcon,
+  UserGroupIcon,
 } from "@heroicons/react/24/outline"
 import type { Metadata } from "next"
 import Image from "next/image"
@@ -196,7 +196,7 @@ function WorkInProgressSection() {
       icon: BookOpenIcon,
       title: "コンテンツ一覧",
       description: "AI駆動開発に役立つ動画や記事を探しやすく",
-    }
+    },
   ]
 
   return (

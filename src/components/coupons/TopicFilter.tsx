@@ -1,9 +1,8 @@
-'use client'
+"use client"
 
-import Image from 'next/image'
-import { Button } from '@/components/catalyst/button'
-import { TOPIC_INFO } from '@/constants/coupon-courses'
-import type { Coupon } from '@/types/coupon'
+import { Button } from "@/components/catalyst/button"
+import { TOPIC_INFO } from "@/constants/coupon-courses"
+import type { Coupon } from "@/types/coupon"
 
 interface TopicFilterProps {
   coupons: Coupon[]
@@ -20,15 +19,15 @@ export function TopicFilter({
 }: TopicFilterProps) {
   // フィルタに表示するトピックを定義（固定）
   const FILTER_TOPICS = [
-    'claude-code',
-    'codex',
-    'python',
-    'expo',
-    'react-native',
-    'nextjs',
-    'kiro',
-    'rails',
-    'react',
+    "claude-code",
+    "codex",
+    "python",
+    "expo",
+    "react-native",
+    "nextjs",
+    "kiro",
+    "rails",
+    "react",
   ]
 
   // 実際に使用されているトピックのみをフィルタリング
@@ -44,7 +43,9 @@ export function TopicFilter({
 
   return (
     <div className="mb-12 rounded-2xl border border-zinc-950/5 bg-white p-8 shadow-sm backdrop-blur-sm">
-      <h3 className="mb-6 text-xl font-semibold text-zinc-950">技術スタックでフィルタ</h3>
+      <h3 className="mb-6 text-xl font-semibold text-zinc-950">
+        技術スタックでフィルタ
+      </h3>
 
       <div className="flex flex-wrap gap-4">
         {availableTopics.map(topic => {
@@ -56,39 +57,19 @@ export function TopicFilter({
             <button
               key={topic}
               onClick={() => onTopicToggle(topic)}
-              className={`group flex cursor-pointer items-center gap-3 rounded-xl border px-5 py-3 transition-all duration-300 ease-out ${
+              className={`group flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-2 transition-all duration-300 ease-out ${
                 isSelected
-                  ? 'scale-105 border-blue-500/30 bg-blue-50/80 shadow-lg ring-1 shadow-blue-500/10 ring-blue-500/20'
-                  : 'border-zinc-950/10 bg-white hover:scale-105 hover:border-zinc-950/20 hover:bg-zinc-50/80 hover:shadow-md'
+                  ? "scale-105 border-blue-500/30 bg-blue-50/80 shadow-lg ring-1 shadow-blue-500/10 ring-blue-500/20"
+                  : "border-zinc-950/10 bg-zinc-50 hover:scale-105 hover:border-zinc-950/20 hover:bg-zinc-100 hover:shadow-md"
               }`}
               aria-pressed={isSelected}
-              aria-label={`${topicInfo.name}でフィルタ${isSelected ? '（選択中）' : ''}`}
+              aria-label={`${topicInfo.name}でフィルタ${isSelected ? "（選択中）" : ""}`}
             >
-              {topicInfo.isLocal ? (
-                <Image
-                  src={topicInfo.icon}
-                  alt={topicInfo.name}
-                  width={24}
-                  height={24}
-                  className="object-contain"
-                  loading="lazy"
-                  decoding="async"
-                />
-              ) : (
-                <Image
-                  src={topicInfo.icon}
-                  alt={topicInfo.name}
-                  width={24}
-                  height={24}
-                  className="object-contain"
-                  loading="lazy"
-                  decoding="async"
-                  unoptimized
-                />
-              )}
               <span
                 className={`text-sm font-medium transition-colors duration-200 ${
-                  isSelected ? 'text-blue-700' : 'text-zinc-700 group-hover:text-zinc-900'
+                  isSelected
+                    ? "text-blue-700"
+                    : "text-zinc-700 group-hover:text-zinc-900"
                 }`}
               >
                 {topicInfo.name}
@@ -111,7 +92,9 @@ export function TopicFilter({
       {selectedTopics.length > 0 && (
         <div className="mt-4 flex items-center gap-2 text-sm text-zinc-600">
           <div className="h-2 w-2 rounded-full bg-blue-500"></div>
-          <span>「{TOPIC_INFO[selectedTopics[0]]?.name}」でフィルタされています</span>
+          <span>
+            「{TOPIC_INFO[selectedTopics[0]]?.name}」でフィルタされています
+          </span>
         </div>
       )}
     </div>

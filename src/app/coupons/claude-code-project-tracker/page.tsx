@@ -1,28 +1,28 @@
-import type { Metadata } from 'next'
-import { getLatestCoupons } from '@/lib/coupons/coupon-data'
-import { CourseDetailHero } from '@/components/coupons/course-detail/CourseDetailHero'
-import { CourseContent } from '@/components/coupons/course-detail/CourseContent'
-import { PriceSection } from '@/components/coupons/course-detail/PriceSection'
-import { CourseFeatures } from '@/components/coupons/course-detail/CourseFeatures'
-import { TargetAudience } from '@/components/coupons/course-detail/TargetAudience'
-import { FloatingCTA } from '@/components/coupons/course-detail/FloatingCTA'
-import { Container } from '@/components/container'
-import { Navbar } from '@/components/navbar'
-import { Footer } from '@/components/footer'
-import { Gradient } from '@/components/gradient'
-import { AsyncErrorBoundary } from '@/components/error-boundary'
+import { Container } from "@/components/container"
+import { CourseContent } from "@/components/coupons/course-detail/CourseContent"
+import { CourseDetailHero } from "@/components/coupons/course-detail/CourseDetailHero"
+import { CourseFeatures } from "@/components/coupons/course-detail/CourseFeatures"
+import { FloatingCTA } from "@/components/coupons/course-detail/FloatingCTA"
+import { PriceSection } from "@/components/coupons/course-detail/PriceSection"
+import { TargetAudience } from "@/components/coupons/course-detail/TargetAudience"
+import { AsyncErrorBoundary } from "@/components/error-boundary"
+import { Footer } from "@/components/footer"
+import { Gradient } from "@/components/gradient"
+import { Navbar } from "@/components/navbar"
+import { getLatestCoupons } from "@/lib/coupons/coupon-data"
+import type { Metadata } from "next"
 
 // 静的生成を明示的に設定
-export const dynamic = 'force-static'
+export const dynamic = "force-static"
 export const revalidate = 3600 // 1時間ごとに再生成
 
 // udemy-course-info-temp.md に記載の正式タイトル（照合用）
 const COURSE_TITLE =
-  '【Claude Code】Next.js で作るサブスク型・作業時間管理アプリで学ぶ AI 駆動開発【完全版】'
+  "【Claude Code】Next.js で作るサブスク型・作業時間管理アプリで学ぶ AI 駆動開発【完全版】"
 
 // サブタイトルも udemy-course-info-temp.md の内容をそのまま使用
 const COURSE_SUBTITLE =
-  'Vibe Codingで誰でも作れる！Stripe決済・Clerk認証・Supabaseを統合した本格SaaS型時間管理アプリ開発。個人開発でストック収入を目指す完全実践ガイド'
+  "Vibe Codingで誰でも作れる！Stripe決済・Clerk認証・Supabaseを統合した本格SaaS型時間管理アプリ開発。個人開発でストック収入を目指す完全実践ガイド"
 
 export const metadata: Metadata = {
   title: COURSE_TITLE,
@@ -30,11 +30,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: COURSE_TITLE,
     description: COURSE_SUBTITLE,
-    type: 'website',
-    url: 'https://school.learning-next.app/coupons/claude-code-project-tracker',
+    type: "website",
+    url: "https://school.learning-next.app/coupons/claude-code-project-tracker",
     images: [
       {
-        url: '/images/udemy/claude-code-project-tracker.png',
+        url: "/images/udemy/claude-code-project-tracker.png",
         width: 1280,
         height: 720,
         alt: COURSE_TITLE,
@@ -42,10 +42,10 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: "summary_large_image",
     title: COURSE_TITLE,
     description: COURSE_SUBTITLE,
-    images: ['/images/udemy/claude-code-project-tracker.png'],
+    images: ["/images/udemy/claude-code-project-tracker.png"],
   },
 }
 
@@ -86,61 +86,61 @@ Claudeのサブスクリプション（ProまたはMax）以外は全て無料�
 さあ、一緒にAI駆動開発で、あなたのサービスを世に送り出しましょう！`,
   features: [
     {
-      title: 'プログラミング未経験でも安心の徹底サポート',
+      title: "プログラミング未経験でも安心の徹底サポート",
       description:
-        'ターミナル操作から丁寧に解説（Mac/Windows両対応） / VS Codeのインストールから初期設定まで完全ガイド / Node.jsセットアップも分かりやすく説明 / 元プログラミングスクール講師による初心者目線の解説',
+        "ターミナル操作から丁寧に解説（Mac/Windows両対応） / VS Codeのインストールから初期設定まで完全ガイド / Node.jsセットアップも分かりやすく説明 / 元プログラミングスクール講師による初心者目線の解説",
     },
     {
-      title: '実践的なドキュメント駆動開発',
+      title: "実践的なドキュメント駆動開発",
       description:
-        '要件定義書の作成とカスタマイズ方法 / デザインシステムドキュメントの整備 / 各種ライブラリのドキュメント管理 / 他のアプリ開発にも応用できるノウハウ',
+        "要件定義書の作成とカスタマイズ方法 / デザインシステムドキュメントの整備 / 各種ライブラリのドキュメント管理 / 他のアプリ開発にも応用できるノウハウ",
     },
     {
-      title: '最新技術スタックで本格SaaS開発',
+      title: "最新技術スタックで本格SaaS開発",
       description:
-        'Next.js 15による高速なWebアプリ開発 / Clerk Billing を用いた Stripe決済でサブスクリプション機能実装 / Clerk認証で安全なユーザー管理 / Supabaseでリアルタイムデータベース構築 / Apple風の洗練されたUIデザイン',
+        "Next.js 15による高速なWebアプリ開発 / Clerk Billing を用いた Stripe決済でサブスクリプション機能実装 / Clerk認証で安全なユーザー管理 / Supabaseでリアルタイムデータベース構築 / Apple風の洗練されたUIデザイン",
     },
     {
-      title: '収益化を見据えた実践的な内容',
+      title: "収益化を見据えた実践的な内容",
       description:
-        'タイマー機能と手動入力による柔軟な時間記録 / カテゴリ管理で複数プロジェクトを整理 / 高度な分析機能（日次・週次・月次・年次） / グラフによる時間配分の可視化 / PDFレポート生成機能の実装',
+        "タイマー機能と手動入力による柔軟な時間記録 / カテゴリ管理で複数プロジェクトを整理 / 高度な分析機能（日次・週次・月次・年次） / グラフによる時間配分の可視化 / PDFレポート生成機能の実装",
     },
   ],
   targetAudience: [
     {
-      title: 'プログラミング完全未経験の方',
+      title: "プログラミング完全未経験の方",
       points: [
-        'コードを書いたことがないけどアプリを作ってみたい',
-        'プログラミングスクールは高額で手が出せない',
-        'AIの力を借りて効率的に学びたい',
-        '副業や独立に向けてスキルを身につけたい',
+        "コードを書いたことがないけどアプリを作ってみたい",
+        "プログラミングスクールは高額で手が出せない",
+        "AIの力を借りて効率的に学びたい",
+        "副業や独立に向けてスキルを身につけたい",
       ],
     },
     {
-      title: '個人開発で収益化を目指す方',
+      title: "個人開発で収益化を目指す方",
       points: [
-        'サブスクリプション型のアプリを作りたい',
-        'ストック収入の仕組みを構築したい',
-        '決済機能の実装方法を学びたい',
-        '本格的なSaaS開発のノウハウを知りたい',
+        "サブスクリプション型のアプリを作りたい",
+        "ストック収入の仕組みを構築したい",
+        "決済機能の実装方法を学びたい",
+        "本格的なSaaS開発のノウハウを知りたい",
       ],
     },
     {
-      title: '時間管理を改善したい方',
+      title: "時間管理を改善したい方",
       points: [
-        'フリーランスで作業時間を正確に把握したい',
-        '複数プロジェクトの時間配分を最適化したい',
-        '生産性向上のためのツールを自作したい',
-        '既存の時間管理アプリに満足していない',
+        "フリーランスで作業時間を正確に把握したい",
+        "複数プロジェクトの時間配分を最適化したい",
+        "生産性向上のためのツールを自作したい",
+        "既存の時間管理アプリに満足していない",
       ],
     },
     {
-      title: '最新の開発手法を学びたい方',
+      title: "最新の開発手法を学びたい方",
       points: [
-        'AI駆動開発の実践的な方法を知りたい',
-        'ドキュメント駆動開発を体験したい',
-        '効率的な開発フローを身につけたい',
-        'Claude Codeの活用法をマスターしたい',
+        "AI駆動開発の実践的な方法を知りたい",
+        "ドキュメント駆動開発を体験したい",
+        "効率的な開発フローを身につけたい",
+        "Claude Codeの活用法をマスターしたい",
       ],
     },
   ],
@@ -157,7 +157,9 @@ export default function ClaudeCodeProjectTrackerPage() {
   if (!coupon) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p className="text-lg text-zinc-600">クーポン情報が見つかりませんでした</p>
+        <p className="text-lg text-zinc-600">
+          クーポン情報が見つかりませんでした
+        </p>
       </div>
     )
   }

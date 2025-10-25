@@ -1,6 +1,6 @@
-'use client'
+"use client"
 
-import { useRef } from 'react'
+import { useRef } from "react"
 
 interface CourseContentProps {
   description: string
@@ -9,7 +9,7 @@ interface CourseContentProps {
 export function CourseContent({ description }: CourseContentProps) {
   const ref = useRef<HTMLDivElement>(null)
 
-  const paragraphs = description.split('\n').filter(p => p.trim())
+  const paragraphs = description.split("\n").filter(p => p.trim())
 
   return (
     <div

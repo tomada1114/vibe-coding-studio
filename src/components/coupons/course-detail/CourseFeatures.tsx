@@ -1,7 +1,7 @@
-'use client'
+"use client"
 
-import { useRef } from 'react'
-import { CheckCircle, Sparkles, Users, Zap } from 'lucide-react'
+import { CheckCircle, Sparkles, Users, Zap } from "lucide-react"
+import { useRef } from "react"
 
 interface Feature {
   title: string
@@ -41,9 +41,13 @@ export function CourseFeatures({ features }: CourseFeaturesProps) {
                   <Icon className="h-5 w-5 text-blue-600" />
                 </div>
 
-                <h3 className="mb-2 text-lg font-semibold text-zinc-950">{feature.title}</h3>
+                <h3 className="mb-2 text-lg font-semibold text-zinc-950">
+                  {feature.title}
+                </h3>
 
-                <p className="text-sm leading-relaxed text-zinc-600">{feature.description}</p>
+                <p className="text-sm leading-relaxed text-zinc-600">
+                  {feature.description}
+                </p>
               </div>
             </div>
           )

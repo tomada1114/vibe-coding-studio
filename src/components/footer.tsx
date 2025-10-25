@@ -184,7 +184,11 @@ function Copyright() {
   )
 }
 
-export function Footer({ hideCallToAction = false }: { hideCallToAction?: boolean }) {
+export function Footer({
+  hideCallToAction = false,
+}: {
+  hideCallToAction?: boolean
+}) {
   return (
     <footer>
       <Gradient className="relative">

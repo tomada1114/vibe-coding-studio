@@ -1,20 +1,25 @@
-'use client'
+"use client"
 
-import { Button } from '@/components/catalyst/button'
-import { calculateDiscountRate } from '@/lib/coupons/coupon-data'
-import type { Coupon } from '@/types/coupon'
-import { Gift, X } from 'lucide-react'
-import { useEffect, useState, memo, useCallback } from 'react'
+import { Button } from "@/components/catalyst/button"
+import { calculateDiscountRate } from "@/lib/coupons/coupon-data"
+import type { Coupon } from "@/types/coupon"
+import { Gift, X } from "lucide-react"
+import { memo, useCallback, useEffect, useState } from "react"
 
 interface FloatingCTAProps {
   coupon: Coupon
 }
 
-export const FloatingCTA = memo(function FloatingCTA({ coupon }: FloatingCTAProps) {
+export const FloatingCTA = memo(function FloatingCTA({
+  coupon,
+}: FloatingCTAProps) {
   const [isVisible, setIsVisible] = useState(false)
   const [isDismissed, setIsDismissed] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
-  const discountRate = calculateDiscountRate(coupon.courseInfo.originalPrice, coupon.discountPrice)
+  const discountRate = calculateDiscountRate(
+    coupon.courseInfo.originalPrice,
+    coupon.discountPrice
+  )
 
   useEffect(() => {
     setIsMounted(true)
@@ -35,8 +40,8 @@ export const FloatingCTA = memo(function FloatingCTA({ coupon }: FloatingCTAProp
     // Initial check
     handleScroll()
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
   }, [isDismissed, isMounted])
 
   const handleDismiss = useCallback(() => {
@@ -63,7 +68,9 @@ export const FloatingCTA = memo(function FloatingCTA({ coupon }: FloatingCTAProp
         <div className="relative space-y-3">
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-lg font-bold text-white">当サイト限定 {discountRate}% OFF</div>
+              <div className="text-lg font-bold text-white">
+                当サイト限定 {discountRate}% OFF
+              </div>
               <div className="text-sm text-white/90">
                 ¥{coupon.discountPrice.toLocaleString()} (通常 ¥
                 {coupon.courseInfo.originalPrice.toLocaleString()})

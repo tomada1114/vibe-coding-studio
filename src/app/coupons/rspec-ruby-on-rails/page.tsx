@@ -1,26 +1,27 @@
-import type { Metadata } from 'next'
-import { getLatestCoupons } from '@/lib/coupons/coupon-data'
-import { CourseDetailHero } from '@/components/coupons/course-detail/CourseDetailHero'
-import { CourseContent } from '@/components/coupons/course-detail/CourseContent'
-import { PriceSection } from '@/components/coupons/course-detail/PriceSection'
-import { CourseFeatures } from '@/components/coupons/course-detail/CourseFeatures'
-import { CourseProjects } from '@/components/coupons/course-detail/CourseProjects'
-import { TargetAudience } from '@/components/coupons/course-detail/TargetAudience'
-import { FloatingCTA } from '@/components/coupons/course-detail/FloatingCTA'
-import { Container } from '@/components/container'
-import { Navbar } from '@/components/navbar'
-import { Footer } from '@/components/footer'
-import { Gradient } from '@/components/gradient'
-import { AsyncErrorBoundary } from '@/components/error-boundary'
+import { Container } from "@/components/container"
+import { CourseContent } from "@/components/coupons/course-detail/CourseContent"
+import { CourseDetailHero } from "@/components/coupons/course-detail/CourseDetailHero"
+import { CourseFeatures } from "@/components/coupons/course-detail/CourseFeatures"
+import { CourseProjects } from "@/components/coupons/course-detail/CourseProjects"
+import { FloatingCTA } from "@/components/coupons/course-detail/FloatingCTA"
+import { PriceSection } from "@/components/coupons/course-detail/PriceSection"
+import { TargetAudience } from "@/components/coupons/course-detail/TargetAudience"
+import { AsyncErrorBoundary } from "@/components/error-boundary"
+import { Footer } from "@/components/footer"
+import { Gradient } from "@/components/gradient"
+import { Navbar } from "@/components/navbar"
+import { getLatestCoupons } from "@/lib/coupons/coupon-data"
+import type { Metadata } from "next"
 
 // 静的生成を明示的に設定
-export const dynamic = 'force-static'
+export const dynamic = "force-static"
 export const revalidate = 3600 // 1時間ごとに再生成
 
 // udemy-course-info-temp.md に記載の正式タイトル・サブタイトルのみを使用
-const COURSE_TITLE = '【RSpec 実践入門】Ruby on Rails 開発者のためのテスト自動化 - 完全ガイド'
+const COURSE_TITLE =
+  "【RSpec 実践入門】Ruby on Rails 開発者のためのテスト自動化 - 完全ガイド"
 const COURSE_SUBTITLE =
-  'テスト未経験でもOK！Ruby/Railsの基礎を確認しながらRSpecの書き方を徹底解説。シンプルな例から実践的なテストまで、現場で使えるテストコーディングスキルが身につきます。'
+  "テスト未経験でもOK！Ruby/Railsの基礎を確認しながらRSpecの書き方を徹底解説。シンプルな例から実践的なテストまで、現場で使えるテストコーディングスキルが身につきます。"
 
 export const metadata: Metadata = {
   title: COURSE_TITLE,
@@ -28,11 +29,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: COURSE_TITLE,
     description: COURSE_SUBTITLE,
-    type: 'website',
-    url: 'https://school.learning-next.app/coupons/rspec-ruby-on-rails',
+    type: "website",
+    url: "https://school.learning-next.app/coupons/rspec-ruby-on-rails",
     images: [
       {
-        url: '/images/udemy/rspec-ruby-on-rails.png',
+        url: "/images/udemy/rspec-ruby-on-rails.png",
         width: 1280,
         height: 720,
         alt: COURSE_TITLE,
@@ -40,10 +41,10 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: "summary_large_image",
     title: COURSE_TITLE,
     description: COURSE_SUBTITLE,
-    images: ['/images/udemy/rspec-ruby-on-rails.png'],
+    images: ["/images/udemy/rspec-ruby-on-rails.png"],
   },
 }
 
@@ -146,74 +147,75 @@ RSpecは、Rubyコミュニティで最も利用されているテストフレ�
     - 実行速度の最適化`,
   features: [
     {
-      title: 'テスト未経験でも安心の丁寧な解説',
+      title: "テスト未経験でも安心の丁寧な解説",
       description:
-        'Ruby/Railsの基礎知識も都度確認しながら進めます / 全動画に詳細なテキスト版を用意し、自分のペースで学習できます / 現場レベルのコードの書き方もカバーしています / プログラミングスクール講師としての経験を活かした、初心者でも分かりやすい解説',
+        "Ruby/Railsの基礎知識も都度確認しながら進めます / 全動画に詳細なテキスト版を用意し、自分のペースで学習できます / 現場レベルのコードの書き方もカバーしています / プログラミングスクール講師としての経験を活かした、初心者でも分かりやすい解説",
     },
     {
-      title: '実践的な例題で学ぶテストの基礎から応用まで',
+      title: "実践的な例題で学ぶテストの基礎から応用まで",
       description:
-        'バリデーションやアソシエーションなど、モデルの振る舞いをテストする方法 / APIのリクエスト/レスポンスを検証する方法 / Capybaraを使ったブラウザ操作の自動化（システムスペック） / 実際の開発現場で使われているテスト手法とベストプラクティス',
+        "バリデーションやアソシエーションなど、モデルの振る舞いをテストする方法 / APIのリクエスト/レスポンスを検証する方法 / Capybaraを使ったブラウザ操作の自動化（システムスペック） / 実際の開発現場で使われているテスト手法とベストプラクティス",
     },
     {
-      title: 'テストの設計・実装ノウハウ',
+      title: "テストの設計・実装ノウハウ",
       description:
-        'beforeやletを使ったテストデータの効率的な準備方法 / テストコードの重複を避ける設計テクニック / モック/スタブを使った外部処理の置き換え / テストの実行速度を意識した実装方法 / テストコードのリファクタリング手法',
+        "beforeやletを使ったテストデータの効率的な準備方法 / テストコードの重複を避ける設計テクニック / モック/スタブを使った外部処理の置き換え / テストの実行速度を意識した実装方法 / テストコードのリファクタリング手法",
     },
     {
-      title: '段階的に理解を深める構成',
+      title: "段階的に理解を深める構成",
       description:
-        '環境構築から丁寧に解説 / 基本的な構文からスタート / 実践的なテストケースへ段階的に移行 / 最終的にはブラウザ操作の自動化まで到達',
+        "環境構築から丁寧に解説 / 基本的な構文からスタート / 実践的なテストケースへ段階的に移行 / 最終的にはブラウザ操作の自動化まで到達",
     },
   ],
   projects: [
     {
-      title: 'モデルのテスト',
-      tech: 'RSpec',
-      description: 'バリデーション・アソシエーション・スコープ・メソッドのテストを実装。',
+      title: "モデルのテスト",
+      tech: "RSpec",
+      description:
+        "バリデーション・アソシエーション・スコープ・メソッドのテストを実装。",
     },
     {
-      title: 'コントローラ/リクエストのテスト',
-      tech: 'RSpec',
-      description: 'リクエストスペックでパラメータとレスポンスの検証を実践。',
+      title: "コントローラ/リクエストのテスト",
+      tech: "RSpec",
+      description: "リクエストスペックでパラメータとレスポンスの検証を実践。",
     },
     {
-      title: 'システムスペック（E2E）',
-      tech: 'RSpec / Capybara',
-      description: 'ブラウザ操作の自動化と実践的なシナリオテストを実装。',
+      title: "システムスペック（E2E）",
+      tech: "RSpec / Capybara",
+      description: "ブラウザ操作の自動化と実践的なシナリオテストを実装。",
     },
   ],
   targetAudience: [
     {
-      title: 'Railsでテストを書いたことがない方',
+      title: "Railsでテストを書いたことがない方",
       points: [
-        'テストの必要性は感じているが、始め方が分からない',
-        'テストの基礎から体系的に学びたい',
-        '実践的なテストの書き方を身につけたい',
+        "テストの必要性は感じているが、始め方が分からない",
+        "テストの基礎から体系的に学びたい",
+        "実践的なテストの書き方を身につけたい",
       ],
     },
     {
-      title: '就職・転職を考えている方',
+      title: "就職・転職を考えている方",
       points: [
-        'ポートフォリオにテストを導入したい',
-        '面接で技術的な優位性をアピールしたい',
-        '実務レベルのテストスキルを身につけたい',
+        "ポートフォリオにテストを導入したい",
+        "面接で技術的な優位性をアピールしたい",
+        "実務レベルのテストスキルを身につけたい",
       ],
     },
     {
-      title: '現場でRSpecを使う必要がある方',
+      title: "現場でRSpecを使う必要がある方",
       points: [
-        '新規プロジェクトでテスト導入を任されている',
-        'レガシーコードにテストを追加したい',
-        'チーム開発でのテストの書き方を学びたい',
+        "新規プロジェクトでテスト導入を任されている",
+        "レガシーコードにテストを追加したい",
+        "チーム開発でのテストの書き方を学びたい",
       ],
     },
     {
-      title: 'テストの品質を上げたい方',
+      title: "テストの品質を上げたい方",
       points: [
-        'より良いテストの書き方を知りたい',
-        'テストの保守性を高めたい',
-        'テストの実行速度を改善したい',
+        "より良いテストの書き方を知りたい",
+        "テストの保守性を高めたい",
+        "テストの実行速度を改善したい",
       ],
     },
   ],
@@ -230,7 +232,9 @@ export default function RSpecRailsCoursePage() {
   if (!coupon) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p className="text-lg text-zinc-600">クーポン情報が見つかりませんでした</p>
+        <p className="text-lg text-zinc-600">
+          クーポン情報が見つかりませんでした
+        </p>
       </div>
     )
   }

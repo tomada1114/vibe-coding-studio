@@ -1,7 +1,7 @@
-'use client'
+"use client"
 
-import { useRef } from 'react'
-import { User, Briefcase, Rocket, Target } from 'lucide-react'
+import { Briefcase, Rocket, Target, User } from "lucide-react"
+import { useRef } from "react"
 
 interface Audience {
   title: string
@@ -38,12 +38,17 @@ export function TargetAudience({ audiences }: TargetAudienceProps) {
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 text-white">
                   <Icon className="h-5 w-5" />
                 </div>
-                <h3 className="font-semibold text-zinc-950">{audience.title}</h3>
+                <h3 className="font-semibold text-zinc-950">
+                  {audience.title}
+                </h3>
               </div>
 
               <ul className="space-y-2">
                 {audience.points.map((point, pointIndex) => (
-                  <li key={pointIndex} className="flex items-start gap-2 text-sm text-zinc-600">
+                  <li
+                    key={pointIndex}
+                    className="flex items-start gap-2 text-sm text-zinc-600"
+                  >
                     <span className="mt-1.5 block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-blue-500" />
                     {point}
                   </li>

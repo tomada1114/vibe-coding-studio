@@ -40,7 +40,8 @@ describe("運営者プロフィールページ（/founder）", () => {
 
     it("キャッチコピーが表示される", () => {
       render(<FounderPage />)
-      const catchphrase = screen.getByText(/カナダ在住のフリーランスエンジニア/i)
+      const catchphrase =
+        screen.getByText(/カナダ在住のフリーランスエンジニア/i)
       expect(catchphrase).toBeInTheDocument()
     })
 
@@ -86,7 +87,9 @@ describe("運営者プロフィールページ（/founder）", () => {
 
     it("AIツール名が記載されている", () => {
       render(<FounderPage />)
-      const toolsText = screen.getByText(/Claude Code、Codex、Cursor、GitHub Copilot/i)
+      const toolsText = screen.getByText(
+        /Claude Code、Codex、Cursor、GitHub Copilot/i
+      )
       expect(toolsText).toBeInTheDocument()
     })
   })

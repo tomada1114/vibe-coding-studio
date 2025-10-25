@@ -1,4 +1,4 @@
-export type CouponType = 'custom_price' | 'free'
+export type CouponType = "custom_price" | "free"
 
 /**
  * クーポンデータの基本情報

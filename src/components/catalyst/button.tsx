@@ -1,1 +1,1 @@
-export { CatalystButton as Button } from '../catalyst-button'
+export { CatalystButton as Button } from "../catalyst-button"

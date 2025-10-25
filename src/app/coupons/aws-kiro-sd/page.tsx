@@ -1,39 +1,39 @@
-import type { Metadata } from 'next'
-import { getLatestCoupons } from '@/lib/coupons/coupon-data'
-import { CourseDetailHero } from '@/components/coupons/course-detail/CourseDetailHero'
-import { CourseContent } from '@/components/coupons/course-detail/CourseContent'
-import { PriceSection } from '@/components/coupons/course-detail/PriceSection'
-import { CourseFeatures } from '@/components/coupons/course-detail/CourseFeatures'
-import { CourseProjects } from '@/components/coupons/course-detail/CourseProjects'
-import { TargetAudience } from '@/components/coupons/course-detail/TargetAudience'
-import { FloatingCTA } from '@/components/coupons/course-detail/FloatingCTA'
-import { Container } from '@/components/container'
-import { Navbar } from '@/components/navbar'
-import { Footer } from '@/components/footer'
-import { Gradient } from '@/components/gradient'
-import { AsyncErrorBoundary } from '@/components/error-boundary'
+import { Container } from "@/components/container"
+import { CourseContent } from "@/components/coupons/course-detail/CourseContent"
+import { CourseDetailHero } from "@/components/coupons/course-detail/CourseDetailHero"
+import { CourseFeatures } from "@/components/coupons/course-detail/CourseFeatures"
+import { CourseProjects } from "@/components/coupons/course-detail/CourseProjects"
+import { FloatingCTA } from "@/components/coupons/course-detail/FloatingCTA"
+import { PriceSection } from "@/components/coupons/course-detail/PriceSection"
+import { TargetAudience } from "@/components/coupons/course-detail/TargetAudience"
+import { AsyncErrorBoundary } from "@/components/error-boundary"
+import { Footer } from "@/components/footer"
+import { Gradient } from "@/components/gradient"
+import { Navbar } from "@/components/navbar"
+import { getLatestCoupons } from "@/lib/coupons/coupon-data"
+import type { Metadata } from "next"
 
 // 静的生成を明示的に設定
-export const dynamic = 'force-static'
+export const dynamic = "force-static"
 export const revalidate = 3600 // 1時間ごとに再生成
 
 // udemy-course-info-temp.md に記載の正式タイトル（照合用）
 const COURSE_TITLE =
-  '【AWS Kiro完全ガイド】仕様駆動開発で学ぶ次世代AI開発 - Next.jsメモアプリ実装からMCP連携まで'
+  "【AWS Kiro完全ガイド】仕様駆動開発で学ぶ次世代AI開発 - Next.jsメモアプリ実装からMCP連携まで"
 
 export const metadata: Metadata = {
   title: COURSE_TITLE,
   description:
-    '計画を立ててから開発する新スタイル！要件・設計・タスクの3段階ドキュメント生成、エージェントフック、MCP連携まで。品質重視のAI駆動開発を基礎から実践まで徹底解説',
+    "計画を立ててから開発する新スタイル！要件・設計・タスクの3段階ドキュメント生成、エージェントフック、MCP連携まで。品質重視のAI駆動開発を基礎から実践まで徹底解説",
   openGraph: {
     title: COURSE_TITLE,
     description:
-      '計画を立ててから開発する新スタイル！要件・設計・タスクの3段階ドキュメント生成、エージェントフック、MCP連携まで。品質重視のAI駆動開発を基礎から実践まで徹底解説',
-    type: 'website',
-    url: 'https://school.learning-next.app/coupons/aws-kiro-sd',
+      "計画を立ててから開発する新スタイル！要件・設計・タスクの3段階ドキュメント生成、エージェントフック、MCP連携まで。品質重視のAI駆動開発を基礎から実践まで徹底解説",
+    type: "website",
+    url: "https://school.learning-next.app/coupons/aws-kiro-sd",
     images: [
       {
-        url: '/images/udemy/aws-kiro-sd.png',
+        url: "/images/udemy/aws-kiro-sd.png",
         width: 1280,
         height: 720,
         alt: COURSE_TITLE,
@@ -41,11 +41,11 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: "summary_large_image",
     title: COURSE_TITLE,
     description:
-      '計画を立ててから開発する新スタイル！要件・設計・タスクの3段階ドキュメント生成、エージェントフック、MCP連携まで。品質重視のAI駆動開発を基礎から実践まで徹底解説',
-    images: ['/images/udemy/aws-kiro-sd.png'],
+      "計画を立ててから開発する新スタイル！要件・設計・タスクの3段階ドキュメント生成、エージェントフック、MCP連携まで。品質重視のAI駆動開発を基礎から実践まで徹底解説",
+    images: ["/images/udemy/aws-kiro-sd.png"],
   },
 }
 
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
 const courseDetails = {
   title: COURSE_TITLE,
   subtitle:
-    '計画を立ててから開発する新スタイル！要件・設計・タスクの3段階ドキュメント生成、エージェントフック、MCP連携まで。品質重視のAI駆動開発を基礎から実践まで徹底解説',
+    "計画を立ててから開発する新スタイル！要件・設計・タスクの3段階ドキュメント生成、エージェントフック、MCP連携まで。品質重視のAI駆動開発を基礎から実践まで徹底解説",
   description: `「AIツールでコードは生成できるけど、要件と違う実装になってしまう...」
 
 「チーム開発でAIを使いたいけど、品質管理やドキュメント整備が追いつかない...」
@@ -65,81 +65,81 @@ Kiroは「仕様駆動開発」という革新的なアプローチで、AI開�
 ビジネス要求を確実に満たす高品質なアプリケーションを開発できます。`,
   features: [
     {
-      title: '仕様駆動開発の完全理解',
+      title: "仕様駆動開発の完全理解",
       description:
-        '要件・設計・タスクリストの3段階アプローチと承認プロセスで品質を担保。要件と実装を確実に紐付け、ビジネスと開発を橋渡しします。',
+        "要件・設計・タスクリストの3段階アプローチと承認プロセスで品質を担保。要件と実装を確実に紐付け、ビジネスと開発を橋渡しします。",
     },
     {
-      title: '実践的なNext.jsメモアプリ開発',
+      title: "実践的なNext.jsメモアプリ開発",
       description:
-        'プロジェクトセットアップから完成までを体験。ローカルストレージによる永続化、レスポンシブとアクセシビリティ対応、TDDまで実践します。',
+        "プロジェクトセットアップから完成までを体験。ローカルストレージによる永続化、レスポンシブとアクセシビリティ対応、TDDまで実践します。",
     },
     {
-      title: 'Kiroの強力な機能をフル活用',
+      title: "Kiroの強力な機能をフル活用",
       description:
-        'エージェントフックでドキュメント自動更新や品質分析を自動化。ステアリングで情報を一元管理し、MCP連携でContext 7やPlaywrightと統合します。',
+        "エージェントフックでドキュメント自動更新や品質分析を自動化。ステアリングで情報を一元管理し、MCP連携でContext 7やPlaywrightと統合します。",
     },
     {
-      title: '品質と効率を両立する開発手法',
+      title: "品質と効率を両立する開発手法",
       description:
-        'テストファーストで堅牢な実装を行い、自動テストと手動確認のバランスを最適化。Git連携で変更管理し、チーム開発にも適用できます。',
+        "テストファーストで堅牢な実装を行い、自動テストと手動確認のバランスを最適化。Git連携で変更管理し、チーム開発にも適用できます。",
     },
   ],
   projects: [
     {
-      title: 'LPページ制作で仕様駆動開発を体験',
-      tech: 'Kiro',
+      title: "LPページ制作で仕様駆動開発を体験",
+      tech: "Kiro",
       description:
-        '要件定義 → 設計 → 実装計画（タスクリスト）→ 実装 の基本フローをLP制作で体験します。',
+        "要件定義 → 設計 → 実装計画（タスクリスト）→ 実装 の基本フローをLP制作で体験します。",
     },
     {
-      title: 'Next.js メモアプリ開発',
-      tech: 'Next.js',
+      title: "Next.js メモアプリ開発",
+      tech: "Next.js",
       description:
-        'プロジェクトセットアップから、ローカルストレージの永続化、アクセシビリティ、テスト駆動開発まで段階的に実装します。',
+        "プロジェクトセットアップから、ローカルストレージの永続化、アクセシビリティ、テスト駆動開発まで段階的に実装します。",
     },
     {
-      title: 'MCP連携と自動E2Eテスト',
-      tech: 'MCP / Context 7 / Playwright',
+      title: "MCP連携と自動E2Eテスト",
+      tech: "MCP / Context 7 / Playwright",
       description:
-        '外部ツール連携による情報取得と、Playwrightでのスクリーンショット・E2E自動テストを実践します。',
+        "外部ツール連携による情報取得と、Playwrightでのスクリーンショット・E2E自動テストを実践します。",
     },
   ],
   targetAudience: [
     {
-      title: 'より計画的なAI開発を目指す方',
+      title: "より計画的なAI開発を目指す方",
       points: [
-        '要件定義から実装まで体系的に進めたい',
-        'AIの出力を適切にコントロールしたい',
-        '品質を犠牲にせず開発効率を上げたい',
-        'ドキュメント作成を効率化したい',
+        "要件定義から実装まで体系的に進めたい",
+        "AIの出力を適切にコントロールしたい",
+        "品質を犠牲にせず開発効率を上げたい",
+        "ドキュメント作成を効率化したい",
       ],
     },
     {
-      title: 'チーム開発でAIを活用したい方',
+      title: "チーム開発でAIを活用したい方",
       points: [
-        'ビジネスサイドとの連携を強化したい',
-        '開発プロセスを標準化したい',
-        '品質基準を明確にしたい',
-        'タスク管理を効率化したい',
+        "ビジネスサイドとの連携を強化したい",
+        "開発プロセスを標準化したい",
+        "品質基準を明確にしたい",
+        "タスク管理を効率化したい",
       ],
     },
     {
-      title: '既存のAIツールに限界を感じている方',
+      title: "既存のAIツールに限界を感じている方",
       points: [
-        'より高度な自動化を実現したい',
-        '外部ツールとの連携を強化したい',
-        'テスト自動化を推進したい',
-        '開発の再現性を高めたい',
+        "より高度な自動化を実現したい",
+        "外部ツールとの連携を強化したい",
+        "テスト自動化を推進したい",
+        "開発の再現性を高めたい",
       ],
     },
     {
-      title: 'VS Codeユーザーの方',
+      title: "VS Codeユーザーの方",
       points: [
-        '慣れ親しんだ環境でAI開発を始めたい',
-        '既存の設定や拡張機能を活かしたい',
-        'スムーズに移行したい',
-        '最新のAI開発環境を体験したい',
+        "慣れ親しんだ環境でAI開発を始めたい",
+        "既存の設定や拡張機能を活かしたい",
+        "スムーズに移行したい",
+        "最新のAI開発環境を体験したい",
       ],
     },
   ],
@@ -156,7 +156,9 @@ export default function AwsKiroCoursePage() {
   if (!coupon) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p className="text-lg text-zinc-600">クーポン情報が見つかりませんでした</p>
+        <p className="text-lg text-zinc-600">
+          クーポン情報が見つかりませんでした
+        </p>
       </div>
     )
   }
