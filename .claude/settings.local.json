@@ -14,7 +14,9 @@
       "WebFetch(domain:github.com)",
       "Bash(git log:*)",
       "WebFetch(domain:registry.npmjs.org)",
-      "WebFetch(domain:api.github.com)"
+      "WebFetch(domain:api.github.com)",
+      "Bash(npm test:*)",
+      "Bash(npx eslint:*)"
     ],
     "deny": [],
     "ask": []
