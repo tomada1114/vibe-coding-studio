@@ -1,4 +1,9 @@
+import { Container } from '@/components/container'
 import { CouponPageLayout } from '@/components/coupons/CouponPageLayout'
+import { AsyncErrorBoundary } from '@/components/error-boundary'
+import { Footer } from '@/components/footer'
+import { Gradient } from '@/components/gradient'
+import { Navbar } from '@/components/navbar'
 import { calculateDiscountRate, getLatestCoupons } from '@/lib/coupons/coupon-data'
 import { ChevronRight } from 'lucide-react'
 import type { Metadata } from 'next'
@@ -92,11 +97,23 @@ export default function CouponsPage() {
   }
 
   return (
-    <>
+    <div className="overflow-hidden">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
+
+      {/* ヘッダーセクション */}
+      <AsyncErrorBoundary>
+        <div className="relative">
+          <Gradient className="absolute inset-2 bottom-0 rounded-4xl ring-1 ring-black/5 ring-inset" />
+          <Container className="relative">
+            <Navbar />
+          </Container>
+        </div>
+      </AsyncErrorBoundary>
+
+      {/* メインコンテンツ */}
       <main className="min-h-screen bg-gradient-to-br from-zinc-50/50 via-white to-blue-50/30">
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           {/* パンくずリスト */}
@@ -153,6 +170,11 @@ export default function CouponsPage() {
           <CouponPageLayout coupons={coupons} />
         </div>
       </main>
-    </>
+
+      {/* フッターセクション */}
+      <AsyncErrorBoundary>
+        <Footer />
+      </AsyncErrorBoundary>
+    </div>
   )
 }

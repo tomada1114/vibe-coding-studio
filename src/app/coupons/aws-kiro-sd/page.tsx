@@ -7,6 +7,11 @@ import { CourseFeatures } from '@/components/coupons/course-detail/CourseFeature
 import { CourseProjects } from '@/components/coupons/course-detail/CourseProjects'
 import { TargetAudience } from '@/components/coupons/course-detail/TargetAudience'
 import { FloatingCTA } from '@/components/coupons/course-detail/FloatingCTA'
+import { Container } from '@/components/container'
+import { Navbar } from '@/components/navbar'
+import { Footer } from '@/components/footer'
+import { Gradient } from '@/components/gradient'
+import { AsyncErrorBoundary } from '@/components/error-boundary'
 
 // 静的生成を明示的に設定
 export const dynamic = 'force-static'
@@ -157,32 +162,50 @@ export default function AwsKiroCoursePage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50/50 via-white to-indigo-50/30">
-      <CourseDetailHero
-        title={courseDetails.title}
-        subtitle={courseDetails.subtitle}
-        topics={coupon.courseInfo.topics}
-        slug={coupon.courseInfo.slug}
-      />
+    <div className="overflow-hidden">
+      {/* ヘッダーセクション */}
+      <AsyncErrorBoundary>
+        <div className="relative">
+          <Gradient className="absolute inset-2 bottom-0 rounded-4xl ring-1 ring-black/5 ring-inset" />
+          <Container className="relative">
+            <Navbar />
+          </Container>
+        </div>
+      </AsyncErrorBoundary>
 
-      <div className="mx-auto max-w-7xl py-8 sm:px-4 sm:py-12 lg:px-8">
-        <div className="grid gap-6 sm:gap-8 lg:grid-cols-3">
-          <div className="space-y-6 sm:space-y-8 lg:col-span-2">
-            <CourseContent description={courseDetails.description} />
-            <CourseFeatures features={courseDetails.features} />
-            <CourseProjects projects={courseDetails.projects} />
-            <TargetAudience audiences={courseDetails.targetAudience} />
-          </div>
+      {/* メインコンテンツ */}
+      <main className="min-h-screen bg-gradient-to-br from-blue-50/50 via-white to-indigo-50/30">
+        <CourseDetailHero
+          title={courseDetails.title}
+          subtitle={courseDetails.subtitle}
+          topics={coupon.courseInfo.topics}
+          slug={coupon.courseInfo.slug}
+        />
 
-          <div className="lg:col-span-1">
-            <div className="sticky top-24">
-              <PriceSection coupon={coupon} />
+        <div className="mx-auto max-w-7xl py-8 sm:px-4 sm:py-12 lg:px-8">
+          <div className="grid gap-6 sm:gap-8 lg:grid-cols-3">
+            <div className="space-y-6 sm:space-y-8 lg:col-span-2">
+              <CourseContent description={courseDetails.description} />
+              <CourseFeatures features={courseDetails.features} />
+              <CourseProjects projects={courseDetails.projects} />
+              <TargetAudience audiences={courseDetails.targetAudience} />
+            </div>
+
+            <div className="lg:col-span-1">
+              <div className="sticky top-24">
+                <PriceSection coupon={coupon} />
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <FloatingCTA coupon={coupon} />
-    </main>
+        <FloatingCTA coupon={coupon} />
+      </main>
+
+      {/* フッターセクション */}
+      <AsyncErrorBoundary>
+        <Footer />
+      </AsyncErrorBoundary>
+    </div>
   )
 }
