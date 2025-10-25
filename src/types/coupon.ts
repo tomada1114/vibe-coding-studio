@@ -1,16 +1,18 @@
 export type CouponType = 'custom_price' | 'free'
 
+/**
+ * クーポンデータの基本情報
+ * URLは動的生成されるため含まない
+ */
 export interface RawCouponData {
-  course_id: string
-  course_name: string
-  coupon_type: CouponType
-  maximum_redemptions: string
-  coupon_code: string
-  start_date_time: string
-  end_date_time: string
+  courseId: string
+  couponType: CouponType
+  maximumRedemptions: string
+  couponCode: string
+  startDateTime: string
+  endDateTime: string
   currency: string
-  discount_price: string
-  course_coupon_url: string
+  discountPrice: number
 }
 
 export interface CourseInfo {
