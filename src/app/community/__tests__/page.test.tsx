@@ -13,6 +13,10 @@ jest.mock("@/components/logo", () => ({
   Logo: () => <img alt="Vibe Coding Studio Logo" src="/logo.png" />,
 }))
 
+// テスト定数
+// Discord参加ボタンの数: ヒーローセクションのCTA + 最終CTAセクション
+const EXPECTED_DISCORD_BUTTON_COUNT = 2
+
 describe("コミュニティページ（/community）", () => {
   describe("ヒーローセクション", () => {
     it("ヒーローセクションのメインメッセージが表示される", () => {
@@ -181,17 +185,26 @@ describe("コミュニティページ（/community）", () => {
 
     it("チャンネルの目的と活用方法が説明される", () => {
       render(<CommunityPage />)
-      // 自己紹介チャンネルの説明を確認
-      const introductionChannels = screen.getAllByText(/自己紹介/i)
-      expect(introductionChannels.length).toBeGreaterThan(0)
+      // 自己紹介チャンネルの見出しを確認
+      const introductionChannel = screen.getByRole("heading", {
+        name: /自己紹介/i,
+        level: 3,
+      })
+      expect(introductionChannel).toBeInTheDocument()
 
-      // 学習報告チャンネルの説明を確認
-      const learningReportChannels = screen.getAllByText(/学習報告/i)
-      expect(learningReportChannels.length).toBeGreaterThan(0)
+      // 学習報告チャンネルの見出しを確認
+      const learningReportChannel = screen.getByRole("heading", {
+        name: /学習報告/i,
+        level: 3,
+      })
+      expect(learningReportChannel).toBeInTheDocument()
 
-      // とまだの検証部屋チャンネルの説明を確認
-      const verificationChannels = screen.getAllByText(/とまだの検証部屋/i)
-      expect(verificationChannels.length).toBeGreaterThan(0)
+      // とまだの検証部屋チャンネルの見出しを確認
+      const verificationChannel = screen.getByRole("heading", {
+        name: /とまだの検証部屋/i,
+        level: 3,
+      })
+      expect(verificationChannel).toBeInTheDocument()
     })
 
     it("チャンネルがアイコンで視覚的に区別される", () => {
@@ -202,7 +215,8 @@ describe("コミュニティページ（/community）", () => {
     })
   })
 
-  // テスティモニアルセクションはコメントアウトされているため、一時的にテストも無効化
+  // TODO: テスティモニアルセクション実装後に有効化
+  // 実装パス: src/app/community/page.tsx の communityTestimonials がコメントアウトされている
   describe.skip("参加者の声セクション（タスク8）", () => {
     it("参加者の声セクションが表示される", () => {
       render(<CommunityPage />)
@@ -221,22 +235,6 @@ describe("コミュニティページ（/community）", () => {
       // 3名分のテスティモニアルが表示されることを確認
       expect(testimonialCards.length).toBeGreaterThanOrEqual(3)
     })
-
-    // 追加のテスティモニアルテスト
-    // it("各テスティモニアルに参加者名が表示される", () => {
-    //   render(<CommunityPage />)
-    //   // コミュニティメンバーのテスティモニアルを確認
-    //   // 最低1つの参加者名が表示されることを確認
-    //   const figures = screen.getAllByRole("figure")
-    //   expect(figures.length).toBeGreaterThan(0)
-    // })
-
-    // it("各テスティモニアルにコメントが表示される", () => {
-    //   const { container } = render(<CommunityPage />)
-    //   // blockquote要素（引用）が存在することを確認
-    //   const blockquotes = container.querySelectorAll("blockquote")
-    //   expect(blockquotes.length).toBeGreaterThanOrEqual(3)
-    // })
   })
 
   describe("FAQセクション（タスク9）", () => {
@@ -282,7 +280,7 @@ describe("コミュニティページ（/community）", () => {
         name: /Discordに参加/i,
       })
       // ヒーローセクション、最終CTAの2つのボタンが存在することを期待
-      expect(buttons.length).toBe(2)
+      expect(buttons.length).toBe(EXPECTED_DISCORD_BUTTON_COUNT)
     })
 
     it("最終CTAセクションのDiscord参加ボタンが正しいURLを持つ", () => {

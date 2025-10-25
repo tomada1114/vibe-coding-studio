@@ -18,12 +18,12 @@ jest.mock("next/image", () => ({
     sizes?: string
     priority?: boolean
   }) => {
-    const { priority, ...rest } = props
+    const { priority, fill, sizes, ...imgProps } = props
     return (
       <img
-        alt={props.alt}
-        {...rest}
+        {...imgProps}
         data-priority={priority ? "true" : undefined}
+        data-fill={fill ? "true" : undefined}
       />
     )
   },
