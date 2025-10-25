@@ -10,7 +10,9 @@ import { render, screen } from "@testing-library/react"
 
 // モックを設定
 jest.mock("@/components/logo", () => ({
-  Logo: () => <img alt="Vibe Coding Studio Logo" src="/vcs-logo-square-transparent.png" />,
+  Logo: () => (
+    <img alt="Vibe Coding Studio Logo" src="/vcs-logo-square-transparent.png" />
+  ),
 }))
 
 // テスト定数
@@ -166,9 +168,8 @@ describe("コミュニティページ（/community）", () => {
     it("とまだの最新検証に関する説明が表示される", () => {
       render(<CommunityPage />)
       // 「とまだの最新検証をリアルタイムで見ながら」というテキストを探す
-      const description = screen.getByText(
-        /とまだの最新検証をリアルタイムで見ながら/i
-      )
+      const description =
+        screen.getByText(/とまだの最新検証をリアルタイムで見ながら/i)
       expect(description).toBeInTheDocument()
     })
   })
