@@ -6,73 +6,196 @@ let cachedCoupons: Coupon[] | null = null
 let cacheTimestamp = 0
 const CACHE_DURATION = 5 * 60 * 1000 // 5 minutes
 
-// CSVデータを直接定義（ビルド時に含まれる）
-const CSV_DATA = `"course_id","course_name","coupon_type","maximum_redemptions","coupon_code","start_date_time","end_date_time","currency","discount_price","course_coupon_url"
-6851913,"【Codex × スマホアプリ開発】AI駆動開発で作る！React Native ではじめるモバイルアプリ開発実践","custom_price","unlimited","2025-10-10","2025-10-10 00:00 PDT","2025-11-09 23:00 PST","JPY",1500,"https://www.udemy.com/course/codex-react-native/?couponCode=2025-10-10"
-6823465,"【初心者OK】Claude CodeとPythonで学ぶAI駆動開発！アプリ・スクレイピング・ゲーム作成で学ぶ完全ガイド","custom_price","unlimited","2025-10-10","2025-10-10 00:00 PDT","2025-11-09 23:00 PDT","JPY",1500,"https://www.udemy.com/course/claude-code-python/?couponCode=2025-09-14"
-6827941,"【Claude Code】FlaskとGeminiで作る Python AI アプリ！実践レベルのAI駆動開発を学ぼう","custom_price","unlimited","2025-10-10","2025-10-15 19:45 PDT","2025-11-15 18:45 PST","JPY",1500,"https://www.udemy.com/course/claude-code-flask/?couponCode=2025-10-10"
-6783611,"【未経験OK】Claude CodeとReact Nativeでスマホアプリ開発！5つのアプリでバイブコーディング実践","custom_price","unlimited","2025-10-10","2025-10-10 00:00 PDT","2025-11-09 23:00 PDT","JPY",1500,"https://www.udemy.com/course/claude-code-react-native-5apps/?couponCode=2025-09-14"
-6801509,"【Codex CLI】実践レベルのアプリ開発で学ぶバイブコーディング！カスタムコマンド・MCP連携の完全ガイド","custom_price","unlimited","2025-10-10","2025-10-15 19:45 PDT","2025-11-15 18:45 PST","JPY",1500,"https://www.udemy.com/course/codex-nextjs/?couponCode=2025-10-10"
-6782117,"Claude Codeでスマホアプリ開発！React Native（Expo）爆速バイブコーディングテンプレートを作ろう","custom_price","unlimited","2025-10-10","2025-10-10 00:00 PDT","2025-11-09 23:00 PDT","JPY",1500,"https://www.udemy.com/course/claude-code-expo-template/?couponCode=2025-09-14"
-6772961,"【AWS Kiro完全ガイド】仕様駆動開発で学ぶ次世代AI開発 - Next.jsメモアプリ実装からMCP連携まで","custom_price","unlimited","2025-10-10","2025-10-10 00:00 PDT","2025-11-09 23:00 PDT","JPY",1500,"https://www.udemy.com/course/aws-kiro-sd/?couponCode=2025-09-14"
-6769253,"【Claude Code × MCP完全攻略】Next.jsアプリ開発を劇的に効率化する5つの最新MCPツール実践ガイド","custom_price","unlimited","2025-10-10","2025-10-10 00:00 PDT","2025-11-09 23:00 PDT","JPY",1500,"https://www.udemy.com/course/claude-code-mcp-nextjs/?couponCode=2025-09-14"
-6739725,"【Claude Code】Next.js で作るサブスク型・作業時間管理アプリで学ぶ AI 駆動開発【完全版】","custom_price","unlimited","2025-10-10","2025-10-10 00:00 PDT","2025-11-09 23:00 PDT","JPY",1500,"https://www.udemy.com/course/claude-code-project-tracker/?couponCode=2025-09-14"
-6732543,"【Claude Code】プログラミング未経験OK！Stripe サブスク型家計簿アプリで学ぶAI駆動開発マスター講座","custom_price","unlimited","2025-10-10","2025-10-10 00:00 PDT","2025-11-09 23:00 PDT","JPY",1500,"https://www.udemy.com/course/claude-code-expenses-app/?couponCode=2025-09-14"
-6694011,"【無料ではじめる】Gemini CLI x Vibe Coding入門 - プログラミング未経験から作れるマインドマップ","custom_price","unlimited","2025-10-10","2025-10-10 00:00 PDT","2025-11-09 23:00 PDT","JPY",1500,"https://www.udemy.com/course/gemini_cli_vibe_coding_mind_map/?couponCode=2025-09-14"
-6691241,"【Claude Codeでバイブコーディング】プログラミング未経験OK！はじめての AI 駆動開発でWebアプリを開発","custom_price","unlimited","2025-10-10","2025-10-10 00:00 PDT","2025-11-09 23:00 PDT","JPY",1500,"https://www.udemy.com/course/claude-code-vibe-coding/?couponCode=2025-09-14"
-6536597,"Next.js（React）で作る AI アプリのポートフォリオ実践！モダンフロントエンド開発を初心者でも学べるコース","custom_price","unlimited","2025-10-10","2025-10-10 00:00 PDT","2025-11-09 23:00 PDT","JPY",1500,"https://www.udemy.com/course/nextjs-ai-pomodoro-timer/?couponCode=2025-09-14"
-6387599,"未経験からはじめる Ruby on Rails！Ruby / RSpec も学びながらポートフォリオ公開まで一本で完結","custom_price","unlimited","2025-10-10","2025-10-10 00:00 PDT","2025-11-09 23:00 PDT","JPY",1500,"https://www.udemy.com/course/ruby-on-rails-rspec/?couponCode=2025-09-14"
-6327241,"【RSpec 実践入門】Ruby on Rails 開発者のためのテスト自動化 - 完全ガイド","custom_price","unlimited","2025-10-10","2025-10-10 00:00 PDT","2025-11-09 23:00 PDT","JPY",1500,"https://www.udemy.com/course/rspec-ruby-on-rails/?couponCode=2025-09-14"
-`
+/**
+ * クーポンデータ
+ * URLは動的生成されるため含まない
+ *
+ * メンテナンス方法：
+ * 1. 新しいクーポンを追加するときは、配列に新しいオブジェクトを追加
+ * 2. couponCodeはYYYY-MM-DD形式で記載
+ * 3. startDateTimeとendDateTimeはISO 8601形式で記載
+ * 4. courseIdはCOURSE_INFOに存在するIDを使用（テストで検証される）
+ */
+const COUPON_DATA: RawCouponData[] = [
+  {
+    courseId: '6851913',
+    couponType: 'custom_price',
+    maximumRedemptions: 'unlimited',
+    couponCode: '2025-10-10',
+    startDateTime: '2025-10-10T00:00:00-07:00',
+    endDateTime: '2025-11-09T23:00:00-08:00',
+    currency: 'JPY',
+    discountPrice: 1500,
+  },
+  {
+    courseId: '6823465',
+    couponType: 'custom_price',
+    maximumRedemptions: 'unlimited',
+    couponCode: '2025-10-10',
+    startDateTime: '2025-10-10T00:00:00-07:00',
+    endDateTime: '2025-11-09T23:00:00-07:00',
+    currency: 'JPY',
+    discountPrice: 1500,
+  },
+  {
+    courseId: '6827941',
+    couponType: 'custom_price',
+    maximumRedemptions: 'unlimited',
+    couponCode: '2025-10-10',
+    startDateTime: '2025-10-15T19:45:00-07:00',
+    endDateTime: '2025-11-15T18:45:00-08:00',
+    currency: 'JPY',
+    discountPrice: 1500,
+  },
+  {
+    courseId: '6783611',
+    couponType: 'custom_price',
+    maximumRedemptions: 'unlimited',
+    couponCode: '2025-10-10',
+    startDateTime: '2025-10-10T00:00:00-07:00',
+    endDateTime: '2025-11-09T23:00:00-07:00',
+    currency: 'JPY',
+    discountPrice: 1500,
+  },
+  {
+    courseId: '6801509',
+    couponType: 'custom_price',
+    maximumRedemptions: 'unlimited',
+    couponCode: '2025-10-10',
+    startDateTime: '2025-10-15T19:45:00-07:00',
+    endDateTime: '2025-11-15T18:45:00-08:00',
+    currency: 'JPY',
+    discountPrice: 1500,
+  },
+  {
+    courseId: '6782117',
+    couponType: 'custom_price',
+    maximumRedemptions: 'unlimited',
+    couponCode: '2025-10-10',
+    startDateTime: '2025-10-10T00:00:00-07:00',
+    endDateTime: '2025-11-09T23:00:00-07:00',
+    currency: 'JPY',
+    discountPrice: 1500,
+  },
+  {
+    courseId: '6772961',
+    couponType: 'custom_price',
+    maximumRedemptions: 'unlimited',
+    couponCode: '2025-10-10',
+    startDateTime: '2025-10-10T00:00:00-07:00',
+    endDateTime: '2025-11-09T23:00:00-07:00',
+    currency: 'JPY',
+    discountPrice: 1500,
+  },
+  {
+    courseId: '6769253',
+    couponType: 'custom_price',
+    maximumRedemptions: 'unlimited',
+    couponCode: '2025-10-10',
+    startDateTime: '2025-10-10T00:00:00-07:00',
+    endDateTime: '2025-11-09T23:00:00-07:00',
+    currency: 'JPY',
+    discountPrice: 1500,
+  },
+  {
+    courseId: '6739725',
+    couponType: 'custom_price',
+    maximumRedemptions: 'unlimited',
+    couponCode: '2025-10-10',
+    startDateTime: '2025-10-10T00:00:00-07:00',
+    endDateTime: '2025-11-09T23:00:00-07:00',
+    currency: 'JPY',
+    discountPrice: 1500,
+  },
+  {
+    courseId: '6732543',
+    couponType: 'custom_price',
+    maximumRedemptions: 'unlimited',
+    couponCode: '2025-10-10',
+    startDateTime: '2025-10-10T00:00:00-07:00',
+    endDateTime: '2025-11-09T23:00:00-07:00',
+    currency: 'JPY',
+    discountPrice: 1500,
+  },
+  {
+    courseId: '6694011',
+    couponType: 'custom_price',
+    maximumRedemptions: 'unlimited',
+    couponCode: '2025-10-10',
+    startDateTime: '2025-10-10T00:00:00-07:00',
+    endDateTime: '2025-11-09T23:00:00-07:00',
+    currency: 'JPY',
+    discountPrice: 1500,
+  },
+  {
+    courseId: '6691241',
+    couponType: 'custom_price',
+    maximumRedemptions: 'unlimited',
+    couponCode: '2025-10-10',
+    startDateTime: '2025-10-10T00:00:00-07:00',
+    endDateTime: '2025-11-09T23:00:00-07:00',
+    currency: 'JPY',
+    discountPrice: 1500,
+  },
+  {
+    courseId: '6536597',
+    couponType: 'custom_price',
+    maximumRedemptions: 'unlimited',
+    couponCode: '2025-10-10',
+    startDateTime: '2025-10-10T00:00:00-07:00',
+    endDateTime: '2025-11-09T23:00:00-07:00',
+    currency: 'JPY',
+    discountPrice: 1500,
+  },
+  {
+    courseId: '6387599',
+    couponType: 'custom_price',
+    maximumRedemptions: 'unlimited',
+    couponCode: '2025-10-10',
+    startDateTime: '2025-10-10T00:00:00-07:00',
+    endDateTime: '2025-11-09T23:00:00-07:00',
+    currency: 'JPY',
+    discountPrice: 1500,
+  },
+  {
+    courseId: '6327241',
+    couponType: 'custom_price',
+    maximumRedemptions: 'unlimited',
+    couponCode: '2025-10-10',
+    startDateTime: '2025-10-10T00:00:00-07:00',
+    endDateTime: '2025-11-09T23:00:00-07:00',
+    currency: 'JPY',
+    discountPrice: 1500,
+  },
+]
 
-// Cache parsed CSV data to avoid re-parsing
-let parsedCSVData: RawCouponData[] | null = null
-
-export function loadCouponsFromCSV(): RawCouponData[] {
-  // Return cached data if available
-  if (parsedCSVData) {
-    return parsedCSVData
-  }
-
-  // CSVを手動でパース
-  const lines = CSV_DATA.trim().split('\n')
-  const headers = lines[0].split(',').map(h => h.replace(/"/g, ''))
-
-  const records: RawCouponData[] = []
-
-  for (let i = 1; i < lines.length; i++) {
-    const values = lines[i].match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || []
-    const cleanValues = values.map(v => v.replace(/^"|"$/g, ''))
-
-    const record: Record<string, string> = {}
-    headers.forEach((header, index) => {
-      record[header] = cleanValues[index] || ''
-    })
-
-    records.push(record as unknown as RawCouponData)
-  }
-
-  // Cache the parsed data
-  parsedCSVData = records
-  return records
+/**
+ * クーポンURLを動的生成
+ * slugとcouponCodeから正しいURLを構築することで、メンテミスを防ぐ
+ */
+function generateCouponUrl(slug: string, couponCode: string): string {
+  return `https://www.udemy.com/course/${slug}/?couponCode=${couponCode}`
 }
 
 export function parseCouponData(rawData: RawCouponData[]): Coupon[] {
   return rawData
-    .filter(data => COURSE_INFO[data.course_id])
-    .map(data => ({
-      courseId: data.course_id,
-      courseName: data.course_name,
-      couponType: data.coupon_type as Coupon['couponType'],
-      maximumRedemptions: data.maximum_redemptions,
-      couponCode: data.coupon_code,
-      startDateTime: new Date(data.start_date_time.replace(' PDT', '')),
-      endDateTime: new Date(data.end_date_time.replace(' PDT', '')),
-      currency: data.currency,
-      discountPrice: parseInt(data.discount_price, 10),
-      courseCouponUrl: data.course_coupon_url,
-      courseInfo: COURSE_INFO[data.course_id],
-    }))
+    .filter(data => COURSE_INFO[data.courseId])
+    .map(data => {
+      const courseInfo = COURSE_INFO[data.courseId]
+      return {
+        courseId: data.courseId,
+        courseName: courseInfo.title,
+        couponType: data.couponType,
+        maximumRedemptions: data.maximumRedemptions,
+        couponCode: data.couponCode,
+        startDateTime: new Date(data.startDateTime),
+        endDateTime: new Date(data.endDateTime),
+        currency: data.currency,
+        discountPrice: data.discountPrice,
+        courseCouponUrl: generateCouponUrl(courseInfo.slug, data.couponCode),
+        courseInfo,
+      }
+    })
 }
 
 export function getLatestCoupons(): Coupon[] {
@@ -83,8 +206,7 @@ export function getLatestCoupons(): Coupon[] {
     return cachedCoupons
   }
 
-  const rawData = loadCouponsFromCSV()
-  const allCoupons = parseCouponData(rawData)
+  const allCoupons = parseCouponData(COUPON_DATA)
 
   // 現在の日時
   const currentDate = new Date()
