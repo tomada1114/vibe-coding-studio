@@ -66,7 +66,7 @@ export const COURSE_INFO: Record<string, CourseInfo> = {
     originalPrice: 5600,
     description:
       "Gemini CLIとVibe Codingを使って、プログラミング未経験でもマインドマップアプリを開発！無料で始められる実践的な開発講座です。",
-    slug: "gemini-cli-vibe-coding-mind-map",
+    slug: "gemini_cli_vibe_coding_mind_map",
     title:
       "【無料ではじめる】Gemini CLI x Vibe Coding入門 - プログラミング未経験から作れるマインドマップ",
     topics: ["gemini", "nextjs", "react"],

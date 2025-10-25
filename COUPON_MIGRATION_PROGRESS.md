@@ -131,7 +131,7 @@ Route (app)                              Size  First Load JS
 2. claude-code-flask (ID: 6827941)
 3. claude-code-python (ID: 6823465)
 4. claude-code-project-tracker (ID: 6739725)
-5. gemini-cli-vibe-coding-mind-map (ID: 6694011)
+5. gemini_cli_vibe_coding_mind_map (ID: 6694011)
 6. claude-code-vibe-coding (ID: 6691241)
 7. nextjs-ai-pomodoro-timer (ID: 6536597)
 8. claude-code-react-native-5apps (ID: 6783611)
@@ -160,7 +160,7 @@ Route (app)                              Size  First Load JS
 ```bash
 for slug in aws-kiro-sd claude-code-expo-template claude-code-flask claude-code-mcp-nextjs \
 claude-code-project-tracker claude-code-python claude-code-react-native-5apps \
-claude-code-vibe-coding codex-nextjs codex-react-native gemini-cli-vibe-coding-mind-map \
+claude-code-vibe-coding codex-nextjs codex-react-native gemini_cli_vibe_coding_mind_map \
 nextjs-ai-pomodoro-timer rspec-ruby-on-rails; do
   mkdir -p "src/app/coupons/$slug"
   cp "coupon-migration-package/src/app/coupons/all-course-pages/${slug}.tsx" \
@@ -189,7 +189,7 @@ Route (app)                                      Size  First Load JS  Revalidate
 ├ ○ /coupons/claude-code-vibe-coding          1.19 kB         125 kB          1h      1y
 ├ ○ /coupons/codex-nextjs                     1.19 kB         125 kB          1h      1y
 ├ ○ /coupons/codex-react-native               1.19 kB         125 kB          1h      1y
-├ ○ /coupons/gemini-cli-vibe-coding-mind-map  1.19 kB         125 kB          1h      1y
+├ ○ /coupons/gemini_cli_vibe_coding_mind_map  1.19 kB         125 kB          1h      1y
 ├ ○ /coupons/nextjs-ai-pomodoro-timer         1.19 kB         125 kB          1h      1y
 ├ ○ /coupons/rspec-ruby-on-rails              1.19 kB         125 kB          1h      1y
 ├ ○ /coupons/ruby-on-rails-rspec              1.19 kB         125 kB          1h      1y
@@ -245,7 +245,7 @@ Route (app)                                      Size  First Load JS  Revalidate
 - `src/app/coupons/claude-code-vibe-coding/page.tsx` (Phase 3)
 - `src/app/coupons/codex-nextjs/page.tsx` (Phase 3)
 - `src/app/coupons/codex-react-native/page.tsx` (Phase 3)
-- `src/app/coupons/gemini-cli-vibe-coding-mind-map/page.tsx` (Phase 3)
+- `src/app/coupons/gemini_cli_vibe_coding_mind_map/page.tsx` (Phase 3)
 - `src/app/coupons/nextjs-ai-pomodoro-timer/page.tsx` (Phase 3)
 - `src/app/coupons/rspec-ruby-on-rails/page.tsx` (Phase 3)
 - `src/app/coupons/ruby-on-rails-rspec/page.tsx` (Phase 2)
@@ -264,7 +264,7 @@ Route (app)                                      Size  First Load JS  Revalidate
 - `public/images/udemy/claude-code-vibe-coding.png` (Phase 3)
 - `public/images/udemy/codex-nextjs.png` (Phase 3)
 - `public/images/udemy/codex-react-native.png` (Phase 3)
-- `public/images/udemy/gemini-cli-vibe-coding-mind-map.png` (Phase 3)
+- `public/images/udemy/gemini_cli_vibe_coding_mind_map.png` (Phase 3)
 - `public/images/udemy/nextjs-ai-pomodoro-timer.png` (Phase 3)
 - `public/images/udemy/rspec-ruby-on-rails.png` (Phase 3)
 - `public/images/udemy/ruby-on-rails-rspec.png` (Phase 2)
