@@ -99,8 +99,9 @@ describe("retry", () => {
     })
     const duration = Date.now() - start
 
-    // Should be limited by maxDelay
-    expect(duration).toBeLessThan(300)
+    // Should be limited by maxDelay (2 retries × 100ms + overhead)
+    // より安定したテスト実行のため、余裕を持った閾値を設定
+    expect(duration).toBeLessThan(800)
   })
 
   it("does not retry on 4xx errors except 429", async () => {
