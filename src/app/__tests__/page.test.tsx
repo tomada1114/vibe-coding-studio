@@ -9,7 +9,9 @@ import { render, screen } from "@testing-library/react"
 
 // モックを設定
 jest.mock("@/components/logo", () => ({
-  Logo: () => <img alt="Vibe Coding Studio Logo" src="/vcs-logo-square-transparent.png" />,
+  Logo: () => (
+    <img alt="Vibe Coding Studio Logo" src="/vcs-logo-square-transparent.png" />
+  ),
 }))
 
 describe("トップページ（/）", () => {
@@ -68,7 +70,9 @@ describe("トップページ（/）", () => {
     it("工事中コンテンツの説明が表示される", () => {
       render(<Home />)
       // 工事中セクションの説明文を探す
-      const section = screen.getByText(/当サイトでは、コミュニティと連携したコンテンツを準備中です/i)
+      const section = screen.getByText(
+        /当サイトでは、コミュニティと連携したコンテンツを準備中です/i
+      )
       expect(section).toBeInTheDocument()
     })
   })

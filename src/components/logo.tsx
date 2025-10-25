@@ -12,7 +12,11 @@ export function Logo({
 
   return (
     <Image
-      src={isWide ? "/vcs-logo-wide-transparent.png" : "/vcs-logo-square-transparent.png"}
+      src={
+        isWide
+          ? "/vcs-logo-wide-transparent.png"
+          : "/vcs-logo-square-transparent.png"
+      }
       alt="Vibe Coding Studio"
       width={isWide ? 300 : 512}
       height={isWide ? 100 : 512}
