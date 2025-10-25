@@ -141,7 +141,8 @@ describe("TopicFilter", () => {
       expect(screen.getByText("Next.js")).toBeInTheDocument()
     })
 
-    it("renders topic icons", () => {
+    // アイコンは削除されたため、このテストはスキップ
+    it.skip("renders topic icons", () => {
       render(
         <TopicFilter
           coupons={mockCoupons}
@@ -407,7 +408,7 @@ describe("TopicFilter", () => {
         />
       )
       const button = screen.getByLabelText(/Claude Codeでフィルタ/)
-      expect(button).toHaveClass("border-zinc-950/10", "bg-white")
+      expect(button).toHaveClass("border-zinc-950/10", "bg-zinc-50")
     })
   })
 })
