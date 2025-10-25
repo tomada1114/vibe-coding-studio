@@ -104,10 +104,10 @@ function CommunityOverviewSection() {
           <div className="flex items-center justify-center">
             <div className="overflow-hidden rounded-2xl">
               <Image
-                src="/logo-wide-bg-black.png"
+                src="/vcs-logo-wide-transparent.png"
                 alt="Vibe Coding Studio"
-                width={400}
-                height={120}
+                width={300}
+                height={100}
                 priority={false}
               />
             </div>

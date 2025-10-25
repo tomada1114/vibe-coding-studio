@@ -12,7 +12,7 @@ import { render } from "@testing-library/react"
 
 // モックを設定
 jest.mock("@/components/logo", () => ({
-  Logo: () => <img alt="Vibe Coding Studio Logo" src="/logo.png" />,
+  Logo: () => <img alt="Vibe Coding Studio Logo" src="/vcs-logo-square-transparent.png" />,
 }))
 
 describe("レスポンシブデザイン（タスク12.4）", () => {
