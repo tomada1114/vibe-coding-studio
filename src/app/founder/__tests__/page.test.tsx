@@ -18,8 +18,14 @@ jest.mock("next/image", () => ({
     sizes?: string
     priority?: boolean
   }) => {
-    // eslint-disable-next-line @next/next/no-img-element
-    return <img {...props} />
+    const { priority, fill, sizes, ...imgProps } = props
+    return (
+      <img
+        {...imgProps}
+        data-priority={priority ? "true" : undefined}
+        data-fill={fill ? "true" : undefined}
+      />
+    )
   },
 }))
 
@@ -40,7 +46,8 @@ describe("運営者プロフィールページ（/founder）", () => {
 
     it("キャッチコピーが表示される", () => {
       render(<FounderPage />)
-      const catchphrase = screen.getByText(/カナダ在住のフリーランスエンジニア/i)
+      const catchphrase =
+        screen.getByText(/カナダ在住のフリーランスエンジニア/i)
       expect(catchphrase).toBeInTheDocument()
     })
 
@@ -53,7 +60,7 @@ describe("運営者プロフィールページ（/founder）", () => {
     it("プロフィール画像が優先読み込みされる", () => {
       render(<FounderPage />)
       const image = screen.getByAltText(/とまだ（Tomada）のプロフィール画像/i)
-      expect(image).toHaveAttribute("priority")
+      expect(image).toHaveAttribute("data-priority", "true")
     })
   })
 
@@ -86,7 +93,9 @@ describe("運営者プロフィールページ（/founder）", () => {
 
     it("AIツール名が記載されている", () => {
       render(<FounderPage />)
-      const toolsText = screen.getByText(/Claude Code、Codex、Cursor、GitHub Copilot/i)
+      const toolsText = screen.getByText(
+        /Claude Code、Codex、Cursor、GitHub Copilot/i
+      )
       expect(toolsText).toBeInTheDocument()
     })
   })

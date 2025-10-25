@@ -68,7 +68,7 @@ describe("トップページ（/）", () => {
     it("工事中コンテンツの説明が表示される", () => {
       render(<Home />)
       // 工事中セクションの説明文を探す
-      const section = screen.getByText(/より充実したコミュニティ体験/i)
+      const section = screen.getByText(/当サイトでは、コミュニティと連携したコンテンツを準備中です/i)
       expect(section).toBeInTheDocument()
     })
   })

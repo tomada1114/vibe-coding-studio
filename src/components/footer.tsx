@@ -60,6 +60,7 @@ function Sitemap() {
         <SitemapLinks>
           <SitemapLink href="/">ホーム</SitemapLink>
           <SitemapLink href="/community">コミュニティ</SitemapLink>
+          <SitemapLink href="/coupons">クーポン</SitemapLink>
           <SitemapLink href="/founder">運営者</SitemapLink>
         </SitemapLinks>
       </div>
@@ -183,7 +184,11 @@ function Copyright() {
   )
 }
 
-export function Footer({ hideCallToAction = false }: { hideCallToAction?: boolean }) {
+export function Footer({
+  hideCallToAction = false,
+}: {
+  hideCallToAction?: boolean
+}) {
   return (
     <footer>
       <Gradient className="relative">
