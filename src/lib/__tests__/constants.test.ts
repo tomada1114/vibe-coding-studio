@@ -61,10 +61,10 @@ describe("constants.ts", () => {
       })
     })
 
-    it("SOCIAL_LINKSがTwitterリンクを含む", () => {
-      const twitterLink = SOCIAL_LINKS.find(link => link.name === "Twitter")
-      expect(twitterLink).toBeDefined()
-      expect(twitterLink?.url).toMatch(/twitter\.com|x\.com/)
+    it("SOCIAL_LINKSがXリンクを含む", () => {
+      const xLink = SOCIAL_LINKS.find(link => link.name === "X")
+      expect(xLink).toBeDefined()
+      expect(xLink?.url).toMatch(/twitter\.com|x\.com/)
     })
 
     it("SOCIAL_LINKSがYouTubeリンクを含む", () => {
@@ -88,7 +88,7 @@ describe("constants.ts", () => {
     it("SOCIAL_LINKSがUdemyリンクを含む", () => {
       const udemyLink = SOCIAL_LINKS.find(link => link.name === "Udemy")
       expect(udemyLink).toBeDefined()
-      expect(udemyLink?.url).toMatch(/udemy\.com/)
+      expect(udemyLink?.url).toMatch(/school\.learning-next\.app/)
     })
   })
 

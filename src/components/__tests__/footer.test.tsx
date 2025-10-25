@@ -101,12 +101,12 @@ describe("Footer コンポーネント", () => {
       })
     })
 
-    it("Twitterリンクが表示される", () => {
+    it("Xリンクが表示される", () => {
       render(<Footer />)
-      const twitterLink = screen.getByRole("link", {
-        name: /Twitter/i,
+      const xLink = screen.getByRole("link", {
+        name: /Visit us on X/i,
       })
-      expect(twitterLink).toBeInTheDocument()
+      expect(xLink).toBeInTheDocument()
     })
 
     it("YouTubeリンクが表示される", () => {

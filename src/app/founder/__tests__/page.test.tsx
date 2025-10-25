@@ -18,8 +18,14 @@ jest.mock("next/image", () => ({
     sizes?: string
     priority?: boolean
   }) => {
-    // eslint-disable-next-line @next/next/no-img-element
-    return <img {...props} />
+    const { priority, ...rest } = props
+    return (
+      <img
+        alt={props.alt}
+        {...rest}
+        data-priority={priority ? "true" : undefined}
+      />
+    )
   },
 }))
 
@@ -54,7 +60,7 @@ describe("運営者プロフィールページ（/founder）", () => {
     it("プロフィール画像が優先読み込みされる", () => {
       render(<FounderPage />)
       const image = screen.getByAltText(/とまだ（Tomada）のプロフィール画像/i)
-      expect(image).toHaveAttribute("priority")
+      expect(image).toHaveAttribute("data-priority", "true")
     })
   })
 
