@@ -45,33 +45,15 @@ export function CourseDetailHero({
               {subtitle}
             </p>
 
-            {/* 技術アイコン */}
+            {/* 技術バッジ */}
             <div className="flex flex-wrap items-center gap-3">
               {topics.map(topic => {
                 const info = TOPIC_INFO[topic]
                 return (
                   <div
                     key={topic}
-                    className="flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-lg transition-transform duration-200 hover:scale-105 hover:shadow-xl"
+                    className="rounded-full bg-white px-4 py-2 shadow-lg transition-transform duration-200 hover:scale-105 hover:shadow-xl"
                   >
-                    {info.isLocal ? (
-                      <Image
-                        src={info.icon}
-                        alt={info.name}
-                        width={20}
-                        height={20}
-                        className="object-contain"
-                      />
-                    ) : (
-                      <Image
-                        src={info.icon}
-                        alt={info.name}
-                        width={20}
-                        height={20}
-                        className="object-contain"
-                        unoptimized
-                      />
-                    )}
                     <span className="text-sm font-medium text-zinc-900">
                       {info.name}
                     </span>
