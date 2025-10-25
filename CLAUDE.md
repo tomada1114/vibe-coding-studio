@@ -22,14 +22,13 @@ npm run start
 # コードの品質チェック
 npm run lint                # ESLint検査
 npm run type-check         # TypeScript型チェック
-npm run pre-commit-check   # コミット前の総合チェック
+npm run format             # Prettierでコード整形
+npm run format:check       # 整形チェックのみ
+npm run check:all          # lint + format + type-check + test の総合チェック
 
 # テスト関連
 npm run test              # Jest単体テスト実行
-npm run test:watch       # テストのウォッチモード
-
-# 環境設定
-npm run validate:env     # 環境変数の検証
+npm run test:coverage     # カバレッジ付きテスト実行
 ```
 
 ## アーキテクチャ概要
@@ -189,19 +188,22 @@ npm run check:all
 
 # または個別実行
 npm run lint        # ESLint検査
+npm run format      # コード整形
 npm run type-check  # TypeScript型チェック
+npm run test        # テスト実行
 
 # オプションだが推奨（時間に余裕がある場合）
-npm run build      # 本番ビルドが動作することを確認
-npm run test       # テスト実行
+npm run build       # 本番ビルドが動作することを確認
 ```
 
 **📋 コミット前チェックスクリプトの詳細**:
 
 - `npm run check:all` は以下を自動実行：
   1. ESLint検査（コードスタイルと品質）
-  2. TypeScript型チェック（型安全性）
-  3. すべてのチェックが合格することを確認
+  2. Prettierコード整形
+  3. TypeScript型チェック（型安全性）
+  4. テスト実行
+  5. すべてのチェックが合格することを確認
 
 **頻繁なコミット**:
 
@@ -278,8 +280,6 @@ npm run test       # テスト実行
    - プロパティと使用方法をドキュメント化
 
 2. **パフォーマンス**
-   - パフォーマンスログを定期的に確認
-   - バンドルサイズを管理下に保つ
    - 重いコンポーネントには動的インポートを使用
    - next/imageで画像を最適化
 
@@ -287,28 +287,24 @@ npm run test       # テスト実行
    - 秘密情報やAPIキーを決してコミットしない
    - CSPヘッダーを厳密に保つ
    - すべてのユーザー入力を検証
-   - 依存関係の定期更新
 
 4. **テスト戦略**
    - ユーティリティとフック用の単体テスト
    - UIコンポーネント用のコンポーネントテスト
    - 重要な機能のテストカバレッジ確保
 
-## 推奨拡張機能
-
-VS Codeユーザー用：
-
-- ESLint
-- Prettier
-- TypeScript and JavaScript Language Features
-- Tailwind CSS IntelliSense
-- Jest Runner
-
 ## 利用可能なMCP
 
 当リポジトリでは以下のMCPを使用可能な場合がありますので、開発の上では積極的に活用してください。
 
 - Context7
+- Chrome DevTools - UIの動作確認とテストに活用可能
+  - ページのスクリーンショット・スナップショット取得
+  - ブラウザスナップショットでの要素検査
+  - フォーム操作（入力、クリック、ドラッグ）
+  - コンソール・ネットワークの確認
+  - パフォーマンス計測・トレース
+  - ネットワーク・CPU・メモリエミュレーション
 
 ## アクティブな仕様（Active Specifications）
 
@@ -319,28 +315,17 @@ Vibe Coding StudioのDiscordコミュニティへの誘導を目的としたラ�
 - **ステータス**: initialized
 - **作成日**: 2025-10-20
 
-## 今後の開発
+## 品質基準
 
-このテンプレートを拡張する際は：
+1. **テストカバレッジ**
+   - コアロジックとユーティリティのテストカバレッジを維持
+   - 新機能追加時はテストも併せて追加
 
-1. **品質基準の維持**
-   - テストカバレッジを80%以上に保つ
-   - すべての新機能をドキュメント化
-   - 既存のパターンと規約に従う
-
-2. **パフォーマンス予算**
-   - 初期バンドル < 500KB
-   - LCP < 2.5秒
-   - CLS < 0.1
-   - FID < 100ミリ秒
-
-3. **アクセシビリティ要件**
-   - 最低限WCAG 2.1 AA準拠
+2. **アクセシビリティ**
+   - WCAG 2.1 AA準拠を維持
    - キーボードナビゲーションサポート
    - スクリーンリーダー対応
-   - カラーコントラスト比
 
-4. **ドキュメント更新**
+3. **ドキュメント**
    - 機能追加時に関連ドキュメントを更新
-   - APIリファレンスを最新に保つ
-   - 新しいコンポーネントの例を追加
+   - 新しいコンポーネントの使用例を追加

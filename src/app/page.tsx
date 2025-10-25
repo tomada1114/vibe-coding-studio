@@ -6,12 +6,13 @@ import { Gradient } from "@/components/gradient"
 import { Navbar } from "@/components/navbar"
 import { Heading, Subheading } from "@/components/text"
 import {
+  BookOpenIcon,
   ChatBubbleLeftRightIcon,
   CodeBracketIcon,
   LightBulbIcon,
-  UserGroupIcon,
   QuestionMarkCircleIcon,
-  BookOpenIcon,
+  TicketIcon,
+  UserGroupIcon,
 } from "@heroicons/react/24/outline"
 import type { Metadata } from "next"
 import Image from "next/image"
@@ -140,6 +141,41 @@ function CommunityOverviewSection() {
 }
 
 /**
+ * クーポンセクション
+ * - Udemyクーポンの案内
+ * - 最大90% OFFの訴求
+ */
+function CouponSection() {
+  return (
+    <div className="relative py-32">
+      <Gradient className="absolute inset-2 rounded-4xl ring-1 ring-black/5 ring-inset" />
+      <Container className="relative">
+        <div className="text-center">
+          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-purple-500 to-pink-500">
+            <TicketIcon className="h-10 w-10 text-white" />
+          </div>
+          <Subheading className="mt-8">Udemy Coupons</Subheading>
+          <Heading as="h2" className="mt-2">
+            講座を特別価格で受講
+          </Heading>
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-600">
+            運営者である「とまだ」のUdemy講座を
+            <br />
+            <span className="font-semibold text-gray-950">最大90% OFF</span>
+            で受講できるクーポンを配布中。
+            <br />
+            AI駆動開発を実践的に学べる講座を特別価格でお届けします。
+          </p>
+          <div className="mt-10 flex justify-center">
+            <Button href="/coupons">クーポンを確認する</Button>
+          </div>
+        </div>
+      </Container>
+    </div>
+  )
+}
+
+/**
  * 工事中セクション
  * - 準備中コンテンツの告知
  * - レスポンシブグリッド（スマホ: 1カラム、タブレット: 2カラム、PC: 3カラム）
@@ -160,7 +196,7 @@ function WorkInProgressSection() {
       icon: BookOpenIcon,
       title: "コンテンツ一覧",
       description: "AI駆動開発に役立つ動画や記事を探しやすく",
-    }
+    },
   ]
 
   return (
@@ -250,7 +286,8 @@ function ProfileSection() {
 /**
  * トップページ
  * - ファーストビュー
- * - コミュニティ概要セクション（新規追加）
+ * - コミュニティ概要セクション
+ * - クーポンセクション（新規追加）
  * - 工事中セクション
  * - プロフィール紹介
  * - AsyncErrorBoundaryによるエラーハンドリング
@@ -264,6 +301,9 @@ export default function Home() {
       <main>
         <AsyncErrorBoundary>
           <CommunityOverviewSection />
+        </AsyncErrorBoundary>
+        <AsyncErrorBoundary>
+          <CouponSection />
         </AsyncErrorBoundary>
         <AsyncErrorBoundary>
           <WorkInProgressSection />

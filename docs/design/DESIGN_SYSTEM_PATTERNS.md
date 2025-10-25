@@ -174,6 +174,128 @@ Before Button:   32px (2rem)
 After Section:   80px (5rem)
 ```
 
+### CTA Section Patterns
+
+Call-to-action sections are critical conversion points. Use these patterns for maximum impact.
+
+#### Promotional CTA with Icon
+
+**Structure:**
+```
+[Gradient Icon]
+[Subheading]
+[Main Heading]
+[Description with highlighted text]
+[CTA Button]
+```
+
+**Implementation:**
+```tsx
+<div className="relative py-32">
+  <Gradient className="absolute inset-2 rounded-4xl ring-1 ring-black/5 ring-inset" />
+  <Container className="relative">
+    <div className="text-center">
+      {/* Icon with gradient background for visual interest */}
+      <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-purple-500 to-pink-500">
+        <Icon className="h-10 w-10 text-white" />
+      </div>
+
+      {/* Subheading for context */}
+      <Subheading className="mt-8">Category or Feature</Subheading>
+
+      {/* Main heading */}
+      <Heading as="h2" className="mt-2">
+        Primary Benefit
+      </Heading>
+
+      {/* Description with emphasis */}
+      <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-600">
+        Descriptive text with
+        <br />
+        <span className="font-semibold text-gray-950">highlighted value</span>
+        more context text.
+      </p>
+
+      {/* CTA Button */}
+      <div className="mt-10 flex justify-center">
+        <Button href="/destination">Action Text</Button>
+      </div>
+    </div>
+  </Container>
+</div>
+```
+
+**Key Design Decisions:**
+- Icon size: 20x20 (h-20 w-20) with rounded-3xl for softer feel
+- Icon background: Colorful gradient (purple-pink) to draw attention
+- Text hierarchy: Subheading (context) → Heading (benefit) → Description (detail)
+- Emphasized text: Black (text-gray-950) for maximum contrast on light background
+- Spacing: 32px vertical padding (py-32) for generous breathing room
+- Button placement: Centered, 10 units (40px) below description
+
+**When to Use:**
+- Promotional sections (discounts, special offers)
+- Feature highlights with strong call-to-action
+- Newsletter signups with incentive
+- Limited-time offers
+
+**Variations:**
+
+1. **Dual CTA**: For primary and secondary actions
+```tsx
+<div className="mt-10 flex justify-center gap-4">
+  <Button href="/primary">Primary Action</Button>
+  <Button variant="secondary" href="/secondary">Secondary Action</Button>
+</div>
+```
+
+2. **With Urgency**: Add countdown or limited availability
+```tsx
+<p className="mt-4 text-sm text-gray-500">
+  Limited time offer · Expires in 30 days
+</p>
+```
+
+3. **With Social Proof**: Add trust indicators
+```tsx
+<p className="mt-6 text-sm text-gray-500">
+  Join 10,000+ developers already learning
+</p>
+```
+
+#### Navigation Enhancement Pattern
+
+When adding new links to site navigation, ensure consistency across all locations:
+
+**Checklist:**
+- [ ] Add to Navbar component (`src/components/navbar.tsx`)
+- [ ] Add to Footer sitemap (`src/components/footer.tsx`)
+- [ ] Add prominent CTA section to homepage (`src/app/page.tsx`)
+- [ ] Ensure consistent label text across all locations
+- [ ] Maintain logical order (typically: Home → Community → New Link → About)
+
+**Example:** Adding "Coupons" link
+```tsx
+// Navbar
+const navLinks = [
+  { href: "/", label: "ホーム" },
+  { href: "/community", label: "コミュニティ" },
+  { href: "/coupons", label: "クーポン" },  // Added here
+  { href: "/founder", label: "運営者" },
+]
+
+// Footer
+<SitemapLinks>
+  <SitemapLink href="/">ホーム</SitemapLink>
+  <SitemapLink href="/community">コミュニティ</SitemapLink>
+  <SitemapLink href="/coupons">クーポン</SitemapLink>  {/* Added here */}
+  <SitemapLink href="/founder">運営者</SitemapLink>
+</SitemapLinks>
+
+// Homepage - Add dedicated section
+<CouponSection />  {/* New section showcasing the feature */}
+```
+
 ---
 
 ## 🎬 Motion Patterns
@@ -481,6 +603,71 @@ background: linear-gradient(
   rgba(0, 0, 0, 0.5) 50%,
   rgba(0, 0, 0, 0.8) 100%
 );
+```
+
+**Colorful Gradient for CTA (Use Sparingly)**
+
+```css
+/* Purple-Pink gradient - for promotional sections */
+background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+
+/* Blue gradient - for tech-focused sections */
+background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+
+/* Warm gradient - for friendly/welcoming sections */
+background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+```
+
+**⚠️ Text Color on Colorful Gradients**
+
+When using colorful gradients, ALWAYS use monochrome text (black or white):
+
+```tsx
+// ❌ Bad: Same color family as background
+<div className="bg-gradient-to-br from-purple-500 to-pink-500">
+  <span className="text-purple-600">Text</span> {/* Poor contrast */}
+</div>
+
+// ✅ Good: Monochrome text
+<div className="bg-gradient-to-br from-purple-500 to-pink-500">
+  <span className="text-gray-950">Text</span> {/* High contrast */}
+</div>
+
+// ✅ Also good: White text (if gradient is dark enough)
+<div className="bg-gradient-to-br from-purple-700 to-pink-700">
+  <span className="text-white">Text</span> {/* High contrast */}
+</div>
+```
+
+**Real-world example**: Coupon CTA Section (src/app/page.tsx)
+
+```tsx
+function CouponSection() {
+  return (
+    <div className="relative py-32">
+      <Gradient className="absolute inset-2 rounded-4xl ring-1 ring-black/5 ring-inset" />
+      <Container className="relative">
+        <div className="text-center">
+          {/* Icon with gradient background */}
+          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-purple-500 to-pink-500">
+            <TicketIcon className="h-10 w-10 text-white" />
+          </div>
+          <Subheading className="mt-8">Udemy Coupons</Subheading>
+          <Heading as="h2" className="mt-2">
+            講座を特別価格で受講
+          </Heading>
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-600">
+            運営者である「とまだ」のUdemy講座を
+            <br />
+            {/* Use black text on gradient background for readability */}
+            <span className="font-semibold text-gray-950">最大90% OFF</span>
+            で受講できるクーポンを配布中。
+          </p>
+        </div>
+      </Container>
+    </div>
+  )
+}
 ```
 
 ### Blur Effects

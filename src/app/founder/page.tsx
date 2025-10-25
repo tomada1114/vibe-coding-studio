@@ -6,12 +6,12 @@ import { Navbar } from "@/components/navbar"
 import { Heading, Subheading } from "@/components/text"
 import {
   AcademicCapIcon,
+  BookOpenIcon,
   BriefcaseIcon,
   CodeBracketIcon,
   GlobeAltIcon,
   MicrophoneIcon,
   RocketLaunchIcon,
-  BookOpenIcon,
 } from "@heroicons/react/24/outline"
 import type { Metadata } from "next"
 import Image from "next/image"

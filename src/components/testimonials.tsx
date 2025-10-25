@@ -43,15 +43,13 @@ const defaultTestimonials: Testimonial[] = [
     img: "/testimonials/community-member-2.jpg",
     name: "コミュニティメンバー",
     title: "エンジニア",
-    quote:
-      "コミュニティメンバーと気軽に質問し合える環境が素晴らしいです。",
+    quote: "コミュニティメンバーと気軽に質問し合える環境が素晴らしいです。",
   },
   {
     img: "/testimonials/community-member-3.jpg",
     name: "コミュニティメンバー",
     title: "開発者",
-    quote:
-      "同じ目標を持つ仲間と繋がれて、モチベーションが維持できています。",
+    quote: "同じ目標を持つ仲間と繋がれて、モチベーションが維持できています。",
   },
 ]
 
