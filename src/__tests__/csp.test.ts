@@ -69,6 +69,15 @@ describe("CSP Utilities", () => {
       expect(config.directives["connect-src"]).toContain("wss://*.sanity.io")
     })
 
+    it("includes YouTube in frame-src for video embeds", () => {
+      const config = getCSPConfig()
+
+      expect(config.directives["frame-src"]).toContain(
+        "https://www.youtube.com"
+      )
+      expect(config.directives["frame-src"]).toContain("'self'")
+    })
+
     it("excludes external font sources for self-hosted fonts", () => {
       const config = getCSPConfig()
 
