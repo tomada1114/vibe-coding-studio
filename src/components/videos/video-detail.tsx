@@ -1,10 +1,9 @@
 import type { CustomSection, VideoMetadata } from "@/types/video"
-import { YouTubeEmbed } from "./youtube-embed"
 
 /**
  * 動画詳細表示コンポーネント
  *
- * 概要欄の各セクションを整形して表示します。
+ * YouTube概要欄にコピペするためのプレーンテキスト形式で表示します。
  */
 
 interface VideoDetailProps {
@@ -13,108 +12,56 @@ interface VideoDetailProps {
 }
 
 /**
- * セクション区切り線コンポーネント
+ * セクション区切り線（プレーンテキスト用）
  */
-function SectionDivider() {
-  return <div className="my-8 border-t border-zinc-200 dark:border-zinc-800" />
+const SECTION_DIVIDER = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+/**
+ * カスタムセクションをプレーンテキストに変換
+ */
+function formatCustomSection(section: CustomSection): string {
+  let result = `${section.title}\n\n`
+
+  if (section.type === "text") {
+    result += `${section.content}\n`
+  }
+
+  if (section.type === "list" && section.items) {
+    section.items.forEach(item => {
+      result += `${item}\n`
+    })
+  }
+
+  if (section.type === "links" && section.links) {
+    section.links.forEach(link => {
+      result += `${link.label}: ${link.url}\n`
+    })
+  }
+
+  if (section.type === "mixed") {
+    if (section.content) {
+      result += `${section.content}\n\n`
+    }
+    if (section.items && section.items.length > 0) {
+      section.items.forEach(item => {
+        result += `${item}\n`
+      })
+      result += "\n"
+    }
+    if (section.links && section.links.length > 0) {
+      section.links.forEach(link => {
+        result += `${link.label}: ${link.url}\n`
+      })
+    }
+  }
+
+  return result
 }
 
 /**
- * セクションタイトルコンポーネント
+ * 動画メタデータをプレーンテキストに変換
  */
-function SectionTitle({ children }: { children: React.ReactNode }) {
-  return (
-    <h2 className="mb-4 text-xl font-semibold text-zinc-900 dark:text-white">
-      {children}
-    </h2>
-  )
-}
-
-/**
- * リンクコンポーネント
- */
-function ExternalLink({
-  href,
-  children,
-}: {
-  href: string
-  children: React.ReactNode
-}) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-blue-600 underline hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
-    >
-      {children}
-    </a>
-  )
-}
-
-/**
- * カスタムセクション表示コンポーネント
- */
-function CustomSectionDisplay({ section }: { section: CustomSection }) {
-  return (
-    <div>
-      <SectionTitle>{section.title}</SectionTitle>
-
-      {section.type === "text" && (
-        <p className="text-zinc-700 dark:text-zinc-300">{section.content}</p>
-      )}
-
-      {section.type === "list" && (
-        <ul className="list-disc space-y-2 pl-6 text-zinc-700 dark:text-zinc-300">
-          {section.items.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </ul>
-      )}
-
-      {section.type === "links" && (
-        <ul className="space-y-2">
-          {section.links.map((link, index) => (
-            <li key={index}>
-              <ExternalLink href={link.url}>{link.label}</ExternalLink>
-            </li>
-          ))}
-        </ul>
-      )}
-
-      {section.type === "mixed" && (
-        <div className="space-y-4">
-          {section.content && (
-            <p className="text-zinc-700 dark:text-zinc-300">
-              {section.content}
-            </p>
-          )}
-          {section.items && section.items.length > 0 && (
-            <ul className="list-disc space-y-2 pl-6 text-zinc-700 dark:text-zinc-300">
-              {section.items.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ul>
-          )}
-          {section.links && section.links.length > 0 && (
-            <ul className="space-y-2">
-              {section.links.map((link, index) => (
-                <li key={index}>
-                  <ExternalLink href={link.url}>{link.label}</ExternalLink>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      )}
-    </div>
-  )
-}
-
-/**
- * 動画詳細コンポーネント
- */
-export function VideoDetail({ video }: VideoDetailProps) {
+function formatVideoAsPlainText(video: VideoMetadata): string {
   const publishedDate = new Date(video.publishedAt).toLocaleDateString(
     "ja-JP",
     {
@@ -124,186 +71,113 @@ export function VideoDetail({ video }: VideoDetailProps) {
     }
   )
 
+  let text = ""
+
+  // タイトルと公開日
+  text += `${video.title}\n`
+  text += `公開日: ${publishedDate}\n\n`
+  text += `${SECTION_DIVIDER}\n\n`
+
+  // 冒頭セクション
+  video.opening.lines.forEach(line => {
+    text += `${line}\n`
+  })
+  text += `\n${SECTION_DIVIDER}\n\n`
+
+  // 学べる内容セクション
+  text += `${video.learningPoints.title}\n\n`
+  video.learningPoints.items.forEach(item => {
+    text += `${item}\n`
+  })
+  text += "\n"
+
+  // カスタムセクション
+  if (video.customSections && video.customSections.length > 0) {
+    video.customSections.forEach(section => {
+      text += `${SECTION_DIVIDER}\n\n`
+      text += formatCustomSection(section)
+      text += "\n"
+    })
+  }
+
+  // 関連動画セクション
+  if (video.relatedVideos) {
+    text += `${SECTION_DIVIDER}\n\n`
+    text += `${video.relatedVideos.title}\n\n`
+    video.relatedVideos.videos.forEach(relatedVideo => {
+      const emoji = relatedVideo.emoji ? `${relatedVideo.emoji} ` : ""
+      text += `${emoji}${relatedVideo.title}: ${relatedVideo.url}\n`
+    })
+    text += "\n"
+  }
+
+  // Udemy講座セクション
+  if (video.udemyCourses) {
+    text += `${SECTION_DIVIDER}\n\n`
+    text += `${video.udemyCourses.title}\n\n`
+    if (video.udemyCourses.description) {
+      text += `${video.udemyCourses.description}\n\n`
+    }
+    if (video.udemyCourses.courses && video.udemyCourses.courses.length > 0) {
+      video.udemyCourses.courses.forEach(course => {
+        text += `${course}\n`
+      })
+      text += "\n"
+    }
+    text += `${video.udemyCourses.cta.text}: ${video.udemyCourses.cta.url}\n\n`
+  }
+
+  // SNS・コミュニティセクション
+  text += `${SECTION_DIVIDER}\n\n`
+  text += `${video.social.title}\n\n`
+  video.social.accounts.forEach(account => {
+    const label = account.label || account.platform
+    text += `${account.emoji} ${label}: ${account.url}\n`
+  })
+  text += "\n"
+
+  // Discordコミュニティセクション
+  if (video.discordCommunity) {
+    text += `${SECTION_DIVIDER}\n\n`
+    text += `${video.discordCommunity.title}\n\n`
+    text += `${video.discordCommunity.description}\n\n`
+    text += `Discordに参加する: ${video.discordCommunity.url}\n\n`
+  }
+
+  // タイムスタンプセクション
+  text += `${SECTION_DIVIDER}\n\n`
+  text += `${video.timestamps.title}\n\n`
+  video.timestamps.items.forEach(timestamp => {
+    text += `${timestamp.time} - ${timestamp.label}\n`
+  })
+  text += "\n"
+
+  // タグ
+  text += `${SECTION_DIVIDER}\n\n`
+  text += video.tags.join(" ") + "\n\n"
+
+  // エンゲージメント促進セクション
+  text += `${SECTION_DIVIDER}\n\n`
+  if (video.engagement.title) {
+    text += `${video.engagement.title}\n\n`
+  }
+  text += `${video.engagement.message}\n\n`
+  text += `${video.engagement.callToAction}\n`
+
+  return text
+}
+
+/**
+ * 動画詳細コンポーネント（プレーンテキスト表示）
+ */
+export function VideoDetail({ video }: VideoDetailProps) {
+  const plainText = formatVideoAsPlainText(video)
+
   return (
     <div className="mx-auto max-w-4xl">
-      {/* 動画タイトルと公開日 */}
-      <div className="mb-8">
-        <h1 className="mb-2 text-3xl font-bold text-zinc-900 dark:text-white">
-          {video.title}
-        </h1>
-        <p className="text-sm text-zinc-600 dark:text-zinc-400">
-          公開日: {publishedDate}
-        </p>
-      </div>
-
-      {/* YouTube埋め込みプレーヤー */}
-      <div className="mb-8">
-        <YouTubeEmbed videoUrl={video.videoUrl} title={video.title} />
-      </div>
-
-      <SectionDivider />
-
-      {/* 冒頭セクション */}
-      <div className="mb-8">
-        {video.opening.lines.map((line, index) => (
-          <p key={index} className="mb-2 text-zinc-700 dark:text-zinc-300">
-            {line}
-          </p>
-        ))}
-      </div>
-
-      <SectionDivider />
-
-      {/* 学べる内容セクション */}
-      <div className="mb-8">
-        <SectionTitle>{video.learningPoints.title}</SectionTitle>
-        <ul className="space-y-2 text-zinc-700 dark:text-zinc-300">
-          {video.learningPoints.items.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </ul>
-      </div>
-
-      {/* カスタムセクション */}
-      {video.customSections && video.customSections.length > 0 && (
-        <>
-          {video.customSections.map((section, index) => (
-            <div key={index}>
-              <SectionDivider />
-              <div className="mb-8">
-                <CustomSectionDisplay section={section} />
-              </div>
-            </div>
-          ))}
-        </>
-      )}
-
-      {/* 関連動画セクション */}
-      {video.relatedVideos && (
-        <>
-          <SectionDivider />
-          <div className="mb-8">
-            <SectionTitle>{video.relatedVideos.title}</SectionTitle>
-            <ul className="space-y-2">
-              {video.relatedVideos.videos.map((relatedVideo, index) => (
-                <li key={index}>
-                  {relatedVideo.emoji && (
-                    <span className="mr-2">{relatedVideo.emoji}</span>
-                  )}
-                  <ExternalLink href={relatedVideo.url}>
-                    {relatedVideo.title}
-                  </ExternalLink>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </>
-      )}
-
-      {/* Udemy講座セクション */}
-      {video.udemyCourses && (
-        <>
-          <SectionDivider />
-          <div className="mb-8">
-            <SectionTitle>{video.udemyCourses.title}</SectionTitle>
-            {video.udemyCourses.description && (
-              <p className="mb-4 text-zinc-700 dark:text-zinc-300">
-                {video.udemyCourses.description}
-              </p>
-            )}
-            {video.udemyCourses.courses &&
-              video.udemyCourses.courses.length > 0 && (
-                <ul className="mb-4 list-disc space-y-2 pl-6 text-zinc-700 dark:text-zinc-300">
-                  {video.udemyCourses.courses.map((course, index) => (
-                    <li key={index}>{course}</li>
-                  ))}
-                </ul>
-              )}
-            <div className="mt-4">
-              <ExternalLink href={video.udemyCourses.cta.url}>
-                {video.udemyCourses.cta.text}
-              </ExternalLink>
-            </div>
-          </div>
-        </>
-      )}
-
-      {/* SNS・コミュニティセクション */}
-      <SectionDivider />
-      <div className="mb-8">
-        <SectionTitle>{video.social.title}</SectionTitle>
-        <ul className="space-y-2">
-          {video.social.accounts.map((account, index) => (
-            <li key={index}>
-              <span className="mr-2">{account.emoji}</span>
-              <ExternalLink href={account.url}>
-                {account.label || account.platform}
-              </ExternalLink>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Discordコミュニティセクション */}
-      {video.discordCommunity && (
-        <>
-          <SectionDivider />
-          <div className="mb-8">
-            <SectionTitle>{video.discordCommunity.title}</SectionTitle>
-            <p className="mb-4 text-zinc-700 dark:text-zinc-300">
-              {video.discordCommunity.description}
-            </p>
-            <ExternalLink href={video.discordCommunity.url}>
-              Discordに参加する
-            </ExternalLink>
-          </div>
-        </>
-      )}
-
-      {/* タイムスタンプセクション */}
-      <SectionDivider />
-      <div className="mb-8">
-        <SectionTitle>{video.timestamps.title}</SectionTitle>
-        <ul className="space-y-2 text-zinc-700 dark:text-zinc-300">
-          {video.timestamps.items.map((timestamp, index) => (
-            <li key={index}>
-              <span className="font-mono text-sm font-semibold">
-                {timestamp.time}
-              </span>{" "}
-              - {timestamp.label}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* タグ */}
-      <SectionDivider />
-      <div className="mb-8">
-        <div className="flex flex-wrap gap-2">
-          {video.tags.map((tag, index) => (
-            <span
-              key={index}
-              className="rounded-full bg-zinc-100 px-3 py-1 text-sm text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* エンゲージメント促進セクション */}
-      <SectionDivider />
-      <div className="mb-8">
-        {video.engagement.title && (
-          <SectionTitle>{video.engagement.title}</SectionTitle>
-        )}
-        <p className="mb-4 whitespace-pre-line text-zinc-700 dark:text-zinc-300">
-          {video.engagement.message}
-        </p>
-        <p className="text-zinc-700 dark:text-zinc-300">
-          {video.engagement.callToAction}
-        </p>
-      </div>
+      <pre className="whitespace-pre-wrap break-words font-sans text-sm text-zinc-900 dark:text-zinc-100">
+        {plainText}
+      </pre>
     </div>
   )
 }
