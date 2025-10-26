@@ -1,7 +1,7 @@
-import { render, screen } from "@testing-library/react"
 import { describe, expect, test } from "@jest/globals"
-import VideoDetailPage from "../[id]/page"
+import { render, screen } from "@testing-library/react"
 import { notFound } from "next/navigation"
+import VideoDetailPage from "../[id]/page"
 
 // next/navigationのnotFound関数をモック
 jest.mock("next/navigation", () => ({
@@ -19,99 +19,91 @@ describe("動画詳細ページ", () => {
 
     const { container } = render(page)
 
-    // 動画タイトルが表示される
-    expect(
-      screen.getByText("Next.js App Routerで学ぶモダンWeb開発入門")
-    ).toBeInTheDocument()
+    // 動画タイトルがプレーンテキストに含まれる
+    const text = container.textContent || ""
+    expect(text).toContain("Next.js App Routerで学ぶモダンWeb開発入門")
 
     // Containerコンポーネントが使用されている
     const containerElement = container.querySelector(".mx-auto")
     expect(containerElement).toBeInTheDocument()
   })
 
-  test("YouTube埋め込みプレーヤーが表示される", async () => {
+  test("プレーンテキスト形式で表示される", async () => {
     const params = Promise.resolve({ id: "video-001" })
     const page = await VideoDetailPage({ params })
 
     const { container } = render(page)
 
-    // iframeが存在する
-    const iframe = container.querySelector("iframe")
-    expect(iframe).toBeInTheDocument()
-
-    // YouTube Embed URLが設定されている
-    expect(iframe?.getAttribute("src")).toContain("youtube.com/embed/")
+    // preタグが使用されている
+    const preElement = container.querySelector("pre")
+    expect(preElement).toBeInTheDocument()
+    expect(preElement).toHaveClass("whitespace-pre-wrap")
   })
 
-  test("冒頭セクションが表示される", async () => {
+  test("冒頭セクションがプレーンテキストに含まれる", async () => {
     const params = Promise.resolve({ id: "video-001" })
     const page = await VideoDetailPage({ params })
 
-    render(page)
+    const { container } = render(page)
+    const text = container.textContent || ""
 
-    // 冒頭セクションの内容が表示される
-    expect(
-      screen.getByText(
-        /この動画では、Next.js 15のApp Routerについて基礎から学びます/
-      )
-    ).toBeInTheDocument()
-  })
-
-  test("学べる内容セクションが表示される", async () => {
-    const params = Promise.resolve({ id: "video-001" })
-    const page = await VideoDetailPage({ params })
-
-    render(page)
-
-    // 学べる内容セクションのタイトルが表示される
-    expect(screen.getByText("💡 この動画で学べること")).toBeInTheDocument()
-
-    // 学べる内容の項目が表示される
-    expect(screen.getByText(/✅ App Routerの基本概念/)).toBeInTheDocument()
-  })
-
-  test("タイムスタンプセクションが表示される", async () => {
-    const params = Promise.resolve({ id: "video-001" })
-    const page = await VideoDetailPage({ params })
-
-    render(page)
-
-    // タイムスタンプセクションのタイトルが表示される
-    expect(screen.getByText("⏰ タイムスタンプ")).toBeInTheDocument()
-
-    // タイムスタンプの時間とラベルが表示される
-    // getByTextで正規表現を使用して検索
-    expect(screen.getByText(/00:00/)).toBeInTheDocument()
-    expect(screen.getByText(/イントロダクション/)).toBeInTheDocument()
-  })
-
-  test("SNS・コミュニティセクションが表示される", async () => {
-    const params = Promise.resolve({ id: "video-001" })
-    const page = await VideoDetailPage({ params })
-
-    render(page)
-
-    // SNSセクションのタイトルが表示される
-    expect(screen.getByText("🔗 SNS・コミュニティ")).toBeInTheDocument()
-
-    // SNSアカウントのリンクが表示される
-    const links = screen.getAllByRole("link")
-    const xLink = links.find(link =>
-      link.getAttribute("href")?.includes("x.com")
+    // 冒頭セクションの内容がプレーンテキストに含まれる
+    expect(text).toContain(
+      "この動画では、Next.js 15のApp Routerについて基礎から学びます"
     )
-    expect(xLink).toBeInTheDocument()
   })
 
-  test("エンゲージメント促進セクションが表示される", async () => {
+  test("学べる内容セクションがプレーンテキストに含まれる", async () => {
     const params = Promise.resolve({ id: "video-001" })
     const page = await VideoDetailPage({ params })
 
-    render(page)
+    const { container } = render(page)
+    const text = container.textContent || ""
 
-    // エンゲージメント促進セクションの内容が表示される
-    expect(
-      screen.getByText(/実際に試してみた感想や、つまずいた点があれば/)
-    ).toBeInTheDocument()
+    // 学べる内容セクションのタイトルがプレーンテキストに含まれる
+    expect(text).toContain("💡 この動画で学べること")
+
+    // 学べる内容の項目がプレーンテキストに含まれる
+    expect(text).toContain("✅ App Routerの基本概念")
+  })
+
+  test("タイムスタンプセクションがプレーンテキストに含まれる", async () => {
+    const params = Promise.resolve({ id: "video-001" })
+    const page = await VideoDetailPage({ params })
+
+    const { container } = render(page)
+    const text = container.textContent || ""
+
+    // タイムスタンプセクションのタイトルがプレーンテキストに含まれる
+    expect(text).toContain("⏰ タイムスタンプ")
+
+    // タイムスタンプの時間とラベルがプレーンテキストに含まれる
+    expect(text).toContain("00:00 - イントロダクション")
+  })
+
+  test("SNS・コミュニティセクションが「ラベル: URL」形式で表示される", async () => {
+    const params = Promise.resolve({ id: "video-001" })
+    const page = await VideoDetailPage({ params })
+
+    const { container } = render(page)
+    const text = container.textContent || ""
+
+    // SNSセクションのタイトルがプレーンテキストに含まれる
+    expect(text).toContain("🔗 SNS・コミュニティ")
+
+    // SNSアカウントが「ラベル: URL」形式でプレーンテキストに含まれる
+    expect(text).toContain("X(Twitter): https://x.com/muscle_coding")
+  })
+
+  test("エンゲージメント促進セクションがプレーンテキストに含まれる", async () => {
+    const params = Promise.resolve({ id: "video-001" })
+    const page = await VideoDetailPage({ params })
+
+    const { container } = render(page)
+    const text = container.textContent || ""
+
+    // エンゲージメント促進セクションの内容がプレーンテキストに含まれる
+    expect(text).toContain("実際に試してみた感想や、つまずいた点があれば")
   })
 
   test("存在しない動画IDでnotFound()が呼ばれる", async () => {
@@ -123,35 +115,66 @@ describe("動画詳細ページ", () => {
     expect(notFound).toHaveBeenCalled()
   })
 
-  test("関連動画セクションが存在する場合に表示される", async () => {
+  test("関連動画セクションが「タイトル: URL」形式で表示される", async () => {
     const params = Promise.resolve({ id: "video-001" })
     const page = await VideoDetailPage({ params })
 
-    render(page)
+    const { container } = render(page)
+    const text = container.textContent || ""
 
-    // 関連動画セクションのタイトルが表示される
-    expect(screen.getByText("📌 関連動画")).toBeInTheDocument()
+    // 関連動画セクションのタイトルがプレーンテキストに含まれる
+    expect(text).toContain("📌 関連動画")
   })
 
-  test("Udemy講座セクションが存在する場合に表示される", async () => {
+  test("Udemy講座セクションがプレーンテキストで表示される", async () => {
     const params = Promise.resolve({ id: "video-001" })
     const page = await VideoDetailPage({ params })
 
-    render(page)
+    const { container } = render(page)
+    const text = container.textContent || ""
 
-    // Udemy講座セクションのタイトルが表示される
-    expect(screen.getByText("🚀 体系的に学びたい方へ")).toBeInTheDocument()
+    // Udemy講座セクションのタイトルがプレーンテキストに含まれる
+    expect(text).toContain("🚀 体系的に学びたい方へ")
   })
 
-  test("カスタムセクションが存在する場合に表示される", async () => {
+  test("カスタムセクションがプレーンテキストで表示される", async () => {
+    const params = Promise.resolve({ id: "video-001" })
+    const page = await VideoDetailPage({ params })
+
+    const { container } = render(page)
+    const text = container.textContent || ""
+
+    // カスタムセクションのタイトルがプレーンテキストに含まれる(実際のデータに基づく)
+    expect(text).toContain("📝 この動画の前提知識")
+    expect(text).toContain("🔧 動画で使用する技術")
+    expect(text).toContain("🔗 参考リソース")
+  })
+
+  test("YouTube概要欄コピー用の説明文が表示される", async () => {
     const params = Promise.resolve({ id: "video-001" })
     const page = await VideoDetailPage({ params })
 
     render(page)
 
-    // カスタムセクションのタイトルが表示される(実際のデータに基づく)
-    expect(screen.getByText("📝 この動画の前提知識")).toBeInTheDocument()
-    expect(screen.getByText("🔧 動画で使用する技術")).toBeInTheDocument()
-    expect(screen.getByText("🔗 参考リソース")).toBeInTheDocument()
+    // YouTube概要欄コピー用の説明文が表示される
+    expect(
+      screen.getByText(
+        "この内容はYouTube概要欄へのコピー用プレーンテキストです"
+      )
+    ).toBeInTheDocument()
+  })
+
+  test("セクション区切り線が表示される", async () => {
+    const params = Promise.resolve({ id: "video-001" })
+    const page = await VideoDetailPage({ params })
+
+    const { container } = render(page)
+    const text = container.textContent || ""
+
+    // セクション区切り線が複数回表示される
+    const dividerCount = (
+      text.match(/━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━/g) || []
+    ).length
+    expect(dividerCount).toBeGreaterThan(5)
   })
 })

@@ -64,6 +64,6 @@ describe("VideoCard", () => {
     render(<VideoCard video={mockVideo} />)
 
     const link = screen.getByRole("link")
-    expect(link).toHaveClass("hover:shadow-lg")
+    expect(link).toHaveClass("hover:shadow-md")
   })
 })
