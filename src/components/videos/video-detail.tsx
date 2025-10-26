@@ -175,9 +175,14 @@ export function VideoDetail({ video }: VideoDetailProps) {
 
   return (
     <div className="mx-auto max-w-4xl">
-      <pre className="whitespace-pre-wrap break-words font-sans text-sm text-zinc-900 dark:text-zinc-100">
-        {plainText}
-      </pre>
+      <div className="rounded-lg border border-gray-200 bg-white p-8 shadow-sm">
+        <pre className="max-w-prose font-sans text-base leading-7 break-words whitespace-pre-wrap text-gray-950">
+          {plainText}
+        </pre>
+      </div>
+      <div className="mt-8 text-center text-sm text-gray-600">
+        <p>この内容はYouTube概要欄へのコピー用プレーンテキストです</p>
+      </div>
     </div>
   )
 }

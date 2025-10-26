@@ -28,14 +28,13 @@ export function VideoCard({ video }: VideoCardProps) {
   return (
     <Link
       href={`/videos/${video.id}`}
-      className="block rounded-lg border border-zinc-200 bg-white p-6 transition-all hover:border-zinc-300 hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700"
+      className="group block rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-all hover:shadow-md focus:ring-2 focus:ring-gray-950 focus:ring-offset-2 focus:outline-none"
+      aria-label={`${video.title}の詳細を見る`}
     >
-      <h2 className="mb-2 text-xl font-semibold text-zinc-900 dark:text-white">
+      <h2 className="mb-2 text-xl font-semibold text-gray-950 transition-colors group-hover:text-gray-700">
         {video.title}
       </h2>
-      <p className="text-sm text-zinc-600 dark:text-zinc-400">
-        公開日: {publishedDate}
-      </p>
+      <p className="text-sm text-gray-600">公開日: {publishedDate}</p>
     </Link>
   )
 }
