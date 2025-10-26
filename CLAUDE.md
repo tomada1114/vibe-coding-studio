@@ -315,6 +315,13 @@ Vibe Coding StudioのDiscordコミュニティへの誘導を目的としたラ�
 - **ステータス**: initialized
 - **作成日**: 2025-10-20
 
+### youtube-video-metadata
+YouTube動画のメタデータ(タイトル、概要欄等)をローカルJSONで管理し、一覧・詳細ページで閲覧可能にする機能。Gitベースのファイル管理を採用し、管理画面は不要。
+
+- **仕様パス**: `.kiro/specs/youtube-video-metadata/`
+- **ステータス**: initialized
+- **作成日**: 2025-10-25
+
 ## 品質基準
 
 1. **テストカバレッジ**
