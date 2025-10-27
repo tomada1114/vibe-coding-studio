@@ -93,6 +93,9 @@ export function getCSPConfig(nonce?: string): CSPConfig {
     ].filter(Boolean),
     "media-src": ["'self'", "https://cdn.sanity.io"],
     "object-src": ["'none'"],
+    // Note: frame-src includes YouTube and Vimeo for future video embedding.
+    // Currently, video metadata pages use plain text format without iframes,
+    // but these directives are kept for potential future use.
     "frame-src": [
       "'self'",
       "https://www.youtube.com",
