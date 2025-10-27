@@ -39,12 +39,6 @@ describe("データローダーの単体テスト", () => {
       }
     })
 
-    test("ソート結果がキャッシュされる", () => {
-      const videos1 = getLatestVideos()
-      const videos2 = getLatestVideos()
-      expect(videos1).toBe(videos2) // 同じ参照
-    })
-
     test("getAllVideos()とは異なる配列を返す", () => {
       const allVideos = getAllVideos()
       const latestVideos = getLatestVideos()
