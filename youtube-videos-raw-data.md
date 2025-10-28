@@ -961,7 +961,298 @@ Claude Code と Codex CLI、結局どっちを選べばいいのか？
 
 ---
 
+### 11. 【Codex CLI対応】仕様駆動開発を1コマンドで導入！Spec Driven Codexで要件定義→設計→実装まで完全自動化
+- **URL**: https://www.youtube.com/watch?v=1EQllS_3TJo
+- **ID**: 1EQllS_3TJo
+- **ステータス**: ✅ 情報収集完了
+
+#### タグ
+#バイブコーディング #VibeCoding #プログラミング #codexcli #codex #specdriven #仕様駆動開発 #AI駆動開発 #VibeCoding #バイブコーディング #プログラミング #Webアプリ開発 #OSS #npm #要件定義 #設計書
+
+#### 概要欄
+Codex CLI専用の仕様駆動開発ツール「Spec Driven Codex」をOSSとしてリリースしました！
+既存の仕様駆動開発ツールはCodex CLIに対応していませんでしたが、自分が欲しくてついに専用ツールを公開。
+
+要件定義→設計→実装の流れを6つのコマンドで実現！
+
+---
+
+### 12. 【Playwright MCP】Codex CLI の Webアプリ・デザインテストを自動化！AI 駆動の E2Eテスト実践ガイド
+- **URL**: https://www.youtube.com/watch?v=pRHyMLH1bcU
+- **ID**: pRHyMLH1bcU
+- **ステータス**: ✅ 情報収集完了
+
+#### タグ
+#VibeCoding #バイブコーディング #プログラミング #codexcli #codex #MCP #Playwright #E2Eテスト #テスト自動化 #AI駆動開発 #VibeCoding #バイブコーディング #プログラミング #Webアプリ開発 #自動テスト #ModelContextProtocol
+
+#### 概要欄
+Codex CLI と Playwrihgt MCPでE2Eテスト（ブラウザ操作レベルのテスト）を完全自動化する方法をお伝えします！
+Playwrightを使って、ユーザー操作レベルのテストをAIと対話しながら実装していきましょう。
+
+---
+
+### 13. 【Codex CLI活用術】MCPサーバを設定する方法！config.toml と CLI コマンドの使い方を初心者向けに解説
+- **URL**: https://www.youtube.com/watch?v=1TJydjQM6eo
+- **ID**: 1TJydjQM6eo
+- **ステータス**: ✅ 情報収集完了
+
+#### タグ
+#VibeCoding #バイブコーディング #プログラミング #CodexCLI #codex #codexcli #openai #MCP #Context7 #AI駆動開発 #バイブコーディング #VibeCoding #Nextjs #React #プログラミング #WebDevelopment #AIツール
+
+#### 概要欄
+Codex CLI にMCP（Model Context Protocol）サーバを設定する方法を解説します！
+
+---
+
+### 14. 【仕様駆動開発】cc-sddでClaude Code/CursorなどをKiro化！日本語対応の国産ツールで簡単に始めるスペック駆動開発
+- **URL**: https://www.youtube.com/watch?v=HM0SLThgXqE
+- **ID**: HM0SLThgXqE
+- **ステータス**: ✅ 情報収集完了
+
+#### タグ
+#ClaudeCode #Cursor #SDD #cc_sdd #AWS_Kiro #仕様駆動開発 #ClaudeCode #Cursor #AI駆動開発 #国産ツール #日本語対応
+
+#### 概要欄
+こんにちは、とまだです！
+
+今回は、日本の開発者が作った仕様駆動開発ツール「cc-sdd」を徹底解説します。
+AWS Kiroの仕様駆動開発（Spec-Driven Development）を、Claude CodeやCursorで
+すぐに実践できる素晴らしいツールです。
+
+---
+
+### 15. 【神アプデ】Claude CodeからCodexをMCPとして利用可能に！両者の良いとこどりで最強の開発環境を構築する方法
+- **URL**: https://www.youtube.com/watch?v=fTONBWDWke0
+- **ID**: fTONBWDWke0
+- **ステータス**: ✅ 情報収集完了
+
+#### タグ
+#バイブコーディング #プログラミング #ClaudeCode #ClaudeCode #CodexCLI #MCP #AI駆動開発 #バイブコーディング #プログラミング #エンジニア #ChatGPT #GPT5 #開発効率化 #gpt5
+
+#### 概要欄
+今回は、Codex CLIの最新アップデートで可能になった「MCP連携」を実際に設定して使ってみました！
+
+Claude Codeの使いやすさを維持しながら、必要な時だけGPT-5（Codex）の推論力を借りることができる神機能です。
+
+---
+
+### 16. 【Vibe Coding ラジオ#1】「AI 駆動開発はできて当たり前」の時代？YouTube チャンネル 1ヶ月のデータから見えた AI駆動開発スキルの傾向
+- **URL**: https://www.youtube.com/watch?v=5aVN2Zs6n7w
+- **ID**: 5aVN2Zs6n7w
+- **ステータス**: ✅ 情報収集完了
+
+#### タグ
+#ポッドキャスト #AI駆動開発 #バイブコーディング #ClaudeCode #YouTube分析 #プログラミング #エンジニア #個人開発 #Cursor #MCP #音声配信 #テックトーク #VibeCodingRadio #とまだ
+
+#### 概要欄
+こんにちは、とまだです！
+
+今回から始まる動画付き音声配信「Vibe Coding ラジオ」。
+普段はAI開発ツールの実演が多いですが、ラジオでは普段私が開発の上で考えていることや、AIツールの動向について話していきます。
+
+---
+
+### 17. 【爆速開発】Codex CLIのカスタムコマンドで繰り返し作業を1秒で終わらせる方法！実践デモ付き
+- **URL**: https://www.youtube.com/watch?v=_VhJCZtQXUc
+- **ID**: _VhJCZtQXUc
+- **ステータス**: ✅ 情報収集完了
+
+#### 概要欄
+こんにちは、とまだです！
+
+「Codex CLIで同じ指示を何度も入力するのが面倒...」
+「コードレビューやリファクタリングをもっと効率化したい」
+「Claude Codeのカスタムコマンドみたいな機能がCodexにもあれば...」
+
+実は、Codex CLIには「カスタムプロンプト」という超便利な機能があるんです！
+
+---
+
+### 18. 【無料】Replit Agent3で知識ゼロからバイブコーディング！ブラウザだけでWeb・データ分析・3Dゲーム・自動化ツールを作れる最新 AI エディタを試してみた
+- **URL**: https://www.youtube.com/watch?v=geZT1xTb06I
+- **ID**: geZT1xTb06I
+- **ステータス**: ✅ 情報収集完了
+
+#### タグ
+#agent3 #vibecoding #バイブコーディング #replit #agent3 #クラウドIDE #ai駆動開発 #vibecoding #ReplitAgent3 #AI開発 #バイブコーディング #VibeCoding #プログラミング初心者 #Webアプリ開発 #AIエージェント #個人開発 #無料開発環境
+
+#### 概要欄
+Replit Agent3を使って、ブラウザだけで動く地図連動型ランドマーク表示アプリを作成！
+プログラミング初心者でも、AIの力を借りて実際に動くWebアプリが完成します。
+
+---
+
+### 19. 【完全比較】Claude Code vs Codex！Codexのコード品質がClaude Codeを超えた！Claude Code ユーザーは Codex（GPT-5）に乗り換えるべき？
+- **URL**: https://www.youtube.com/watch?v=Yy2alUag5I8
+- **ID**: Yy2alUag5I8
+- **ステータス**: ✅ 情報収集完了
+
+#### タグ
+#VibeCoding #ClaudeCode #GPT5 #ClaudeCode #Codex #GPT5 #AI駆動開発 #VibeCoding
+
+#### 概要欄
+Claude CodeとCodex、どちらを使うべきか悩んでいませんか？
+
+今回は同じ要件定義のToDoアプリを両ツールで作成し、コード品質を5つの観点から徹底比較しました。
+
+---
+
+### 20. 【1時間でわかる】OpenAI Codex（ChatGPT）でバイブコーディング入門！IDE・CLI 版の比較と基礎を動画1本で完全理解
+- **URL**: https://www.youtube.com/watch?v=H5TGzM_PCW4
+- **ID**: H5TGzM_PCW4
+- **ステータス**: ✅ 情報収集完了
+
+#### 概要欄
+こんにちは、とまだです！
+
+「ChatGPTのサブスク持ってるけど、Codexって何？」
+「Claude Codeは使ってるけど、Codexの違いがわからない」
+「IDE版とCLI版って何が違うの？」
+
+そんな疑問を1時間で完全解決します！
+
+---
+
+### 21. 【Playwright入門】Claude Code × MCPでブラウザテストを完全自動化！AI 駆動の E2Eテスト実践ガイド
+- **URL**: https://www.youtube.com/watch?v=TDECUH62yYQ
+- **ID**: TDECUH62yYQ
+- **ステータス**: ✅ 情報収集完了
+
+#### タグ
+#バイブコーディング #VibeCoding #プログラミング #ClaudeCode #MCP #Playwright #E2Eテスト #テスト自動化 #AI駆動開発 #VibeCoding #バイブコーディング #プログラミング #Webアプリ開発 #自動テスト #ModelContextProtocol
+
+#### 概要欄
+Claude CodeとMCPでE2Eテスト（ブラウザ操作レベルのテスト）を完全自動化する方法をお伝えします！
+Playwrightを使って、ユーザー操作レベルのテストをAIと対話しながら実装していきましょう。
+
+---
+
+### 22. 【仕様駆動開発】AWS Kiro がすごい！手戻り削減の要件定義→設計→計画→実装を誰でも実現できる時代へ
+- **URL**: https://www.youtube.com/watch?v=qCFnfS5DAr8
+- **ID**: qCFnfS5DAr8
+- **ステータス**: ✅ 情報収集完了
+
+#### 概要欄
+今回は、AWSが開発した革新的エディタ「Kiro」を使って仕様駆動開発という新しい開発スタイルを実演します！
+
+従来のAI開発ツール（Cursor、Claude Code等）とは一線を画すKiroの丁寧さを、実際にランディングページを作りながら体験していただけます。
+
+---
+
+### 23. 【実践編】SuperClaudeのコマンドをフル活用！要件定義・設計・計画・エラー解決から品質改善までの推奨フローを完全解説
+- **URL**: https://www.youtube.com/watch?v=ECRzrFNIWNM
+- **ID**: ECRzrFNIWNM
+- **ステータス**: ✅ 情報収集完了
+
+#### タグ
+#バイブコーディング #VibeCoding #プログラミング #SuperClaude #ClaudeCode #AI駆動開発 #Next #天気予報アプリ #VibeCoding #バイブコーディング #プログラミング #Webアプリ開発
+
+#### 概要欄
+『SuperClaudeのコマンドが多すぎて使い方がわからない』という方に向けた動画です。
+
+実はSuperClaudeには『推奨ワークフロー』があります！
+今回は天気予報アプリを0から作りながら、17種あるカスタムコマンドを実践的に使いこなす方法を完全解説します。
+
+---
+
+### 24. 【完全初心者OK】Claude Code×React Nativeでスマホアプリ開発！カウンターと計算機を作るバイブコーディング実演
+- **URL**: https://www.youtube.com/watch?v=TfaNCNrYu8A
+- **ID**: TfaNCNrYu8A
+- **ステータス**: ✅ 情報収集完了
+
+#### タグ
+#VibeCoding #バイブコーディング #プログラミング初心者 #ClaudeCode #ReactNative #バイブコーディング #VibeCoding #スマホアプリ開発 #AI駆動開発 #プログラミング初心者 #Expo #個人開発 #アプリ開発
+
+#### 概要欄
+今回は、プログラミング未経験でもスマホアプリが作れる
+Claude CodeとReact Nativeを使ったバイブコーディングを実演します。
+
+実際にカウンターアプリと計算機アプリを作りながら、
+AIとの対話だけで本格的なアプリ開発ができることを体験していただけます。
+
+---
+
+### 25. SuperClaudeでClaude Codeの品質が爆上がり！チーム開発・個人開発の両方でおすすめの神ツールとは？
+- **URL**: https://www.youtube.com/watch?v=ZUr_Sp72q50
+- **ID**: ZUr_Sp72q50
+- **ステータス**: ✅ 情報収集完了
+
+#### タグ
+#バイブコーディング #VibeCoding #プログラミング #SuperClaude #ClaudeCode #AI駆動開発 #コード品質 #VibeCoding #バイブコーディング #プログラミング #個人開発
+
+#### 概要欄
+Claude Codeユーザー必見！無料で使えるSuperClaudeで開発品質が劇的に向上しました。
+
+個人開発のクーポンページを実際に分析・改善しながら、
+コード量70%削減、品質スコア90%達成の全工程をお見せします！
+
+---
+
+### 26. 【GPT-5搭載】JetBrains最新AIエージェント「Junie」でRailsアプリ開発！Claude Codeとの違いも徹底比較
+- **URL**: https://www.youtube.com/watch?v=VHZNtl46CJw
+- **ID**: VHZNtl46CJw
+- **ステータス**: ✅ 情報収集完了
+
+#### タグ
+#VibeCoding #バイブコーディング #GPT5 #Junie #JetBrains #RubyMine #GPT5 #AI駆動開発 #バイブコーディング #VibeCoding #RubyonRails #ClaudeCode比較
+
+#### 概要欄
+現役フリーランスエンジニアのとまだです！
+
+今回はJetBrains社の最新AIエージェント「Junie」を実際に使って、
+既存のRailsアプリに機能追加してみました。
+
+なんと、最新モデルGPT-5がデフォルトで使える上に、
+指示していないのに勝手にテストを書いて品質を担保してくれる優秀なAIでした！
+
+---
+
+### 27. 【30分で完成】Claude Code × バイブコーディングでタイピングゲーム作成｜React初心者でも動くアプリが作れる
+- **URL**: https://www.youtube.com/watch?v=xrRFnoOeC94
+- **ID**: xrRFnoOeC94
+- **ステータス**: ✅ 情報収集完了
+
+#### タグ
+#バイブコーディング #プログラミング初心者 #ClaudeCode #ClaudeCode #バイブコーディング #React #タイピングゲーム #AI開発 #プログラミング初心者 #Webアプリ開発 #TypeScript #tailwindcss
+
+#### 概要欄
+【今回作るアプリ】
+Claude Codeを使って、30分でブラウザで動くタイピングゲームを作成します！
+React初心者の方でも、AIの力を借りて実際に動くアプリが完成します。
+
+---
+
+### 28. 【AI駆動開発】初心者OK！Claude Codeでバイブコーディング〜React ポモドーロタイマーを作る
+- **URL**: https://www.youtube.com/watch?v=d67qWFEdxCI
+- **ID**: d67qWFEdxCI
+- **ステータス**: ✅ 情報収集完了
+
+#### タグ
+#ポモドーロタイマー #VibeCoding #ClaudeCode #ポモドーロタイマー #VibeCoding #ClaudeCode #ClaudeCode #VibeCoding #AI駆動開発 #React #ポモドーロタイマー #プログラミング #Vite #多言語対応 #個人開発 #Webアプリ開発
+
+#### 概要欄
+こんにちは、とまだです！
+
+今回はClaude Codeを使ったVibe Codingの実践動画です。
+ポモドーロタイマーアプリを約30分で、基本機能から多言語対応まで実装していきます。
+
+---
+
+### 29. 【1時間で速習】Claude Code完全ガイド   AI駆動開発で企業サイトを作ってデプロイまで実演！
+- **URL**: https://www.youtube.com/watch?v=Xr_HhLuzOy8
+- **ID**: Xr_HhLuzOy8
+- **ステータス**: ✅ 情報収集完了
+
+#### タグ
+#バイブコーディング #VibeCoding #ClaudeCode #ClaudeCode #AI駆動開発 #VibeCoding #バイブコーディング #Webサイト制作
+
+#### 概要欄
+現役フリーランスエンジニアのとまだが、Claude Codeの全てを1時間で解説します。
+インストールから実際の企業サイト作成、カスタマイズ、そしてVercelデプロイまで、全て実演でお見せします！
+
+---
+
 ## 進捗状況
-- ✅ 完了: 10本
-- ⏳ 未収集: 19本
+- ✅ 完了: 29本（全動画）
+- ⏳ 未収集: 0本
 - 合計: 29本
