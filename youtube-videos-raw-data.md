@@ -371,7 +371,597 @@ SQLiteデータベース連携やTypeScript対応まで学べます。
 
 ---
 
+---
+
+### 4. 【コード品質UP】技術的負債を作らないための AI 向け開発ルールを設定しよう（Claude Code/Codex/Cursor 対応）
+- **URL**: https://www.youtube.com/watch?v=SO5qov2qTUE
+- **ID**: SO5qov2qTUE
+- **公開日**: 2025/10/17
+- **ステータス**: ✅ 情報収集完了
+
+#### タグ
+#バイブコーディング #VibeCoding #Cursor #ClaudeCode #Codex #Cursor #AI駆動開発 #VibeCoding #バイブコーディング #プログラミング #コード品質 #技術的負債 #エラーハンドリング #セキュリティ #保守性 #初心者向け
+
+#### 概要欄
+AIエージェントが「動くコード」を書いてくれるのは便利だけど、「これって本当に良いコードなの?」って不安になること、ありませんか?
+
+実は、AIに「良いコード」の基準を教える設定ファイルを作るだけで、エラー処理、セキュリティ、保守性まで考慮したプロ級のコードを自動生成できるんです。
+
+今回は、Claude Code、Codex、Cursor に対応した「共通ルールファイル」の設定方法と、8つの品質観点を初心者向けに詳しく解説しました。
+
+設定はたった5分で完了し、一度設定すれば全プロジェクトで自動適用されます。
+プログラミング初心者の方でも、この動画を見ればコード品質の考え方が身につきます!
+
+━━━━━━━━━━━━━━━━
+📚 詳細解説記事(Zenn)
+━━━━━━━━━━━━━━━━
+【コピペOK】技術的負債を作らないためのルールを設定しよう(Claude Code, Codex, Cursor対応)
+・https://zenn.dev/tmasuyama1114/articl...
+
+ルールファイルの中身もこちらからコピペできます。
+
+━━━━━━━━━━━━━━━━
+🎯 この動画で学べること
+━━━━━━━━━━━━━━━━
+✅ AIに「良いコード」の基準を教える方法
+✅ 5分で設定完了する共通ルールファイルの作り方
+✅ 8つの品質観点(エラー処理、セキュリティ、保守性など)の完全理解
+✅ Claude Code、Codex、Cursorそれぞれの設定方法
+✅ 技術的負債を作らないプログラミングの考え方
+
+━━━━━━━━━━━━━━━━
+👥 コミュニティ
+━━━━━━━━━━━━━━━━
+Discord「Vibe Coding Studio」でAI駆動開発を一緒に学びましょう!
+質問・相談・交流の場として、初心者から上級者まで大歓迎です。
+  / discord
+
+━━━━━━━━━━━━━━━━
+🚀 体系的に学びたい方へ
+━━━━━━━━━━━━━━━━
+Udemy講座でClaude CodeやCodexなどAI駆動開発を体系的にマスター!
+
+✨ 実践的なアプリ開発の全工程
+✨ MCP連携で外部ツールを自在に操る
+✨ コード品質を保ちながら爆速開発
+
+🎁 限定クーポンで最大90%OFF!
+▶︎ https://school.learning-next.app/coupons
+
+━━━━━━━━━━━━━━━━
+📌 関連動画
+━━━━━━━━━━━━━━━━
+▶︎ 【どっちを選ぶ？】Claude Code vs Codex CLI！
+       • 【どっちを選ぶ？】Claude Code vs Codex CLI！両方使い倒した現...
+
+▶︎ 【1時間でわかる】OpenAI Codex入門
+       • 【1時間でわかる】OpenAI Codex（ChatGPT）でバイブコーディング入門...
+
+▶︎ 【1時間で速習】Claude Code完全ガイド
+       • 【1時間で速習】Claude Code完全ガイド   AI駆動開発で企業サイ...
+
+━━━━━━━━━━━━━━━━
+🔗 SNS
+━━━━━━━━━━━━━━━━
+🐦 X(Twitter): https://x.com/muscle_coding
+📝 note: https://note.com/tomada
+💻 Qiita: https://qiita.com/tomada
+📖 Zenn: https://zenn.dev/tmasuyama1114
+
+━━━━━━━━━━━━━━━━
+💬 コメント・質問お待ちしています!
+━━━━━━━━━━━━━━━━
+実際に設定してみた感想や、つまずいた点があればコメント欄で教えてください。
+できる限りお答えします!
+
+チャンネル登録と高評価で応援していただけると嬉しいです✨
+
+【タイムライン】
+00:00 はじめに
+01:42 この動画で学べること
+04:00 ルールファイルとは？
+04:51 AI用ルールの重要性
+12:23 Claude Codeでの設定方法
+17:50 Codexでの設定方法
+18:59 Cursorでの設定方法
+20:14 共通ルールの概要
+24:52 エラーハンドリングの考え方
+27:26 セキュリティの原則
+29:12 コード品質の基準
+31:48 テストの考え方
+34:13 保守性・リファクタリングの原則
+36:37 パフォーマンスの重要性
+37:48 信頼性の確保
+38:52 AIと一緒に「考え方」を学ぶ
+40:14 まとめ
+
+---
+
+### 5. React Native（Expo）入門！iOS・Android アプリ環境構築の全手順を初心者向けに解説【シミュレータ対応】
+- **URL**: https://www.youtube.com/watch?v=TWUpzNGp7fI
+- **ID**: TWUpzNGp7fI
+- **公開日**: 2025/10/11
+- **ステータス**: ✅ 情報収集完了
+
+#### タグ
+#VibeCoding #バイブコーディング #プログラミング入門 #ReactNative #Expo #スマホアプリ開発 #モバイルアプリ #プログラミング入門 #JavaScript #TypeScript #iOS開発 #Android開発 #VibeCoding #バイブコーディング #AI駆動開発 #ExpoGo #環境構築 #初心者向け
+
+#### 概要欄
+React NativeとExpoを使ったスマホアプリ開発の完全入門ガイドです！
+環境構築から実機テストまで、1時間でマスターできる内容をお届けします。
+
+Web開発の知識をそのままスマホアプリ開発に活かして、iOS・Android両方のアプリを同時開発！
+Udemy講座から厳選した内容で、初心者の方でもつまずかずに進められます。
+
+この動画を見れば、今日からスマホアプリ開発が始められます！
+
+━━━━━━━━━━━━━━━━
+📌 関連動画
+━━━━━━━━━━━━━━━━
+▶︎ OpenAI Codex（ChatGPT）でバイブコーディング入門！動画1本で完全理解
+   • 【1時間でわかる】OpenAI Codex（ChatGPT）でバイブコーディング入門...
+
+▶︎ Claude Code×React Nativeでスマホアプリ開発！カウンターと計算機を作るバイブコーディング実演
+   • 【完全初心者OK】Claude Code×React Nativeでスマホアプリ開発...
+
+▶︎ Claude Code完全ガイド AI駆動開発で企業サイトを作ってデプロイまで実演！
+   • 【爆速開発】Codex CLIのカスタムコマンドで繰り返し作業を1秒で終わらせる方法...
+
+━━━━━━━━━━━━━━━━
+🚀 スマホアプリ x AI駆動開発を体系的に学べる
+━━━━━━━━━━━━━━━━
+
+本動画は Codex でスマホアプリ開発を行う講座の一部を抜粋しています。
+個人開発をはじめたい方向けに、最大90%OFFの特別クーポンをご用意しています！
+
+✨【Codex × スマホアプリ開発】AI駆動開発で作る！React Native ではじめるモバイルアプリ開発実践
+▶ https://school.learning-next.app/coup...
+
+✨【未経験OK】Claude CodeとReact Nativeでスマホアプリ開発！5つのアプリでバイブコーディング実践
+▶ https://school.learning-next.app/coup...
+
+✨ Claude Codeでスマホアプリ開発！React Native（Expo）爆速バイブコーディングテンプレートを作ろう
+▶ https://school.learning-next.app/coup...
+
+━━━━━━━━━━━━━━━━
+🔗 SNS・コミュニティ
+━━━━━━━━━━━━━━━━
+🐦 X（Twitter）: https://x.com/muscle_coding
+📝 note: https://note.com/tomada
+💻 Qiita: https://qiita.com/tomada
+💡 Zenn: https://zenn.dev/tmasuyama1114
+
+最新情報をキャッチアップしつつ、AI 駆動開発を学ぶ仲間と繋がれる Discord コミュニティも運営してます！
+気軽に参加してみてください。
+→   / discord
+
+【お願い】
+チャンネル登録と高評価で応援をよろしくお願いします！
+今後の動画制作の励みになります✨
+
+【タイムライン】
+00:00 React Nativeとは？
+07:02 Expoとは？
+12:19 Expo Goとは？
+22:23 Expoセットアップ方法
+26:27 iOSシミュレータをインストール
+33:34 ExpoをiOSシミュレータで起動
+44:17 Androidエミュレータをインストール
+56:00 ExpoをAndroidシミュレータで起動
+
+---
+
+### 6. 【AgentKit登場】ノーコードでAIワークフローを構築！Agent Builderの使い方を完全解説
+- **URL**: https://www.youtube.com/watch?v=4MUadOFHy9M
+- **ID**: 4MUadOFHy9M
+- **公開日**: 2025/10/07
+- **ステータス**: ✅ 情報収集完了
+
+#### タグ
+#AgentBuilder #VibeCoding #バイブコーディング #AgentKit #AgentBuilder #OpenAI #DevDay2025 #AI駆動開発 #VibeCoding #バイブコーディング #ノーコード #AIエージェント #ワークフロー #ChatGPT #プログラミング
+
+#### 概要欄
+OpenAI Dev Day 2025で発表されたAgentKit、その中でも特に注目のAgent Builderを実際に触ってみました!
+
+ドラッグ&ドロップでAIエージェントのワークフローを組み立てられる時代が来ました。
+条件分岐、Guardrails、JSON出力、ユーザー承認フローなど、
+プログラミング知識がなくても高度なAI処理を実現できる神ツールです。
+
+この動画では、Agent Builderの基本的な使い方から実践的なワークフロー作成まで、初めての方でも分かるように1から丁寧に解説していきます。
+
+━━━━━━━━━━━━━━━━
+💡 この動画で学べること
+━━━━━━━━━━━━━━━━
+✅ Agent Builderの基本的な使い方
+✅ ワークフローのノード配置と接続方法
+✅ Guardrailsでセキュリティを強化
+✅ AgentノードでAI処理を組み込む
+✅ 条件分岐(if/else)で処理を分ける
+✅ JSON形式での出力設定
+✅ User Approvalで承認フローを実装
+✅ Previewで動作確認する方法
+
+━━━━━━━━━━━━━━━━
+🎯 AgentKitでできること
+━━━━━━━━━━━━━━━━
+・カスタマーサポートの自動化
+・フィードバック分類システム
+・ドキュメント検索アシスタント
+・Gmail/Googleカレンダー連携（その他、各種ツール）
+・Web検索を活用した情報収集
+・Pythonコード実行による複雑な処理
+・MCPサーバとの連携　など
+
+━━━━━━━━━━━━━━━━
+🔗 関連リンク
+━━━━━━━━━━━━━━━━
+▼ OpenAI Agent Builder公式
+https://platform.openai.com/docs/guid...
+
+━━━━━━━━━━━━━━━━
+📌 関連動画
+━━━━━━━━━━━━━━━━
+▶︎ 【1時間でわかる】OpenAI Codex入門
+      • 【Codex CLI対応】仕様駆動開発を1コマンドで導入！Spec Driven C...
+
+▶︎ 【Codex CLI対応】仕様駆動開発を1コマンドで導入！
+      • 【Chrome DevTools MCP】ブラウザ操作やパフォーマンス確認まで！Pl...
+
+━━━━━━━━━━━━━━━━
+🔗 SNS・コミュニティ
+━━━━━━━━━━━━━━━━
+🐦 X（Twitter）: https://x.com/muscle_coding
+📝 note: https://note.com/tomada
+💻 Qiita: https://qiita.com/tomada
+💡 Zenn: https://zenn.dev/tmasuyama1114
+
+最新情報をキャッチアップしつつ、AI 駆動開発を学ぶ仲間と繋がれる Discord コミュニティも運営してます！
+気軽に参加してみてください。
+→   / discord
+
+
+【お願い】
+チャンネル登録と高評価で応援をよろしくお願いします！
+今後の動画制作の励みになります✨
+
+【タイムライン】
+00:00 OpenAI Dev Day 2025のアップデート概要
+01:03 Agent Builderにアクセス
+02:25 カスタマーサービステンプレートを試す
+03:42 実際にプレビューで動かしてみる
+06:50 ゼロからワークフローを作成
+08:14 Guardrailsノードで安全性を確保
+09:58 Agentノードで分類処理を実装
+14:19 JSON形式で出力を設定
+16:53 条件分岐(if/else)で処理を分ける
+20:59 User Approvalで承認フローを追加
+24:07 MCP・ファイル検索などツール紹介
+26:56 高度なデータ処理ツール
+29:46 Agents SDK とは？
+31:18 まとめと活用のヒント
+
+---
+
+### 7. 【Slack×Claude連携】業務効率化に使える！チャット要約・相談・エラー解決も AI で自動化できるアップデート
+- **URL**: https://www.youtube.com/watch?v=qrDUjfnlOiI
+- **ID**: qrDUjfnlOiI
+- **公開日**: 2025/10/04
+- **ステータス**: ✅ 情報収集完了
+
+#### タグ
+#Slack #VibeCoding #Claude #Slack #Claude #AI活用 #業務効率化 #SlackAI #ClaudeAPI #チャットボット #エラー解析 #MCP #AI駆動開発 #VibeCoding #バイブコーディング
+
+#### 概要欄
+Claude が Slack と正式に連携！チーム内でのAI活用が劇的に進化しました。
+https://www.anthropic.com/news/claude...
+
+Slack内でClaudeを呼び出してそのまま会話の要約、エラー解決、ドキュメント分析まで
+すべてSlack内で完結できるようになります。
+
+━━━━━━━━━━━━━━━━
+🚀 この動画で得られるスキル
+━━━━━━━━━━━━━━━━
+✅ Slack×Claude連携の初期設定方法
+✅ ダイレクトメッセージでClaudeと会話する方法
+✅ スレッド内でClaudeをメンション呼び出しする方法
+✅ チャンネルの会話を瞬時に要約する活用法
+
+━━━━━━━━━━━━━━━━
+📌 おすすめ活用シーン
+━━━━━━━━━━━━━━━━
+🔸 長いスレッドの要約を1クリックで生成
+🔸 本番環境のエラー通知メッセージを即座に分析
+🔸 ミーティング前の資料準備を効率化
+🔸 技術的な質問にSlack内で即回答
+🔸 過去の会話履歴から必要な情報を検索
+
+━━━━━━━━━━━━━━━━
+📚 関連動画
+━━━━━━━━━━━━━━━━
+▶︎ 1時間で速習！Claude Code ではじめる AI 駆動開発
+      • 【1時間で速習】Claude Code完全ガイド   AI駆動開発で企業サイ...
+
+▶︎ どっちを選ぶ？Claude Code と Codex CLI の違いを丁寧に解説
+      • 【どっちを選ぶ？】Claude Code vs Codex CLI！両方使い倒した現...
+
+━━━━━━━━━━━━━━━━
+🎁 体系的にAI駆動開発を学びたい方へ
+━━━━━━━━━━━━━━━━
+UdemyではClaude Code実践マスター講座を公開中！
+最新のAI開発手法を体系的に学べます。
+
+✨ MCP連携で外部ツールを自在に操る
+✨ Claude Codeでの本格アプリ開発
+✨ エラー解決の自動化テクニック
+✨ チーム開発での AI 活用法
+
+🎯 限定クーポンで最大90%OFF！
+▶︎ https://school.learning-next.app/coup...
+
+━━━━━━━━━━━━━━━━
+🔗 SNS・コミュニティ
+━━━━━━━━━━━━━━━━
+🐦 X（Twitter）: https://x.com/muscle_coding
+📝 note: https://note.com/tomada
+💻 Qiita: https://qiita.com/tomada
+💡 Zenn: https://zenn.dev/tmasuyama1114
+
+最新情報をキャッチアップしつつ、AI 駆動開発を学ぶ仲間と繋がれる Discord コミュニティも運営してます！
+気軽に参加してみてください。
+→   / discord
+
+
+━━━━━━━━━━━━━━━━
+💬 コメントお待ちしています！
+━━━━━━━━━━━━━━━━
+動画の感想や今後の要望など、皆さんのご意見をお待ちしてます！
+動画作りの参考にさせていただきます。
+
+また、チャンネル登録・高評価で応援いただけると大変はげみになります🙇
+
+---
+
+### 8. Claude Sonnet 4.5 vs GPT-5-Codex！速度2倍差でも品質は互角？現役エンジニアの結論を解説
+- **URL**: https://www.youtube.com/watch?v=5ACcnosaEdw
+- **ID**: 5ACcnosaEdw
+- **公開日**: 2025/10/03
+- **ステータス**: ✅ 情報収集完了
+
+#### タグ
+#claude #VibeCoding #sonnet #ClaudeSonnet4.5 #GPT5Codex #コード品質 #AI駆動開発 #VibeCoding #ClaudeCode #CodexCLI #claude #sonnet #anthropic #codexcli #codex #python
+
+#### 概要欄
+Claude Sonnet 4.5とGPT-5-Codexのコード品質を100点満点で採点！
+同じ要件で100万件のログ分析システムを実装させた結果...
+
+【検証結果】
+・Claude Sonnet 4.5：74点（実装3分）
+・GPT-5-Codex：75点（実装7分）
+
+速度は2倍差、でも品質はほぼ互角。
+ただし決定的な違いが1つありました。
+
+なぜその違いが発生したのか？問題を防ぐには？
+動画で詳しく開発しています！
+
+※あくまで小〜中規模程度・新規機能開発時の比較となります。
+
+━━━━━━━━━━━━━━━━
+🚀 AI駆動開発を体系的に学ぶ
+━━━━━━━━━━━━━━━━
+UdemyでClaude Code/Codex CLI実践講座公開中
+限定クーポンで最大90%OFF！
+https://school.learning-next.app/coupons
+
+━━━━━━━━━━━━━━━━
+📌 関連リンク
+━━━━━━━━━━━━━━━━
+・SuperClaudeでClaude Codeの品質が爆上がり！
+   • SuperClaudeでClaude Codeの品質が爆上がり！チーム開発・個人開発...
+
+・Claude CodeからCodexをMCPとして利用可能に！組み合わせが最強
+   • 【神アプデ】Claude CodeからCodexをMCPとして利用可能に！両者の良い...
+
+・【性能比較】Claude Sonnet 4.5 vs GPT-5-Codex！速度2倍差でも品質は互角？（Qiita 記事版）
+https://qiita.com/tomada/items/fde259...
+
+━━━━━━━━━━━━━━━━
+🔗 SNS・コミュニティ
+━━━━━━━━━━━━━━━━
+🐦 X（Twitter）: https://x.com/muscle_coding
+📝 note: https://note.com/tomada
+💻 Qiita: https://qiita.com/tomada
+💡 Zenn: https://zenn.dev/tmasuyama1114
+
+最新情報をキャッチアップしつつ、AI 駆動開発を学ぶ仲間と繋がれる Discord コミュニティも運営してます！
+気軽に参加してみてください。
+→   / discord
+
+
+━━━━━━━━━━━━━━━━
+⏰ タイムライン
+━━━━━━━━━━━━━━━━
+00:00 はじめに
+01:27 今回の検証内容
+03:25 SuperClaudeの使用について補足
+04:40 実装開始
+06:43 コード品質の分析開始
+09:04 分析結果の確認
+12:42 比較のサマリ
+
+今回の動画が参考になりましたら、チャンネル登録・高評価で応援お願いします！
+また、動画の感想や、今後の動画要望がありましたらコメントいただけると嬉しいです😊
+
+---
+
+### 9. 【Chrome DevTools MCP】ブラウザ操作やパフォーマンス確認まで！Playwright MCPとの違いと使い分けを徹底解説
+- **URL**: https://www.youtube.com/watch?v=gXwS9dJewrU
+- **ID**: gXwS9dJewrU
+- **公開日**: 2025/10/01
+- **ステータス**: ✅ 情報収集完了
+
+#### タグ
+#PlaywrightMCP #バイブコーディング #自動化 #ChromeDevTools #MCP #PlaywrightMCP #AI駆動開発 #フロントエンド #Web開発 #自動化 #VibeCoding #バイブコーディング #ClaudeCode #Cursor #Codex
+
+#### 概要欄
+フロントエンド開発でDevToolsを開いてエラーやスクショをコピペする作業、もう必要ありません！
+9/23 に登場したばかりの Chrome DevTools MCP について徹底的に解説！
+
+また、似たような「Playwright MCP」との違いも気になる方が多いのではないでしょうか？
+今回は実際に両方のMCPを使いながら、それぞれの特徴と使い分け方を解説します！
+
+Claude Code、Codex、Cursor、GitHub Copilot での設定方法もご紹介。
+https://github.com/ChromeDevTools/chr...
+
+━━━━━━━━━━━━━━━━
+📌 関連動画
+━━━━━━━━━━━━━━━━
+▶︎ 【Playwright MCP】E2Eテストを自動化！
+（Codex 版）   • 【Playwright MCP】Codex CLI の Webアプリ・デザインテスト...
+（Claude Code版）   • 【Playwright入門】Claude Code × MCPでブラウザテストを完全...
+
+▶︎ 【Codex CLI活用術】MCPサーバを設定する方法！
+      • 【Codex CLI活用術】MCPサーバを設定する方法！config.toml と ...
+
+━━━━━━━━━━━━━━━━
+🚀 AI駆動開発をマスターしたい方へ
+━━━━━━━━━━━━━━━━
+MCP の使い方を含め、体系的に AI 駆動開発を学びたい方のためにUdemy講座を公開しています！
+▶︎ https://school.learning-next.app/coupons
+
+Claude Code や Codex CLI、MCP 専門講座なども出していますので、ぜひご覧ください。
+多くの高評価もいただいており、複数のベストセラーを獲得しています！
+
+━━━━━━━━━━━━━━━━
+📝 詳細記事
+━━━━━━━━━━━━━━━━
+今回の内容を詳しくまとめた記事はこちら👇
+https://qiita.com/tomada/items/8b22ca...
+
+━━━━━━━━━━━━━━━━
+🔗 SNS・コミュニティ
+━━━━━━━━━━━━━━━━
+🐦 X（Twitter）: https://x.com/muscle_coding
+📝 note: https://note.com/tomada
+💻 Qiita: https://qiita.com/tomada
+💡 Zenn: https://zenn.dev/tmasuyama1114
+
+最新情報をキャッチアップしつつ、AI 駆動開発を学ぶ仲間と繋がれる Discord コミュニティも運営してます！
+気軽に参加してみてください。
+→   / discord
+
+
+今回の動画が参考になったら、チャンネル登録・高評価で応援お願いします！
+
+【タイムライン】
+00:00 はじめに
+00:34 Chrome DevTools MCPとは
+02:23 Playwright MCPとの比較表
+08:11 各ツールへのインストール方法
+11:51 ブラウザを自動操作する
+16:36 コンソールのエラーをチェック
+18:31 パフォーマンス分析
+23:06 Playwright MCPとのトークン比較
+27:49 補足：Playwright MCPを使うべき場面
+29:56 まとめ：Playwright MCPとの使い分け
+
+---
+
+### 10. 【どっちを選ぶ？】Claude Code vs Codex CLI！両方使い倒した現役エンジニアの最終結論を徹底解説！
+- **URL**: https://www.youtube.com/watch?v=4HJCCAfDGU4
+- **ID**: 4HJCCAfDGU4
+- **公開日**: 2025/09/29
+- **ステータス**: ✅ 情報収集完了
+
+#### タグ
+#バイブコーディング #Claude #VibeCoding #ClaudeCode #CodexCLI #AI駆動開発 #バイブコーディング #VibeCoding #プログラミング #エンジニア #ChatGPT #Claude #開発ツール #比較 #使い分け #MCP #個人開発 #フリーランス
+
+#### 概要欄
+Claude Code と Codex CLI、結局どっちを選べばいいのか？
+
+両ツールを日常的に使い倒している現役エンジニアが
+10の観点から徹底比較して、あなたに最適な選択をお教えします！
+
+まず、それぞれを併用していいとこ取りする使い方もご紹介しますので
+コスパ良く、品質も兼ね揃えた最適解を知りたい方は、ぜひ最後までご覧ください。
+
+なお、収録の関係上 Claude 4.5 Sonnet 登場前の比較となりますこと、ご了承ください。
+
+━━━━━━━━━━━━━━━━
+🚀 AI駆動開発を本格的に学びたい方へ
+━━━━━━━━━━━━━━━━
+
+【Udemy講座】最大90%OFFクーポン配布中！
+ベストセラー講座も複数あります
+
+✨ Claude Code 実践マスター講座
+✨ Codex CLI 完全攻略講座
+✨ バイブコーディング入門（プログラミング未経験OK）
+✨ MCP連携による外部ツール自動化
+✨ Next.js × Supabase本格アプリ開発
+
+🎁 クーポン一覧ページはこちら
+▶︎ https://school.learning-next.app/coupons
+
+━━━━━━━━━━━━━━━━
+📌 関連動画
+━━━━━━━━━━━━━━━━
+▶︎ 【1時間でわかる】Claude Code入門
+      • 【1時間で速習】Claude Code完全ガイド   AI駆動開発で企業サイ...
+
+▶︎ 【1時間でわかる】Codex CLI 入門
+      • 【1時間でわかる】OpenAI Codex（ChatGPT）でバイブコーディング入門...
+
+▶︎ Claude Code から Codex を MCP として呼び出す方法
+      • 【神アプデ】Claude CodeからCodexをMCPとして利用可能に！両者の良い...
+
+━━━━━━━━━━━━━━━━
+🔗 SNS・コミュニティ
+━━━━━━━━━━━━━━━━
+🐦 X（Twitter）: https://x.com/muscle_coding
+📝 note: https://note.com/tomada
+💻 Qiita: https://qiita.com/tomada
+💡 Zenn: https://zenn.dev/tmasuyama1114
+
+最新情報をキャッチアップしつつ、AI 駆動開発を学ぶ仲間と繋がれる Discord コミュニティも運営してます！
+気軽に参加してみてください。
+→   / discord
+
+
+━━━━━━━━━━━━━━━━
+⏰ タイムスタンプ
+━━━━━━━━━━━━━━━━
+00:00 この動画でわかること
+00:24 はじめに
+00:55 自己紹介
+02:04 こんな悩みありませんか？
+03:05 今回比較する10個の観点
+06:16 前提知識のおさらい
+07:17 観点1: 料金プラン
+10:29 観点2: コード品質
+13:58 観点3: カスタマイズ性
+19:39 観点4: 要件・設計と計画性
+22:58 観点5: 操作の簡単さ
+26:48 観点6: 学びやすさ
+29:38 観点7: チーム開発
+31:46 観点8: 用途・目的別
+34:31 観点9: 開発テンポ
+36:49 観点10: コーディング以外
+38:59 実は併用が最強説？
+42:51 まとめ
+
+━━━━━━━━━━━━━━━━
+💬 コメントお待ちしています！
+━━━━━━━━━━━━━━━━
+・どちらを使っていますか？
+・使い分けのコツがあれば教えてください
+・動画のリクエストもお気軽に！
+
+チャンネル登録・高評価で応援をよろしくお願いします！
+
+---
+
 ## 進捗状況
-- ✅ 完了: 3本
-- ⏳ 未収集: 26本
+- ✅ 完了: 10本
+- ⏳ 未収集: 19本
 - 合計: 29本
