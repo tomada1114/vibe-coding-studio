@@ -7,11 +7,13 @@
 - ✅ 全29本の動画URLリストを取得
 - ✅ 全29本の動画の詳細情報を収集（⚠️ 概要欄は短縮版の可能性）
 - ✅ 収集データを`youtube-videos-raw-data.md`に保存
-- ✅ 10本のTSファイル化完了（`video-001.ts`～`video-010.ts`）
+- ✅ 9本のTSファイル化完了（YouTube IDベースのファイル名に移行済み）
+- ✅ ファイル名をYouTube IDベースに変更（例: `1LP4ZAsU_UI.ts`）
 - ✅ `youtube-videos-raw-data.md`を整理（完了済み/未処理で分割）
 
 ### 進行中
-- 🔄 残り19本の動画情報のTSファイル化（video-011～029）
+- 🔄 残り18本の動画情報のTSファイル化（video-012～029）
+- ⚠️ データ不足の動画（video-004, video-005）の再収集が必要
 - ⚠️ 概要欄が短縮版の動画は、Chrome DevTools MCPで再収集が必要
 
 ---
@@ -244,12 +246,13 @@ export const videoXXX: VideoMetadata = {
 
 ---
 
-**最終更新**: 2025-10-28（23:30 UTC+9）
+**最終更新**: 2025-10-28（12:45 UTC+9）
 **進捗**:
 - データ収集フェーズ ✅ 完了
-- データ整理（完了済み/未処理分割） ✅ 完了
-- TSファイル作成 🔄 10/29本完了
+- ファイル名YouTube IDベース移行 ✅ 完了
+- TSファイル作成 🔄 9/29本完了（video-004, video-005はデータ不足）
 **次回セッション**:
-1. video-011の概要欄をChrome DevTools MCPで再収集（「もっと見る」展開必須）
-2. video-011のTSファイル作成（概要欄→VideoMetadata型へのAI変換）
-3. video-012以降も同様に進める
+1. video-012の概要欄をChrome DevTools MCPで収集（「もっと見る」展開必須）
+2. video-012のTSファイル作成（概要欄→VideoMetadata型へのAI変換）
+3. video-013以降も同様に進める
+4. video-004, video-005のデータ収集と作成

@@ -1,9 +1,11 @@
 # Vibe Coding Studio YouTube動画データ収集
 
 ## 📊 進捗状況
-- ✅ 完了（TSファイル作成済み）: 10本（video-001～010）
-- ⏳ 未処理（これから作成）: 19本（video-011～029）
+- ✅ 完了（TSファイル作成済み）: 9本（YouTube IDベースのファイル名に移行済み）
+- ⏳ 未処理（これから作成）: 20本（video-012～029 + video-004～005のデータ不足分）
 - 合計: 29本
+
+**注**: ファイル名をYouTube IDベースに変更しました（例: `1LP4ZAsU_UI.ts`）
 
 ---
 
@@ -12,70 +14,70 @@
 ### 1. AIが書いたコード、いつコミットする？失敗しないGit運用術
 - **URL**: https://www.youtube.com/watch?v=1LP4ZAsU_UI
 - **ID**: 1LP4ZAsU_UI
-- **ステータス**: ✅ TSファイル作成済み (video-001.ts)
+- **ステータス**: ✅ TSファイル作成済み (1LP4ZAsU_UI.ts)
 
 ---
 
 ### 2. Claude Code on the Web で開発が変わる！外出先でも開発が可能になった！
 - **URL**: https://www.youtube.com/watch?v=UqKd0dxLskU
 - **ID**: UqKd0dxLskU
-- **ステータス**: ✅ TSファイル作成済み (video-002.ts)
+- **ステータス**: ✅ TSファイル作成済み (UqKd0dxLskU.ts)
 
 ---
 
 ### 3. 【Codex】はじめてのスマホアプリ AI 駆動開発！知識ゼロでも通知機能・ナビゲーションメニューまで作れるチュートリアル
 - **URL**: https://www.youtube.com/watch?v=Y15kBuMhCO4
 - **ID**: Y15kBuMhCO4
-- **ステータス**: ✅ TSファイル作成済み (video-003.ts)
+- **ステータス**: ✅ TSファイル作成済み (Y15kBuMhCO4.ts)
 
 ---
 
 ### 4. 【コード品質UP】技術的負債を作らないための AI 向け開発ルールを設定しよう（Claude Code/Codex/Cursor 対応）
 - **URL**: https://www.youtube.com/watch?v=SO5qov2qTUE
 - **ID**: SO5qov2qTUE
-- **ステータス**: ✅ TSファイル作成済み (video-004.ts)
+- **ステータス**: ⏳ TSファイル未作成（データ不足）
 
 ---
 
 ### 5. React Native（Expo）入門！iOS・Android アプリ環境構築の全手順を初心者向けに解説【シミュレータ対応】
 - **URL**: https://www.youtube.com/watch?v=TWUpzNGp7fI
 - **ID**: TWUpzNGp7fI
-- **ステータス**: ✅ TSファイル作成済み (video-005.ts)
+- **ステータス**: ⏳ TSファイル未作成（データ不足）
 
 ---
 
 ### 6. 【AgentKit登場】ノーコードでAIワークフローを構築！Agent Builderの使い方を完全解説
 - **URL**: https://www.youtube.com/watch?v=4MUadOFHy9M
 - **ID**: 4MUadOFHy9M
-- **ステータス**: ✅ TSファイル作成済み (video-006.ts)
+- **ステータス**: ✅ TSファイル作成済み (4MUadOFHy9M.ts)
 
 ---
 
 ### 7. 【Slack×Claude連携】業務効率化に使える！チャット要約・相談・エラー解決も AI で自動化できるアップデート
 - **URL**: https://www.youtube.com/watch?v=qrDUjfnlOiI
 - **ID**: qrDUjfnlOiI
-- **ステータス**: ✅ TSファイル作成済み (video-007.ts)
+- **ステータス**: ✅ TSファイル作成済み (qrDUjfnlOiI.ts)
 
 ---
 
 ### 8. Claude Sonnet 4.5 vs GPT-5-Codex！速度2倍差でも品質は互角？現役エンジニアの結論を解説
 - **URL**: https://www.youtube.com/watch?v=5ACcnosaEdw
 - **ID**: 5ACcnosaEdw
-- **ステータス**: ✅ TSファイル作成済み (video-008.ts)
+- **ステータス**: ✅ TSファイル作成済み (5ACcnosaEdw.ts)
 
 ---
 
 ### 9. 【Chrome DevTools MCP】ブラウザ操作やパフォーマンス確認まで！Playwright MCPとの違いと使い分けを徹底解説
 - **URL**: https://www.youtube.com/watch?v=gXwS9dJewrU
 - **ID**: gXwS9dJewrU
-- **ステータス**: ✅ TSファイル作成済み (video-009.ts)
+- **ステータス**: ✅ TSファイル作成済み (gXwS9dJewrU.ts)
 
 ---
 
 ### 10. 【どっちを選ぶ？】Claude Code vs Codex CLI！両方使い倒した現役エンジニアの最終結論を徹底解説！
 - **URL**: https://www.youtube.com/watch?v=4HJCCAfDGU4
 - **ID**: 4HJCCAfDGU4
-- **ステータス**: ✅ TSファイル作成済み (video-010.ts)
+- **ステータス**: ✅ TSファイル作成済み (4HJCCAfDGU4.ts)
 
 ---
 
@@ -92,6 +94,7 @@
 ### 11. 【Codex CLI対応】仕様駆動開発を1コマンドで導入！Spec Driven Codexで要件定義→設計→実装まで完全自動化
 - **URL**: https://www.youtube.com/watch?v=1EQllS_3TJo
 - **ID**: 1EQllS_3TJo
+- **ステータス**: ✅ TSファイル作成済み (1EQllS_3TJo.ts)
 
 ### 12. 【Playwright MCP】Codex CLI の Webアプリ・デザインテストを自動化！AI 駆動の E2Eテスト実践ガイド
 - **URL**: https://www.youtube.com/watch?v=pRHyMLH1bcU
