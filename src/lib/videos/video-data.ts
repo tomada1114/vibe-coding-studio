@@ -1,5 +1,8 @@
 import { video001 } from "@/data/videos/video-001"
 import { video002 } from "@/data/videos/video-002"
+import { video003 } from "@/data/videos/video-003"
+import { video004 } from "@/data/videos/video-004"
+import { video005 } from "@/data/videos/video-005"
 import type { VideoMetadata } from "@/types/video"
 
 /**
@@ -13,7 +16,13 @@ import type { VideoMetadata } from "@/types/video"
  * すべての動画データの配列
  * 新しい動画を追加する場合は、ここにimportとデータを追加してください。
  */
-const allVideosData: VideoMetadata[] = [video001, video002]
+const allVideosData: VideoMetadata[] = [
+  video001,
+  video002,
+  video003,
+  video004,
+  video005,
+]
 
 /**
  * すべての動画データを取得する
