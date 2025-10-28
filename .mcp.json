@@ -1,10 +1,10 @@
 {
   "mcpServers": {
-    "context7": {
-      "type": "stdio",
+    "playwright": {
       "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp"],
-      "env": {}
+      "args": [
+        "@playwright/mcp@latest"
+      ]
     }
   }
 }
