@@ -5,7 +5,7 @@ import type { VideoMetadata } from "@/types/video"
  * Codexスマホアプリ開発チュートリアル
  * React Native/Expoを使った実践的なモバイルアプリ開発
  */
-export const video005: VideoMetadata = {
+export const video_Y15kBuMhCO4: VideoMetadata = {
   // 基本情報
   id: "Y15kBuMhCO4",
   title:

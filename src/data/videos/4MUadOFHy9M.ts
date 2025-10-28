@@ -5,7 +5,7 @@ import type { VideoMetadata } from "@/types/video"
  * OpenAI AgentKitとAgent Builderの使い方解説動画
  * ノーコードでAIワークフローを構築する方法を実践的に解説
  */
-export const video006: VideoMetadata = {
+export const video_4MUadOFHy9M: VideoMetadata = {
   // 基本情報
   id: "4MUadOFHy9M",
   title:

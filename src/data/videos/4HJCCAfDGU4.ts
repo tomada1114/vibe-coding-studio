@@ -5,7 +5,7 @@ import type { VideoMetadata } from "@/types/video"
  * Claude Code vs Codex CLI 徹底比較動画
  * 10の観点から両ツールの違いと使い分けを解説
  */
-export const video010: VideoMetadata = {
+export const video_4HJCCAfDGU4: VideoMetadata = {
   // 基本情報
   id: "4HJCCAfDGU4",
   title:

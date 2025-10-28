@@ -5,7 +5,7 @@ import type { VideoMetadata } from "@/types/video"
  * Claude Sonnet 4.5 vs GPT-5-Codex の性能比較動画
  * 実装速度とコード品質を実際の開発タスクで検証
  */
-export const video008: VideoMetadata = {
+export const video_5ACcnosaEdw: VideoMetadata = {
   // 基本情報
   id: "5ACcnosaEdw",
   title:

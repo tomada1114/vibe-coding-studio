@@ -5,7 +5,7 @@ import type { VideoMetadata } from "@/types/video"
  * AI駆動開発のGitコミット戦略動画
  * ClaudeCodeやCodexを使ったAI駆動開発におけるGitコミットのベストプラクティス
  */
-export const video003: VideoMetadata = {
+export const video_1LP4ZAsU_UI: VideoMetadata = {
   // 基本情報
   id: "1LP4ZAsU_UI",
   title: "AIが書いたコード、いつコミットする？失敗しないGit運用術",

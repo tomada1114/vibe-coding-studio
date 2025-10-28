@@ -5,7 +5,7 @@ import type { VideoMetadata } from "@/types/video"
  * Chrome DevTools MCPの解説動画
  * Playwright MCPとの違いと使い分けを実践的に解説
  */
-export const video009: VideoMetadata = {
+export const video_gXwS9dJewrU: VideoMetadata = {
   // 基本情報
   id: "gXwS9dJewrU",
   title:

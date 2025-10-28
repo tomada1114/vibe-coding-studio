@@ -5,7 +5,7 @@ import type { VideoMetadata } from "@/types/video"
  * Claude Code on the Web 解説動画
  * ブラウザやスマホからAI駆動開発ができる新機能の紹介
  */
-export const video004: VideoMetadata = {
+export const video_UqKd0dxLskU: VideoMetadata = {
   // 基本情報
   id: "UqKd0dxLskU",
   title: "Claude Code on the Web で開発が変わる！外出先でも開発が可能になった！",

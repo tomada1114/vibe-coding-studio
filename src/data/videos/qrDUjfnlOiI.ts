@@ -5,7 +5,7 @@ import type { VideoMetadata } from "@/types/video"
  * Slack×Claude連携の解説動画
  * Slackでのチャット要約、エラー解決など業務効率化の方法を実演
  */
-export const video007: VideoMetadata = {
+export const video_qrDUjfnlOiI: VideoMetadata = {
   // 基本情報
   id: "qrDUjfnlOiI",
   title:
