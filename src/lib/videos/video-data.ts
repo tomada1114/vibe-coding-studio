@@ -3,6 +3,11 @@ import { video002 } from "@/data/videos/video-002"
 import { video003 } from "@/data/videos/video-003"
 import { video004 } from "@/data/videos/video-004"
 import { video005 } from "@/data/videos/video-005"
+import { video006 } from "@/data/videos/video-006"
+import { video007 } from "@/data/videos/video-007"
+import { video008 } from "@/data/videos/video-008"
+import { video009 } from "@/data/videos/video-009"
+import { video010 } from "@/data/videos/video-010"
 import type { VideoMetadata } from "@/types/video"
 
 /**
@@ -22,6 +27,11 @@ const allVideosData: VideoMetadata[] = [
   video003,
   video004,
   video005,
+  video006,
+  video007,
+  video008,
+  video009,
+  video010,
 ]
 
 /**
