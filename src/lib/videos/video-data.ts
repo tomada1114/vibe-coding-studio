@@ -1,13 +1,12 @@
-import { video001 } from "@/data/videos/video-001"
-import { video002 } from "@/data/videos/video-002"
-import { video003 } from "@/data/videos/video-003"
-import { video004 } from "@/data/videos/video-004"
-import { video005 } from "@/data/videos/video-005"
-import { video006 } from "@/data/videos/video-006"
-import { video007 } from "@/data/videos/video-007"
-import { video008 } from "@/data/videos/video-008"
-import { video009 } from "@/data/videos/video-009"
-import { video010 } from "@/data/videos/video-010"
+import { video_1LP4ZAsU_UI } from "@/data/videos/1LP4ZAsU_UI"
+import { video_UqKd0dxLskU } from "@/data/videos/UqKd0dxLskU"
+import { video_Y15kBuMhCO4 } from "@/data/videos/Y15kBuMhCO4"
+import { video_4MUadOFHy9M } from "@/data/videos/4MUadOFHy9M"
+import { video_qrDUjfnlOiI } from "@/data/videos/qrDUjfnlOiI"
+import { video_5ACcnosaEdw } from "@/data/videos/5ACcnosaEdw"
+import { video_gXwS9dJewrU } from "@/data/videos/gXwS9dJewrU"
+import { video_4HJCCAfDGU4 } from "@/data/videos/4HJCCAfDGU4"
+import { video_1EQllS_3TJo } from "@/data/videos/1EQllS_3TJo"
 import type { VideoMetadata } from "@/types/video"
 
 /**
@@ -22,16 +21,15 @@ import type { VideoMetadata } from "@/types/video"
  * 新しい動画を追加する場合は、ここにimportとデータを追加してください。
  */
 const allVideosData: VideoMetadata[] = [
-  video001,
-  video002,
-  video003,
-  video004,
-  video005,
-  video006,
-  video007,
-  video008,
-  video009,
-  video010,
+  video_1LP4ZAsU_UI,
+  video_UqKd0dxLskU,
+  video_Y15kBuMhCO4,
+  video_4MUadOFHy9M,
+  video_qrDUjfnlOiI,
+  video_5ACcnosaEdw,
+  video_gXwS9dJewrU,
+  video_4HJCCAfDGU4,
+  video_1EQllS_3TJo,
 ]
 
 /**
