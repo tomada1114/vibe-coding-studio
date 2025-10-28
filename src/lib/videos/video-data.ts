@@ -8,6 +8,7 @@ import { video_qrDUjfnlOiI } from "@/data/videos/qrDUjfnlOiI"
 import { video_5ACcnosaEdw } from "@/data/videos/5ACcnosaEdw"
 import { video_gXwS9dJewrU } from "@/data/videos/gXwS9dJewrU"
 import { video_4HJCCAfDGU4 } from "@/data/videos/4HJCCAfDGU4"
+import { video_pRHyMLH1bcU } from "@/data/videos/pRHyMLH1bcU"
 import { video_1EQllS_3TJo } from "@/data/videos/1EQllS_3TJo"
 import type { VideoMetadata } from "@/types/video"
 
@@ -33,6 +34,7 @@ const allVideosData: VideoMetadata[] = [
   video_5ACcnosaEdw,
   video_gXwS9dJewrU,
   video_4HJCCAfDGU4,
+  video_pRHyMLH1bcU,
   video_1EQllS_3TJo,
 ]
 
