@@ -5,16 +5,15 @@
 ### 完了した作業
 - ✅ YouTubeチャンネルページにアクセス
 - ✅ 全29本の動画URLリストを取得
-- ✅ 全29本の動画の詳細情報を収集（⚠️ 概要欄は短縮版の可能性）
+- ✅ 全29本の動画の詳細情報を収集
 - ✅ 収集データを`youtube-videos-raw-data.md`に保存
-- ✅ 9本のTSファイル化完了（YouTube IDベースのファイル名に移行済み）
+- ✅ 11本のTSファイル化完了（YouTube IDベースのファイル名）
 - ✅ ファイル名をYouTube IDベースに変更（例: `1LP4ZAsU_UI.ts`）
 - ✅ `youtube-videos-raw-data.md`を整理（完了済み/未処理で分割）
+- ✅ video-004, video-005のTSファイル作成・登録完了
 
 ### 進行中
 - 🔄 残り18本の動画情報のTSファイル化（video-012～029）
-- ⚠️ データ不足の動画（video-004, video-005）の再収集が必要
-- ⚠️ 概要欄が短縮版の動画は、Chrome DevTools MCPで再収集が必要
 
 ---
 
@@ -61,42 +60,78 @@ YouTubeチャンネルの全動画情報を、既存のTypeScript型定義に基
 
 ---
 
-## 🔄 作業フロー（シンプル版）
+## 🔄 作業フロー（推奨ワークフロー）
 
-### 動画1本のTSファイル化の手順
+### ✨ 新しい効率的なワークフロー（推奨）
 
-1. **Chrome DevTools MCPでYouTube動画ページを開く**
-   - 例: `https://www.youtube.com/watch?v=1EQllS_3TJo`
+このワークフローでは、ユーザーがYouTube概要欄をコピペし、AIが正しい形式に変換します。
 
-2. **「もっと見る」をクリックして概要欄を完全展開**
-   ⚠️ **超重要**: 展開せずに進むと情報が不完全になります！
-   - タイムスタンプ欠落
-   - 関連動画リンク取得不可
-   - Udemy講座情報不完全
+#### 手順
 
-3. **概要欄をコピー（または Chrome DevTools MCPのスナップショット機能を使用）**
-   - タイトル、概要欄、タグをClaude（AI）に渡す
+1. **YouTube動画IDの空ファイルを作成**
+   ```bash
+   # 例: video-012の場合（YouTube ID: pRHyMLH1bcU）
+   touch src/data/videos/pRHyMLH1bcU.ts
+   ```
 
-4. **Claude（AI）が概要欄を理解してVideoMetadata型に変換**
-   - 概要欄の構造を解釈：
-     - 💡 この動画で学べること → `learningPoints`
-     - ⏰ タイムライン → `timestamps`
-     - 🚀 Udemy講座 → `udemyCourses` or `customSections`
-     - 🔗 SNS → `social`（共通セクション使用）
-   - 適切な型構造に「いい感じに」マッピング
+2. **YouTube動画ページで概要欄を完全展開してコピー**
+   - ブラウザで`https://www.youtube.com/watch?v=pRHyMLH1bcU`を開く
+   - 「もっと見る」をクリックして概要欄を完全展開
+   - タイトル、公開日、概要欄全文、タグをすべてコピー
 
-5. **`src/data/videos/video-XXX.ts`を直接作成**
-   - 中間ファイル（markdown）は作成しない
-   - その場でTSファイルを完成させる
+3. **空ファイルにコメントアウトで貼り付け**
+   ```typescript
+   // https://www.youtube.com/watch?v=pRHyMLH1bcU
 
-6. **動画データローダーに登録**
+   // # タイトル
+   // 【Playwright MCP】Codex CLI の Webアプリ・デザインテストを自動化！
+
+   // # 概要欄
+   //
+   // 2025/10/15  #VibeCoding #バイブコーディング
+   // 概要欄の内容をそのままコピペ...
+   //
+   // 【タイムライン】
+   // 00:00 イントロ
+   // ...
+   ```
+
+4. **Claude（AI）に変換を依頼**
+   - 「このファイルを正しいVideoMetadata型に変換してください」と依頼
+   - AIが概要欄の構造を理解し、適切な型構造にマッピング
+
+5. **動画データローダーに登録**
    - `src/lib/videos/video-data.ts`に追加
 
-7. **型チェック・Lint確認**
+6. **型チェック・Lint確認**
    ```bash
-   npm run type-check
-   npm run lint
+   npm run type-check && npm run lint
    ```
+
+#### このワークフローの利点
+
+- ✅ **高速**: Chrome DevTools MCPの起動やタイムアウト問題を回避
+- ✅ **確実**: 概要欄の全文を確実に取得できる
+- ✅ **シンプル**: ブラウザ→コピペ→AI変換の3ステップ
+- ✅ **再現性**: コメントアウトされた元データが残るため検証可能
+
+---
+
+### 🔧 旧ワークフロー（Chrome DevTools MCP使用）
+
+Chrome DevTools MCPを使った方法も可能ですが、タイムアウト問題が発生する場合があります。
+
+<details>
+<summary>旧ワークフローの詳細を表示</summary>
+
+1. **Chrome DevTools MCPでYouTube動画ページを開く**
+2. **「もっと見る」をクリックして概要欄を完全展開**
+3. **スナップショット機能で概要欄を取得**
+4. **Claude（AI）が直接VideoMetadata型に変換**
+5. **動画データローダーに登録**
+6. **型チェック・Lint確認**
+
+</details>
 
 ---
 
@@ -176,16 +211,35 @@ export const videoXXX: VideoMetadata = {
 
 ## 📝 次のステップ
 
-### 今すぐやること
-1. Chrome DevTools MCPで video-011 のYouTubeページを開く
-2. 「もっと見る」をクリックして概要欄を完全展開
-3. 概要欄をコピー（またはスナップショット）
-4. Claude（私）に渡して、video-011.ts を作成してもらう
-5. video-data.ts に登録
-6. 型チェック・Lint確認
+### 今すぐやること（推奨ワークフロー）
+
+1. **次の動画IDで空ファイルを作成**
+   ```bash
+   touch src/data/videos/pRHyMLH1bcU.ts  # video-012
+   ```
+
+2. **YouTube動画ページで概要欄をコピー**
+   - `https://www.youtube.com/watch?v=pRHyMLH1bcU`を開く
+   - 「もっと見る」をクリックして完全展開
+   - タイトル・公開日・概要欄全文・タグをコピー
+
+3. **空ファイルにコメントアウトで貼り付け**
+   ```typescript
+   // https://www.youtube.com/watch?v=pRHyMLH1bcU
+   // コピーした内容をそのまま貼り付け
+   ```
+
+4. **Claude（AI）に変換依頼**
+   - 「このファイルを正しいVideoMetadata型に変換してください」
+
+5. **動画ローダーに登録 & 確認**
+   ```bash
+   # video-data.tsに追加後
+   npm run type-check && npm run lint
+   ```
 
 ### その後
-- video-012～029も同様の手順で1本ずつ進める
+- video-013～029も同様の手順で1本ずつ進める
 - 全29本完了後、UIでの表示確認
 
 ---
@@ -233,26 +287,26 @@ export const videoXXX: VideoMetadata = {
 - [x] `youtube-videos-raw-data.md`を整理（完了済み/未処理で分割）
 
 ### データ変換フェーズ 🔄 進行中
-- [x] 10本のTSファイル作成（video-001～010）
-- [ ] ⚠️ 概要欄短縮版動画の再収集（video-011～029）
-- [ ] 19本のTSファイル作成（video-011～029）
+- [x] 11本のTSファイル作成（video-001～video-011）
+- [ ] 18本のTSファイル作成（video-012～029）
 
 ### 統合フェーズ ⏳ 次回以降
-- [x] 10本を動画ローダーに登録（video-001～010）
-- [ ] 残り19本を動画ローダーに登録（video-011～029）
-- [ ] 型チェック・Lint確認
+- [x] 11本を動画ローダーに登録（video-001～011）
+- [ ] 残り18本を動画ローダーに登録（video-012～029）
+- [x] 型チェック・Lint確認（11本完了時点）
 - [ ] テスト実行確認
 - [ ] UIでの表示確認
 
 ---
 
-**最終更新**: 2025-10-28（12:45 UTC+9）
+**最終更新**: 2025-10-28（14:00 UTC+9）
 **進捗**:
 - データ収集フェーズ ✅ 完了
 - ファイル名YouTube IDベース移行 ✅ 完了
-- TSファイル作成 🔄 9/29本完了（video-004, video-005はデータ不足）
+- TSファイル作成 🔄 11/29本完了
+- 新ワークフロー確立 ✅ 完了（コメントアウト方式）
 **次回セッション**:
-1. video-012の概要欄をChrome DevTools MCPで収集（「もっと見る」展開必須）
-2. video-012のTSファイル作成（概要欄→VideoMetadata型へのAI変換）
-3. video-013以降も同様に進める
-4. video-004, video-005のデータ収集と作成
+1. video-012用の空ファイル作成（pRHyMLH1bcU.ts）
+2. YouTube概要欄をコピーしてコメントアウトで貼り付け
+3. AIに変換依頼してVideoMetadata型に変換
+4. video-013以降も同様に進める（1ファイルずつ）
