@@ -1,6 +1,7 @@
 import { video_1LP4ZAsU_UI } from "@/data/videos/1LP4ZAsU_UI"
 import { video_UqKd0dxLskU } from "@/data/videos/UqKd0dxLskU"
 import { video_Y15kBuMhCO4 } from "@/data/videos/Y15kBuMhCO4"
+import { video_SO5qov2qTUE } from "@/data/videos/SO5qov2qTUE"
 import { video_4MUadOFHy9M } from "@/data/videos/4MUadOFHy9M"
 import { video_qrDUjfnlOiI } from "@/data/videos/qrDUjfnlOiI"
 import { video_5ACcnosaEdw } from "@/data/videos/5ACcnosaEdw"
@@ -24,6 +25,7 @@ const allVideosData: VideoMetadata[] = [
   video_1LP4ZAsU_UI,
   video_UqKd0dxLskU,
   video_Y15kBuMhCO4,
+  video_SO5qov2qTUE,
   video_4MUadOFHy9M,
   video_qrDUjfnlOiI,
   video_5ACcnosaEdw,
