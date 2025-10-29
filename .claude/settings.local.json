@@ -24,11 +24,9 @@
     "deny": [],
     "ask": []
   },
-  "disabledMcpjsonServers": [
-    "context7"
-  ],
+  "disabledMcpjsonServers": ["context7"],
   "sandbox": {
     "autoAllowBashIfSandboxed": false,
-    "enabled": true
+    "enabled": false
   }
 }
