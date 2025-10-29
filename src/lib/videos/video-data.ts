@@ -20,6 +20,7 @@ import { video_TDECUH62yYQ } from "@/data/videos/TDECUH62yYQ"
 import { video_TfaNCNrYu8A } from "@/data/videos/TfaNCNrYu8A"
 import { video_TWUpzNGp7fI } from "@/data/videos/TWUpzNGp7fI"
 import { video_UqKd0dxLskU } from "@/data/videos/UqKd0dxLskU"
+import { video_VHZNtl46CJw } from "@/data/videos/VHZNtl46CJw"
 import { video_Xr_HhLuzOy8 } from "@/data/videos/Xr_HhLuzOy8"
 import { video_xrRFnoOeC94 } from "@/data/videos/xrRFnoOeC94"
 import { video_Y15kBuMhCO4 } from "@/data/videos/Y15kBuMhCO4"
@@ -65,6 +66,7 @@ const allVideosData: VideoMetadata[] = [
   video_TfaNCNrYu8A,
   video_Xr_HhLuzOy8,
   video_xrRFnoOeC94,
+  video_VHZNtl46CJw,
   video_ZUr_Sp72q50,
 ]
 
