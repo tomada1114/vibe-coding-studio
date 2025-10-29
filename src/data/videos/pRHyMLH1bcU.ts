@@ -65,7 +65,8 @@ export const video_pRHyMLH1bcU: VideoMetadata = {
         emoji: "💡",
       },
       {
-        title: "【1時間でわかる】OpenAI Codex（ChatGPT）でバイブコーディング入門",
+        title:
+          "【1時間でわかる】OpenAI Codex（ChatGPT）でバイブコーディング入門",
         url: "https://www.youtube.com/watch?v=PLACEHOLDER",
         emoji: "▶︎",
       },

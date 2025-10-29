@@ -86,7 +86,8 @@ export const video_1EQllS_3TJo: VideoMetadata = {
           url: "https://www.youtube.com/watch?v=VIDEO_ID_PLACEHOLDER",
         },
         {
-          label: "【爆速開発】Codex CLIのカスタムコマンドで繰り返し作業を1秒で終わらせる方法！",
+          label:
+            "【爆速開発】Codex CLIのカスタムコマンドで繰り返し作業を1秒で終わらせる方法！",
           url: "https://www.youtube.com/watch?v=VIDEO_ID_PLACEHOLDER",
         },
         {

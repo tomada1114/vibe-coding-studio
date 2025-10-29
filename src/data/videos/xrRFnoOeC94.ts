@@ -66,8 +66,7 @@ export const video_xrRFnoOeC94: VideoMetadata = {
 
   udemyCourses: {
     title: "🚀 体系的に学びたい方へ",
-    description:
-      "Claude Code や AI駆動開発講座のクーポン配布しています！",
+    description: "Claude Code や AI駆動開発講座のクーポン配布しています！",
     cta: {
       text: "Udemyクーポンを確認する",
       url: "https://school.learning-next.app/coupons",

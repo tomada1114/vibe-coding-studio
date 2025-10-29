@@ -35,9 +35,7 @@ export const video_qrDUjfnlOiI: VideoMetadata = {
   // タイムスタンプセクション
   timestamps: {
     title: "⏰ タイムスタンプ",
-    items: [
-      { time: "00:00", label: "はじめに" },
-    ],
+    items: [{ time: "00:00", label: "はじめに" }],
   },
 
   // タグ

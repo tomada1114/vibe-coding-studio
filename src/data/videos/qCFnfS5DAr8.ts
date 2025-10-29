@@ -3,7 +3,8 @@ import type { VideoMetadata } from "@/types/video"
 
 export const video_qCFnfS5DAr8: VideoMetadata = {
   id: "qCFnfS5DAr8",
-  title: "【仕様駆動開発】AWS Kiro がすごい！手戻り削減の要件定義→設計→計画→実装を誰でも実現できる時代へ",
+  title:
+    "【仕様駆動開発】AWS Kiro がすごい！手戻り削減の要件定義→設計→計画→実装を誰でも実現できる時代へ",
   publishedAt: "2025-09-02",
   videoUrl: "https://www.youtube.com/watch?v=qCFnfS5DAr8",
 

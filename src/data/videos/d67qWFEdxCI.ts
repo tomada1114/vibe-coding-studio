@@ -77,7 +77,8 @@ export const video_d67qWFEdxCI: VideoMetadata = {
         emoji: "🎥",
       },
       {
-        title: "実践的なバイブコーディング開発を体験するならこちらの動画もおすすめ",
+        title:
+          "実践的なバイブコーディング開発を体験するならこちらの動画もおすすめ",
         url: "https://x.gd/bj31v",
         emoji: "🎓",
       },

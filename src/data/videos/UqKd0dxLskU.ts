@@ -8,7 +8,8 @@ import type { VideoMetadata } from "@/types/video"
 export const video_UqKd0dxLskU: VideoMetadata = {
   // 基本情報
   id: "UqKd0dxLskU",
-  title: "Claude Code on the Web で開発が変わる！外出先でも開発が可能になった！",
+  title:
+    "Claude Code on the Web で開発が変わる！外出先でも開発が可能になった！",
   publishedAt: "2025-10-20T12:00:00+09:00",
   videoUrl: "https://www.youtube.com/watch?v=UqKd0dxLskU",
 
