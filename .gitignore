@@ -48,3 +48,6 @@ node_modules/
 
 *storybook.log
 storybook-static
+
+# Claude local settings
+.claude/settings.local.json
