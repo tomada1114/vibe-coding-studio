@@ -62,7 +62,7 @@ export const video_1TJydjQM6eo: VideoMetadata = {
     ],
     cta: {
       text: "90% OFFクーポンはこちら",
-      url: "https://school.learning-next.app/coupons",
+      url: "https://www.vibecodingstudio.dev/coupons?topic=codex",
     },
   },
 

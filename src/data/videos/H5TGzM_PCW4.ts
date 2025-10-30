@@ -82,7 +82,7 @@ export const video_H5TGzM_PCW4: VideoMetadata = {
     ],
     cta: {
       text: "🎁 限定クーポンで90%OFF！",
-      url: "https://school.learning-next.app/coup...",
+      url: "https://www.vibecodingstudio.dev/coupons?topic=codex",
     },
   },
 
