@@ -13,8 +13,9 @@ interface VideoDetailProps {
 
 /**
  * セクション区切り線（プレーンテキスト用）
+ * 30文字に短縮して視覚的バランスを改善
  */
-const SECTION_DIVIDER = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+const SECTION_DIVIDER = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
 /**
  * カスタムセクションをプレーンテキストに変換
@@ -104,9 +105,14 @@ function formatVideoAsPlainText(video: VideoMetadata): string {
   if (video.relatedVideos) {
     text += `${SECTION_DIVIDER}\n\n`
     text += `${video.relatedVideos.title}\n\n`
-    video.relatedVideos.videos.forEach(relatedVideo => {
-      const emoji = relatedVideo.emoji ? `${relatedVideo.emoji} ` : ""
-      text += `${emoji}${relatedVideo.title}: ${relatedVideo.url}\n`
+    video.relatedVideos.videos.forEach((relatedVideo, index) => {
+      // タイトルに中点「・」を付与（絵文字は使用しない）
+      text += `・${relatedVideo.title}\n`
+      text += `${relatedVideo.url}\n`
+      // 最後の動画でない場合は空白行を追加
+      if (video.relatedVideos && index < video.relatedVideos.videos.length - 1) {
+        text += "\n"
+      }
     })
     text += "\n"
   }
@@ -152,9 +158,9 @@ function formatVideoAsPlainText(video: VideoMetadata): string {
   })
   text += "\n"
 
-  // タグ
-  text += `${SECTION_DIVIDER}\n\n`
-  text += video.tags.join(" ") + "\n\n"
+  // タグ（#記号を自動付与）
+  text += "\n"
+  text += video.tags.map(tag => `#${tag}`).join(" ") + "\n\n"
 
   // エンゲージメント促進セクション
   text += `${SECTION_DIVIDER}\n\n`
