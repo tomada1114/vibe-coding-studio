@@ -103,8 +103,10 @@ vibe-coding-studio/
 │   │   └── claude-code/
 │   │       └── commands/
 │   │           ├── page.tsx           # 一覧ページ
+│   │           ├── loading.tsx        # 一覧ページのローディング状態
 │   │           └── [slug]/
-│   │               └── page.tsx       # 詳細ページ
+│   │               ├── page.tsx       # 詳細ページ
+│   │               └── loading.tsx    # 詳細ページのローディング状態
 │   ├── data/
 │   │   ├── commands/        # 公開用カスタムコマンド（このディレクトリの内容を公開）
 │   │   │   ├── convert-video.md
@@ -422,6 +424,33 @@ export async function generateMetadata(): Promise<Metadata>
 
 **状態管理**: ステートレス（静的ページ）
 
+**ローディング状態（要件7.5対応）**:
+- **実装方法**: Next.js App Router の `loading.tsx` を使用
+- **配置**: `src/app/claude-code/commands/loading.tsx`
+- **表示内容**: スケルトンローディング（カードのプレースホルダー）
+
+```typescript
+// src/app/claude-code/commands/loading.tsx
+export default function Loading() {
+  return (
+    <Container className="mt-16 mb-32 sm:mt-32">
+      <header className="max-w-2xl">
+        <div className="h-12 w-64 bg-gray-200 rounded animate-pulse mb-6" />
+        <div className="h-6 w-full bg-gray-200 rounded animate-pulse" />
+      </header>
+      <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {[1, 2, 3, 4, 5, 6].map(i => (
+          <div key={i} className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+            <div className="h-6 w-3/4 bg-gray-200 rounded animate-pulse mb-2" />
+            <div className="h-4 w-1/2 bg-gray-200 rounded animate-pulse" />
+          </div>
+        ))}
+      </div>
+    </Container>
+  )
+}
+```
+
 #### CommandDetailPage
 
 **責務と境界**
@@ -470,6 +499,27 @@ export default async function CommandDetailPage({
 **統合戦略**:
 - **既存のパターンを踏襲**: `/videos/[id]/page.tsx` と同様の構造を採用
 - **後方互換性**: 既存ページに影響を与えない独立したルート
+
+**ローディング状態（要件7.5対応）**:
+- **実装方法**: Next.js App Router の `loading.tsx` を使用
+- **配置**: `src/app/claude-code/commands/[slug]/loading.tsx`
+- **表示内容**: スケルトンローディング（詳細ページのプレースホルダー）
+
+```typescript
+// src/app/claude-code/commands/[slug]/loading.tsx
+export default function Loading() {
+  return (
+    <Container className="mt-16 mb-32 sm:mt-32">
+      <div className="mb-8">
+        <div className="h-6 w-32 bg-gray-200 rounded animate-pulse" />
+      </div>
+      <div className="h-12 w-3/4 bg-gray-200 rounded animate-pulse mb-6" />
+      <div className="h-6 w-full bg-gray-200 rounded animate-pulse mb-4" />
+      <div className="h-96 w-full bg-gray-200 rounded animate-pulse" />
+    </Container>
+  )
+}
+```
 
 ### UIコンポーネント層
 
@@ -631,7 +681,7 @@ interface CommandMetadata {
   /** スラッグ（ファイル名から生成、例: "convert-video"） */
   slug: string
 
-  /** コマンドタイトル（ファイル名から生成、またはフロントマターから取得） */
+  /** コマンドタイトル（常にファイル名から生成、例: "Convert Video"） */
   title: string
 
   /** 説明文（フロントマターの description フィールド） */
@@ -656,9 +706,20 @@ interface CommandMetadata {
 
 **ビジネスルールと不変条件**:
 - `slug` は一意であり、URL として有効な形式である
-- `title` は最小1文字、最大200文字
+- `title` は常にファイル名から生成される（ケバブケースをタイトルケースに変換、例: `convert-video` → `Convert Video`）
 - `description` はオプションだが、存在する場合は最大500文字
 - `rawContent` は常にフロントマターを含む完全なファイル内容を保持
+
+**タイトル生成ロジック**:
+```typescript
+// ファイル名 "convert-video.md" からタイトルを生成
+const slug = "convert-video" // .md を除去
+const title = slug
+  .split('-')
+  .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+  .join(' ')
+// 結果: "Convert Video"
+```
 
 ### データコントラクト（フロントマター）
 
@@ -748,6 +809,37 @@ graph LR
 - **発生条件**: Clipboard API がサポートされていない、またはHTTPSでない環境
 - **エラーメッセージ**: "コピーに失敗しました。手動でテキストを選択してください"
 - **対応**: フォールバック UI を表示（テキストエリアで手動選択を促す）
+
+**ネットワークエラー（要件7.4対応）**:
+- **発生条件**: ページ読み込み中にネットワーク接続が失われた、またはサーバーエラーが発生
+- **エラーメッセージ**: "ネットワークエラーが発生しました。接続を確認してください"
+- **対応**:
+  1. **AsyncErrorBoundary でキャッチ**: ページレベルのエラー境界でネットワークエラーをキャッチ
+  2. **リトライCTA**: "再試行" ボタンを表示し、ページをリロード（`window.location.reload()`）
+  3. **オフラインモード（将来）**: Service Worker を使用したオフラインキャッシュ（初期バージョンでは対象外）
+
+**実装パターン**:
+```typescript
+// AsyncErrorBoundary でのネットワークエラーハンドリング
+export function NetworkErrorFallback({ error, resetErrorBoundary }) {
+  return (
+    <div className="text-center py-16">
+      <h2 className="text-2xl font-semibold text-gray-950 mb-4">
+        ネットワークエラー
+      </h2>
+      <p className="text-gray-600 mb-6">
+        接続に問題が発生しました。ネットワーク接続を確認してください。
+      </p>
+      <button
+        onClick={() => window.location.reload()}
+        className="px-4 py-2 bg-gray-950 text-white rounded-full"
+      >
+        再試行
+      </button>
+    </div>
+  )
+}
+```
 
 ### エラーフロー図
 
