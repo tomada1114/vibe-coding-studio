@@ -5,7 +5,7 @@ export const video_xrRFnoOeC94: VideoMetadata = {
   id: "xrRFnoOeC94",
   title:
     "【30分で完成】Claude Code × バイブコーディングでタイピングゲーム作成｜React初心者でも動くアプリが作れる",
-  publishedAt: "2025-08-15",
+  publishedAt: "2025-08-15T12:00:00+09:00",
   videoUrl: "https://www.youtube.com/watch?v=xrRFnoOeC94",
 
   opening: {
@@ -57,7 +57,6 @@ export const video_xrRFnoOeC94: VideoMetadata = {
     title: "📌 関連動画",
     videos: [
       {
-        emoji: "🎓",
         title: "Claude Code完全ガイド（インストール〜設定まで）",
         url: "https://www.youtube.com/watch?v=Xr_HhLuzOy8",
       },
@@ -69,7 +68,7 @@ export const video_xrRFnoOeC94: VideoMetadata = {
     description: "Claude Code や AI駆動開発講座のクーポン配布しています！",
     cta: {
       text: "Udemyクーポンを確認する",
-      url: "https://school.learning-next.app/coupons",
+      url: "https://www.vibecodingstudio.dev/coupons?topic=claude-code",
     },
   },
 

@@ -5,7 +5,7 @@ export const video_TDECUH62yYQ: VideoMetadata = {
   id: "TDECUH62yYQ",
   title:
     "【Playwright入門】Claude Code × MCPでブラウザテストを完全自動化！AI 駆動の E2Eテスト実践ガイド",
-  publishedAt: "2025-09-05",
+  publishedAt: "2025-09-05T12:00:00+09:00",
   videoUrl: "https://www.youtube.com/watch?v=TDECUH62yYQ",
 
   opening: {
@@ -43,18 +43,18 @@ export const video_TDECUH62yYQ: VideoMetadata = {
   },
 
   tags: [
-    "#ClaudeCode",
-    "#MCP",
-    "#Playwright",
-    "#E2Eテスト",
-    "#テスト自動化",
-    "#AI駆動開発",
-    "#VibeCoding",
-    "#バイブコーディング",
-    "#プログラミング",
-    "#Webアプリ開発",
-    "#自動テスト",
-    "#ModelContextProtocol",
+    "ClaudeCode",
+    "MCP",
+    "Playwright",
+    "E2Eテスト",
+    "テスト自動化",
+    "AI駆動開発",
+    "VibeCoding",
+    "バイブコーディング",
+    "プログラミング",
+    "Webアプリ開発",
+    "自動テスト",
+    "ModelContextProtocol",
   ],
 
   customSections: [
@@ -72,7 +72,7 @@ export const video_TDECUH62yYQ: VideoMetadata = {
       "「Claude Code × MCP完全攻略」Udemy講座でさらに深く学べます！\n5つのMCPツールを使った本格的な開発手法を習得できます。",
     cta: {
       text: "特別クーポンはこちら",
-      url: "https://school.learning-next.app/coupons",
+      url: "https://www.vibecodingstudio.dev/coupons?topic=claude-code",
     },
   },
 
@@ -80,7 +80,6 @@ export const video_TDECUH62yYQ: VideoMetadata = {
     title: "📚 関連動画",
     videos: [
       {
-        emoji: "📺",
         title: "Claude Code入門（1時間で完全マスター）",
         url: "https://www.youtube.com/watch?v=1TJydjQM6eo",
       },

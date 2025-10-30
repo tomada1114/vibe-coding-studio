@@ -5,7 +5,7 @@ export const video_qCFnfS5DAr8: VideoMetadata = {
   id: "qCFnfS5DAr8",
   title:
     "【仕様駆動開発】AWS Kiro がすごい！手戻り削減の要件定義→設計→計画→実装を誰でも実現できる時代へ",
-  publishedAt: "2025-09-02",
+  publishedAt: "2025-09-02T12:00:00+09:00",
   videoUrl: "https://www.youtube.com/watch?v=qCFnfS5DAr8",
 
   opening: {
@@ -39,29 +39,30 @@ export const video_qCFnfS5DAr8: VideoMetadata = {
     ],
   },
 
-  tags: [],
+  tags: [
+    "仕様駆動開発",
+    "AWS Kiro",
+    "AI駆動開発",
+    "VibeCoding",
+    "バイブコーディング",
+    "プログラミング",
+    "AI開発ツール",
+  ],
 
   udemyCourses: {
     title: "📚 さらに詳しく学びたい方へ",
     description: "この動画はUdemy講座の一部を無料公開したものです！",
     courses: [
       "🎓 【AWS Kiro完全ガイド】仕様駆動開発で学ぶ次世代AI開発",
-      "",
-      "体系的に学べる講座では、さらに以下の内容も学ぶことができます。",
       "✨ エージェントフックで開発タスクの自動化",
       "✨ ステアリングでプロジェクト情報の効率管理",
       "✨ MCP連携(Context 7、Playwright統合)",
       "✨ Next.jsメモアプリの本格開発",
       "✨ テスト駆動開発の実践",
-      "",
-      "85%OFFクーポンで1,500円！(通常9,800円)",
-      "",
-      "体系的に学べる完全版で、Kiroの本領発揮を体験！",
-      "開発者として次のレベルへステップアップしましょう。",
     ],
     cta: {
       text: "Udemy講座を見る",
-      url: "https://school.learning-next.app/coup...",
+      url: "https://www.vibecodingstudio.dev/coupons",
     },
   },
 

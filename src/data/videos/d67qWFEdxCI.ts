@@ -5,13 +5,12 @@ export const video_d67qWFEdxCI: VideoMetadata = {
   id: "d67qWFEdxCI",
   title:
     "【AI駆動開発】初心者OK！Claude Codeでバイブコーディング〜React ポモドーロタイマーを作る",
-  publishedAt: "2025-08-12",
+  publishedAt: "2025-08-12T12:00:00+09:00",
   videoUrl: "https://www.youtube.com/watch?v=d67qWFEdxCI",
 
   opening: {
     lines: [
       "こんにちは、とまだです！",
-      "",
       "今回はClaude Codeを使ったVibe Codingの実践動画です。",
       "ポモドーロタイマーアプリを約30分で、基本機能から多言語対応まで実装していきます。",
     ],
@@ -43,16 +42,16 @@ export const video_d67qWFEdxCI: VideoMetadata = {
   },
 
   tags: [
-    "#ポモドーロタイマー",
-    "#VibeCoding",
-    "#ClaudeCode",
-    "#AI駆動開発",
-    "#React",
-    "#プログラミング",
-    "#Vite",
-    "#多言語対応",
-    "#個人開発",
-    "#Webアプリ開発",
+    "ポモドーロタイマー",
+    "VibeCoding",
+    "ClaudeCode",
+    "AI駆動開発",
+    "React",
+    "プログラミング",
+    "Vite",
+    "多言語対応",
+    "個人開発",
+    "Webアプリ開発",
   ],
 
   customSections: [
@@ -74,13 +73,11 @@ export const video_d67qWFEdxCI: VideoMetadata = {
       {
         title: "Claude Code初期設定がまだの方",
         url: "https://www.youtube.com/watch?v=4MUadOFHy9M",
-        emoji: "🎥",
       },
       {
         title:
           "実践的なバイブコーディング開発を体験するならこちらの動画もおすすめ",
         url: "https://x.gd/bj31v",
-        emoji: "🎓",
       },
     ],
   },

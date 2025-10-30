@@ -55,18 +55,18 @@ export const video_5ACcnosaEdw: VideoMetadata = {
 
   // タグ
   tags: [
-    "#claude",
-    "#VibeCoding",
-    "#sonnet",
-    "#ClaudeSonnet4.5",
-    "#GPT5Codex",
-    "#コード品質",
-    "#AI駆動開発",
-    "#ClaudeCode",
-    "#CodexCLI",
-    "#anthropic",
-    "#codex",
-    "#python",
+    "claude",
+    "VibeCoding",
+    "sonnet",
+    "ClaudeSonnet4.5",
+    "GPT5Codex",
+    "コード品質",
+    "AI駆動開発",
+    "ClaudeCode",
+    "CodexCLI",
+    "anthropic",
+    "codex",
+    "python",
   ],
 
   // カスタムセクション
@@ -88,8 +88,8 @@ export const video_5ACcnosaEdw: VideoMetadata = {
     title: "🚀 AI駆動開発を体系的に学ぶ",
     description: "UdemyでClaude Code/Codex CLI実践講座公開中",
     cta: {
-      text: "限定クーポンで最大90%OFF！",
-      url: "https://school.learning-next.app/coupons",
+      text: "限定クーポンで最大90%OFF!",
+      url: "https://www.vibecodingstudio.dev/coupons",
     },
   },
 

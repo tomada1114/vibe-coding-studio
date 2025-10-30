@@ -61,18 +61,18 @@ export const video_4MUadOFHy9M: VideoMetadata = {
 
   // タグ
   tags: [
-    "#AgentBuilder",
-    "#VibeCoding",
-    "#バイブコーディング",
-    "#AgentKit",
-    "#OpenAI",
-    "#DevDay2025",
-    "#AI駆動開発",
-    "#ノーコード",
-    "#AIエージェント",
-    "#ワークフロー",
-    "#ChatGPT",
-    "#プログラミング",
+    "AgentBuilder",
+    "VibeCoding",
+    "バイブコーディング",
+    "AgentKit",
+    "OpenAI",
+    "DevDay2025",
+    "AI駆動開発",
+    "ノーコード",
+    "AIエージェント",
+    "ワークフロー",
+    "ChatGPT",
+    "プログラミング",
   ],
 
   // カスタムセクション

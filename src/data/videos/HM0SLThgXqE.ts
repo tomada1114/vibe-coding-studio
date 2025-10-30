@@ -5,13 +5,12 @@ export const video_HM0SLThgXqE: VideoMetadata = {
   id: "HM0SLThgXqE",
   title:
     "【仕様駆動開発】cc-sddでClaude Code/CursorなどをKiro化！日本語対応の国産ツールで簡単に始めるスペック駆動開発",
-  publishedAt: "2025-09-19",
+  publishedAt: "2025-09-19T12:00:00+09:00",
   videoUrl: "https://www.youtube.com/watch?v=HM0SLThgXqE",
 
   opening: {
     lines: [
       "こんにちは、とまだです！",
-      "",
       "今回は、日本の開発者が作った仕様駆動開発ツール「cc-sdd」を徹底解説します。",
       "AWS Kiroの仕様駆動開発（Spec-Driven Development）を、Claude CodeやCursorで実践できる神ツールです。",
     ],
@@ -46,15 +45,15 @@ export const video_HM0SLThgXqE: VideoMetadata = {
   },
 
   tags: [
-    "#cc_sdd",
-    "#AWS_Kiro",
-    "#仕様駆動開発",
-    "#SDD",
-    "#ClaudeCode",
-    "#Cursor",
-    "#AI駆動開発",
-    "#国産ツール",
-    "#日本語対応",
+    "cc_sdd",
+    "AWS_Kiro",
+    "仕様駆動開発",
+    "SDD",
+    "ClaudeCode",
+    "Cursor",
+    "AI駆動開発",
+    "国産ツール",
+    "日本語対応",
   ],
 
   customSections: [
@@ -89,15 +88,13 @@ export const video_HM0SLThgXqE: VideoMetadata = {
     videos: [
       {
         title:
-          "【仕様駆動開発】AWS Kiro がすごい！手戻り削減の要件定義→設計→計画→実装を誰でも実現できる時代へ",
+          "【仕様駆動開発】AWS Kiro がすごい!手戻り削減の要件定義→設計→計画→実装を誰でも実現できる時代へ",
         url: "https://www.youtube.com/watch?v=VIDEO_ID_1",
-        emoji: "🚀",
       },
       {
         title:
-          "【1時間で速習】Claude Code完全ガイド！AI駆動開発で企業サイトを作ってデプロイまで実演！",
+          "【1時間で速習】Claude Code完全ガイド!AI駆動開発で企業サイトを作ってデプロイまで実演!",
         url: "https://www.youtube.com/watch?v=VIDEO_ID_2",
-        emoji: "📚",
       },
     ],
   },

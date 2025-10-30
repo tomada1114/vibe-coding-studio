@@ -5,19 +5,16 @@ export const video_H5TGzM_PCW4: VideoMetadata = {
   id: "H5TGzM_PCW4",
   title:
     "【1時間でわかる】OpenAI Codex（ChatGPT）でバイブコーディング入門！IDE・CLI 版の比較と基礎を動画1本で完全理解",
-  publishedAt: "2025-09-08",
+  publishedAt: "2025-09-08T12:00:00+09:00",
   videoUrl: "https://www.youtube.com/watch?v=H5TGzM_PCW4",
 
   opening: {
     lines: [
       "こんにちは、とまだです！",
-      "",
       "「ChatGPTのサブスク持ってるけど、Codexって何？」",
       "「Claude Codeは使ってるけど、Codexの違いがわからない」",
       "「IDE版とCLI版って何が違うの？」",
-      "",
       "そんな疑問を1時間で完全解決します！",
-      "",
       "今回は、OpenAIが提供するAIエージェント「Codex」について、実際にWebサイトやランディングページを作りながら、基礎から実践まで徹底的に解説しました。",
     ],
   },
@@ -49,7 +46,16 @@ export const video_H5TGzM_PCW4: VideoMetadata = {
     ],
   },
 
-  tags: [],
+  tags: [
+    "OpenAI Codex",
+    "Codex",
+    "ChatGPT",
+    "AI駆動開発",
+    "VibeCoding",
+    "バイブコーディング",
+    "プログラミング",
+    "Webアプリ開発",
+  ],
 
   customSections: [
     {

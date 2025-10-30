@@ -52,16 +52,16 @@ export const video_VHZNtl46CJw: VideoMetadata = {
 
   // タグ
   tags: [
-    "#Junie",
-    "#JetBrains",
-    "#RubyMine",
-    "#GPT5",
-    "#AI駆動開発",
-    "#バイブコーディング",
-    "#VibeCoding",
-    "#RubyonRails",
-    "#ClaudeCode比較",
-    "#AIエージェント",
+    "Junie",
+    "JetBrains",
+    "RubyMine",
+    "GPT5",
+    "AI駆動開発",
+    "バイブコーディング",
+    "VibeCoding",
+    "RubyonRails",
+    "ClaudeCode比較",
+    "AIエージェント",
   ],
 
   // カスタムセクション

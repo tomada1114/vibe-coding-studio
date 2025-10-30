@@ -5,7 +5,7 @@ export const video_1TJydjQM6eo: VideoMetadata = {
   id: "1TJydjQM6eo",
   title:
     "【Codex CLI活用術】MCPサーバを設定する方法！config.toml と CLI コマンドの使い方を初心者向けに解説",
-  publishedAt: "2025-09-20",
+  publishedAt: "2025-09-20T12:00:00+09:00",
   videoUrl: "https://www.youtube.com/watch?v=1TJydjQM6eo",
 
   opening: {

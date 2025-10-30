@@ -5,20 +5,17 @@ export const video__VhJCZtQXUc: VideoMetadata = {
   id: "_VhJCZtQXUc",
   title:
     "【爆速開発】Codex CLIのカスタムコマンドで繰り返し作業を1秒で終わらせる方法！実践デモ付き",
-  publishedAt: "2025-09-13",
+  publishedAt: "2025-09-13T12:00:00+09:00",
   videoUrl: "https://www.youtube.com/watch?v=_VhJCZtQXUc",
 
   opening: {
     lines: [
       "こんにちは、とまだです！",
-      "",
       "「Codex CLIで同じ指示を何度も入力するのが面倒...」",
       "「コードレビューやリファクタリングをもっと効率化したい」",
       "「Claude Codeのカスタムコマンドみたいな機能がCodexにもあれば...」",
-      "",
       "実は、Codex CLIには「カスタムプロンプト」という超便利な機能があるんです！",
       "※便宜上、カスタムコマンドと呼ぶこともあります。",
-      "",
       "今回は、よく使う指示をコマンド化して、/reviewと打つだけでコードレビューができる方法を実演しながら解説します。",
     ],
   },
@@ -45,7 +42,16 @@ export const video__VhJCZtQXUc: VideoMetadata = {
     ],
   },
 
-  tags: [],
+  tags: [
+    "Codex CLI",
+    "codex",
+    "カスタムコマンド",
+    "カスタムプロンプト",
+    "AI駆動開発",
+    "VibeCoding",
+    "バイブコーディング",
+    "プログラミング",
+  ],
 
   relatedVideos: {
     title: "📌 関連動画",
@@ -53,12 +59,10 @@ export const video__VhJCZtQXUc: VideoMetadata = {
       {
         title: "【1時間でわかる】OpenAI Codex入門",
         url: "https://www.youtube.com/watch?v=PLACEHOLDER1",
-        emoji: "▶︎",
       },
       {
         title: "Claude Code vs Codex 徹底比較",
         url: "https://www.youtube.com/watch?v=PLACEHOLDER2",
-        emoji: "▶︎",
       },
     ],
   },
@@ -75,8 +79,8 @@ export const video__VhJCZtQXUc: VideoMetadata = {
       "✨ 実践的なアプリ開発の全工程",
     ],
     cta: {
-      text: "🎁 限定クーポンで最大90%OFF！",
-      url: "https://school.learning-next.app/coup",
+      text: "🎁 限定クーポンで最大90%OFF!",
+      url: "https://www.vibecodingstudio.dev/coupons?topic=codex",
     },
   },
 

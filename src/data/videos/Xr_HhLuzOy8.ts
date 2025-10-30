@@ -5,7 +5,7 @@ export const video_Xr_HhLuzOy8: VideoMetadata = {
   id: "Xr_HhLuzOy8",
   title:
     "【1時間で速習】Claude Code完全ガイド   AI駆動開発で企業サイトを作ってデプロイまで実演！",
-  publishedAt: "2025-08-08",
+  publishedAt: "2025-08-08T12:00:00+09:00",
   videoUrl: "https://www.youtube.com/watch?v=Xr_HhLuzOy8",
 
   opening: {
@@ -73,7 +73,7 @@ export const video_Xr_HhLuzOy8: VideoMetadata = {
       "Vibe Coding でアプリを作る Udemy 講座を多数開講しています。ベストセラー講座もお得に学べるクーポンを配布しています！",
     cta: {
       text: "クーポンを取得する",
-      url: "https://school.learning-next.app/coupons",
+      url: "https://www.vibecodingstudio.dev/coupons?topic=claude-code",
     },
   },
 

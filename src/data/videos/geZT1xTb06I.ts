@@ -5,7 +5,7 @@ export const video_geZT1xTb06I: VideoMetadata = {
   id: "geZT1xTb06I",
   title:
     "【無料】Replit Agent3で知識ゼロからバイブコーディング！ブラウザだけでWeb・データ分析・3Dゲーム・自動化ツールを作れる最新 AI エディタを試してみた",
-  publishedAt: "2025-09-12",
+  publishedAt: "2025-09-12T12:00:00+09:00",
   videoUrl: "https://www.youtube.com/watch?v=geZT1xTb06I",
 
   opening: {
@@ -103,7 +103,7 @@ export const video_geZT1xTb06I: VideoMetadata = {
     description: "AI駆動開発・バイブコーディング講座を多数公開中！",
     cta: {
       text: "Udemy講座一覧はこちら",
-      url: "https://school.learning-next.app/coupons",
+      url: "https://www.vibecodingstudio.dev/coupons",
     },
   },
 
