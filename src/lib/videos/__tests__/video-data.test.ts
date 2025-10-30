@@ -48,9 +48,9 @@ describe("データローダーの単体テスト", () => {
 
   describe("getVideoById()", () => {
     test("指定されたIDの動画データを返す", () => {
-      const video = getVideoById("video-001")
+      const video = getVideoById("1LP4ZAsU_UI")
       expect(video).toBeDefined()
-      expect(video?.id).toBe("video-001")
+      expect(video?.id).toBe("1LP4ZAsU_UI")
       expect(video?.title).toBeTruthy()
     })
 
@@ -65,8 +65,8 @@ describe("データローダーの単体テスト", () => {
     })
 
     test("複数の動画を正しく取得できる", () => {
-      const video1 = getVideoById("video-001")
-      const video2 = getVideoById("video-002")
+      const video1 = getVideoById("1LP4ZAsU_UI")
+      const video2 = getVideoById("Y15kBuMhCO4")
       expect(video1).toBeDefined()
       expect(video2).toBeDefined()
       expect(video1?.id).not.toBe(video2?.id)
@@ -82,8 +82,8 @@ describe("データローダーの単体テスト", () => {
 
     test("既知の動画IDが含まれている", () => {
       const ids = getAllVideoIds()
-      expect(ids).toContain("video-001")
-      expect(ids).toContain("video-002")
+      expect(ids).toContain("1LP4ZAsU_UI")
+      expect(ids).toContain("Y15kBuMhCO4")
     })
 
     test("動画IDの数がgetAllVideos()の長さと一致する", () => {

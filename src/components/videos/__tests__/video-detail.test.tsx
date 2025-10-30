@@ -30,7 +30,7 @@ const mockVideoData: VideoMetadata = {
     ],
   },
 
-  tags: ["#テスト", "#サンプル", "#動画"],
+  tags: ["テスト", "サンプル", "動画"],
 
   social: {
     title: "🔗 SNS・コミュニティ",
@@ -79,10 +79,10 @@ describe("VideoDetail", () => {
       expect(text).toMatch(/2025年(9月30日|10月1日)/)
     })
 
-    it("セクション区切り線が表示される", () => {
+    it("セクション区切り線が表示される（30文字に短縮）", () => {
       const { container } = render(<VideoDetail video={mockVideoData} />)
       const text = container.textContent || ""
-      expect(text).toContain("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+      expect(text).toContain("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
     })
 
     it("冒頭セクションの内容がプレーンテキストに含まれる", () => {
@@ -110,9 +110,10 @@ describe("VideoDetail", () => {
       expect(text).toContain("15:45 - まとめ")
     })
 
-    it("タグがスペース区切りでプレーンテキストに含まれる", () => {
+    it("タグが#記号付きでスペース区切りでプレーンテキストに含まれる", () => {
       const { container } = render(<VideoDetail video={mockVideoData} />)
       const text = container.textContent || ""
+      // タグデータには#記号を含めずに管理し、表示時に自動的に#を付与する
       expect(text).toContain("#テスト #サンプル #動画")
     })
 
@@ -144,15 +145,110 @@ describe("VideoDetail", () => {
     })
   })
 
-  describe("オプションセクションのテスト", () => {
-    it("関連動画セクションが「タイトル: URL」形式で表示される", () => {
+  describe("新規要件: 表示フォーマットの最適化", () => {
+    it("セクション区切り線が短縮されている（30文字程度）", () => {
+      const { container } = render(<VideoDetail video={mockVideoData} />)
+      const text = container.textContent || ""
+      // 区切り線が約30文字であることを確認
+      const dividerMatch = text.match(/━{20,40}/)
+      expect(dividerMatch).toBeTruthy()
+      if (dividerMatch) {
+        expect(dividerMatch[0].length).toBeLessThanOrEqual(35)
+        expect(dividerMatch[0].length).toBeGreaterThanOrEqual(25)
+      }
+    })
+
+    it("タグセクションの前に区切り線が表示されない", () => {
+      const { container } = render(<VideoDetail video={mockVideoData} />)
+      const text = container.textContent || ""
+      // タグセクションの直前に区切り線が存在しないことを確認
+      const tagSectionPattern = /━+\s*\n\s*#テスト/
+      expect(text).not.toMatch(tagSectionPattern)
+    })
+
+    it("関連動画のタイトルとURLが改行で区切られている", () => {
       const videoWithRelated: VideoMetadata = {
         ...mockVideoData,
         relatedVideos: {
           title: "📌 関連動画",
           videos: [
             {
-              emoji: "🎯",
+              title: "関連動画1",
+              url: "https://www.youtube.com/watch?v=related1",
+            },
+            {
+              title: "関連動画2",
+              url: "https://www.youtube.com/watch?v=related2",
+            },
+          ],
+        },
+      }
+
+      const { container } = render(<VideoDetail video={videoWithRelated} />)
+      const text = container.textContent || ""
+      // タイトルとURLが改行で区切られていることを確認
+      expect(text).toMatch(/関連動画1\s*\n\s*https:\/\/www\.youtube\.com/)
+      expect(text).toMatch(/関連動画2\s*\n\s*https:\/\/www\.youtube\.com/)
+    })
+
+    it("複数の関連動画の間に空白行が存在する", () => {
+      const videoWithRelated: VideoMetadata = {
+        ...mockVideoData,
+        relatedVideos: {
+          title: "📌 関連動画",
+          videos: [
+            {
+              title: "関連動画1",
+              url: "https://www.youtube.com/watch?v=related1",
+            },
+            {
+              title: "関連動画2",
+              url: "https://www.youtube.com/watch?v=related2",
+            },
+          ],
+        },
+      }
+
+      const { container } = render(<VideoDetail video={videoWithRelated} />)
+      const text = container.textContent || ""
+      // 関連動画間に空白行が存在することを確認
+      expect(text).toMatch(
+        /related1\s*\n\s*\n\s*・\s*関連動画2/
+      )
+    })
+
+    it("関連動画のタイトルに中点「・」が使用される", () => {
+      const videoWithRelated: VideoMetadata = {
+        ...mockVideoData,
+        relatedVideos: {
+          title: "📌 関連動画",
+          videos: [
+            {
+              title: "関連動画1",
+              url: "https://www.youtube.com/watch?v=related1",
+            },
+          ],
+        },
+      }
+
+      const { container } = render(<VideoDetail video={videoWithRelated} />)
+      const text = container.textContent || ""
+      // タイトルに中点が使用されていることを確認
+      expect(text).toContain("・関連動画1")
+      // 絵文字が使用されていないことを確認
+      expect(text).not.toMatch(/[🎯📱💻🔧].*関連動画1/)
+    })
+  })
+
+  describe("オプションセクションのテスト", () => {
+    it("関連動画セクションが中点付きタイトルと改行区切りURLで表示される", () => {
+      const videoWithRelated: VideoMetadata = {
+        ...mockVideoData,
+        relatedVideos: {
+          title: "📌 関連動画",
+          videos: [
+            {
+              emoji: "🎯", // emojiはデータには含まれるが表示されない
               title: "関連動画1",
               url: "https://www.youtube.com/watch?v=related1",
             },
@@ -167,12 +263,12 @@ describe("VideoDetail", () => {
       const { container } = render(<VideoDetail video={videoWithRelated} />)
       const text = container.textContent || ""
       expect(text).toContain("📌 関連動画")
-      expect(text).toContain(
-        "🎯 関連動画1: https://www.youtube.com/watch?v=related1"
-      )
-      expect(text).toContain(
-        "関連動画2: https://www.youtube.com/watch?v=related2"
-      )
+      // 中点とタイトル
+      expect(text).toContain("・関連動画1")
+      expect(text).toContain("・関連動画2")
+      // URLは改行で区切られている
+      expect(text).toContain("https://www.youtube.com/watch?v=related1")
+      expect(text).toContain("https://www.youtube.com/watch?v=related2")
     })
 
     it("Udemy講座セクションがプレーンテキストで表示される", () => {
