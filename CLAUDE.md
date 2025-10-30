@@ -328,19 +328,12 @@ npm run build       # 本番ビルドが動作することを確認
 
 ## アクティブな仕様（Active Specifications）
 
-### discord-community-site
-Vibe Coding StudioのDiscordコミュニティへの誘導を目的としたランディングページ。既存デザインを踏襲し、トップページとコミュニティページの2ページ構成。
+### video-display-improvements
+/videosページにおける動画メタデータの表示改善。セクション区切り、タグ表示、関連動画の表示形式、Udemy講座URLの修正など、視覚的な可読性とユーザビリティを向上させる。
 
-- **仕様パス**: `.kiro/specs/discord-community-site/`
+- **仕様パス**: `.kiro/specs/video-display-improvements/`
 - **ステータス**: initialized
-- **作成日**: 2025-10-20
-
-### youtube-video-metadata
-YouTube動画のメタデータ(タイトル、概要欄等)をローカルJSONで管理し、一覧・詳細ページで閲覧可能にする機能。Gitベースのファイル管理を採用し、管理画面は不要。
-
-- **仕様パス**: `.kiro/specs/youtube-video-metadata/`
-- **ステータス**: initialized
-- **作成日**: 2025-10-25
+- **作成日**: 2025-10-29
 
 ## 品質基準
 
