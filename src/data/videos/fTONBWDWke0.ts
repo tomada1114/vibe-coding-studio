@@ -5,16 +5,14 @@ export const video_fTONBWDWke0: VideoMetadata = {
   id: "fTONBWDWke0",
   title:
     "【神アプデ】Claude CodeからCodexをMCPとして利用可能に！両者の良いとこどりで最強の開発環境を構築する方法",
-  publishedAt: "2025-09-17",
+  publishedAt: "2025-09-17T12:00:00+09:00",
   videoUrl: "https://www.youtube.com/watch?v=fTONBWDWke0",
 
   opening: {
     lines: [
       "今回は、Codex CLIの最新アップデートで可能になった「MCP連携」を実際に設定して使ってみました！",
-      "",
       "Claude Codeの使いやすさを維持しながら、必要な時だけGPT-5（Codex）の推論力を借りることができる神機能です。",
       "設定はコマンド1つで完了。これで開発効率が劇的に向上します！",
-      "",
       "（9/19追記：ChatGPT もサブスク契約が必要）",
     ],
   },
@@ -45,17 +43,17 @@ export const video_fTONBWDWke0: VideoMetadata = {
   },
 
   tags: [
-    "#ClaudeCode",
-    "#CodexCLI",
-    "#MCP",
-    "#AI駆動開発",
-    "#バイブコーディング",
-    "#プログラミング",
-    "#エンジニア",
-    "#ChatGPT",
-    "#GPT5",
-    "#開発効率化",
-    "#gpt5",
+    "ClaudeCode",
+    "CodexCLI",
+    "MCP",
+    "AI駆動開発",
+    "バイブコーディング",
+    "プログラミング",
+    "エンジニア",
+    "ChatGPT",
+    "GPT5",
+    "開発効率化",
+    "gpt5",
   ],
 
   customSections: [

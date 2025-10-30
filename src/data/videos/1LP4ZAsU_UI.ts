@@ -54,19 +54,19 @@ export const video_1LP4ZAsU_UI: VideoMetadata = {
 
   // タグ
   tags: [
-    "#ClaudeCode",
-    "#CodexCLI",
-    "#Git",
-    "#コミット",
-    "#AI駆動開発",
-    "#バイブコーディング",
-    "#VibeCoding",
-    "#プログラミング",
-    "#初心者",
-    "#エンジニア",
-    "#GitHub",
-    "#バージョン管理",
-    "#開発効率化",
+    "ClaudeCode",
+    "CodexCLI",
+    "Git",
+    "コミット",
+    "AI駆動開発",
+    "バイブコーディング",
+    "VibeCoding",
+    "プログラミング",
+    "初心者",
+    "エンジニア",
+    "GitHub",
+    "バージョン管理",
+    "開発効率化",
   ],
 
   // カスタムセクション
@@ -101,8 +101,8 @@ export const video_1LP4ZAsU_UI: VideoMetadata = {
       "MCP連携で外部ツールを自在に操る方法",
     ],
     cta: {
-      text: "🎁 最大90%OFFクーポン配布中！",
-      url: "https://school.learning-next.app/coupons",
+      text: "🎁 最大90%OFFクーポン配布中!",
+      url: "https://www.vibecodingstudio.dev/coupons",
     },
   },
 

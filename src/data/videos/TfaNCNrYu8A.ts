@@ -5,7 +5,7 @@ export const video_TfaNCNrYu8A: VideoMetadata = {
   id: "TfaNCNrYu8A",
   title:
     "【完全初心者OK】Claude Code×React Nativeでスマホアプリ開発！カウンターと計算機を作るバイブコーディング実演",
-  publishedAt: "2025-08-26",
+  publishedAt: "2025-08-26T12:00:00+09:00",
   videoUrl: "https://www.youtube.com/watch?v=TfaNCNrYu8A",
 
   opening: {
@@ -63,7 +63,7 @@ export const video_TfaNCNrYu8A: VideoMetadata = {
     ],
     cta: {
       text: "講座の詳細はこちら",
-      url: "https://school.learning-next.app/coupons",
+      url: "https://www.vibecodingstudio.dev/coupons?topic=claude-code",
     },
   },
 

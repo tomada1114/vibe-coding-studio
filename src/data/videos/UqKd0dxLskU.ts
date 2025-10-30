@@ -8,7 +8,8 @@ import type { VideoMetadata } from "@/types/video"
 export const video_UqKd0dxLskU: VideoMetadata = {
   // 基本情報
   id: "UqKd0dxLskU",
-  title: "Claude Code on the Web で開発が変わる！外出先でも開発が可能になった！",
+  title:
+    "Claude Code on the Web で開発が変わる！外出先でも開発が可能になった！",
   publishedAt: "2025-10-20T12:00:00+09:00",
   videoUrl: "https://www.youtube.com/watch?v=UqKd0dxLskU",
 
@@ -53,16 +54,16 @@ export const video_UqKd0dxLskU: VideoMetadata = {
 
   // タグ
   tags: [
-    "#バイブコーディング",
-    "#Claude",
-    "#VibeCoding",
-    "#ClaudeCode",
-    "#AI駆動開発",
-    "#プログラミング",
-    "#個人開発",
-    "#副業",
-    "#Webアプリ開発",
-    "#Anthropic",
+    "バイブコーディング",
+    "Claude",
+    "VibeCoding",
+    "ClaudeCode",
+    "AI駆動開発",
+    "プログラミング",
+    "個人開発",
+    "副業",
+    "Webアプリ開発",
+    "Anthropic",
   ],
 
   // 関連動画セクション
@@ -70,12 +71,10 @@ export const video_UqKd0dxLskU: VideoMetadata = {
     title: "📚 関連動画",
     videos: [
       {
-        emoji: "⚡",
         title: "【1時間で完全マスター】Claude Code入門",
         url: "https://www.youtube.com/watch?v=Xr_HhLuzOy8",
       },
       {
-        emoji: "🤖",
         title: "Claude Code と Playwright MCP でブラウザ確認を自動化",
         url: "https://www.youtube.com/watch?v=TDECUH62yYQ",
       },
@@ -88,8 +87,8 @@ export const video_UqKd0dxLskU: VideoMetadata = {
     description:
       "UdemyのClaude Code実践マスター講座では、さらに高度な内容を体系的に学べます。",
     cta: {
-      text: "限定クーポンで最大90%OFF！",
-      url: "https://school.learning-next.app/coupons",
+      text: "限定クーポンで最大90%OFF!",
+      url: "https://www.vibecodingstudio.dev/coupons?topic=claude-code",
     },
   },
 

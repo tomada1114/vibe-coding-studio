@@ -59,7 +59,6 @@ function Sitemap() {
         <SitemapHeading>サイト</SitemapHeading>
         <SitemapLinks>
           <SitemapLink href="/">ホーム</SitemapLink>
-          <SitemapLink href="/videos">動画</SitemapLink>
           <SitemapLink href="/community">コミュニティ</SitemapLink>
           <SitemapLink href="/coupons">クーポン</SitemapLink>
           <SitemapLink href="/founder">運営者</SitemapLink>

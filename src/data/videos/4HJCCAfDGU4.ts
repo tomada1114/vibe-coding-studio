@@ -61,21 +61,21 @@ export const video_4HJCCAfDGU4: VideoMetadata = {
 
   // タグ
   tags: [
-    "#バイブコーディング",
-    "#Claude",
-    "#VibeCoding",
-    "#ClaudeCode",
-    "#CodexCLI",
-    "#AI駆動開発",
-    "#プログラミング",
-    "#エンジニア",
-    "#ChatGPT",
-    "#開発ツール",
-    "#比較",
-    "#使い分け",
-    "#MCP",
-    "#個人開発",
-    "#フリーランス",
+    "バイブコーディング",
+    "Claude",
+    "VibeCoding",
+    "ClaudeCode",
+    "CodexCLI",
+    "AI駆動開発",
+    "プログラミング",
+    "エンジニア",
+    "ChatGPT",
+    "開発ツール",
+    "比較",
+    "使い分け",
+    "MCP",
+    "個人開発",
+    "フリーランス",
   ],
 
   // カスタムセクション
@@ -100,8 +100,8 @@ export const video_4HJCCAfDGU4: VideoMetadata = {
       "Next.js × Supabase本格アプリ開発",
     ],
     cta: {
-      text: "🎁 最大90%OFFクーポン配布中！",
-      url: "https://school.learning-next.app/coupons",
+      text: "🎁 最大90%OFFクーポン配布中!",
+      url: "https://www.vibecodingstudio.dev/coupons",
     },
   },
 

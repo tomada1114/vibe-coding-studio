@@ -50,21 +50,21 @@ export const video_Y15kBuMhCO4: VideoMetadata = {
 
   // タグ
   tags: [
-    "#バイブコーディング",
-    "#VibeCoding",
-    "#プログラミング",
-    "#Codex",
-    "#CodexCLI",
-    "#Expo",
-    "#ReactNative",
-    "#スマホアプリ開発",
-    "#モバイルアプリ",
-    "#AI駆動開発",
-    "#ナビゲーション",
-    "#プッシュ通知",
-    "#ハンバーガーメニュー",
-    "#ChatGPT",
-    "#GPT5",
+    "バイブコーディング",
+    "VibeCoding",
+    "プログラミング",
+    "Codex",
+    "CodexCLI",
+    "Expo",
+    "ReactNative",
+    "スマホアプリ開発",
+    "モバイルアプリ",
+    "AI駆動開発",
+    "ナビゲーション",
+    "プッシュ通知",
+    "ハンバーガーメニュー",
+    "ChatGPT",
+    "GPT5",
   ],
 
   // カスタムセクション
@@ -95,21 +95,18 @@ export const video_Y15kBuMhCO4: VideoMetadata = {
     title: "📌 関連動画",
     videos: [
       {
-        emoji: "📱",
         title:
-          "React Native（Expo）入門！iOS・Android アプリ環境構築の全手順を初心者向けに解説",
+          "React Native（Expo）入門!iOS・Android アプリ環境構築の全手順を初心者向けに解説",
         url: "https://www.youtube.com/watch?v=TWUpzNGp7fI",
       },
       {
-        emoji: "💻",
         title:
-          "OpenAI Codex（ChatGPT）でバイブコーディング入門！動画1本で完全理解",
+          "OpenAI Codex（ChatGPT）でバイブコーディング入門!動画1本で完全理解",
         url: "https://www.youtube.com/watch?v=H5TGzM_PCW4",
       },
       {
-        emoji: "🎯",
         title:
-          "【Codex CLI対応】仕様駆動開発を1コマンドで導入！Spec Driven Codex",
+          "【Codex CLI対応】仕様駆動開発を1コマンドで導入!Spec Driven Codex",
         url: "https://www.youtube.com/watch?v=1EQllS_3TJo",
       },
     ],
@@ -125,7 +122,7 @@ export const video_Y15kBuMhCO4: VideoMetadata = {
     ],
     cta: {
       text: "講座では読書記録アプリを完成まで作り上げ、SQLiteデータベース連携やTypeScript対応まで学べます",
-      url: "https://school.learning-next.app/coupons",
+      url: "https://www.vibecodingstudio.dev/coupons?topic=codex",
     },
   },
 

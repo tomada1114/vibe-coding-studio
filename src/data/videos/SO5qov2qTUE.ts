@@ -5,7 +5,7 @@ export const video_SO5qov2qTUE: VideoMetadata = {
   id: "SO5qov2qTUE",
   title:
     "【コード品質UP】技術的負債を作らないための AI 向け開発ルールを設定しよう（Claude Code/Codex/Cursor 対応）",
-  publishedAt: "2025-10-17",
+  publishedAt: "2025-10-17T12:00:00+09:00",
   videoUrl: "https://www.youtube.com/watch?v=SO5qov2qTUE",
 
   opening: {
@@ -88,7 +88,7 @@ export const video_SO5qov2qTUE: VideoMetadata = {
     ],
     cta: {
       text: "🎁 限定クーポンで最大90%OFF!",
-      url: "https://school.learning-next.app/coupons",
+      url: "https://www.vibecodingstudio.dev/coupons",
     },
   },
 

@@ -1,81 +1,97 @@
-// 【GPT-5搭載】JetBrains最新AIエージェント「Junie」でRailsアプリ開発！Claude Codeとの違いも徹底比較
-// https://www.youtube.com/watch?v=VHZNtl46CJw
+import { commonSections } from "@/data/shared/common-sections"
+import type { VideoMetadata } from "@/types/video"
 
-// 393 回視聴  2025/08/19  #VibeCoding #バイブコーディング #GPT5
-// 現役フリーランスエンジニアのとまだです！
+/**
+ * 【GPT-5搭載】JetBrains最新AIエージェント「Junie」でRailsアプリ開発！Claude Codeとの違いも徹底比較
+ */
+export const video_VHZNtl46CJw: VideoMetadata = {
+  // 基本情報
+  id: "VHZNtl46CJw",
+  title:
+    "【GPT-5搭載】JetBrains最新AIエージェント「Junie」でRailsアプリ開発！Claude Codeとの違いも徹底比較",
+  publishedAt: "2025-08-19T00:00:00+09:00",
+  videoUrl: "https://www.youtube.com/watch?v=VHZNtl46CJw",
 
-// 今回はJetBrains社の最新AIエージェント「Junie」を実際に使って、
-// 既存のRailsアプリに機能追加してみました。
+  // 冒頭セクション
+  opening: {
+    lines: [
+      "現役フリーランスエンジニアのとまだです！",
+      "今回はJetBrains社の最新AIエージェント「Junie」を実際に使って、既存のRailsアプリに機能追加してみました。",
+      "なんと、最新モデルGPT-5がデフォルトで使える上に、指示していないのに勝手にテストを書いて品質を担保してくれる優秀なAIでした！",
+    ],
+  },
 
-// なんと、最新モデルGPT-5がデフォルトで使える上に、
-// 指示していないのに勝手にテストを書いて品質を担保してくれる優秀なAIでした！
+  // 学べる内容セクション
+  learningPoints: {
+    title: "💡 この動画で学べること",
+    items: [
+      "✅ JetBrains Junieの実際の使い方と特徴",
+      "✅ GPT-5を使った高品質なAI駆動開発の実践",
+      "✅ Claude Codeとの違いと使い分けポイント",
+      "✅ 曖昧な指示でも品質を保った実装をする方法",
+      "✅ RubyMineでのAI開発環境構築",
+    ],
+  },
 
-// 【この動画で分かること】
-// ✅ JetBrains Junieの実際の使い方と特徴
-// ✅ GPT-5を使った高品質なAI駆動開発の実践
-// ✅ Claude Codeとの違いと使い分けポイント
-// ✅ 曖昧な指示でも品質を保った実装をする方法
-// ✅ RubyMineでのAI開発環境構築
+  // タイムスタンプセクション
+  timestamps: {
+    title: "⏰ タイムライン",
+    items: [
+      { time: "00:00", label: "はじめに" },
+      { time: "00:30", label: "Junieの概要説明" },
+      { time: "02:15", label: "Junieのインストール" },
+      { time: "05:00", label: "RailsアプリへのJunie統合" },
+      { time: "08:30", label: "機能追加の実装デモ" },
+      { time: "15:45", label: "自動テスト実行と品質確保" },
+      { time: "20:00", label: "Claude Codeとの比較" },
+      { time: "25:30", label: "メリット・デメリット" },
+      { time: "28:45", label: "使い分けポイント" },
+      { time: "30:00", label: "まとめ" },
+    ],
+  },
 
-// 【こんな方におすすめ】
-// ・JetBrains IDEユーザーでAI機能を試してみたい方
-// ・Claude CodeやCursorと他のAIツールを比較検討している方
-// ・Ruby on Rails開発でAIを活用したい方
-// ・品質重視のAI駆動開発に興味がある方
-// ・GPT-5の実力を実際の開発で見てみたい方
+  // タグ
+  tags: [
+    "Junie",
+    "JetBrains",
+    "RubyMine",
+    "GPT5",
+    "AI駆動開発",
+    "バイブコーディング",
+    "VibeCoding",
+    "RubyonRails",
+    "ClaudeCode比較",
+    "AIエージェント",
+  ],
 
-// ━━━━━━━━━━━━━━━━━━━━━
-// 💡 Junieの特徴まとめ
-// ━━━━━━━━━━━━━━━━━━━━━
-// ✨ 最新モデルGPT-5がデフォルトで使える
-// ✨ 特に指示しなくてもテストを自動実行
-// ✨ 曖昧な指示でも品質の高い実装
-// ✨ プロジェクト理解力が高い（1分で全体把握）
-// ✨ ローカルLLMでオフラインモードも対応
-// ✨ エディタ内でチュートリアル完備
+  // カスタムセクション
+  customSections: [
+    {
+      type: "text",
+      title: "💡 Junieの特徴まとめ",
+      content:
+        "✨ 最新モデルGPT-5がデフォルトで使える\n✨ 特に指示しなくてもテストを自動実行\n✨ 曖昧な指示でも品質の高い実装\n✨ プロジェクト理解力が高い（1分で全体把握）\n✨ ローカルLLMでオフラインモードも対応\n✨ エディタ内でチュートリアル完備",
+    },
+    {
+      type: "text",
+      title: "📢 総評（Claude Code使いの視点から）",
+      content:
+        "【Junieがおすすめな人】\n✅ JetBrains IDE利用者で「まずAIを試したい」\n✅ 品質重視で安全に開発を進めたい\n✅ チームでAIツールを導入検討している\n\n【Claude Codeがおすすめな人】\n✅ IDE問わず様々な環境で使いたい\n✅ カスタマイズ性を重視したい\n✅ 日本語の情報が豊富な方が良い\n\nどちらも素晴らしいツールなので、用途に応じて使い分けるのがベストだと思います！",
+    },
+    {
+      type: "links",
+      title: "📝 詳細記事",
+      links: [
+        {
+          label: "RubyMineでJunie AIエージェントを使ってみた！GPT-5にも対応しつつ自主的に品質を担保",
+          url: "https://qiita.com/tomada/items/4009e9...",
+        },
+      ],
+    },
+  ],
 
-// ━━━━━━━━━━━━━━━━━━━━━
-// 📝 関連記事
-// ━━━━━━━━━━━━━━━━━━━━━
-// Qiitaで詳細記事を公開しています！
-// 「RubyMineでJunie AIエージェントを使ってみた！GPT-5にも対応しつつ自主的に品質を担保」
-// https://qiita.com/tomada/items/4009e9...
-
-// ━━━━━━━━━━━━━━━━
-// 🔗 SNS・コミュニティ
-// ━━━━━━━━━━━━━━━━
-// 🐦 X（Twitter）: https://x.com/muscle_coding
-// 📝 note: https://note.com/tomada
-// 💻 Qiita: https://qiita.com/tomada
-// 💡 Zenn: https://zenn.dev/tmasuyama1114
-
-// 最新情報をキャッチアップしつつ、AI 駆動開発を学ぶ仲間と繋がれる Discord コミュニティも運営してます！
-// 気軽に参加してみてください。
-// →   / discord
-
-// ━━━━━━━━━━━━━━━━━━━━━
-// 📢 総評（Claude Code使いの視点から）
-// ━━━━━━━━━━━━━━━━━━━━━
-
-// 【Junieがおすすめな人】
-// ✅ JetBrains IDE利用者で「まずAIを試したい」
-// ✅ 品質重視で安全に開発を進めたい
-// ✅ チームでAIツールを導入検討している
-
-// 【Claude Codeがおすすめな人】
-// ✅ IDE問わず様々な環境で使いたい
-// ✅ カスタマイズ性を重視したい
-// ✅ 日本語の情報が豊富な方が良い
-
-// どちらも素晴らしいツールなので、
-// 用途に応じて使い分けるのがベストだと思います！
-
-// ━━━━━━━━━━━━━━━━━━━━━
-// 💬 コメント・質問歓迎！
-// ━━━━━━━━━━━━━━━━━━━━━
-// 実際に試してみた感想や、他のAIツールとの比較など
-// ぜひコメント欄で教えてください！
-
-// 高評価とチャンネル登録で応援お願いします🙏
-
-// #Junie #JetBrains #RubyMine #GPT5 #AI駆動開発 #バイブコーディング #VibeCoding #RubyonRails #ClaudeCode比較
+  // 共通データ参照
+  social: commonSections.social,
+  discordCommunity: commonSections.discordCommunity,
+  engagement: commonSections.engagement,
+}

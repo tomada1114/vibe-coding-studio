@@ -5,13 +5,12 @@ export const video_ECRzrFNIWNM: VideoMetadata = {
   id: "ECRzrFNIWNM",
   title:
     "【実践編】SuperClaudeのコマンドをフル活用！要件定義・設計・計画・エラー解決から品質改善までの推奨フローを完全解説",
-  publishedAt: "2025-08-29",
+  publishedAt: "2025-08-29T12:00:00+09:00",
   videoUrl: "https://www.youtube.com/watch?v=ECRzrFNIWNM",
 
   opening: {
     lines: [
       "『SuperClaudeのコマンドが多すぎて使い方がわからない』という方に向けた動画です。",
-      "",
       "実はSuperClaudeには『推奨ワークフロー』があります！",
       "今回は天気予報アプリを0から作りながら、17種あるカスタムコマンドを実践的に使いこなす方法を完全解説します。",
     ],
@@ -48,7 +47,7 @@ export const video_ECRzrFNIWNM: VideoMetadata = {
       { time: "53:34", label: "/sc:analyzeで品質チェック" },
       { time: "57:18", label: "/sc:improveで品質改善" },
       { time: "59:35", label: "/sc:test --coverage" },
-      { time: "1:03:14", label: "まとめ" },
+      { time: "63:14", label: "まとめ" },
     ],
   },
 
@@ -89,15 +88,13 @@ export const video_ECRzrFNIWNM: VideoMetadata = {
     videos: [
       {
         title:
-          "Qiita：SuperClaudeの推奨ワークフローで天気予報アプリを作ったら開発効率が劇的に向上した話",
+          "Qiita:SuperClaudeの推奨ワークフローで天気予報アプリを作ったら開発効率が劇的に向上した話",
         url: "https://qiita.com/tomada/items/2eb1b0...",
-        emoji: "📝",
       },
       {
         title:
-          "前回の動画：SuperClaudeでClaude Codeの品質が爆上がり！チーム開発・個人開発...",
+          "前回の動画:SuperClaudeでClaude Codeの品質が爆上がり!チーム開発・個人開発...",
         url: "https://www.youtube.com/watch?v=...",
-        emoji: "📹",
       },
     ],
   },
@@ -107,7 +104,7 @@ export const video_ECRzrFNIWNM: VideoMetadata = {
     description: "SuperClaude公式GitHub",
     cta: {
       text: "Claude Code 完全マスター講座",
-      url: "https://school.learning-next.app/coup...",
+      url: "https://www.vibecodingstudio.dev/coupons?topic=claude-code",
     },
     courses: ["https://github.com/SuperClaude-Org/Su..."],
   },

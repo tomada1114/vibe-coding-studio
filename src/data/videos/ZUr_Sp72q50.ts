@@ -5,7 +5,7 @@ export const video_ZUr_Sp72q50: VideoMetadata = {
   id: "ZUr_Sp72q50",
   title:
     "SuperClaudeでClaude Codeの品質が爆上がり！チーム開発・個人開発の両方でおすすめの神ツールとは？",
-  publishedAt: "2025-08-22",
+  publishedAt: "2025-08-22T12:00:00+09:00",
   videoUrl: "https://www.youtube.com/watch?v=ZUr_Sp72q50",
 
   opening: {
@@ -74,7 +74,7 @@ export const video_ZUr_Sp72q50: VideoMetadata = {
     description: "Claude Code完全マスター講座をUdemyで公開中！",
     cta: {
       text: "お得なクーポンはこちら",
-      url: "https://school.learning-next.app/coupons",
+      url: "https://www.vibecodingstudio.dev/coupons?topic=claude-code",
     },
   },
 

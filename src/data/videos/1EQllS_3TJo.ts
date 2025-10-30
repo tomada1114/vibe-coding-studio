@@ -54,19 +54,19 @@ export const video_1EQllS_3TJo: VideoMetadata = {
 
   // タグ
   tags: [
-    "#バイブコーディング",
-    "#VibeCoding",
-    "#プログラミング",
-    "#codexcli",
-    "#codex",
-    "#specdriven",
-    "#仕様駆動開発",
-    "#AI駆動開発",
-    "#Webアプリ開発",
-    "#OSS",
-    "#npm",
-    "#要件定義",
-    "#設計書",
+    "バイブコーディング",
+    "VibeCoding",
+    "プログラミング",
+    "codexcli",
+    "codex",
+    "specdriven",
+    "仕様駆動開発",
+    "AI駆動開発",
+    "Webアプリ開発",
+    "OSS",
+    "npm",
+    "要件定義",
+    "設計書",
   ],
 
   // カスタムセクション
@@ -86,7 +86,8 @@ export const video_1EQllS_3TJo: VideoMetadata = {
           url: "https://www.youtube.com/watch?v=VIDEO_ID_PLACEHOLDER",
         },
         {
-          label: "【爆速開発】Codex CLIのカスタムコマンドで繰り返し作業を1秒で終わらせる方法！",
+          label:
+            "【爆速開発】Codex CLIのカスタムコマンドで繰り返し作業を1秒で終わらせる方法！",
           url: "https://www.youtube.com/watch?v=VIDEO_ID_PLACEHOLDER",
         },
         {
@@ -116,8 +117,8 @@ export const video_1EQllS_3TJo: VideoMetadata = {
       "実践的なアプリ開発の全工程",
     ],
     cta: {
-      text: "🎁 限定クーポンで最大90%OFF！",
-      url: "https://school.learning-next.app/coupons",
+      text: "🎁 限定クーポンで最大90%OFF!",
+      url: "https://www.vibecodingstudio.dev/coupons?topic=codex",
     },
   },
 

@@ -5,7 +5,7 @@ export const video_pRHyMLH1bcU: VideoMetadata = {
   id: "pRHyMLH1bcU",
   title:
     "【Playwright MCP】Codex CLI の Webアプリ・デザインテストを自動化！AI 駆動の E2Eテスト実践ガイド",
-  publishedAt: "2025-09-24",
+  publishedAt: "2025-09-24T12:00:00+09:00",
   videoUrl: "https://www.youtube.com/watch?v=pRHyMLH1bcU",
 
   opening: {
@@ -60,14 +60,13 @@ export const video_pRHyMLH1bcU: VideoMetadata = {
     videos: [
       {
         title:
-          "【Codex CLI活用術】MCPサーバを設定する方法！config.toml と CLI コマンドの使い方を初心者向けに解説",
+          "【Codex CLI活用術】MCPサーバを設定する方法!config.toml と CLI コマンドの使い方を初心者向けに解説",
         url: "https://www.youtube.com/watch?v=PLACEHOLDER",
-        emoji: "💡",
       },
       {
-        title: "【1時間でわかる】OpenAI Codex（ChatGPT）でバイブコーディング入門",
+        title:
+          "【1時間でわかる】OpenAI Codex（ChatGPT）でバイブコーディング入門",
         url: "https://www.youtube.com/watch?v=PLACEHOLDER",
-        emoji: "▶︎",
       },
     ],
   },
@@ -84,8 +83,8 @@ export const video_pRHyMLH1bcU: VideoMetadata = {
       "実践的なアプリ開発の全工程",
     ],
     cta: {
-      text: "🎁 限定クーポンで最大90%OFF！",
-      url: "https://school.learning-next.app/coup...",
+      text: "🎁 限定クーポンで最大90%OFF!",
+      url: "https://www.vibecodingstudio.dev/coupons?topic=codex",
     },
   },
 

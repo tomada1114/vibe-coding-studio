@@ -35,25 +35,23 @@ export const video_qrDUjfnlOiI: VideoMetadata = {
   // タイムスタンプセクション
   timestamps: {
     title: "⏰ タイムスタンプ",
-    items: [
-      { time: "00:00", label: "はじめに" },
-    ],
+    items: [{ time: "00:00", label: "はじめに" }],
   },
 
   // タグ
   tags: [
-    "#Slack",
-    "#VibeCoding",
-    "#Claude",
-    "#AI活用",
-    "#業務効率化",
-    "#SlackAI",
-    "#ClaudeAPI",
-    "#チャットボット",
-    "#エラー解析",
-    "#MCP",
-    "#AI駆動開発",
-    "#バイブコーディング",
+    "Slack",
+    "VibeCoding",
+    "Claude",
+    "AI活用",
+    "業務効率化",
+    "SlackAI",
+    "ClaudeAPI",
+    "チャットボット",
+    "エラー解析",
+    "MCP",
+    "AI駆動開発",
+    "バイブコーディング",
   ],
 
   // カスタムセクション
@@ -93,8 +91,8 @@ export const video_qrDUjfnlOiI: VideoMetadata = {
       "チーム開発での AI 活用法",
     ],
     cta: {
-      text: "🎯 限定クーポンで最大90%OFF！",
-      url: "https://school.learning-next.app/coupons",
+      text: "🎯 限定クーポンで最大90%OFF!",
+      url: "https://www.vibecodingstudio.dev/coupons?topic=claude-code",
     },
   },
 

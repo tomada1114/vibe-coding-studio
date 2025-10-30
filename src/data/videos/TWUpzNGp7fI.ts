@@ -5,7 +5,7 @@ export const video_TWUpzNGp7fI: VideoMetadata = {
   id: "TWUpzNGp7fI",
   title:
     "React Native（Expo）入門！iOS・Android アプリ環境構築の全手順を初心者向けに解説【シミュレータ対応】",
-  publishedAt: "2025-10-11",
+  publishedAt: "2025-10-11T12:00:00+09:00",
   videoUrl: "https://www.youtube.com/watch?v=TWUpzNGp7fI",
 
   opening: {
@@ -79,8 +79,8 @@ export const video_TWUpzNGp7fI: VideoMetadata = {
       "Claude Codeでスマホアプリ開発！React Native（Expo）爆速バイブコーディングテンプレートを作ろう",
     ],
     cta: {
-      text: "🎁 最大90%OFFクーポン配布中！",
-      url: "https://school.learning-next.app/coupons",
+      text: "🎁 最大90%OFFクーポン配布中!",
+      url: "https://www.vibecodingstudio.dev/coupons",
     },
   },
 

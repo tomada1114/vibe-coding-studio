@@ -19,12 +19,9 @@ describe("動画一覧ページ", () => {
   test("動画データが存在する場合、動画カードが表示される", () => {
     render(<VideosPage />)
 
-    // 動画タイトルが表示される(サンプルデータから)
+    // 動画タイトルが表示される(実際のデータから)
     expect(
-      screen.getByText("Next.js App Routerで学ぶモダンWeb開発入門")
-    ).toBeInTheDocument()
-    expect(
-      screen.getByText("TypeScriptで学ぶ型安全なコーディング実践")
+      screen.getByText("AIが書いたコード、いつコミットする？失敗しないGit運用術")
     ).toBeInTheDocument()
   })
 
@@ -37,7 +34,7 @@ describe("動画一覧ページ", () => {
 
     // リンクが正しいhref属性を持つ
     const firstLink = links.find(link =>
-      link.getAttribute("href")?.includes("/videos/video-001")
+      link.getAttribute("href")?.includes("/videos/1LP4ZAsU_UI")
     )
     expect(firstLink).toBeInTheDocument()
   })

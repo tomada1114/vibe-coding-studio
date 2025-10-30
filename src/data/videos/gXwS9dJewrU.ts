@@ -54,18 +54,18 @@ export const video_gXwS9dJewrU: VideoMetadata = {
 
   // タグ
   tags: [
-    "#PlaywrightMCP",
-    "#バイブコーディング",
-    "#自動化",
-    "#ChromeDevTools",
-    "#MCP",
-    "#AI駆動開発",
-    "#フロントエンド",
-    "#Web開発",
-    "#VibeCoding",
-    "#ClaudeCode",
-    "#Cursor",
-    "#Codex",
+    "PlaywrightMCP",
+    "バイブコーディング",
+    "自動化",
+    "ChromeDevTools",
+    "MCP",
+    "AI駆動開発",
+    "フロントエンド",
+    "Web開発",
+    "VibeCoding",
+    "ClaudeCode",
+    "Cursor",
+    "Codex",
   ],
 
   // カスタムセクション
@@ -91,13 +91,10 @@ export const video_gXwS9dJewrU: VideoMetadata = {
     title: "🚀 AI駆動開発をマスターしたい方へ",
     description:
       "MCP の使い方を含め、体系的に AI 駆動開発を学びたい方のためにUdemy講座を公開しています！",
-    courses: [
-      "Claude Code や Codex CLI",
-      "MCP 専門講座",
-    ],
+    courses: ["Claude Code や Codex CLI", "MCP 専門講座"],
     cta: {
-      text: "多くの高評価をいただき、複数のベストセラーを獲得！",
-      url: "https://school.learning-next.app/coupons",
+      text: "多くの高評価をいただき、複数のベストセラーを獲得!",
+      url: "https://www.vibecodingstudio.dev/coupons",
     },
   },
 

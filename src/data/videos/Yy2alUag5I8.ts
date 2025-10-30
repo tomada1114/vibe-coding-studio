@@ -5,7 +5,7 @@ export const video_Yy2alUag5I8: VideoMetadata = {
   id: "Yy2alUag5I8",
   title:
     "【完全比較】Claude Code vs Codex！Codexのコード品質がClaude Codeを超えた！Claude Code ユーザーは Codex（GPT-5）に乗り換えるべき？",
-  publishedAt: "2025-09-11",
+  publishedAt: "2025-09-11T12:00:00+09:00",
   videoUrl: "https://www.youtube.com/watch?v=Yy2alUag5I8",
 
   opening: {
@@ -71,7 +71,7 @@ export const video_Yy2alUag5I8: VideoMetadata = {
     courses: ["🎓 Claude Code × Vibe Coding入門講座"],
     cta: {
       text: "講座の詳細はこちら",
-      url: "https://school.learning-next.app/coupons",
+      url: "https://www.vibecodingstudio.dev/coupons",
     },
   },
 
