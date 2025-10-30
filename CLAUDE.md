@@ -335,6 +335,13 @@ npm run build       # 本番ビルドが動作することを確認
 - **ステータス**: initialized
 - **作成日**: 2025-10-29
 
+### custom-commands-publish
+カスタムコマンドのマークダウンファイルを動的に公開する機能。`.claude/commands/`内のマークダウンファイルを解析し、Webページとして公開します。
+
+- **仕様パス**: `.kiro/specs/custom-commands-publish/`
+- **ステータス**: initialized
+- **作成日**: 2025-10-30
+
 ## 品質基準
 
 1. **テストカバレッジ**
