@@ -6,9 +6,8 @@
  * page to show the complete markdown content including frontmatter.
  */
 
-import React from 'react'
-import clsx from 'clsx'
-import { CopyButton } from './copy-button'
+import clsx from "clsx"
+import { CopyButton } from "./copy-button"
 
 export interface CodeBlockProps {
   /**
@@ -47,22 +46,25 @@ export interface CodeBlockProps {
  * />
  * ```
  */
-export default function CodeBlock({ code, language = 'markdown', showLineNumbers = false }: CodeBlockProps) {
+export default function CodeBlock({
+  code,
+  language = "markdown",
+}: CodeBlockProps) {
   return (
     <div
       data-testid="code-block"
       className={clsx(
         // Layout
-        'relative',
+        "relative",
         // Background and border (Radiant design system)
-        'bg-gray-50',
-        'border border-gray-200',
-        'rounded-lg',
+        "bg-gray-50",
+        "border border-gray-200",
+        "rounded-lg",
         // Spacing (24px padding from design system)
-        'p-6',
+        "p-6",
         // Scrolling for long content
-        'overflow-auto',
-        'max-h-[600px]',
+        "overflow-auto",
+        "max-h-[600px]"
       )}
       aria-label={`Code block for ${language}`}
       tabIndex={0}
@@ -76,16 +78,16 @@ export default function CodeBlock({ code, language = 'markdown', showLineNumbers
       <pre
         className={clsx(
           // Typography
-          'font-mono',
-          'text-sm',
-          'leading-relaxed',
-          'text-gray-800',
+          "font-mono",
+          "text-sm",
+          "leading-relaxed",
+          "text-gray-800",
           // Whitespace preservation
-          'whitespace-pre',
+          "whitespace-pre",
           // Remove default margin
-          'm-0',
+          "m-0",
           // Padding right to avoid overlap with copy button
-          'pr-20',
+          "pr-20"
         )}
       >
         <code className={`language-${language}`}>{code}</code>

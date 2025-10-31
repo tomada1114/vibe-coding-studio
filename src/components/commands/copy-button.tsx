@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 interface CopyButtonProps {
   textToCopy: string
@@ -85,7 +85,7 @@ export function CopyButton({
 
   const getButtonStyles = () => {
     const baseStyles =
-      "inline-flex items-center justify-center rounded-full px-4 py-2 transition-colors"
+      "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-medium transition-colors min-h-[44px]"
 
     switch (copyState) {
       case "success":

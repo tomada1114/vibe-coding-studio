@@ -16,14 +16,14 @@
  * - Accessibility compliant (WCAG 2.1 AA)
  */
 
-import { Container } from '@/components/container'
-import { AsyncErrorBoundary } from '@/components/error-boundary'
-import { Footer } from '@/components/footer'
-import { Gradient } from '@/components/gradient'
-import { Navbar } from '@/components/navbar'
-import CommandCard from '@/components/commands/command-card'
-import { getAllCommands } from '@/lib/commands/command-data'
-import type { Metadata } from 'next'
+import CommandCard from "@/components/commands/command-card"
+import { Container } from "@/components/container"
+import { AsyncErrorBoundary } from "@/components/error-boundary"
+import { Footer } from "@/components/footer"
+import { Gradient } from "@/components/gradient"
+import { Navbar } from "@/components/navbar"
+import { getAllCommands } from "@/lib/commands/command-data"
+import type { Metadata } from "next"
 
 /**
  * ISR (Incremental Static Regeneration) Configuration
@@ -41,10 +41,10 @@ export const revalidate = 60
  * @returns Metadata object for Next.js
  */
 export async function generateMetadata(): Promise<Metadata> {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
-  const pageTitle = 'カスタムコマンド一覧'
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+  const pageTitle = "カスタムコマンド一覧"
   const pageDescription =
-    'Claude Code で使用するカスタムコマンドの一覧です。各コマンドの詳細を確認し、自分の環境で利用できます。'
+    "Claude Code で使用するカスタムコマンドの一覧です。各コマンドの詳細を確認し、自分の環境で利用できます。"
 
   return {
     title: pageTitle,
@@ -56,7 +56,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: pageTitle,
       description: pageDescription,
       url: `${siteUrl}/claude-code/commands`,
-      type: 'website',
+      type: "website",
     },
   }
 }
@@ -103,7 +103,8 @@ export default function CommandsListPage() {
                 カスタムコマンド一覧
               </h1>
               <p className="mt-6 text-base text-gray-600">
-                Claude Code で使用するカスタムコマンドをご覧いただけます。各コマンドの詳細ページで、コマンドの内容を確認し、コピーして自分の環境で利用できます。
+                Claude Code
+                で使用するカスタムコマンドをご覧いただけます。各コマンドの詳細ページで、コマンドの内容を確認し、コピーして自分の環境で利用できます。
               </p>
             </header>
 
@@ -111,12 +112,14 @@ export default function CommandsListPage() {
             {commands.length === 0 ? (
               // Empty state: No commands available
               <div className="mt-16 text-center">
-                <p className="text-gray-600">公開されているコマンドはまだありません</p>
+                <p className="text-gray-600">
+                  公開されているコマンドはまだありません
+                </p>
               </div>
             ) : (
               // Command cards grid (responsive: 1 col mobile, 2 cols tablet, 3 cols desktop)
               <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {commands.map((command) => (
+                {commands.map(command => (
                   <CommandCard key={command.slug} command={command} />
                 ))}
               </div>

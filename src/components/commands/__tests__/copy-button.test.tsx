@@ -1,6 +1,5 @@
 import "@testing-library/jest-dom"
 import { fireEvent, render, screen, waitFor } from "@testing-library/react"
-import React from "react"
 import { CopyButton } from "../copy-button"
 
 // Clipboard API のモック
@@ -235,8 +234,9 @@ describe("CopyButton", () => {
 
       // 基本スタイル
       expect(button).toHaveClass("rounded-full")
-      expect(button).toHaveClass("px-4")
-      expect(button).toHaveClass("py-2")
+      expect(button).toHaveClass("px-6")
+      expect(button).toHaveClass("py-3")
+      expect(button).toHaveClass("min-h-[44px]")
 
       // カラースタイル（idle状態）
       expect(button).toHaveClass("bg-gray-950")

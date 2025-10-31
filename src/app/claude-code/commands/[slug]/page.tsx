@@ -18,17 +18,28 @@
  * - Accessibility compliant (WCAG 2.1 AA)
  */
 
-import { Container } from '@/components/container'
-import { AsyncErrorBoundary } from '@/components/error-boundary'
-import { Footer } from '@/components/footer'
-import { Gradient } from '@/components/gradient'
-import { Navbar } from '@/components/navbar'
-import CommandDetail from '@/components/commands/command-detail'
-import CodeBlock from '@/components/commands/code-block'
-import { getAllCommandSlugs, getCommandBySlug } from '@/lib/commands/command-data'
-import type { Metadata } from 'next'
-import Link from 'next/link'
-import { notFound } from 'next/navigation'
+import CodeBlock from "@/components/commands/code-block"
+import CommandDetail from "@/components/commands/command-detail"
+import { Container } from "@/components/container"
+import { AsyncErrorBoundary } from "@/components/error-boundary"
+import { Footer } from "@/components/footer"
+import { Gradient } from "@/components/gradient"
+import { Navbar } from "@/components/navbar"
+import {
+  getAllCommandSlugs,
+  getCommandBySlug,
+} from "@/lib/commands/command-data"
+import type { Metadata } from "next"
+import Link from "next/link"
+import { notFound } from "next/navigation"
+
+/**
+ * ISR (Incremental Static Regeneration) Configuration
+ *
+ * Revalidate every 60 seconds to automatically detect command file updates
+ * while maintaining excellent performance through static generation.
+ */
+export const revalidate = 60
 
 /**
  * Generate static parameters for all commands at build time
@@ -40,7 +51,7 @@ import { notFound } from 'next/navigation'
  */
 export async function generateStaticParams() {
   const slugs = getAllCommandSlugs()
-  return slugs.map((slug) => ({ slug }))
+  return slugs.map(slug => ({ slug }))
 }
 
 /**
@@ -62,13 +73,14 @@ export async function generateMetadata({
 
   if (!command) {
     return {
-      title: 'コマンドが見つかりません',
+      title: "コマンドが見つかりません",
     }
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
   const pageTitle = `${command.title} - カスタムコマンド`
-  const pageDescription = command.description || `${command.title}のカスタムコマンド詳細`
+  const pageDescription =
+    command.description || `${command.title}のカスタムコマンド詳細`
 
   return {
     title: pageTitle,
@@ -80,7 +92,7 @@ export async function generateMetadata({
       title: pageTitle,
       description: pageDescription,
       url: `${siteUrl}/claude-code/commands/${slug}`,
-      type: 'article',
+      type: "article",
     },
   }
 }
@@ -156,10 +168,16 @@ export default async function CommandDetailPage({
             <CommandDetail command={command} />
 
             {/* Markdown content section */}
-            <section className="mt-12" aria-label="コマンドのマークダウンコード">
-              <h2 className="text-xl font-semibold text-gray-950 mb-4">マークダウンファイル</h2>
-              <p className="text-sm text-gray-600 mb-4">
-                以下のコードをコピーして、.claude/commands/ ディレクトリに配置してください。
+            <section
+              className="mt-12"
+              aria-label="コマンドのマークダウンコード"
+            >
+              <h2 className="mb-4 text-xl font-semibold text-gray-950">
+                マークダウンファイル
+              </h2>
+              <p className="mb-4 text-sm text-gray-600">
+                以下のコードをコピーして、.claude/commands/
+                ディレクトリに配置してください。
               </p>
               <CodeBlock code={command.rawContent} language="markdown" />
             </section>

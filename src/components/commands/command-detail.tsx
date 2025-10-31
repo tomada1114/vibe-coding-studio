@@ -6,9 +6,8 @@
  * This component is used in the command detail page.
  */
 
-import React from 'react'
-import clsx from 'clsx'
-import type { CommandMetadata } from '@/types/command'
+import type { CommandMetadata } from "@/types/command"
+import clsx from "clsx"
 
 export interface CommandDetailProps {
   /**
@@ -41,11 +40,11 @@ export default function CommandDetail({ command }: CommandDetailProps) {
         id={headingId}
         className={clsx(
           // Typography (Radiant design system: 36px/24px for headings)
-          'text-3xl sm:text-4xl',
-          'font-bold',
-          'text-gray-950',
+          "text-3xl sm:text-4xl",
+          "font-bold",
+          "text-gray-950",
           // Spacing
-          'mb-4',
+          "mb-4"
         )}
       >
         {title}
@@ -56,9 +55,9 @@ export default function CommandDetail({ command }: CommandDetailProps) {
         <p
           className={clsx(
             // Typography (Radiant design system: 16px for body text)
-            'text-lg',
-            'text-gray-600',
-            'leading-relaxed',
+            "text-lg",
+            "text-gray-600",
+            "leading-relaxed"
           )}
         >
           {description}
@@ -72,25 +71,22 @@ export default function CommandDetail({ command }: CommandDetailProps) {
           {allowedTools.length > 0 && (
             <div>
               <dt
-                className={clsx(
-                  'text-sm font-semibold text-gray-950',
-                  'mb-2',
-                )}
+                className={clsx("text-sm font-semibold text-gray-950", "mb-2")}
               >
                 Allowed Tools
               </dt>
               <dd>
                 <ul className="flex flex-wrap gap-2">
-                  {allowedTools.map((tool) => (
+                  {allowedTools.map(tool => (
                     <li
                       key={tool}
                       className={clsx(
-                        'inline-flex items-center',
-                        'px-3 py-1',
-                        'bg-gray-100',
-                        'border border-gray-200',
-                        'rounded-full',
-                        'text-sm text-gray-700',
+                        "inline-flex items-center",
+                        "px-3 py-1",
+                        "bg-gray-100",
+                        "border border-gray-200",
+                        "rounded-full",
+                        "text-sm text-gray-700"
                       )}
                     >
                       {tool}
@@ -105,20 +101,17 @@ export default function CommandDetail({ command }: CommandDetailProps) {
           {argumentHint && (
             <div>
               <dt
-                className={clsx(
-                  'text-sm font-semibold text-gray-950',
-                  'mb-2',
-                )}
+                className={clsx("text-sm font-semibold text-gray-950", "mb-2")}
               >
                 Argument Hint
               </dt>
               <dd
                 className={clsx(
-                  'font-mono text-sm text-gray-700',
-                  'bg-gray-100',
-                  'border border-gray-200',
-                  'rounded px-3 py-2',
-                  'inline-block',
+                  "font-mono text-sm text-gray-700",
+                  "bg-gray-100",
+                  "border border-gray-200",
+                  "rounded px-3 py-2",
+                  "inline-block"
                 )}
               >
                 {argumentHint}

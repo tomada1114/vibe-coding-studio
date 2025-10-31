@@ -21,7 +21,9 @@ describe("動画一覧ページ", () => {
 
     // 動画タイトルが表示される(実際のデータから)
     expect(
-      screen.getByText("AIが書いたコード、いつコミットする？失敗しないGit運用術")
+      screen.getByText(
+        "AIが書いたコード、いつコミットする？失敗しないGit運用術"
+      )
     ).toBeInTheDocument()
   })
 

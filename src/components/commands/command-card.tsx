@@ -13,8 +13,8 @@
  * - Accessibility: Full keyboard navigation, focus indicators, semantic HTML
  */
 
-import Link from 'next/link'
-import type { CommandMetadata } from '@/types/command'
+import type { CommandMetadata } from "@/types/command"
+import Link from "next/link"
 
 interface CommandCardProps {
   /**
@@ -50,7 +50,7 @@ export default function CommandCard({ command }: CommandCardProps) {
       aria-label={`View details for ${command.title}`}
     >
       <article
-        className="flex h-full flex-col rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 ease-in-out hover:border-gray-300 hover:shadow-md focus-within:outline-none focus-within:ring-2 focus-within:ring-gray-950"
+        className="flex h-full flex-col rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 ease-in-out focus-within:ring-2 focus-within:ring-gray-950 focus-within:outline-none hover:border-gray-300 hover:shadow-md"
         role="article"
       >
         <div className="flex flex-1 flex-col">
@@ -58,13 +58,15 @@ export default function CommandCard({ command }: CommandCardProps) {
             {command.title}
           </h3>
           {command.description && (
-            <p className="flex-1 text-sm text-gray-600 line-clamp-3">
+            <p className="line-clamp-3 flex-1 text-sm text-gray-600">
               {command.description}
             </p>
           )}
         </div>
         <div className="mt-4 flex items-center justify-end opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-          <span className="text-xs font-medium text-gray-500">View Details →</span>
+          <span className="text-xs font-medium text-gray-500">
+            View Details →
+          </span>
         </div>
       </article>
     </Link>

@@ -21,13 +21,13 @@ export interface CommandFrontmatter {
    * Comma-separated list of allowed tools (e.g., "Read, Write, Edit, Bash").
    * This indicates which tools the command can use.
    */
-  'allowed-tools'?: string
+  "allowed-tools"?: string
 
   /**
    * Hint for command arguments (e.g., "<youtube-video-id>").
    * This helps users understand what arguments the command expects.
    */
-  'argument-hint'?: string
+  "argument-hint"?: string
 }
 
 /**
@@ -100,9 +100,9 @@ export interface CommandMetadata {
  */
 export function slugToTitle(slug: string): string {
   return slug
-    .split('-')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ')
+    .split("-")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ")
 }
 
 /**
@@ -119,8 +119,8 @@ export function slugToTitle(slug: string): string {
  * ```
  */
 export function parseCommaSeparated(value: string | undefined): string[] {
-  if (!value || value.trim() === '') return []
-  return value.split(',').map((item) => item.trim())
+  if (!value || value.trim() === "") return []
+  return value.split(",").map(item => item.trim())
 }
 
 /**

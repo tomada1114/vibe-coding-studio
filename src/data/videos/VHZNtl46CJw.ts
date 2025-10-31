@@ -83,7 +83,8 @@ export const video_VHZNtl46CJw: VideoMetadata = {
       title: "📝 詳細記事",
       links: [
         {
-          label: "RubyMineでJunie AIエージェントを使ってみた！GPT-5にも対応しつつ自主的に品質を担保",
+          label:
+            "RubyMineでJunie AIエージェントを使ってみた！GPT-5にも対応しつつ自主的に品質を担保",
           url: "https://qiita.com/tomada/items/4009e9...",
         },
       ],

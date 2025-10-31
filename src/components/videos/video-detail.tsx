@@ -110,7 +110,10 @@ function formatVideoAsPlainText(video: VideoMetadata): string {
       text += `・${relatedVideo.title}\n`
       text += `${relatedVideo.url}\n`
       // 最後の動画でない場合は空白行を追加
-      if (video.relatedVideos && index < video.relatedVideos.videos.length - 1) {
+      if (
+        video.relatedVideos &&
+        index < video.relatedVideos.videos.length - 1
+      ) {
         text += "\n"
       }
     })

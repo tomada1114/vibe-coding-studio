@@ -11,22 +11,22 @@
  * - Validates slugs to prevent path traversal attacks
  */
 
-import fs from 'fs'
-import path from 'path'
-import matter from 'gray-matter'
-import type { CommandMetadata, CommandFrontmatter } from '@/types/command'
-import { slugToTitle, parseCommaSeparated, isValidSlug } from '@/types/command'
+import type { CommandFrontmatter, CommandMetadata } from "@/types/command"
+import { isValidSlug, parseCommaSeparated, slugToTitle } from "@/types/command"
+import fs from "fs"
+import matter from "gray-matter"
+import path from "path"
 
 /**
  * Directory containing published command markdown files.
  */
-const COMMANDS_DIR = path.join(process.cwd(), 'src', 'data', 'commands')
+const COMMANDS_DIR = path.join(process.cwd(), "src", "data", "commands")
 
 /**
  * Log warning messages (development only).
  */
 function logWarning(message: string): void {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === "development") {
     // eslint-disable-next-line no-console
     console.warn(message)
   }
@@ -36,7 +36,7 @@ function logWarning(message: string): void {
  * Log error messages.
  */
 function logError(message: string, error?: unknown): void {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === "development") {
     // eslint-disable-next-line no-console
     console.error(message, error)
   } else {
@@ -74,14 +74,14 @@ export function getAllCommands(): CommandMetadata[] {
     const files = fs.readdirSync(COMMANDS_DIR)
 
     // Filter for markdown files only
-    const markdownFiles = files.filter((file) => file.endsWith('.md'))
+    const markdownFiles = files.filter(file => file.endsWith(".md"))
 
     // Parse each file and collect metadata
     const commands: CommandMetadata[] = []
 
     for (const file of markdownFiles) {
       try {
-        const slug = file.replace(/\.md$/, '')
+        const slug = file.replace(/\.md$/, "")
 
         // Validate slug format
         if (!isValidSlug(slug)) {
@@ -90,16 +90,16 @@ export function getAllCommands(): CommandMetadata[] {
         }
 
         const filePath = path.join(COMMANDS_DIR, file)
-        const rawContent = fs.readFileSync(filePath, 'utf-8')
+        const rawContent = fs.readFileSync(filePath, "utf-8")
 
         // Parse frontmatter
         const { data, content } = matter(rawContent)
 
         // Extract frontmatter fields with defaults
         const frontmatter = data as CommandFrontmatter
-        const description = frontmatter.description ?? ''
-        const allowedTools = parseCommaSeparated(frontmatter['allowed-tools'])
-        const argumentHint = frontmatter['argument-hint'] ?? ''
+        const description = frontmatter.description ?? ""
+        const allowedTools = parseCommaSeparated(frontmatter["allowed-tools"])
+        const argumentHint = frontmatter["argument-hint"] ?? ""
 
         // Get file stats for last modified date
         const stats = fs.statSync(filePath)
@@ -128,7 +128,7 @@ export function getAllCommands(): CommandMetadata[] {
     // Sort by slug for consistent ordering
     return commands.sort((a, b) => a.slug.localeCompare(b.slug))
   } catch (error) {
-    logError('Failed to read commands directory:', error)
+    logError("Failed to read commands directory:", error)
     return []
   }
 }
@@ -165,16 +165,16 @@ export function getCommandBySlug(slug: string): CommandMetadata | undefined {
     }
 
     // Read file content
-    const rawContent = fs.readFileSync(filePath, 'utf-8')
+    const rawContent = fs.readFileSync(filePath, "utf-8")
 
     // Parse frontmatter
     const { data, content } = matter(rawContent)
 
     // Extract frontmatter fields with defaults
     const frontmatter = data as CommandFrontmatter
-    const description = frontmatter.description ?? ''
-    const allowedTools = parseCommaSeparated(frontmatter['allowed-tools'])
-    const argumentHint = frontmatter['argument-hint'] ?? ''
+    const description = frontmatter.description ?? ""
+    const allowedTools = parseCommaSeparated(frontmatter["allowed-tools"])
+    const argumentHint = frontmatter["argument-hint"] ?? ""
 
     // Get file stats for last modified date
     const stats = fs.statSync(filePath)
@@ -209,5 +209,5 @@ export function getCommandBySlug(slug: string): CommandMetadata | undefined {
  */
 export function getAllCommandSlugs(): string[] {
   const commands = getAllCommands()
-  return commands.map((command) => command.slug)
+  return commands.map(command => command.slug)
 }
