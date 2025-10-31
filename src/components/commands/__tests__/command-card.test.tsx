@@ -68,10 +68,7 @@ describe("CommandCard", () => {
     it("should link to the correct detail page", () => {
       render(<CommandCard command={mockCommand} />)
       const link = screen.getByRole("link")
-      expect(link).toHaveAttribute(
-        "href",
-        "/claude-code/commands/smart-commit"
-      )
+      expect(link).toHaveAttribute("href", "/claude-code/commands/smart-commit")
     })
 
     it("should generate correct link for different slugs", () => {
@@ -189,10 +186,7 @@ describe("CommandCard", () => {
       }
       render(<CommandCard command={commandWithoutDescription} />)
       const link = screen.getByRole("link")
-      expect(link).toHaveAttribute(
-        "href",
-        "/claude-code/commands/smart-commit"
-      )
+      expect(link).toHaveAttribute("href", "/claude-code/commands/smart-commit")
     })
   })
 

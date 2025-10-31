@@ -92,7 +92,9 @@ describe("Commands List Page", () => {
 
       // Command descriptions should be displayed
       expect(
-        screen.getByText(/変更内容を自動的に分析し、関連する変更ごとにグループ化/)
+        screen.getByText(
+          /変更内容を自動的に分析し、関連する変更ごとにグループ化/
+        )
       ).toBeInTheDocument()
       expect(
         screen.getByText(/A test command for testing purposes/)
