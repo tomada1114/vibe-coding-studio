@@ -18,25 +18,25 @@ import CommandsListPage from "../page"
 jest.mock("@/lib/commands/command-data", () => ({
   getAllCommands: jest.fn(() => [
     {
-      slug: "convert-video",
-      title: "Convert Video",
+      slug: "smart-commit",
+      title: "Smart Commit",
       description:
-        "Convert YouTube video data from commented format to VideoMetadata TypeScript",
-      allowedTools: ["Read", "Write", "Edit", "Bash"],
-      argumentHint: "<youtube-video-id>",
-      content: "# Content",
-      rawContent: "---\ndescription: test\n---\n# Content",
+        "変更内容を自動的に分析し、関連する変更ごとにグループ化して適切なコミットを作成",
+      allowedTools: ["Bash", "Read"],
+      argumentHint: "",
+      content: "# Smart Commit Command",
+      rawContent:
+        "---\ndescription: 変更内容を自動的に分析し、関連する変更ごとにグループ化して適切なコミットを作成\nallowed-tools: Bash, Read\n---\n# Smart Commit Command",
       lastModified: "2025-01-01T00:00:00.000Z",
     },
     {
-      slug: "pr-description",
-      title: "Pr Description",
-      description:
-        "Create or update PR title and description for a given PR number",
+      slug: "test-command",
+      title: "Test Command",
+      description: "A test command for testing purposes",
       allowedTools: ["Bash", "Read"],
-      argumentHint: "<pr-number>",
-      content: "# Content",
-      rawContent: "---\ndescription: test\n---\n# Content",
+      argumentHint: "",
+      content: "# Test Content",
+      rawContent: "---\ndescription: test\n---\n# Test Content",
       lastModified: "2025-01-01T00:00:00.000Z",
     },
   ]),
@@ -83,8 +83,8 @@ describe("Commands List Page", () => {
       render(<CommandsListPage />)
 
       // Command titles should be displayed
-      expect(screen.getByText("Convert Video")).toBeInTheDocument()
-      expect(screen.getByText("Pr Description")).toBeInTheDocument()
+      expect(screen.getByText("Smart Commit")).toBeInTheDocument()
+      expect(screen.getByText("Test Command")).toBeInTheDocument()
     })
 
     test("should render command descriptions", () => {
@@ -92,10 +92,10 @@ describe("Commands List Page", () => {
 
       // Command descriptions should be displayed
       expect(
-        screen.getByText(/Convert YouTube video data from commented format/)
+        screen.getByText(/変更内容を自動的に分析し、関連する変更ごとにグループ化/)
       ).toBeInTheDocument()
       expect(
-        screen.getByText(/Create or update PR title and description/)
+        screen.getByText(/A test command for testing purposes/)
       ).toBeInTheDocument()
     })
   })
@@ -113,23 +113,23 @@ describe("Commands List Page", () => {
       render(<CommandsListPage />)
 
       // Find links with correct href
-      const convertVideoLink = screen
+      const smartCommitLink = screen
         .getAllByRole("link")
         .find(link =>
           link
             .getAttribute("href")
-            ?.includes("/claude-code/commands/convert-video")
+            ?.includes("/claude-code/commands/smart-commit")
         )
-      const prDescriptionLink = screen
+      const testCommandLink = screen
         .getAllByRole("link")
         .find(link =>
           link
             .getAttribute("href")
-            ?.includes("/claude-code/commands/pr-description")
+            ?.includes("/claude-code/commands/test-command")
         )
 
-      expect(convertVideoLink).toBeInTheDocument()
-      expect(prDescriptionLink).toBeInTheDocument()
+      expect(smartCommitLink).toBeInTheDocument()
+      expect(testCommandLink).toBeInTheDocument()
     })
   })
 

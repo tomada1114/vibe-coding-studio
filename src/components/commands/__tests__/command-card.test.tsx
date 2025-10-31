@@ -30,28 +30,29 @@ jest.mock("next/link", () => {
  * Sample command metadata for testing
  */
 const mockCommand: CommandMetadata = {
-  slug: "convert-video",
-  title: "Convert Video",
+  slug: "smart-commit",
+  title: "Smart Commit",
   description:
-    "Convert YouTube video data from commented format to VideoMetadata TypeScript",
-  allowedTools: ["Read", "Write", "Edit", "Bash"],
-  argumentHint: "<youtube-video-id>",
-  content: "# Content",
-  rawContent: "---\ndescription: test\n---\n# Content",
+    "変更内容を自動的に分析し、関連する変更ごとにグループ化して適切なコミットを作成",
+  allowedTools: ["Bash", "Read"],
+  argumentHint: "",
+  content: "# Smart Commit Command",
+  rawContent:
+    "---\ndescription: 変更内容を自動的に分析し、関連する変更ごとにグループ化して適切なコミットを作成\nallowed-tools: Bash, Read\n---\n# Smart Commit Command",
 }
 
 describe("CommandCard", () => {
   describe("Rendering", () => {
     it("should render command title", () => {
       render(<CommandCard command={mockCommand} />)
-      expect(screen.getByText("Convert Video")).toBeInTheDocument()
+      expect(screen.getByText("Smart Commit")).toBeInTheDocument()
     })
 
     it("should render command description", () => {
       render(<CommandCard command={mockCommand} />)
       expect(
         screen.getByText(
-          "Convert YouTube video data from commented format to VideoMetadata TypeScript"
+          "変更内容を自動的に分析し、関連する変更ごとにグループ化して適切なコミットを作成"
         )
       ).toBeInTheDocument()
     })
@@ -69,7 +70,7 @@ describe("CommandCard", () => {
       const link = screen.getByRole("link")
       expect(link).toHaveAttribute(
         "href",
-        "/claude-code/commands/convert-video"
+        "/claude-code/commands/smart-commit"
       )
     })
 
@@ -118,7 +119,7 @@ describe("CommandCard", () => {
   describe("Typography", () => {
     it("should render title with proper heading styles", () => {
       render(<CommandCard command={mockCommand} />)
-      const title = screen.getByText("Convert Video")
+      const title = screen.getByText("Smart Commit")
 
       expect(title.tagName).toBe("H3")
       expect(title).toHaveClass("font-semibold")
@@ -127,7 +128,7 @@ describe("CommandCard", () => {
 
     it("should render description with body text styles", () => {
       render(<CommandCard command={mockCommand} />)
-      const description = screen.getByText(/Convert YouTube video data/)
+      const description = screen.getByText(/変更内容を自動的に分析し/)
 
       expect(description).toHaveClass("text-gray-600")
     })
@@ -167,7 +168,7 @@ describe("CommandCard", () => {
 
       // Link is semantic and contains descriptive text
       expect(link).toBeInTheDocument()
-      expect(screen.getByText("Convert Video")).toBeInTheDocument()
+      expect(screen.getByText("Smart Commit")).toBeInTheDocument()
     })
   })
 
@@ -178,7 +179,7 @@ describe("CommandCard", () => {
         description: "",
       }
       render(<CommandCard command={commandWithoutDescription} />)
-      expect(screen.getByText("Convert Video")).toBeInTheDocument()
+      expect(screen.getByText("Smart Commit")).toBeInTheDocument()
     })
 
     it("should still be clickable with empty description", () => {
@@ -190,7 +191,7 @@ describe("CommandCard", () => {
       const link = screen.getByRole("link")
       expect(link).toHaveAttribute(
         "href",
-        "/claude-code/commands/convert-video"
+        "/claude-code/commands/smart-commit"
       )
     })
   })

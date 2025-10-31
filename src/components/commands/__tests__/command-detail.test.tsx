@@ -14,28 +14,29 @@ import { render, screen } from "@testing-library/react"
  * Sample command metadata for testing
  */
 const mockCommand: CommandMetadata = {
-  slug: "convert-video",
-  title: "Convert Video",
+  slug: "smart-commit",
+  title: "Smart Commit",
   description:
-    "Convert YouTube video data from commented format to VideoMetadata TypeScript",
-  allowedTools: ["Read", "Write", "Edit", "Bash"],
-  argumentHint: "<youtube-video-id>",
-  content: "# Content",
-  rawContent: "---\ndescription: test\n---\n# Content",
+    "変更内容を自動的に分析し、関連する変更ごとにグループ化して適切なコミットを作成",
+  allowedTools: ["Bash", "Read"],
+  argumentHint: "",
+  content: "# Smart Commit Command",
+  rawContent:
+    "---\ndescription: 変更内容を自動的に分析し、関連する変更ごとにグループ化して適切なコミットを作成\nallowed-tools: Bash, Read\n---\n# Smart Commit Command",
 }
 
 describe("CommandDetail", () => {
   describe("Rendering", () => {
     it("should render command title", () => {
       render(<CommandDetail command={mockCommand} />)
-      expect(screen.getByText("Convert Video")).toBeInTheDocument()
+      expect(screen.getByText("Smart Commit")).toBeInTheDocument()
     })
 
     it("should render command description", () => {
       render(<CommandDetail command={mockCommand} />)
       expect(
         screen.getByText(
-          "Convert YouTube video data from commented format to VideoMetadata TypeScript"
+          "変更内容を自動的に分析し、関連する変更ごとにグループ化して適切なコミットを作成"
         )
       ).toBeInTheDocument()
     })
@@ -53,17 +54,19 @@ describe("CommandDetail", () => {
       render(<CommandDetail command={mockCommand} />)
 
       expect(screen.getByText(/Allowed Tools/i)).toBeInTheDocument()
-      expect(screen.getByText(/Read/)).toBeInTheDocument()
-      expect(screen.getByText(/Write/)).toBeInTheDocument()
-      expect(screen.getByText(/Edit/)).toBeInTheDocument()
       expect(screen.getByText(/Bash/)).toBeInTheDocument()
+      expect(screen.getByText(/Read/)).toBeInTheDocument()
     })
 
     it("should display argument hint when present", () => {
-      render(<CommandDetail command={mockCommand} />)
+      const commandWithHint: CommandMetadata = {
+        ...mockCommand,
+        argumentHint: "<test-arg>",
+      }
+      render(<CommandDetail command={commandWithHint} />)
 
       expect(screen.getByText(/Argument Hint/i)).toBeInTheDocument()
-      expect(screen.getByText("<youtube-video-id>")).toBeInTheDocument()
+      expect(screen.getByText("<test-arg>")).toBeInTheDocument()
     })
 
     it("should not display allowed tools section when empty", () => {
@@ -94,14 +97,14 @@ describe("CommandDetail", () => {
       expect(list).toBeInTheDocument()
 
       const listItems = container.querySelectorAll("li")
-      expect(listItems.length).toBeGreaterThanOrEqual(4) // At least 4 tools
+      expect(listItems.length).toBeGreaterThanOrEqual(2) // At least 2 tools
     })
   })
 
   describe("Typography and Styling", () => {
     it("should render title as H1 with proper styling", () => {
       render(<CommandDetail command={mockCommand} />)
-      const title = screen.getByText("Convert Video")
+      const title = screen.getByText("Smart Commit")
 
       expect(title.tagName).toBe("H1")
       expect(title).toHaveClass("text-gray-950")
@@ -110,7 +113,7 @@ describe("CommandDetail", () => {
 
     it("should have proper title size", () => {
       render(<CommandDetail command={mockCommand} />)
-      const title = screen.getByText("Convert Video")
+      const title = screen.getByText("Smart Commit")
 
       expect(title).toHaveClass("text-3xl")
       expect(title).toHaveClass("sm:text-4xl")
@@ -118,7 +121,7 @@ describe("CommandDetail", () => {
 
     it("should render description with body text styling", () => {
       render(<CommandDetail command={mockCommand} />)
-      const description = screen.getByText(/Convert YouTube video data/)
+      const description = screen.getByText(/変更内容を自動的に分析し/)
 
       expect(description).toHaveClass("text-gray-600")
       expect(description).toHaveClass("text-lg")
@@ -152,7 +155,7 @@ describe("CommandDetail", () => {
       // Main title should be H1
       const h1 = container.querySelector("h1")
       expect(h1).toBeInTheDocument()
-      expect(h1).toHaveTextContent("Convert Video")
+      expect(h1).toHaveTextContent("Smart Commit")
     })
   })
 
@@ -169,13 +172,13 @@ describe("CommandDetail", () => {
 
       // Title should be accessible
       const title = screen.getByRole("heading", { level: 1 })
-      expect(title).toHaveTextContent("Convert Video")
+      expect(title).toHaveTextContent("Smart Commit")
     })
 
     it("should have proper color contrast", () => {
       render(<CommandDetail command={mockCommand} />)
-      const title = screen.getByText("Convert Video")
-      const description = screen.getByText(/Convert YouTube video data/)
+      const title = screen.getByText("Smart Commit")
+      const description = screen.getByText(/変更内容を自動的に分析し/)
 
       // Gray-950 on white background meets WCAG AA
       expect(title).toHaveClass("text-gray-950")
@@ -187,7 +190,7 @@ describe("CommandDetail", () => {
   describe("Responsive Design", () => {
     it("should have responsive title sizing", () => {
       render(<CommandDetail command={mockCommand} />)
-      const title = screen.getByText("Convert Video")
+      const title = screen.getByText("Smart Commit")
 
       expect(title).toHaveClass("text-3xl")
       expect(title).toHaveClass("sm:text-4xl")
@@ -209,7 +212,7 @@ describe("CommandDetail", () => {
       }
       render(<CommandDetail command={commandWithoutDescription} />)
 
-      expect(screen.getByText("Convert Video")).toBeInTheDocument()
+      expect(screen.getByText("Smart Commit")).toBeInTheDocument()
       // Should still render other elements
     })
 
@@ -252,7 +255,11 @@ describe("CommandDetail", () => {
 
   describe("Frontmatter Labels", () => {
     it("should have clear labels for frontmatter fields", () => {
-      render(<CommandDetail command={mockCommand} />)
+      const commandWithHint: CommandMetadata = {
+        ...mockCommand,
+        argumentHint: "<test-arg>",
+      }
+      render(<CommandDetail command={commandWithHint} />)
 
       // Labels should be descriptive
       expect(screen.getByText(/Allowed Tools/i)).toBeInTheDocument()
