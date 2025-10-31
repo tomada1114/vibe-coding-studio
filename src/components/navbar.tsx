@@ -17,6 +17,7 @@ const navLinks = [
   { href: "/", label: "ホーム" },
   { href: "/community", label: "コミュニティ" },
   { href: "/coupons", label: "クーポン" },
+  { href: "/claude-code/commands", label: "カスタムコマンド" },
   { href: "/founder", label: "運営者" },
 ]
 

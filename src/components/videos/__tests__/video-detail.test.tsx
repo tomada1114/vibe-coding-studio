@@ -212,9 +212,7 @@ describe("VideoDetail", () => {
       const { container } = render(<VideoDetail video={videoWithRelated} />)
       const text = container.textContent || ""
       // 関連動画間に空白行が存在することを確認
-      expect(text).toMatch(
-        /related1\s*\n\s*\n\s*・\s*関連動画2/
-      )
+      expect(text).toMatch(/related1\s*\n\s*\n\s*・\s*関連動画2/)
     })
 
     it("関連動画のタイトルに中点「・」が使用される", () => {

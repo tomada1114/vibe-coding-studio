@@ -61,6 +61,9 @@ function Sitemap() {
           <SitemapLink href="/">ホーム</SitemapLink>
           <SitemapLink href="/community">コミュニティ</SitemapLink>
           <SitemapLink href="/coupons">クーポン</SitemapLink>
+          <SitemapLink href="/claude-code/commands">
+            カスタムコマンド
+          </SitemapLink>
           <SitemapLink href="/founder">運営者</SitemapLink>
         </SitemapLinks>
       </div>
