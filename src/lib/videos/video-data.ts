@@ -1,3 +1,4 @@
+import { video_1_1NAB5jIjo } from "@/data/videos/1-1NAB5jIjo"
 import { video_1EQllS_3TJo } from "@/data/videos/1EQllS_3TJo"
 import { video_1LP4ZAsU_UI } from "@/data/videos/1LP4ZAsU_UI"
 import { video_1TJydjQM6eo } from "@/data/videos/1TJydjQM6eo"
@@ -40,6 +41,7 @@ import type { VideoMetadata } from "@/types/video"
  * 新しい動画を追加する場合は、ここにimportとデータを追加してください。
  */
 const allVideosData: VideoMetadata[] = [
+  video_1_1NAB5jIjo,
   video_1LP4ZAsU_UI,
   video_1TJydjQM6eo,
   video_UqKd0dxLskU,
