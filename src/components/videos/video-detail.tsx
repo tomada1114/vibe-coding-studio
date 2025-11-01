@@ -21,7 +21,7 @@ const SECTION_DIVIDER = "━━━━━━━━━━━━━━━━━━�
  * カスタムセクションをプレーンテキストに変換
  */
 function formatCustomSection(section: CustomSection): string {
-  let result = `${section.title}\n\n`
+  let result = `${section.title}\n${SECTION_DIVIDER}\n`
 
   if (section.type === "text") {
     result += `${section.content}\n`
@@ -35,7 +35,7 @@ function formatCustomSection(section: CustomSection): string {
 
   if (section.type === "links" && section.links) {
     section.links.forEach(link => {
-      result += `${link.label}: ${link.url}\n`
+      result += `${link.label}\n${link.url}\n`
     })
   }
 
@@ -51,7 +51,7 @@ function formatCustomSection(section: CustomSection): string {
     }
     if (section.links && section.links.length > 0) {
       section.links.forEach(link => {
-        result += `${link.label}: ${link.url}\n`
+        result += `${link.label}\n${link.url}\n`
       })
     }
   }
@@ -83,10 +83,10 @@ function formatVideoAsPlainText(video: VideoMetadata): string {
   video.opening.lines.forEach(line => {
     text += `${line}\n`
   })
-  text += `\n${SECTION_DIVIDER}\n\n`
+  text += `\n${SECTION_DIVIDER}\n`
 
   // 学べる内容セクション
-  text += `${video.learningPoints.title}\n\n`
+  text += `${video.learningPoints.title}\n${SECTION_DIVIDER}\n`
   video.learningPoints.items.forEach(item => {
     text += `${item}\n`
   })
@@ -95,7 +95,7 @@ function formatVideoAsPlainText(video: VideoMetadata): string {
   // カスタムセクション
   if (video.customSections && video.customSections.length > 0) {
     video.customSections.forEach(section => {
-      text += `${SECTION_DIVIDER}\n\n`
+      text += `${SECTION_DIVIDER}\n`
       text += formatCustomSection(section)
       text += "\n"
     })
@@ -103,8 +103,8 @@ function formatVideoAsPlainText(video: VideoMetadata): string {
 
   // 関連動画セクション
   if (video.relatedVideos) {
-    text += `${SECTION_DIVIDER}\n\n`
-    text += `${video.relatedVideos.title}\n\n`
+    text += `${SECTION_DIVIDER}\n`
+    text += `${video.relatedVideos.title}\n${SECTION_DIVIDER}\n`
     video.relatedVideos.videos.forEach((relatedVideo, index) => {
       // タイトルに中点「・」を付与（絵文字は使用しない）
       text += `・${relatedVideo.title}\n`
@@ -122,56 +122,56 @@ function formatVideoAsPlainText(video: VideoMetadata): string {
 
   // Udemy講座セクション
   if (video.udemyCourses) {
-    text += `${SECTION_DIVIDER}\n\n`
-    text += `${video.udemyCourses.title}\n\n`
+    text += `${SECTION_DIVIDER}\n`
+    text += `${video.udemyCourses.title}\n${SECTION_DIVIDER}\n`
     if (video.udemyCourses.description) {
       text += `${video.udemyCourses.description}\n\n`
     }
     if (video.udemyCourses.courses && video.udemyCourses.courses.length > 0) {
       video.udemyCourses.courses.forEach(course => {
-        text += `${course}\n`
+        text += `・${course}\n`
       })
       text += "\n"
     }
-    text += `${video.udemyCourses.cta.text}: ${video.udemyCourses.cta.url}\n\n`
+    text += `${video.udemyCourses.cta.text}\n${video.udemyCourses.cta.url}\n\n`
   }
 
   // SNS・コミュニティセクション
-  text += `${SECTION_DIVIDER}\n\n`
-  text += `${video.social.title}\n\n`
+  text += `${SECTION_DIVIDER}\n`
+  text += `${video.social.title}\n${SECTION_DIVIDER}\n`
   video.social.accounts.forEach(account => {
     const label = account.label || account.platform
-    text += `${account.emoji} ${label}: ${account.url}\n`
+    text += `${account.emoji} ${label}\n${account.url}\n`
   })
   text += "\n"
 
   // Discordコミュニティセクション
   if (video.discordCommunity) {
-    text += `${SECTION_DIVIDER}\n\n`
-    text += `${video.discordCommunity.title}\n\n`
+    text += `${SECTION_DIVIDER}\n`
+    text += `${video.discordCommunity.title}\n${SECTION_DIVIDER}\n`
     text += `${video.discordCommunity.description}\n\n`
-    text += `Discordに参加する: ${video.discordCommunity.url}\n\n`
+    text += `Discordに参加する\n${video.discordCommunity.url}\n\n`
   }
 
   // タイムスタンプセクション
-  text += `${SECTION_DIVIDER}\n\n`
-  text += `${video.timestamps.title}\n\n`
+  text += `${SECTION_DIVIDER}\n`
+  text += `${video.timestamps.title}\n${SECTION_DIVIDER}\n`
   video.timestamps.items.forEach(timestamp => {
-    text += `${timestamp.time} - ${timestamp.label}\n`
+    text += `${timestamp.time} ${timestamp.label}\n`
   })
   text += "\n"
 
-  // タグ（#記号を自動付与）
-  text += "\n"
-  text += video.tags.map(tag => `#${tag}`).join(" ") + "\n\n"
-
   // エンゲージメント促進セクション
-  text += `${SECTION_DIVIDER}\n\n`
+  text += `${SECTION_DIVIDER}\n`
   if (video.engagement.title) {
-    text += `${video.engagement.title}\n\n`
+    text += `${video.engagement.title}\n${SECTION_DIVIDER}\n`
   }
   text += `${video.engagement.message}\n\n`
-  text += `${video.engagement.callToAction}\n`
+  text += `${video.engagement.callToAction}\n\n`
+
+  // タグ（#記号を自動付与）
+  text += "\n"
+  text += video.tags.map(tag => `#${tag}`).join(" ") + "\n"
 
   return text
 }
