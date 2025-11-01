@@ -1,11 +1,14 @@
 # CLAUDE.md
 
-このファイルは、このリポジトリのコードを扱う際のClaude Code (claude.ai/code) へのガイダンスを提供します。
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 日本語で常に回答するようにしてください。
 
-## プロジェクト構造
+## プロジェクト概要
 
-このリポジトリには Radiant テンプレートが含まれています - 厳密な型チェックが有効になったTypeScript/TSXの実装で、Next.js 15とTailwind CSS v4で構築されています。
+**Vibe Coding Studio**は、Next.js 15とTailwind CSS v4を使用したモダンなWebアプリケーションです。YouTube動画のメタデータ管理機能を中心に、技術コンテンツを構造化して提供するプラットフォームです。
+
+Radiantテンプレートをベースに、エンタープライズグレードのセキュリティ、パフォーマンス最適化、型安全性を実現しています。
 
 ## 開発コマンド
 
@@ -31,6 +34,89 @@ npm run test              # Jest単体テスト実行
 npm run test:coverage     # カバレッジ付きテスト実行
 ```
 
+## プロジェクト固有の機能
+
+### YouTube動画メタデータシステム
+
+このプロジェクトの中核機能は、YouTube動画のメタデータを構造化して管理するシステムです。
+
+**主要ファイル**:
+- `src/types/video.ts` - 動画メタデータの型定義（`VideoMetadata`インターフェース）
+- `src/data/videos/` - 個別の動画データファイル（例: `1-1NAB5jIjo.ts`）
+- `src/lib/videos/video-data.ts` - 動画データローダー（全動画の集約）
+- `src/data/shared/common-sections.ts` - 共通セクション（SNS、Discord、エンゲージメント）
+
+**動画データの構造**:
+```typescript
+export const video_VIDEO_ID: VideoMetadata = {
+  id: "VIDEO_ID",
+  title: "動画タイトル",
+  publishedAt: "YYYY-MM-DD",
+  videoUrl: "https://www.youtube.com/watch?v=VIDEO_ID",
+
+  // 必須セクション
+  opening: { lines: [...] },
+  learningPoints: { title: "💡 この動画で学べること", items: [...] },
+  timestamps: { title: "⏰ タイムスタンプ", items: [...] },
+  tags: [...],
+
+  // オプションセクション
+  relatedVideos?: {...},
+  udemyCourses?: {...},
+  customSections?: [...],
+
+  // 共通セクション（commonSectionsから参照）
+  social: commonSections.social,
+  discordCommunity: commonSections.discordCommunity,
+  engagement: commonSections.engagement,
+}
+```
+
+**新しい動画の追加手順**:
+1. `src/data/videos/VIDEO_ID.ts` を作成し、`VideoMetadata`形式でデータを記述
+2. `src/lib/videos/video-data.ts` にインポートと配列への追加
+3. `/convert-video` カスタムコマンドを使うと、コメント形式からの自動変換が可能
+
+### Kiro仕様駆動開発システム
+
+`.kiro/` ディレクトリには、AI駆動開発のための仕様管理システムが含まれています。
+
+**ディレクトリ構造**:
+```
+.kiro/
+├── steering/           # プロダクト・技術・構造の指針
+│   ├── product.md     # 製品概要と価値提案
+│   ├── tech.md        # 技術スタック詳細
+│   └── structure.md   # プロジェクト構造
+└── specs/             # 機能仕様
+    ├── archive/       # 完了した仕様
+    └── [feature-name]/ # 進行中の仕様
+        ├── requirements.md
+        ├── design.md
+        ├── tasks.md
+        └── spec.json
+```
+
+**Kiroカスタムコマンド** (`.claude/commands/kiro/`):
+- `/kiro:steering` - ステアリングドキュメント作成・更新
+- `/kiro:spec-init` - 新規仕様の初期化
+- `/kiro:spec-requirements` - 要件定義生成
+- `/kiro:spec-design` - 技術設計書作成
+- `/kiro:spec-tasks` - 実装タスク分解
+- `/kiro:spec-impl` - TDDによる実装実行
+- `/kiro:spec-status` - 仕様のステータス確認
+- `/kiro:validate-gap` - 要件と実装のギャップ分析
+- `/kiro:validate-design` - 設計品質レビュー
+
+**現在アクティブな仕様**（CLAUDE.mdの「アクティブな仕様」セクション参照）:
+- `custom-commands-publish` - カスタムコマンドの動的公開機能
+
+### カスタムコマンド
+
+`/convert-video <youtube-video-id>` - YouTube動画データの自動変換
+
+コメント形式で記述された動画データを`VideoMetadata`形式に変換し、データローダーに登録します。
+
 ## アーキテクチャ概要
 
 ### 技術スタック
@@ -45,32 +131,41 @@ npm run test:coverage     # カバレッジ付きテスト実行
 
 ### 主要ディレクトリ
 
-- `src/app/`: Next.js App Routerのページとレイアウト
+```
+src/
+├── app/                    # Next.js App Router（ページ・レイアウト）
+├── components/             # 再利用可能UIコンポーネント
+│   └── __tests__/         # コンポーネントテスト
+├── data/                   # アプリケーションデータ
+│   ├── videos/            # 動画メタデータファイル（VIDEO_ID.ts）
+│   └── shared/            # 共通データ（common-sections.ts）
+├── lib/                    # ユーティリティ・設定
+│   ├── videos/            # 動画データローダー
+│   ├── csp.ts             # CSP設定
+│   └── env-validation.ts  # 環境変数検証
+├── types/                  # TypeScript型定義
+│   └── video.ts           # VideoMetadata型
+└── styles/                # グローバルスタイル
 
-- `src/components/`: 再利用可能なUIコンポーネント
-  - アニメーションコンポーネント（AnimatedNumber）
-  - レイアウトコンポーネント（Container、Footer、Navbar）
-  - ビジュアルコンポーネント（BentoCard、Screenshot、Logoバリアント）
+.claude/                    # Claude Code設定
+├── commands/              # カスタムコマンド
+│   └── kiro/             # Kiro仕様駆動開発コマンド
+└── skills/               # Claude Codeスキル
 
+.kiro/                     # Kiro仕様管理
+├── steering/             # プロジェクト指針
+└── specs/                # 機能仕様
 
-- `src/lib/`: ユーティリティライブラリと設定
-  - エッジランタイムサポート付きCSP設定
-- エラーハンドリングとログ記録ユーティリティ
-  - 環境バリデーション
+docs/                      # プロジェクトドキュメント
+└── design/               # デザインシステム
+```
 
+### 設計原則
 
-### コンポーネントの操作
-
-コンポーネントは条件付きスタイリングにclsxを使用し、一貫したパターンに従います：
-
-- デフォルト関数/コンポーネントのエクスポート
-- スタイリングにTailwindクラスを使用
-- 適切なTypeScript型定義を含む
-- 多くのコンポーネントはアニメーション用にFramer Motionを使用
-
-### パスエイリアス
-
-プロジェクトはインポートで`@/`を`./src/`のエイリアスとして使用します。
+- **型安全性**: TypeScript厳格モード、`VideoMetadata`などの明確な型定義
+- **コンポーネント設計**: デフォルトエクスポート、clsxでの条件付きスタイリング、Framer Motionアニメーション
+- **パスエイリアス**: `@/` → `./src/`
+- **テストファーストアプローチ**: TDD（t-wadaスタイル）を推奨
 
 ## デザイン方針
 
@@ -134,17 +229,16 @@ npm run test:coverage     # カバレッジ付きテスト実行
 - 設定不足に対する開発者フレンドリーな警告
 - 早期バリデーションによる本番エラー防止
 
-## リポジトリの目的とステータス
+## プロジェクトステータス
 
-このリポジトリは、Next.js、TypeScriptを使用したモダンなWebアプリケーション構築のための**テンプレートリポジトリ**として機能します。エンタープライズグレードのセキュリティ、キャッシュ最適化、包括的なコンポーネントライブラリを備えた堅固な基盤を提供します。
+**Vibe Coding Studio**は、技術コンテンツを構造化して提供する本番環境対応のWebアプリケーションです。
 
-### 現在のステータス
-
-- ✅ 完全な機能セットを持つ本番環境対応テンプレート
+- ✅ YouTube動画メタデータシステム（29動画のデータ）
+- ✅ Kiro仕様駆動開発システム統合
 - ✅ コアコンポーネントの完全なテストカバレッジ
 - ✅ `/docs`ディレクトリの包括的なドキュメント
-- ✅ デザインシステムドキュメント（英語・日本語）
-- ✅ Catalyst UIコンポーネントの完全な統合
+- ✅ Catalyst UIコンポーネント統合
+- 🚧 カスタムコマンド公開機能（開発中）
 
 ## 開発ワークフロー
 
@@ -183,12 +277,10 @@ npm test
 #### 2. 開発中
 
 ```bash
-# TDDサイクル
-npm test:watch  # 開発中は継続実行
-
 # 定期チェック
 npm run type-check  # TypeScriptバリデーション
 npm run lint       # コードスタイルチェック
+npm run test       # テスト実行
 ```
 
 #### 3. コミットガイドライン
@@ -267,51 +359,29 @@ npm run build       # 本番ビルドが動作することを確認
 - `DESIGN_SYSTEM_JA.md` - 日本語デザインドキュメント
 - `CATALYST_COMPONENTS.md` - Catalyst UI統合ガイド
 
-### このテンプレートの使用
+### 開発ベストプラクティス
 
-#### 新しいプロジェクトの開始
+1. **動画データ追加時**
+   - `VideoMetadata`型に厳密に準拠
+   - 共通セクションは`commonSections`から参照
+   - データローダーへの登録を忘れずに
+   - タイムスタンプは"HH:MM"または"HH:MM:SS"形式
 
-1. **テンプレートのクローン**
+2. **新機能開発時（Kiroワークフロー）**
+   - `/kiro:spec-init`で仕様を初期化
+   - 要件定義 → 設計 → タスク分解 → TDD実装の流れ
+   - ステアリングドキュメントを定期的に参照
 
-   ```bash
-   git clone <repo-url> your-project-name
-   cd your-project-name
-   rm -rf .git  # テンプレートのgit履歴を削除
-   git init     # 新しく開始
-   ```
+3. **コンポーネント開発**
+   - TDDアプローチ（Red → Green → Refactor）
+   - WCAG 2.1 AA準拠のアクセシビリティ
+   - Framer Motionを活用したアニメーション
 
-2. **環境のセットアップ**
-
-   ```bash
-   npm install
-   cp .env.example .env.local  # 環境設定
-   ```
-
-3. **プロジェクトのカスタマイズ**
-   - プロジェクトの詳細で`package.json`を更新
-   - `/src/components`のコンポーネントを変更
-   - Tailwind設定でデザイントークンを調整
-
-#### 開発ベストプラクティス
-
-1. **コンポーネント開発**
-   - テストから開始（TDDアプローチ）
-   - アクセシビリティを確保（WCAG 2.1準拠）
-   - プロパティと使用方法をドキュメント化
-
-2. **パフォーマンス**
-   - 重いコンポーネントには動的インポートを使用
-   - next/imageで画像を最適化
-
-3. **セキュリティ**
-   - 秘密情報やAPIキーを決してコミットしない
-   - CSPヘッダーを厳密に保つ
-   - すべてのユーザー入力を検証
-
-4. **テスト戦略**
-   - ユーティリティとフック用の単体テスト
-   - UIコンポーネント用のコンポーネントテスト
-   - 重要な機能のテストカバレッジ確保
+4. **パフォーマンス・セキュリティ**
+   - 動的インポートで初期バンドルを最小化
+   - next/imageで画像最適化
+   - CSPヘッダーの厳格な維持
+   - 秘密情報を決してコミットしない
 
 ## 利用可能なMCP
 
@@ -344,15 +414,8 @@ npm run build       # 本番ビルドが動作することを確認
 
 ## 品質基準
 
-1. **テストカバレッジ**
-   - コアロジックとユーティリティのテストカバレッジを維持
-   - 新機能追加時はテストも併せて追加
-
-2. **アクセシビリティ**
-   - WCAG 2.1 AA準拠を維持
-   - キーボードナビゲーションサポート
-   - スクリーンリーダー対応
-
-3. **ドキュメント**
-   - 機能追加時に関連ドキュメントを更新
-   - 新しいコンポーネントの使用例を追加
+- **テストカバレッジ**: コアロジックとユーティリティで80%以上を維持
+- **アクセシビリティ**: WCAG 2.1 AA準拠（キーボードナビゲーション、スクリーンリーダー対応）
+- **パフォーマンス**: Core Web Vitals目標（LCP < 2.5秒、CLS < 0.1、FID < 100ms）
+- **型安全性**: TypeScript厳格モード、すべての新機能に適切な型定義
+- **ドキュメント**: 新機能追加時に関連ドキュメントを更新
