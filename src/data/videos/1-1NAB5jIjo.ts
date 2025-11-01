@@ -82,11 +82,6 @@ export const video_1_1NAB5jIjo: VideoMetadata = {
       },
       {
         title:
-          "【Codex CLI対応】仕様駆動開発を1コマンドで導入！Spec Driven Codexで要件定義→設計→実装まで完全自動化",
-        url: "https://www.youtube.com/watch?v=1EQllS_3TJo",
-      },
-      {
-        title:
           "【1時間で速習】Claude Code完全ガイド AI駆動開発で企業サイトを作ってデプロイまで実演！",
         url: "https://www.youtube.com/watch?v=Xr_HhLuzOy8",
       },
@@ -126,7 +121,7 @@ export const video_1_1NAB5jIjo: VideoMetadata = {
       type: "text",
       title: "📝 関連記事・リソース",
       content:
-        "公開したカスタムコマンド\nVibe Coding Studioの公式サイトで公開中\nhttps://www.vibecodingstudio.dev/claude-code/commands",
+        "・公開したカスタムコマンド\nVibe Coding Studioの公式サイトで公開中\nhttps://www.vibecodingstudio.dev/claude-code/commands",
     },
   ],
 

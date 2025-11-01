@@ -26,7 +26,7 @@ export const video_1_1NAB5jIjo: VideoMetadata = {
 
   id: "1-1NAB5jIjo",
   title: "リアルなAI駆動開発の全工程！現役エンジニアの仕様駆動開発の流れを公開",
-  publishedAt: "2025-11-01T00:00:00+09:00",  // ISO 8601形式、JST（+09:00）
+  publishedAt: "2025-11-01T00:00:00+09:00", // ISO 8601形式、JST（+09:00）
   videoUrl: "https://www.youtube.com/watch?v=1-1NAB5jIjo",
 
   // ========================================
@@ -102,7 +102,7 @@ export const video_1_1NAB5jIjo: VideoMetadata = {
       { time: "48:29", label: "実装フェーズ" },
       { time: "50:54", label: "品質チェック" },
       { time: "52:34", label: "MCPで自動確認" },
-      { time: "01:00:52", label: "手動で動作確認" },  // 1時間超
+      { time: "01:00:52", label: "手動で動作確認" }, // 1時間超
       { time: "01:05:17", label: "GitHub PR作成" },
       { time: "01:08:57", label: "/reviewで自動レビュー" },
       { time: "01:12:45", label: "まとめ" },
