@@ -7,8 +7,8 @@ import type { VideoMetadata } from "@/types/video"
 export const video_1_1NAB5jIjo: VideoMetadata = {
   // 基本情報
   id: "1-1NAB5jIjo",
-  title: "リアルなAI駆動開発の全工程！現役エンジニアの仕様駆動開発の流れを公開",
-  publishedAt: "2025-11-01T00:00:00+09:00",
+  title: "リアルなAI駆動開発の全工程！現役エンジニアの仕様駆動開発を公開",
+  publishedAt: "2025-11-02T08:00:00+09:00",
   videoUrl: "https://www.youtube.com/watch?v=1-1NAB5jIjo",
 
   // 冒頭セクション
