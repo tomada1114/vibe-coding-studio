@@ -200,9 +200,10 @@ describe("タスク3.2: 配列とセクション構造の検証", () => {
           expect(video.timestamps.items.length).toBeGreaterThan(0)
         })
 
-        test('タイムスタンプ形式が正しい("00:00"形式)', () => {
+        test('タイムスタンプ形式が正しい("00:00"または"01:00:52"形式)', () => {
           video.timestamps.items.forEach(ts => {
-            expect(ts.time).toMatch(/^\d{2}:\d{2}$/)
+            // HH:MM または HH:MM:SS 形式をサポート
+            expect(ts.time).toMatch(/^\d{1,2}:\d{2}(:\d{2})?$/)
             expect(ts.label).toBeTruthy()
             expect(typeof ts.label).toBe("string")
             expect(ts.label.length).toBeGreaterThan(0)
