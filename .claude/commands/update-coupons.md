@@ -10,6 +10,24 @@ Update the coupon database by parsing a CSV file and integrating the data into t
 
 **CSV File Path**: $ARGUMENTS
 
+## 📚 Knowledge Base
+
+**IMPORTANT**: This command should actively use the `coupon-system-knowledge` skill for comprehensive implementation guidance.
+
+The `coupon-system-knowledge` skill contains:
+- Complete CSV format specifications
+- Detailed data transformation rules (CSV → RawCouponData)
+- Validation rules and error handling patterns
+- Implementation patterns for CSV parsing
+- Test strategies and examples
+- Timezone conversion logic (PDT/PST)
+
+**Before implementing, consult the skill for**:
+- Exact field transformation logic
+- Validation regex patterns
+- Error handling strategies
+- Test implementation examples
+
 ## Task: Parse CSV and Update Coupon Data
 
 **SCOPE**: This command reads a CSV file with coupon data, validates it, converts to proper RawCouponData format, updates the coupon data loader, and validates the result.
@@ -28,6 +46,8 @@ Before running this command, ensure:
 
 ### 1. Read and Validate CSV File
 
+**📚 See `coupon-system-knowledge` skill for complete CSV format specifications and validation regex patterns.**
+
 Read `$ARGUMENTS` to extract:
 - course_id (Udemy course ID)
 - coupon_type (e.g., "custom_price", "free")
@@ -44,6 +64,8 @@ Validate:
 - custom_price is a valid number
 
 ### 2. Transform CSV Data
+
+**📚 Refer to `coupon-system-knowledge` skill for detailed transformation logic.**
 
 Convert each CSV row to RawCouponData format:
 
@@ -75,6 +97,8 @@ Convert each CSV row to RawCouponData format:
 - `discountPrice`: Use CSV's custom_price as a number
 
 ### 3. Merge with Existing Coupon Data
+
+**📚 Refer to `coupon-system-knowledge` skill for merge validation logic and implementation examples.**
 
 1. Read current `src/lib/coupons/coupon-data.ts` file
 2. Extract existing COUPON_DATA array
@@ -140,6 +164,8 @@ After successful update, provide:
 
 ## Error Handling
 
+**📚 Consult `coupon-system-knowledge` skill for comprehensive error handling patterns and validation examples.**
+
 If errors occur:
 - **File not found**: Verify CSV file exists at `$ARGUMENTS`
 - **Invalid CSV format**: Check headers and data rows match expected format
@@ -171,3 +197,17 @@ Provide clear, structured output:
 
 ✨ Coupon data successfully updated!
 ```
+
+---
+
+## 💡 Implementation Reminder
+
+**Always consult the `coupon-system-knowledge` skill throughout implementation:**
+
+1. **Before parsing**: Check CSV format specifications
+2. **During transformation**: Verify field transformation rules
+3. **When validating**: Use exact regex patterns from skill
+4. **For error handling**: Reference error handling patterns
+5. **Before testing**: Review test strategies and examples
+
+The skill provides detailed, comprehensive guidance that supplements this command's high-level workflow.
