@@ -3,7 +3,6 @@ name: udemy-coupon-creator
 description: Markdownファイルから新しいUdemy講座のクーポン配布ページを自動生成するスキル。講座情報をパースし、詳細ページ・一覧ページ更新・データファイル更新を一括で実行します。Udemyクーポン追加、新講座公開、クーポンページ作成時に使用してください。
 argument-hint: <markdown-file-path>
 allowed-tools: [Read, Write, Edit, Bash, Glob, Grep, mcp__chrome-devtools__navigate_page, mcp__chrome-devtools__take_snapshot, mcp__chrome-devtools__take_screenshot]
-model: sonnet
 ---
 
 # Udemy Coupon Creator
@@ -70,8 +69,12 @@ Markdownファイルから新しいUdemy講座のクーポン配布ページを�
    - `### コースを受講するための要件や前提条件は何ですか？` → requirements
    - `### 誰に向けたコースですか？` → targetAudience
 
-3. **サムネイル画像の存在確認**：
-   - `public/images/udemy/` に指定された画像が存在するか
+3. **サムネイル画像の存在確認と準備**：
+   - `public/images/udemy/` に指定された画像が存在するか確認
+   - **重要**: 画像ファイル名は`{slug}.png`形式である必要があります
+     - 例：slug が`codex-python-fast-api`なら、ファイル名は`codex-python-fast-api.png`
+     - Markdownに記載されたファイル名（例：`codex_fastapi.png`）がslugと異なる場合は、コピーまたはリネームが必要
+   - CourseDetailHeroコンポーネントは`/images/udemy/${slug}.png`でアクセスするため
    - なければ警告を表示（処理は継続）
 
 ### Step 2: データファイルの更新
@@ -147,6 +150,23 @@ export const TOPIC_INFO: Record<string, TopicInfo> = {
 **注意**：Codexなど、Deviconに存在しないアイコンの場合：
 - ローカル画像を使用（例：`/images/icons/codex.svg`）
 - `isLocal: true` を設定
+
+#### 2.5 EXPECTED_COURSE_IDsへの追加（`src/lib/coupons/__tests__/coupon-data.test.ts`）
+
+**重要**: テストファイルの`EXPECTED_COURSE_IDS`配列に新しい講座IDを追加：
+
+```typescript
+const EXPECTED_COURSE_IDS = [
+  "{courseId}", // {講座の簡単な説明}
+  // 既存のエントリ
+] as const
+```
+
+**追加位置**：配列の先頭（最新講座が先頭）
+
+**目的**：
+- うっかりクーポンデータを削除した場合にテストで検出
+- すべての講座にクーポンが存在することを保証
 
 ### Step 3: 詳細ページの生成
 
@@ -314,10 +334,12 @@ npm run test -- src/lib/coupons/__tests__/coupon-data.test.ts
 - クーポンコードの形式（YYYY-MM-DD）
 - URL生成の正確性
 - 日付の妥当性
+- **期待されるすべての講座にクーポンが存在すること**（EXPECTED_COURSE_IDs）
 
 **エラーが出た場合**：
 - データの不整合を修正
 - 形式エラーを修正
+- `EXPECTED_COURSE_IDS`への追加漏れを確認
 
 ### Step 5: 開発サーバーでの動作確認
 
@@ -532,6 +554,11 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
    - COUPON_DATAの先頭に新エントリを追加
    - 日時を適切に生成（PST基準）
 
+3. **EXPECTED_COURSE_IDS更新**（`src/lib/coupons/__tests__/coupon-data.test.ts`）：
+   - テストファイルを読み込み
+   - `EXPECTED_COURSE_IDS`配列の先頭に新しい講座IDを追加
+   - コメントで講座の簡単な説明を追記
+
 ### Phase 3: 詳細ページ生成
 
 1. **既存講座を参考**：
@@ -643,6 +670,7 @@ src/
 - [ ] COUPON_DATAに追加済み（先頭）
 - [ ] COURSE_DISPLAY_ORDERに追加済み（先頭）
 - [ ] TOPIC_INFOに新トピック追加済み
+- [ ] EXPECTED_COURSE_IDsに追加済み（テストファイル）
 - [ ] 詳細ページを作成済み
 - [ ] `npm run type-check` 合格
 - [ ] `npm run lint` 合格

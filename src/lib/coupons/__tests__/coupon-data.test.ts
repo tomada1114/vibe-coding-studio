@@ -2,6 +2,29 @@ import { COURSE_INFO } from "@/constants/coupon-courses"
 import type { RawCouponData } from "@/types/coupon"
 import { getLatestCoupons, parseCouponData } from "../coupon-data"
 
+/**
+ * クーポンが存在すべき講座IDのリスト
+ * 新しい講座を追加する際は、このリストにIDを追加してください
+ */
+const EXPECTED_COURSE_IDS = [
+  "6826831", // Codex × FastAPI
+  "6851913", // Codex × React Native
+  "6827941", // Claude Code × Flask
+  "6823465", // Claude Code × Python
+  "6801509", // Codex CLI
+  "6782117", // Claude Code × Expo
+  "6783611", // Claude Code × React Native 5apps
+  "6772961", // AWS Kiro
+  "6769253", // Claude Code × MCP
+  "6739725", // Claude Code × 作業時間管理
+  "6732543", // Claude Code × 家計簿
+  "6694011", // Gemini CLI
+  "6691241", // Claude Code × Vibe Coding
+  "6536597", // Next.js
+  "6387599", // Rails
+  "6327241", // RSpec
+] as const
+
 describe("coupon-data", () => {
   describe("データ整合性検証", () => {
     let allCoupons: ReturnType<typeof getLatestCoupons>
@@ -81,6 +104,18 @@ describe("coupon-data", () => {
       allCoupons.forEach(coupon => {
         expect(coupon.courseName).toBe(coupon.courseInfo.title)
       })
+    })
+
+    it("期待されるすべての講座にクーポンが存在すること", () => {
+      const couponCourseIds = new Set(allCoupons.map(c => c.courseId))
+
+      EXPECTED_COURSE_IDS.forEach(expectedId => {
+        expect(couponCourseIds.has(expectedId)).toBe(true)
+        expect(COURSE_INFO[expectedId]).toBeDefined()
+      })
+
+      // 逆チェック：期待されるID数と実際のクーポン数が一致すること
+      expect(allCoupons.length).toBe(EXPECTED_COURSE_IDS.length)
     })
   })
 

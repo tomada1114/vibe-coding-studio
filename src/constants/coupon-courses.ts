@@ -181,6 +181,18 @@ export const COURSE_INFO: Record<string, CourseInfo> = {
     promotionUrl:
       "https://www.udemy.com/course/codex-nextjs/?referralCode=F5C07ED4A2914F04D6D2",
   },
+  // Codex × FastAPI 講座
+  "6826831": {
+    originalPrice: 9800,
+    description:
+      "OpenAI CodexのIDE版とCLI版を完全マスター。Python FastAPIで実用的な天気予報APIを開発。プログラミング未経験でもMCPツール連携、カスタムプロンプトで本格的なバックエンド開発を実践。",
+    slug: "codex-python-fast-api",
+    title:
+      "CodexでAI駆動開発！Python FastAPI で作る本格的な天気予報 API | バックエンド開発入門",
+    topics: ["codex", "python", "fastapi"],
+    promotionUrl:
+      "https://www.udemy.com/course/codex-python-fast-api/?referralCode=E159CDE010F734F6760E",
+  },
 }
 
 export const TOPIC_INFO: Record<string, TopicInfo> = {
@@ -291,6 +303,11 @@ export const TOPIC_INFO: Record<string, TopicInfo> = {
     name: "Flask",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original.svg",
   },
+  fastapi: {
+    slug: "fastapi",
+    name: "FastAPI",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg",
+  },
 }
 
 export const POPULAR_COURSE_IDS = [
@@ -319,6 +336,7 @@ export const POPULAR_COURSE_IDS = [
  */
 export const COURSE_DISPLAY_ORDER = [
   // === Codexシリーズ ===
+  "6826831", // Codex × FastAPI - Python FastAPI天気予報API開発（最新）
   "6801509", // Codex CLI - Next.jsアプリ開発でカスタムコマンド・MCP連携（基礎）
   "6851913", // Codex × React Native - スマホアプリ開発実践（応用）
 
