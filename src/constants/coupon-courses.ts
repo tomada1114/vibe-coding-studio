@@ -328,18 +328,13 @@ export const POPULAR_COURSE_IDS = [
  * この配列の順序で表示されます（先頭が最初に表示される）
  *
  * 優先順位:
- * 1. Codexシリーズ（基礎 → 応用・スマホアプリ）
- * 2. Claude Codeシリーズ（基礎 → 応用 → スマホアプリ → Python）
+ * 1. Claude Codeシリーズ（基礎 → 応用 → スマホアプリ → Python）
+ * 2. Codexシリーズ（基礎 → 応用・スマホアプリ → バックエンド）
  * 3. Gemini CLIシリーズ
  * 4. Kiroシリーズ
  * 5. その他（Next.js、Rails、RSpec）
  */
 export const COURSE_DISPLAY_ORDER = [
-  // === Codexシリーズ ===
-  "6826831", // Codex × FastAPI - Python FastAPI天気予報API開発（最新）
-  "6801509", // Codex CLI - Next.jsアプリ開発でカスタムコマンド・MCP連携（基礎）
-  "6851913", // Codex × React Native - スマホアプリ開発実践（応用）
-
   // === Claude Codeシリーズ ===
   // 基礎 → 応用
   "6691241", // Claude Code × Vibe Coding - 未経験OK、ゼロから学べる基礎
@@ -354,6 +349,11 @@ export const COURSE_DISPLAY_ORDER = [
   // Python系
   "6823465", // Claude Code × Python - 基礎・スクレイピング・ゲーム
   "6827941", // Claude Code × Flask - Flask実践レベルのAIアプリ
+
+  // === Codexシリーズ ===
+  "6801509", // Codex CLI - Next.jsアプリ開発でカスタムコマンド・MCP連携（基礎）
+  "6851913", // Codex × React Native - スマホアプリ開発実践（応用）
+  "6826831", // Codex × FastAPI - Python FastAPI天気予報API開発（バックエンド）
 
   // === Gemini CLIシリーズ ===
   "6694011", // Gemini CLI - マインドマップアプリ
