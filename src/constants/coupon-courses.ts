@@ -181,6 +181,18 @@ export const COURSE_INFO: Record<string, CourseInfo> = {
     promotionUrl:
       "https://www.udemy.com/course/codex-nextjs/?referralCode=F5C07ED4A2914F04D6D2",
   },
+  // Codex × FastAPI 講座
+  "6826831": {
+    originalPrice: 9800,
+    description:
+      "OpenAI CodexのIDE版とCLI版を完全マスター。Python FastAPIで実用的な天気予報APIを開発。プログラミング未経験でもMCPツール連携、カスタムプロンプトで本格的なバックエンド開発を実践。",
+    slug: "codex-python-fast-api",
+    title:
+      "CodexでAI駆動開発！Python FastAPI で作る本格的な天気予報 API | バックエンド開発入門",
+    topics: ["codex", "python", "fastapi"],
+    promotionUrl:
+      "https://www.udemy.com/course/codex-python-fast-api/?referralCode=E159CDE010F734F6760E",
+  },
 }
 
 export const TOPIC_INFO: Record<string, TopicInfo> = {
@@ -291,6 +303,11 @@ export const TOPIC_INFO: Record<string, TopicInfo> = {
     name: "Flask",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original.svg",
   },
+  fastapi: {
+    slug: "fastapi",
+    name: "FastAPI",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg",
+  },
 }
 
 export const POPULAR_COURSE_IDS = [
@@ -311,17 +328,13 @@ export const POPULAR_COURSE_IDS = [
  * この配列の順序で表示されます（先頭が最初に表示される）
  *
  * 優先順位:
- * 1. Codexシリーズ（基礎 → 応用・スマホアプリ）
- * 2. Claude Codeシリーズ（基礎 → 応用 → スマホアプリ → Python）
+ * 1. Claude Codeシリーズ（基礎 → 応用 → スマホアプリ → Python）
+ * 2. Codexシリーズ（基礎 → 応用・スマホアプリ → バックエンド）
  * 3. Gemini CLIシリーズ
  * 4. Kiroシリーズ
  * 5. その他（Next.js、Rails、RSpec）
  */
 export const COURSE_DISPLAY_ORDER = [
-  // === Codexシリーズ ===
-  "6801509", // Codex CLI - Next.jsアプリ開発でカスタムコマンド・MCP連携（基礎）
-  "6851913", // Codex × React Native - スマホアプリ開発実践（応用）
-
   // === Claude Codeシリーズ ===
   // 基礎 → 応用
   "6691241", // Claude Code × Vibe Coding - 未経験OK、ゼロから学べる基礎
@@ -336,6 +349,11 @@ export const COURSE_DISPLAY_ORDER = [
   // Python系
   "6823465", // Claude Code × Python - 基礎・スクレイピング・ゲーム
   "6827941", // Claude Code × Flask - Flask実践レベルのAIアプリ
+
+  // === Codexシリーズ ===
+  "6801509", // Codex CLI - Next.jsアプリ開発でカスタムコマンド・MCP連携（基礎）
+  "6851913", // Codex × React Native - スマホアプリ開発実践（応用）
+  "6826831", // Codex × FastAPI - Python FastAPI天気予報API開発（バックエンド）
 
   // === Gemini CLIシリーズ ===
   "6694011", // Gemini CLI - マインドマップアプリ

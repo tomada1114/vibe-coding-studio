@@ -1,85 +1,137 @@
-タイトル案：リアルなAI駆動開発の全工程！現役エンジニアの仕様駆動開発の流れを公開
+# TODO - Vibe Coding Studio
 
+## ✅ 完了タスク
 
+### 1. 画像URL修正
+**ファイル**: `src/app/coupons/codex-python-fast-api/page.tsx`
 
-綺麗なチュートリアルじゃなく、リアルな開発プロセスをすべてお見せします！
-個人開発サイト「Vibe Coding Studio」にカスタムコマンド公開機能を追加する過程を、
-試行錯誤も含めてすべての思考プロセスを収録しました。
+**完了内容**:
+- ✅ Line 36の画像URLを`codex-python-fast-api.png`に修正
+- ✅ Line 49の画像URLを`codex-python-fast-api.png`に修正
+- ✅ SEOとSNS共有での画像表示が正常に動作
 
-実際にAI駆動開発を日常的にやっているエンジニアが
-・どう仕様を詰めて
-・どこでつまづいて
-・どう修正していくか
+---
 
-そういうリアルなAI駆動開発の思考プロセスを学び、ご自身の開発に活用していただければ幸いです。
+### 2. `.gitignore`への追加
+**ファイル**: `.gitignore`
 
-━━━━━━━━━━━━━━━━
-💡 この動画の特徴
-━━━━━━━━━━━━━━━━
+**完了内容**:
+- ✅ `src/data/coupons/uploads/`をGit管理から除外
+- ✅ 一時的なCSVファイルがコミットされないように設定
 
-✅ チュートリアルではなく、実際の開発プロセスをそのまま収録
-✅ cc-sdd（仕様駆動開発）を使った要件定義・設計の対話プロセス
-✅ Codexによる自動レビューでの指摘と軌道修正
-✅ スコープ調整や優先順位判断のリアルな判断
-✅ コンテキスト管理やMCP無効化などの実務テクニック
-✅ 失敗や迷いも含めた、飾らない開発の実態
+---
 
+### 3. 古い画像ファイルの削除
+**ファイル**: `public/images/udemy/codex_fastapi.png`
 
+**完了内容**:
+- ✅ 旧命名規則の画像ファイル（`codex_fastapi.png`）を削除
+- ✅ 新ファイル（`codex-python-fast-api.png`）のみが存在する状態に整理
 
-━━━━━━━━━━━━━━━━
-📝 関連記事・リソース
-━━━━━━━━━━━━━━━━
+---
 
+### 4. CSVファイルの処理
+**ファイル**: `src/data/coupons/uploads/bulk_coupon_upload - 2025-11-02.csv`
 
+**完了内容**:
+- ✅ `.gitignore`に追加済みのため、ローカル作業用として保持
+- ✅ 14講座分のクーポンデータを含む作業用ファイル
 
+---
 
-**公開したカスタムコマンド**
-Vibe Coding Studioの公式サイトで公開中
-https://www.vibecodingstudio.dev/claude-code/commands
+## 🔄 次のステップ（優先度順）
 
+### 優先度: 中
 
+#### 5. E2Eテストの追加
+**目的**: ページ表示の自動テスト
 
-【タイムライン】
-00:00 はじめに
-01:50 今回作る機能を整理
-08:11 ブランチを作成
-09:14 cc-sddで仕様駆動開発
-13:45 要件定義フェーズ
-27:34 設計フェーズ
-41:55 計画フェーズ
-48:29 実装フェーズ
-50:54 品質チェック
-52:34 MCPで自動確認
-01:00:52 手動で動作確認
-01:05:17 GitHub PR作成
-01:08:57 /reviewで自動レビュー
-01:12:45 まとめ
+**内容**:
+- [ ] Playwrightを使用したページ表示テスト
+- [ ] OGP画像の読み込み確認
+- [ ] クーポン情報の表示テスト
+- [ ] レスポンシブデザインのテスト
 
-#AI駆動開発 #仕様駆動開発 #ccsdd #SpecDrivenCodex #VibeCoding #バイブコーディング #ClaudeCode #CodexCLI #個人開発 #実践的プログラミング #開発プロセス #試行錯誤
+**予定ファイル**: `src/app/coupons/[slug]/__tests__/e2e.spec.ts`
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📋 改善メモ
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+---
 
-## タグ選定の改善が必要
+#### 6. 型定義の整理
+**目的**: コードの保守性向上
 
-**問題点:**
-- 動画内容に直接関係のない技術タグが含まれている
-- 実際に動画で扱っていないツール名がタグに入っている可能性
+**内容**:
+- [ ] `courseDetails`の型を`src/types/course-details.ts`に移動
+- [ ] 既存コンポーネントで型を再利用
+- [ ] 型安全性の向上
 
-**改善方針:**
-1. 動画で実際に使用・言及した技術のみをタグにする
-2. 動画のテーマ・主題に直接関連するキーワードに絞る
-3. 視聴者が検索しそうなキーワードを優先
-4. タグの数は10-15個程度に抑える（YouTubeの推奨）
+**型定義例**:
+```typescript
+// src/types/course-details.ts
+export interface CourseDetails {
+  title: string
+  subtitle: string
+  description: string
+  projects: CourseProject[]
+  features: CourseFeature[]
+  targetAudience: TargetAudienceGroup[]
+  whatYouLearn: string[]
+  requirements: string[]
+}
+```
 
-**確認すべき点:**
-- CodexCLI: 動画で使用しているか？
-- SpecDrivenCodex: 実際に言及しているか？
-- その他の技術固有のタグ: 本当に動画の内容と関連があるか？
+---
 
-**推奨アプローチ:**
-- 動画の主要なトピック（AI駆動開発、仕様駆動開発）
-- 使用しているツール（実際に画面に映っているもののみ）
-- 開発手法・プロセス（実際に実演しているもの）
-- ターゲット層（個人開発者、エンジニア向けなど）
+### 優先度: 低（将来の改善）
+
+#### 7. CI/CDでの自動検証
+**目的**: データ整合性の自動確認
+
+**内容**:
+- [ ] 画像ファイル存在確認
+  - slugに対応する画像ファイルが存在するか検証
+  - `public/images/udemy/${slug}.png`の存在確認
+- [ ] slug命名規則チェック
+  - kebab-caseに準拠しているか確認
+  - 重複slugの検出
+- [ ] EXPECTED_COURSE_IDsの整合性チェック
+  - COURSE_INFOに存在するIDのみが使われているか確認
+
+**GitHub Actions例**:
+```yaml
+# .github/workflows/coupon-validation.yml
+name: Coupon Data Validation
+on: [push, pull_request]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm ci
+      - run: npm run test:coupon-validation
+```
+
+---
+
+## 📊 進捗サマリー
+
+**完了**: 4タスク ✅
+**進行中**: 0タスク 🔄
+**未着手**: 3タスク ⏳
+
+---
+
+## 📝 メモ
+
+### テストカバレッジ
+`src/lib/coupons/__tests__/coupon-data.test.ts` は既に充実しており、以下をカバー済み：
+- ✅ EXPECTED_COURSE_IDsの定義と検証
+- ✅ couponCodeのYYYY-MM-DD形式チェック
+- ✅ URL生成の正確性チェック
+- ✅ 日付フィールドの有効性チェック
+- ✅ 講座タイトルの一致確認
+
+---
+
+**最終更新**: 2025-11-01
+**ステータス**: 優先度高タスク完了
+**次の焦点**: E2Eテスト追加または型定義整理
