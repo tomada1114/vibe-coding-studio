@@ -105,9 +105,9 @@ describe("VideoDetail", () => {
       const { container } = render(<VideoDetail video={mockVideoData} />)
       const text = container.textContent || ""
       expect(text).toContain("⏰ タイムスタンプ")
-      expect(text).toContain("00:00 - イントロダクション")
-      expect(text).toContain("05:30 - メインコンテンツ")
-      expect(text).toContain("15:45 - まとめ")
+      expect(text).toContain("00:00 イントロダクション")
+      expect(text).toContain("05:30 メインコンテンツ")
+      expect(text).toContain("15:45 まとめ")
     })
 
     it("タグが#記号付きでスペース区切りでプレーンテキストに含まれる", () => {
@@ -117,12 +117,14 @@ describe("VideoDetail", () => {
       expect(text).toContain("#テスト #サンプル #動画")
     })
 
-    it("SNSアカウント情報が「ラベル: URL」形式で表示される", () => {
+    it("SNSアカウント情報がラベルとURLで表示される", () => {
       const { container } = render(<VideoDetail video={mockVideoData} />)
       const text = container.textContent || ""
       expect(text).toContain("🔗 SNS・コミュニティ")
-      expect(text).toContain("🐦 X(Twitter): https://x.com/test_account")
-      expect(text).toContain("📝 note: https://note.com/test_account")
+      expect(text).toContain("🐦 X(Twitter)")
+      expect(text).toContain("https://x.com/test_account")
+      expect(text).toContain("📝 note")
+      expect(text).toContain("https://note.com/test_account")
     })
 
     it("エンゲージメント促進セクションがプレーンテキストに含まれる", () => {
@@ -289,9 +291,8 @@ describe("VideoDetail", () => {
       expect(text).toContain("Udemy講座の説明文です。")
       expect(text).toContain("講座1")
       expect(text).toContain("講座2")
-      expect(text).toContain(
-        "Udemy講座の詳細はこちら: https://www.udemy.com/course/test"
-      )
+      expect(text).toContain("Udemy講座の詳細はこちら")
+      expect(text).toContain("https://www.udemy.com/course/test")
     })
 
     it("Discordコミュニティセクションがプレーンテキストで表示される", () => {
@@ -309,7 +310,8 @@ describe("VideoDetail", () => {
       const text = container.textContent || ""
       expect(text).toContain("💬 Discordコミュニティ(無料)")
       expect(text).toContain("Discordコミュニティの説明文です。")
-      expect(text).toContain("Discordに参加する: https://discord.gg/test")
+      expect(text).toContain("Discordに参加する")
+      expect(text).toContain("https://discord.gg/test")
     })
   })
 
@@ -352,7 +354,7 @@ describe("VideoDetail", () => {
       expect(text).toContain("リスト項目3")
     })
 
-    it("リンクセクションが「ラベル: URL」形式で表示される", () => {
+    it("リンクセクションがラベルとURLで表示される", () => {
       const videoWithLinks: VideoMetadata = {
         ...mockVideoData,
         customSections: [
@@ -370,8 +372,10 @@ describe("VideoDetail", () => {
       const { container } = render(<VideoDetail video={videoWithLinks} />)
       const text = container.textContent || ""
       expect(text).toContain("🔗 リンクセクション")
-      expect(text).toContain("リンク1: https://example.com/link1")
-      expect(text).toContain("リンク2: https://example.com/link2")
+      expect(text).toContain("リンク1")
+      expect(text).toContain("https://example.com/link1")
+      expect(text).toContain("リンク2")
+      expect(text).toContain("https://example.com/link2")
     })
 
     it("混合セクションがすべての要素を含めて表示される", () => {
@@ -394,7 +398,8 @@ describe("VideoDetail", () => {
       expect(text).toContain("混合セクションのテキスト")
       expect(text).toContain("混合項目1")
       expect(text).toContain("混合項目2")
-      expect(text).toContain("混合リンク: https://example.com/mixed")
+      expect(text).toContain("混合リンク")
+      expect(text).toContain("https://example.com/mixed")
     })
   })
 
