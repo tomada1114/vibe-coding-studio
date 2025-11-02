@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     url: "https://school.learning-next.app/coupons/codex-python-fast-api",
     images: [
       {
-        url: "/images/udemy/codex_fastapi.png",
+        url: "/images/udemy/codex-python-fast-api.png",
         width: 1280,
         height: 720,
         alt: "CodexでAI駆動開発！Python FastAPI で作る本格的な天気予報 API | バックエンド開発入門",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
       "CodexでAI駆動開発！Python FastAPI で作る本格的な天気予報 API | バックエンド開発入門",
     description:
       "プログラミング未経験でもCodex IDE & CLIでPythonの基礎からFastAPI開発まで完全習得！",
-    images: ["/images/udemy/codex_fastapi.png"],
+    images: ["/images/udemy/codex-python-fast-api.png"],
   },
 }
 
