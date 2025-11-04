@@ -24,7 +24,7 @@ function createUdemyCourseIndexItem(
   courseInfo: {
     title: string
     topics: string[]
-    promotionUrl: string
+    promotionUrl?: string
     description: string
   },
 ): UdemyCourseIndexItem {
@@ -32,7 +32,7 @@ function createUdemyCourseIndexItem(
     courseId,
     title: courseInfo.title,
     topics: courseInfo.topics,
-    promotionUrl: courseInfo.promotionUrl,
+    promotionUrl: courseInfo.promotionUrl || "",
     description: courseInfo.description,
   }
 }
