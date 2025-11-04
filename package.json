@@ -12,7 +12,8 @@
     "test:coverage": "jest --coverage",
     "format": "prettier --write . --log-level=warn",
     "format:check": "prettier --check .",
-    "check:all": "npm run lint --silent && npm run format && npm run type-check && npm run test"
+    "check:all": "npm run lint --silent && npm run format && npm run type-check && npm run test",
+    "generate-indexes": "tsx scripts/generate-indexes.ts"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.6",
@@ -48,6 +49,7 @@
     "prettier-plugin-organize-imports": "^4.2.0",
     "prettier-plugin-tailwindcss": "^0.6.14",
     "tailwindcss": "^4.1.11",
+    "tsx": "^4.20.6",
     "typescript": "^5"
   }
 }
