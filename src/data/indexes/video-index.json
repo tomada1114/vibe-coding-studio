@@ -1,0 +1,593 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2025-11-04T20:12:24.238Z",
+  "videos": [
+    {
+      "id": "1-1NAB5jIjo",
+      "title": "リアルなAI駆動開発の全工程！現役エンジニアの仕様駆動開発を公開",
+      "tags": [
+        "AI駆動開発",
+        "仕様駆動開発",
+        "ccsdd",
+        "SpecDrivenCodex",
+        "VibeCoding",
+        "バイブコーディング",
+        "ClaudeCode",
+        "CodexCLI",
+        "個人開発",
+        "実践的プログラミング",
+        "開発プロセス",
+        "試行錯誤"
+      ],
+      "relatedVideoIds": [
+        "HM0SLThgXqE",
+        "Xr_HhLuzOy8",
+        "SO5qov2qTUE",
+        "1LP4ZAsU_UI"
+      ],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "1LP4ZAsU_UI",
+      "title": "AIが書いたコード、いつコミットする？失敗しないGit運用術",
+      "tags": [
+        "ClaudeCode",
+        "CodexCLI",
+        "Git",
+        "コミット",
+        "AI駆動開発",
+        "バイブコーディング",
+        "VibeCoding",
+        "プログラミング",
+        "初心者",
+        "エンジニア",
+        "GitHub",
+        "バージョン管理",
+        "開発効率化"
+      ],
+      "relatedVideoIds": [],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "1TJydjQM6eo",
+      "title": "【Codex CLI活用術】MCPサーバを設定する方法！config.toml と CLI コマンドの使い方を初心者向けに解説",
+      "tags": [
+        "VibeCoding",
+        "バイブコーディング",
+        "プログラミング",
+        "CodexCLI",
+        "codex",
+        "codexcli",
+        "openai",
+        "MCP",
+        "Context7",
+        "AI駆動開発",
+        "Nextjs",
+        "React",
+        "WebDevelopment",
+        "AIツール"
+      ],
+      "relatedVideoIds": [],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "UqKd0dxLskU",
+      "title": "Claude Code on the Web で開発が変わる！外出先でも開発が可能になった！",
+      "tags": [
+        "バイブコーディング",
+        "Claude",
+        "VibeCoding",
+        "ClaudeCode",
+        "AI駆動開発",
+        "プログラミング",
+        "個人開発",
+        "副業",
+        "Webアプリ開発",
+        "Anthropic"
+      ],
+      "relatedVideoIds": [
+        "Xr_HhLuzOy8",
+        "TDECUH62yYQ"
+      ],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "Y15kBuMhCO4",
+      "title": "【Codex】はじめてのスマホアプリ AI 駆動開発！知識ゼロでも通知機能・ナビゲーションメニューまで作れるチュートリアル",
+      "tags": [
+        "バイブコーディング",
+        "VibeCoding",
+        "プログラミング",
+        "Codex",
+        "CodexCLI",
+        "Expo",
+        "ReactNative",
+        "スマホアプリ開発",
+        "モバイルアプリ",
+        "AI駆動開発",
+        "ナビゲーション",
+        "プッシュ通知",
+        "ハンバーガーメニュー",
+        "ChatGPT",
+        "GPT5"
+      ],
+      "relatedVideoIds": [
+        "TWUpzNGp7fI",
+        "H5TGzM_PCW4",
+        "1EQllS_3TJo"
+      ],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "SO5qov2qTUE",
+      "title": "【コード品質UP】技術的負債を作らないための AI 向け開発ルールを設定しよう（Claude Code/Codex/Cursor 対応）",
+      "tags": [
+        "ClaudeCode",
+        "Codex",
+        "Cursor",
+        "AI駆動開発",
+        "VibeCoding",
+        "バイブコーディング",
+        "プログラミング",
+        "コード品質",
+        "技術的負債",
+        "エラーハンドリング",
+        "セキュリティ",
+        "保守性",
+        "初心者向け"
+      ],
+      "relatedVideoIds": [
+        "4HJCCAfDGU4",
+        "H5TGzM_PCW4",
+        "Xr_HhLuzOy8"
+      ],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "TWUpzNGp7fI",
+      "title": "React Native（Expo）入門！iOS・Android アプリ環境構築の全手順を初心者向けに解説【シミュレータ対応】",
+      "tags": [
+        "ReactNative",
+        "Expo",
+        "スマホアプリ開発",
+        "モバイルアプリ",
+        "プログラミング入門",
+        "JavaScript",
+        "TypeScript",
+        "iOS開発",
+        "Android開発",
+        "VibeCoding",
+        "バイブコーディング",
+        "AI駆動開発",
+        "ExpoGo",
+        "環境構築",
+        "初心者向け"
+      ],
+      "relatedVideoIds": [
+        "H5TGzM_PCW4",
+        "TfaNCNrYu8A",
+        "_VhJCZtQXUc"
+      ],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "4MUadOFHy9M",
+      "title": "【AgentKit登場】ノーコードでAIワークフローを構築！Agent Builderの使い方を完全解説",
+      "tags": [
+        "AgentBuilder",
+        "VibeCoding",
+        "バイブコーディング",
+        "AgentKit",
+        "OpenAI",
+        "DevDay2025",
+        "AI駆動開発",
+        "ノーコード",
+        "AIエージェント",
+        "ワークフロー",
+        "ChatGPT",
+        "プログラミング"
+      ],
+      "relatedVideoIds": [],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "qrDUjfnlOiI",
+      "title": "【Slack×Claude連携】業務効率化に使える！チャット要約・相談・エラー解決も AI で自動化できるアップデート",
+      "tags": [
+        "Slack",
+        "VibeCoding",
+        "Claude",
+        "AI活用",
+        "業務効率化",
+        "SlackAI",
+        "ClaudeAPI",
+        "チャットボット",
+        "エラー解析",
+        "MCP",
+        "AI駆動開発",
+        "バイブコーディング"
+      ],
+      "relatedVideoIds": [],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "5ACcnosaEdw",
+      "title": "Claude Sonnet 4.5 vs GPT-5-Codex！速度2倍差でも品質は互角？現役エンジニアの結論を解説",
+      "tags": [
+        "claude",
+        "VibeCoding",
+        "sonnet",
+        "ClaudeSonnet4.5",
+        "GPT5Codex",
+        "コード品質",
+        "AI駆動開発",
+        "ClaudeCode",
+        "CodexCLI",
+        "anthropic",
+        "codex",
+        "python"
+      ],
+      "relatedVideoIds": [],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "gXwS9dJewrU",
+      "title": "【Chrome DevTools MCP】ブラウザ操作やパフォーマンス確認まで！Playwright MCPとの違いと使い分けを徹底解説",
+      "tags": [
+        "PlaywrightMCP",
+        "バイブコーディング",
+        "自動化",
+        "ChromeDevTools",
+        "MCP",
+        "AI駆動開発",
+        "フロントエンド",
+        "Web開発",
+        "VibeCoding",
+        "ClaudeCode",
+        "Cursor",
+        "Codex"
+      ],
+      "relatedVideoIds": [],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "4HJCCAfDGU4",
+      "title": "【どっちを選ぶ？】Claude Code vs Codex CLI！両方使い倒した現役エンジニアの最終結論を徹底解説！",
+      "tags": [
+        "バイブコーディング",
+        "Claude",
+        "VibeCoding",
+        "ClaudeCode",
+        "CodexCLI",
+        "AI駆動開発",
+        "プログラミング",
+        "エンジニア",
+        "ChatGPT",
+        "開発ツール",
+        "比較",
+        "使い分け",
+        "MCP",
+        "個人開発",
+        "フリーランス"
+      ],
+      "relatedVideoIds": [],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "pRHyMLH1bcU",
+      "title": "【Playwright MCP】Codex CLI の Webアプリ・デザインテストを自動化！AI 駆動の E2Eテスト実践ガイド",
+      "tags": [
+        "codexcli",
+        "codex",
+        "MCP",
+        "Playwright",
+        "E2Eテスト",
+        "テスト自動化",
+        "AI駆動開発",
+        "VibeCoding",
+        "バイブコーディング",
+        "プログラミング",
+        "Webアプリ開発",
+        "自動テスト",
+        "ModelContextProtocol"
+      ],
+      "relatedVideoIds": [
+        "PLACEHOLDER",
+        "PLACEHOLDER"
+      ],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "1EQllS_3TJo",
+      "title": "【Codex CLI対応】仕様駆動開発を1コマンドで導入！Spec Driven Codexで要件定義→設計→実装まで完全自動化",
+      "tags": [
+        "バイブコーディング",
+        "VibeCoding",
+        "プログラミング",
+        "codexcli",
+        "codex",
+        "specdriven",
+        "仕様駆動開発",
+        "AI駆動開発",
+        "Webアプリ開発",
+        "OSS",
+        "npm",
+        "要件定義",
+        "設計書"
+      ],
+      "relatedVideoIds": [],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "ECRzrFNIWNM",
+      "title": "【実践編】SuperClaudeのコマンドをフル活用！要件定義・設計・計画・エラー解決から品質改善までの推奨フローを完全解説",
+      "tags": [
+        "バイブコーディング",
+        "VibeCoding",
+        "プログラミング",
+        "SuperClaude",
+        "ClaudeCode",
+        "AI駆動開発",
+        "Next.js",
+        "天気予報アプリ",
+        "Webアプリ開発"
+      ],
+      "relatedVideoIds": [
+        "..."
+      ],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "geZT1xTb06I",
+      "title": "【無料】Replit Agent3で知識ゼロからバイブコーディング！ブラウザだけでWeb・データ分析・3Dゲーム・自動化ツールを作れる最新 AI エディタを試してみた",
+      "tags": [
+        "agent3",
+        "vibecoding",
+        "バイブコーディング",
+        "replit",
+        "クラウドIDE",
+        "ai駆動開発",
+        "ReplitAgent3",
+        "AI開発",
+        "VibeCoding",
+        "プログラミング初心者",
+        "Webアプリ開発",
+        "AIエージェント",
+        "個人開発",
+        "無料開発環境"
+      ],
+      "relatedVideoIds": [],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "Yy2alUag5I8",
+      "title": "【完全比較】Claude Code vs Codex！Codexのコード品質がClaude Codeを超えた！Claude Code ユーザーは Codex（GPT-5）に乗り換えるべき？",
+      "tags": [
+        "ClaudeCode",
+        "Codex",
+        "GPT5",
+        "AI駆動開発",
+        "VibeCoding",
+        "バイブコーディング",
+        "プログラミング"
+      ],
+      "relatedVideoIds": [],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "_VhJCZtQXUc",
+      "title": "【爆速開発】Codex CLIのカスタムコマンドで繰り返し作業を1秒で終わらせる方法！実践デモ付き",
+      "tags": [
+        "Codex CLI",
+        "codex",
+        "カスタムコマンド",
+        "カスタムプロンプト",
+        "AI駆動開発",
+        "VibeCoding",
+        "バイブコーディング",
+        "プログラミング"
+      ],
+      "relatedVideoIds": [
+        "PLACEHOLDER1",
+        "PLACEHOLDER2"
+      ],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "d67qWFEdxCI",
+      "title": "【AI駆動開発】初心者OK！Claude Codeでバイブコーディング〜React ポモドーロタイマーを作る",
+      "tags": [
+        "ポモドーロタイマー",
+        "VibeCoding",
+        "ClaudeCode",
+        "AI駆動開発",
+        "React",
+        "プログラミング",
+        "Vite",
+        "多言語対応",
+        "個人開発",
+        "Webアプリ開発"
+      ],
+      "relatedVideoIds": [
+        "4MUadOFHy9M"
+      ],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "fTONBWDWke0",
+      "title": "【神アプデ】Claude CodeからCodexをMCPとして利用可能に！両者の良いとこどりで最強の開発環境を構築する方法",
+      "tags": [
+        "ClaudeCode",
+        "CodexCLI",
+        "MCP",
+        "AI駆動開発",
+        "バイブコーディング",
+        "プログラミング",
+        "エンジニア",
+        "ChatGPT",
+        "GPT5",
+        "開発効率化",
+        "gpt5"
+      ],
+      "relatedVideoIds": [],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "H5TGzM_PCW4",
+      "title": "【1時間でわかる】OpenAI Codex（ChatGPT）でバイブコーディング入門！IDE・CLI 版の比較と基礎を動画1本で完全理解",
+      "tags": [
+        "OpenAI Codex",
+        "Codex",
+        "ChatGPT",
+        "AI駆動開発",
+        "VibeCoding",
+        "バイブコーディング",
+        "プログラミング",
+        "Webアプリ開発"
+      ],
+      "relatedVideoIds": [],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "HM0SLThgXqE",
+      "title": "【仕様駆動開発】cc-sddでClaude Code/CursorなどをKiro化！日本語対応の国産ツールで簡単に始めるスペック駆動開発",
+      "tags": [
+        "cc_sdd",
+        "AWS_Kiro",
+        "仕様駆動開発",
+        "SDD",
+        "ClaudeCode",
+        "Cursor",
+        "AI駆動開発",
+        "国産ツール",
+        "日本語対応"
+      ],
+      "relatedVideoIds": [
+        "VIDEO_ID_1",
+        "VIDEO_ID_2"
+      ],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "qCFnfS5DAr8",
+      "title": "【仕様駆動開発】AWS Kiro がすごい！手戻り削減の要件定義→設計→計画→実装を誰でも実現できる時代へ",
+      "tags": [
+        "仕様駆動開発",
+        "AWS Kiro",
+        "AI駆動開発",
+        "VibeCoding",
+        "バイブコーディング",
+        "プログラミング",
+        "AI開発ツール"
+      ],
+      "relatedVideoIds": [],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "TDECUH62yYQ",
+      "title": "【Playwright入門】Claude Code × MCPでブラウザテストを完全自動化！AI 駆動の E2Eテスト実践ガイド",
+      "tags": [
+        "ClaudeCode",
+        "MCP",
+        "Playwright",
+        "E2Eテスト",
+        "テスト自動化",
+        "AI駆動開発",
+        "VibeCoding",
+        "バイブコーディング",
+        "プログラミング",
+        "Webアプリ開発",
+        "自動テスト",
+        "ModelContextProtocol"
+      ],
+      "relatedVideoIds": [
+        "1TJydjQM6eo"
+      ],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "TfaNCNrYu8A",
+      "title": "【完全初心者OK】Claude Code×React Nativeでスマホアプリ開発！カウンターと計算機を作るバイブコーディング実演",
+      "tags": [
+        "ClaudeCode",
+        "ReactNative",
+        "バイブコーディング",
+        "VibeCoding",
+        "スマホアプリ開発",
+        "AI駆動開発",
+        "プログラミング初心者",
+        "Expo",
+        "個人開発",
+        "アプリ開発"
+      ],
+      "relatedVideoIds": [],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "Xr_HhLuzOy8",
+      "title": "【1時間で速習】Claude Code完全ガイド   AI駆動開発で企業サイトを作ってデプロイまで実演！",
+      "tags": [
+        "ClaudeCode",
+        "AI駆動開発",
+        "VibeCoding",
+        "バイブコーディング",
+        "Webサイト制作"
+      ],
+      "relatedVideoIds": [],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "xrRFnoOeC94",
+      "title": "【30分で完成】Claude Code × バイブコーディングでタイピングゲーム作成｜React初心者でも動くアプリが作れる",
+      "tags": [
+        "バイブコーディング",
+        "プログラミング初心者",
+        "ClaudeCode",
+        "React",
+        "タイピングゲーム",
+        "AI開発",
+        "Webアプリ開発",
+        "TypeScript",
+        "tailwindcss"
+      ],
+      "relatedVideoIds": [
+        "Xr_HhLuzOy8"
+      ],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "VHZNtl46CJw",
+      "title": "【GPT-5搭載】JetBrains最新AIエージェント「Junie」でRailsアプリ開発！Claude Codeとの違いも徹底比較",
+      "tags": [
+        "Junie",
+        "JetBrains",
+        "RubyMine",
+        "GPT5",
+        "AI駆動開発",
+        "バイブコーディング",
+        "VibeCoding",
+        "RubyonRails",
+        "ClaudeCode比較",
+        "AIエージェント"
+      ],
+      "relatedVideoIds": [],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "ZUr_Sp72q50",
+      "title": "SuperClaudeでClaude Codeの品質が爆上がり！チーム開発・個人開発の両方でおすすめの神ツールとは？",
+      "tags": [
+        "SuperClaude",
+        "ClaudeCode",
+        "AI駆動開発",
+        "コード品質",
+        "VibeCoding",
+        "バイブコーディング",
+        "プログラミング",
+        "個人開発"
+      ],
+      "relatedVideoIds": [],
+      "udemyCourseIds": []
+    }
+  ]
+}
