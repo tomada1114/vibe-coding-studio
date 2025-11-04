@@ -13,6 +13,7 @@ import { video_geZT1xTb06I } from "@/data/videos/geZT1xTb06I"
 import { video_gXwS9dJewrU } from "@/data/videos/gXwS9dJewrU"
 import { video_H5TGzM_PCW4 } from "@/data/videos/H5TGzM_PCW4"
 import { video_HM0SLThgXqE } from "@/data/videos/HM0SLThgXqE"
+import { video_OfXZCu6xJJg } from "@/data/videos/OfXZCu6xJJg"
 import { video_pRHyMLH1bcU } from "@/data/videos/pRHyMLH1bcU"
 import { video_qCFnfS5DAr8 } from "@/data/videos/qCFnfS5DAr8"
 import { video_qrDUjfnlOiI } from "@/data/videos/qrDUjfnlOiI"
@@ -70,6 +71,7 @@ const allVideosData: VideoMetadata[] = [
   video_xrRFnoOeC94,
   video_VHZNtl46CJw,
   video_ZUr_Sp72q50,
+  video_OfXZCu6xJJg,
 ]
 
 /**
