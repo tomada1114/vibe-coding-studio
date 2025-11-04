@@ -411,16 +411,27 @@ npm run test -- src/lib/videos/__tests__/video-data.test.ts
 - ✅ 単体テスト: 合格
 
 ## 📝 次のステップ
-1. `.tmp/next-video-description.txt`の内容をYouTube Studioの概要欄にコピー
-2. 開発サーバーで動作確認:
+1. **動画インデックスの更新（必須）**:
+   ```bash
+   npm run update:video-indexes
+   ```
+   このコマンドは以下を実行します:
+   - 動画インデックスの生成 (`src/data/indexes/video-index.json`)
+   - Udemy講座インデックスの生成 (`src/data/indexes/udemy-course-index.json`)
+   - インデックスファイルの検証
+
+2. `.tmp/next-video-description.txt`の内容をYouTube Studioの概要欄にコピー
+
+3. 開発サーバーで動作確認:
    ```bash
    npm run dev
    ```
    - `/videos` ページで新動画が表示されるか確認
    - `/videos/$1` ページで全セクションが正しく表示されるか確認
-3. Gitコミット:
+
+4. Gitコミット:
    ```bash
-   git add src/data/videos/$1.ts src/lib/videos/video-data.ts .tmp/next-video-description.txt
+   git add src/data/videos/$1.ts src/lib/videos/video-data.ts src/data/indexes/ .tmp/next-video-description.txt
    git commit -m "feat: 動画【タイトル】のメタデータを追加"
    ```
 
