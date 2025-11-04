@@ -13,10 +13,9 @@
     "format": "prettier --write . --log-level=warn",
     "format:check": "prettier --check .",
     "check:all": "npm run lint --silent && npm run format && npm run type-check && npm run test",
-    "generate-indexes": "tsx scripts/generate-indexes.ts",
     "generate:indexes": "tsx scripts/generate-indexes.ts",
-    "setup-hooks": "node scripts/setup-hooks.js",
-    "validate-indexes": "tsx scripts/validate-indexes.ts"
+    "validate:indexes": "tsx scripts/validate-indexes.ts",
+    "update:video-indexes": "npm run generate:indexes && npm run validate:indexes"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.6",
