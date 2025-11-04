@@ -6,71 +6,71 @@
 
 ## 実装タスク
 
-- [ ] 1. 型定義とデータモデルの構築
-- [ ] 1.1 動画インデックスの型定義を作成
+- [x] 1. 型定義とデータモデルの構築
+- [x] 1.1 動画インデックスの型定義を作成
   - VideoIndex, VideoIndexItem, VideoIndexMetadataの型インターフェースを定義
   - セマンティックバージョニング形式のversion文字列型を定義
   - ISO 8601形式のgeneratedAt日時型を定義
   - _Requirements: 1.6, 6.6_
 
-- [ ] 1.2 Udemy講座インデックスの型定義を作成
+- [x] 1.2 Udemy講座インデックスの型定義を作成
   - UdemyCourseIndex, UdemyCourseIndexItem, TopicMappingの型インターフェースを定義
   - トピック別URLマッピングの型構造を定義
   - 講座プロモーションURLの型を定義
   - _Requirements: 1.6, 3.6, 6.6_
 
-- [ ] 1.3 エラー型とエラーコードの定義
+- [x] 1.3 エラー型とエラーコードの定義
   - VideoIndexErrorCodeとUdemyCourseIndexErrorCodeの列挙型を定義
   - カスタムエラークラス（VideoIndexError）を実装
   - エラーコンテキスト情報の型を定義
   - _Requirements: インデックス生成とローダーのエラーハンドリングに必要_
 
-- [ ] 2. 動画インデックス生成機能の実装
-- [ ] 2.1 動画データファイルの読み込みと解析
+- [x] 2. 動画インデックス生成機能の実装
+- [x] 2.1 動画データファイルの読み込みと解析
   - src/data/videos/ディレクトリから動画データファイルを検出
   - 各動画ファイルからVideoMetadataデータを抽出
   - 動画ID、タイトル、タグ配列を収集
   - _Requirements: 1.1, 1.2_
 
-- [ ] 2.2 動画インデックスの構築ロジック
+- [x] 2.2 動画インデックスの構築ロジック
   - VideoIndexItem形式にデータを変換
   - 関連動画IDとUdemy講座IDを抽出
   - バージョン情報とタイムスタンプを追加
   - _Requirements: 1.2, 1.4_
 
-- [ ] 2.3 動画インデックスのJSON出力機能
+- [x] 2.3 動画インデックスのJSON出力機能
   - インデックスデータをJSON形式にシリアライズ
   - src/data/indexes/video-index.jsonに書き込み
   - ファイル書き込みエラーのハンドリング
   - _Requirements: 1.3_
 
-- [ ] 2.4 動画インデックス生成の単体テスト
+- [x] 2.4 動画インデックス生成の単体テスト
   - 動画データファイルの検出機能をテスト
   - VideoIndexItem変換ロジックをテスト
   - JSON出力の正確性をテスト
   - エッジケース: 動画データ0件、ファイル書き込み失敗
   - _Requirements: 7.1, 7.4, 7.5_
 
-- [ ] 3. Udemy講座インデックス生成機能の実装
-- [ ] 3.1 Udemy講座データの読み込みと解析
+- [x] 3. Udemy講座インデックス生成機能の実装
+- [x] 3.1 Udemy講座データの読み込みと解析
   - src/constants/coupon-courses.tsからCOURSE_INFOを読み込み
   - 各講座データから講座ID、タイトル、トピック配列を抽出
   - プロモーションURLと説明文を収集
   - _Requirements: 3.1, 3.2_
 
-- [ ] 3.2 Udemy講座インデックスの構築ロジック
+- [x] 3.2 Udemy講座インデックスの構築ロジック
   - UdemyCourseIndexItem形式にデータを変換
   - トピック別のURLマッピング（TopicMapping）を生成
   - バージョン情報とタイムスタンプを追加
   - _Requirements: 3.2, 3.4_
 
-- [ ] 3.3 Udemy講座インデックスのJSON出力機能
+- [x] 3.3 Udemy講座インデックスのJSON出力機能
   - インデックスデータをJSON形式にシリアライズ
   - src/data/indexes/udemy-course-index.jsonに書き込み
   - ファイル書き込みエラーのハンドリング
   - _Requirements: 3.3_
 
-- [ ] 3.4 Udemy講座インデックス生成の単体テスト
+- [x] 3.4 Udemy講座インデックス生成の単体テスト
   - COURSE_INFO読み込み機能をテスト
   - UdemyCourseIndexItem変換ロジックをテスト
   - TopicMapping生成の正確性をテスト
