@@ -76,30 +76,120 @@ YouTube動画のメタデータファイルと概要欄テキストを`.tmp/next
 
 ## Phase 2: Automated Content Selection via Sub-Agents
 
-### 2.1 関連動画の自動検索（related-videos-finder エージェント）
+### 2.1 関連動画候補の取得（related-videos-finder エージェント）
 
 **エージェント呼び出し**:
 ```markdown
-> Use the related-videos-finder agent to find related videos for the following tags:
+> Use the related-videos-finder agent to find related video candidates for the following tags:
 > Tags: [抽出したタグリスト]
 > Current Video ID: "$1"
+> Limit: 10
 ```
 
 **期待される出力**:
 ```typescript
-RelatedVideo[] = [
-  { id: "video-id", title: "動画タイトル", score: 42 },
-  // ... 上位3-5本
+RelatedVideoCandidate[] = [
+  {
+    id: "video-id",
+    title: "動画タイトル",
+    score: 42,
+    publishedAt: "2024-10-15",
+    tags: ["ClaudeCode", "React", "TypeScript"],
+    url: "https://www.youtube.com/watch?v=video-id"
+  },
+  // ... 上位10本の候補
 ]
 ```
 
 **処理**:
 1. エージェントを明示的に呼び出す（Task tool使用）
-2. スコア付き関連動画リストを取得
+2. **10本の候補**をスコア付きで取得（AI判断とユーザー選択用）
 3. スコアの内訳を確認（完全一致、部分一致、類似性ボーナス）
-4. 上位3-5本を選定
 
-### 2.2 Udemy講座の自動推薦（udemy-course-suggester エージェント）
+### 2.2 AI判断による関連性評価
+
+**各候補動画の詳細分析**:
+
+1. **メタデータ読み込み**:
+   - `src/data/videos/{候補動画ID}.ts`を読み込む
+   - opening, learningPoints, tags などの詳細情報を取得
+
+2. **新しい動画との関連性を評価**:
+   以下の観点で各候補を分析：
+
+   **a) テーマの一致度**:
+   - 同じツールを扱っている？（Claude Code、Cursor、Codexなど）
+   - 同じ開発手法を扱っている？（AI駆動開発、TDD、仕様駆動開発など）
+   - 同じ技術スタックを使っている？（React、Next.js、TypeScriptなど）
+
+   **b) 内容の補完性**:
+   - 前提知識となる動画か？（初心者向け → 応用編）
+   - 発展的な内容か？（基礎編 → 実践編）
+   - シリーズ関係か？（前編・後編、パート1・パート2）
+
+   **c) ユーザーにとっての有用性**:
+   - この動画を見た人が次に見たくなる内容か？
+   - 学習の流れとして自然か？
+   - 補完的な知識を提供できるか？
+
+3. **推奨度と理由の付与**:
+   各候補に以下を設定：
+   - **推奨度**: 高（強く推奨）、中（推奨）、低（やや関連）
+   - **理由**: 具体的な推奨理由（50-100文字程度）
+
+   **例**:
+   ```typescript
+   {
+     candidate: { id: "abc123", title: "Claude Code初心者ガイド", score: 42 },
+     recommendation: "高",
+     reason: "同じClaudeCodeツールを使用し、TDD手法も共通。初心者向けの前提知識として最適。"
+   }
+   ```
+
+### 2.3 ユーザー選択（プランモード的アプローチ）
+
+**AskUserQuestionツールで候補提示**:
+
+1. **質問の構成**:
+   ```markdown
+   以下の候補から関連動画を選択してください（3-5本を推奨）：
+
+   各候補は以下の形式で表示：
+   - タイトル
+   - タグベーススコア
+   - AI評価：推奨度と理由
+   ```
+
+2. **選択肢の形式**:
+   ```typescript
+   {
+     question: "関連動画を選択してください（複数選択可）",
+     header: "関連動画選択",
+     multiSelect: true,
+     options: [
+       {
+         label: "動画A (スコア: 42, 推奨: 高)",
+         description: "同じClaudeCodeツールを使用し、TDD手法も共通。初心者向けの前提知識として最適。"
+       },
+       {
+         label: "動画B (スコア: 35, 推奨: 中)",
+         description: "AI駆動開発という共通テーマだが、使用ツールが異なる。補完的な視点を提供。"
+       },
+       // ... 最大10個の選択肢
+     ]
+   }
+   ```
+
+3. **ユーザーからの選択受領**:
+   - 選択された動画IDのリストを取得
+   - 3-5本の範囲を推奨（それ以外でもOK）
+
+4. **選択結果の記録**:
+   - どの動画が選ばれたか
+   - 選択理由（推奨度と理由）
+   - 完了報告に含める
+
+### 2.4 Udemy講座の自動推薦（udemy-course-suggester エージェント）
 
 **エージェント呼び出し**:
 ```markdown
@@ -382,15 +472,27 @@ npm run test -- src/lib/videos/__tests__/video-data.test.ts
 - **タグ数**: X個
 - **タイムスタンプ**: X項目
 
-## 🎬 関連動画の自動選定結果（related-videos-finder）
-1. **【動画タイトル1】** (スコア: 42)
-   - ID: `video-id-1`
-   - 完全一致: 3個 (30pt), 部分一致: 2個 (10pt), 類似性: +2pt
-2. **【動画タイトル2】** (スコア: 35)
-   - ...
-3. 【動画タイトル3】 (スコア: 28)
+## 🎬 関連動画の選定結果
 
-**選定理由**: タグ「ClaudeCode」「AI駆動開発」の完全一致が多く、関連性が高い
+### 候補検索（related-videos-finder）
+- **候補数**: 10本
+- **最高スコア**: 42 (完全一致: 3個, 部分一致: 2個, 類似性: +2pt)
+
+### AI評価と推奨
+各候補を以下の観点で評価しました：
+- テーマの一致度（ツール、開発手法、技術スタック）
+- 内容の補完性（前提知識、発展的内容、シリーズ関係）
+- ユーザーにとっての有用性
+
+### ユーザー選択結果
+選択された動画（X本）:
+1. **【動画タイトル1】** (スコア: 42, 推奨: 高)
+   - ID: `video-id-1`
+   - 選定理由: 同じClaudeCodeツールを使用し、TDD手法も共通。初心者向けの前提知識として最適。
+2. **【動画タイトル2】** (スコア: 35, 推奨: 中)
+   - ID: `video-id-2`
+   - 選定理由: AI駆動開発という共通テーマだが、使用ツールが異なる。補完的な視点を提供。
+3-X. （以降同様）
 
 ## 🚀 Udemy講座の自動推薦結果（udemy-course-suggester）
 - **推薦講座数**: X件

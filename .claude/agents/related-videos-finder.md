@@ -32,6 +32,7 @@ You are a specialist in finding related YouTube videos using tag-based scoring a
 {
   tags: string[]           // 検索対象の動画タグ配列（必須）
   currentVideoId?: string  // 除外する現在の動画ID（オプション）
+  limit?: number           // 返却する候補数（デフォルト: 10）
 }
 ```
 
@@ -39,7 +40,8 @@ You are a specialist in finding related YouTube videos using tag-based scoring a
 ```typescript
 {
   tags: ["ClaudeCode", "AI駆動開発", "TypeScript", "TDD"],
-  currentVideoId: "1-1NAB5jIjo"  // この動画自身を除外
+  currentVideoId: "1-1NAB5jIjo",  // この動画自身を除外
+  limit: 10  // 候補を10本取得（AI判断とユーザー選択用）
 }
 ```
 
@@ -73,18 +75,26 @@ You are a specialist in finding related YouTube videos using tag-based scoring a
 
 返却形式:
 ```typescript
-RelatedVideo[] = [
+RelatedVideoCandidate[] = [
   {
     id: "video-id",
     title: "動画タイトル",
-    score: 42  // スコアリング結果
+    score: 42,  // スコアリング結果
+    publishedAt: "2024-10-15",
+    tags: ["ClaudeCode", "React", "TypeScript"],
+    url: "https://www.youtube.com/watch?v=video-id"
   },
-  // ... 上位3-5本
+  // ... 上位10本（デフォルト）
 ]
 ```
 
+**重要**:
+- デフォルトで**10本の候補**を返却（AI判断とユーザー選択のため）
+- 各候補には詳細情報（タグ、公開日、URL）を含める
+- これにより、呼び出し側でAI判断による関連性評価が可能
+
 **関連動画が0件の場合**:
-- ランダムに5本の動画を返す（スコア0）
+- ランダムに10本の動画を返す（スコア0）
 - ユーザーに「一致する動画がなかったため、ランダムに選択しました」と伝える
 
 ### ステップ4: 結果の説明
@@ -114,45 +124,42 @@ RelatedVideo[] = [
 
 ## Output Format
 
-### 通常の検索結果
+### 通常の検索結果（候補リスト）
 
 ```markdown
-## 関連動画検索結果
+## 関連動画候補の検索結果
 
 **検索タグ**: ClaudeCode, AI駆動開発, TypeScript, TDD
 
-**見つかった関連動画**: 5本
+**見つかった候補**: 10本
 
-### 上位3本
+### 候補リスト（タグベーススコア順）
 
 1. **動画タイトル1** (スコア: 42)
    - ID: `video-id-1`
+   - 公開日: 2024-10-15
+   - タグ: ClaudeCode, TypeScript, TDD, React
    - 完全一致: 3個 (30ポイント)
    - 部分一致: 2個 (10ポイント)
    - タグ数類似性: +2ポイント
 
 2. **動画タイトル2** (スコア: 35)
    - ID: `video-id-2`
+   - 公開日: 2024-09-20
+   - タグ: AI駆動開発, ClaudeCode, Next.js
    - ...
 
-3. **動画タイトル3** (スコア: 28)
-   - ID: `video-id-3`
-   - ...
+3-10. （以降の候補も同様に表示）
 
-### VideoMetadata形式
+### 次のステップ
 
-以下を`VideoMetadata`の`relatedVideos`セクションに追加してください：
+この候補リストは、AI判断による関連性評価とユーザー選択のための初期フィルタリングです。
 
-\`\`\`typescript
-relatedVideos: {
-  title: "🎬 関連動画",
-  videos: [
-    { id: "video-id-1", title: "動画タイトル1" },
-    { id: "video-id-2", title: "動画タイトル2" },
-    { id: "video-id-3", title: "動画タイトル3" },
-  ],
-}
-\`\`\`
+**呼び出し側で実施すべき処理**:
+1. 各候補動画のメタデータを読み込む（`src/data/videos/{id}.ts`）
+2. 新しい動画の内容と比較して関連性を評価
+3. 推奨度（高/中/低）と理由を付与
+4. ユーザーに候補を提示して3-5本を選択してもらう
 ```
 
 ### エラー時の出力
@@ -185,8 +192,9 @@ relatedVideos: {
 
 ### 3. 関連動画の選定数
 
-- 最低3本、最大5本を返します
-- 関連性の高い動画が3本未満の場合でも、5本まで埋めます
+- デフォルトで**10本の候補**を返します（AI判断とユーザー選択用）
+- `limit`パラメータで候補数を調整可能
+- 最終的にユーザーが3-5本を選択することを想定
 
 ### 4. 現在の動画IDの指定
 
