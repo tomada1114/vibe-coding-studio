@@ -222,8 +222,8 @@ export interface VideoMetadata {
   opening: OpeningSection
   /** 学べる内容セクション */
   learningPoints: LearningPointsSection
-  /** タイムスタンプセクション */
-  timestamps: TimestampSection
+  /** タイムスタンプセクション（オプション） */
+  timestamps?: TimestampSection
   /** タグ */
   tags: string[]
 
