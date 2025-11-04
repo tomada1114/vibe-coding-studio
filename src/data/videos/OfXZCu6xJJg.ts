@@ -11,7 +11,7 @@ export const video_OfXZCu6xJJg: VideoMetadata = {
   opening: {
     lines: [
       "ターミナルとは、コンピューターをキーボードで文字を打ち込むことで操作するアプリケーション（ツール）のことです。よく「黒い画面」と呼ばれ、コマンドという命令を入力して、ファイルやフォルダーの作成・削除など、さまざまな操作を行うことができます。",
-      "この動画では、ターミナルの基本的な使い方を初心者向けに解説します。MacのターミナルとWindowsのGit Bashを使って、実際にコマンドを実行する例をお見せします。",
+      "この動画では、ターミナルの基本的な使い方を初心者向けに解説します。実際にコマンドを実行する例をお見せします。",
       "プログラミングを始めるなら、ターミナルの基本操作は必須スキルです。一緒に学んでいきましょう！",
     ],
   },
@@ -54,26 +54,6 @@ export const video_OfXZCu6xJJg: VideoMetadata = {
         title: "AIが書いたコード、いつコミットする？失敗しないGit運用術",
         url: "https://www.youtube.com/watch?v=1LP4ZAsU_UI",
       },
-      {
-        title:
-          "React Native（Expo）入門！iOS・Android アプリ環境構築の全手順を初心者向けに解説【シミュレータ対応】",
-        url: "https://www.youtube.com/watch?v=TWUpzNGp7fI",
-      },
-      {
-        title:
-          "【コード品質UP】技術的負債を作らないための AI 向け開発ルールを設定しよう（Claude Code/Codex/Cursor 対応）",
-        url: "https://www.youtube.com/watch?v=SO5qov2qTUE",
-      },
-      {
-        title:
-          "【爆速開発】Codex CLIのカスタムコマンドで繰り返し作業を1秒で終わらせる方法！実践デモ付き",
-        url: "https://www.youtube.com/watch?v=_VhJCZtQXUc",
-      },
-      {
-        title:
-          "【神アプデ】Claude CodeからCodexをMCPとして利用可能に！両者の良いとこどりで最強の開発環境を構築する方法",
-        url: "https://www.youtube.com/watch?v=fTONBWDWke0",
-      },
     ],
   },
 
@@ -81,7 +61,7 @@ export const video_OfXZCu6xJJg: VideoMetadata = {
   udemyCourses: {
     title: "🚀 体系的に学びたい方へ",
     description:
-      "プログラミング初心者からベテランまで、あなたのレベルに合わせたUdemy講座を多数ご用意しています。",
+      "プログラミング初心者からベテランまで、レベルに合わせたUdemy講座を多数ご用意しています。",
     cta: {
       text: "Udemy講座を見る",
       url: "https://www.vibecodingstudio.dev/coupons",
