@@ -412,6 +412,20 @@ npm run build       # 本番ビルドが動作することを確認
 - **ステータス**: initialized
 - **作成日**: 2025-10-30
 
+### video-indexing-system
+YouTube動画メタデータのインデックスベースシステム。関連動画の高速検索とトークン使用量の削減を実現します。動画インデックスの生成・管理、関連動画の検索アルゴリズム、自動同期機能を含みます。
+
+- **仕様パス**: `.kiro/specs/video-indexing-system/`
+- **ステータス**: initialized
+- **作成日**: 2025-11-04
+
+### udemy-courses-management
+Udemy講座情報を一元管理し、動画タグに基づいて適切な講座を自動選定するシステム。`video-metadata-creator` スキルのパフォーマンスを最適化し、講座情報の更新を効率化します。
+
+- **仕様パス**: `.kiro/specs/udemy-courses-management/`
+- **ステータス**: initialized
+- **作成日**: 2025-11-04
+
 ## 品質基準
 
 - **テストカバレッジ**: コアロジックとユーティリティで80%以上を維持
