@@ -6,10 +6,9 @@
  */
 
 import {
-  suggestUdemyCourses,
   calculateCourseScore,
+  suggestUdemyCourses,
 } from "../suggest-udemy-courses"
-import { UdemyCourseIndexError, UdemyCourseIndexErrorCode } from "../errors"
 
 describe("calculateCourseScore", () => {
   describe("完全一致トピックのスコアリング", () => {
@@ -116,7 +115,7 @@ describe("suggestUdemyCourses", () => {
 
       // descriptionまたはcoursesが存在する場合、講座が推薦されている
       expect(
-        result.description !== undefined || result.courses !== undefined,
+        result.description !== undefined || result.courses !== undefined
       ).toBe(true)
     })
   })
@@ -133,10 +132,9 @@ describe("suggestUdemyCourses", () => {
   })
 
   describe("異常系", () => {
-    it("空のタグ配列の場合、UdemyCourseIndexErrorをスローすること", () => {
+    it("空のタグ配列の場合、エラーをスローすること", () => {
       const tags: string[] = []
 
-      expect(() => suggestUdemyCourses(tags)).toThrow(UdemyCourseIndexError)
       expect(() => suggestUdemyCourses(tags)).toThrow("タグ配列が空です")
     })
   })

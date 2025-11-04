@@ -6,11 +6,6 @@
  */
 
 import { loadUdemyCourseIndex } from "../udemy-course-index-loader"
-import {
-  UdemyCourseIndexError,
-  UdemyCourseIndexErrorCode,
-} from "../errors"
-import type { UdemyCourseIndex } from "@/types/udemy-course-index"
 
 describe("loadUdemyCourseIndex", () => {
   describe("正常系", () => {

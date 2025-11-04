@@ -3,8 +3,6 @@
  */
 
 import { generateVideoIndex } from "../video-index-generator"
-import type { VideoIndex } from "@/types/video-index"
-import { VideoIndexError, VideoIndexErrorCode } from "../errors"
 
 describe("generateVideoIndex", () => {
   describe("正常系", () => {
@@ -13,7 +11,9 @@ describe("generateVideoIndex", () => {
 
       expect(result).toBeDefined()
       expect(result.version).toBe("1.0.0")
-      expect(result.generatedAt).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/)
+      expect(result.generatedAt).toMatch(
+        /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/
+      )
       expect(result.videos).toBeInstanceOf(Array)
       expect(result.videos.length).toBeGreaterThan(0)
     })
@@ -38,7 +38,7 @@ describe("generateVideoIndex", () => {
     test("タグ配列は最低1つ以上の要素を持つ", () => {
       const result = generateVideoIndex()
 
-      result.videos.forEach((video) => {
+      result.videos.forEach(video => {
         expect(video.tags.length).toBeGreaterThan(0)
       })
     })
@@ -47,7 +47,7 @@ describe("generateVideoIndex", () => {
       const result = generateVideoIndex()
 
       const videoWithRelated = result.videos.find(
-        (v) => v.relatedVideoIds.length > 0,
+        v => v.relatedVideoIds.length > 0
       )
       expect(videoWithRelated).toBeDefined()
     })
@@ -63,7 +63,7 @@ describe("generateVideoIndex", () => {
 
       // 少なくとも1つの動画にudemyCourseIdsプロパティが存在することを確認
       const videoWithCoursesProperty = result.videos.find(
-        (v) => v.udemyCourseIds !== undefined,
+        v => v.udemyCourseIds !== undefined
       )
       expect(videoWithCoursesProperty).toBeDefined()
       expect(Array.isArray(videoWithCoursesProperty?.udemyCourseIds)).toBe(true)

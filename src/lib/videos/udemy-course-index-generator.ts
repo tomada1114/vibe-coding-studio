@@ -4,12 +4,12 @@
  * COURSE_INFOから検索用のUdemy講座インデックスを生成します。
  */
 
+import { COURSE_INFO } from "@/constants/coupon-courses"
 import type {
+  TopicMapping,
   UdemyCourseIndex,
   UdemyCourseIndexItem,
-  TopicMapping,
 } from "@/types/udemy-course-index"
-import { COURSE_INFO } from "@/constants/coupon-courses"
 import { UdemyCourseIndexError, UdemyCourseIndexErrorCode } from "./errors"
 
 /**
@@ -26,7 +26,7 @@ function createUdemyCourseIndexItem(
     topics: string[]
     promotionUrl?: string
     description: string
-  },
+  }
 ): UdemyCourseIndexItem {
   return {
     courseId,
@@ -77,13 +77,13 @@ export function generateUdemyCourseIndex(): UdemyCourseIndex {
     throw new UdemyCourseIndexError(
       UdemyCourseIndexErrorCode.NO_COURSE_DATA,
       "Udemy講座データが見つかりません",
-      { courseCount: 0 },
+      { courseCount: 0 }
     )
   }
 
   // 各講座からUdemyCourseIndexItemを生成
   const courseIndexItems = courseEntries.map(([courseId, courseInfo]) =>
-    createUdemyCourseIndexItem(courseId, courseInfo),
+    createUdemyCourseIndexItem(courseId, courseInfo)
   )
 
   // トピックマッピングを生成

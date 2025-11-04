@@ -4,9 +4,9 @@
  * タグベースのトピックマッチングスコアリングでUdemy講座を推薦します。
  */
 
-import { loadUdemyCourseIndex } from "./udemy-course-index-loader"
-import { UdemyCourseIndexError, UdemyCourseIndexErrorCode } from "./errors"
 import type { UdemyCoursesSection } from "@/types/video"
+import { UdemyCourseIndexError, UdemyCourseIndexErrorCode } from "./errors"
+import { loadUdemyCourseIndex } from "./udemy-course-index-loader"
 
 /**
  * トピックマッチングのスコアリングアルゴリズム
@@ -17,7 +17,7 @@ import type { UdemyCoursesSection } from "@/types/video"
  */
 export function calculateCourseScore(
   inputTags: string[],
-  courseTopics: string[],
+  courseTopics: string[]
 ): number {
   // 講座トピックが空の場合は0を返す
   if (courseTopics.length === 0) {
@@ -27,17 +27,17 @@ export function calculateCourseScore(
   let score = 0
 
   // 大文字小文字を無視するために正規化
-  const normalizedInput = inputTags.map((t) => t.toLowerCase())
-  const normalizedTopics = courseTopics.map((t) => t.toLowerCase())
+  const normalizedInput = inputTags.map(t => t.toLowerCase())
+  const normalizedTopics = courseTopics.map(t => t.toLowerCase())
 
   // 完全一致トピック: 15ポイント/トピック
-  const exactMatches = normalizedInput.filter((inputTag) =>
-    normalizedTopics.includes(inputTag),
+  const exactMatches = normalizedInput.filter(inputTag =>
+    normalizedTopics.includes(inputTag)
   )
   score += exactMatches.length * 15
 
   // 部分一致トピック: 7ポイント/トピック（完全一致を除く）
-  const partialMatches = normalizedInput.filter((inputTag) => {
+  const partialMatches = normalizedInput.filter(inputTag => {
     // 完全一致は除外
     if (exactMatches.includes(inputTag)) {
       return false
@@ -45,7 +45,7 @@ export function calculateCourseScore(
 
     // 部分一致を探す
     return normalizedTopics.some(
-      (topic) => topic.includes(inputTag) || inputTag.includes(topic),
+      topic => topic.includes(inputTag) || inputTag.includes(topic)
     )
   })
   score += partialMatches.length * 7
@@ -69,7 +69,7 @@ export function suggestUdemyCourses(tags: string[]): UdemyCoursesSection {
     throw new UdemyCourseIndexError(
       UdemyCourseIndexErrorCode.EMPTY_TAGS,
       "タグ配列が空です",
-      { tags },
+      { tags }
     )
   }
 
@@ -77,7 +77,7 @@ export function suggestUdemyCourses(tags: string[]): UdemyCoursesSection {
   const courseIndex = loadUdemyCourseIndex()
 
   // 各講座にスコアを計算
-  const scoredCourses = courseIndex.courses.map((course) => ({
+  const scoredCourses = courseIndex.courses.map(course => ({
     courseId: course.courseId,
     title: course.title,
     topics: course.topics,
@@ -95,9 +95,7 @@ export function suggestUdemyCourses(tags: string[]): UdemyCoursesSection {
   })
 
   // トピック数ボーナスを除外した実質スコアが0より大きい講座を抽出
-  const validCourses = scoredCourses.filter(
-    (c) => c.score > c.topics.length,
-  )
+  const validCourses = scoredCourses.filter(c => c.score > c.topics.length)
 
   // 一致する講座が0件の場合、デフォルトURLを返す
   if (validCourses.length === 0) {
@@ -116,9 +114,7 @@ export function suggestUdemyCourses(tags: string[]): UdemyCoursesSection {
   const topCourses = validCourses.slice(0, 3)
 
   // 最も一致度の高い講座のトピックを抽出
-  const topTopics = Array.from(
-    new Set(topCourses.flatMap((c) => c.topics)),
-  )
+  const topTopics = Array.from(new Set(topCourses.flatMap(c => c.topics)))
 
   // トピックが複数ある場合、フィルター付きURLを生成
   let url = "https://www.vibecodingstudio.dev/coupons"
@@ -141,7 +137,7 @@ export function suggestUdemyCourses(tags: string[]): UdemyCoursesSection {
   }
 
   // 推薦講座が複数の場合
-  const courseNames = topCourses.map((c) => `・${c.title}`)
+  const courseNames = topCourses.map(c => `・${c.title}`)
   return {
     title: "🚀 体系的に学びたい方へ",
     description: `この動画に関連するUdemy講座をご用意しています：`,

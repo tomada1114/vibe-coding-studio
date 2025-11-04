@@ -68,7 +68,7 @@ export class VideoIndexError extends Error {
   constructor(
     public readonly code: VideoIndexErrorCode,
     message: string,
-    public readonly context?: Record<string, unknown>,
+    public readonly context?: Record<string, unknown>
   ) {
     super(message)
     // TypeScriptのビルトインErrorクラスを正しく継承するための処理
@@ -85,7 +85,7 @@ export class UdemyCourseIndexError extends Error {
   constructor(
     public readonly code: UdemyCourseIndexErrorCode,
     message: string,
-    public readonly context?: Record<string, unknown>,
+    public readonly context?: Record<string, unknown>
   ) {
     super(message)
     // TypeScriptのビルトインErrorクラスを正しく継承するための処理

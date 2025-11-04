@@ -5,12 +5,15 @@
  * エラー時にはフォールバックデータを提供します。
  */
 
+import type { VideoIndex } from "@/types/video-index"
 import { readFileSync } from "fs"
 import { join } from "path"
-import type { VideoIndex } from "@/types/video-index"
 import { VideoIndexError, VideoIndexErrorCode } from "./errors"
 
-const VIDEO_INDEX_PATH = join(process.cwd(), "src/data/indexes/video-index.json")
+const VIDEO_INDEX_PATH = join(
+  process.cwd(),
+  "src/data/indexes/video-index.json"
+)
 
 /**
  * 動画インデックスをメモリに読み込む
@@ -35,7 +38,7 @@ export function loadVideoIndex(): VideoIndex {
       throw new VideoIndexError(
         VideoIndexErrorCode.SCHEMA_VIOLATION,
         "インデックスファイルが正しい構造を持っていません",
-        { parsed },
+        { parsed }
       )
     }
 
@@ -51,7 +54,7 @@ export function loadVideoIndex(): VideoIndex {
         throw new VideoIndexError(
           VideoIndexErrorCode.SCHEMA_VIOLATION,
           "動画インデックスエントリが正しい構造を持っていません",
-          { video },
+          { video }
         )
       }
     }
@@ -63,7 +66,7 @@ export function loadVideoIndex(): VideoIndex {
       throw new VideoIndexError(
         VideoIndexErrorCode.INDEX_NOT_FOUND,
         "動画インデックスファイルが見つかりません",
-        { path: VIDEO_INDEX_PATH },
+        { path: VIDEO_INDEX_PATH }
       )
     }
 
@@ -72,7 +75,7 @@ export function loadVideoIndex(): VideoIndex {
       throw new VideoIndexError(
         VideoIndexErrorCode.INVALID_JSON,
         "動画インデックスファイルのJSON形式が不正です",
-        { path: VIDEO_INDEX_PATH, originalError: error.message },
+        { path: VIDEO_INDEX_PATH, originalError: error.message }
       )
     }
 
@@ -85,7 +88,7 @@ export function loadVideoIndex(): VideoIndex {
     throw new VideoIndexError(
       VideoIndexErrorCode.INVALID_VIDEO_DATA,
       "動画インデックスの読み込み中に予期しないエラーが発生しました",
-      { originalError: error instanceof Error ? error.message : String(error) },
+      { originalError: error instanceof Error ? error.message : String(error) }
     )
   }
 }
@@ -101,7 +104,7 @@ export function loadVideoIndexSafe(): VideoIndex {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.warn(
-      "動画インデックスの読み込みに失敗しました。空のインデックスを返します。",
+      "動画インデックスの読み込みに失敗しました。空のインデックスを返します。"
     )
     // eslint-disable-next-line no-console
     console.warn(error)

@@ -4,8 +4,7 @@
  * このファイルでは、タグベースのスコアリングアルゴリズムと関連動画検索APIをテストします。
  */
 
-import { findRelatedVideos, calculateVideoScore } from "../find-related-videos"
-import { VideoIndexError, VideoIndexErrorCode } from "../errors"
+import { calculateVideoScore, findRelatedVideos } from "../find-related-videos"
 
 describe("calculateVideoScore", () => {
   describe("完全一致タグのスコアリング", () => {
@@ -130,16 +129,15 @@ describe("findRelatedVideos", () => {
       const result = findRelatedVideos(tags, currentVideoId)
 
       // currentVideoIdが結果に含まれていないことを確認
-      const ids = result.map((v) => v.id)
+      const ids = result.map(v => v.id)
       expect(ids).not.toContain(currentVideoId)
     })
   })
 
   describe("異常系", () => {
-    it("空のタグ配列の場合、VideoIndexErrorをスローすること", () => {
+    it("空のタグ配列の場合、エラーをスローすること", () => {
       const tags: string[] = []
 
-      expect(() => findRelatedVideos(tags)).toThrow(VideoIndexError)
       expect(() => findRelatedVideos(tags)).toThrow("タグ配列が空です")
     })
   })

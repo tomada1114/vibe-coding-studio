@@ -4,10 +4,10 @@
  * 既存の動画データファイルから検索用のインデックスを生成します。
  */
 
-import type { VideoIndex, VideoIndexItem } from "@/types/video-index"
 import type { VideoMetadata } from "@/types/video"
-import { getAllVideos } from "./video-data"
+import type { VideoIndex, VideoIndexItem } from "@/types/video-index"
 import { VideoIndexError, VideoIndexErrorCode } from "./errors"
+import { getAllVideos } from "./video-data"
 
 /**
  * 動画データからVideoIndexItemを生成する
@@ -60,12 +60,12 @@ export function generateVideoIndex(): VideoIndex {
     throw new VideoIndexError(
       VideoIndexErrorCode.NO_VIDEO_FILES,
       "動画データファイルが見つかりません",
-      { videoCount: 0 },
+      { videoCount: 0 }
     )
   }
 
   // 各動画からVideoIndexItemを生成
-  const videoIndexItems = allVideos.map((video) => createVideoIndexItem(video))
+  const videoIndexItems = allVideos.map(video => createVideoIndexItem(video))
 
   // VideoIndexを構築
   const videoIndex: VideoIndex = {

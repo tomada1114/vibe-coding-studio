@@ -5,14 +5,14 @@
  * エラー時にはフォールバックデータを提供します。
  */
 
+import type { UdemyCourseIndex } from "@/types/udemy-course-index"
 import { readFileSync } from "fs"
 import { join } from "path"
-import type { UdemyCourseIndex } from "@/types/udemy-course-index"
 import { UdemyCourseIndexError, UdemyCourseIndexErrorCode } from "./errors"
 
 const UDEMY_COURSE_INDEX_PATH = join(
   process.cwd(),
-  "src/data/indexes/udemy-course-index.json",
+  "src/data/indexes/udemy-course-index.json"
 )
 
 /**
@@ -40,7 +40,7 @@ export function loadUdemyCourseIndex(): UdemyCourseIndex {
       throw new UdemyCourseIndexError(
         UdemyCourseIndexErrorCode.SCHEMA_VIOLATION,
         "インデックスファイルが正しい構造を持っていません",
-        { parsed },
+        { parsed }
       )
     }
 
@@ -56,7 +56,7 @@ export function loadUdemyCourseIndex(): UdemyCourseIndex {
         throw new UdemyCourseIndexError(
           UdemyCourseIndexErrorCode.SCHEMA_VIOLATION,
           "講座インデックスエントリが正しい構造を持っていません",
-          { course },
+          { course }
         )
       }
     }
@@ -67,7 +67,7 @@ export function loadUdemyCourseIndex(): UdemyCourseIndex {
         throw new UdemyCourseIndexError(
           UdemyCourseIndexErrorCode.SCHEMA_VIOLATION,
           `トピックマッピング "${topic}" が配列ではありません`,
-          { topic, mappings },
+          { topic, mappings }
         )
       }
 
@@ -76,7 +76,7 @@ export function loadUdemyCourseIndex(): UdemyCourseIndex {
           throw new UdemyCourseIndexError(
             UdemyCourseIndexErrorCode.SCHEMA_VIOLATION,
             `トピックマッピング "${topic}" のエントリが正しい構造を持っていません`,
-            { topic, mapping },
+            { topic, mapping }
           )
         }
       }
@@ -89,7 +89,7 @@ export function loadUdemyCourseIndex(): UdemyCourseIndex {
       throw new UdemyCourseIndexError(
         UdemyCourseIndexErrorCode.INDEX_NOT_FOUND,
         "Udemy講座インデックスファイルが見つかりません",
-        { path: UDEMY_COURSE_INDEX_PATH },
+        { path: UDEMY_COURSE_INDEX_PATH }
       )
     }
 
@@ -98,7 +98,7 @@ export function loadUdemyCourseIndex(): UdemyCourseIndex {
       throw new UdemyCourseIndexError(
         UdemyCourseIndexErrorCode.INVALID_JSON,
         "Udemy講座インデックスファイルのJSON形式が不正です",
-        { path: UDEMY_COURSE_INDEX_PATH, originalError: error.message },
+        { path: UDEMY_COURSE_INDEX_PATH, originalError: error.message }
       )
     }
 
@@ -111,7 +111,7 @@ export function loadUdemyCourseIndex(): UdemyCourseIndex {
     throw new UdemyCourseIndexError(
       UdemyCourseIndexErrorCode.INVALID_COURSE_DATA,
       "Udemy講座インデックスの読み込み中に予期しないエラーが発生しました",
-      { originalError: error instanceof Error ? error.message : String(error) },
+      { originalError: error instanceof Error ? error.message : String(error) }
     )
   }
 }
@@ -127,7 +127,7 @@ export function loadUdemyCourseIndexSafe(): UdemyCourseIndex {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.warn(
-      "Udemy講座インデックスの読み込みに失敗しました。空のインデックスを返します。",
+      "Udemy講座インデックスの読み込みに失敗しました。空のインデックスを返します。"
     )
     // eslint-disable-next-line no-console
     console.warn(error)

@@ -3,7 +3,6 @@
  */
 
 import { generateUdemyCourseIndex } from "../udemy-course-index-generator"
-import { UdemyCourseIndexError, UdemyCourseIndexErrorCode } from "../errors"
 
 describe("generateUdemyCourseIndex", () => {
   describe("正常系", () => {
@@ -12,7 +11,9 @@ describe("generateUdemyCourseIndex", () => {
 
       expect(result).toBeDefined()
       expect(result.version).toBe("1.0.0")
-      expect(result.generatedAt).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/)
+      expect(result.generatedAt).toMatch(
+        /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/
+      )
       expect(result.courses).toBeInstanceOf(Array)
       expect(result.courses.length).toBeGreaterThan(0)
       expect(result.topicMapping).toBeDefined()
@@ -38,7 +39,7 @@ describe("generateUdemyCourseIndex", () => {
     test("トピック配列は最低1つ以上の要素を持つ", () => {
       const result = generateUdemyCourseIndex()
 
-      result.courses.forEach((course) => {
+      result.courses.forEach(course => {
         expect(course.topics.length).toBeGreaterThan(0)
       })
     })
@@ -50,9 +51,9 @@ describe("generateUdemyCourseIndex", () => {
       expect(Object.keys(result.topicMapping).length).toBeGreaterThan(0)
 
       // 各トピックに対応する講座情報が正しい形式であることを確認
-      Object.values(result.topicMapping).forEach((courses) => {
+      Object.values(result.topicMapping).forEach(courses => {
         expect(Array.isArray(courses)).toBe(true)
-        courses.forEach((course) => {
+        courses.forEach(course => {
           expect(course).toHaveProperty("courseId")
           expect(course).toHaveProperty("url")
           expect(typeof course.courseId).toBe("string")
@@ -66,7 +67,7 @@ describe("generateUdemyCourseIndex", () => {
 
       // トピックマッピングのURLにクエリパラメータが含まれることを確認
       Object.entries(result.topicMapping).forEach(([topic, courses]) => {
-        courses.forEach((course) => {
+        courses.forEach(course => {
           expect(course.url).toContain(`?topic=${topic}`)
         })
       })
