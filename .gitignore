@@ -51,3 +51,6 @@ storybook-static
 
 # Claude local settings
 .claude/settings.local.json
+
+# tmp files
+.tmp/

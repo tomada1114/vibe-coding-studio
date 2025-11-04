@@ -51,17 +51,31 @@ YouTube動画のメタデータ（VideoMetadata）を効率的に作成・追加
    - タイムライン情報（あれば）
    - 特徴・学べること（箇条書きでOK）
 
-2. **既存動画データベースの分析**：
-   - `src/data/videos/` 内の全動画ファイルを確認
-   - 類似テーマの動画を特定（タグ、タイトル、内容から判別）
-   - 関連性の高い動画を3-5本リストアップ
+2. **関連動画候補の取得**（サブエージェント活用）：
+   - **`related-videos-finder`エージェントを使用**して候補を10本取得
+   - 動画のタグリストを入力として提供
+   - タグベーススコアリングで初期フィルタリング
+   - 各候補の詳細情報（タグ、公開日、URL）を取得
 
-3. **Udemy講座の判別**：
-   - 動画内容からメインテーマを抽出（例：Claude Code, Codex, 仕様駆動開発）
-   - 適切なクーポンURLを決定：
-     - Claude Code系: `?topic=claude-code`
-     - Codex系: `?topic=codex`
-     - 汎用: クエリパラメータなし
+3. **AI判断による関連性評価**：
+   - 各候補動画のメタデータを読み込み（`src/data/videos/*.ts`）
+   - 新しい動画の内容と比較して関連性を評価：
+     - テーマの一致度（ツール、開発手法、技術スタック）
+     - 内容の補完性（前提知識、発展的内容、シリーズ関係）
+     - ユーザーにとっての有用性
+   - 各候補に推奨度（高/中/低）と理由を付与
+
+4. **ユーザー選択**：
+   - AskUserQuestionツールで候補を提示
+   - 各候補について、タグベーススコア、推奨度、理由を表示
+   - ユーザーが3-5本を選択（multiSelect: true）
+   - 選択結果を記録
+
+5. **Udemy講座の自動推薦**（サブエージェント活用）：
+   - **`udemy-course-suggester`エージェントを使用**して最適な講座を推薦
+   - 動画のタグリストから自動でトピックマッチング
+   - フィルター付きURLを自動生成（例：`?topic=claude-code`）
+   - 推薦講座の詳細（タイトル、説明、URL）を取得
 
 ### Step 2: メタデータ構築フェーズ
 
@@ -86,12 +100,10 @@ YouTube動画のメタデータ（VideoMetadata）を効率的に作成・追加
    - 10-15個程度が適切
 
 5. **relatedVideos セクション**（重要）：
-   - Step 1で特定した関連動画を3-5本設定
-   - 優先順位：
-     1. 同じシリーズ・続編
-     2. 同じツール・技術スタック
-     3. 同じ開発手法（AI駆動開発、仕様駆動開発など）
+   - Step 1でユーザーが選択した関連動画を設定
+   - 選択された動画はAI評価と推奨理由に基づいている
    - 各動画は `title` と `url` を持つ
+   - 完了報告に選定理由を含める
 
 6. **udemyCourses セクション**（重要）：
    - title: テーマに応じた適切なタイトル
@@ -144,6 +156,64 @@ YouTube動画のメタデータ（VideoMetadata）を効率的に作成・追加
 - ✅ 品質チェックの結果
 - ✅ コミット用のコマンド例
 
+## Available Sub-Agents
+
+このスキルは以下のサブエージェントを活用します：
+
+### 1. related-videos-finder
+
+**場所**: `.claude/agents/related-videos-finder.md`
+
+**機能**:
+- タグベースのスコアリングアルゴリズムで関連動画を検索
+- `src/lib/videos/find-related-videos.ts`の`findRelatedVideos()`関数を活用
+- 完全一致（10pt）、部分一致（5pt）、タグ数類似性（+2pt）でスコアリング
+- 上位3-5本の関連動画を返却
+
+**呼び出し方法**:
+```markdown
+> Use the related-videos-finder agent to find related videos for the following tags:
+> Tags: ["ClaudeCode", "AI駆動開発", "TypeScript"]
+> Current Video ID: "1-1NAB5jIjo"
+```
+
+**出力形式**:
+```typescript
+RelatedVideo[] = [
+  { id: "video-id", title: "動画タイトル", score: 42 },
+  // ... 上位3-5本
+]
+```
+
+### 2. udemy-course-suggester
+
+**場所**: `.claude/agents/udemy-course-suggester.md`
+
+**機能**:
+- タグベースのトピックマッチングで最適なUdemy講座を推薦
+- `src/lib/videos/suggest-udemy-courses.ts`の`suggestUdemyCourses()`関数を活用
+- 完全一致（15pt）、部分一致（7pt）、トピック数ボーナス（×1pt）でスコアリング
+- フィルター付きURL自動生成（例：`/coupons?topic=claude-code`）
+
+**呼び出し方法**:
+```markdown
+> Use the udemy-course-suggester agent to suggest Udemy courses for the following tags:
+> Tags: ["ClaudeCode", "React", "Next.js"]
+```
+
+**出力形式**:
+```typescript
+UdemyCoursesSection = {
+  title: "🚀 体系的に学びたい方へ",
+  description: "この動画に関連するUdemy講座をご用意しています：",
+  courses: ["・講座タイトル1", "・講座タイトル2"],
+  cta: {
+    text: "Udemy講座を見る",
+    url: "https://www.vibecodingstudio.dev/coupons?topic=claude-code"
+  }
+}
+```
+
 ## Reference Documentation
 
 詳細な仕様やパターンは以下のリファレンスを参照してください：
@@ -165,22 +235,73 @@ YouTube動画のメタデータ（VideoMetadata）を効率的に作成・追加
 - **空文字列は避ける**: opening.lines に空文字列を含めない（テスト失敗の原因）
 - **URLは別行**: リンクは必ず改行して独立した行に配置
 
-### 関連動画の選定基準
+### 関連動画の選定（ハイブリッドアプローチ）
 
-優先度順：
-1. **直接的な続編・シリーズ**: 前編・後編の関係
-2. **同じツール**: Claude Code同士、Codex同士など
-3. **同じ開発手法**: 仕様駆動開発、AI駆動開発など
-4. **同じ技術スタック**: React, Next.js, TypeScriptなど
-5. **補完的な内容**: 動画で触れた関連トピック
+**ステップ1: 候補取得（related-videos-finder活用）**:
+```markdown
+> Use the related-videos-finder agent to find related video candidates
+> Tags: ["ClaudeCode", "AI駆動開発", "TypeScript"]
+> Current Video ID: "1-1NAB5jIjo"
+> Limit: 10
+```
 
-### Udemy講座URLの判別
+**スコアリング基準（エージェント内部処理）**:
+- 完全一致タグ: 10ポイント/タグ
+- 部分一致タグ: 5ポイント/タグ
+- タグ数類似性: ±2以内で+2ポイント
 
-| 動画の主要テーマ | クーポンURL |
+**ステップ2: AI判断による評価**:
+各候補を以下の観点で分析：
+
+1. **テーマの一致度**:
+   - 同じツール（Claude Code、Cursor、Codexなど）
+   - 同じ開発手法（AI駆動開発、TDD、仕様駆動開発など）
+   - 同じ技術スタック（React、Next.js、TypeScriptなど）
+
+2. **内容の補完性**:
+   - 前提知識（初心者向け → 応用編）
+   - 発展的内容（基礎編 → 実践編）
+   - シリーズ関係（前編・後編、パート1・パート2）
+
+3. **ユーザーにとっての有用性**:
+   - この動画を見た人が次に見たくなる内容か
+   - 学習の流れとして自然か
+   - 補完的な知識を提供できるか
+
+**各候補に付与**:
+- **推奨度**: 高（強く推奨）、中（推奨）、低（やや関連）
+- **理由**: 具体的な推奨理由（50-100文字）
+
+**ステップ3: ユーザー選択**:
+- AskUserQuestionツールで候補を提示
+- 各候補の情報（タイトル、スコア、推奨度、理由）を表示
+- ユーザーが3-5本を選択（multiSelect: true）
+- 選択結果を記録し、完了報告に含める
+
+### Udemy講座の自動推薦（udemy-course-suggester活用）
+
+**使用方法**:
+```markdown
+> Use the udemy-course-suggester agent to suggest Udemy courses
+> Tags: ["ClaudeCode", "React", "Next.js"]
+```
+
+**スコアリング基準（エージェント内部処理）**:
+- 完全一致トピック: 15ポイント/トピック
+- 部分一致トピック: 7ポイント/トピック
+- トピック数ボーナス: トピック数×1ポイント
+
+**URL生成ルール**（エージェント自動処理）:
+| 推薦講座の状況 | 生成されるURL |
 |---|---|
-| Claude Code, MCP, カスタムコマンド | `?topic=claude-code` |
-| Codex CLI, GPT-5, OpenAI | `?topic=codex` |
-| 汎用・複数ツール | パラメータなし |
+| 複数講座が一致 | `?topic={最もスコアの高い講座のトピック}` |
+| 1件のみ一致 | 講座の直接URL（promotionUrl） |
+| 一致なし | デフォルト `/coupons` |
+
+**エージェント出力を活用**:
+- 返された`UdemyCoursesSection`をそのまま使用
+- フィルター付きURLは自動生成される
+- トピックマッピングの説明を完了報告に含める
 
 ### タグの付け方
 
@@ -252,18 +373,42 @@ lines: [
    - 公開日（未公開の場合は仮日付を提案）
    - 動画の概要（ざっくりでOK）
 
-2. **既存動画の分析**（必須）:
-   ```bash
-   # 全動画ファイルをリスト
-   ls src/data/videos/
+2. **関連動画候補の取得**（必須）:
+   - **`related-videos-finder`エージェントを呼び出す**:
+     ```markdown
+     > Use the related-videos-finder agent to find related video candidates for the following tags:
+     > Tags: ["タグ1", "タグ2", "タグ3"]
+     > Current Video ID: "{動画ID}"
+     > Limit: 10
+     ```
+   - エージェントが返す候補リスト（10本）を取得
+   - スコアの内訳を確認
 
-   # 類似テーマの動画を検索
-   grep -r "キーワード" src/data/videos/
-   ```
+3. **AI判断による関連性評価**（必須）:
+   - 各候補動画のメタデータを読み込む（`src/data/videos/{id}.ts`）
+   - 新しい動画の内容と比較して関連性を評価：
+     - テーマの一致度（ツール、開発手法、技術スタック）
+     - 内容の補完性（前提知識、発展的内容、シリーズ関係）
+     - ユーザーにとっての有用性
+   - 各候補に推奨度（高/中/低）と理由を付与
 
-3. **関連動画の選定**（3-5本）:
-   - 同じツール・技術の動画を優先
-   - タイトルとタグから関連性を判定
+4. **ユーザー選択**（必須）:
+   - AskUserQuestionツールで候補を提示
+   - multiSelect: true で複数選択可能に
+   - 各候補の情報を表示：
+     - タイトル
+     - タグベーススコア
+     - AI推奨度と理由
+   - ユーザーから選択結果を受領（3-5本推奨）
+
+5. **Udemy講座の自動推薦**（必須）:
+   - **`udemy-course-suggester`エージェントを呼び出す**:
+     ```markdown
+     > Use the udemy-course-suggester agent to suggest Udemy courses for the following tags:
+     > Tags: ["タグ1", "タグ2", "タグ3"]
+     ```
+   - エージェントが返す`UdemyCoursesSection`形式のデータを取得
+   - フィルター付きURLとトピックマッピングを確認
 
 ### Phase 2: データ生成
 
@@ -273,9 +418,9 @@ lines: [
    - 2-5行程度
 
 2. **関連動画セクション**（重要）:
-   - **必ず5本選定**（3本以上）
+   - **ユーザーが選択した動画を設定**（通常3-5本）
    - title と url を正確に設定
-   - なぜその動画を選んだか理由を記録
+   - AI評価の推奨度と理由を完了報告に記録
 
 3. **Udemy講座セクション**（重要）:
    - 動画テーマからクーポンURLを判別
@@ -299,20 +444,27 @@ lines: [
 
 ### Always Do
 
-- ✅ 既存の動画データを参考にする
-- ✅ 関連動画は必ず3-5本選定
-- ✅ Udemy講座URLは適切なフィルターを設定
+- ✅ **サブエージェントを活用**して関連動画候補とUdemy講座を選定
+  - `related-videos-finder`で候補10本を取得
+  - 各候補のAI評価を実施（推奨度と理由）
+  - AskUserQuestionでユーザーに選択してもらう
+  - `udemy-course-suggester`でUdemy講座を推薦
+- ✅ エージェントが返すスコアと評価理由を確認
+- ✅ 関連動画はユーザー選択に基づいて設定（通常3-5本）
+- ✅ Udemy講座URLはエージェントが生成したフィルター付きURLを使用
 - ✅ テストを実行して全て合格させる
 - ✅ 改行位置を最適化して読みやすく
-- ✅ 完了時に選定理由を報告
+- ✅ 完了時にAI評価とユーザー選択結果を報告
 
 ### Never Do
 
-- ❌ 関連動画を選定せずに空にする
-- ❌ Udemy講座URLをランダムに設定
+- ❌ サブエージェントを使わずに手動で関連動画を選定する
+- ❌ AI評価をスキップしてランダムに候補を提示する
+- ❌ ユーザー選択をスキップして自動選定する
 - ❌ テストをスキップ
 - ❌ 空文字列をopeningに含める
 - ❌ 動作確認をせずに完了報告
+- ❌ AI評価の理由を報告しない
 
 ## Quick Reference
 
@@ -339,7 +491,8 @@ src/
 - [ ] learningPoints は4-6項目
 - [ ] timestamps は正しい形式
 - [ ] tags は10-15個
-- [ ] relatedVideos は3-5本（重要）
+- [ ] relatedVideos はユーザー選択済み（通常3-5本、重要）
+- [ ] AI評価の推奨度と理由を記録
 - [ ] udemyCourses URLは適切なフィルター（重要）
 - [ ] customSections はtextタイプでURLは別行
 - [ ] video-data.tsにimportと配列追加

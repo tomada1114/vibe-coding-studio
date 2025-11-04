@@ -191,23 +191,29 @@ describe("タスク3.2: 配列とセクション構造の検証", () => {
           })
         })
 
-        test("timestampsが存在し、必須項目を持つ", () => {
-          expect(video.timestamps).toBeDefined()
-          expect(video.timestamps.title).toBeTruthy()
-          expect(typeof video.timestamps.title).toBe("string")
+        test("timestampsが存在する場合、必須項目を持つ", () => {
+          if (video.timestamps) {
+            expect(video.timestamps.title).toBeTruthy()
+            expect(typeof video.timestamps.title).toBe("string")
 
-          expect(Array.isArray(video.timestamps.items)).toBe(true)
-          expect(video.timestamps.items.length).toBeGreaterThan(0)
+            expect(Array.isArray(video.timestamps.items)).toBe(true)
+            expect(video.timestamps.items.length).toBeGreaterThan(0)
+          } else {
+            // timestampsがオプショナルなので、undefinedの場合もテストをパス
+            expect(video.timestamps).toBeUndefined()
+          }
         })
 
         test('タイムスタンプ形式が正しい("00:00"または"01:00:52"形式)', () => {
-          video.timestamps.items.forEach(ts => {
-            // HH:MM または HH:MM:SS 形式をサポート
-            expect(ts.time).toMatch(/^\d{1,2}:\d{2}(:\d{2})?$/)
-            expect(ts.label).toBeTruthy()
-            expect(typeof ts.label).toBe("string")
-            expect(ts.label.length).toBeGreaterThan(0)
-          })
+          if (video.timestamps) {
+            video.timestamps.items.forEach(ts => {
+              // HH:MM または HH:MM:SS 形式をサポート
+              expect(ts.time).toMatch(/^\d{1,2}:\d{2}(:\d{2})?$/)
+              expect(ts.label).toBeTruthy()
+              expect(typeof ts.label).toBe("string")
+              expect(ts.label.length).toBeGreaterThan(0)
+            })
+          }
         })
 
         test("tagsが配列で空でない", () => {

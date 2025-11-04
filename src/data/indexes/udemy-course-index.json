@@ -1,0 +1,434 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2025-11-04T21:41:42.023Z",
+  "courses": [
+    {
+      "courseId": "6327241",
+      "title": "【RSpec 実践入門】Ruby on Rails 開発者のためのテスト自動化 - 完全ガイド",
+      "topics": [
+        "rspec",
+        "rails",
+        "ruby"
+      ],
+      "promotionUrl": "https://www.udemy.com/course/rspec-ruby-on-rails/?referralCode=7E43E652974CF1A7DCDC",
+      "description": "テスト未経験でもOK！Ruby/Railsの基礎を確認しながらRSpecの書き方を徹底解説。シンプルな例から実践的なテストまで、現場で使えるテストコーディングスキルが身につきます。"
+    },
+    {
+      "courseId": "6387599",
+      "title": "未経験からはじめる Ruby on Rails！Ruby / RSpec も学びながらポートフォリオ公開まで一本で完結",
+      "topics": [
+        "rails",
+        "ruby",
+        "rspec"
+      ],
+      "promotionUrl": "https://www.udemy.com/course/ruby-on-rails-rspec/?referralCode=E67D93CA920B9761199D",
+      "description": "RubyとRails、さらにRSpecやDeviseも学びながらSNSアプリ開発とデプロイまでこれ一本！Tailwind CSS でデザインも抜群。初心者からエンジニアとしてのキャリアを目指す第一歩をスタートできる完全ガイド"
+    },
+    {
+      "courseId": "6536597",
+      "title": "Next.js（React）で作る AI アプリのポートフォリオ実践！モダンフロントエンド開発を初心者でも学べるコース",
+      "topics": [
+        "nextjs",
+        "react",
+        "gemini"
+      ],
+      "promotionUrl": "https://www.udemy.com/course/nextjs-ai-pomodoro-timer/?referralCode=68F9E4EBA775B8792EC0",
+      "description": "Next.jsとGeminiを使って、AIポモドーロタイマーを開発する講座。モダンなフロントエンド開発を学びながら UI 設計まで、実践的なスキルを身につけることができます。"
+    },
+    {
+      "courseId": "6691241",
+      "title": "【Claude Code×Vibe Coding】プログラミング未経験OK！ゼロから学べる AI 駆動開発実践講座",
+      "topics": [
+        "claude-code",
+        "react",
+        "nextjs"
+      ],
+      "promotionUrl": "https://www.udemy.com/course/claude-code-vibe-coding/?referralCode=D041E6472D189B3BC3C0",
+      "description": "Claude Code×Vibe Codingでプログラミング未経験でもReact・Next.jsで5つのアプリを開発！実践的な開発スキルを身につけることができます。"
+    },
+    {
+      "courseId": "6694011",
+      "title": "【無料ではじめる】Gemini CLI x Vibe Coding入門 - プログラミング未経験から作れるマインドマップ",
+      "topics": [
+        "gemini",
+        "nextjs",
+        "react"
+      ],
+      "promotionUrl": "https://www.udemy.com/course/gemini_cli_vibe_coding_mind_map/?referralCode=0FBF56A85D2B6FD677EC",
+      "description": "Gemini CLIとVibe Codingを使って、プログラミング未経験でもマインドマップアプリを開発！無料で始められる実践的な開発講座です。"
+    },
+    {
+      "courseId": "6732543",
+      "title": "【Claude Code】プログラミング未経験OK！Stripe サブスク型家計簿アプリで学ぶAI駆動開発マスター講座",
+      "topics": [
+        "claude-code",
+        "stripe",
+        "typescript"
+      ],
+      "promotionUrl": "https://www.udemy.com/course/claude-code-expenses-app/?referralCode=D8072C627C9E0B5828E4",
+      "description": "Claude Codeを使ってStripeサブスク型家計簿アプリを開発。AI駆動開発の実践的なスキルを身につけ、決済機能を持つWebアプリケーションを作成します。"
+    },
+    {
+      "courseId": "6739725",
+      "title": "【Claude Code】Next.js で作るサブスク型・作業時間管理アプリで学ぶ AI 駆動開発【完全版】",
+      "topics": [
+        "claude-code",
+        "nextjs",
+        "stripe",
+        "supabase"
+      ],
+      "promotionUrl": "https://www.udemy.com/course/claude-code-project-tracker/?referralCode=F89DE6FED7828F23F35C",
+      "description": "Claude Codeを使ってNext.jsでサブスク型作業時間管理アプリを開発。Stripe決済・Clerk認証・Supabaseを統合した本格SaaS開発を実践的に学べます。"
+    },
+    {
+      "courseId": "6769253",
+      "title": "【Claude Code × MCP完全攻略】Next.jsアプリ開発を劇的に効率化する5つの最新MCPツール実践ガイド",
+      "topics": [
+        "mcp",
+        "claude-code",
+        "nextjs",
+        "supabase",
+        "playwright"
+      ],
+      "promotionUrl": "https://www.udemy.com/course/claude-code-mcp-nextjs/?referralCode=0422EF97A5F3210CCD59",
+      "description": "Claude CodeとMCPツールを組み合わせて開発効率を劇的に向上。Serena、Context7、Playwright、Sequential Thinking、Supabaseの5つのツールを実践的に学びます。"
+    },
+    {
+      "courseId": "6772961",
+      "title": "【AWS Kiro完全ガイド】仕様駆動開発で学ぶ次世代AI開発 - Next.jsメモアプリ実装からMCP連携まで",
+      "topics": [
+        "kiro",
+        "nextjs",
+        "mcp",
+        "playwright"
+      ],
+      "promotionUrl": "https://www.udemy.com/course/aws-kiro-sd/?referralCode=14D1CD325DA1F5C54C51",
+      "description": "AWSが開発した最新エディタ「Kiro」で仕様駆動開発を学ぶ。要件・設計・タスクの3段階アプローチで、AI開発の品質と効率を劇的に向上させます。"
+    },
+    {
+      "courseId": "6782117",
+      "title": "Claude Codeでスマホアプリ開発！React Native（Expo）爆速バイブコーディングテンプレートを作ろう",
+      "topics": [
+        "claude-code",
+        "expo",
+        "react-native",
+        "mcp"
+      ],
+      "promotionUrl": "https://www.udemy.com/course/claude-code-expo-template/?referralCode=220E1F0207A28DE7A14C",
+      "description": "バイブコーディング専用のReact Native/Expo開発テンプレートを構築。一度作れば使い回せる環境でAIと一緒にスマホアプリを量産。E2E自動テストやMCP連携で開発効率を極限まで高めます。"
+    },
+    {
+      "courseId": "6783611",
+      "title": "【未経験OK】Claude CodeとReact Nativeでスマホアプリ開発！5つのアプリでバイブコーディング実践",
+      "topics": [
+        "claude-code",
+        "react-native",
+        "expo"
+      ],
+      "promotionUrl": "https://www.udemy.com/course/draft/6783611/?referralCode=0FA02DD403E254AE48AE",
+      "description": "プログラミング未経験でもClaude CodeとReact Nativeでスマホアプリ開発！カウンター、計算機、単位変換、Todo、読書記録の5つのアプリを作りながら、バイブコーディングを実践的に学べます。"
+    },
+    {
+      "courseId": "6801509",
+      "title": "【Codex CLI】実践レベルのアプリ開発で学ぶバイブコーディング！カスタムコマンド・MCP連携の完全ガイド",
+      "topics": [
+        "codex",
+        "nextjs"
+      ],
+      "promotionUrl": "https://www.udemy.com/course/codex-nextjs/?referralCode=F5C07ED4A2914F04D6D2",
+      "description": "OpenAI CodexのIDE版とCLI版を完全マスター。カスタムコマンドとMCP連携（Context7・Playwright・Supabase）で開発効率10倍。React/Next.jsアプリを作りながら次世代のAI開発手法を習得！"
+    },
+    {
+      "courseId": "6823465",
+      "title": "【初心者OK】Claude CodeとPythonで学ぶAI駆動開発！アプリ・スクレイピング・ゲーム作成で学ぶ完全ガイド",
+      "topics": [
+        "claude-code",
+        "python"
+      ],
+      "promotionUrl": "https://www.udemy.com/course/claude-code-python/?referralCode=1B7A5F8CD868B6CC9D2D",
+      "description": "Claude CodeとPythonでプログラミング未経験でも7つの実践アプリを開発！FizzBuzzから始めてスクレイピング、GUIアプリ、ゲーム開発まで幅広く学べます。"
+    },
+    {
+      "courseId": "6826831",
+      "title": "CodexでAI駆動開発！Python FastAPI で作る本格的な天気予報 API | バックエンド開発入門",
+      "topics": [
+        "codex",
+        "python",
+        "fastapi"
+      ],
+      "promotionUrl": "https://www.udemy.com/course/codex-python-fast-api/?referralCode=E159CDE010F734F6760E",
+      "description": "OpenAI CodexのIDE版とCLI版を完全マスター。Python FastAPIで実用的な天気予報APIを開発。プログラミング未経験でもMCPツール連携、カスタムプロンプトで本格的なバックエンド開発を実践。"
+    },
+    {
+      "courseId": "6827941",
+      "title": "【Claude Code】FlaskとGeminiで作る Python AI アプリ！実践レベルのAI駆動開発を学ぼう",
+      "topics": [
+        "claude-code",
+        "flask",
+        "python",
+        "gemini"
+      ],
+      "promotionUrl": "https://www.udemy.com/course/claude-code-flask/?referralCode=558CB5FE26C0945F6FA4",
+      "description": "Claude CodeとFlaskでPython AIアプリを開発！要件定義から設計・実装まで、プロの開発フローで作る自動レビュー＆バグ診断ツール。初心者も安心のPython Web開発完全ガイド。"
+    },
+    {
+      "courseId": "6851913",
+      "title": "【Codex × スマホアプリ開発】AI駆動開発で作る！React Native ではじめるモバイルアプリ開発実践",
+      "topics": [
+        "codex",
+        "expo",
+        "react-native"
+      ],
+      "promotionUrl": "https://www.udemy.com/course/codex-react-native/?referralCode=6DB0AFF2545122ECF823",
+      "description": "OpenAI CodexのIDE版とCLI版を完全マスター。React Native/Expoでスマホアプリ開発を実践。プログラミング未経験でも通知機能、データベース、TypeScriptまで学べる実践講座。"
+    }
+  ],
+  "topicMapping": {
+    "rspec": [
+      {
+        "courseId": "6327241",
+        "url": "/coupons?topic=rspec"
+      },
+      {
+        "courseId": "6387599",
+        "url": "/coupons?topic=rspec"
+      }
+    ],
+    "rails": [
+      {
+        "courseId": "6327241",
+        "url": "/coupons?topic=rails"
+      },
+      {
+        "courseId": "6387599",
+        "url": "/coupons?topic=rails"
+      }
+    ],
+    "ruby": [
+      {
+        "courseId": "6327241",
+        "url": "/coupons?topic=ruby"
+      },
+      {
+        "courseId": "6387599",
+        "url": "/coupons?topic=ruby"
+      }
+    ],
+    "nextjs": [
+      {
+        "courseId": "6536597",
+        "url": "/coupons?topic=nextjs"
+      },
+      {
+        "courseId": "6691241",
+        "url": "/coupons?topic=nextjs"
+      },
+      {
+        "courseId": "6694011",
+        "url": "/coupons?topic=nextjs"
+      },
+      {
+        "courseId": "6739725",
+        "url": "/coupons?topic=nextjs"
+      },
+      {
+        "courseId": "6769253",
+        "url": "/coupons?topic=nextjs"
+      },
+      {
+        "courseId": "6772961",
+        "url": "/coupons?topic=nextjs"
+      },
+      {
+        "courseId": "6801509",
+        "url": "/coupons?topic=nextjs"
+      }
+    ],
+    "react": [
+      {
+        "courseId": "6536597",
+        "url": "/coupons?topic=react"
+      },
+      {
+        "courseId": "6691241",
+        "url": "/coupons?topic=react"
+      },
+      {
+        "courseId": "6694011",
+        "url": "/coupons?topic=react"
+      }
+    ],
+    "gemini": [
+      {
+        "courseId": "6536597",
+        "url": "/coupons?topic=gemini"
+      },
+      {
+        "courseId": "6694011",
+        "url": "/coupons?topic=gemini"
+      },
+      {
+        "courseId": "6827941",
+        "url": "/coupons?topic=gemini"
+      }
+    ],
+    "claude-code": [
+      {
+        "courseId": "6691241",
+        "url": "/coupons?topic=claude-code"
+      },
+      {
+        "courseId": "6732543",
+        "url": "/coupons?topic=claude-code"
+      },
+      {
+        "courseId": "6739725",
+        "url": "/coupons?topic=claude-code"
+      },
+      {
+        "courseId": "6769253",
+        "url": "/coupons?topic=claude-code"
+      },
+      {
+        "courseId": "6782117",
+        "url": "/coupons?topic=claude-code"
+      },
+      {
+        "courseId": "6783611",
+        "url": "/coupons?topic=claude-code"
+      },
+      {
+        "courseId": "6823465",
+        "url": "/coupons?topic=claude-code"
+      },
+      {
+        "courseId": "6827941",
+        "url": "/coupons?topic=claude-code"
+      }
+    ],
+    "stripe": [
+      {
+        "courseId": "6732543",
+        "url": "/coupons?topic=stripe"
+      },
+      {
+        "courseId": "6739725",
+        "url": "/coupons?topic=stripe"
+      }
+    ],
+    "typescript": [
+      {
+        "courseId": "6732543",
+        "url": "/coupons?topic=typescript"
+      }
+    ],
+    "supabase": [
+      {
+        "courseId": "6739725",
+        "url": "/coupons?topic=supabase"
+      },
+      {
+        "courseId": "6769253",
+        "url": "/coupons?topic=supabase"
+      }
+    ],
+    "mcp": [
+      {
+        "courseId": "6769253",
+        "url": "/coupons?topic=mcp"
+      },
+      {
+        "courseId": "6772961",
+        "url": "/coupons?topic=mcp"
+      },
+      {
+        "courseId": "6782117",
+        "url": "/coupons?topic=mcp"
+      }
+    ],
+    "playwright": [
+      {
+        "courseId": "6769253",
+        "url": "/coupons?topic=playwright"
+      },
+      {
+        "courseId": "6772961",
+        "url": "/coupons?topic=playwright"
+      }
+    ],
+    "kiro": [
+      {
+        "courseId": "6772961",
+        "url": "/coupons?topic=kiro"
+      }
+    ],
+    "expo": [
+      {
+        "courseId": "6782117",
+        "url": "/coupons?topic=expo"
+      },
+      {
+        "courseId": "6783611",
+        "url": "/coupons?topic=expo"
+      },
+      {
+        "courseId": "6851913",
+        "url": "/coupons?topic=expo"
+      }
+    ],
+    "react-native": [
+      {
+        "courseId": "6782117",
+        "url": "/coupons?topic=react-native"
+      },
+      {
+        "courseId": "6783611",
+        "url": "/coupons?topic=react-native"
+      },
+      {
+        "courseId": "6851913",
+        "url": "/coupons?topic=react-native"
+      }
+    ],
+    "codex": [
+      {
+        "courseId": "6801509",
+        "url": "/coupons?topic=codex"
+      },
+      {
+        "courseId": "6826831",
+        "url": "/coupons?topic=codex"
+      },
+      {
+        "courseId": "6851913",
+        "url": "/coupons?topic=codex"
+      }
+    ],
+    "python": [
+      {
+        "courseId": "6823465",
+        "url": "/coupons?topic=python"
+      },
+      {
+        "courseId": "6826831",
+        "url": "/coupons?topic=python"
+      },
+      {
+        "courseId": "6827941",
+        "url": "/coupons?topic=python"
+      }
+    ],
+    "fastapi": [
+      {
+        "courseId": "6826831",
+        "url": "/coupons?topic=fastapi"
+      }
+    ],
+    "flask": [
+      {
+        "courseId": "6827941",
+        "url": "/coupons?topic=flask"
+      }
+    ]
+  }
+}

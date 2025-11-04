@@ -153,13 +153,15 @@ function formatVideoAsPlainText(video: VideoMetadata): string {
     text += `Discordに参加する\n${video.discordCommunity.url}\n\n`
   }
 
-  // タイムスタンプセクション
-  text += `${SECTION_DIVIDER}\n`
-  text += `${video.timestamps.title}\n${SECTION_DIVIDER}\n`
-  video.timestamps.items.forEach(timestamp => {
-    text += `${timestamp.time} ${timestamp.label}\n`
-  })
-  text += "\n"
+  // タイムスタンプセクション（オプショナル）
+  if (video.timestamps) {
+    text += `${SECTION_DIVIDER}\n`
+    text += `${video.timestamps.title}\n${SECTION_DIVIDER}\n`
+    video.timestamps.items.forEach(timestamp => {
+      text += `${timestamp.time} ${timestamp.label}\n`
+    })
+    text += "\n"
+  }
 
   // エンゲージメント促進セクション
   text += `${SECTION_DIVIDER}\n`
