@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2025-11-04T21:41:42.021Z",
+  "generatedAt": "2025-11-05T22:50:39.903Z",
   "videos": [
     {
       "id": "1-1NAB5jIjo",
@@ -45,7 +45,11 @@
         "バージョン管理",
         "開発効率化"
       ],
-      "relatedVideoIds": [],
+      "relatedVideoIds": [
+        "4HJCCAfDGU4",
+        "fTONBWDWke0",
+        "SO5qov2qTUE"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -67,7 +71,11 @@
         "WebDevelopment",
         "AIツール"
       ],
-      "relatedVideoIds": [],
+      "relatedVideoIds": [
+        "pRHyMLH1bcU",
+        "4HJCCAfDGU4",
+        "Y15kBuMhCO4"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -85,7 +93,11 @@
         "Webアプリ開発",
         "Anthropic"
       ],
-      "relatedVideoIds": ["Xr_HhLuzOy8", "TDECUH62yYQ"],
+      "relatedVideoIds": [
+        "4HJCCAfDGU4",
+        "d67qWFEdxCI",
+        "ECRzrFNIWNM"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -108,7 +120,11 @@
         "ChatGPT",
         "GPT5"
       ],
-      "relatedVideoIds": ["TWUpzNGp7fI", "H5TGzM_PCW4", "1EQllS_3TJo"],
+      "relatedVideoIds": [
+        "TWUpzNGp7fI",
+        "H5TGzM_PCW4",
+        "1EQllS_3TJo"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -129,7 +145,11 @@
         "保守性",
         "初心者向け"
       ],
-      "relatedVideoIds": ["4HJCCAfDGU4", "H5TGzM_PCW4", "Xr_HhLuzOy8"],
+      "relatedVideoIds": [
+        "4HJCCAfDGU4",
+        "1-1NAB5jIjo",
+        "H5TGzM_PCW4"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -152,7 +172,11 @@
         "環境構築",
         "初心者向け"
       ],
-      "relatedVideoIds": ["H5TGzM_PCW4", "TfaNCNrYu8A", "_VhJCZtQXUc"],
+      "relatedVideoIds": [
+        "H5TGzM_PCW4",
+        "TfaNCNrYu8A",
+        "_VhJCZtQXUc"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -172,7 +196,11 @@
         "ChatGPT",
         "プログラミング"
       ],
-      "relatedVideoIds": [],
+      "relatedVideoIds": [
+        "d67qWFEdxCI",
+        "Xr_HhLuzOy8",
+        "geZT1xTb06I"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -192,7 +220,11 @@
         "AI駆動開発",
         "バイブコーディング"
       ],
-      "relatedVideoIds": [],
+      "relatedVideoIds": [
+        "Xr_HhLuzOy8",
+        "fTONBWDWke0",
+        "4HJCCAfDGU4"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -212,7 +244,11 @@
         "codex",
         "python"
       ],
-      "relatedVideoIds": [],
+      "relatedVideoIds": [
+        "Yy2alUag5I8",
+        "4HJCCAfDGU4",
+        "H5TGzM_PCW4"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -232,7 +268,11 @@
         "Cursor",
         "Codex"
       ],
-      "relatedVideoIds": [],
+      "relatedVideoIds": [
+        "TDECUH62yYQ",
+        "pRHyMLH1bcU",
+        "fTONBWDWke0"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -255,7 +295,11 @@
         "個人開発",
         "フリーランス"
       ],
-      "relatedVideoIds": [],
+      "relatedVideoIds": [
+        "fTONBWDWke0",
+        "1LP4ZAsU_UI",
+        "1-1NAB5jIjo"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -276,7 +320,11 @@
         "自動テスト",
         "ModelContextProtocol"
       ],
-      "relatedVideoIds": ["PLACEHOLDER", "PLACEHOLDER"],
+      "relatedVideoIds": [
+        "TDECUH62yYQ",
+        "1EQllS_3TJo",
+        "1TJydjQM6eo"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -297,7 +345,11 @@
         "要件定義",
         "設計書"
       ],
-      "relatedVideoIds": [],
+      "relatedVideoIds": [
+        "pRHyMLH1bcU",
+        "1-1NAB5jIjo",
+        "H5TGzM_PCW4"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -314,7 +366,11 @@
         "天気予報アプリ",
         "Webアプリ開発"
       ],
-      "relatedVideoIds": ["..."],
+      "relatedVideoIds": [
+        "UqKd0dxLskU",
+        "ZUr_Sp72q50",
+        "TDECUH62yYQ"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -336,7 +392,11 @@
         "個人開発",
         "無料開発環境"
       ],
-      "relatedVideoIds": [],
+      "relatedVideoIds": [
+        "Xr_HhLuzOy8",
+        "4MUadOFHy9M",
+        "d67qWFEdxCI"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -351,7 +411,11 @@
         "バイブコーディング",
         "プログラミング"
       ],
-      "relatedVideoIds": [],
+      "relatedVideoIds": [
+        "SO5qov2qTUE",
+        "Y15kBuMhCO4",
+        "1LP4ZAsU_UI"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -367,7 +431,11 @@
         "バイブコーディング",
         "プログラミング"
       ],
-      "relatedVideoIds": ["PLACEHOLDER1", "PLACEHOLDER2"],
+      "relatedVideoIds": [
+        "H5TGzM_PCW4",
+        "1EQllS_3TJo",
+        "1TJydjQM6eo"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -385,7 +453,11 @@
         "個人開発",
         "Webアプリ開発"
       ],
-      "relatedVideoIds": ["4MUadOFHy9M"],
+      "relatedVideoIds": [
+        "UqKd0dxLskU",
+        "TfaNCNrYu8A",
+        "ECRzrFNIWNM"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -404,7 +476,11 @@
         "開発効率化",
         "gpt5"
       ],
-      "relatedVideoIds": [],
+      "relatedVideoIds": [
+        "4HJCCAfDGU4",
+        "1LP4ZAsU_UI",
+        "Y15kBuMhCO4"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -420,7 +496,11 @@
         "プログラミング",
         "Webアプリ開発"
       ],
-      "relatedVideoIds": [],
+      "relatedVideoIds": [
+        "1EQllS_3TJo",
+        "pRHyMLH1bcU",
+        "Y15kBuMhCO4"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -437,7 +517,11 @@
         "国産ツール",
         "日本語対応"
       ],
-      "relatedVideoIds": ["VIDEO_ID_1", "VIDEO_ID_2"],
+      "relatedVideoIds": [
+        "1-1NAB5jIjo",
+        "qCFnfS5DAr8",
+        "SO5qov2qTUE"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -452,7 +536,11 @@
         "プログラミング",
         "AI開発ツール"
       ],
-      "relatedVideoIds": [],
+      "relatedVideoIds": [
+        "HM0SLThgXqE",
+        "1-1NAB5jIjo",
+        "Xr_HhLuzOy8"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -472,7 +560,11 @@
         "自動テスト",
         "ModelContextProtocol"
       ],
-      "relatedVideoIds": ["1TJydjQM6eo"],
+      "relatedVideoIds": [
+        "pRHyMLH1bcU",
+        "gXwS9dJewrU",
+        "UqKd0dxLskU"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -490,7 +582,11 @@
         "個人開発",
         "アプリ開発"
       ],
-      "relatedVideoIds": [],
+      "relatedVideoIds": [
+        "Xr_HhLuzOy8",
+        "TWUpzNGp7fI",
+        "Y15kBuMhCO4"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -503,7 +599,11 @@
         "バイブコーディング",
         "Webサイト制作"
       ],
-      "relatedVideoIds": [],
+      "relatedVideoIds": [
+        "4HJCCAfDGU4",
+        "SO5qov2qTUE",
+        "d67qWFEdxCI"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -520,7 +620,11 @@
         "TypeScript",
         "tailwindcss"
       ],
-      "relatedVideoIds": ["Xr_HhLuzOy8"],
+      "relatedVideoIds": [
+        "TfaNCNrYu8A",
+        "geZT1xTb06I",
+        "ECRzrFNIWNM"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -538,7 +642,11 @@
         "ClaudeCode比較",
         "AIエージェント"
       ],
-      "relatedVideoIds": [],
+      "relatedVideoIds": [
+        "4HJCCAfDGU4",
+        "Yy2alUag5I8",
+        "Xr_HhLuzOy8"
+      ],
       "udemyCourseIds": []
     },
     {
@@ -554,7 +662,37 @@
         "プログラミング",
         "個人開発"
       ],
-      "relatedVideoIds": [],
+      "relatedVideoIds": [
+        "ECRzrFNIWNM",
+        "SO5qov2qTUE",
+        "Xr_HhLuzOy8"
+      ],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "OfXZCu6xJJg",
+      "title": "ターミナル（コマンドライン）とは？初心者向け基本操作ガイド",
+      "tags": [
+        "ターミナル",
+        "CLI",
+        "コマンドライン",
+        "Mac",
+        "Windows",
+        "Git Bash",
+        "初心者向け",
+        "入門",
+        "チュートリアル",
+        "プログラミング基礎",
+        "開発環境",
+        "ファイル操作",
+        "フォルダー操作",
+        "コマンド操作"
+      ],
+      "relatedVideoIds": [
+        "1LP4ZAsU_UI",
+        "SO5qov2qTUE",
+        "TWUpzNGp7fI"
+      ],
       "udemyCourseIds": []
     }
   ]
