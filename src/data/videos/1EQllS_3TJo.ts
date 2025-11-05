@@ -104,6 +104,28 @@ export const video_1EQllS_3TJo: VideoMetadata = {
     },
   ],
 
+  // 関連動画セクション
+  relatedVideos: {
+    title: "🎬 関連動画",
+    videos: [
+      {
+        title:
+          "【Playwright MCP】Codex CLI の Webアプリ・デザインテストを自動化！AI 駆動の E2Eテスト実践ガイド",
+        url: "https://www.youtube.com/watch?v=pRHyMLH1bcU",
+      },
+      {
+        title:
+          "リアルなAI駆動開発の全工程！現役エンジニアの仕様駆動開発を公開",
+        url: "https://www.youtube.com/watch?v=1-1NAB5jIjo",
+      },
+      {
+        title:
+          "【1時間でわかる】OpenAI Codex（ChatGPT）でバイブコーディング入門！IDE・CLI 版の比較と基礎を動画1本で完全理解",
+        url: "https://www.youtube.com/watch?v=H5TGzM_PCW4",
+      },
+    ],
+  },
+
   // Udemy講座誘導セクション
   udemyCourses: {
     title: "🚀 体系的にCodex CLIを学んで一歩先へ！",

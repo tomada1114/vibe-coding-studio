@@ -88,6 +88,27 @@ export const video_4HJCCAfDGU4: VideoMetadata = {
     },
   ],
 
+  // 関連動画セクション
+  relatedVideos: {
+    title: "🎬 関連動画",
+    videos: [
+      {
+        title:
+          "【神アプデ】Claude CodeからCodexをMCPとして利用可能に！両者の良いとこどりで最強の開発環境を構築する方法",
+        url: "https://www.youtube.com/watch?v=fTONBWDWke0",
+      },
+      {
+        title: "AIが書いたコード、いつコミットする？失敗しないGit運用術",
+        url: "https://www.youtube.com/watch?v=1LP4ZAsU_UI",
+      },
+      {
+        title:
+          "リアルなAI駆動開発の全工程！現役エンジニアの仕様駆動開発を公開",
+        url: "https://www.youtube.com/watch?v=1-1NAB5jIjo",
+      },
+    ],
+  },
+
   // Udemy講座誘導セクション
   udemyCourses: {
     title: "🚀 AI駆動開発を本格的に学びたい方へ",

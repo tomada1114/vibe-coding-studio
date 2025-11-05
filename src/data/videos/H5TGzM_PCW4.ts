@@ -69,6 +69,27 @@ export const video_H5TGzM_PCW4: VideoMetadata = {
     },
   ],
 
+  relatedVideos: {
+    title: "🎬 関連動画",
+    videos: [
+      {
+        title:
+          "【Codex CLI対応】仕様駆動開発を1コマンドで導入！Spec Driven Codexで要件定義→設計→実装まで完全自動化",
+        url: "https://www.youtube.com/watch?v=1EQllS_3TJo",
+      },
+      {
+        title:
+          "【Playwright MCP】Codex CLI の Webアプリ・デザインテストを自動化！AI 駆動の E2Eテスト実践ガイド",
+        url: "https://www.youtube.com/watch?v=pRHyMLH1bcU",
+      },
+      {
+        title:
+          "【Codex】はじめてのスマホアプリ AI 駆動開発！知識ゼロでも通知機能・ナビゲーションメニューまで作れるチュートリアル",
+        url: "https://www.youtube.com/watch?v=Y15kBuMhCO4",
+      },
+    ],
+  },
+
   udemyCourses: {
     title: "🚀 さらに深く学びたい方へ",
     description:

@@ -89,6 +89,27 @@ export const video_ZUr_Sp72q50: VideoMetadata = {
     "個人開発",
   ],
 
+  relatedVideos: {
+    title: "🎬 関連動画",
+    videos: [
+      {
+        title:
+          "【実践編】SuperClaudeのコマンドをフル活用！要件定義・設計・計画・エラー解決から品質改善までの推奨フローを完全解説",
+        url: "https://www.youtube.com/watch?v=ECRzrFNIWNM",
+      },
+      {
+        title:
+          "【コード品質UP】技術的負債を作らないための AI 向け開発ルールを設定しよう（Claude Code/Codex/Cursor 対応）",
+        url: "https://www.youtube.com/watch?v=SO5qov2qTUE",
+      },
+      {
+        title:
+          "【1時間で速習】Claude Code完全ガイド   AI駆動開発で企業サイトを作ってデプロイまで実演！",
+        url: "https://www.youtube.com/watch?v=Xr_HhLuzOy8",
+      },
+    ],
+  },
+
   social: commonSections.social,
   discordCommunity: commonSections.discordCommunity,
   engagement: commonSections.engagement,

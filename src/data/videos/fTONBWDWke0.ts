@@ -92,6 +92,26 @@ export const video_fTONBWDWke0: VideoMetadata = {
     },
   ],
 
+  relatedVideos: {
+    title: "🎬 関連動画",
+    videos: [
+      {
+        title:
+          "【どっちを選ぶ？】Claude Code vs Codex CLI！両方使い倒した現役エンジニアの最終結論を徹底解説！",
+        url: "https://www.youtube.com/watch?v=4HJCCAfDGU4",
+      },
+      {
+        title: "AIが書いたコード、いつコミットする？失敗しないGit運用術",
+        url: "https://www.youtube.com/watch?v=1LP4ZAsU_UI",
+      },
+      {
+        title:
+          "【Codex】はじめてのスマホアプリ AI 駆動開発！知識ゼロでも通知機能・ナビゲーションメニューまで作れるチュートリアル",
+        url: "https://www.youtube.com/watch?v=Y15kBuMhCO4",
+      },
+    ],
+  },
+
   social: commonSections.social,
   discordCommunity: commonSections.discordCommunity,
   engagement: commonSections.engagement,
