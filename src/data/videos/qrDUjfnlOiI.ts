@@ -96,6 +96,27 @@ export const video_qrDUjfnlOiI: VideoMetadata = {
     },
   },
 
+  relatedVideos: {
+    title: "🎬 関連動画",
+    videos: [
+      {
+        title:
+          "【1時間で速習】Claude Code完全ガイド   AI駆動開発で企業サイトを作ってデプロイまで実演！",
+        url: "https://www.youtube.com/watch?v=Xr_HhLuzOy8",
+      },
+      {
+        title:
+          "【神アプデ】Claude CodeからCodexをMCPとして利用可能に！両者の良いとこどりで最強の開発環境を構築する方法",
+        url: "https://www.youtube.com/watch?v=fTONBWDWke0",
+      },
+      {
+        title:
+          "【どっちを選ぶ？】Claude Code vs Codex CLI！両方使い倒した現役エンジニアの最終結論を徹底解説！",
+        url: "https://www.youtube.com/watch?v=4HJCCAfDGU4",
+      },
+    ],
+  },
+
   // 共通データ参照
   social: commonSections.social,
   discordCommunity: commonSections.discordCommunity,

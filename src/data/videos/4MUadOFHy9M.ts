@@ -102,6 +102,27 @@ export const video_4MUadOFHy9M: VideoMetadata = {
     },
   ],
 
+  relatedVideos: {
+    title: "🎬 関連動画",
+    videos: [
+      {
+        title:
+          "【AI駆動開発】初心者OK！Claude Codeでバイブコーディング〜React ポモドーロタイマーを作る",
+        url: "https://www.youtube.com/watch?v=d67qWFEdxCI",
+      },
+      {
+        title:
+          "【1時間で速習】Claude Code完全ガイド   AI駆動開発で企業サイトを作ってデプロイまで実演！",
+        url: "https://www.youtube.com/watch?v=Xr_HhLuzOy8",
+      },
+      {
+        title:
+          "【無料】Replit Agent3で知識ゼロからバイブコーディング！ブラウザだけでWeb・データ分析・3Dゲーム・自動化ツールを作れる最新 AI エディタを試してみた",
+        url: "https://www.youtube.com/watch?v=geZT1xTb06I",
+      },
+    ],
+  },
+
   // 共通データ参照
   social: commonSections.social,
   discordCommunity: commonSections.discordCommunity,

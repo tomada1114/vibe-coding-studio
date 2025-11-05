@@ -86,6 +86,27 @@ export const video_qCFnfS5DAr8: VideoMetadata = {
     },
   ],
 
+  relatedVideos: {
+    title: "🎬 関連動画",
+    videos: [
+      {
+        title:
+          "【仕様駆動開発】cc-sddでClaude Code/CursorなどをKiro化！日本語対応の国産ツールで簡単に始めるスペック駆動開発",
+        url: "https://www.youtube.com/watch?v=HM0SLThgXqE",
+      },
+      {
+        title:
+          "リアルなAI駆動開発の全工程！現役エンジニアの仕様駆動開発を公開",
+        url: "https://www.youtube.com/watch?v=1-1NAB5jIjo",
+      },
+      {
+        title:
+          "【1時間で速習】Claude Code完全ガイド   AI駆動開発で企業サイトを作ってデプロイまで実演！",
+        url: "https://www.youtube.com/watch?v=Xr_HhLuzOy8",
+      },
+    ],
+  },
+
   social: commonSections.social,
   discordCommunity: commonSections.discordCommunity,
   engagement: commonSections.engagement,

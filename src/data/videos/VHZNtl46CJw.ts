@@ -91,6 +91,27 @@ export const video_VHZNtl46CJw: VideoMetadata = {
     },
   ],
 
+  relatedVideos: {
+    title: "🎬 関連動画",
+    videos: [
+      {
+        title:
+          "【どっちを選ぶ？】Claude Code vs Codex CLI！両方使い倒した現役エンジニアの最終結論を徹底解説！",
+        url: "https://www.youtube.com/watch?v=4HJCCAfDGU4",
+      },
+      {
+        title:
+          "【完全比較】Claude Code vs Codex！Codexのコード品質がClaude Codeを超えた！Claude Code ユーザーは Codex（GPT-5）に乗り換えるべき？",
+        url: "https://www.youtube.com/watch?v=Yy2alUag5I8",
+      },
+      {
+        title:
+          "【1時間で速習】Claude Code完全ガイド   AI駆動開発で企業サイトを作ってデプロイまで実演！",
+        url: "https://www.youtube.com/watch?v=Xr_HhLuzOy8",
+      },
+    ],
+  },
+
   // 共通データ参照
   social: commonSections.social,
   discordCommunity: commonSections.discordCommunity,

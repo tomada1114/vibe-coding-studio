@@ -107,6 +107,27 @@ export const video_geZT1xTb06I: VideoMetadata = {
     },
   },
 
+  relatedVideos: {
+    title: "🎬 関連動画",
+    videos: [
+      {
+        title:
+          "【1時間で速習】Claude Code完全ガイド   AI駆動開発で企業サイトを作ってデプロイまで実演！",
+        url: "https://www.youtube.com/watch?v=Xr_HhLuzOy8",
+      },
+      {
+        title:
+          "【AgentKit登場】ノーコードでAIワークフローを構築！Agent Builderの使い方を完全解説",
+        url: "https://www.youtube.com/watch?v=4MUadOFHy9M",
+      },
+      {
+        title:
+          "【AI駆動開発】初心者OK！Claude Codeでバイブコーディング〜React ポモドーロタイマーを作る",
+        url: "https://www.youtube.com/watch?v=d67qWFEdxCI",
+      },
+    ],
+  },
+
   social: commonSections.social,
   discordCommunity: commonSections.discordCommunity,
   engagement: {

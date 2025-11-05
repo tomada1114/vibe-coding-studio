@@ -57,8 +57,19 @@ export const video_xrRFnoOeC94: VideoMetadata = {
     title: "📌 関連動画",
     videos: [
       {
-        title: "Claude Code完全ガイド（インストール〜設定まで）",
-        url: "https://www.youtube.com/watch?v=Xr_HhLuzOy8",
+        title:
+          "【完全初心者OK】Claude Code×React Nativeでスマホアプリ開発！カウンターと計算機を作るバイブコーディング実演",
+        url: "https://www.youtube.com/watch?v=TfaNCNrYu8A",
+      },
+      {
+        title:
+          "【無料】Replit Agent3で知識ゼロからバイブコーディング！ブラウザだけでWeb・データ分析・3Dゲーム・自動化ツールを作れる最新 AI エディタを試してみた",
+        url: "https://www.youtube.com/watch?v=geZT1xTb06I",
+      },
+      {
+        title:
+          "【実践編】SuperClaudeのコマンドをフル活用！要件定義・設計・計画・エラー解決から品質改善までの推奨フローを完全解説",
+        url: "https://www.youtube.com/watch?v=ECRzrFNIWNM",
       },
     ],
   },

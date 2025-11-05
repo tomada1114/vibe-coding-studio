@@ -53,6 +53,27 @@ export const video_1TJydjQM6eo: VideoMetadata = {
     "AIツール",
   ],
 
+  relatedVideos: {
+    title: "🎬 関連動画",
+    videos: [
+      {
+        title:
+          "【Playwright MCP】Codex CLI の Webアプリ・デザインテストを自動化！AI 駆動の E2Eテスト実践ガイド",
+        url: "https://www.youtube.com/watch?v=pRHyMLH1bcU",
+      },
+      {
+        title:
+          "【どっちを選ぶ？】Claude Code vs Codex CLI！両方使い倒した現役エンジニアの最終結論を徹底解説！",
+        url: "https://www.youtube.com/watch?v=4HJCCAfDGU4",
+      },
+      {
+        title:
+          "【Codex】はじめてのスマホアプリ AI 駆動開発！知識ゼロでも通知機能・ナビゲーションメニューまで作れるチュートリアル",
+        url: "https://www.youtube.com/watch?v=Y15kBuMhCO4",
+      },
+    ],
+  },
+
   udemyCourses: {
     title: "📚 関連Udemy講座（クーポン付き）",
     description:

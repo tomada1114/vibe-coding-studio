@@ -60,13 +60,18 @@ export const video_pRHyMLH1bcU: VideoMetadata = {
     videos: [
       {
         title:
-          "【Codex CLI活用術】MCPサーバを設定する方法!config.toml と CLI コマンドの使い方を初心者向けに解説",
-        url: "https://www.youtube.com/watch?v=PLACEHOLDER",
+          "【Playwright入門】Claude Code × MCPでブラウザテストを完全自動化！AI 駆動の E2Eテスト実践ガイド",
+        url: "https://www.youtube.com/watch?v=TDECUH62yYQ",
       },
       {
         title:
-          "【1時間でわかる】OpenAI Codex（ChatGPT）でバイブコーディング入門",
-        url: "https://www.youtube.com/watch?v=PLACEHOLDER",
+          "【Codex CLI対応】仕様駆動開発を1コマンドで導入！Spec Driven Codexで要件定義→設計→実装まで完全自動化",
+        url: "https://www.youtube.com/watch?v=1EQllS_3TJo",
+      },
+      {
+        title:
+          "【Codex CLI活用術】MCPサーバを設定する方法！config.toml と CLI コマンドの使い方を初心者向けに解説",
+        url: "https://www.youtube.com/watch?v=1TJydjQM6eo",
       },
     ],
   },

@@ -54,6 +54,16 @@ export const video_OfXZCu6xJJg: VideoMetadata = {
         title: "AIが書いたコード、いつコミットする？失敗しないGit運用術",
         url: "https://www.youtube.com/watch?v=1LP4ZAsU_UI",
       },
+      {
+        title:
+          "【コード品質UP】技術的負債を作らないための AI 向け開発ルールを設定しよう（Claude Code/Codex/Cursor 対応）",
+        url: "https://www.youtube.com/watch?v=SO5qov2qTUE",
+      },
+      {
+        title:
+          "React Native（Expo）入門！iOS・Android アプリ環境構築の全手順を初心者向けに解説【シミュレータ対応】",
+        url: "https://www.youtube.com/watch?v=TWUpzNGp7fI",
+      },
     ],
   },
 

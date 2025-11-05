@@ -65,6 +65,26 @@ export const video_Yy2alUag5I8: VideoMetadata = {
     },
   ],
 
+  relatedVideos: {
+    title: "🎬 関連動画",
+    videos: [
+      {
+        title:
+          "【コード品質UP】技術的負債を作らないための AI 向け開発ルールを設定しよう（Claude Code/Codex/Cursor 対応）",
+        url: "https://www.youtube.com/watch?v=SO5qov2qTUE",
+      },
+      {
+        title:
+          "【Codex】はじめてのスマホアプリ AI 駆動開発！知識ゼロでも通知機能・ナビゲーションメニューまで作れるチュートリアル",
+        url: "https://www.youtube.com/watch?v=Y15kBuMhCO4",
+      },
+      {
+        title: "AIが書いたコード、いつコミットする？失敗しないGit運用術",
+        url: "https://www.youtube.com/watch?v=1LP4ZAsU_UI",
+      },
+    ],
+  },
+
   udemyCourses: {
     title: "📚 関連講座・リソース",
     description: "プログラミング未経験OK！5つのアプリを作りながら学ぶ",

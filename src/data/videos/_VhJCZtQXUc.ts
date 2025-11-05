@@ -57,12 +57,19 @@ export const video__VhJCZtQXUc: VideoMetadata = {
     title: "📌 関連動画",
     videos: [
       {
-        title: "【1時間でわかる】OpenAI Codex入門",
-        url: "https://www.youtube.com/watch?v=PLACEHOLDER1",
+        title:
+          "【1時間でわかる】OpenAI Codex（ChatGPT）でバイブコーディング入門！IDE・CLI 版の比較と基礎を動画1本で完全理解",
+        url: "https://www.youtube.com/watch?v=H5TGzM_PCW4",
       },
       {
-        title: "Claude Code vs Codex 徹底比較",
-        url: "https://www.youtube.com/watch?v=PLACEHOLDER2",
+        title:
+          "【Codex CLI対応】仕様駆動開発を1コマンドで導入！Spec Driven Codexで要件定義→設計→実装まで完全自動化",
+        url: "https://www.youtube.com/watch?v=1EQllS_3TJo",
+      },
+      {
+        title:
+          "【Codex CLI活用術】MCPサーバを設定する方法！config.toml と CLI コマンドの使い方を初心者向けに解説",
+        url: "https://www.youtube.com/watch?v=1TJydjQM6eo",
       },
     ],
   },

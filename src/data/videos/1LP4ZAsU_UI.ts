@@ -89,6 +89,28 @@ export const video_1LP4ZAsU_UI: VideoMetadata = {
     },
   ],
 
+  // 関連動画セクション
+  relatedVideos: {
+    title: "🎬 関連動画",
+    videos: [
+      {
+        title:
+          "【どっちを選ぶ？】Claude Code vs Codex CLI！両方使い倒した現役エンジニアの最終結論を徹底解説！",
+        url: "https://www.youtube.com/watch?v=4HJCCAfDGU4",
+      },
+      {
+        title:
+          "【神アプデ】Claude CodeからCodexをMCPとして利用可能に！両者の良いとこどりで最強の開発環境を構築する方法",
+        url: "https://www.youtube.com/watch?v=fTONBWDWke0",
+      },
+      {
+        title:
+          "【コード品質UP】技術的負債を作らないための AI 向け開発ルールを設定しよう（Claude Code/Codex/Cursor 対応）",
+        url: "https://www.youtube.com/watch?v=SO5qov2qTUE",
+      },
+    ],
+  },
+
   // Udemy講座誘導セクション
   udemyCourses: {
     title: "🚀 体系的にAI駆動開発を学びたい方へ",

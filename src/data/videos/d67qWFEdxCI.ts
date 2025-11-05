@@ -71,13 +71,19 @@ export const video_d67qWFEdxCI: VideoMetadata = {
     title: "📌 関連動画",
     videos: [
       {
-        title: "Claude Code初期設定がまだの方",
-        url: "https://www.youtube.com/watch?v=4MUadOFHy9M",
+        title:
+          "Claude Code on the Web で開発が変わる！外出先でも開発が可能になった！",
+        url: "https://www.youtube.com/watch?v=UqKd0dxLskU",
       },
       {
         title:
-          "実践的なバイブコーディング開発を体験するならこちらの動画もおすすめ",
-        url: "https://x.gd/bj31v",
+          "【完全初心者OK】Claude Code×React Nativeでスマホアプリ開発！カウンターと計算機を作るバイブコーディング実演",
+        url: "https://www.youtube.com/watch?v=TfaNCNrYu8A",
+      },
+      {
+        title:
+          "【実践編】SuperClaudeのコマンドをフル活用！要件定義・設計・計画・エラー解決から品質改善までの推奨フローを完全解説",
+        url: "https://www.youtube.com/watch?v=ECRzrFNIWNM",
       },
     ],
   },

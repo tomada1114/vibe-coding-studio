@@ -98,6 +98,27 @@ export const video_gXwS9dJewrU: VideoMetadata = {
     },
   },
 
+  relatedVideos: {
+    title: "🎬 関連動画",
+    videos: [
+      {
+        title:
+          "【Playwright入門】Claude Code × MCPでブラウザテストを完全自動化！AI 駆動の E2Eテスト実践ガイド",
+        url: "https://www.youtube.com/watch?v=TDECUH62yYQ",
+      },
+      {
+        title:
+          "【Playwright MCP】Codex CLI の Webアプリ・デザインテストを自動化！AI 駆動の E2Eテスト実践ガイド",
+        url: "https://www.youtube.com/watch?v=pRHyMLH1bcU",
+      },
+      {
+        title:
+          "【神アプデ】Claude CodeからCodexをMCPとして利用可能に！両者の良いとこどりで最強の開発環境を構築する方法",
+        url: "https://www.youtube.com/watch?v=fTONBWDWke0",
+      },
+    ],
+  },
+
   // 共通データ参照
   social: commonSections.social,
   discordCommunity: commonSections.discordCommunity,

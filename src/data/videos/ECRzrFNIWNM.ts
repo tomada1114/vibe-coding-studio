@@ -84,17 +84,22 @@ export const video_ECRzrFNIWNM: VideoMetadata = {
   ],
 
   relatedVideos: {
-    title: "📚 関連記事・動画",
+    title: "📚 関連動画",
     videos: [
       {
         title:
-          "Qiita:SuperClaudeの推奨ワークフローで天気予報アプリを作ったら開発効率が劇的に向上した話",
-        url: "https://qiita.com/tomada/items/2eb1b0...",
+          "Claude Code on the Web で開発が変わる！外出先でも開発が可能になった！",
+        url: "https://www.youtube.com/watch?v=UqKd0dxLskU",
       },
       {
         title:
-          "前回の動画:SuperClaudeでClaude Codeの品質が爆上がり!チーム開発・個人開発...",
-        url: "https://www.youtube.com/watch?v=...",
+          "SuperClaudeでClaude Codeの品質が爆上がり！チーム開発・個人開発の両方でおすすめの神ツールとは？",
+        url: "https://www.youtube.com/watch?v=ZUr_Sp72q50",
+      },
+      {
+        title:
+          "【Playwright入門】Claude Code × MCPでブラウザテストを完全自動化！AI 駆動の E2Eテスト実践ガイド",
+        url: "https://www.youtube.com/watch?v=TDECUH62yYQ",
       },
     ],
   },

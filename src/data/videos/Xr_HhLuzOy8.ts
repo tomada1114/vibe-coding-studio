@@ -85,6 +85,27 @@ export const video_Xr_HhLuzOy8: VideoMetadata = {
     "Webサイト制作",
   ],
 
+  relatedVideos: {
+    title: "🎬 関連動画",
+    videos: [
+      {
+        title:
+          "【どっちを選ぶ？】Claude Code vs Codex CLI！両方使い倒した現役エンジニアの最終結論を徹底解説！",
+        url: "https://www.youtube.com/watch?v=4HJCCAfDGU4",
+      },
+      {
+        title:
+          "【コード品質UP】技術的負債を作らないための AI 向け開発ルールを設定しよう（Claude Code/Codex/Cursor 対応）",
+        url: "https://www.youtube.com/watch?v=SO5qov2qTUE",
+      },
+      {
+        title:
+          "【AI駆動開発】初心者OK！Claude Codeでバイブコーディング〜React ポモドーロタイマーを作る",
+        url: "https://www.youtube.com/watch?v=d67qWFEdxCI",
+      },
+    ],
+  },
+
   social: commonSections.social,
   discordCommunity: commonSections.discordCommunity,
   engagement: commonSections.engagement,

@@ -67,6 +67,27 @@ export const video_TfaNCNrYu8A: VideoMetadata = {
     },
   },
 
+  relatedVideos: {
+    title: "🎬 関連動画",
+    videos: [
+      {
+        title:
+          "【1時間で速習】Claude Code完全ガイド   AI駆動開発で企業サイトを作ってデプロイまで実演！",
+        url: "https://www.youtube.com/watch?v=Xr_HhLuzOy8",
+      },
+      {
+        title:
+          "React Native（Expo）入門！iOS・Android アプリ環境構築の全手順を初心者向けに解説【シミュレータ対応】",
+        url: "https://www.youtube.com/watch?v=TWUpzNGp7fI",
+      },
+      {
+        title:
+          "【Codex】はじめてのスマホアプリ AI 駆動開発！知識ゼロでも通知機能・ナビゲーションメニューまで作れるチュートリアル",
+        url: "https://www.youtube.com/watch?v=Y15kBuMhCO4",
+      },
+    ],
+  },
+
   social: commonSections.social,
   discordCommunity: commonSections.discordCommunity,
   engagement: commonSections.engagement,
