@@ -88,13 +88,18 @@ export const video_HM0SLThgXqE: VideoMetadata = {
     videos: [
       {
         title:
-          "【仕様駆動開発】AWS Kiro がすごい!手戻り削減の要件定義→設計→計画→実装を誰でも実現できる時代へ",
-        url: "https://www.youtube.com/watch?v=VIDEO_ID_1",
+          "リアルなAI駆動開発の全工程！現役エンジニアの仕様駆動開発を公開",
+        url: "https://www.youtube.com/watch?v=1-1NAB5jIjo",
       },
       {
         title:
-          "【1時間で速習】Claude Code完全ガイド!AI駆動開発で企業サイトを作ってデプロイまで実演!",
-        url: "https://www.youtube.com/watch?v=VIDEO_ID_2",
+          "【仕様駆動開発】AWS Kiro がすごい！手戻り削減の要件定義→設計→計画→実装を誰でも実現できる時代へ",
+        url: "https://www.youtube.com/watch?v=qCFnfS5DAr8",
+      },
+      {
+        title:
+          "【コード品質UP】技術的負債を作らないための AI 向け開発ルールを設定しよう（Claude Code/Codex/Cursor 対応）",
+        url: "https://www.youtube.com/watch?v=SO5qov2qTUE",
       },
     ],
   },

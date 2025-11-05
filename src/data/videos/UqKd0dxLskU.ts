@@ -71,12 +71,19 @@ export const video_UqKd0dxLskU: VideoMetadata = {
     title: "📚 関連動画",
     videos: [
       {
-        title: "【1時間で完全マスター】Claude Code入門",
-        url: "https://www.youtube.com/watch?v=Xr_HhLuzOy8",
+        title:
+          "【どっちを選ぶ？】Claude Code vs Codex CLI！両方使い倒した現役エンジニアの最終結論を徹底解説！",
+        url: "https://www.youtube.com/watch?v=4HJCCAfDGU4",
       },
       {
-        title: "Claude Code と Playwright MCP でブラウザ確認を自動化",
-        url: "https://www.youtube.com/watch?v=TDECUH62yYQ",
+        title:
+          "【AI駆動開発】初心者OK！Claude Codeでバイブコーディング〜React ポモドーロタイマーを作る",
+        url: "https://www.youtube.com/watch?v=d67qWFEdxCI",
+      },
+      {
+        title:
+          "【実践編】SuperClaudeのコマンドをフル活用！要件定義・設計・計画・エラー解決から品質改善までの推奨フローを完全解説",
+        url: "https://www.youtube.com/watch?v=ECRzrFNIWNM",
       },
     ],
   },

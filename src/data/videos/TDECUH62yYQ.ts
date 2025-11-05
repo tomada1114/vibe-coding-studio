@@ -80,8 +80,19 @@ export const video_TDECUH62yYQ: VideoMetadata = {
     title: "📚 関連動画",
     videos: [
       {
-        title: "Claude Code入門（1時間で完全マスター）",
-        url: "https://www.youtube.com/watch?v=1TJydjQM6eo",
+        title:
+          "【Playwright MCP】Codex CLI の Webアプリ・デザインテストを自動化！AI 駆動の E2Eテスト実践ガイド",
+        url: "https://www.youtube.com/watch?v=pRHyMLH1bcU",
+      },
+      {
+        title:
+          "【Chrome DevTools MCP】ブラウザ操作やパフォーマンス確認まで！Playwright MCPとの違いと使い分けを徹底解説",
+        url: "https://www.youtube.com/watch?v=gXwS9dJewrU",
+      },
+      {
+        title:
+          "Claude Code on the Web で開発が変わる！外出先でも開発が可能になった！",
+        url: "https://www.youtube.com/watch?v=UqKd0dxLskU",
       },
     ],
   },
