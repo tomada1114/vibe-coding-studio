@@ -113,24 +113,6 @@ export const video_SO5qov2qTUE: VideoMetadata = {
     },
   },
 
-  relatedVideos: {
-    title: "📌 関連動画",
-    videos: [
-      {
-        title: "【どっちを選ぶ？】Claude Code vs Codex CLI！",
-        url: "https://www.youtube.com/watch?v=4HJCCAfDGU4",
-      },
-      {
-        title: "【1時間でわかる】OpenAI Codex入門",
-        url: "https://www.youtube.com/watch?v=H5TGzM_PCW4",
-      },
-      {
-        title: "【1時間で速習】Claude Code完全ガイド",
-        url: "https://www.youtube.com/watch?v=Xr_HhLuzOy8",
-      },
-    ],
-  },
-
   social: commonSections.social,
   discordCommunity: commonSections.discordCommunity,
   engagement: commonSections.engagement,
