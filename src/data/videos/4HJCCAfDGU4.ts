@@ -102,8 +102,7 @@ export const video_4HJCCAfDGU4: VideoMetadata = {
         url: "https://www.youtube.com/watch?v=1LP4ZAsU_UI",
       },
       {
-        title:
-          "リアルなAI駆動開発の全工程！現役エンジニアの仕様駆動開発を公開",
+        title: "リアルなAI駆動開発の全工程！現役エンジニアの仕様駆動開発を公開",
         url: "https://www.youtube.com/watch?v=1-1NAB5jIjo",
       },
     ],

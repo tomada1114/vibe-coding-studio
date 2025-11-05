@@ -87,8 +87,7 @@ export const video_HM0SLThgXqE: VideoMetadata = {
     title: "🎬 関連動画で理解を深める",
     videos: [
       {
-        title:
-          "リアルなAI駆動開発の全工程！現役エンジニアの仕様駆動開発を公開",
+        title: "リアルなAI駆動開発の全工程！現役エンジニアの仕様駆動開発を公開",
         url: "https://www.youtube.com/watch?v=1-1NAB5jIjo",
       },
       {
