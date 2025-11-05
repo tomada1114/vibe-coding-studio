@@ -61,3 +61,6 @@ public/
 # Markdown files
 *.md
 *.mdx
+
+# Generated index files (auto-generated, no need to format)
+src/data/indexes/*.json
