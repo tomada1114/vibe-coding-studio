@@ -1,0 +1,24 @@
+{
+  "name": "refactor-videos-architecture",
+  "status": "initialized",
+  "createdAt": "2025-11-05",
+  "description": "/videos機能のアーキテクチャを、クリーンアーキテクチャ + 軽量DDDに基づいてリファクタリング",
+  "phases": {
+    "requirements": "pending",
+    "design": "not_started",
+    "tasks": "not_started",
+    "implementation": "not_started"
+  },
+  "metadata": {
+    "priority": "high",
+    "complexity": "high",
+    "estimatedDays": 10,
+    "impactedModules": [
+      "src/lib/videos",
+      "src/data/videos",
+      "src/app/videos",
+      "src/components/videos",
+      "scripts"
+    ]
+  }
+}
