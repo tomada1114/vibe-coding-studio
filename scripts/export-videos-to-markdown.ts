@@ -1,12 +1,7 @@
 import { writeFileSync, mkdirSync } from "fs"
 import { join } from "path"
 import { getAllVideos } from "../src/lib/videos/video-data"
-import type {
-  VideoMetadata,
-  CustomSection,
-  TimestampItem,
-  RelatedVideo,
-} from "../src/types/video"
+import type { VideoMetadata, CustomSection } from "../src/types/video"
 
 /**
  * ファイル名として使用できない文字を置き換える
@@ -16,160 +11,161 @@ function sanitizeFilename(filename: string): string {
 }
 
 /**
- * VideoMetadataからマークダウンコンテンツを生成
+ * セクション区切り線（プレーンテキスト用）
  */
-function generateMarkdownContent(video: VideoMetadata): string {
-  const lines: string[] = []
+const SECTION_DIVIDER = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
-  // タイトル
-  lines.push(`# ${video.title}`)
-  lines.push("")
+/**
+ * カスタムセクションをプレーンテキストに変換
+ */
+function formatCustomSection(section: CustomSection): string {
+  let result = `${section.title}\n${SECTION_DIVIDER}\n`
 
-  // 動画ID
-  lines.push(`**Video ID:** ${video.id}`)
-  lines.push("")
+  if (section.type === "text") {
+    result += `${section.content}\n`
+  }
 
-  // 区切り線
-  lines.push("---")
-  lines.push("")
+  if (section.type === "list" && section.items) {
+    section.items.forEach(item => {
+      result += `${item}\n`
+    })
+  }
+
+  if (section.type === "links" && section.links) {
+    section.links.forEach(link => {
+      result += `${link.label}\n${link.url}\n`
+    })
+  }
+
+  if (section.type === "mixed") {
+    if (section.content) {
+      result += `${section.content}\n\n`
+    }
+    if (section.items && section.items.length > 0) {
+      section.items.forEach(item => {
+        result += `${item}\n`
+      })
+      result += "\n"
+    }
+    if (section.links && section.links.length > 0) {
+      section.links.forEach(link => {
+        result += `${link.label}\n${link.url}\n`
+      })
+    }
+  }
+
+  return result
+}
+
+/**
+ * VideoMetadataをYouTube概要欄用のプレーンテキストに変換
+ * （既存のVideoDetailコンポーネントのロジックを使用、公開日を除外）
+ */
+function formatVideoAsPlainText(video: VideoMetadata): string {
+  let text = ""
+
+  // タイトルと動画ID
+  text += `${video.title}\n`
+  text += `Video ID: ${video.id}\n\n`
+  text += `${SECTION_DIVIDER}\n\n`
 
   // 冒頭セクション
-  if (video.opening?.lines && video.opening.lines.length > 0) {
-    video.opening.lines.forEach(line => {
-      lines.push(line)
-    })
-    lines.push("")
-  }
+  video.opening.lines.forEach(line => {
+    text += `${line}\n`
+  })
+  text += `\n${SECTION_DIVIDER}\n`
 
   // 学べる内容セクション
-  if (video.learningPoints) {
-    lines.push(`## ${video.learningPoints.title}`)
-    lines.push("")
-    video.learningPoints.items.forEach(item => {
-      lines.push(item)
-    })
-    lines.push("")
-  }
+  text += `${video.learningPoints.title}\n${SECTION_DIVIDER}\n`
+  video.learningPoints.items.forEach(item => {
+    text += `${item}\n`
+  })
+  text += "\n"
 
-  // タイムスタンプセクション
-  if (video.timestamps && video.timestamps.items.length > 0) {
-    lines.push(`## ${video.timestamps.title}`)
-    lines.push("")
-    video.timestamps.items.forEach((item: TimestampItem) => {
-      lines.push(`${item.time} ${item.label}`)
+  // カスタムセクション
+  if (video.customSections && video.customSections.length > 0) {
+    video.customSections.forEach(section => {
+      text += `${SECTION_DIVIDER}\n`
+      text += formatCustomSection(section)
+      text += "\n"
     })
-    lines.push("")
   }
 
   // 関連動画セクション
-  if (video.relatedVideos && video.relatedVideos.videos.length > 0) {
-    lines.push(`## ${video.relatedVideos.title}`)
-    lines.push("")
-    video.relatedVideos.videos.forEach((relatedVideo: RelatedVideo) => {
-      const emoji = relatedVideo.emoji ? `${relatedVideo.emoji} ` : ""
-      lines.push(`${emoji}[${relatedVideo.title}](${relatedVideo.url})`)
+  if (video.relatedVideos) {
+    text += `${SECTION_DIVIDER}\n`
+    text += `${video.relatedVideos.title}\n${SECTION_DIVIDER}\n`
+    video.relatedVideos.videos.forEach((relatedVideo, index) => {
+      // タイトルに中点「・」を付与
+      text += `・${relatedVideo.title}\n`
+      text += `${relatedVideo.url}\n`
+      // 最後の動画でない場合は空白行を追加
+      if (
+        video.relatedVideos &&
+        index < video.relatedVideos.videos.length - 1
+      ) {
+        text += "\n"
+      }
     })
-    lines.push("")
+    text += "\n"
   }
 
   // Udemy講座セクション
   if (video.udemyCourses) {
-    lines.push(`## ${video.udemyCourses.title}`)
-    lines.push("")
-
+    text += `${SECTION_DIVIDER}\n`
+    text += `${video.udemyCourses.title}\n${SECTION_DIVIDER}\n`
     if (video.udemyCourses.description) {
-      lines.push(video.udemyCourses.description)
-      lines.push("")
+      text += `${video.udemyCourses.description}\n\n`
     }
-
     if (video.udemyCourses.courses && video.udemyCourses.courses.length > 0) {
       video.udemyCourses.courses.forEach(course => {
-        lines.push(`- ${course}`)
+        text += `・${course}\n`
       })
-      lines.push("")
+      text += "\n"
     }
-
-    lines.push(`[${video.udemyCourses.cta.text}](${video.udemyCourses.cta.url})`)
-    lines.push("")
-  }
-
-  // カスタムセクション
-  if (video.customSections && video.customSections.length > 0) {
-    video.customSections.forEach((section: CustomSection) => {
-      lines.push(`## ${section.title}`)
-      lines.push("")
-
-      switch (section.type) {
-        case "text":
-          lines.push(section.content)
-          break
-        case "list":
-          section.items.forEach(item => {
-            lines.push(`- ${item}`)
-          })
-          break
-        case "links":
-          section.links.forEach(link => {
-            lines.push(`[${link.label}](${link.url})`)
-          })
-          break
-        case "mixed":
-          if (section.content) {
-            lines.push(section.content)
-            lines.push("")
-          }
-          if (section.items) {
-            section.items.forEach(item => {
-              lines.push(`- ${item}`)
-            })
-            lines.push("")
-          }
-          if (section.links) {
-            section.links.forEach(link => {
-              lines.push(`[${link.label}](${link.url})`)
-            })
-          }
-          break
-      }
-
-      lines.push("")
-    })
+    text += `${video.udemyCourses.cta.text}\n${video.udemyCourses.cta.url}\n\n`
   }
 
   // SNS・コミュニティセクション
-  if (video.social) {
-    lines.push(`## ${video.social.title}`)
-    lines.push("")
-    video.social.accounts.forEach(account => {
-      const label = account.label || account.platform
-      lines.push(`${account.emoji} [${label}](${account.url})`)
-    })
-    lines.push("")
-  }
+  text += `${SECTION_DIVIDER}\n`
+  text += `${video.social.title}\n${SECTION_DIVIDER}\n`
+  video.social.accounts.forEach(account => {
+    const label = account.label || account.platform
+    text += `${account.emoji} ${label}\n${account.url}\n`
+  })
+  text += "\n"
 
   // Discordコミュニティセクション
   if (video.discordCommunity) {
-    lines.push(`## ${video.discordCommunity.title}`)
-    lines.push("")
-    lines.push(video.discordCommunity.description)
-    lines.push("")
-    lines.push(`[Discordに参加する](${video.discordCommunity.url})`)
-    lines.push("")
+    text += `${SECTION_DIVIDER}\n`
+    text += `${video.discordCommunity.title}\n${SECTION_DIVIDER}\n`
+    text += `${video.discordCommunity.description}\n\n`
+    text += `Discordに参加する\n${video.discordCommunity.url}\n\n`
   }
 
-  // エンゲージメントセクション
-  if (video.engagement) {
-    if (video.engagement.title) {
-      lines.push(`## ${video.engagement.title}`)
-      lines.push("")
-    }
-    lines.push(video.engagement.message)
-    lines.push("")
-    lines.push(video.engagement.callToAction)
-    lines.push("")
+  // タイムスタンプセクション（オプショナル）
+  if (video.timestamps) {
+    text += `${SECTION_DIVIDER}\n`
+    text += `${video.timestamps.title}\n${SECTION_DIVIDER}\n`
+    video.timestamps.items.forEach(timestamp => {
+      text += `${timestamp.time} ${timestamp.label}\n`
+    })
+    text += "\n"
   }
 
-  return lines.join("\n")
+  // エンゲージメント促進セクション
+  text += `${SECTION_DIVIDER}\n`
+  if (video.engagement.title) {
+    text += `${video.engagement.title}\n${SECTION_DIVIDER}\n`
+  }
+  text += `${video.engagement.message}\n\n`
+  text += `${video.engagement.callToAction}\n\n`
+
+  // タグ（#記号を自動付与）
+  text += "\n"
+  text += video.tags.map(tag => `#${tag}`).join(" ") + "\n"
+
+  return text
 }
 
 /**
@@ -177,20 +173,20 @@ function generateMarkdownContent(video: VideoMetadata): string {
  */
 function main() {
   const videos = getAllVideos()
-  const outputDir = join(process.cwd(), ".output", "videos-markdown")
+  const outputDir = join(process.cwd(), ".output", "videos-plaintext")
 
   // 出力ディレクトリを作成
   mkdirSync(outputDir, { recursive: true })
 
-  console.log(`📝 ${videos.length}個の動画をマークダウンに変換中...`)
+  console.log(`📝 ${videos.length}個の動画をプレーンテキストに変換中...`)
 
   let successCount = 0
   let errorCount = 0
 
   videos.forEach(video => {
     try {
-      const content = generateMarkdownContent(video)
-      const filename = sanitizeFilename(video.title) + ".md"
+      const content = formatVideoAsPlainText(video)
+      const filename = sanitizeFilename(video.title) + ".txt"
       const filepath = join(outputDir, filename)
 
       writeFileSync(filepath, content, "utf-8")

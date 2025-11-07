@@ -1,0 +1,78 @@
+【Codex CLI活用術】MCPサーバを設定する方法！config.toml と CLI コマンドの使い方を初心者向けに解説
+Video ID: 1TJydjQM6eo
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Codex CLI にMCP（Model Context Protocol）サーバを設定する方法を解説します！
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎯 この動画で得られるスキル
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Codex CLIでMCPサーバーを設定・利用できるようになる
+Context 7で最新ドキュメントを自動取得できる
+React、Next.js、Supabaseなども最新情報で開発できる
+エラーやトラブルシューティングに対処できる
+他のMCPツール（Playwright、Supabase等）も使えるようになる
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎬 関連動画
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+・【Playwright MCP】Codex CLI の Webアプリ・デザインテストを自動化！AI 駆動の E2Eテスト実践ガイド
+https://www.youtube.com/watch?v=pRHyMLH1bcU
+
+・【どっちを選ぶ？】Claude Code vs Codex CLI！両方使い倒した現役エンジニアの最終結論を徹底解説！
+https://www.youtube.com/watch?v=4HJCCAfDGU4
+
+・【Codex】はじめてのスマホアプリ AI 駆動開発！知識ゼロでも通知機能・ナビゲーションメニューまで作れるチュートリアル
+https://www.youtube.com/watch?v=Y15kBuMhCO4
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📚 関連Udemy講座（クーポン付き）
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+今回の動画はUdemy講座の（ほぼ）一部です。
+この講座では、CodexCLの基礎から実践まで体系的に学べる上、Playwrightなど人気のMCPの使い方や、アプリ開発手法を学ぶことができます！
+
+・【Codex CLI】実践レベルのアプリ開発で学ぶバイブコーディング！カスタムコマンド・MCP連携の完全ガイド
+
+90% OFFクーポンはこちら
+https://www.vibecodingstudio.dev/coupons?topic=codex
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔗 SNS・コミュニティ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🐦 X(Twitter)
+https://x.com/muscle_coding
+📝 note
+https://note.com/tomada
+💻 Qiita
+https://qiita.com/tomada
+📘 Zenn
+https://zenn.dev/tmasuyama1114
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💬 Discordコミュニティ(無料)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+最新情報をキャッチアップしつつ、AI駆動開発を学ぶ仲間と繋がれるDiscordコミュニティも運営してます!気軽に参加してみてください。
+
+Discordに参加する
+https://discord.gg/qZDRagzbVD
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⏱ タイムライン
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+00:00 MCPとは？
+03:57 config.toml でMCPサーバを設定
+06:47 CLI からMCPサーバを設定
+07:46 Context7 MCPを使ってみよう
+15:39 トラブルシューティング
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💬 コメント・質問お待ちしています!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+実際に試してみた感想や、つまずいた点があればコメント欄で教えてください。
+可能な限りお答えします!
+
+チャンネル登録・高評価いただけると今後の動画作成の励みになります🙏
+
+
+#VibeCoding #バイブコーディング #プログラミング #CodexCLI #codex #codexcli #openai #MCP #Context7 #AI駆動開発 #Nextjs #React #WebDevelopment #AIツール
