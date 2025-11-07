@@ -75,6 +75,28 @@ npm run test             # Run Jest tests
 npm run test:watch       # Run tests in watch mode
 ```
 
+## Utility Scripts
+
+### Export Video Metadata to Plain Text
+
+Export all YouTube video metadata as plain text files for use in video descriptions:
+
+```bash
+npx tsx scripts/export-videos-to-markdown.ts
+```
+
+This script will:
+- ✅ Convert all video metadata from `src/data/videos/` to YouTube-compatible plain text format
+- ✅ Generate files in `.output/videos-plaintext/` directory
+- ✅ Create one `.txt` file per video, named after the video title
+- ✅ Include all sections: opening, learning points, related videos, Udemy courses, timestamps, social links, and tags
+- ✅ Format links as separate lines (text and URL) for YouTube compatibility
+- ✅ Use section dividers (━━━━━━) for visual separation
+
+**Output Location**: `.output/videos-plaintext/`
+
+**Use Case**: Copy the generated text directly into YouTube video descriptions when uploading or updating videos.
+
 ## Project Structure
 
 ```
