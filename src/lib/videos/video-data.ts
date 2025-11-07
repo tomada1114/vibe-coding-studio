@@ -7,6 +7,7 @@ import { video_4MUadOFHy9M } from "@/data/videos/4MUadOFHy9M"
 import { video_5ACcnosaEdw } from "@/data/videos/5ACcnosaEdw"
 import { video__VhJCZtQXUc } from "@/data/videos/_VhJCZtQXUc"
 import { video_d67qWFEdxCI } from "@/data/videos/d67qWFEdxCI"
+import { video_dV1cZ3R_GEI } from "@/data/videos/dV1cZ3R-GEI"
 import { video_ECRzrFNIWNM } from "@/data/videos/ECRzrFNIWNM"
 import { video_fTONBWDWke0 } from "@/data/videos/fTONBWDWke0"
 import { video_geZT1xTb06I } from "@/data/videos/geZT1xTb06I"
@@ -28,6 +29,7 @@ import { video_xrRFnoOeC94 } from "@/data/videos/xrRFnoOeC94"
 import { video_Y15kBuMhCO4 } from "@/data/videos/Y15kBuMhCO4"
 import { video_Yy2alUag5I8 } from "@/data/videos/Yy2alUag5I8"
 import { video_ZUr_Sp72q50 } from "@/data/videos/ZUr_Sp72q50"
+import { video_Mwp4_DYGzTI } from "@/data/videos/Mwp4_DYGzTI"
 import type { VideoMetadata } from "@/types/video"
 
 /**
@@ -72,6 +74,8 @@ const allVideosData: VideoMetadata[] = [
   video_VHZNtl46CJw,
   video_ZUr_Sp72q50,
   video_OfXZCu6xJJg,
+  video_dV1cZ3R_GEI,
+  video_Mwp4_DYGzTI,
 ]
 
 /**
