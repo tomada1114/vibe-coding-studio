@@ -1,7 +1,7 @@
-import { writeFileSync, mkdirSync } from "fs"
+import { mkdirSync, writeFileSync } from "fs"
 import { join } from "path"
 import { getAllVideos } from "../src/lib/videos/video-data"
-import type { VideoMetadata, CustomSection } from "../src/types/video"
+import type { CustomSection, VideoMetadata } from "../src/types/video"
 
 /**
  * ファイル名として使用できない文字を置き換える

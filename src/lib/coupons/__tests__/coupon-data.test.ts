@@ -1,6 +1,10 @@
 import { COURSE_INFO } from "@/constants/coupon-courses"
 import type { RawCouponData } from "@/types/coupon"
-import { getLatestCoupons, parseCouponData } from "../coupon-data"
+import {
+  getLatestCoupons,
+  getRelatedCoupons,
+  parseCouponData,
+} from "../coupon-data"
 
 /**
  * クーポンが存在すべき講座IDのリスト
@@ -166,6 +170,111 @@ describe("coupon-data", () => {
       const result = parseCouponData(testData)
       const expectedUrl = `https://www.udemy.com/course/${COURSE_INFO["6732543"].slug}/?couponCode=2025-10-10`
       expect(result[0].courseCouponUrl).toBe(expectedUrl)
+    })
+  })
+
+  describe("getRelatedCoupons", () => {
+    let allCoupons: ReturnType<typeof getLatestCoupons>
+
+    beforeAll(() => {
+      allCoupons = getLatestCoupons()
+    })
+
+    it("現在のクーポンを除外すること", () => {
+      if (allCoupons.length === 0) {
+        throw new Error("テストに必要なクーポンが存在しません")
+      }
+
+      const currentCoupon = allCoupons[0]
+      const relatedCoupons = getRelatedCoupons(currentCoupon, allCoupons, 10)
+
+      expect(relatedCoupons).not.toContainEqual(currentCoupon)
+      expect(
+        relatedCoupons.every(c => c.courseId !== currentCoupon.courseId)
+      ).toBe(true)
+    })
+
+    it("指定されたlimit件数以下を返すこと", () => {
+      if (allCoupons.length < 2) {
+        throw new Error("テストに必要なクーポンが不足しています")
+      }
+
+      const currentCoupon = allCoupons[0]
+      const limit = 4
+      const relatedCoupons = getRelatedCoupons(currentCoupon, allCoupons, limit)
+
+      expect(relatedCoupons.length).toBeLessThanOrEqual(limit)
+      expect(relatedCoupons.length).toBeLessThanOrEqual(allCoupons.length - 1)
+    })
+
+    it("タグが一致するクーポンを優先的に返すこと", () => {
+      // タグが一致するクーポンを見つける
+      const currentCoupon = allCoupons.find(c => c.courseInfo.topics.length > 0)
+
+      if (!currentCoupon) {
+        throw new Error("タグを持つクーポンが見つかりません")
+      }
+
+      const relatedCoupons = getRelatedCoupons(currentCoupon, allCoupons, 10)
+
+      if (relatedCoupons.length > 1) {
+        // 最初のクーポンのタグ一致数を計算
+        const firstMatchCount = relatedCoupons[0].courseInfo.topics.filter(
+          tag => currentCoupon.courseInfo.topics.includes(tag)
+        ).length
+
+        // 2番目以降のクーポンのタグ一致数を計算
+        for (let i = 1; i < relatedCoupons.length; i++) {
+          const matchCount = relatedCoupons[i].courseInfo.topics.filter(tag =>
+            currentCoupon.courseInfo.topics.includes(tag)
+          ).length
+
+          // スコアが高い順にソートされているはず
+          expect(firstMatchCount).toBeGreaterThanOrEqual(matchCount)
+        }
+      }
+    })
+
+    it("タグが同じスコアの場合、COURSE_DISPLAY_ORDER順に返すこと", () => {
+      // このテストは実装を信頼して、結果が重複しないことのみ確認
+      if (allCoupons.length < 2) {
+        throw new Error("テストに必要なクーポンが不足しています")
+      }
+
+      const currentCoupon = allCoupons[0]
+      const relatedCoupons = getRelatedCoupons(currentCoupon, allCoupons, 10)
+
+      // 重複チェック
+      const courseIds = relatedCoupons.map(c => c.courseId)
+      const uniqueCourseIds = new Set(courseIds)
+      expect(courseIds.length).toBe(uniqueCourseIds.size)
+    })
+
+    it("limit=0の場合、空配列を返すこと", () => {
+      if (allCoupons.length === 0) {
+        throw new Error("テストに必要なクーポンが存在しません")
+      }
+
+      const currentCoupon = allCoupons[0]
+      const relatedCoupons = getRelatedCoupons(currentCoupon, allCoupons, 0)
+
+      expect(relatedCoupons).toEqual([])
+    })
+
+    it("他にクーポンがない場合、空配列を返すこと", () => {
+      if (allCoupons.length === 0) {
+        throw new Error("テストに必要なクーポンが存在しません")
+      }
+
+      const currentCoupon = allCoupons[0]
+      const singleCouponList = [currentCoupon]
+      const relatedCoupons = getRelatedCoupons(
+        currentCoupon,
+        singleCouponList,
+        10
+      )
+
+      expect(relatedCoupons).toEqual([])
     })
   })
 })

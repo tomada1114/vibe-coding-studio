@@ -43,7 +43,10 @@ export const video_Mwp4_DYGzTI: VideoMetadata = {
       { time: "01:22", label: "VS Codeのダウンロード" },
       { time: "02:18", label: "Mac版のインストール手順" },
       { time: "03:45", label: "日本語拡張機能のインストール" },
-      { time: "05:10", label: "エクスプローラー機能（フォルダー・ファイル管理）" },
+      {
+        time: "05:10",
+        label: "エクスプローラー機能（フォルダー・ファイル管理）",
+      },
       { time: "07:30", label: "検索機能と一括置換" },
       { time: "10:15", label: "統合ターミナルの使い方" },
       { time: "13:20", label: "まとめ" },

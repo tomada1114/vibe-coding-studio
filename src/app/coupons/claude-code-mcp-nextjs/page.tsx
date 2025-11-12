@@ -6,11 +6,12 @@ import { CourseProjects } from "@/components/coupons/course-detail/CourseProject
 import { FloatingCTA } from "@/components/coupons/course-detail/FloatingCTA"
 import { PriceSection } from "@/components/coupons/course-detail/PriceSection"
 import { TargetAudience } from "@/components/coupons/course-detail/TargetAudience"
+import { RelatedCoupons } from "@/components/coupons/RelatedCoupons"
 import { AsyncErrorBoundary } from "@/components/error-boundary"
 import { Footer } from "@/components/footer"
 import { Gradient } from "@/components/gradient"
 import { Navbar } from "@/components/navbar"
-import { getLatestCoupons } from "@/lib/coupons/coupon-data"
+import { getLatestCoupons, getRelatedCoupons } from "@/lib/coupons/coupon-data"
 import type { Metadata } from "next"
 
 // 静的生成を明示的に設定
@@ -176,6 +177,9 @@ export default function ClaudeCodeMcpCoursePage() {
     )
   }
 
+  // 関連クーポンを取得（最大4件）
+  const relatedCoupons = getRelatedCoupons(coupon, coupons, 4)
+
   return (
     <div className="overflow-hidden">
       {/* ヘッダーセクション */}
@@ -213,6 +217,9 @@ export default function ClaudeCodeMcpCoursePage() {
             </div>
           </div>
         </div>
+
+        {/* 関連クーポンセクション */}
+        <RelatedCoupons coupons={relatedCoupons} />
 
         <FloatingCTA coupon={coupon} />
       </main>
