@@ -309,3 +309,52 @@ export function formatDateToJST(date: Date): string {
 
   return `${jstYear}年${jstMonth}月${jstDay}日`
 }
+
+/**
+ * タグベースで関連するクーポンを取得
+ *
+ * @param currentCoupon 現在のクーポン
+ * @param allCoupons すべてのクーポン（通常は getLatestCoupons() の結果）
+ * @param limit 取得する最大件数（デフォルト: 4）
+ * @returns 関連クーポンの配列（タグの一致度順、同点の場合は COURSE_DISPLAY_ORDER 順）
+ */
+export function getRelatedCoupons(
+  currentCoupon: Coupon,
+  allCoupons: Coupon[],
+  limit: number = 4
+): Coupon[] {
+  // 現在のクーポンを除外
+  const otherCoupons = allCoupons.filter(
+    coupon => coupon.courseId !== currentCoupon.courseId
+  )
+
+  // COURSE_DISPLAY_ORDER のインデックスマップを作成（O(n)）
+  const orderMap = new Map<string, number>(
+    COURSE_DISPLAY_ORDER.map((id, index) => [id as string, index])
+  )
+
+  // 各クーポンにスコアを付与
+  const couponsWithScore = otherCoupons.map(coupon => {
+    // タグの一致数を計算
+    const matchingTagsCount = coupon.courseInfo.topics.filter(tag =>
+      currentCoupon.courseInfo.topics.includes(tag)
+    ).length
+
+    return {
+      coupon,
+      score: matchingTagsCount,
+      displayOrder: orderMap.get(coupon.courseId) ?? Number.MAX_SAFE_INTEGER,
+    }
+  })
+
+  // ソート: スコア降順、同点の場合は displayOrder 昇順
+  couponsWithScore.sort((a, b) => {
+    if (a.score !== b.score) {
+      return b.score - a.score // スコアが高い順
+    }
+    return a.displayOrder - b.displayOrder // 表示順が小さい順
+  })
+
+  // 上位 limit 件を返す
+  return couponsWithScore.slice(0, limit).map(item => item.coupon)
+}
