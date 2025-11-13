@@ -1,6 +1,5 @@
 "use client"
 
-import { Heading } from "@/components/catalyst/heading"
 import type { Coupon } from "@/types/coupon"
 import { memo } from "react"
 import { CouponCard } from "./CouponCard"
@@ -26,12 +25,9 @@ export const RelatedCoupons = memo(function RelatedCoupons({
   return (
     <section className="mt-16 border-t border-zinc-950/5 pt-12 pb-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <Heading
-          level={2}
-          className="mb-8 text-center text-2xl font-bold text-zinc-950 sm:text-3xl"
-        >
+        <h2 className="mb-8 text-center text-2xl font-bold text-zinc-950 sm:text-3xl">
           {title}
-        </Heading>
+        </h2>
 
         {/* グリッドレイアウト（一覧ページと同じスタイル） */}
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-10">
