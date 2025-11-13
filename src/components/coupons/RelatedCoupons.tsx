@@ -17,14 +17,14 @@ interface RelatedCouponsProps {
  */
 export const RelatedCoupons = memo(function RelatedCoupons({
   coupons,
-  title = "他のおすすめクーポン",
+  title = "他のおすすめ講座",
 }: RelatedCouponsProps) {
   if (coupons.length === 0) {
     return null
   }
 
   return (
-    <section className="mt-16 border-t border-zinc-950/5 pt-12">
+    <section className="mt-16 border-t border-zinc-950/5 pt-12 pb-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Heading
           level={2}
