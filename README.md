@@ -39,7 +39,36 @@ NEXT_PUBLIC_SITE_URL=https://yourdomain.com
 
 # Optional: Report URI for CSP violations
 NEXT_PUBLIC_CSP_REPORT_URI=/api/csp-report
+
+# Optional: Discord Bot Token for fetching server member count
+DISCORD_BOT_TOKEN=your_bot_token_here
+
+# Optional: Discord Guild (Server) ID
+DISCORD_GUILD_ID=your_guild_id_here
 ```
+
+#### Discord Configuration (Optional)
+
+To display Discord server member count on the community page:
+
+1. **Create a Discord Bot**:
+   - Visit [Discord Developer Portal](https://discord.com/developers/applications)
+   - Click "New Application" and give it a name
+   - Go to "Bot" section and create a bot
+   - Copy the bot token and add it to `DISCORD_BOT_TOKEN`
+
+2. **Get Your Guild ID**:
+   - Enable Developer Mode in Discord (User Settings → Advanced → Developer Mode)
+   - Right-click your server and select "Copy ID"
+   - Add it to `DISCORD_GUILD_ID`
+
+3. **Invite the Bot**:
+   - Go to "OAuth2" → "URL Generator"
+   - Select scopes: `bot`
+   - No permissions are required (bot only reads server info)
+   - Copy the generated URL and open it in your browser to invite the bot
+
+**Note**: If these environment variables are not set, the member count will simply not be displayed.
 
 ### 3. Validate Configuration (Optional)
 

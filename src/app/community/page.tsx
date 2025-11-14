@@ -1,5 +1,6 @@
 import { Button } from "@/components/button"
 import { Container } from "@/components/container"
+import { DiscordMemberCount } from "@/components/discord-member-count"
 import { AsyncErrorBoundary } from "@/components/error-boundary"
 import { Footer } from "@/components/footer"
 import { Gradient } from "@/components/gradient"
@@ -50,6 +51,11 @@ function CommunityHeroSection() {
             <br />
             待っています
           </h1>
+
+          {/* Discordメンバー数 */}
+          <div className="mt-8">
+            <DiscordMemberCount />
+          </div>
 
           {/* サブメッセージ - 不安解消 */}
           <div className="mt-8 max-w-2xl">

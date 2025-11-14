@@ -15,6 +15,10 @@ jest.mock("@/components/logo", () => ({
   ),
 }))
 
+jest.mock("@/components/discord-member-count", () => ({
+  DiscordMemberCount: () => null, // テスト環境では何も表示しない
+}))
+
 // テスト定数
 // Discord参加ボタンの数: ヒーローセクションのCTA + 最終CTAセクション
 const EXPECTED_DISCORD_BUTTON_COUNT = 2
