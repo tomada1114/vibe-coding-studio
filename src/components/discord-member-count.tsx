@@ -2,7 +2,7 @@
  * Discordメンバー数表示コンポーネント
  *
  * Discord APIからメンバー数を取得して表示します。
- * サーバーコンポーネントとして動作し、1分間キャッシュされます。
+ * サーバーコンポーネントとして動作し、24時間キャッシュされます。
  */
 
 import { getDiscordMemberCount } from "@/lib/discord-api"
