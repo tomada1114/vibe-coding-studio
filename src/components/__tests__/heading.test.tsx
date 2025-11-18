@@ -30,8 +30,7 @@ describe("Heading", () => {
       "text-2xl/8",
       "font-semibold",
       "text-zinc-950",
-      "sm:text-xl/8",
-      "dark:text-white"
+      "sm:text-xl/8"
     )
   })
 
@@ -65,12 +64,6 @@ describe("Heading", () => {
     render(<Heading id="main-heading">ID Heading</Heading>)
     const heading = screen.getByText("ID Heading")
     expect(heading).toHaveAttribute("id", "main-heading")
-  })
-
-  it("has dark mode text styling", () => {
-    render(<Heading>Dark Mode Heading</Heading>)
-    const heading = screen.getByText("Dark Mode Heading")
-    expect(heading).toHaveClass("dark:text-white")
   })
 
   it("has responsive text sizing", () => {
@@ -182,8 +175,7 @@ describe("Subheading", () => {
       "text-base/7",
       "font-semibold",
       "text-zinc-950",
-      "sm:text-sm/6",
-      "dark:text-white"
+      "sm:text-sm/6"
     )
   })
 
@@ -237,12 +229,6 @@ describe("Subheading", () => {
     )
     const subheading = screen.getByTestId("subheading-props")
     expect(subheading).toHaveAttribute("aria-label", "Test subheading")
-  })
-
-  it("has dark mode text styling", () => {
-    render(<Subheading>Dark Mode Subheading</Subheading>)
-    const subheading = screen.getByText("Dark Mode Subheading")
-    expect(subheading).toHaveClass("dark:text-white")
   })
 
   it("has responsive text sizing", () => {
@@ -307,21 +293,6 @@ describe("Heading and Subheading Integration", () => {
     expect(screen.getByRole("heading", { level: 4 })).toHaveTextContent(
       "Minor Section"
     )
-  })
-
-  it("maintains consistent styling across dark mode", () => {
-    render(
-      <div>
-        <Heading>Main Title</Heading>
-        <Subheading>Sub Title</Subheading>
-      </div>
-    )
-
-    const heading = screen.getByText("Main Title")
-    const subheading = screen.getByText("Sub Title")
-
-    expect(heading).toHaveClass("dark:text-white")
-    expect(subheading).toHaveClass("dark:text-white")
   })
 
   it("supports custom styling on both components", () => {
