@@ -2,12 +2,9 @@
  * @jest-environment jsdom
  */
 
-import { render, screen } from "@testing-library/react"
-import {
-  DiscordMemberCount,
-  formatMemberCount,
-} from "../discord-member-count"
 import * as discordApi from "@/lib/discord-api"
+import { render } from "@testing-library/react"
+import { DiscordMemberCount, formatMemberCount } from "../discord-member-count"
 
 // discord-apiモジュールをモック
 jest.mock("@/lib/discord-api")
@@ -48,10 +45,12 @@ describe("formatMemberCount", () => {
 })
 
 describe("DiscordMemberCount", () => {
+  let consoleErrorSpy: jest.SpyInstance
+
   beforeEach(() => {
     jest.clearAllMocks()
     // console.errorをモック化してテスト出力を抑制
-    jest.spyOn(console, "error").mockImplementation(() => {})
+    consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {})
   })
 
   afterEach(() => {
@@ -60,9 +59,7 @@ describe("DiscordMemberCount", () => {
 
   it("メンバー数を正しく表示する", async () => {
     // getDiscordMemberCountをモック
-    jest
-      .spyOn(discordApi, "getDiscordMemberCount")
-      .mockResolvedValue(1234)
+    jest.spyOn(discordApi, "getDiscordMemberCount").mockResolvedValue(1234)
 
     const component = await DiscordMemberCount()
     const { container } = render(component)
@@ -88,16 +85,14 @@ describe("DiscordMemberCount", () => {
 
     expect(component).toBeNull()
     // console.errorが呼ばれたことを確認
-    expect(console.error).toHaveBeenCalledWith(
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
       "Failed to display Discord member count:",
       expect.any(Error)
     )
   })
 
   it("DiscordMemberCountClientに正しいpropsを渡す", async () => {
-    jest
-      .spyOn(discordApi, "getDiscordMemberCount")
-      .mockResolvedValue(567)
+    jest.spyOn(discordApi, "getDiscordMemberCount").mockResolvedValue(567)
 
     const component = await DiscordMemberCount()
     const { getByTestId } = render(component)
