@@ -299,9 +299,10 @@ export function calculateDiscountRate(
   return Math.round(((originalPrice - discountPrice) / originalPrice) * 100)
 }
 
-export function formatDateToJST(date: Date): string {
+export function formatDateToJST(date: Date | string): string {
+  const d = typeof date === "string" ? new Date(date) : date
   // PDTからJSTへの変換（+16時間）
-  const jstDate = new Date(date.getTime() + 16 * 60 * 60 * 1000)
+  const jstDate = new Date(d.getTime() + 16 * 60 * 60 * 1000)
 
   const jstYear = jstDate.getFullYear()
   const jstMonth = String(jstDate.getMonth() + 1).padStart(2, "0")
