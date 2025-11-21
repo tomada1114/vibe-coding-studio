@@ -44,7 +44,7 @@ function CommunityHeroSection() {
         <Navbar />
         <div className="pt-16 pb-24 sm:pt-24 sm:pb-32 md:pt-32 md:pb-48">
           {/* メインメッセージ */}
-          <h1 className="font-display text-6xl/[1.15] font-medium tracking-tight text-balance text-gray-950 sm:text-8xl/[1.1] md:text-9xl/[1.1]">
+          <h1 className="font-display text-5xl/[1.15] font-medium tracking-tight text-balance text-gray-950 sm:text-6xl/[1.1] md:text-7xl/[1.1]">
             AI駆動開発を
             <br />
             一緒に学ぶ仲間が
