@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <head></head>
-      <body className="text-gray-950 antialiased">
+      <body className="text-gray-950 antialiased" suppressHydrationWarning>
         <CSPNonceProvider />
         <ErrorBoundary showDetails={process.env.NODE_ENV === "development"}>
           {children}

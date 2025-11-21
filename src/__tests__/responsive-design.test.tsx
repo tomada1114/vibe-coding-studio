@@ -17,6 +17,10 @@ jest.mock("@/components/logo", () => ({
   ),
 }))
 
+jest.mock("@/components/discord-member-count", () => ({
+  DiscordMemberCount: () => null, // テスト環境では何も表示しない
+}))
+
 describe("レスポンシブデザイン（タスク12.4）", () => {
   describe("トップページのレスポンシブデザイン", () => {
     it("トップページにレスポンシブクラスが使用されている", () => {
