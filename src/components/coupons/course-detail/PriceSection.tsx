@@ -14,7 +14,7 @@ import {
   ExternalLink,
   Gift,
 } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 interface PriceSectionProps {
   coupon: Coupon
@@ -22,6 +22,10 @@ interface PriceSectionProps {
 
 export function PriceSection({ coupon }: PriceSectionProps) {
   const [copied, setCopied] = useState(false)
+  const [isExpired, setIsExpired] = useState(false)
+  const [daysRemaining, setDaysRemaining] = useState<number | null>(null)
+  const [isClient, setIsClient] = useState(false)
+
   const { courseInfo } = coupon
   const discountRate = calculateDiscountRate(
     courseInfo.originalPrice,
@@ -30,13 +34,17 @@ export function PriceSection({ coupon }: PriceSectionProps) {
   const savings = courseInfo.originalPrice - coupon.discountPrice
   const formattedEndDate = formatDateToJST(coupon.endDateTime)
 
-  // Calculate days remaining and check if expired
-  const now = new Date()
-  const endDate = new Date(coupon.endDateTime)
-  const daysRemaining = Math.ceil(
-    (endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)
-  )
-  const isExpired = daysRemaining < 0
+  useEffect(() => {
+    setIsClient(true)
+    const now = new Date()
+    // Handle both Date object and string (ISO format) for endDateTime
+    const endDate = new Date(coupon.endDateTime)
+    const remaining = Math.ceil(
+      (endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)
+    )
+    setDaysRemaining(remaining)
+    setIsExpired(remaining < 0)
+  }, [coupon.endDateTime])
 
   const handleCopyCode = async () => {
     if (!isExpired) {
@@ -150,7 +158,9 @@ export function PriceSection({ coupon }: PriceSectionProps) {
           <div className="flex items-center gap-2 text-orange-800">
             <Clock className="h-4 w-4" />
             <span className="text-sm font-medium">
-              残り{daysRemaining}日で終了
+              {isClient && daysRemaining !== null
+                ? `残り${daysRemaining}日で終了`
+                : "終了間近"}
             </span>
           </div>
           <div className="mt-1 text-xs text-orange-600">
