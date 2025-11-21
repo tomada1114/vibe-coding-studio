@@ -1,5 +1,6 @@
 import { Button } from "@/components/button"
 import { Container } from "@/components/container"
+import { DiscordMemberCount } from "@/components/discord-member-count"
 import { AsyncErrorBoundary } from "@/components/error-boundary"
 import { Footer } from "@/components/footer"
 import { Gradient } from "@/components/gradient"
@@ -49,6 +50,11 @@ function HeroSection() {
             <br />
             一緒に成長するDiscordコミュニティです
           </p>
+
+          {/* Discordメンバー数 */}
+          <div className="mt-12">
+            <DiscordMemberCount />
+          </div>
 
           {/* コミュニティ参加ボタン */}
           <div className="mt-12 flex flex-col gap-x-6 gap-y-4 sm:flex-row">

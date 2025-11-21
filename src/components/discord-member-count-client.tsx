@@ -3,12 +3,14 @@
  *
  * Framer Motionを使用したアニメーション付きの表示コンポーネント。
  * シンプルで視認性の高いデザイン。
+ * 数字がカウントアップするアニメーション効果付き。
  */
 
 "use client"
 
 import { UserGroupIcon } from "@heroicons/react/24/outline"
-import { motion } from "framer-motion"
+import { animate, motion, useMotionValue, useTransform } from "framer-motion"
+import { useEffect } from "react"
 
 interface DiscordMemberCountClientProps {
   formattedCount: string
@@ -22,6 +24,23 @@ interface DiscordMemberCountClientProps {
 export function DiscordMemberCountClient({
   formattedCount,
 }: DiscordMemberCountClientProps) {
+  // formattedCountから数値部分を抽出（例: "1,230+" -> 1230）
+  const targetNumber = parseInt(formattedCount.replace(/[^0-9]/g, ""), 10)
+
+  // Framer Motionのモーション値
+  const count = useMotionValue(0)
+  const rounded = useTransform(count, Math.round)
+
+  useEffect(() => {
+    // カウントアップアニメーション（0から目標値まで）
+    const controls = animate(count, targetNumber, {
+      duration: 2, // 2秒かけてカウントアップ
+      ease: "easeOut",
+    })
+
+    return controls.stop
+  }, [count, targetNumber])
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -35,7 +54,7 @@ export function DiscordMemberCountClient({
       {/* メンバー数情報 */}
       <div className="flex items-baseline gap-3">
         <span className="font-display text-7xl font-bold tracking-tight text-gray-950">
-          {formattedCount}
+          <motion.span>{rounded}</motion.span>+
         </span>
         <span className="text-2xl font-medium text-gray-600">
           名の仲間が参加中
