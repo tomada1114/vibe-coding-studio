@@ -8,7 +8,6 @@
 
 "use client"
 
-import { UserGroupIcon } from "@heroicons/react/24/outline"
 import { animate, motion, useMotionValue, useTransform } from "framer-motion"
 import { useEffect } from "react"
 
@@ -34,7 +33,7 @@ export function DiscordMemberCountClient({
   useEffect(() => {
     // カウントアップアニメーション（0から目標値まで）
     const controls = animate(count, targetNumber, {
-      duration: 2, // 2秒かけてカウントアップ
+      duration: 1.5, // 1.5秒かけてカウントアップ
       ease: "easeOut",
     })
 
@@ -46,11 +45,8 @@ export function DiscordMemberCountClient({
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className="flex items-center justify-center gap-4"
+      className="flex items-center justify-center"
     >
-      {/* アイコン */}
-      <UserGroupIcon className="h-12 w-12 text-gray-950" />
-
       {/* メンバー数情報 */}
       <div className="flex items-baseline gap-3">
         <span className="font-display text-7xl font-bold tracking-tight text-gray-950">
