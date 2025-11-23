@@ -1,6 +1,8 @@
 import { COURSE_INFO } from "@/constants/coupon-courses"
 import type { RawCouponData } from "@/types/coupon"
 import {
+  calculateDiscountRate,
+  formatDateToJST,
   getLatestCoupons,
   getRelatedCoupons,
   parseCouponData,
@@ -275,6 +277,149 @@ describe("coupon-data", () => {
       )
 
       expect(relatedCoupons).toEqual([])
+    })
+  })
+
+  describe("calculateDiscountRate", () => {
+    it("正しく割引率を計算すること", () => {
+      expect(calculateDiscountRate(10000, 1500)).toBe(85)
+      expect(calculateDiscountRate(5000, 1500)).toBe(70)
+      expect(calculateDiscountRate(2000, 1500)).toBe(25)
+    })
+
+    it("割引率が0の場合（同じ価格）", () => {
+      expect(calculateDiscountRate(1500, 1500)).toBe(0)
+    })
+
+    it("割引率が100%の場合", () => {
+      expect(calculateDiscountRate(1500, 0)).toBe(100)
+    })
+
+    it("小数点以下を四捨五入すること", () => {
+      // 10000 - 1234 = 8766, 8766 / 10000 = 0.8766, * 100 = 87.66, round = 88
+      expect(calculateDiscountRate(10000, 1234)).toBe(88)
+      // 10000 - 1235 = 8765, 8765 / 10000 = 0.8765, * 100 = 87.65, round = 88
+      expect(calculateDiscountRate(10000, 1235)).toBe(88)
+    })
+
+    it("エッジケース: 非常に小さな割引", () => {
+      expect(calculateDiscountRate(10000, 9999)).toBe(0)
+    })
+
+    it("エッジケース: 非常に大きな価格", () => {
+      expect(calculateDiscountRate(1000000, 1500)).toBe(100)
+    })
+  })
+
+  describe("formatDateToJST", () => {
+    it("Date型を正しくJST形式にフォーマットすること", () => {
+      const date = new Date("2025-01-01T00:00:00-08:00") // PST
+      const result = formatDateToJST(date)
+
+      // PDTからJST（+16時間）への変換を期待
+      expect(result).toMatch(/^\d{4}年\d{2}月\d{2}日$/)
+    })
+
+    it("ISO文字列を正しくJST形式にフォーマットすること", () => {
+      const dateString = "2025-01-15T12:00:00-08:00"
+      const result = formatDateToJST(dateString)
+
+      expect(result).toMatch(/^\d{4}年\d{2}月\d{2}日$/)
+      expect(result).toContain("2025年")
+    })
+
+    it("月と日が1桁の場合、ゼロパディングされること", () => {
+      const date = new Date("2025-01-05T00:00:00-08:00")
+      const result = formatDateToJST(date)
+
+      // ゼロパディングされた形式を期待
+      expect(result).toMatch(/^\d{4}年0\d月\d{2}日$/)
+    })
+
+    it("年末年始の日付変換が正しく行われること", () => {
+      // 12/31 PST + 16時間 = 次の日（1/1）になるケース
+      const date = new Date("2024-12-31T10:00:00-08:00")
+      const result = formatDateToJST(date)
+
+      // 16時間を加算すると2025年1月1日になる
+      expect(result).toMatch(/2025年01月\d{2}日/)
+    })
+  })
+
+  describe("getLatestCoupons - Edge Cases", () => {
+    it("キャッシュが機能すること", () => {
+      const firstCall = getLatestCoupons()
+      const secondCall = getLatestCoupons()
+
+      // 同じインスタンスが返されることを確認（キャッシュが機能）
+      expect(firstCall).toBe(secondCall)
+    })
+
+    it("有効期限内のクーポンのみを返すこと", () => {
+      const coupons = getLatestCoupons()
+
+      // 現在の日付を取得
+      const now = new Date()
+      const todayUTC = Date.UTC(
+        now.getUTCFullYear(),
+        now.getUTCMonth(),
+        now.getUTCDate()
+      )
+
+      coupons.forEach(coupon => {
+        const start = coupon.startDateTime
+        const startUTC = Date.UTC(
+          start.getUTCFullYear(),
+          start.getUTCMonth(),
+          start.getUTCDate()
+        )
+
+        const end = coupon.endDateTime
+        const endUTC = Date.UTC(
+          end.getUTCFullYear(),
+          end.getUTCMonth(),
+          end.getUTCDate()
+        )
+
+        // 開始日 <= 今日 <= 終了日
+        expect(startUTC).toBeLessThanOrEqual(todayUTC)
+        expect(endUTC).toBeGreaterThanOrEqual(todayUTC)
+      })
+    })
+  })
+
+  describe("parseCouponData - Edge Cases", () => {
+    it("空配列を渡した場合、空配列を返すこと", () => {
+      const result = parseCouponData([])
+      expect(result).toEqual([])
+    })
+
+    it("すべてのcourseIdが存在しない場合、空配列を返すこと", () => {
+      const testData: RawCouponData[] = [
+        {
+          courseId: "9999991",
+          couponType: "custom_price",
+          maximumRedemptions: "unlimited",
+          couponCode: "2025-10-10",
+          startDateTime: "2025-10-10T00:00:00-07:00",
+          endDateTime: "2025-11-09T23:00:00-07:00",
+          currency: "JPY",
+          discountPrice: 1500,
+        },
+        {
+          courseId: "9999992",
+          couponType: "custom_price",
+          maximumRedemptions: "unlimited",
+          couponCode: "2025-10-10",
+          startDateTime: "2025-10-10T00:00:00-07:00",
+          endDateTime: "2025-11-09T23:00:00-07:00",
+          currency: "JPY",
+          discountPrice: 1500,
+        },
+      ]
+
+      const result = parseCouponData(testData)
+      expect(result).toEqual([])
     })
   })
 })
