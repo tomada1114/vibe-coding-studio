@@ -436,7 +436,6 @@ describe("loadUdemyCourseIndex", () => {
 
     it("Error以外の例外の場合も、INVALID_COURSE_DATAエラーをスローすること", () => {
       mockedFs.readFileSync.mockImplementation(() => {
-        // eslint-disable-next-line @typescript-eslint/only-throw-error
         throw "String error"
       })
 

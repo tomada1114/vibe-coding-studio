@@ -325,7 +325,6 @@ describe("loadVideoIndex", () => {
 
     it("Error以外の例外の場合も、INVALID_VIDEO_DATAエラーをスローすること", () => {
       mockedFs.readFileSync.mockImplementation(() => {
-        // eslint-disable-next-line @typescript-eslint/only-throw-error
         throw "String error"
       })
 

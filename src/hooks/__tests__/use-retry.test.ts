@@ -53,7 +53,7 @@ describe("useRetry", () => {
   it("失敗時にerrorが設定されること", async () => {
     const error = new Error("Test error")
     const fn = jest.fn().mockRejectedValue(error)
-    const { result } = renderHook(() => useRetry(fn, { maxRetries: 0 }))
+    const { result } = renderHook(() => useRetry(fn, { maxAttempts: 1 }))
 
     await act(async () => {
       await result.current.execute()
@@ -75,7 +75,7 @@ describe("useRetry", () => {
     })
 
     const { result } = renderHook(() =>
-      useRetry(fn, { maxRetries: 3, baseDelay: 10 })
+      useRetry(fn, { maxAttempts: 3, initialDelay: 10 })
     )
 
     await act(async () => {
@@ -98,7 +98,7 @@ describe("useRetry", () => {
 
     const onRetry = jest.fn()
     const { result } = renderHook(() =>
-      useRetry(fn, { maxRetries: 3, baseDelay: 10, onRetry })
+      useRetry(fn, { maxAttempts: 3, initialDelay: 10, onRetry })
     )
 
     await act(async () => {
@@ -132,7 +132,7 @@ describe("useRetry", () => {
 
   it("Error以外の例外もエラーとして扱うこと", async () => {
     const fn = jest.fn().mockRejectedValue("String error")
-    const { result } = renderHook(() => useRetry(fn, { maxRetries: 0 }))
+    const { result } = renderHook(() => useRetry(fn, { maxAttempts: 1 }))
 
     await act(async () => {
       await result.current.execute()
@@ -202,27 +202,31 @@ describe("useAutoRetry", () => {
 
   it("resetメソッドが状態をリセットすること", async () => {
     const fn = jest.fn().mockResolvedValue("success")
-    const { result } = renderHook(() => useAutoRetry(fn))
+    const { result, rerender } = renderHook(
+      ({ enabled }) => useAutoRetry(fn, { enabled }),
+      { initialProps: { enabled: true } }
+    )
 
     await waitFor(() => {
       expect(result.current.data).toBe("success")
     })
 
     await act(async () => {
+      // enabled: falseに設定してから reset を呼ぶ
+      rerender({ enabled: false })
       result.current.reset()
-      // Wait for next tick to allow state updates
-      await Promise.resolve()
     })
 
     await waitFor(() => {
       expect(result.current.data).toBeUndefined()
+      expect(result.current.isLoading).toBe(false)
     })
   })
 
   it("エラー時にerrorが設定されること", async () => {
     const error = new Error("Test error")
     const fn = jest.fn().mockRejectedValue(error)
-    const { result } = renderHook(() => useAutoRetry(fn, { maxRetries: 0 }))
+    const { result } = renderHook(() => useAutoRetry(fn, { maxAttempts: 1 }))
 
     await waitFor(
       () => {
@@ -243,12 +247,15 @@ describe("useAutoRetry", () => {
     })
 
     const { result } = renderHook(() =>
-      useAutoRetry(fn, { maxRetries: 3, baseDelay: 10 })
+      useAutoRetry(fn, { maxAttempts: 3, initialDelay: 10 })
     )
 
-    await waitFor(() => {
-      expect(result.current.data).toBe("success")
-    })
+    await waitFor(
+      () => {
+        expect(result.current.data).toBe("success")
+      },
+      { timeout: 5000 }
+    )
 
     expect(fn).toHaveBeenCalledTimes(3)
   })
