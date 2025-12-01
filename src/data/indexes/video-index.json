@@ -1,7 +1,56 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2025-11-05T22:50:39.903Z",
+  "generatedAt": "2025-11-21T21:19:59.426Z",
   "videos": [
+    {
+      "id": "NpA5f4Y1IsY",
+      "title": "Claude Skillsで簡単にApple風デザインを自動生成！AIっぽいデザインから脱却する方法",
+      "tags": [
+        "claude",
+        "claudecode",
+        "skills",
+        "design",
+        "ai",
+        "デザインシステム",
+        "AppleDesign",
+        "MaterialDesign",
+        "UI",
+        "UX",
+        "スキル作成",
+        "デザイン自動生成",
+        "claude-skill-creator",
+        "Anthropic",
+        "プログラミング"
+      ],
+      "relatedVideoIds": [
+        "UqKd0dxLskU",
+        "ECRzrFNIWNM",
+        "SO5qov2qTUE"
+      ],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "DDP9-YzjUYU",
+      "title": "【速報】Google Antigravityを紹介！Gemini 3 Pro/Claude Sonnet 4.5も無料！？",
+      "tags": [
+        "Google Antigravity",
+        "Gemini 3 Pro",
+        "Claude Sonnet 4.5",
+        "GPT-OSS",
+        "AI駆動開発",
+        "IDE",
+        "無料ツール",
+        "Cursor",
+        "Windsurf",
+        "AIエディター比較"
+      ],
+      "relatedVideoIds": [
+        "HM0SLThgXqE",
+        "4HJCCAfDGU4",
+        "geZT1xTb06I"
+      ],
+      "udemyCourseIds": []
+    },
     {
       "id": "1-1NAB5jIjo",
       "title": "リアルなAI駆動開発の全工程！現役エンジニアの仕様駆動開発を公開",
@@ -689,9 +738,66 @@
         "コマンド操作"
       ],
       "relatedVideoIds": [
-        "1LP4ZAsU_UI",
-        "SO5qov2qTUE",
-        "TWUpzNGp7fI"
+        "dV1cZ3R-GEI",
+        "Mwp4_DYGzTI",
+        "1LP4ZAsU_UI"
+      ],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "dV1cZ3R-GEI",
+      "title": "CLI(コマンドラインインターフェース)を練習してみよう",
+      "tags": [
+        "CLI",
+        "コマンドライン",
+        "ターミナル",
+        "Mac",
+        "gitbash",
+        "ファイル操作",
+        "ディレクトリ操作",
+        "初心者向け",
+        "pwd",
+        "cd",
+        "ls",
+        "mkdir",
+        "touch",
+        "mv",
+        "cp",
+        "rm",
+        "grep",
+        "cat"
+      ],
+      "relatedVideoIds": [
+        "OfXZCu6xJJg",
+        "Mwp4_DYGzTI",
+        "1LP4ZAsU_UI"
+      ],
+      "udemyCourseIds": []
+    },
+    {
+      "id": "Mwp4_DYGzTI",
+      "title": "VSCode（Visual Studio Code）のインストールと使い方",
+      "tags": [
+        "VSCode",
+        "VisualStudioCode",
+        "エディター",
+        "開発環境",
+        "初心者向け",
+        "プログラミング入門",
+        "Microsoft",
+        "拡張機能",
+        "ターミナル",
+        "コードエディター",
+        "Mac",
+        "Windows",
+        "日本語化",
+        "ファイル管理",
+        "検索機能"
+      ],
+      "relatedVideoIds": [
+        "OfXZCu6xJJg",
+        "dV1cZ3R-GEI",
+        "1LP4ZAsU_UI"
       ],
       "udemyCourseIds": []
     }

@@ -7,10 +7,72 @@
 import Home from "@/app/page"
 import { render, screen } from "@testing-library/react"
 
-// モックを設定
+// Next.js の usePathname をモック
+jest.mock("next/navigation", () => ({
+  usePathname: () => "/",
+}))
+
+// Next.js Image コンポーネントをモック
+jest.mock("next/image", () => ({
+  __esModule: true,
+  default: ({
+    src,
+    alt,
+    width,
+    height,
+    className,
+    sizes,
+  }: {
+    src: string
+    alt: string
+    width?: number
+    height?: number
+    className?: string
+    sizes?: string
+    priority?: boolean
+    fill?: boolean
+  }) => (
+    <img
+      src={src}
+      alt={alt || ""}
+      width={width}
+      height={height}
+      className={className}
+      data-sizes={sizes}
+    />
+  ),
+}))
+
+// framer-motion をモック
+jest.mock("framer-motion", () => ({
+  motion: {
+    div: ({
+      children,
+      ...props
+    }: React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>>) => (
+      <div {...props}>{children}</div>
+    ),
+    span: ({
+      children,
+      ...props
+    }: React.PropsWithChildren<React.HTMLAttributes<HTMLSpanElement>>) => (
+      <span {...props}>{children}</span>
+    ),
+  },
+  AnimatePresence: ({ children }: React.PropsWithChildren) => <>{children}</>,
+}))
+
+// Logo コンポーネントをモック
 jest.mock("@/components/logo", () => ({
   Logo: () => (
     <img alt="Vibe Coding Studio Logo" src="/vcs-logo-square-transparent.png" />
+  ),
+}))
+
+// DiscordMemberCount コンポーネントをモック（非同期サーバーコンポーネントのため）
+jest.mock("@/components/discord-member-count", () => ({
+  DiscordMemberCount: () => (
+    <div data-testid="discord-member-count">1,000+ 人のメンバー</div>
   ),
 }))
 
