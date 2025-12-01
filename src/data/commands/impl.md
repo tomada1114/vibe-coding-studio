@@ -1,6 +1,5 @@
 ---
-description: Execute single pending subtask using cc-sdd-impl-agent. This command is for executing tasks **one at a time** without specifying task numbers manually.
-allowed-tools: Read, Task, Glob
+description: Execute single pending subtask using cc-sdd-impl-agent. This command does not require you to specify the feature name and task number.
 ---
 
 # Single Task Executor
