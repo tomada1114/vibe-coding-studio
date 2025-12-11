@@ -19,9 +19,7 @@ import type { Metadata } from "next"
 import Image from "next/image"
 
 export const metadata: Metadata = {
-  title: "Vibe Coding Studio - AI駆動開発コミュニティ",
-  description:
-    "AI駆動開発を学ぶ仲間が集まり、情報を共有し合い、一緒に成長するDiscordコミュニティ",
+  title: "ホーム",
 }
 
 /**
@@ -38,10 +36,10 @@ function HeroSection() {
         <Navbar />
         <div className="pt-16 pb-24 sm:pt-24 sm:pb-32 md:pt-32 md:pb-48">
           {/* キャッチコピー */}
-          <h1 className="font-display text-6xl/[1.15] font-medium tracking-tight text-balance text-gray-950 sm:text-8xl/[1.1] md:text-9xl/[1.1]">
-            AI駆動開発を
+          <h1 className="font-display text-4xl/[1.2] font-medium tracking-tight text-balance text-gray-950 sm:text-5xl/[1.15] md:text-6xl/[1.1]">
+            AI駆動開発を仲間と
             <br />
-            仲間と一緒に学ぼう
+            一緒に学ぼう
           </h1>
 
           {/* 説明文 */}
@@ -84,7 +82,7 @@ function CommunityOverviewSection() {
       icon: LightBulbIcon,
       title: "最新検証をリアルタイムで",
       description:
-        "とまだの最新AI技術検証をYouTube化前に見られる。失敗も含めた試行錯誤のプロセスが学べます",
+        "とまだの最新AI技術検証をYouTube公開前の段階から共有。失敗も含めた試行錯誤のプロセスを一緒に追えます",
     },
     {
       icon: ChatBubbleLeftRightIcon,
@@ -114,7 +112,7 @@ function CommunityOverviewSection() {
                 alt="Vibe Coding Studio"
                 width={300}
                 height={100}
-                priority={false}
+                sizes="(max-width: 640px) 240px, 300px"
               />
             </div>
           </div>
@@ -125,7 +123,10 @@ function CommunityOverviewSection() {
           {communityFeatures.map(feature => (
             <div key={feature.title} className="text-center">
               <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gray-950">
-                <feature.icon className="h-8 w-8 text-white" />
+                <feature.icon
+                  className="h-8 w-8 text-white"
+                  aria-hidden="true"
+                />
               </div>
               <h3 className="mt-6 text-xl/7 font-semibold text-gray-950">
                 {feature.title}
@@ -158,7 +159,7 @@ function CouponSection() {
       <Container className="relative">
         <div className="text-center">
           <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-purple-500 to-pink-500">
-            <TicketIcon className="h-10 w-10 text-white" />
+            <TicketIcon className="h-10 w-10 text-white" aria-hidden="true" />
           </div>
           <Subheading className="mt-8">Udemy Coupons</Subheading>
           <Heading as="h2" className="mt-2">
@@ -223,7 +224,10 @@ function WorkInProgressSection() {
               key={feature.title}
               className="relative rounded-3xl bg-white p-8 shadow-sm ring-1 ring-gray-950/5"
             >
-              <feature.icon className="h-10 w-10 text-gray-950" />
+              <feature.icon
+                className="h-10 w-10 text-gray-950"
+                aria-hidden="true"
+              />
               <h3 className="mt-6 text-xl/7 font-semibold text-gray-950">
                 {feature.title}
               </h3>
@@ -301,10 +305,16 @@ function ProfileSection() {
 export default function Home() {
   return (
     <div className="overflow-hidden">
-      <AsyncErrorBoundary>
-        <HeroSection />
-      </AsyncErrorBoundary>
-      <main>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-gray-950 focus:ring-2 focus:ring-gray-950/20"
+      >
+        メインコンテンツへスキップ
+      </a>
+      <main id="main-content">
+        <AsyncErrorBoundary>
+          <HeroSection />
+        </AsyncErrorBoundary>
         <AsyncErrorBoundary>
           <CommunityOverviewSection />
         </AsyncErrorBoundary>
