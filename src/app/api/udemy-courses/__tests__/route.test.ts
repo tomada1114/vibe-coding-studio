@@ -2,6 +2,7 @@
  * @jest-environment node
  */
 import { COURSE_DISPLAY_ORDER, COURSE_INFO } from "@/constants/coupon-courses"
+import type { UdemyCourseApiInfo } from "@/types/udemy-course-api"
 import { NextRequest } from "next/server"
 
 import { GET } from "../route"
@@ -35,7 +36,9 @@ describe("GET /api/udemy-courses", () => {
       const data = await response.json()
 
       // Then: COURSE_DISPLAY_ORDER の順序で返される
-      const courseIds = data.courses.map((course: { id: string }) => course.id)
+      const courseIds = data.courses.map(
+        (course: UdemyCourseApiInfo) => course.id
+      )
       expect(courseIds).toEqual(COURSE_DISPLAY_ORDER)
     })
 
@@ -48,26 +51,17 @@ describe("GET /api/udemy-courses", () => {
       const data = await response.json()
 
       // Then: 各講座に必須フィールドが含まれている
-      data.courses.forEach(
-        (course: {
-          id: string
-          title: string
-          slug: string
-          description: string
-          topics: string[]
-          url: string
-        }) => {
-          expect(course).toHaveProperty("id")
-          expect(course).toHaveProperty("title")
-          expect(course).toHaveProperty("slug")
-          expect(course).toHaveProperty("description")
-          expect(course).toHaveProperty("topics")
-          expect(course).toHaveProperty("url")
-          expect(course.url).toMatch(
-            /^https:\/\/www\.vibecodingstudio\.dev\/coupons\/.+$/
-          )
-        }
-      )
+      data.courses.forEach((course: UdemyCourseApiInfo) => {
+        expect(course).toHaveProperty("id")
+        expect(course).toHaveProperty("title")
+        expect(course).toHaveProperty("slug")
+        expect(course).toHaveProperty("description")
+        expect(course).toHaveProperty("topics")
+        expect(course).toHaveProperty("url")
+        expect(course.url).toMatch(
+          /^https:\/\/www\.vibecodingstudio\.dev\/coupons\/.+$/
+        )
+      })
     })
 
     it("should return correct URL format for each course", async () => {
@@ -79,7 +73,7 @@ describe("GET /api/udemy-courses", () => {
       const data = await response.json()
 
       // Then: URLがスラッグから正しく生成されている
-      data.courses.forEach((course: { slug: string; url: string }) => {
+      data.courses.forEach((course: UdemyCourseApiInfo) => {
         expect(course.url).toBe(
           `https://www.vibecodingstudio.dev/coupons/${course.slug}`
         )
@@ -103,7 +97,7 @@ describe("GET /api/udemy-courses", () => {
       expect(data.courses.length).toBeGreaterThan(0)
       expect(data.filter).toEqual({ topic: "claude-code" })
 
-      data.courses.forEach((course: { topics: string[] }) => {
+      data.courses.forEach((course: UdemyCourseApiInfo) => {
         expect(course.topics).toContain("claude-code")
       })
     })
@@ -135,7 +129,7 @@ describe("GET /api/udemy-courses", () => {
       // Then: codexトピックを含む講座のみ返される
       expect(response.status).toBe(200)
       expect(data.courses.length).toBeGreaterThan(0)
-      data.courses.forEach((course: { topics: string[] }) => {
+      data.courses.forEach((course: UdemyCourseApiInfo) => {
         expect(course.topics).toContain("codex")
       })
     })
@@ -184,21 +178,13 @@ describe("GET /api/udemy-courses", () => {
       const data = await response.json()
 
       // Then: COURSE_INFOのデータと一致する
-      data.courses.forEach(
-        (course: {
-          id: string
-          title: string
-          slug: string
-          description: string
-          topics: string[]
-        }) => {
-          const originalInfo = COURSE_INFO[course.id]
-          expect(course.title).toBe(originalInfo.title)
-          expect(course.slug).toBe(originalInfo.slug)
-          expect(course.description).toBe(originalInfo.description)
-          expect(course.topics).toEqual(originalInfo.topics)
-        }
-      )
+      data.courses.forEach((course: UdemyCourseApiInfo) => {
+        const originalInfo = COURSE_INFO[course.id]
+        expect(course.title).toBe(originalInfo.title)
+        expect(course.slug).toBe(originalInfo.slug)
+        expect(course.description).toBe(originalInfo.description)
+        expect(course.topics).toEqual(originalInfo.topics)
+      })
     })
   })
 
@@ -214,6 +200,23 @@ describe("GET /api/udemy-courses", () => {
       expect(response.headers.get("Cache-Control")).toBe(
         "public, s-maxage=3600, stale-while-revalidate=86400"
       )
+    })
+  })
+
+  describe("Unhappy Path: エラーハンドリング", () => {
+    it("should return 500 when internal error occurs", async () => {
+      // Given: 不正なURLでリクエストを作成（URL解析でエラーを発生させる）
+      const mockRequest = {
+        url: "invalid-url",
+      } as NextRequest
+
+      // When: APIを呼び出す
+      const response = await GET(mockRequest)
+      const data = await response.json()
+
+      // Then: 500エラーを返す
+      expect(response.status).toBe(500)
+      expect(data.error).toBe("Internal server error")
     })
   })
 })
