@@ -65,6 +65,166 @@ interface CSPReport {
 
 ---
 
+### Udemy Courses API
+
+Vibe Coding Studioで扱っているUdemy講座の情報を取得するAPI。トピックでフィルタリングして関連講座を検索できます。価格情報は含まれません。
+
+#### `GET /api/udemy-courses`
+
+講座一覧を取得します。
+
+**Query Parameters:**
+
+| Parameter | Type   | Required | Description                                                                 |
+| --------- | ------ | -------- | --------------------------------------------------------------------------- |
+| `topic`   | string | No       | フィルタリングするトピックのスラッグ。例: `claude-code`, `codex`, `nextjs` |
+
+**Response:**
+
+```typescript
+interface UdemyCoursesApiResponse {
+  courses: UdemyCourseApiInfo[]
+  totalCount: number
+  filter?: {
+    topic?: string
+  }
+}
+
+interface UdemyCourseApiInfo {
+  id: string           // 講座ID（Udemy内部ID）
+  title: string        // 講座タイトル
+  slug: string         // URLスラッグ
+  description: string  // 講座の概要説明
+  topics: string[]     // 関連トピック一覧
+  url: string          // 詳細ページURL
+}
+```
+
+**Example Request:**
+
+```bash
+# 全講座取得
+curl https://www.vibecodingstudio.dev/api/udemy-courses
+
+# Claude Code関連の講座を取得
+curl https://www.vibecodingstudio.dev/api/udemy-courses?topic=claude-code
+
+# Codex関連の講座を取得
+curl https://www.vibecodingstudio.dev/api/udemy-courses?topic=codex
+```
+
+**Example Response:**
+
+```json
+{
+  "courses": [
+    {
+      "id": "6691241",
+      "title": "【Claude Code×Vibe Coding】プログラミング未経験OK！ゼロから学べる AI 駆動開発実践講座",
+      "slug": "claude-code-vibe-coding",
+      "description": "Claude Code×Vibe Codingでプログラミング未経験でもReact・Next.jsで5つのアプリを開発！実践的な開発スキルを身につけることができます。",
+      "topics": ["claude-code", "react", "nextjs"],
+      "url": "https://www.vibecodingstudio.dev/coupons/claude-code-vibe-coding"
+    }
+  ],
+  "totalCount": 8,
+  "filter": {
+    "topic": "claude-code"
+  }
+}
+```
+
+---
+
+#### `GET /api/udemy-courses/topics`
+
+利用可能なトピック一覧を取得します。`/coupons` ページのフィルタ種別と連動しています。
+
+**Response:**
+
+```typescript
+interface UdemyTopicsApiResponse {
+  topics: UdemyTopicApiInfo[]
+  totalCount: number
+}
+
+interface UdemyTopicApiInfo {
+  slug: string       // トピックスラッグ（フィルタリング用キー）
+  name: string       // トピック表示名
+  icon: string       // アイコンURL
+  courseCount: number // 該当講座数
+}
+```
+
+**Example Request:**
+
+```bash
+curl https://www.vibecodingstudio.dev/api/udemy-courses/topics
+```
+
+**Example Response:**
+
+```json
+{
+  "topics": [
+    {
+      "slug": "claude-code",
+      "name": "Claude Code",
+      "icon": "/images/topics/claude.svg",
+      "courseCount": 8
+    },
+    {
+      "slug": "nextjs",
+      "name": "Next.js",
+      "icon": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original-wordmark.svg",
+      "courseCount": 6
+    },
+    {
+      "slug": "codex",
+      "name": "Codex",
+      "icon": "/images/topics/codex.svg",
+      "courseCount": 3
+    }
+  ],
+  "totalCount": 18
+}
+```
+
+---
+
+#### `GET /api/udemy-courses/info`
+
+API の説明情報を取得します。
+
+**Response:**
+
+```typescript
+interface UdemyCoursesApiInfo {
+  name: string
+  description: string
+  baseUrl: string
+  endpoints: {
+    path: string
+    method: string
+    description: string
+    parameters?: {
+      name: string
+      type: string
+      required: boolean
+      description: string
+    }[]
+  }[]
+}
+```
+
+**Example Request:**
+
+```bash
+curl https://www.vibecodingstudio.dev/api/udemy-courses/info
+```
+
+---
+
 #### `OPTIONS /api/csp-report`
 
 CORS preflight handler for CSP reporting.
