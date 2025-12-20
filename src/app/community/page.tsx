@@ -30,6 +30,9 @@ export const metadata: Metadata = {
     "AI駆動開発を学ぶ仲間と繋がり、最新検証を見ながら一緒に成長するDiscordコミュニティに参加しよう",
 }
 
+// 1時間ごとに再検証
+export const revalidate = 3600
+
 /**
  * コミュニティページのヒーローセクション
  * - Discord参加への強いCTA
