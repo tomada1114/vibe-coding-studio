@@ -59,9 +59,10 @@ export async function getDiscordMemberCount(): Promise<number> {
           Authorization: `Bot ${botToken}`,
           "Content-Type": "application/json",
         },
-        // 24時間キャッシュ（Discord APIのレート制限対策）
+        // 1時間キャッシュ（Next.js Data Cache）
         next: {
-          revalidate: 86400, // 24時間 = 86400秒
+          revalidate: 3600, // 1時間 = 3600秒
+          tags: ["discord-member-count"],
         },
       }
     )

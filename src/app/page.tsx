@@ -22,6 +22,9 @@ export const metadata: Metadata = {
   title: "ホーム",
 }
 
+// 1時間ごとに再検証
+export const revalidate = 3600
+
 /**
  * ファーストビューセクション
  * - キャッチコピー
