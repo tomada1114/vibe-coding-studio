@@ -5,6 +5,7 @@ import {
   cacheConfig,
   cachedQuery,
   cacheKeys,
+  logCacheStats,
   memoryCache,
   staleWhileRevalidate,
 } from "@/lib/cache"
@@ -232,5 +233,97 @@ describe("cacheConfig", () => {
     expect(cacheConfig.categories.ttl).toBe(30 * 60 * 1000) // 30 minutes
     expect(cacheConfig.count.ttl).toBe(5 * 60 * 1000) // 5 minutes
     expect(cacheConfig.static.ttl).toBe(60 * 60 * 1000) // 1 hour
+  })
+})
+
+describe("logCacheStats", () => {
+  beforeEach(() => {
+    memoryCache.clear()
+  })
+
+  it("should log cache stats in development mode", () => {
+    const originalEnv = process.env.NODE_ENV
+    process.env.NODE_ENV = "development"
+
+    // Add some test data
+    memoryCache.set("key1", "value1")
+    memoryCache.set("key2", "value2")
+    memoryCache.get("key1")
+    memoryCache.get("key1")
+    memoryCache.get("non-existent")
+
+    const consoleTableSpy = jest
+      .spyOn(console, "table")
+      .mockImplementation(() => {})
+    const consoleLogSpy = jest
+      .spyOn(console, "log")
+      .mockImplementation(() => {})
+
+    logCacheStats()
+
+    expect(consoleTableSpy).toHaveBeenCalled()
+    expect(consoleLogSpy).toHaveBeenCalled()
+
+    consoleTableSpy.mockRestore()
+    consoleLogSpy.mockRestore()
+    process.env.NODE_ENV = originalEnv
+  })
+
+  it("should not log in production mode", () => {
+    const originalEnv = process.env.NODE_ENV
+    process.env.NODE_ENV = "production"
+
+    memoryCache.set("key1", "value1")
+
+    const consoleTableSpy = jest
+      .spyOn(console, "table")
+      .mockImplementation(() => {})
+    const consoleLogSpy = jest
+      .spyOn(console, "log")
+      .mockImplementation(() => {})
+
+    logCacheStats()
+
+    expect(consoleTableSpy).not.toHaveBeenCalled()
+    expect(consoleLogSpy).not.toHaveBeenCalled()
+
+    consoleTableSpy.mockRestore()
+    consoleLogSpy.mockRestore()
+    process.env.NODE_ENV = originalEnv
+  })
+
+  it("should show top cached entries when entries exist", () => {
+    const originalEnv = process.env.NODE_ENV
+    process.env.NODE_ENV = "development"
+
+    // Add multiple entries with different hit counts
+    memoryCache.set("popular", "value1")
+    memoryCache.set("medium", "value2")
+    memoryCache.set("rare", "value3")
+
+    // Create different hit counts
+    memoryCache.get("popular")
+    memoryCache.get("popular")
+    memoryCache.get("popular")
+    memoryCache.get("medium")
+    memoryCache.get("medium")
+    memoryCache.get("rare")
+
+    const consoleTableSpy = jest
+      .spyOn(console, "table")
+      .mockImplementation(() => {})
+    const consoleLogSpy = jest
+      .spyOn(console, "log")
+      .mockImplementation(() => {})
+
+    logCacheStats()
+
+    // Should call console.table twice (once for stats, once for entries)
+    expect(consoleTableSpy).toHaveBeenCalled()
+    expect(consoleLogSpy).toHaveBeenCalledWith("Top cached entries:")
+
+    consoleTableSpy.mockRestore()
+    consoleLogSpy.mockRestore()
+    process.env.NODE_ENV = originalEnv
   })
 })

@@ -437,5 +437,69 @@ description: Test command
         }
       })
     })
+
+    describe("Production Environment Logging", () => {
+      it("should log errors in production mode", () => {
+        const originalEnv = process.env.NODE_ENV
+        process.env.NODE_ENV = "production"
+
+        mockedFs.existsSync.mockReturnValue(true)
+        mockedFs.readFileSync.mockImplementation(() => {
+          throw new Error("File read error")
+        })
+
+        const consoleErrorSpy = jest
+          .spyOn(console, "error")
+          .mockImplementation(() => {})
+
+        const command = getCommandBySlug("test-command")
+
+        expect(command).toBeUndefined()
+        expect(consoleErrorSpy).toHaveBeenCalled()
+
+        consoleErrorSpy.mockRestore()
+        process.env.NODE_ENV = originalEnv
+      })
+
+      it("should log warnings in development mode", () => {
+        const originalEnv = process.env.NODE_ENV
+        process.env.NODE_ENV = "development"
+
+        mockedFs.existsSync.mockReturnValue(true)
+        mockedFs.readdirSync.mockReturnValue([
+          "../invalid-slug.md",
+        ] as unknown as fs.Dirent[])
+
+        const consoleWarnSpy = jest
+          .spyOn(console, "warn")
+          .mockImplementation(() => {})
+
+        const commands = getAllCommands()
+
+        expect(commands).toEqual([])
+        expect(consoleWarnSpy).toHaveBeenCalled()
+
+        consoleWarnSpy.mockRestore()
+        process.env.NODE_ENV = originalEnv
+      })
+
+      it("should not log warnings in production for invalid slugs", () => {
+        const originalEnv = process.env.NODE_ENV
+        process.env.NODE_ENV = "production"
+
+        const consoleWarnSpy = jest
+          .spyOn(console, "warn")
+          .mockImplementation(() => {})
+
+        const command = getCommandBySlug("../invalid-path")
+
+        expect(command).toBeUndefined()
+        // In production, warnings are not logged
+        expect(consoleWarnSpy).not.toHaveBeenCalled()
+
+        consoleWarnSpy.mockRestore()
+        process.env.NODE_ENV = originalEnv
+      })
+    })
   })
 })
