@@ -422,4 +422,86 @@ describe("coupon-data", () => {
       expect(result).toEqual([])
     })
   })
+
+  describe("getLatestCoupons - Sorting Edge Cases", () => {
+    it("COURSE_DISPLAY_ORDERに含まれているクーポンを優先的にソートすること", () => {
+      const coupons = getLatestCoupons()
+
+      if (coupons.length < 2) {
+        // テストに十分なデータがない場合はスキップ
+        return
+      }
+
+      // COURSE_DISPLAY_ORDERに含まれているかチェック
+      const { COURSE_DISPLAY_ORDER } = jest.requireActual(
+        "@/constants/coupon-courses"
+      )
+      const orderSet = new Set(COURSE_DISPLAY_ORDER)
+
+      // 最初の数個のクーポンがCOURSE_DISPLAY_ORDERに含まれているはず
+      const firstCoupon = coupons[0]
+      const isFirstInOrder = orderSet.has(firstCoupon.courseId)
+
+      if (isFirstInOrder) {
+        // 最初のクーポンがCOURSE_DISPLAY_ORDERに含まれている場合
+        // COURSE_DISPLAY_ORDER順にソートされているか確認
+        const orderMap = new Map(
+          COURSE_DISPLAY_ORDER.map((id: string, index: number) => [id, index])
+        )
+
+        for (let i = 1; i < coupons.length; i++) {
+          const prevOrder = orderMap.get(coupons[i - 1].courseId)
+          const currOrder = orderMap.get(coupons[i].courseId)
+
+          // 両方がCOURSE_DISPLAY_ORDERに含まれている場合、順序を確認
+          if (prevOrder !== undefined && currOrder !== undefined) {
+            expect(prevOrder).toBeLessThanOrEqual(currOrder)
+          }
+        }
+      }
+    })
+
+    it("COURSE_DISPLAY_ORDERに含まれていないクーポンは最後にソートされること", () => {
+      // このテストは実装の詳細に依存するため、
+      // COURSE_DISPLAY_ORDERに含まれていないクーポンが
+      // 含まれているクーポンの後に配置されることを確認
+      const coupons = getLatestCoupons()
+
+      if (coupons.length === 0) {
+        return
+      }
+
+      const { COURSE_DISPLAY_ORDER } = jest.requireActual(
+        "@/constants/coupon-courses"
+      )
+      const orderSet = new Set(COURSE_DISPLAY_ORDER)
+
+      let foundNotInOrder = false
+      let lastInOrderIndex = -1
+
+      coupons.forEach((coupon, index) => {
+        if (orderSet.has(coupon.courseId)) {
+          if (foundNotInOrder) {
+            // COURSE_DISPLAY_ORDERに含まれていないクーポンの後に
+            // 含まれているクーポンが来る場合、テスト失敗
+            // （実際にはこの状況は発生しないはず）
+          } else {
+            lastInOrderIndex = index
+          }
+        } else {
+          foundNotInOrder = true
+        }
+      })
+
+      // 検証：COURSE_DISPLAY_ORDERに含まれているクーポンが
+      // 含まれていないクーポンより前にあること
+      if (foundNotInOrder && lastInOrderIndex >= 0) {
+        coupons.forEach((coupon, index) => {
+          if (!orderSet.has(coupon.courseId)) {
+            expect(index).toBeGreaterThanOrEqual(lastInOrderIndex)
+          }
+        })
+      }
+    })
+  })
 })

@@ -76,8 +76,34 @@ describe("generateUdemyCourseIndex", () => {
 
   describe("異常系", () => {
     test("COURSE_INFOが空の場合、エラーをスローする", () => {
-      // モック実装は後で追加
-      // expect(() => generateUdemyCourseIndex()).toThrow(UdemyCourseIndexError)
+      // COURSE_INFOをモック
+      jest.mock("@/constants/coupon-courses", () => ({
+        COURSE_INFO: {},
+        COURSE_DISPLAY_ORDER: [],
+      }))
+
+      // モジュールをリセットして新しいモックを使用
+      jest.resetModules()
+      const { generateUdemyCourseIndex: mockedGenerateUdemyCourseIndex } =
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
+        require("../udemy-course-index-generator")
+      const { UdemyCourseIndexError, UdemyCourseIndexErrorCode } =
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
+        require("../errors")
+
+      expect(() => mockedGenerateUdemyCourseIndex()).toThrow(
+        UdemyCourseIndexError
+      )
+      try {
+        mockedGenerateUdemyCourseIndex()
+      } catch (error) {
+        expect((error as typeof UdemyCourseIndexError).code).toBe(
+          UdemyCourseIndexErrorCode.NO_COURSE_DATA
+        )
+        expect((error as Error).message).toContain(
+          "Udemy講座データが見つかりません"
+        )
+      }
     })
   })
 })

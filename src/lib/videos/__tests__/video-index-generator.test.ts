@@ -72,8 +72,31 @@ describe("generateVideoIndex", () => {
 
   describe("異常系", () => {
     test("動画データが0件の場合、エラーをスローする", () => {
-      // モック実装は後で追加
-      // expect(() => generateVideoIndex()).toThrow(VideoIndexError)
+      // getAllVideosをモック
+      jest.mock("../video-data", () => ({
+        getAllVideos: jest.fn(() => []),
+      }))
+
+      // モジュールをリセットして新しいモックを使用
+      jest.resetModules()
+      const { generateVideoIndex: mockedGenerateVideoIndex } =
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
+        require("../video-index-generator")
+      const { VideoIndexError, VideoIndexErrorCode } =
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
+        require("../errors")
+
+      expect(() => mockedGenerateVideoIndex()).toThrow(VideoIndexError)
+      try {
+        mockedGenerateVideoIndex()
+      } catch (error) {
+        expect((error as typeof VideoIndexError).code).toBe(
+          VideoIndexErrorCode.NO_VIDEO_FILES
+        )
+        expect((error as Error).message).toContain(
+          "動画データファイルが見つかりません"
+        )
+      }
     })
   })
 })
