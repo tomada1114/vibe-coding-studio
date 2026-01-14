@@ -8,6 +8,7 @@
 import fs from "fs"
 import matter from "gray-matter"
 import path from "path"
+import { logBlogError } from "./logging"
 
 const postsDirectory = path.join(process.cwd(), "content/posts")
 
@@ -73,8 +74,12 @@ export function getPostsByCategory(category: string): Post[] {
   const categoryPath = path.join(postsDirectory, category)
 
   if (!fs.existsSync(categoryPath)) {
-    // eslint-disable-next-line no-console
-    console.warn(`[Blog] Category directory not found: ${categoryPath}`)
+    logBlogError("CATEGORY_DIRECTORY_NOT_FOUND", {
+      category,
+      path: categoryPath,
+      reason:
+        "Category directory does not exist - check deployment or configuration",
+    })
     return []
   }
 
@@ -142,15 +147,20 @@ export function getPostsByCategory(category: string): Post[] {
  */
 export function getAllCategories(): string[] {
   if (!fs.existsSync(postsDirectory)) {
-    // eslint-disable-next-line no-console
-    console.warn(`[Blog] Posts directory not found: ${postsDirectory}`)
+    logBlogError("POSTS_DIRECTORY_NOT_FOUND", {
+      path: postsDirectory,
+      reason:
+        "Posts directory does not exist - check deployment or configuration",
+    })
     return []
   }
 
   try {
     return fs
       .readdirSync(postsDirectory)
-      .filter(file => fs.statSync(path.join(postsDirectory, file)).isDirectory())
+      .filter(file =>
+        fs.statSync(path.join(postsDirectory, file)).isDirectory()
+      )
   } catch (error) {
     throw new BlogPostError(
       `Failed to read posts directory: ${error instanceof Error ? error.message : String(error)}`,

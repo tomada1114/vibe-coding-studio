@@ -7,6 +7,8 @@
  * - Emoji: For non-programming categories
  */
 
+import { logBlogWarning } from "./logging"
+
 export type IconSize = "sm" | "md" | "lg"
 
 export type CategoryIcon = {
@@ -102,8 +104,10 @@ export function getCategoryIcon(
   const categoryInfo = NON_PROGRAMMING_CATEGORIES[category]
 
   if (!categoryInfo) {
-    // eslint-disable-next-line no-console
-    console.warn(`[Blog] Unknown category "${category}". Using fallback emoji.`)
+    logBlogWarning("UNKNOWN_CATEGORY_ICON", {
+      category,
+      fallback: "📌",
+    })
   }
 
   return {
@@ -119,20 +123,12 @@ export function getCategoryInfo(
 ): CategoryInfo {
   const icon = getCategoryIcon(category, iconSize)
 
+  // Determine display name (logging for unknown categories handled by getCategoryIcon)
   let name: string
   if (isDeviconCategory(category)) {
-    const configuredName = PROGRAMMING_CATEGORIES[category]
-    if (!configuredName) {
-      // eslint-disable-next-line no-console
-      console.warn(`[Blog] Unknown programming category "${category}".`)
-    }
-    name = configuredName || category
+    name = PROGRAMMING_CATEGORIES[category] || category
   } else {
     const categoryInfo = NON_PROGRAMMING_CATEGORIES[category]
-    if (!categoryInfo) {
-      // eslint-disable-next-line no-console
-      console.warn(`[Blog] Unknown category "${category}".`)
-    }
     name = categoryInfo?.name || category
   }
 
