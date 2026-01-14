@@ -3,12 +3,13 @@
  *
  * Client-side sidebar displaying:
  * - Categories list with active highlighting
- * - Recent posts (5 most recent)
+ * - Recent posts (configurable count)
  */
 
 "use client"
 
 import { getCategoryInfo } from "@/lib/blog/categories"
+import { BLOG_CONFIG } from "@/lib/blog/constants"
 import type { Post } from "@/lib/blog/posts"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -49,24 +50,25 @@ export function BlogSidebar({
           >
             All Posts
           </Link>
-          {categories.map(category => (
-            <Link
-              key={category}
-              href={`/blog/${category}`}
-              className={`block rounded-md px-3 py-2 text-sm font-medium transition-colors ${
-                currentCategory === category
-                  ? "bg-blue-50 text-blue-700"
-                  : "text-gray-700 hover:bg-gray-50"
-              }`}
-            >
-              <div className="inline-flex items-center gap-2">
-                <CategoryIconComponent
-                  icon={getCategoryInfo(category, "sm").icon}
-                />
-                <span>{getCategoryInfo(category).name}</span>
-              </div>
-            </Link>
-          ))}
+          {categories.map(category => {
+            const info = getCategoryInfo(category, "sm")
+            return (
+              <Link
+                key={category}
+                href={`/blog/${category}`}
+                className={`block rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+                  currentCategory === category
+                    ? "bg-blue-50 text-blue-700"
+                    : "text-gray-700 hover:bg-gray-50"
+                }`}
+              >
+                <div className="inline-flex items-center gap-2">
+                  <CategoryIconComponent icon={info.icon} />
+                  <span>{info.name}</span>
+                </div>
+              </Link>
+            )
+          })}
         </nav>
       </div>
 
@@ -76,7 +78,7 @@ export function BlogSidebar({
           Recent Posts
         </h3>
         <div className="space-y-3">
-          {recentPosts.slice(0, 5).map(post => (
+          {recentPosts.slice(0, BLOG_CONFIG.RECENT_POSTS_COUNT).map(post => (
             <Link
               key={`${post.category}-${post.slug}`}
               href={`/blog/${post.category}/${post.slug}`}
