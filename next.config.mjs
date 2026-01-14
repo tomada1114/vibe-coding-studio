@@ -110,9 +110,6 @@ const nextConfig = {
     // Fail build on ESLint errors in production
     ignoreDuringBuilds: false,
   },
-
-  // Output configuration
-  output: "standalone",
 }
 
 // Bundle analyzer configuration (only in development)
