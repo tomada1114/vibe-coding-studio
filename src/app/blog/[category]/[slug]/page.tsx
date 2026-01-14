@@ -25,6 +25,7 @@ import { PostCard } from "@/components/blog/PostCard"
 import { ShareButtons } from "@/components/blog/ShareButtons"
 import { TableOfContents } from "@/components/blog/TableOfContents"
 import { getCategoryInfo } from "@/lib/blog/categories"
+import { logBlogError } from "@/lib/blog/logging"
 import { markdownToHtml } from "@/lib/blog/markdown"
 import {
   getAllCategories,
@@ -40,20 +41,36 @@ import Script from "next/script"
 export const dynamic = "force-static"
 
 export async function generateStaticParams() {
-  const categories = getAllCategories()
-  const params = []
+  try {
+    const categories = getAllCategories()
+    const params = []
 
-  for (const category of categories) {
-    const posts = getPostsByCategory(category)
-    for (const post of posts) {
-      params.push({
-        category,
-        slug: post.slug,
-      })
+    for (const category of categories) {
+      try {
+        const posts = getPostsByCategory(category)
+        for (const post of posts) {
+          params.push({
+            category,
+            slug: post.slug,
+          })
+        }
+      } catch (error) {
+        logBlogError("GET_POSTS_BY_CATEGORY_FAILED", {
+          category,
+          error: error instanceof Error ? error.message : String(error),
+        })
+        // Continue with other categories
+      }
     }
-  }
 
-  return params
+    return params
+  } catch (error) {
+    logBlogError("GENERATE_STATIC_PARAMS_FAILED", {
+      page: "slug",
+      error: error instanceof Error ? error.message : String(error),
+    })
+    return []
+  }
 }
 
 export async function generateMetadata({
@@ -110,7 +127,20 @@ export default async function BlogPost({
     notFound()
   }
 
-  const content = await markdownToHtml(post.content)
+  let content: string
+  try {
+    content = await markdownToHtml(post.content)
+  } catch (error) {
+    logBlogError("MARKDOWN_PROCESSING_FAILED", {
+      category,
+      slug,
+      error: error instanceof Error ? error.message : String(error),
+    })
+    // Provide fallback content with error message
+    content = `<div class="p-4 bg-red-50 border border-red-200 rounded-md">
+      <p class="text-red-600">Failed to render article content. Please try again later.</p>
+    </div>`
+  }
 
   const relatedPosts = getPostsByCategory(category)
     .filter(p => p.slug !== slug)
