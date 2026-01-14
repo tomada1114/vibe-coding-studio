@@ -25,6 +25,7 @@ import { PostCard } from "@/components/blog/PostCard"
 import { ShareButtons } from "@/components/blog/ShareButtons"
 import { TableOfContents } from "@/components/blog/TableOfContents"
 import { getCategoryInfo } from "@/lib/blog/categories"
+import { BLOG_CONFIG } from "@/lib/blog/constants"
 import { logBlogError } from "@/lib/blog/logging"
 import { markdownToHtml } from "@/lib/blog/markdown"
 import {
@@ -144,7 +145,7 @@ export default async function BlogPost({
 
   const relatedPosts = getPostsByCategory(category)
     .filter(p => p.slug !== slug)
-    .slice(0, 3)
+    .slice(0, BLOG_CONFIG.RELATED_POSTS_COUNT)
 
   const categoryInfo = getCategoryInfo(category)
   const allPosts = getAllPosts()

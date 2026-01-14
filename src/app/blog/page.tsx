@@ -13,11 +13,12 @@ import {
 } from "@/components/blog/BlogBreadcrumb"
 import { BlogSidebar } from "@/components/blog/BlogSidebar"
 import { CategoryBadge } from "@/components/blog/CategoryBadge"
+import { Pagination } from "@/components/blog/Pagination"
 import { PostCard } from "@/components/blog/PostCard"
+import { BLOG_CONFIG } from "@/lib/blog/constants"
 import { parsePageParam } from "@/lib/blog/pagination"
 import { getAllCategories, getAllPosts } from "@/lib/blog/posts"
 import type { Metadata } from "next"
-import Link from "next/link"
 
 export const dynamic = "force-static"
 
@@ -32,8 +33,6 @@ export const metadata: Metadata = {
   },
 }
 
-const ITEMS_PER_PAGE = 10
-
 export default async function BlogPage({
   searchParams,
 }: {
@@ -42,10 +41,13 @@ export default async function BlogPage({
   const params = await searchParams
   const allPosts = getAllPosts()
   const categories = getAllCategories()
-  const totalPages = Math.ceil(allPosts.length / ITEMS_PER_PAGE)
+  const totalPages = Math.ceil(allPosts.length / BLOG_CONFIG.ITEMS_PER_PAGE)
   const currentPage = parsePageParam(params.page, totalPages)
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
-  const posts = allPosts.slice(startIndex, startIndex + ITEMS_PER_PAGE)
+  const startIndex = (currentPage - 1) * BLOG_CONFIG.ITEMS_PER_PAGE
+  const posts = allPosts.slice(
+    startIndex,
+    startIndex + BLOG_CONFIG.ITEMS_PER_PAGE
+  )
 
   const breadcrumbs = generateBlogBreadcrumb()
 
@@ -82,39 +84,11 @@ export default async function BlogPage({
             </div>
           )}
 
-          {totalPages > 1 && (
-            <div className="mt-8 flex items-center justify-center gap-2">
-              {currentPage > 1 ? (
-                <Link
-                  href={`/blog?page=${currentPage - 1}`}
-                  className="rounded-md border px-4 py-2 text-sm font-medium hover:bg-gray-50"
-                >
-                  Previous
-                </Link>
-              ) : (
-                <span className="rounded-md border px-4 py-2 text-sm font-medium text-gray-400">
-                  Previous
-                </span>
-              )}
-
-              <span className="px-4 py-2 text-sm">
-                Page {currentPage} of {totalPages}
-              </span>
-
-              {currentPage < totalPages ? (
-                <Link
-                  href={`/blog?page=${currentPage + 1}`}
-                  className="rounded-md border px-4 py-2 text-sm font-medium hover:bg-gray-50"
-                >
-                  Next
-                </Link>
-              ) : (
-                <span className="rounded-md border px-4 py-2 text-sm font-medium text-gray-400">
-                  Next
-                </span>
-              )}
-            </div>
-          )}
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            baseUrl="/blog"
+          />
         </main>
 
         <div className="hidden lg:block lg:w-64">

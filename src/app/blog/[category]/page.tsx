@@ -14,8 +14,10 @@ import {
 import { BlogSidebar } from "@/components/blog/BlogSidebar"
 import { CategoryBadge } from "@/components/blog/CategoryBadge"
 import { CategoryIconComponent } from "@/components/blog/CategoryIcon"
+import { Pagination } from "@/components/blog/Pagination"
 import { PostCard } from "@/components/blog/PostCard"
 import { getCategoryInfo } from "@/lib/blog/categories"
+import { BLOG_CONFIG } from "@/lib/blog/constants"
 import { logBlogError } from "@/lib/blog/logging"
 import { parsePageParam } from "@/lib/blog/pagination"
 import {
@@ -24,7 +26,6 @@ import {
   getPostsByCategory,
 } from "@/lib/blog/posts"
 import type { Metadata } from "next"
-import Link from "next/link"
 import { notFound } from "next/navigation"
 
 export const dynamic = "force-static"
@@ -60,8 +61,6 @@ export async function generateMetadata({
   }
 }
 
-const ITEMS_PER_PAGE = 10
-
 export default async function CategoryPage({
   params,
   searchParams,
@@ -81,10 +80,15 @@ export default async function CategoryPage({
   }
 
   const categoryInfo = getCategoryInfo(category, "lg")
-  const totalPages = Math.ceil(allCategoryPosts.length / ITEMS_PER_PAGE)
+  const totalPages = Math.ceil(
+    allCategoryPosts.length / BLOG_CONFIG.ITEMS_PER_PAGE
+  )
   const currentPage = parsePageParam(page, totalPages)
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
-  const posts = allCategoryPosts.slice(startIndex, startIndex + ITEMS_PER_PAGE)
+  const startIndex = (currentPage - 1) * BLOG_CONFIG.ITEMS_PER_PAGE
+  const posts = allCategoryPosts.slice(
+    startIndex,
+    startIndex + BLOG_CONFIG.ITEMS_PER_PAGE
+  )
 
   const breadcrumbs = generateBlogBreadcrumb(categoryInfo.name, category)
 
@@ -128,39 +132,11 @@ export default async function CategoryPage({
             ))}
           </div>
 
-          {totalPages > 1 && (
-            <div className="mt-8 flex items-center justify-center gap-2">
-              {currentPage > 1 ? (
-                <Link
-                  href={`/blog/${category}?page=${currentPage - 1}`}
-                  className="rounded-md border px-4 py-2 text-sm font-medium hover:bg-gray-50"
-                >
-                  Previous
-                </Link>
-              ) : (
-                <span className="rounded-md border px-4 py-2 text-sm font-medium text-gray-400">
-                  Previous
-                </span>
-              )}
-
-              <span className="px-4 py-2 text-sm">
-                Page {currentPage} of {totalPages}
-              </span>
-
-              {currentPage < totalPages ? (
-                <Link
-                  href={`/blog/${category}?page=${currentPage + 1}`}
-                  className="rounded-md border px-4 py-2 text-sm font-medium hover:bg-gray-50"
-                >
-                  Next
-                </Link>
-              ) : (
-                <span className="rounded-md border px-4 py-2 text-sm font-medium text-gray-400">
-                  Next
-                </span>
-              )}
-            </div>
-          )}
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            baseUrl={`/blog/${category}`}
+          />
         </main>
 
         <div className="hidden lg:block lg:w-64">
