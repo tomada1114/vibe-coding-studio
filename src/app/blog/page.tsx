@@ -33,18 +33,41 @@ export const metadata: Metadata = {
 
 const ITEMS_PER_PAGE = 10
 
+/**
+ * Parse and validate page parameter
+ * Returns a valid positive integer, defaulting to 1 for invalid input
+ */
+function parsePageParam(pageStr: string | undefined, maxPage: number): number {
+  if (!pageStr) return 1
+
+  const parsed = parseInt(pageStr, 10)
+
+  // Handle NaN, negative numbers, zero, and numbers exceeding max
+  if (isNaN(parsed) || parsed < 1) {
+    // eslint-disable-next-line no-console
+    console.warn(`[Blog] Invalid page parameter: "${pageStr}". Defaulting to 1.`)
+    return 1
+  }
+
+  if (parsed > maxPage && maxPage > 0) {
+    // eslint-disable-next-line no-console
+    console.warn(`[Blog] Page ${parsed} exceeds max ${maxPage}.`)
+    return maxPage
+  }
+
+  return parsed
+}
+
 export default async function BlogPage({
   searchParams,
 }: {
   searchParams: Promise<{ page?: string }>
 }) {
   const params = await searchParams
-  const currentPage = params.page ? parseInt(params.page, 10) : 1
-
   const allPosts = getAllPosts()
   const categories = getAllCategories()
-
   const totalPages = Math.ceil(allPosts.length / ITEMS_PER_PAGE)
+  const currentPage = parsePageParam(params.page, totalPages)
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
   const posts = allPosts.slice(startIndex, startIndex + ITEMS_PER_PAGE)
 

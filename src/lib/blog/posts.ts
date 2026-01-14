@@ -12,6 +12,48 @@ import path from "path"
 const postsDirectory = path.join(process.cwd(), "content/posts")
 
 /**
+ * Custom error class for blog post operations
+ */
+export class BlogPostError extends Error {
+  constructor(
+    message: string,
+    public readonly filePath?: string,
+    public readonly category?: string
+  ) {
+    super(message)
+    this.name = "BlogPostError"
+  }
+}
+
+/**
+ * Validate required frontmatter fields
+ * @throws BlogPostError if validation fails
+ */
+function validateFrontmatter(
+  data: Record<string, unknown>,
+  filePath: string
+): { title: string; date: string; excerpt: string } {
+  if (!data.title || typeof data.title !== "string") {
+    throw new BlogPostError(
+      `Missing or invalid 'title' in frontmatter`,
+      filePath
+    )
+  }
+  if (!data.date || typeof data.date !== "string") {
+    throw new BlogPostError(
+      `Missing or invalid 'date' in frontmatter`,
+      filePath
+    )
+  }
+
+  return {
+    title: data.title,
+    date: data.date,
+    excerpt: typeof data.excerpt === "string" ? data.excerpt : "",
+  }
+}
+
+/**
  * Post interface representing a blog article
  */
 export interface Post {
@@ -25,30 +67,67 @@ export interface Post {
 
 /**
  * Get all posts in a specific category, sorted by date (newest first)
+ * @throws BlogPostError if file operations or parsing fails
  */
 export function getPostsByCategory(category: string): Post[] {
   const categoryPath = path.join(postsDirectory, category)
 
   if (!fs.existsSync(categoryPath)) {
+    // eslint-disable-next-line no-console
+    console.warn(`[Blog] Category directory not found: ${categoryPath}`)
     return []
   }
 
-  const fileNames = fs.readdirSync(categoryPath)
+  let fileNames: string[]
+  try {
+    fileNames = fs.readdirSync(categoryPath)
+  } catch (error) {
+    throw new BlogPostError(
+      `Failed to read category directory: ${error instanceof Error ? error.message : String(error)}`,
+      categoryPath,
+      category
+    )
+  }
 
   const posts = fileNames
     .filter(fileName => fileName.endsWith(".md"))
     .map(fileName => {
       const slug = fileName.replace(/\.md$/, "")
       const fullPath = path.join(categoryPath, fileName)
-      const fileContents = fs.readFileSync(fullPath, "utf8")
-      const { data, content } = matter(fileContents)
+
+      let fileContents: string
+      try {
+        fileContents = fs.readFileSync(fullPath, "utf8")
+      } catch (error) {
+        throw new BlogPostError(
+          `Failed to read file: ${error instanceof Error ? error.message : String(error)}`,
+          fullPath,
+          category
+        )
+      }
+
+      let data: Record<string, unknown>
+      let content: string
+      try {
+        const parsed = matter(fileContents)
+        data = parsed.data
+        content = parsed.content
+      } catch (error) {
+        throw new BlogPostError(
+          `Failed to parse frontmatter: ${error instanceof Error ? error.message : String(error)}`,
+          fullPath,
+          category
+        )
+      }
+
+      const validated = validateFrontmatter(data, fullPath)
 
       return {
         slug,
         category,
-        title: data.title,
-        date: data.date,
-        excerpt: data.excerpt || "",
+        title: validated.title,
+        date: validated.date,
+        excerpt: validated.excerpt,
         content,
       }
     })
@@ -59,19 +138,30 @@ export function getPostsByCategory(category: string): Post[] {
 
 /**
  * Get all category folder names
+ * @throws BlogPostError if directory operations fail
  */
 export function getAllCategories(): string[] {
   if (!fs.existsSync(postsDirectory)) {
+    // eslint-disable-next-line no-console
+    console.warn(`[Blog] Posts directory not found: ${postsDirectory}`)
     return []
   }
 
-  return fs
-    .readdirSync(postsDirectory)
-    .filter(file => fs.statSync(path.join(postsDirectory, file)).isDirectory())
+  try {
+    return fs
+      .readdirSync(postsDirectory)
+      .filter(file => fs.statSync(path.join(postsDirectory, file)).isDirectory())
+  } catch (error) {
+    throw new BlogPostError(
+      `Failed to read posts directory: ${error instanceof Error ? error.message : String(error)}`,
+      postsDirectory
+    )
+  }
 }
 
 /**
  * Get a single post by category and slug
+ * @throws BlogPostError if file operations or parsing fails
  */
 export function getPostBySlug(category: string, slug: string): Post | null {
   const fullPath = path.join(postsDirectory, category, `${slug}.md`)
@@ -80,15 +170,39 @@ export function getPostBySlug(category: string, slug: string): Post | null {
     return null
   }
 
-  const fileContents = fs.readFileSync(fullPath, "utf8")
-  const { data, content } = matter(fileContents)
+  let fileContents: string
+  try {
+    fileContents = fs.readFileSync(fullPath, "utf8")
+  } catch (error) {
+    throw new BlogPostError(
+      `Failed to read file: ${error instanceof Error ? error.message : String(error)}`,
+      fullPath,
+      category
+    )
+  }
+
+  let data: Record<string, unknown>
+  let content: string
+  try {
+    const parsed = matter(fileContents)
+    data = parsed.data
+    content = parsed.content
+  } catch (error) {
+    throw new BlogPostError(
+      `Failed to parse frontmatter: ${error instanceof Error ? error.message : String(error)}`,
+      fullPath,
+      category
+    )
+  }
+
+  const validated = validateFrontmatter(data, fullPath)
 
   return {
     slug,
     category,
-    title: data.title,
-    date: data.date,
-    excerpt: data.excerpt || "",
+    title: validated.title,
+    date: validated.date,
+    excerpt: validated.excerpt,
     content,
   }
 }

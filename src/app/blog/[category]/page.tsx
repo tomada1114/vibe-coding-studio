@@ -52,6 +52,31 @@ export async function generateMetadata({
 
 const ITEMS_PER_PAGE = 10
 
+/**
+ * Parse and validate page parameter
+ * Returns a valid positive integer, defaulting to 1 for invalid input
+ */
+function parsePageParam(pageStr: string | undefined, maxPage: number): number {
+  if (!pageStr) return 1
+
+  const parsed = parseInt(pageStr, 10)
+
+  // Handle NaN, negative numbers, zero, and numbers exceeding max
+  if (isNaN(parsed) || parsed < 1) {
+    // eslint-disable-next-line no-console
+    console.warn(`[Blog] Invalid page parameter: "${pageStr}". Defaulting to 1.`)
+    return 1
+  }
+
+  if (parsed > maxPage && maxPage > 0) {
+    // eslint-disable-next-line no-console
+    console.warn(`[Blog] Page ${parsed} exceeds max ${maxPage}.`)
+    return maxPage
+  }
+
+  return parsed
+}
+
 export default async function CategoryPage({
   params,
   searchParams,
@@ -61,7 +86,6 @@ export default async function CategoryPage({
 }) {
   const { category } = await params
   const { page } = await searchParams
-  const currentPage = page ? parseInt(page, 10) : 1
 
   const allCategoryPosts = getPostsByCategory(category)
   const allPosts = getAllPosts()
@@ -72,8 +96,8 @@ export default async function CategoryPage({
   }
 
   const categoryInfo = getCategoryInfo(category, "lg")
-
   const totalPages = Math.ceil(allCategoryPosts.length / ITEMS_PER_PAGE)
+  const currentPage = parsePageParam(page, totalPages)
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
   const posts = allCategoryPosts.slice(startIndex, startIndex + ITEMS_PER_PAGE)
 

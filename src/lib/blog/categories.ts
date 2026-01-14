@@ -100,6 +100,12 @@ export function getCategoryIcon(
   }
 
   const categoryInfo = NON_PROGRAMMING_CATEGORIES[category]
+
+  if (!categoryInfo) {
+    // eslint-disable-next-line no-console
+    console.warn(`[Blog] Unknown category "${category}". Using fallback emoji.`)
+  }
+
   return {
     type: "emoji",
     value: categoryInfo?.emoji || "📌",
@@ -115,9 +121,18 @@ export function getCategoryInfo(
 
   let name: string
   if (isDeviconCategory(category)) {
-    name = PROGRAMMING_CATEGORIES[category] || category
+    const configuredName = PROGRAMMING_CATEGORIES[category]
+    if (!configuredName) {
+      // eslint-disable-next-line no-console
+      console.warn(`[Blog] Unknown programming category "${category}".`)
+    }
+    name = configuredName || category
   } else {
     const categoryInfo = NON_PROGRAMMING_CATEGORIES[category]
+    if (!categoryInfo) {
+      // eslint-disable-next-line no-console
+      console.warn(`[Blog] Unknown category "${category}".`)
+    }
     name = categoryInfo?.name || category
   }
 
