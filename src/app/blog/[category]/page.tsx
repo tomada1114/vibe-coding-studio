@@ -16,6 +16,8 @@ import { CategoryBadge } from "@/components/blog/CategoryBadge"
 import { CategoryIconComponent } from "@/components/blog/CategoryIcon"
 import { PostCard } from "@/components/blog/PostCard"
 import { getCategoryInfo } from "@/lib/blog/categories"
+import { logBlogError } from "@/lib/blog/logging"
+import { parsePageParam } from "@/lib/blog/pagination"
 import {
   getAllCategories,
   getAllPosts,
@@ -28,8 +30,16 @@ import { notFound } from "next/navigation"
 export const dynamic = "force-static"
 
 export async function generateStaticParams() {
-  const categories = getAllCategories()
-  return categories.map(category => ({ category }))
+  try {
+    const categories = getAllCategories()
+    return categories.map(category => ({ category }))
+  } catch (error) {
+    logBlogError("GENERATE_STATIC_PARAMS_FAILED", {
+      page: "category",
+      error: error instanceof Error ? error.message : String(error),
+    })
+    return []
+  }
 }
 
 export async function generateMetadata({
@@ -51,31 +61,6 @@ export async function generateMetadata({
 }
 
 const ITEMS_PER_PAGE = 10
-
-/**
- * Parse and validate page parameter
- * Returns a valid positive integer, defaulting to 1 for invalid input
- */
-function parsePageParam(pageStr: string | undefined, maxPage: number): number {
-  if (!pageStr) return 1
-
-  const parsed = parseInt(pageStr, 10)
-
-  // Handle NaN, negative numbers, zero, and numbers exceeding max
-  if (isNaN(parsed) || parsed < 1) {
-    // eslint-disable-next-line no-console
-    console.warn(`[Blog] Invalid page parameter: "${pageStr}". Defaulting to 1.`)
-    return 1
-  }
-
-  if (parsed > maxPage && maxPage > 0) {
-    // eslint-disable-next-line no-console
-    console.warn(`[Blog] Page ${parsed} exceeds max ${maxPage}.`)
-    return maxPage
-  }
-
-  return parsed
-}
 
 export default async function CategoryPage({
   params,

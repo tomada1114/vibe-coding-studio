@@ -14,6 +14,7 @@ import {
 import { BlogSidebar } from "@/components/blog/BlogSidebar"
 import { CategoryBadge } from "@/components/blog/CategoryBadge"
 import { PostCard } from "@/components/blog/PostCard"
+import { parsePageParam } from "@/lib/blog/pagination"
 import { getAllCategories, getAllPosts } from "@/lib/blog/posts"
 import type { Metadata } from "next"
 import Link from "next/link"
@@ -32,31 +33,6 @@ export const metadata: Metadata = {
 }
 
 const ITEMS_PER_PAGE = 10
-
-/**
- * Parse and validate page parameter
- * Returns a valid positive integer, defaulting to 1 for invalid input
- */
-function parsePageParam(pageStr: string | undefined, maxPage: number): number {
-  if (!pageStr) return 1
-
-  const parsed = parseInt(pageStr, 10)
-
-  // Handle NaN, negative numbers, zero, and numbers exceeding max
-  if (isNaN(parsed) || parsed < 1) {
-    // eslint-disable-next-line no-console
-    console.warn(`[Blog] Invalid page parameter: "${pageStr}". Defaulting to 1.`)
-    return 1
-  }
-
-  if (parsed > maxPage && maxPage > 0) {
-    // eslint-disable-next-line no-console
-    console.warn(`[Blog] Page ${parsed} exceeds max ${maxPage}.`)
-    return maxPage
-  }
-
-  return parsed
-}
 
 export default async function BlogPage({
   searchParams,
