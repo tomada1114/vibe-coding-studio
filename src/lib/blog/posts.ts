@@ -55,6 +55,37 @@ function validateFrontmatter(
 }
 
 /**
+ * Read and parse a markdown post file
+ * @throws BlogPostError if file operations or parsing fails
+ */
+function parsePostFile(
+  filePath: string,
+  category: string
+): { data: Record<string, unknown>; content: string } {
+  let fileContents: string
+  try {
+    fileContents = fs.readFileSync(filePath, "utf8")
+  } catch (error) {
+    throw new BlogPostError(
+      `Failed to read file: ${error instanceof Error ? error.message : String(error)}`,
+      filePath,
+      category
+    )
+  }
+
+  try {
+    const parsed = matter(fileContents)
+    return { data: parsed.data, content: parsed.content }
+  } catch (error) {
+    throw new BlogPostError(
+      `Failed to parse frontmatter: ${error instanceof Error ? error.message : String(error)}`,
+      filePath,
+      category
+    )
+  }
+}
+
+/**
  * Post interface representing a blog article
  */
 export interface Post {
@@ -99,32 +130,7 @@ export function getPostsByCategory(category: string): Post[] {
     .map(fileName => {
       const slug = fileName.replace(/\.md$/, "")
       const fullPath = path.join(categoryPath, fileName)
-
-      let fileContents: string
-      try {
-        fileContents = fs.readFileSync(fullPath, "utf8")
-      } catch (error) {
-        throw new BlogPostError(
-          `Failed to read file: ${error instanceof Error ? error.message : String(error)}`,
-          fullPath,
-          category
-        )
-      }
-
-      let data: Record<string, unknown>
-      let content: string
-      try {
-        const parsed = matter(fileContents)
-        data = parsed.data
-        content = parsed.content
-      } catch (error) {
-        throw new BlogPostError(
-          `Failed to parse frontmatter: ${error instanceof Error ? error.message : String(error)}`,
-          fullPath,
-          category
-        )
-      }
-
+      const { data, content } = parsePostFile(fullPath, category)
       const validated = validateFrontmatter(data, fullPath)
 
       return {
@@ -180,31 +186,7 @@ export function getPostBySlug(category: string, slug: string): Post | null {
     return null
   }
 
-  let fileContents: string
-  try {
-    fileContents = fs.readFileSync(fullPath, "utf8")
-  } catch (error) {
-    throw new BlogPostError(
-      `Failed to read file: ${error instanceof Error ? error.message : String(error)}`,
-      fullPath,
-      category
-    )
-  }
-
-  let data: Record<string, unknown>
-  let content: string
-  try {
-    const parsed = matter(fileContents)
-    data = parsed.data
-    content = parsed.content
-  } catch (error) {
-    throw new BlogPostError(
-      `Failed to parse frontmatter: ${error instanceof Error ? error.message : String(error)}`,
-      fullPath,
-      category
-    )
-  }
-
+  const { data, content } = parsePostFile(fullPath, category)
   const validated = validateFrontmatter(data, fullPath)
 
   return {

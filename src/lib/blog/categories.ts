@@ -22,46 +22,30 @@ export interface CategoryInfo {
   icon: CategoryIcon
 }
 
-const PROGRAMMING_CATEGORIES: Record<string, string> = {
-  javascript: "JavaScript",
-  typescript: "TypeScript",
-  react: "React",
-  vue: "Vue.js",
-  angular: "Angular",
-  svelte: "Svelte",
-  nextjs: "Next.js",
-  python: "Python",
-  java: "Java",
-  ruby: "Ruby",
-  rails: "Ruby on Rails",
-  php: "PHP",
-  csharp: "C#",
-  html: "HTML",
-  css: "CSS",
-  nodejs: "Node.js",
-  git: "Git",
-  docker: "Docker",
+interface ProgrammingCategory {
+  displayName: string
+  deviconSlug: string
 }
 
-const DEVICON_MAPPING: Record<string, string> = {
-  javascript: "javascript",
-  typescript: "typescript",
-  react: "react",
-  vue: "vuejs",
-  angular: "angularjs",
-  svelte: "svelte",
-  nextjs: "nextjs",
-  python: "python",
-  java: "java",
-  ruby: "ruby",
-  rails: "rails",
-  php: "php",
-  csharp: "csharp",
-  html: "html5",
-  css: "css3",
-  nodejs: "nodejs",
-  git: "git",
-  docker: "docker",
+const PROGRAMMING_CATEGORIES: Record<string, ProgrammingCategory> = {
+  javascript: { displayName: "JavaScript", deviconSlug: "javascript" },
+  typescript: { displayName: "TypeScript", deviconSlug: "typescript" },
+  react: { displayName: "React", deviconSlug: "react" },
+  vue: { displayName: "Vue.js", deviconSlug: "vuejs" },
+  angular: { displayName: "Angular", deviconSlug: "angularjs" },
+  svelte: { displayName: "Svelte", deviconSlug: "svelte" },
+  nextjs: { displayName: "Next.js", deviconSlug: "nextjs" },
+  python: { displayName: "Python", deviconSlug: "python" },
+  java: { displayName: "Java", deviconSlug: "java" },
+  ruby: { displayName: "Ruby", deviconSlug: "ruby" },
+  rails: { displayName: "Ruby on Rails", deviconSlug: "rails" },
+  php: { displayName: "PHP", deviconSlug: "php" },
+  csharp: { displayName: "C#", deviconSlug: "csharp" },
+  html: { displayName: "HTML", deviconSlug: "html5" },
+  css: { displayName: "CSS", deviconSlug: "css3" },
+  nodejs: { displayName: "Node.js", deviconSlug: "nodejs" },
+  git: { displayName: "Git", deviconSlug: "git" },
+  docker: { displayName: "Docker", deviconSlug: "docker" },
 }
 
 const NON_PROGRAMMING_CATEGORIES: Record<
@@ -82,28 +66,29 @@ const NON_PROGRAMMING_CATEGORIES: Record<
 }
 
 export function isDeviconCategory(category: string): boolean {
-  return category in PROGRAMMING_CATEGORIES && category in DEVICON_MAPPING
+  return category in PROGRAMMING_CATEGORIES
 }
 
 export function getDeviconSlug(category: string): string | undefined {
-  return DEVICON_MAPPING[category]
+  return PROGRAMMING_CATEGORIES[category]?.deviconSlug
 }
 
 export function getCategoryIcon(
   category: string,
   size: IconSize = "sm"
 ): CategoryIcon {
-  if (isDeviconCategory(category)) {
+  const programmingCategory = PROGRAMMING_CATEGORIES[category]
+  if (programmingCategory) {
     return {
       type: "devicon",
-      value: DEVICON_MAPPING[category],
+      value: programmingCategory.deviconSlug,
       size,
     }
   }
 
-  const categoryInfo = NON_PROGRAMMING_CATEGORIES[category]
+  const nonProgrammingCategory = NON_PROGRAMMING_CATEGORIES[category]
 
-  if (!categoryInfo) {
+  if (!nonProgrammingCategory) {
     logBlogWarning("UNKNOWN_CATEGORY_ICON", {
       category,
       fallback: "📌",
@@ -112,7 +97,7 @@ export function getCategoryIcon(
 
   return {
     type: "emoji",
-    value: categoryInfo?.emoji || "📌",
+    value: nonProgrammingCategory?.emoji || "📌",
     size,
   }
 }
@@ -125,11 +110,12 @@ export function getCategoryInfo(
 
   // Determine display name (logging for unknown categories handled by getCategoryIcon)
   let name: string
-  if (isDeviconCategory(category)) {
-    name = PROGRAMMING_CATEGORIES[category] || category
+  const programmingCategory = PROGRAMMING_CATEGORIES[category]
+  if (programmingCategory) {
+    name = programmingCategory.displayName
   } else {
-    const categoryInfo = NON_PROGRAMMING_CATEGORIES[category]
-    name = categoryInfo?.name || category
+    const nonProgrammingCategory = NON_PROGRAMMING_CATEGORIES[category]
+    name = nonProgrammingCategory?.name || category
   }
 
   return {
