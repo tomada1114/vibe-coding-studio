@@ -88,14 +88,20 @@ export async function generateMetadata({
     }
   }
 
+  const canonicalUrl = `/blog/${category}/${slug}`
+
   return {
     title: `${post.title} | Vibe Coding Studio`,
     description: post.excerpt,
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
       title: `${post.title} | Vibe Coding Studio`,
       description: post.excerpt,
       type: "article",
       publishedTime: post.date,
+      url: canonicalUrl,
     },
     twitter: {
       card: "summary_large_image",

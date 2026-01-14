@@ -34,9 +34,21 @@ export async function generateMetadata({
     }
   }
 
+  const canonicalUrl = `/videos/${id}`
+  const description = video.opening.lines.join(" ")
+
   return {
     title: video.title,
-    description: video.opening.lines.join(" "),
+    description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: video.title,
+      description,
+      type: "video.other",
+      url: canonicalUrl,
+    },
   }
 }
 
