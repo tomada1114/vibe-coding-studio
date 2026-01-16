@@ -15,9 +15,9 @@ paths: content/posts/**/*.md
 
 ```yaml
 ---
-title: "Article Title"
-date: "YYYY-MM-DD"
-excerpt: "Brief description"
+title: "Article Title"       # Required
+date: "YYYY-MM-DD"           # Required
+excerpt: "Brief description" # Optional, defaults to empty string
 ---
 ```
 

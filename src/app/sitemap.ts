@@ -1,6 +1,40 @@
+/**
+ * Dynamic Sitemap Generation
+ *
+ * Generates sitemap.xml with all site pages including:
+ * - Static pages (priority 1.0-0.7)
+ * - Blog category pages (priority 0.7)
+ * - Blog posts (priority 0.6, lastModified from post date)
+ * - Video pages (priority 0.6, lastModified from publishedAt)
+ *
+ * Error handling: Each data source is wrapped in try-catch.
+ * If one fails, the sitemap continues with available data.
+ */
+import { logBlogError } from "@/lib/blog/logging"
 import { getAllCategories, getAllPosts } from "@/lib/blog/posts"
 import { getAllVideos } from "@/lib/videos/video-data"
 import type { MetadataRoute } from "next"
+
+/**
+ * Safely parse a date string, returning current date as fallback for invalid dates.
+ */
+function safeParseDate(
+  dateStr: string,
+  context: { type: string; id: string }
+): Date {
+  const date = new Date(dateStr)
+  if (isNaN(date.getTime())) {
+    // eslint-disable-next-line no-console
+    console.error(`[Sitemap:INVALID_DATE]`, {
+      ...context,
+      dateStr,
+      reason:
+        "Date string could not be parsed - using current date as fallback",
+    })
+    return new Date()
+  }
+  return date
+}
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = (
@@ -42,31 +76,61 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ]
 
   // ブログカテゴリページ
-  const categories = getAllCategories()
-  const categoryPages: MetadataRoute.Sitemap = categories.map(category => ({
-    url: `${baseUrl}/blog/${category}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.7,
-  }))
+  let categoryPages: MetadataRoute.Sitemap = []
+  try {
+    const categories = getAllCategories()
+    categoryPages = categories.map(category => ({
+      url: `${baseUrl}/blog/${category}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    }))
+  } catch (error) {
+    logBlogError("SITEMAP_CATEGORIES_FAILED", {
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+    })
+  }
 
   // ブログ記事ページ
-  const posts = getAllPosts()
-  const blogPages: MetadataRoute.Sitemap = posts.map(post => ({
-    url: `${baseUrl}/blog/${post.category}/${post.slug}`,
-    lastModified: new Date(post.date),
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }))
+  let blogPages: MetadataRoute.Sitemap = []
+  try {
+    const posts = getAllPosts()
+    blogPages = posts.map(post => ({
+      url: `${baseUrl}/blog/${post.category}/${post.slug}`,
+      lastModified: safeParseDate(post.date, {
+        type: "blog",
+        id: `${post.category}/${post.slug}`,
+      }),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    }))
+  } catch (error) {
+    logBlogError("SITEMAP_BLOG_POSTS_FAILED", {
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+    })
+  }
 
   // 動画詳細ページ
-  const videos = getAllVideos()
-  const videoPages: MetadataRoute.Sitemap = videos.map(video => ({
-    url: `${baseUrl}/videos/${video.id}`,
-    lastModified: new Date(video.publishedAt),
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }))
+  let videoPages: MetadataRoute.Sitemap = []
+  try {
+    const videos = getAllVideos()
+    videoPages = videos.map(video => ({
+      url: `${baseUrl}/videos/${video.id}`,
+      lastModified: safeParseDate(video.publishedAt, {
+        type: "video",
+        id: video.id,
+      }),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    }))
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error("[Sitemap:VIDEO_DATA_FAILED]", {
+      error: error instanceof Error ? error.message : String(error),
+    })
+  }
 
   return [...staticPages, ...categoryPages, ...blogPages, ...videoPages]
 }

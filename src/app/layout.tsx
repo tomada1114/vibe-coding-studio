@@ -3,8 +3,32 @@ import { ErrorBoundary } from "@/components/error-boundary"
 import "@/styles/tailwind.css"
 import type { Metadata } from "next"
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://vibe-coding-studio.com"
+const FALLBACK_URL = "https://vibe-coding-studio.com"
+
+/**
+ * Validate and return site URL from environment variable.
+ * Falls back to default URL if env var is missing or invalid.
+ */
+function getValidatedSiteUrl(): string {
+  const envUrl = process.env.NEXT_PUBLIC_SITE_URL
+
+  if (!envUrl) {
+    return FALLBACK_URL
+  }
+
+  try {
+    new URL(envUrl)
+    return envUrl
+  } catch {
+    // eslint-disable-next-line no-console
+    console.error(
+      `[Layout:INVALID_SITE_URL] NEXT_PUBLIC_SITE_URL is not a valid URL: "${envUrl}". Using fallback: "${FALLBACK_URL}"`
+    )
+    return FALLBACK_URL
+  }
+}
+
+const siteUrl = getValidatedSiteUrl()
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
