@@ -18,6 +18,16 @@ const CACHE_DURATION = 5 * 60 * 1000 // 5 minutes
  */
 const COUPON_DATA: RawCouponData[] = [
   {
+    courseId: "6981353",
+    couponType: "custom_price",
+    maximumRedemptions: "unlimited",
+    couponCode: "2026-01-17",
+    startDateTime: "2026-01-17T00:00:00-07:00",
+    endDateTime: "2026-02-17T23:00:00-08:00",
+    currency: "JPY",
+    discountPrice: 1500,
+  },
+  {
     courseId: "6826831",
     couponType: "custom_price",
     maximumRedemptions: "unlimited",

@@ -193,6 +193,18 @@ export const COURSE_INFO: Record<string, CourseInfo> = {
     promotionUrl:
       "https://www.udemy.com/course/codex-python-fast-api/?referralCode=E159CDE010F734F6760E",
   },
+  // Claude Code カスタマイズ完全ガイド講座
+  "6981353": {
+    originalPrice: 19800,
+    description:
+      "Claude Codeの6つのカスタマイズ機能（CLAUDE.md、rules、コマンド、サブエージェント、Skills、Hooks）を完全マスター。コンテキスト節約しながら開発効率を最大化する実践講座。",
+    slug: "claude-code-perfect-guide",
+    title:
+      "【Claude Code カスタマイズ完全ガイド】6つの拡張機能を使いこなして開発効率アップ！一歩先のAI駆動開発へ",
+    topics: ["claude-code"],
+    promotionUrl:
+      "https://www.udemy.com/course/claude-code-perfect-guide/?referralCode=7062AD44CE74010889E4",
+  },
 }
 
 export const TOPIC_INFO: Record<string, TopicInfo> = {
@@ -337,6 +349,7 @@ export const POPULAR_COURSE_IDS = [
 export const COURSE_DISPLAY_ORDER = [
   // === Claude Codeシリーズ ===
   // 基礎 → 応用
+  "6981353", // Claude Code カスタマイズ完全ガイド - 6つの拡張機能を使いこなす
   "6691241", // Claude Code × Vibe Coding - 未経験OK、ゼロから学べる基礎
   "6769253", // Claude Code × MCP - Next.jsアプリ開発効率化（5つのMCPツール）
   "6732543", // Claude Code × 家計簿 - Stripeサブスク型アプリ
