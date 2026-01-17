@@ -45,7 +45,7 @@ export const COURSE_INFO: Record<string, CourseInfo> = {
     slug: "claude-code-project-tracker",
     title:
       "【Claude Code】Next.js で作るサブスク型・作業時間管理アプリで学ぶ AI 駆動開発【完全版】",
-    topics: ["claude-code", "nextjs", "stripe", "supabase"],
+    topics: ["claude-code", "nextjs", "supabase"],
     promotionUrl:
       "https://www.udemy.com/course/claude-code-project-tracker/?referralCode=F89DE6FED7828F23F35C",
   },
@@ -57,7 +57,7 @@ export const COURSE_INFO: Record<string, CourseInfo> = {
     slug: "claude-code-expenses-app",
     title:
       "【Claude Code】プログラミング未経験OK！Stripe サブスク型家計簿アプリで学ぶAI駆動開発マスター講座",
-    topics: ["claude-code", "stripe", "typescript"],
+    topics: ["claude-code", "typescript"],
     promotionUrl:
       "https://www.udemy.com/course/claude-code-expenses-app/?referralCode=D8072C627C9E0B5828E4",
   },
