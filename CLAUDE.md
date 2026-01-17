@@ -117,7 +117,7 @@ export const video_VIDEO_ID: VideoMetadata = {
 - **UIコンポーネント**: Headless UI + カスタムコンポーネント
 - **アニメーション**: Framer Motion
 - **型安全性**: TypeScriptの厳密モードが有効
-- **セキュリティ**: nonceベースのインラインスクリプトを使用したコンテンツセキュリティポリシー（CSP）
+- **セキュリティ**: 基本的なセキュリティヘッダー（X-Frame-Options, X-Content-Type-Options等）
 - **パフォーマンス**: ISR（60秒の再検証）、最適化されたキャッシュ戦略
 
 ### 主要ディレクトリ
@@ -132,7 +132,6 @@ src/
 │   └── shared/            # 共通データ（common-sections.ts）
 ├── lib/                    # ユーティリティ・設定
 │   ├── videos/            # 動画データローダー
-│   ├── csp.ts             # CSP設定
 │   └── env-validation.ts  # 環境変数検証
 ├── types/                  # TypeScript型定義
 │   └── video.ts           # VideoMetadata型
@@ -185,21 +184,13 @@ docs/                      # プロジェクトドキュメント
 
 ## セキュリティ機能
 
-### コンテンツセキュリティポリシー（CSP）
-
-- 開発環境ではReport-Onlyモードで実装
-- nonceベースのインラインスクリプト実行
-- すべてのリソースタイプに対する包括的なディレクティブ設定
-- `/api/csp-report`でのCSP違反レポートエンドポイント
-- Web Crypto APIを使用したエッジランタイム対応
-
 ### セキュリティヘッダー
 
-- プリロード付きStrict-Transport-Security（HSTS）
-- X-Frame-Options: SAMEORIGIN
-- X-Content-Type-Options: nosniff
-- Referrer-Policy: strict-origin-when-cross-origin
-- カメラ、マイク、位置情報を制限するPermissions-Policy
+`next.config.mjs`で基本的なセキュリティヘッダーを設定しています：
+
+- X-Frame-Options: SAMEORIGIN（クリックジャッキング対策）
+- X-Content-Type-Options: nosniff（MIMEスニッフィング対策）
+- Referrer-Policy: origin-when-cross-origin
 
 ## パフォーマンス最適化
 
@@ -209,7 +200,6 @@ docs/                      # プロジェクトドキュメント
 - AVIF/WebPサポート付き画像最適化
 - バンドル分析サポート（ANALYZE=true環境変数経由）
 - バンドルサイズ削減のための最適化されたパッケージインポート
-- ミドルウェアによる詳細なキャッシュ戦略
 
 ## エラーハンドリング
 
@@ -376,7 +366,6 @@ npm run build       # 本番ビルドが動作することを確認
 4. **パフォーマンス・セキュリティ**
    - 動的インポートで初期バンドルを最小化
    - next/imageで画像最適化
-   - CSPヘッダーの厳格な維持
    - 秘密情報を決してコミットしない
 
 ## 利用可能なMCP

@@ -1,4 +1,3 @@
-import { CSPNonceProvider } from "@/components/csp-nonce-provider"
 import { ErrorBoundary } from "@/components/error-boundary"
 import { getSiteUrl } from "@/lib/seo/site-url"
 import "@/styles/tailwind.css"
@@ -57,8 +56,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <head></head>
-      <body className="text-gray-950 antialiased" suppressHydrationWarning>
-        <CSPNonceProvider />
+      <body className="text-gray-950 antialiased">
         <ErrorBoundary showDetails={process.env.NODE_ENV === "development"}>
           {children}
         </ErrorBoundary>
