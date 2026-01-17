@@ -2,21 +2,23 @@
  * Dynamic Sitemap Generation
  *
  * Generates sitemap.xml with all site pages including:
- * - Static pages (priority 1.0-0.7)
+ * - Static pages (varying priorities: 1.0 for home, 0.9-0.7 for others)
  * - Blog category pages (priority 0.7)
  * - Blog posts (priority 0.6, lastModified from post date)
  * - Video pages (priority 0.6, lastModified from publishedAt)
  *
- * Error handling: Each data source is wrapped in try-catch.
- * If one fails, the sitemap continues with available data.
+ * Error handling: Dynamic data sources (categories, posts, videos) are
+ * wrapped in try-catch. If one fails, the sitemap continues with available data.
  */
 import { logBlogError } from "@/lib/blog/logging"
 import { getAllCategories, getAllPosts } from "@/lib/blog/posts"
+import { getSiteUrl } from "@/lib/seo/site-url"
 import { getAllVideos } from "@/lib/videos/video-data"
 import type { MetadataRoute } from "next"
 
 /**
  * Safely parse a date string, returning current date as fallback for invalid dates.
+ * Logs an error when fallback is triggered for debugging purposes.
  */
 function safeParseDate(
   dateStr: string,
@@ -37,9 +39,7 @@ function safeParseDate(
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = (
-    process.env.NEXT_PUBLIC_SITE_URL || "https://vibe-coding-studio.com"
-  ).replace(/\/$/, "")
+  const baseUrl = getSiteUrl()
 
   // 静的ページ
   const staticPages: MetadataRoute.Sitemap = [
@@ -129,6 +129,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // eslint-disable-next-line no-console
     console.error("[Sitemap:VIDEO_DATA_FAILED]", {
       error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
     })
   }
 

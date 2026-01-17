@@ -1,9 +1,8 @@
+import { getSiteUrl } from "@/lib/seo/site-url"
 import type { MetadataRoute } from "next"
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = (
-    process.env.NEXT_PUBLIC_SITE_URL || "https://vibe-coding-studio.com"
-  ).replace(/\/$/, "")
+  const baseUrl = getSiteUrl()
 
   return {
     rules: [
