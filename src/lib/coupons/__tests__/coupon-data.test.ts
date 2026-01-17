@@ -13,6 +13,7 @@ import {
  * 新しい講座を追加する際は、このリストにIDを追加してください
  */
 const EXPECTED_COURSE_IDS = [
+  "6981353", // Claude Code カスタマイズ完全ガイド
   "6826831", // Codex × FastAPI
   "6851913", // Codex × React Native
   "6827941", // Claude Code × Flask
