@@ -5,8 +5,12 @@ import path from "path"
 describe("Console.log Detection", () => {
   const srcDir = path.join(process.cwd(), "src")
 
-  // Files that are allowed to use console methods (like our logger)
-  const allowedFiles = ["src/lib/logger.ts", "src/lib/blog/logging.ts"]
+  // Files that are allowed to use console methods (like our logger or test files testing console output)
+  const allowedFiles = [
+    "src/lib/logger.ts",
+    "src/lib/blog/logging.ts",
+    "src/lib/seo/__tests__/site-url.test.ts",
+  ]
 
   function findConsoleStatements(dir: string): string[] {
     const filesWithConsole: string[] = []

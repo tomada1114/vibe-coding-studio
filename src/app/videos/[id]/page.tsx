@@ -34,9 +34,36 @@ export async function generateMetadata({
     }
   }
 
+  const canonicalUrl = `/videos/${id}`
+  const description = video.opening.lines.join(" ")
+  const thumbnailUrl = `https://img.youtube.com/vi/${id}/maxresdefault.jpg`
+
   return {
     title: video.title,
-    description: video.opening.lines.join(" "),
+    description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: video.title,
+      description,
+      type: "video.other",
+      url: canonicalUrl,
+      images: [
+        {
+          url: thumbnailUrl,
+          width: 1280,
+          height: 720,
+          alt: video.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: video.title,
+      description,
+      images: [thumbnailUrl],
+    },
   }
 }
 
