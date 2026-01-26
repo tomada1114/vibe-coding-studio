@@ -200,7 +200,6 @@ Comprehensive documentation is available in the `/docs` directory:
 
 The template is optimized for performance:
 
-- **ISR**: 60-second revalidation for blog pages
 - **Image Optimization**: AVIF/WebP support
 - **Bundle Analysis**: Available via `ANALYZE=true` environment variable
 - **Caching Strategy**: Optimized via middleware

@@ -3,15 +3,11 @@
  *
  * Generates sitemap.xml with all site pages including:
  * - Static pages (varying priorities: 1.0 for home, 0.9-0.7 for others)
- * - Blog category pages (priority 0.7)
- * - Blog posts (priority 0.6, lastModified from post date)
  * - Video pages (priority 0.6, lastModified from publishedAt)
  *
- * Error handling: Dynamic data sources (categories, posts, videos) are
+ * Error handling: Dynamic data sources (videos) are
  * wrapped in try-catch. If one fails, the sitemap continues with available data.
  */
-import { logBlogError } from "@/lib/blog/logging"
-import { getAllCategories, getAllPosts } from "@/lib/blog/posts"
 import { getSiteUrl } from "@/lib/seo/site-url"
 import { getAllVideos } from "@/lib/videos/video-data"
 import type { MetadataRoute } from "next"
@@ -56,12 +52,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/blog`,
-      lastModified: new Date(),
-      changeFrequency: "daily",
-      priority: 0.8,
-    },
-    {
       url: `${baseUrl}/videos`,
       lastModified: new Date(),
       changeFrequency: "weekly",
@@ -74,43 +64,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
   ]
-
-  // ブログカテゴリページ
-  let categoryPages: MetadataRoute.Sitemap = []
-  try {
-    const categories = getAllCategories()
-    categoryPages = categories.map(category => ({
-      url: `${baseUrl}/blog/${category}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.7,
-    }))
-  } catch (error) {
-    logBlogError("SITEMAP_CATEGORIES_FAILED", {
-      error: error instanceof Error ? error.message : String(error),
-      stack: error instanceof Error ? error.stack : undefined,
-    })
-  }
-
-  // ブログ記事ページ
-  let blogPages: MetadataRoute.Sitemap = []
-  try {
-    const posts = getAllPosts()
-    blogPages = posts.map(post => ({
-      url: `${baseUrl}/blog/${post.category}/${post.slug}`,
-      lastModified: safeParseDate(post.date, {
-        type: "blog",
-        id: `${post.category}/${post.slug}`,
-      }),
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    }))
-  } catch (error) {
-    logBlogError("SITEMAP_BLOG_POSTS_FAILED", {
-      error: error instanceof Error ? error.message : String(error),
-      stack: error instanceof Error ? error.stack : undefined,
-    })
-  }
 
   // 動画詳細ページ
   let videoPages: MetadataRoute.Sitemap = []
@@ -133,5 +86,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   }
 
-  return [...staticPages, ...categoryPages, ...blogPages, ...videoPages]
+  return [...staticPages, ...videoPages]
 }
