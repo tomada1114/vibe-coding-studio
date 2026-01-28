@@ -50,14 +50,15 @@ export function CourseDetailHero({
               {topics.map(topic => {
                 const info = TOPIC_INFO[topic]
                 return (
-                  <div
+                  <Link
                     key={topic}
-                    className="rounded-full bg-white px-4 py-2 shadow-lg transition-transform duration-200 hover:scale-105 hover:shadow-xl"
+                    href={`/coupons?topic=${topic}`}
+                    className="rounded-full bg-white px-4 py-2 shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:shadow-xl"
                   >
                     <span className="text-sm font-medium text-zinc-900">
                       {info.name}
                     </span>
-                  </div>
+                  </Link>
                 )
               })}
             </div>
