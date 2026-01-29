@@ -1,5 +1,5 @@
-import { clsx } from 'clsx'
-import Link from 'next/link'
+import { clsx } from "clsx"
+import Link from "next/link"
 
 interface RoadmapBannerProps {
   className?: string
@@ -9,12 +9,12 @@ export function RoadmapBanner({ className }: RoadmapBannerProps) {
   return (
     <div
       className={clsx(
-        'relative overflow-hidden rounded-2xl border border-zinc-950/5 bg-white p-8 shadow-sm',
+        "relative overflow-hidden rounded-2xl border border-zinc-950/5 bg-white p-8 shadow-sm",
         className
       )}
     >
       {/* Decorative gradient blobs */}
-      <div className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-gradient-to-br from-blue-100 to-indigo-100 opacity-50 blur-3xl"></div>
+      <div className="absolute -top-20 -right-20 h-40 w-40 rounded-full bg-gradient-to-br from-blue-100 to-indigo-100 opacity-50 blur-3xl"></div>
       <div className="absolute -bottom-10 -left-10 h-32 w-32 rounded-full bg-gradient-to-br from-pink-100 to-purple-100 opacity-50 blur-3xl"></div>
 
       <div className="relative flex flex-col items-center gap-6 text-center sm:flex-row sm:text-left">

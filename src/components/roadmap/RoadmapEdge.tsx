@@ -1,4 +1,4 @@
-import { clsx } from 'clsx'
+import { clsx } from "clsx"
 
 interface RoadmapEdgeProps {
   className?: string
@@ -9,11 +9,7 @@ export function RoadmapEdge({ className, height = 32 }: RoadmapEdgeProps) {
   const gradientId = `edge-gradient-${Math.random().toString(36).slice(2, 8)}`
 
   return (
-    <svg
-      className={clsx('w-8', className)}
-      height={height}
-      aria-hidden="true"
-    >
+    <svg className={clsx("w-8", className)} height={height} aria-hidden="true">
       <style>
         {`
           @keyframes flowDown {

@@ -1,10 +1,10 @@
-'use client'
+"use client"
 
-import { clsx } from 'clsx'
-import { motion, AnimatePresence } from 'framer-motion'
-import type { RoadmapCourse } from '@/data/roadmaps'
-import { RoadmapNode } from './RoadmapNode'
-import { RoadmapEdge } from './RoadmapEdge'
+import type { RoadmapCourse } from "@/data/roadmaps"
+import { clsx } from "clsx"
+import { AnimatePresence, motion } from "framer-motion"
+import { RoadmapEdge } from "./RoadmapEdge"
+import { RoadmapNode } from "./RoadmapNode"
 
 interface RoadmapFlowProps {
   course: RoadmapCourse
@@ -46,7 +46,7 @@ function GoalMarker() {
 
 export function RoadmapFlow({ course, className }: RoadmapFlowProps) {
   return (
-    <div className={clsx('relative mx-auto max-w-4xl', className)}>
+    <div className={clsx("relative mx-auto max-w-4xl", className)}>
       <div className="pointer-events-none absolute inset-x-1/2 top-0 h-full w-px -translate-x-1/2 bg-gradient-to-b from-blue-200 via-pink-200 to-purple-200 opacity-40" />
 
       <AnimatePresence mode="wait">
@@ -66,7 +66,7 @@ export function RoadmapFlow({ course, className }: RoadmapFlowProps) {
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{
-                type: 'spring',
+                type: "spring",
                 stiffness: 100,
                 damping: 15,
                 delay: index * 0.1,

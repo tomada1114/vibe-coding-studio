@@ -1,14 +1,17 @@
-'use client'
+"use client"
 
-import { clsx } from 'clsx'
-import { getAllCourses, type CourseId } from '@/data/roadmaps'
+import { getAllCourses, type CourseId } from "@/data/roadmaps"
+import { clsx } from "clsx"
 
 interface RoadmapTabsProps {
   activeCourse: CourseId
   onCourseChange: (courseId: CourseId) => void
 }
 
-export function RoadmapTabs({ activeCourse, onCourseChange }: RoadmapTabsProps) {
+export function RoadmapTabs({
+  activeCourse,
+  onCourseChange,
+}: RoadmapTabsProps) {
   const courses = getAllCourses()
 
   return (
@@ -17,7 +20,7 @@ export function RoadmapTabs({ activeCourse, onCourseChange }: RoadmapTabsProps) 
         role="tablist"
         className="inline-flex overflow-x-auto rounded-2xl bg-white p-1.5 shadow-sm ring-1 ring-zinc-950/5"
       >
-        {courses.map((course) => {
+        {courses.map(course => {
           const isActive = activeCourse === course.id
           return (
             <button
@@ -26,10 +29,10 @@ export function RoadmapTabs({ activeCourse, onCourseChange }: RoadmapTabsProps) 
               aria-selected={isActive}
               onClick={() => onCourseChange(course.id)}
               className={clsx(
-                'whitespace-nowrap rounded-xl px-5 py-2.5 text-sm font-medium transition-all',
+                "rounded-xl px-5 py-2.5 text-sm font-medium whitespace-nowrap transition-all",
                 isActive
-                  ? 'bg-indigo-50 text-indigo-700 ring-1 ring-indigo-700/10'
-                  : 'text-zinc-600 hover:bg-zinc-50 hover:text-zinc-950'
+                  ? "bg-indigo-50 text-indigo-700 ring-1 ring-indigo-700/10"
+                  : "text-zinc-600 hover:bg-zinc-50 hover:text-zinc-950"
               )}
             >
               <span className="mr-1.5">{course.emoji}</span>
