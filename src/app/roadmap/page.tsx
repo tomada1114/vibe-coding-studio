@@ -1,3 +1,8 @@
+import { Container } from "@/components/container"
+import { AsyncErrorBoundary } from "@/components/error-boundary"
+import { Footer } from "@/components/footer"
+import { Gradient } from "@/components/gradient"
+import { Navbar } from "@/components/navbar"
 import { RoadmapContent } from "@/components/roadmap/RoadmapContent"
 import type { Metadata } from "next"
 import { Suspense } from "react"
@@ -10,16 +15,34 @@ export const metadata: Metadata = {
 
 export default function RoadmapPage() {
   return (
-    <main className="overflow-hidden">
-      <Suspense
-        fallback={
-          <div className="flex min-h-screen items-center justify-center">
-            <div className="text-zinc-500">読み込み中...</div>
-          </div>
-        }
-      >
-        <RoadmapContent />
-      </Suspense>
-    </main>
+    <div className="overflow-hidden">
+      {/* ヘッダーセクション */}
+      <AsyncErrorBoundary>
+        <div className="relative">
+          <Gradient className="absolute inset-2 bottom-0 rounded-4xl ring-1 ring-black/5 ring-inset" />
+          <Container className="relative">
+            <Navbar />
+          </Container>
+        </div>
+      </AsyncErrorBoundary>
+
+      {/* メインコンテンツ */}
+      <main>
+        <Suspense
+          fallback={
+            <div className="flex min-h-screen items-center justify-center">
+              <div className="text-gray-500">読み込み中...</div>
+            </div>
+          }
+        >
+          <RoadmapContent />
+        </Suspense>
+      </main>
+
+      {/* フッターセクション */}
+      <AsyncErrorBoundary>
+        <Footer />
+      </AsyncErrorBoundary>
+    </div>
   )
 }
