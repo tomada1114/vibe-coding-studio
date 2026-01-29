@@ -2,13 +2,16 @@
 
 import { clsx } from 'clsx'
 import { useRouter } from 'next/navigation'
-import type { RoadmapNode as RoadmapNodeType } from '@/data/roadmaps'
+import type {
+  RoadmapNode as RoadmapNodeType,
+  DifficultyLevel,
+} from '@/data/roadmaps'
 
 interface RoadmapNodeProps {
   node: RoadmapNodeType
 }
 
-const difficultyConfig = {
+const difficultyConfig: Record<DifficultyLevel, { label: string; className: string }> = {
   beginner: { label: '初級', className: 'bg-green-50 text-green-700' },
   intermediate: { label: '中級', className: 'bg-yellow-50 text-yellow-700' },
   'intermediate-advanced': {
@@ -25,7 +28,7 @@ export function RoadmapNode({ node }: RoadmapNodeProps) {
   const handleClick = () => {
     const { type, url } = node.link
     if (type === 'external' || type === 'zenn') {
-      window.open(url, '_blank')
+      window.open(url, '_blank', 'noopener,noreferrer')
     } else {
       router.push(url)
     }
@@ -40,7 +43,6 @@ export function RoadmapNode({ node }: RoadmapNodeProps) {
 
   return (
     <article
-      role="article"
       tabIndex={0}
       onClick={handleClick}
       onKeyDown={handleKeyDown}

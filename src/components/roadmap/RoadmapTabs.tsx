@@ -1,20 +1,16 @@
 'use client'
 
 import { clsx } from 'clsx'
-import type { CourseId } from '@/data/roadmaps'
+import { getAllCourses, type CourseId } from '@/data/roadmaps'
 
 interface RoadmapTabsProps {
   activeCourse: CourseId
   onCourseChange: (courseId: CourseId) => void
 }
 
-const courses = [
-  { id: 'beginner', name: '完全初心者', emoji: '🚀' },
-  { id: 'web', name: 'Web開発', emoji: '🌐' },
-  { id: 'mobile', name: 'スマホアプリ', emoji: '📱' },
-] as const
-
 export function RoadmapTabs({ activeCourse, onCourseChange }: RoadmapTabsProps) {
+  const courses = getAllCourses()
+
   return (
     <div className="flex justify-center">
       <div
