@@ -1,24 +1,24 @@
-'use client'
+"use client"
 
-import { useState, useEffect } from 'react'
-import { useSearchParams, useRouter } from 'next/navigation'
-import Link from 'next/link'
-import { RoadmapTabs } from '@/components/roadmap/RoadmapTabs'
-import { RoadmapFlow } from '@/components/roadmap/RoadmapFlow'
-import { getCourseById, isValidCourseId, type CourseId } from '@/data/roadmaps'
-import { Container } from '@/components/container'
-import { Gradient } from '@/components/gradient'
+import { Container } from "@/components/container"
+import { Gradient } from "@/components/gradient"
+import { RoadmapFlow } from "@/components/roadmap/RoadmapFlow"
+import { RoadmapTabs } from "@/components/roadmap/RoadmapTabs"
+import { getCourseById, isValidCourseId, type CourseId } from "@/data/roadmaps"
+import Link from "next/link"
+import { useRouter, useSearchParams } from "next/navigation"
+import { useEffect, useState } from "react"
 
 export function RoadmapContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
-  const courseParam = searchParams.get('course')
+  const courseParam = searchParams.get("course")
 
   const [activeCourse, setActiveCourse] = useState<CourseId>(() => {
     if (courseParam && isValidCourseId(courseParam)) {
       return courseParam
     }
-    return 'beginner'
+    return "web"
   })
 
   useEffect(() => {
@@ -90,11 +90,11 @@ export function RoadmapContent() {
                 <span className="text-xs">🗺️</span>
                 目的別学習ガイド
               </div>
-              <h1 className="mb-6 text-4xl font-bold leading-tight text-zinc-950 sm:text-5xl lg:text-6xl">
+              <h1 className="mb-6 text-4xl leading-tight font-bold text-zinc-950 sm:text-5xl lg:text-6xl">
                 Claude Code
                 <br className="sm:hidden" />
                 <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                  {' '}
+                  {" "}
                   学習ロードマップ
                 </span>
               </h1>
