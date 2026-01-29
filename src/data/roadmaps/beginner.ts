@@ -11,70 +11,60 @@ export const beginnerCourse: RoadmapCourse = {
       title: 'Claude Code × Vibe Coding 入門',
       description:
         'プログラミング未経験からスタート。React・Next.jsで5つのアプリを作りながら、AI駆動開発の基礎を身につけます。',
+      roadmapDescription:
+        'AI駆動開発の第一歩。Claude Codeの使い方とReact・Next.jsの基礎を5つのアプリ開発を通じて学びます。',
       difficulty: 'beginner',
       category: 'intro',
       link: {
         type: 'coupon',
         url: '/coupons/claude-code-vibe-coding',
       },
-      isRequired: true,
     },
     {
       id: 'expenses-app',
       title: 'Stripe サブスク型 家計簿アプリ',
       description:
         '決済機能を持つWebアプリケーションを開発。実践的なSaaS開発スキルを習得します。',
+      roadmapDescription:
+        '入門の次はSaaS開発に挑戦。Stripe決済を組み込んだ実用的なアプリで、Webアプリ開発の流れを体験します。',
       difficulty: 'intermediate',
       category: 'basic',
       link: {
         type: 'coupon',
         url: '/coupons/claude-code-expenses-app',
       },
-      isRequired: true,
-    },
-    {
-      id: 'project-tracker',
-      title: '作業時間管理アプリ【完全版】',
-      description:
-        'Stripe決済・Clerk認証・Supabaseを統合した本格SaaS開発を実践的に学べます。',
-      difficulty: 'intermediate-advanced',
-      category: 'practice',
-      link: {
-        type: 'coupon',
-        url: '/coupons/claude-code-project-tracker',
-      },
-      isRequired: true,
     },
     {
       id: 'mcp-mastery',
       title: 'MCP完全攻略',
       description: '5つの最新MCPツールで開発効率を劇的に向上させます。',
+      roadmapDescription:
+        'アプリ開発の経験を活かし、MCPツールで開発効率を飛躍的に高めます。Claude Codeの真価を引き出すステップです。',
       difficulty: 'intermediate',
-      category: 'optional',
+      category: 'practice',
       link: {
         type: 'coupon',
         url: '/coupons/claude-code-mcp-nextjs',
       },
-      isRequired: false,
     },
     {
-      id: 'kiro-sd',
-      title: 'AWS Kiro 仕様駆動開発',
+      id: 'claude-code-customize',
+      title: 'Claude Code カスタマイズガイド',
       description:
-        '要件・設計・タスクの3段階アプローチで、AI開発の品質と効率を劇的に向上。',
+        'CLAUDE.md・カスタムコマンド・サブエージェント・MCPを駆使して、Claude Codeを自分だけの開発環境に仕上げます。',
+      roadmapDescription:
+        '総仕上げ。CLAUDE.md・カスタムコマンド・サブエージェントを駆使して、自分だけの最強開発環境を構築します。',
       difficulty: 'advanced',
       category: 'advanced',
       link: {
         type: 'coupon',
-        url: '/coupons/aws-kiro-sd',
+        url: '/coupons/claude-code-customize',
       },
-      isRequired: true,
     },
   ],
   edges: [
     { from: 'vibe-coding-intro', to: 'expenses-app' },
-    { from: 'expenses-app', to: 'project-tracker' },
-    { from: 'project-tracker', to: 'mcp-mastery' },
-    { from: 'project-tracker', to: 'kiro-sd' },
+    { from: 'expenses-app', to: 'mcp-mastery' },
+    { from: 'mcp-mastery', to: 'claude-code-customize' },
   ],
 }

@@ -1,5 +1,5 @@
 // コースID
-export type CourseId = 'beginner' | 'web' | 'mobile' | 'python'
+export type CourseId = 'beginner' | 'web' | 'mobile'
 
 // リンクタイプ
 export type NodeLinkType = 'coupon' | 'blog' | 'video' | 'external' | 'zenn'
@@ -12,12 +12,7 @@ export type DifficultyLevel =
   | 'advanced'
 
 // ノードカテゴリ
-export type NodeCategory =
-  | 'intro'
-  | 'basic'
-  | 'practice'
-  | 'advanced'
-  | 'optional'
+export type NodeCategory = 'intro' | 'basic' | 'practice' | 'advanced'
 
 // ノードリンク
 export interface RoadmapNodeLink {
@@ -31,10 +26,10 @@ export interface RoadmapNode {
   id: string
   title: string
   description: string
+  roadmapDescription: string
   difficulty: DifficultyLevel
   category: NodeCategory
   link: RoadmapNodeLink
-  isRequired: boolean
 }
 
 // エッジ（ノード間接続）
