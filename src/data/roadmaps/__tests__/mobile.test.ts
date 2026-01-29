@@ -29,12 +29,6 @@ describe('Mobile Course Data', () => {
     })
   })
 
-  describe('edges', () => {
-    it('should have 2 edges', () => {
-      expect(mobileCourse.edges).toHaveLength(2)
-    })
-  })
-
   describe('integration with index', () => {
     it('should be retrievable via getCourseById', () => {
       const course = getCourseById('mobile')

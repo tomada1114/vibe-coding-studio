@@ -42,25 +42,6 @@ describe('Beginner Course Data', () => {
     })
   })
 
-  describe('edges', () => {
-    it('should have 3 edges', () => {
-      expect(beginnerCourse.edges).toHaveLength(3)
-    })
-
-    it('should have edges referencing valid node IDs', () => {
-      const nodeIds = beginnerCourse.nodes.map((n) => n.id)
-      beginnerCourse.edges.forEach((edge) => {
-        expect(nodeIds).toContain(edge.from)
-        expect(nodeIds).toContain(edge.to)
-      })
-    })
-
-    it('should start from vibe-coding-intro', () => {
-      const firstEdge = beginnerCourse.edges[0]
-      expect(firstEdge.from).toBe('vibe-coding-intro')
-    })
-  })
-
   describe('integration with index', () => {
     it('should be retrievable via getCourseById', () => {
       const course = getCourseById('beginner')

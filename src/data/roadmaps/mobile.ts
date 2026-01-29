@@ -49,8 +49,4 @@ export const mobileCourse: RoadmapCourse = {
       },
     },
   ],
-  edges: [
-    { from: 'vibe-coding-intro', to: 'react-native-5apps' },
-    { from: 'react-native-5apps', to: 'expo-template' },
-  ],
 }

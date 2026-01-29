@@ -5,7 +5,6 @@ import type {
   NodeCategory,
   RoadmapNodeLink,
   RoadmapNode,
-  RoadmapEdge,
   RoadmapCourse,
 } from '../types'
 
@@ -78,15 +77,6 @@ describe('Roadmap Types', () => {
     expect(node.roadmapDescription).toBe('ロードマップ用の説明文')
   })
 
-  it('should accept valid RoadmapEdge', () => {
-    const edge: RoadmapEdge = {
-      from: 'node-1',
-      to: 'node-2',
-    }
-    expect(edge.from).toBe('node-1')
-    expect(edge.to).toBe('node-2')
-  })
-
   it('should accept valid RoadmapCourse', () => {
     const course: RoadmapCourse = {
       id: 'beginner',
@@ -94,7 +84,6 @@ describe('Roadmap Types', () => {
       emoji: '🚀',
       description: 'Test description',
       nodes: [],
-      edges: [],
     }
     expect(course.id).toBe('beginner')
   })

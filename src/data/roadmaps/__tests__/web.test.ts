@@ -28,12 +28,6 @@ describe('Web Course Data', () => {
     })
   })
 
-  describe('edges', () => {
-    it('should have 3 edges', () => {
-      expect(webCourse.edges).toHaveLength(3)
-    })
-  })
-
   describe('integration with index', () => {
     it('should be retrievable via getCourseById', () => {
       const course = getCourseById('web')

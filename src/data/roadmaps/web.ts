@@ -63,9 +63,4 @@ export const webCourse: RoadmapCourse = {
       },
     },
   ],
-  edges: [
-    { from: 'vibe-coding-intro', to: 'expenses-app' },
-    { from: 'expenses-app', to: 'project-tracker' },
-    { from: 'project-tracker', to: 'mcp-nextjs' },
-  ],
 }

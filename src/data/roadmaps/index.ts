@@ -12,7 +12,7 @@ const courses: RoadmapCourse[] = [beginnerCourse, webCourse, mobileCourse]
 /**
  * すべてのコースを取得
  */
-export function getAllCourses(): RoadmapCourse[] {
+export function getAllCourses(): readonly RoadmapCourse[] {
   return courses
 }
 
@@ -45,6 +45,5 @@ export type {
   NodeCategory,
   RoadmapNodeLink,
   RoadmapNode,
-  RoadmapEdge,
   RoadmapCourse,
 } from './types'

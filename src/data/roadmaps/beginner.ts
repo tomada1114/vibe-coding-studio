@@ -62,9 +62,4 @@ export const beginnerCourse: RoadmapCourse = {
       },
     },
   ],
-  edges: [
-    { from: 'vibe-coding-intro', to: 'expenses-app' },
-    { from: 'expenses-app', to: 'mcp-mastery' },
-    { from: 'mcp-mastery', to: 'claude-code-customize' },
-  ],
 }

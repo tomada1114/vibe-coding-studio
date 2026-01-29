@@ -40,17 +40,6 @@ describe('All Courses Integration', () => {
     })
   })
 
-  it('should have all edges referencing valid node IDs', () => {
-    const courses = getAllCourses()
-    courses.forEach((course) => {
-      const nodeIds = course.nodes.map((n) => n.id)
-      course.edges.forEach((edge) => {
-        expect(nodeIds).toContain(edge.from)
-        expect(nodeIds).toContain(edge.to)
-      })
-    })
-  })
-
   it('should have roadmapDescription for all nodes', () => {
     const courses = getAllCourses()
     courses.forEach((course) => {

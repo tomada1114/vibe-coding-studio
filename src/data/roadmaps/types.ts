@@ -32,12 +32,6 @@ export interface RoadmapNode {
   link: RoadmapNodeLink
 }
 
-// エッジ（ノード間接続）
-export interface RoadmapEdge {
-  from: string
-  to: string
-}
-
 // コース全体
 export interface RoadmapCourse {
   id: CourseId
@@ -45,5 +39,4 @@ export interface RoadmapCourse {
   emoji: string
   description: string
   nodes: RoadmapNode[]
-  edges: RoadmapEdge[]
 }
