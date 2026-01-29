@@ -3,10 +3,12 @@ import { RoadmapBanner } from "../RoadmapBanner"
 
 describe("RoadmapBanner", () => {
   describe("rendering", () => {
-    it("should display badge with emoji and text", () => {
+    it("should display badge with SVG icon and text", () => {
       render(<RoadmapBanner />)
-      expect(screen.getByText("🗺️")).toBeInTheDocument()
       expect(screen.getByText("学習ガイド")).toBeInTheDocument()
+      const badge = screen.getByText("学習ガイド").closest("div")
+      const svgIcon = badge?.querySelector("svg")
+      expect(svgIcon).toBeInTheDocument()
     })
 
     it("should display title", () => {
@@ -24,6 +26,12 @@ describe("RoadmapBanner", () => {
     it("should display CTA button", () => {
       render(<RoadmapBanner />)
       expect(screen.getByText("ロードマップを見る")).toBeInTheDocument()
+    })
+
+    it("should not have decorative gradient blobs", () => {
+      const { container } = render(<RoadmapBanner />)
+      const blobs = container.querySelectorAll(".blur-3xl")
+      expect(blobs.length).toBe(0)
     })
   })
 

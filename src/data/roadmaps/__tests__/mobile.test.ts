@@ -11,8 +11,8 @@ describe("Mobile Course Data", () => {
       expect(mobileCourse.name).toBe("スマホアプリ")
     })
 
-    it("should have correct emoji", () => {
-      expect(mobileCourse.emoji).toBe("📱")
+    it("should have correct icon", () => {
+      expect(mobileCourse.icon).toBe("smartphone")
     })
   })
 

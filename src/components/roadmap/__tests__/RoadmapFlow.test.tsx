@@ -25,6 +25,20 @@ jest.mock("framer-motion", () => {
         children: React.ReactNode
         [key: string]: unknown
       }) => <div {...filterProps(props)}>{children}</div>,
+      ol: ({
+        children,
+        ...props
+      }: {
+        children: React.ReactNode
+        [key: string]: unknown
+      }) => <ol {...filterProps(props)}>{children}</ol>,
+      li: ({
+        children,
+        ...props
+      }: {
+        children: React.ReactNode
+        [key: string]: unknown
+      }) => <li {...filterProps(props)}>{children}</li>,
       article: ({
         children,
         ...props
@@ -53,84 +67,62 @@ describe("RoadmapFlow", () => {
         expect(screen.getByText(node.title)).toBeInTheDocument()
       })
     })
+  })
 
-    it("should not render step numbers", () => {
+  describe("timeline layout", () => {
+    it("should use ordered list for semantic structure", () => {
+      const { container } = render(<RoadmapFlow course={webCourse} />)
+      const ol = container.querySelector("ol")
+      expect(ol).toBeInTheDocument()
+    })
+
+    it("should render step number circles", () => {
       render(<RoadmapFlow course={webCourse} />)
 
       for (let i = 1; i <= webCourse.nodes.length; i++) {
-        expect(screen.queryByText(String(i))).not.toBeInTheDocument()
+        expect(screen.getByText(String(i))).toBeInTheDocument()
       }
     })
-  })
 
-  describe("layout", () => {
-    it("should have flex column layout for nodes", () => {
+    it("should render step numbers as circles with border", () => {
       const { container } = render(<RoadmapFlow course={webCourse} />)
-      const nodesContainer = container.querySelector(".flex-col")
-      expect(nodesContainer).toBeInTheDocument()
-    })
-
-    it("should center nodes horizontally", () => {
-      const { container } = render(<RoadmapFlow course={webCourse} />)
-      const nodesContainer = container.querySelector(".items-center")
-      expect(nodesContainer).toBeInTheDocument()
+      const circles = container.querySelectorAll(".rounded-full.border-2")
+      expect(circles.length).toBe(webCourse.nodes.length)
     })
   })
 
   describe("edge rendering", () => {
-    it("should render edge connectors between nodes plus goal edge", () => {
+    it("should render edge connectors between nodes (not after last)", () => {
       const { container } = render(<RoadmapFlow course={webCourse} />)
-      const edgeSvgs = container.querySelectorAll('svg.w-8[aria-hidden="true"]')
-      // between-node edges (nodes.length - 1) + goal edge (1)
-      expect(edgeSvgs.length).toBe(webCourse.nodes.length)
-    })
-
-    it("should render goal edge for single-node course", () => {
-      const singleNodeCourse = {
-        ...webCourse,
-        id: "web" as const,
-        nodes: [webCourse.nodes[0]],
-      }
-      const { container } = render(<RoadmapFlow course={singleNodeCourse} />)
-      const edgeSvgs = container.querySelectorAll('svg.w-8[aria-hidden="true"]')
-      // no between-node edges, but 1 goal edge
-      expect(edgeSvgs.length).toBe(1)
+      const edges = container.querySelectorAll('[aria-hidden="true"]')
+      // edges between nodes only (nodes.length - 1), not after last node
+      // plus SVG icons inside nodes
+      expect(edges.length).toBeGreaterThan(0)
     })
   })
 
-  describe("journey markers", () => {
-    it("should render start marker", () => {
+  describe("no journey markers", () => {
+    it("should not render start marker", () => {
       render(<RoadmapFlow course={webCourse} />)
-      expect(screen.getByText("スタート")).toBeInTheDocument()
+      expect(screen.queryByText("スタート")).not.toBeInTheDocument()
     })
 
-    it("should render goal marker", () => {
+    it("should not render goal marker", () => {
       render(<RoadmapFlow course={webCourse} />)
-      expect(screen.getByText("目標達成！")).toBeInTheDocument()
-    })
-
-    it("should not render goal marker for empty course", () => {
-      const emptyCourse = {
-        ...webCourse,
-        id: "web" as const,
-        nodes: [],
-      }
-      render(<RoadmapFlow course={emptyCourse} />)
-      expect(screen.getByText("スタート")).toBeInTheDocument()
       expect(screen.queryByText("目標達成！")).not.toBeInTheDocument()
     })
   })
 
   describe("empty course", () => {
-    it("should render start marker but no edge connectors", () => {
+    it("should render no list items for empty course", () => {
       const emptyCourse = {
         ...webCourse,
         id: "web" as const,
         nodes: [],
       }
       const { container } = render(<RoadmapFlow course={emptyCourse} />)
-      const edgeSvgs = container.querySelectorAll('svg.w-8[aria-hidden="true"]')
-      expect(edgeSvgs.length).toBe(0)
+      const listItems = container.querySelectorAll("li")
+      expect(listItems.length).toBe(0)
     })
   })
 

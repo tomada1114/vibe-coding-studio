@@ -3,70 +3,35 @@ import { RoadmapEdge } from "../RoadmapEdge"
 
 describe("RoadmapEdge", () => {
   describe("rendering", () => {
-    it("should render SVG element", () => {
+    it("should render a div element", () => {
       const { container } = render(<RoadmapEdge />)
-      const svg = container.querySelector("svg")
-      expect(svg).toBeInTheDocument()
+      const edge = container.firstChild as HTMLElement
+      expect(edge).toBeInTheDocument()
+      expect(edge.tagName).toBe("DIV")
     })
 
-    it("should render line element inside SVG", () => {
+    it("should have vertical line styles", () => {
       const { container } = render(<RoadmapEdge />)
-      const line = container.querySelector("line")
-      expect(line).toBeInTheDocument()
-    })
-
-    it("should have correct stroke color", () => {
-      const { container } = render(<RoadmapEdge />)
-      const line = container.querySelector("line")
-      expect(line).toHaveAttribute("stroke", "#e4e4e7")
-    })
-
-    it("should have correct stroke width", () => {
-      const { container } = render(<RoadmapEdge />)
-      const line = container.querySelector("line")
-      expect(line).toHaveAttribute("stroke-width", "2")
-    })
-
-    it("should have dashed stroke", () => {
-      const { container } = render(<RoadmapEdge />)
-      const line = container.querySelector("line")
-      expect(line).toHaveAttribute("stroke-dasharray", "8,4")
+      const edge = container.firstChild
+      expect(edge).toHaveClass("w-px")
+      expect(edge).toHaveClass("bg-gray-200")
+      expect(edge).toHaveClass("h-8")
     })
   })
 
   describe("accessibility", () => {
     it('should have aria-hidden="true" for decorative element', () => {
       const { container } = render(<RoadmapEdge />)
-      const svg = container.querySelector("svg")
-      expect(svg).toHaveAttribute("aria-hidden", "true")
-    })
-  })
-
-  describe("sizing", () => {
-    it("should have default width class", () => {
-      const { container } = render(<RoadmapEdge />)
-      const svg = container.querySelector("svg")
-      expect(svg).toHaveClass("w-8")
-    })
-
-    it("should have default height", () => {
-      const { container } = render(<RoadmapEdge />)
-      const svg = container.querySelector("svg")
-      expect(svg).toHaveAttribute("height", "32")
-    })
-
-    it("should accept custom height", () => {
-      const { container } = render(<RoadmapEdge height={64} />)
-      const svg = container.querySelector("svg")
-      expect(svg).toHaveAttribute("height", "64")
+      const edge = container.firstChild
+      expect(edge).toHaveAttribute("aria-hidden", "true")
     })
   })
 
   describe("custom className", () => {
     it("should accept custom className", () => {
       const { container } = render(<RoadmapEdge className="custom-class" />)
-      const svg = container.querySelector("svg")
-      expect(svg).toHaveClass("custom-class")
+      const edge = container.firstChild
+      expect(edge).toHaveClass("custom-class")
     })
   })
 })

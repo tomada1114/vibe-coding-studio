@@ -11,8 +11,8 @@ describe("Web Course Data", () => {
       expect(webCourse.name).toBe("Web開発")
     })
 
-    it("should have correct emoji", () => {
-      expect(webCourse.emoji).toBe("🌐")
+    it("should have correct icon", () => {
+      expect(webCourse.icon).toBe("globe")
     })
   })
 

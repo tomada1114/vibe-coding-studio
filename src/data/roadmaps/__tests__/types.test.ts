@@ -81,7 +81,7 @@ describe("Roadmap Types", () => {
     const course: RoadmapCourse = {
       id: "web",
       name: "Web開発",
-      emoji: "🌐",
+      icon: "globe",
       description: "Test description",
       nodes: [],
     }

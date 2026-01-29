@@ -1,6 +1,34 @@
 import { fireEvent, render, screen } from "@testing-library/react"
 import { RoadmapTabs } from "../RoadmapTabs"
 
+// Mock framer-motion
+jest.mock("framer-motion", () => {
+  const framerMotionKeys = new Set([
+    "initial",
+    "animate",
+    "exit",
+    "transition",
+    "whileHover",
+    "whileTap",
+    "layoutId",
+  ])
+  const filterProps = (props: Record<string, unknown>) =>
+    Object.fromEntries(
+      Object.entries(props).filter(([key]) => !framerMotionKeys.has(key))
+    )
+  return {
+    motion: {
+      div: ({
+        children,
+        ...props
+      }: {
+        children?: React.ReactNode
+        [key: string]: unknown
+      }) => <div {...filterProps(props)}>{children}</div>,
+    },
+  }
+})
+
 describe("RoadmapTabs", () => {
   const mockOnCourseChange = jest.fn()
 
@@ -34,6 +62,35 @@ describe("RoadmapTabs", () => {
       const tabs = screen.getAllByRole("tab")
       expect(tabs).toHaveLength(2)
     })
+
+    it("should render SVG icons instead of emoji", () => {
+      const { container } = render(
+        <RoadmapTabs activeCourse="web" onCourseChange={mockOnCourseChange} />
+      )
+
+      const svgIcons = container.querySelectorAll("svg")
+      expect(svgIcons.length).toBeGreaterThanOrEqual(2)
+    })
+  })
+
+  describe("segment control style", () => {
+    it("should have gray-100 background container", () => {
+      render(
+        <RoadmapTabs activeCourse="web" onCourseChange={mockOnCourseChange} />
+      )
+
+      const tablist = screen.getByRole("tablist")
+      expect(tablist).toHaveClass("bg-gray-100")
+    })
+
+    it("should render active pill for selected tab", () => {
+      const { container } = render(
+        <RoadmapTabs activeCourse="web" onCourseChange={mockOnCourseChange} />
+      )
+
+      const activePill = container.querySelector(".bg-white.shadow-sm")
+      expect(activePill).toBeInTheDocument()
+    })
   })
 
   describe("active state", () => {
@@ -58,13 +115,13 @@ describe("RoadmapTabs", () => {
       expect(mobileTab).toHaveAttribute("aria-selected", "true")
     })
 
-    it("should apply active styles to selected tab", () => {
+    it("should apply active text color to selected tab", () => {
       render(
         <RoadmapTabs activeCourse="web" onCourseChange={mockOnCourseChange} />
       )
 
       const webTab = screen.getByRole("tab", { name: /Web開発/ })
-      expect(webTab).toHaveClass("bg-indigo-50")
+      expect(webTab).toHaveClass("text-gray-950")
     })
   })
 

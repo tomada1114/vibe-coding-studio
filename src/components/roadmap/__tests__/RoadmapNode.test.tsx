@@ -105,25 +105,17 @@ describe("RoadmapNode", () => {
       expect(screen.getByText(introNode.roadmapDescription)).toBeInTheDocument()
     })
 
-    it("should display difficulty badge", () => {
+    it("should display difficulty badge with SVG icon", () => {
       render(<RoadmapNode node={introNode} />)
       expect(screen.getByText("初級")).toBeInTheDocument()
+      const badge = screen.getByText("初級").closest("span")
+      const svgIcon = badge?.querySelector("svg")
+      expect(svgIcon).toBeInTheDocument()
     })
 
     it("should display CTA text as 学習を開始する", () => {
       render(<RoadmapNode node={introNode} />)
       expect(screen.getByText("学習を開始する")).toBeInTheDocument()
-    })
-
-    it("should not display step number", () => {
-      render(<RoadmapNode node={introNode} />)
-      expect(screen.queryByText("1")).not.toBeInTheDocument()
-    })
-
-    it("should not display category badge", () => {
-      render(<RoadmapNode node={introNode} />)
-      expect(screen.queryByText(/入門講座/)).not.toBeInTheDocument()
-      expect(screen.queryByText(/📘/)).not.toBeInTheDocument()
     })
   })
 
@@ -138,7 +130,7 @@ describe("RoadmapNode", () => {
       (difficulty, label, expectedClass) => {
         const node = { ...introNode, difficulty }
         render(<RoadmapNode node={node} />)
-        const badge = screen.getByText(label)
+        const badge = screen.getByText(label).closest("span")
         expect(badge).toHaveClass(expectedClass)
       }
     )
@@ -235,6 +227,20 @@ describe("RoadmapNode", () => {
       render(<RoadmapNode node={introNode} />)
       const article = screen.getByRole("article")
       expect(article).toHaveAttribute("tabIndex", "0")
+    })
+  })
+
+  describe("layout", () => {
+    it("should have left-aligned text", () => {
+      render(<RoadmapNode node={introNode} />)
+      const article = screen.getByRole("article")
+      expect(article).toHaveClass("text-left")
+    })
+
+    it("should have difficulty badge and CTA in same row", () => {
+      const { container } = render(<RoadmapNode node={introNode} />)
+      const row = container.querySelector(".justify-between")
+      expect(row).toBeInTheDocument()
     })
   })
 })

@@ -18,6 +18,7 @@ jest.mock("framer-motion", () => {
     "transition",
     "whileHover",
     "whileTap",
+    "layoutId",
   ])
   const filterProps = (props: Record<string, unknown>) =>
     Object.fromEntries(
@@ -29,9 +30,23 @@ jest.mock("framer-motion", () => {
         children,
         ...props
       }: {
-        children: React.ReactNode
+        children?: React.ReactNode
         [key: string]: unknown
       }) => <div {...filterProps(props)}>{children}</div>,
+      ol: ({
+        children,
+        ...props
+      }: {
+        children: React.ReactNode
+        [key: string]: unknown
+      }) => <ol {...filterProps(props)}>{children}</ol>,
+      li: ({
+        children,
+        ...props
+      }: {
+        children: React.ReactNode
+        [key: string]: unknown
+      }) => <li {...filterProps(props)}>{children}</li>,
       article: ({
         children,
         ...props
@@ -112,16 +127,17 @@ describe("RoadmapContent", () => {
   })
 
   describe("page structure", () => {
-    it("should render description text", () => {
-      render(<RoadmapContent />)
-      expect(screen.getByText(/最適な学習パス/)).toBeInTheDocument()
-    })
-
     it("should render roadmap nodes for default course", () => {
       render(<RoadmapContent />)
       expect(
         screen.getByText("Claude Code × Vibe Coding 入門")
       ).toBeInTheDocument()
+    })
+
+    it("should not render description text or badge", () => {
+      render(<RoadmapContent />)
+      expect(screen.queryByText(/最適な学習パス/)).not.toBeInTheDocument()
+      expect(screen.queryByText(/目的別学習ガイド/)).not.toBeInTheDocument()
     })
   })
 })

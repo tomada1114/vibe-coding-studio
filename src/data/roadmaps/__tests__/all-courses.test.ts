@@ -26,7 +26,7 @@ describe("All Courses Integration", () => {
     courses.forEach(course => {
       expect(course.id).toBeTruthy()
       expect(course.name).toBeTruthy()
-      expect(course.emoji).toBeTruthy()
+      expect(course.icon).toBeTruthy()
       expect(course.nodes.length).toBeGreaterThan(0)
     })
   })
