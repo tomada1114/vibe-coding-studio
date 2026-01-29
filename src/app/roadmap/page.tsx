@@ -1,11 +1,11 @@
-import { Suspense } from 'react'
-import type { Metadata } from 'next'
-import { RoadmapContent } from '@/components/roadmap/RoadmapContent'
+import { RoadmapContent } from "@/components/roadmap/RoadmapContent"
+import type { Metadata } from "next"
+import { Suspense } from "react"
 
 export const metadata: Metadata = {
-  title: 'ロードマップ | Vibe Coding Studio',
+  title: "ロードマップ | Vibe Coding Studio",
   description:
-    'Claude Codeを使ったAI駆動開発の学習ロードマップ。目的別に最適な学習パスを選び、プログラミング未経験からプロフェッショナルまで効率的にスキルを習得できます。',
+    "Claude Codeを使ったAI駆動開発の学習ロードマップ。目的別に最適な学習パスを選び、プログラミング未経験からプロフェッショナルまで効率的にスキルを習得できます。",
 }
 
 export default function RoadmapPage() {

@@ -126,7 +126,10 @@ describe("CourseDetailHero", () => {
       const typescriptLink = screen.getByRole("link", { name: "TypeScript" })
       const reactLink = screen.getByRole("link", { name: "React" })
 
-      expect(typescriptLink).toHaveAttribute("href", "/coupons?topic=typescript")
+      expect(typescriptLink).toHaveAttribute(
+        "href",
+        "/coupons?topic=typescript"
+      )
       expect(reactLink).toHaveAttribute("href", "/coupons?topic=react")
     })
 
@@ -141,7 +144,10 @@ describe("CourseDetailHero", () => {
       const reactLink = screen.getByRole("link", { name: "React" })
       const nextjsLink = screen.getByRole("link", { name: "Next.js" })
 
-      expect(typescriptLink).toHaveAttribute("href", "/coupons?topic=typescript")
+      expect(typescriptLink).toHaveAttribute(
+        "href",
+        "/coupons?topic=typescript"
+      )
       expect(reactLink).toHaveAttribute("href", "/coupons?topic=react")
       expect(nextjsLink).toHaveAttribute("href", "/coupons?topic=nextjs")
     })
@@ -181,7 +187,10 @@ describe("CourseDetailHero", () => {
       const propsWithSingleTopic = { ...defaultProps, topics: ["typescript"] }
       render(<CourseDetailHero {...propsWithSingleTopic} />)
       const typescriptLink = screen.getByRole("link", { name: "TypeScript" })
-      expect(typescriptLink).toHaveAttribute("href", "/coupons?topic=typescript")
+      expect(typescriptLink).toHaveAttribute(
+        "href",
+        "/coupons?topic=typescript"
+      )
     })
   })
 })
