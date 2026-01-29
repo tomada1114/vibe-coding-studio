@@ -3,7 +3,7 @@ import type { RoadmapCourse } from "./types"
 export const webCourse: RoadmapCourse = {
   id: "web",
   name: "Web開発",
-  emoji: "🌐",
+  icon: "globe",
   description: "Next.js/Reactを中心としたモダンWeb開発",
   nodes: [
     {
@@ -26,7 +26,7 @@ export const webCourse: RoadmapCourse = {
       description:
         "決済機能を持つWebアプリケーションを開発。実践的なSaaS開発スキルを習得します。",
       roadmapDescription:
-        "基礎を固めたら決済機能付きアプリに挑戦。SaaS開発の基本パターンを身につけます。",
+        "基礎を固めたらStripe決済付きアプリに挑戦。SaaS開発の基本パターンを身につけます。",
       difficulty: "intermediate",
       category: "basic",
       link: {
@@ -54,7 +54,7 @@ export const webCourse: RoadmapCourse = {
       description:
         "MCPツールを活用したNext.jsフルスタック開発。認証・データベースを含む本格的なWebアプリを構築。",
       roadmapDescription:
-        "MCPツールでNext.jsフルスタック開発を加速。認証・DB連携を含む本格Webアプリを効率的に構築します。",
+        "MCPサーバーを活用してNext.jsフルスタック開発を加速。AIツール連携の実践スキルを身につけます。",
       difficulty: "advanced",
       category: "advanced",
       link: {

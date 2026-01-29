@@ -3,7 +3,7 @@ import type { RoadmapCourse } from "./types"
 export const mobileCourse: RoadmapCourse = {
   id: "mobile",
   name: "スマホアプリ",
-  emoji: "📱",
+  icon: "smartphone",
   description: "React Native/Expoでクロスプラットフォーム開発",
   nodes: [
     {

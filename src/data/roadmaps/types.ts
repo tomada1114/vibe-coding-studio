@@ -36,7 +36,7 @@ export interface RoadmapNode {
 export interface RoadmapCourse {
   id: CourseId
   name: string
-  emoji: string
+  icon: string
   description: string
   nodes: RoadmapNode[]
 }
