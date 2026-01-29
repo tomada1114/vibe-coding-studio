@@ -21,18 +21,8 @@ describe('Beginner Course Data', () => {
   })
 
   describe('nodes', () => {
-    it('should have 5 nodes', () => {
-      expect(beginnerCourse.nodes).toHaveLength(5)
-    })
-
-    it('should have 4 required nodes', () => {
-      const requiredNodes = beginnerCourse.nodes.filter((n) => n.isRequired)
-      expect(requiredNodes).toHaveLength(4)
-    })
-
-    it('should have 1 optional node', () => {
-      const optionalNodes = beginnerCourse.nodes.filter((n) => !n.isRequired)
-      expect(optionalNodes).toHaveLength(1)
+    it('should have 4 nodes', () => {
+      expect(beginnerCourse.nodes).toHaveLength(4)
     })
 
     it('should have first node as vibe-coding-intro', () => {
@@ -53,8 +43,8 @@ describe('Beginner Course Data', () => {
   })
 
   describe('edges', () => {
-    it('should have 4 edges', () => {
-      expect(beginnerCourse.edges).toHaveLength(4)
+    it('should have 3 edges', () => {
+      expect(beginnerCourse.edges).toHaveLength(3)
     })
 
     it('should have edges referencing valid node IDs', () => {

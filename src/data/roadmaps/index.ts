@@ -2,18 +2,12 @@ import type { CourseId, RoadmapCourse } from './types'
 import { beginnerCourse } from './beginner'
 import { webCourse } from './web'
 import { mobileCourse } from './mobile'
-import { pythonCourse } from './python'
 
 // コースID一覧（定数）
-export const courseIds: CourseId[] = ['beginner', 'web', 'mobile', 'python']
+export const courseIds: CourseId[] = ['beginner', 'web', 'mobile']
 
 // コースデータ
-const courses: RoadmapCourse[] = [
-  beginnerCourse,
-  webCourse,
-  mobileCourse,
-  pythonCourse,
-]
+const courses: RoadmapCourse[] = [beginnerCourse, webCourse, mobileCourse]
 
 /**
  * すべてのコースを取得

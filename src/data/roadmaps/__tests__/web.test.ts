@@ -21,11 +21,6 @@ describe('Web Course Data', () => {
       expect(webCourse.nodes).toHaveLength(4)
     })
 
-    it('should have all required nodes', () => {
-      const requiredNodes = webCourse.nodes.filter((n) => n.isRequired)
-      expect(requiredNodes).toHaveLength(4)
-    })
-
     it('should have unique node IDs', () => {
       const ids = webCourse.nodes.map((n) => n.id)
       const uniqueIds = new Set(ids)

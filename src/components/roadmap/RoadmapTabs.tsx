@@ -12,7 +12,6 @@ const courses = [
   { id: 'beginner', name: '完全初心者', emoji: '🚀' },
   { id: 'web', name: 'Web開発', emoji: '🌐' },
   { id: 'mobile', name: 'スマホアプリ', emoji: '📱' },
-  { id: 'python', name: 'Python開発', emoji: '🐍' },
 ] as const
 
 export function RoadmapTabs({ activeCourse, onCourseChange }: RoadmapTabsProps) {

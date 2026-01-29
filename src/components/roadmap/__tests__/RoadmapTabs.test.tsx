@@ -9,7 +9,7 @@ describe('RoadmapTabs', () => {
   })
 
   describe('rendering', () => {
-    it('should render 4 tabs', () => {
+    it('should render 3 tabs', () => {
       render(
         <RoadmapTabs
           activeCourse="beginner"
@@ -20,7 +20,6 @@ describe('RoadmapTabs', () => {
       expect(screen.getByText(/完全初心者/)).toBeInTheDocument()
       expect(screen.getByText(/Web開発/)).toBeInTheDocument()
       expect(screen.getByText(/スマホアプリ/)).toBeInTheDocument()
-      expect(screen.getByText(/Python開発/)).toBeInTheDocument()
     })
 
     it('should have role="tablist" on container', () => {
@@ -43,7 +42,7 @@ describe('RoadmapTabs', () => {
       )
 
       const tabs = screen.getAllByRole('tab')
-      expect(tabs).toHaveLength(4)
+      expect(tabs).toHaveLength(3)
     })
   })
 
@@ -104,9 +103,6 @@ describe('RoadmapTabs', () => {
           onCourseChange={mockOnCourseChange}
         />
       )
-
-      fireEvent.click(screen.getByRole('tab', { name: /Python開発/ }))
-      expect(mockOnCourseChange).toHaveBeenCalledWith('python')
 
       fireEvent.click(screen.getByRole('tab', { name: /スマホアプリ/ }))
       expect(mockOnCourseChange).toHaveBeenCalledWith('mobile')

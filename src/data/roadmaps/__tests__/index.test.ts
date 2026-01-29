@@ -8,15 +8,14 @@ import {
 
 describe('Roadmap Data Index', () => {
   describe('courseIds', () => {
-    it('should contain 4 course IDs', () => {
-      expect(courseIds).toHaveLength(4)
+    it('should contain 3 course IDs', () => {
+      expect(courseIds).toHaveLength(3)
     })
 
     it('should contain expected course IDs', () => {
       expect(courseIds).toContain('beginner')
       expect(courseIds).toContain('web')
       expect(courseIds).toContain('mobile')
-      expect(courseIds).toContain('python')
     })
   })
 
@@ -26,9 +25,9 @@ describe('Roadmap Data Index', () => {
       expect(Array.isArray(courses)).toBe(true)
     })
 
-    it('should return 4 courses', () => {
+    it('should return 3 courses', () => {
       const courses = getAllCourses()
-      expect(courses).toHaveLength(4)
+      expect(courses).toHaveLength(3)
     })
   })
 
@@ -50,12 +49,6 @@ describe('Roadmap Data Index', () => {
       expect(course).toBeDefined()
       expect(course?.id).toBe('mobile')
     })
-
-    it('should return python course', () => {
-      const course = getCourseById('python')
-      expect(course).toBeDefined()
-      expect(course?.id).toBe('python')
-    })
   })
 
   describe('getDefaultCourse', () => {
@@ -71,13 +64,13 @@ describe('Roadmap Data Index', () => {
       expect(isValidCourseId('beginner')).toBe(true)
       expect(isValidCourseId('web')).toBe(true)
       expect(isValidCourseId('mobile')).toBe(true)
-      expect(isValidCourseId('python')).toBe(true)
     })
 
     it('should return false for invalid course IDs', () => {
       expect(isValidCourseId('invalid')).toBe(false)
       expect(isValidCourseId('')).toBe(false)
       expect(isValidCourseId('BEGINNER')).toBe(false)
+      expect(isValidCourseId('python')).toBe(false)
     })
   })
 })

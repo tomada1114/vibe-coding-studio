@@ -5,7 +5,6 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { RoadmapTabs } from '@/components/roadmap/RoadmapTabs'
 import { RoadmapFlow } from '@/components/roadmap/RoadmapFlow'
-import { RoadmapLegend } from '@/components/roadmap/RoadmapLegend'
 import { getCourseById, isValidCourseId, type CourseId } from '@/data/roadmaps'
 import { Container } from '@/components/container'
 import { Gradient } from '@/components/gradient'
@@ -120,9 +119,6 @@ function RoadmapContent() {
 
         {/* Roadmap Flow */}
         <RoadmapFlow course={course} />
-
-        {/* Legend */}
-        <RoadmapLegend className="mt-12" />
       </Container>
     </>
   )

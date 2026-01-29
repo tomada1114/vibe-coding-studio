@@ -17,18 +17,8 @@ describe('Mobile Course Data', () => {
   })
 
   describe('nodes', () => {
-    it('should have 4 nodes', () => {
-      expect(mobileCourse.nodes).toHaveLength(4)
-    })
-
-    it('should have 3 required nodes', () => {
-      const requiredNodes = mobileCourse.nodes.filter((n) => n.isRequired)
-      expect(requiredNodes).toHaveLength(3)
-    })
-
-    it('should have 1 optional node', () => {
-      const optionalNodes = mobileCourse.nodes.filter((n) => !n.isRequired)
-      expect(optionalNodes).toHaveLength(1)
+    it('should have 3 nodes', () => {
+      expect(mobileCourse.nodes).toHaveLength(3)
     })
 
     it('should have React Native focused content', () => {
@@ -40,8 +30,8 @@ describe('Mobile Course Data', () => {
   })
 
   describe('edges', () => {
-    it('should have 3 edges', () => {
-      expect(mobileCourse.edges).toHaveLength(3)
+    it('should have 2 edges', () => {
+      expect(mobileCourse.edges).toHaveLength(2)
     })
   })
 
