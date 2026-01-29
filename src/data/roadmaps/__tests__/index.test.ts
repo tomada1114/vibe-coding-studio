@@ -1,76 +1,69 @@
 import {
+  courseIds,
   getAllCourses,
   getCourseById,
   getDefaultCourse,
   isValidCourseId,
-  courseIds,
-} from '../index'
+} from "../index"
 
-describe('Roadmap Data Index', () => {
-  describe('courseIds', () => {
-    it('should contain 3 course IDs', () => {
-      expect(courseIds).toHaveLength(3)
+describe("Roadmap Data Index", () => {
+  describe("courseIds", () => {
+    it("should contain 2 course IDs", () => {
+      expect(courseIds).toHaveLength(2)
     })
 
-    it('should contain expected course IDs', () => {
-      expect(courseIds).toContain('beginner')
-      expect(courseIds).toContain('web')
-      expect(courseIds).toContain('mobile')
+    it("should contain expected course IDs", () => {
+      expect(courseIds).toContain("web")
+      expect(courseIds).toContain("mobile")
     })
   })
 
-  describe('getAllCourses', () => {
-    it('should return an array', () => {
+  describe("getAllCourses", () => {
+    it("should return an array", () => {
       const courses = getAllCourses()
       expect(Array.isArray(courses)).toBe(true)
     })
 
-    it('should return 3 courses', () => {
+    it("should return 2 courses", () => {
       const courses = getAllCourses()
-      expect(courses).toHaveLength(3)
+      expect(courses).toHaveLength(2)
     })
   })
 
-  describe('getCourseById', () => {
-    it('should return beginner course', () => {
-      const course = getCourseById('beginner')
+  describe("getCourseById", () => {
+    it("should return web course", () => {
+      const course = getCourseById("web")
       expect(course).toBeDefined()
-      expect(course?.id).toBe('beginner')
+      expect(course?.id).toBe("web")
     })
 
-    it('should return web course', () => {
-      const course = getCourseById('web')
+    it("should return mobile course", () => {
+      const course = getCourseById("mobile")
       expect(course).toBeDefined()
-      expect(course?.id).toBe('web')
-    })
-
-    it('should return mobile course', () => {
-      const course = getCourseById('mobile')
-      expect(course).toBeDefined()
-      expect(course?.id).toBe('mobile')
+      expect(course?.id).toBe("mobile")
     })
   })
 
-  describe('getDefaultCourse', () => {
-    it('should return beginner course as default', () => {
+  describe("getDefaultCourse", () => {
+    it("should return web course as default", () => {
       const course = getDefaultCourse()
       expect(course).toBeDefined()
-      expect(course?.id).toBe('beginner')
+      expect(course?.id).toBe("web")
     })
   })
 
-  describe('isValidCourseId', () => {
-    it('should return true for valid course IDs', () => {
-      expect(isValidCourseId('beginner')).toBe(true)
-      expect(isValidCourseId('web')).toBe(true)
-      expect(isValidCourseId('mobile')).toBe(true)
+  describe("isValidCourseId", () => {
+    it("should return true for valid course IDs", () => {
+      expect(isValidCourseId("web")).toBe(true)
+      expect(isValidCourseId("mobile")).toBe(true)
     })
 
-    it('should return false for invalid course IDs', () => {
-      expect(isValidCourseId('invalid')).toBe(false)
-      expect(isValidCourseId('')).toBe(false)
-      expect(isValidCourseId('BEGINNER')).toBe(false)
-      expect(isValidCourseId('python')).toBe(false)
+    it("should return false for invalid course IDs", () => {
+      expect(isValidCourseId("beginner")).toBe(false)
+      expect(isValidCourseId("invalid")).toBe(false)
+      expect(isValidCourseId("")).toBe(false)
+      expect(isValidCourseId("BEGINNER")).toBe(false)
+      expect(isValidCourseId("python")).toBe(false)
     })
   })
 })
