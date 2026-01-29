@@ -37,6 +37,36 @@ describe('RoadmapNode', () => {
     link: { type: 'external', url: 'https://www.udemy.com/course/test' },
   }
 
+  const zennNode: RoadmapNodeType = {
+    id: 'test-zenn',
+    title: 'Zenn記事',
+    description: 'Zennで学ぶ',
+    roadmapDescription: 'Zenn記事で学習を進めます。',
+    difficulty: 'intermediate',
+    category: 'basic',
+    link: { type: 'zenn', url: 'https://zenn.dev/test/articles/test' },
+  }
+
+  const blogNode: RoadmapNodeType = {
+    id: 'test-blog',
+    title: 'ブログ記事',
+    description: 'ブログで学ぶ',
+    roadmapDescription: 'ブログ記事で学習を進めます。',
+    difficulty: 'beginner',
+    category: 'basic',
+    link: { type: 'blog', url: '/blog/test-article' },
+  }
+
+  const videoNode: RoadmapNodeType = {
+    id: 'test-video',
+    title: '動画講座',
+    description: '動画で学ぶ',
+    roadmapDescription: '動画で学習を進めます。',
+    difficulty: 'beginner',
+    category: 'intro',
+    link: { type: 'video', url: '/videos/test-video' },
+  }
+
   beforeEach(() => {
     mockPush.mockClear()
     mockOpen.mockClear()
@@ -104,8 +134,70 @@ describe('RoadmapNode', () => {
       fireEvent.click(article)
       expect(mockOpen).toHaveBeenCalledWith(
         'https://www.udemy.com/course/test',
-        '_blank'
+        '_blank',
+        'noopener,noreferrer'
       )
+    })
+
+    it('should open new tab for zenn link', () => {
+      render(<RoadmapNode node={zennNode} />)
+      const article = screen.getByRole('article')
+      fireEvent.click(article)
+      expect(mockOpen).toHaveBeenCalledWith(
+        'https://zenn.dev/test/articles/test',
+        '_blank',
+        'noopener,noreferrer'
+      )
+    })
+
+    it('should navigate internally for blog link', () => {
+      render(<RoadmapNode node={blogNode} />)
+      const article = screen.getByRole('article')
+      fireEvent.click(article)
+      expect(mockPush).toHaveBeenCalledWith('/blog/test-article')
+    })
+
+    it('should navigate internally for video link', () => {
+      render(<RoadmapNode node={videoNode} />)
+      const article = screen.getByRole('article')
+      fireEvent.click(article)
+      expect(mockPush).toHaveBeenCalledWith('/videos/test-video')
+    })
+  })
+
+  describe('keyboard navigation', () => {
+    it('should navigate on Enter key for internal link', () => {
+      render(<RoadmapNode node={introNode} />)
+      const article = screen.getByRole('article')
+      fireEvent.keyDown(article, { key: 'Enter' })
+      expect(mockPush).toHaveBeenCalledWith('/coupons/claude-code-vibe-coding')
+    })
+
+    it('should navigate on Space key for internal link', () => {
+      render(<RoadmapNode node={introNode} />)
+      const article = screen.getByRole('article')
+      fireEvent.keyDown(article, { key: ' ' })
+      expect(mockPush).toHaveBeenCalledWith('/coupons/claude-code-vibe-coding')
+    })
+
+    it('should open new tab on Enter key for external link', () => {
+      render(<RoadmapNode node={externalNode} />)
+      const article = screen.getByRole('article')
+      fireEvent.keyDown(article, { key: 'Enter' })
+      expect(mockOpen).toHaveBeenCalledWith(
+        'https://www.udemy.com/course/test',
+        '_blank',
+        'noopener,noreferrer'
+      )
+    })
+
+    it('should not navigate on other keys', () => {
+      render(<RoadmapNode node={introNode} />)
+      const article = screen.getByRole('article')
+      fireEvent.keyDown(article, { key: 'Tab' })
+      fireEvent.keyDown(article, { key: 'Escape' })
+      expect(mockPush).not.toHaveBeenCalled()
+      expect(mockOpen).not.toHaveBeenCalled()
     })
   })
 

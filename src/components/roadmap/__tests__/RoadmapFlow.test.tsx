@@ -12,15 +12,16 @@ jest.mock('framer-motion', () => ({
       children: React.ReactNode
       [key: string]: unknown
     }) => {
-      // Remove framer-motion specific props
-      const {
-        initial: _initial,
-        animate: _animate,
-        exit: _exit,
-        transition: _transition,
-        ...restProps
-      } = props
-      return <div {...restProps}>{children}</div>
+      const framerMotionKeys = new Set([
+        'initial',
+        'animate',
+        'exit',
+        'transition',
+      ])
+      const filteredProps = Object.fromEntries(
+        Object.entries(props).filter(([key]) => !framerMotionKeys.has(key))
+      )
+      return <div {...filteredProps}>{children}</div>
     },
   },
   AnimatePresence: ({ children }: { children: React.ReactNode }) => (
@@ -67,10 +68,33 @@ describe('RoadmapFlow', () => {
   })
 
   describe('edge rendering', () => {
-    it('should render edge component', () => {
+    it('should render edge connectors between nodes', () => {
       const { container } = render(<RoadmapFlow course={beginnerCourse} />)
-      const svg = container.querySelector('svg')
-      expect(svg).toBeInTheDocument()
+      const edgeSvgs = container.querySelectorAll('svg[aria-hidden="true"]')
+      expect(edgeSvgs.length).toBe(beginnerCourse.nodes.length - 1)
+    })
+
+    it('should not render edge for single-node course', () => {
+      const singleNodeCourse = {
+        ...beginnerCourse,
+        id: 'beginner' as const,
+        nodes: [beginnerCourse.nodes[0]],
+      }
+      const { container } = render(<RoadmapFlow course={singleNodeCourse} />)
+      const edgeSvgs = container.querySelectorAll('svg[aria-hidden="true"]')
+      expect(edgeSvgs.length).toBe(0)
+    })
+  })
+
+  describe('empty course', () => {
+    it('should render without error for empty nodes', () => {
+      const emptyCourse = {
+        ...beginnerCourse,
+        id: 'beginner' as const,
+        nodes: [],
+      }
+      const { container } = render(<RoadmapFlow course={emptyCourse} />)
+      expect(container.querySelector('svg')).not.toBeInTheDocument()
     })
   })
 
