@@ -1,13 +1,12 @@
-import type { CourseId, RoadmapCourse } from './types'
-import { beginnerCourse } from './beginner'
-import { webCourse } from './web'
-import { mobileCourse } from './mobile'
+import { mobileCourse } from "./mobile"
+import type { CourseId, RoadmapCourse } from "./types"
+import { webCourse } from "./web"
 
 // コースID一覧（定数）
-export const courseIds: CourseId[] = ['beginner', 'web', 'mobile']
+export const courseIds: CourseId[] = ["web", "mobile"]
 
 // コースデータ
-const courses: RoadmapCourse[] = [beginnerCourse, webCourse, mobileCourse]
+const courses: RoadmapCourse[] = [webCourse, mobileCourse]
 
 /**
  * すべてのコースを取得
@@ -20,14 +19,14 @@ export function getAllCourses(): readonly RoadmapCourse[] {
  * IDでコースを取得
  */
 export function getCourseById(id: CourseId): RoadmapCourse | undefined {
-  return courses.find((course) => course.id === id)
+  return courses.find(course => course.id === id)
 }
 
 /**
- * デフォルトコースを取得（beginner）
+ * デフォルトコースを取得（web）
  */
 export function getDefaultCourse(): RoadmapCourse | undefined {
-  return getCourseById('beginner')
+  return getCourseById("web")
 }
 
 /**
@@ -40,10 +39,10 @@ export function isValidCourseId(id: string): id is CourseId {
 // 型の再エクスポート
 export type {
   CourseId,
-  NodeLinkType,
   DifficultyLevel,
   NodeCategory,
-  RoadmapNodeLink,
-  RoadmapNode,
+  NodeLinkType,
   RoadmapCourse,
-} from './types'
+  RoadmapNode,
+  RoadmapNodeLink,
+} from "./types"

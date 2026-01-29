@@ -1,18 +1,18 @@
 // コースID
-export type CourseId = 'beginner' | 'web' | 'mobile'
+export type CourseId = "web" | "mobile"
 
 // リンクタイプ
-export type NodeLinkType = 'coupon' | 'blog' | 'video' | 'external' | 'zenn'
+export type NodeLinkType = "coupon" | "blog" | "video" | "external" | "zenn"
 
 // 難易度レベル
 export type DifficultyLevel =
-  | 'beginner'
-  | 'intermediate'
-  | 'intermediate-advanced'
-  | 'advanced'
+  | "beginner"
+  | "intermediate"
+  | "intermediate-advanced"
+  | "advanced"
 
 // ノードカテゴリ
-export type NodeCategory = 'intro' | 'basic' | 'practice' | 'advanced'
+export type NodeCategory = "intro" | "basic" | "practice" | "advanced"
 
 // ノードリンク
 export interface RoadmapNodeLink {
