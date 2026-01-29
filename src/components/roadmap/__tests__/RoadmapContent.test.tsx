@@ -10,31 +10,41 @@ jest.mock('next/navigation', () => ({
 }))
 
 // Mock framer-motion
-jest.mock('framer-motion', () => ({
-  motion: {
-    div: ({
-      children,
-      ...props
-    }: {
-      children: React.ReactNode
-      [key: string]: unknown
-    }) => {
-      const framerMotionKeys = new Set([
-        'initial',
-        'animate',
-        'exit',
-        'transition',
-      ])
-      const filteredProps = Object.fromEntries(
-        Object.entries(props).filter(([key]) => !framerMotionKeys.has(key))
-      )
-      return <div {...filteredProps}>{children}</div>
+jest.mock('framer-motion', () => {
+  const framerMotionKeys = new Set([
+    'initial',
+    'animate',
+    'exit',
+    'transition',
+    'whileHover',
+    'whileTap',
+  ])
+  const filterProps = (props: Record<string, unknown>) =>
+    Object.fromEntries(
+      Object.entries(props).filter(([key]) => !framerMotionKeys.has(key))
+    )
+  return {
+    motion: {
+      div: ({
+        children,
+        ...props
+      }: {
+        children: React.ReactNode
+        [key: string]: unknown
+      }) => <div {...filterProps(props)}>{children}</div>,
+      article: ({
+        children,
+        ...props
+      }: {
+        children: React.ReactNode
+        [key: string]: unknown
+      }) => <article {...filterProps(props)}>{children}</article>,
     },
-  },
-  AnimatePresence: ({ children }: { children: React.ReactNode }) => (
-    <>{children}</>
-  ),
-}))
+    AnimatePresence: ({ children }: { children: React.ReactNode }) => (
+      <>{children}</>
+    ),
+  }
+})
 
 describe('RoadmapContent', () => {
   beforeEach(() => {

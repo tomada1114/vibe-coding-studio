@@ -3,31 +3,41 @@ import { RoadmapFlow } from '../RoadmapFlow'
 import { beginnerCourse } from '@/data/roadmaps/beginner'
 
 // Mock framer-motion
-jest.mock('framer-motion', () => ({
-  motion: {
-    div: ({
-      children,
-      ...props
-    }: {
-      children: React.ReactNode
-      [key: string]: unknown
-    }) => {
-      const framerMotionKeys = new Set([
-        'initial',
-        'animate',
-        'exit',
-        'transition',
-      ])
-      const filteredProps = Object.fromEntries(
-        Object.entries(props).filter(([key]) => !framerMotionKeys.has(key))
-      )
-      return <div {...filteredProps}>{children}</div>
+jest.mock('framer-motion', () => {
+  const framerMotionKeys = new Set([
+    'initial',
+    'animate',
+    'exit',
+    'transition',
+    'whileHover',
+    'whileTap',
+  ])
+  const filterProps = (props: Record<string, unknown>) =>
+    Object.fromEntries(
+      Object.entries(props).filter(([key]) => !framerMotionKeys.has(key))
+    )
+  return {
+    motion: {
+      div: ({
+        children,
+        ...props
+      }: {
+        children: React.ReactNode
+        [key: string]: unknown
+      }) => <div {...filterProps(props)}>{children}</div>,
+      article: ({
+        children,
+        ...props
+      }: {
+        children: React.ReactNode
+        [key: string]: unknown
+      }) => <article {...filterProps(props)}>{children}</article>,
     },
-  },
-  AnimatePresence: ({ children }: { children: React.ReactNode }) => (
-    <>{children}</>
-  ),
-}))
+    AnimatePresence: ({ children }: { children: React.ReactNode }) => (
+      <>{children}</>
+    ),
+  }
+})
 
 // Mock next/navigation
 jest.mock('next/navigation', () => ({
@@ -68,33 +78,59 @@ describe('RoadmapFlow', () => {
   })
 
   describe('edge rendering', () => {
-    it('should render edge connectors between nodes', () => {
+    it('should render edge connectors between nodes plus goal edge', () => {
       const { container } = render(<RoadmapFlow course={beginnerCourse} />)
-      const edgeSvgs = container.querySelectorAll('svg[aria-hidden="true"]')
-      expect(edgeSvgs.length).toBe(beginnerCourse.nodes.length - 1)
+      const edgeSvgs = container.querySelectorAll('svg.w-8[aria-hidden="true"]')
+      // between-node edges (nodes.length - 1) + goal edge (1)
+      expect(edgeSvgs.length).toBe(beginnerCourse.nodes.length)
     })
 
-    it('should not render edge for single-node course', () => {
+    it('should render goal edge for single-node course', () => {
       const singleNodeCourse = {
         ...beginnerCourse,
         id: 'beginner' as const,
         nodes: [beginnerCourse.nodes[0]],
       }
       const { container } = render(<RoadmapFlow course={singleNodeCourse} />)
-      const edgeSvgs = container.querySelectorAll('svg[aria-hidden="true"]')
-      expect(edgeSvgs.length).toBe(0)
+      const edgeSvgs = container.querySelectorAll('svg.w-8[aria-hidden="true"]')
+      // no between-node edges, but 1 goal edge
+      expect(edgeSvgs.length).toBe(1)
+    })
+  })
+
+  describe('journey markers', () => {
+    it('should render start marker', () => {
+      render(<RoadmapFlow course={beginnerCourse} />)
+      expect(screen.getByText('スタート')).toBeInTheDocument()
+    })
+
+    it('should render goal marker', () => {
+      render(<RoadmapFlow course={beginnerCourse} />)
+      expect(screen.getByText('目標達成！')).toBeInTheDocument()
+    })
+
+    it('should not render goal marker for empty course', () => {
+      const emptyCourse = {
+        ...beginnerCourse,
+        id: 'beginner' as const,
+        nodes: [],
+      }
+      render(<RoadmapFlow course={emptyCourse} />)
+      expect(screen.getByText('スタート')).toBeInTheDocument()
+      expect(screen.queryByText('目標達成！')).not.toBeInTheDocument()
     })
   })
 
   describe('empty course', () => {
-    it('should render without error for empty nodes', () => {
+    it('should render start marker but no edge connectors', () => {
       const emptyCourse = {
         ...beginnerCourse,
         id: 'beginner' as const,
         nodes: [],
       }
       const { container } = render(<RoadmapFlow course={emptyCourse} />)
-      expect(container.querySelector('svg')).not.toBeInTheDocument()
+      const edgeSvgs = container.querySelectorAll('svg.w-8[aria-hidden="true"]')
+      expect(edgeSvgs.length).toBe(0)
     })
   })
 

@@ -2,6 +2,32 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import { RoadmapNode } from '../RoadmapNode'
 import type { RoadmapNode as RoadmapNodeType } from '@/data/roadmaps'
 
+// Mock framer-motion
+jest.mock('framer-motion', () => ({
+  motion: {
+    article: ({
+      children,
+      ...props
+    }: {
+      children: React.ReactNode
+      [key: string]: unknown
+    }) => {
+      const framerMotionKeys = new Set([
+        'initial',
+        'animate',
+        'exit',
+        'transition',
+        'whileHover',
+        'whileTap',
+      ])
+      const filteredProps = Object.fromEntries(
+        Object.entries(props).filter(([key]) => !framerMotionKeys.has(key))
+      )
+      return <article {...filteredProps}>{children}</article>
+    },
+  },
+}))
+
 // Mock next/navigation
 const mockPush = jest.fn()
 jest.mock('next/navigation', () => ({
