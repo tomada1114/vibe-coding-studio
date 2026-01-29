@@ -43,25 +43,12 @@ describe('RoadmapFlow', () => {
       })
     })
 
-    it('should render step numbers for required nodes', () => {
+    it('should not render step numbers', () => {
       render(<RoadmapFlow course={beginnerCourse} />)
 
-      const requiredCount = beginnerCourse.nodes.filter(
-        (n) => n.isRequired
-      ).length
-      for (let i = 1; i <= requiredCount; i++) {
-        expect(screen.getByText(String(i))).toBeInTheDocument()
+      for (let i = 1; i <= beginnerCourse.nodes.length; i++) {
+        expect(screen.queryByText(String(i))).not.toBeInTheDocument()
       }
-    })
-
-    it('should render "選択" badge for optional nodes', () => {
-      render(<RoadmapFlow course={beginnerCourse} />)
-
-      const optionalCount = beginnerCourse.nodes.filter(
-        (n) => !n.isRequired
-      ).length
-      const badges = screen.getAllByText('選択')
-      expect(badges).toHaveLength(optionalCount)
     })
   })
 

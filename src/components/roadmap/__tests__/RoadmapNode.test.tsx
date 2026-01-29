@@ -16,34 +16,25 @@ Object.defineProperty(window, 'open', {
 })
 
 describe('RoadmapNode', () => {
-  const requiredNode: RoadmapNodeType = {
-    id: 'test-required',
+  const introNode: RoadmapNodeType = {
+    id: 'test-intro',
     title: 'Claude Code × Vibe Coding 入門',
     description: 'プログラミング未経験からスタート',
+    roadmapDescription:
+      'AI駆動開発の第一歩。Claude Codeの使い方とReactの基礎を学びます。',
     difficulty: 'beginner',
     category: 'intro',
     link: { type: 'coupon', url: '/coupons/claude-code-vibe-coding' },
-    isRequired: true,
-  }
-
-  const optionalNode: RoadmapNodeType = {
-    id: 'test-optional',
-    title: 'MCP完全攻略',
-    description: '5つの最新MCPツール',
-    difficulty: 'intermediate',
-    category: 'optional',
-    link: { type: 'coupon', url: '/coupons/claude-code-mcp-nextjs' },
-    isRequired: false,
   }
 
   const externalNode: RoadmapNodeType = {
     id: 'test-external',
     title: '外部リンク講座',
     description: '外部サイトへ',
+    roadmapDescription: '外部サイトで学習を進めます。',
     difficulty: 'advanced',
     category: 'advanced',
     link: { type: 'external', url: 'https://www.udemy.com/course/test' },
-    isRequired: true,
   }
 
   beforeEach(() => {
@@ -51,46 +42,34 @@ describe('RoadmapNode', () => {
     mockOpen.mockClear()
   })
 
-  describe('rendering - required node', () => {
-    it('should display step number when stepNumber is provided', () => {
-      render(<RoadmapNode node={requiredNode} stepNumber={1} />)
-      expect(screen.getByText('1')).toBeInTheDocument()
-    })
-
-    it('should display title and description', () => {
-      render(<RoadmapNode node={requiredNode} stepNumber={1} />)
-      expect(screen.getByText(requiredNode.title)).toBeInTheDocument()
-      expect(screen.getByText(requiredNode.description)).toBeInTheDocument()
-    })
-
-    it('should display category badge with correct emoji', () => {
-      render(<RoadmapNode node={requiredNode} stepNumber={1} />)
-      expect(screen.getByText(/📘/)).toBeInTheDocument()
-      expect(screen.getByText(/入門講座/)).toBeInTheDocument()
+  describe('rendering', () => {
+    it('should display title and roadmapDescription', () => {
+      render(<RoadmapNode node={introNode} />)
+      expect(screen.getByText(introNode.title)).toBeInTheDocument()
+      expect(
+        screen.getByText(introNode.roadmapDescription)
+      ).toBeInTheDocument()
     })
 
     it('should display difficulty badge', () => {
-      render(<RoadmapNode node={requiredNode} stepNumber={1} />)
+      render(<RoadmapNode node={introNode} />)
       expect(screen.getByText('初級')).toBeInTheDocument()
     })
-  })
 
-  describe('rendering - optional node', () => {
-    it('should display "選択" badge', () => {
-      render(<RoadmapNode node={optionalNode} />)
-      expect(screen.getByText('選択')).toBeInTheDocument()
+    it('should display CTA text as 学習を開始する', () => {
+      render(<RoadmapNode node={introNode} />)
+      expect(screen.getByText('学習を開始する')).toBeInTheDocument()
     })
 
     it('should not display step number', () => {
-      render(<RoadmapNode node={optionalNode} />)
-      // Step number should not be rendered for optional nodes
-      expect(screen.queryByText(/^[0-9]$/)).not.toBeInTheDocument()
+      render(<RoadmapNode node={introNode} />)
+      expect(screen.queryByText('1')).not.toBeInTheDocument()
     })
 
-    it('should have dashed border class', () => {
-      const { container } = render(<RoadmapNode node={optionalNode} />)
-      const article = container.querySelector('article')
-      expect(article).toHaveClass('border-dashed')
+    it('should not display category badge', () => {
+      render(<RoadmapNode node={introNode} />)
+      expect(screen.queryByText(/入門講座/)).not.toBeInTheDocument()
+      expect(screen.queryByText(/📘/)).not.toBeInTheDocument()
     })
   })
 
@@ -103,8 +82,8 @@ describe('RoadmapNode', () => {
     ] as const)(
       'should display %s as %s with correct style',
       (difficulty, label, expectedClass) => {
-        const node = { ...requiredNode, difficulty }
-        render(<RoadmapNode node={node} stepNumber={1} />)
+        const node = { ...introNode, difficulty }
+        render(<RoadmapNode node={node} />)
         const badge = screen.getByText(label)
         expect(badge).toHaveClass(expectedClass)
       }
@@ -113,14 +92,14 @@ describe('RoadmapNode', () => {
 
   describe('navigation', () => {
     it('should navigate to internal URL on click for coupon link', () => {
-      render(<RoadmapNode node={requiredNode} stepNumber={1} />)
+      render(<RoadmapNode node={introNode} />)
       const article = screen.getByRole('article')
       fireEvent.click(article)
       expect(mockPush).toHaveBeenCalledWith('/coupons/claude-code-vibe-coding')
     })
 
     it('should open new tab for external link', () => {
-      render(<RoadmapNode node={externalNode} stepNumber={1} />)
+      render(<RoadmapNode node={externalNode} />)
       const article = screen.getByRole('article')
       fireEvent.click(article)
       expect(mockOpen).toHaveBeenCalledWith(
@@ -132,12 +111,12 @@ describe('RoadmapNode', () => {
 
   describe('accessibility', () => {
     it('should have role="article" for semantic structure', () => {
-      render(<RoadmapNode node={requiredNode} stepNumber={1} />)
+      render(<RoadmapNode node={introNode} />)
       expect(screen.getByRole('article')).toBeInTheDocument()
     })
 
     it('should be focusable', () => {
-      render(<RoadmapNode node={requiredNode} stepNumber={1} />)
+      render(<RoadmapNode node={introNode} />)
       const article = screen.getByRole('article')
       expect(article).toHaveAttribute('tabIndex', '0')
     })
