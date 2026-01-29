@@ -11,8 +11,8 @@ import type {
 
 describe('Roadmap Types', () => {
   it('should accept valid CourseId values', () => {
-    const validIds: CourseId[] = ['beginner', 'web', 'mobile', 'python']
-    expect(validIds).toHaveLength(4)
+    const validIds: CourseId[] = ['beginner', 'web', 'mobile']
+    expect(validIds).toHaveLength(3)
   })
 
   it('should accept valid NodeLinkType values', () => {
@@ -42,9 +42,8 @@ describe('Roadmap Types', () => {
       'basic',
       'practice',
       'advanced',
-      'optional',
     ]
-    expect(validCategories).toHaveLength(5)
+    expect(validCategories).toHaveLength(4)
   })
 
   it('should accept valid RoadmapNodeLink', () => {
@@ -65,17 +64,18 @@ describe('Roadmap Types', () => {
     expect(link.label).toBe('External Link')
   })
 
-  it('should accept valid RoadmapNode', () => {
+  it('should accept valid RoadmapNode with roadmapDescription', () => {
     const node: RoadmapNode = {
       id: 'test-node',
       title: 'Test Title',
       description: 'Test Description',
+      roadmapDescription: 'ロードマップ用の説明文',
       difficulty: 'beginner',
       category: 'intro',
       link: { type: 'coupon', url: '/coupons/test' },
-      isRequired: true,
     }
     expect(node.id).toBe('test-node')
+    expect(node.roadmapDescription).toBe('ロードマップ用の説明文')
   })
 
   it('should accept valid RoadmapEdge', () => {

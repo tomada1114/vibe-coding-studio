@@ -1,9 +1,9 @@
 import { getAllCourses, getCourseById, courseIds } from '../index'
 
 describe('All Courses Integration', () => {
-  it('should have 4 courses', () => {
+  it('should have 3 courses', () => {
     const courses = getAllCourses()
-    expect(courses).toHaveLength(4)
+    expect(courses).toHaveLength(3)
   })
 
   it('should have all courseIds retrievable', () => {
@@ -47,6 +47,17 @@ describe('All Courses Integration', () => {
       course.edges.forEach((edge) => {
         expect(nodeIds).toContain(edge.from)
         expect(nodeIds).toContain(edge.to)
+      })
+    })
+  })
+
+  it('should have roadmapDescription for all nodes', () => {
+    const courses = getAllCourses()
+    courses.forEach((course) => {
+      course.nodes.forEach((node) => {
+        expect(node.roadmapDescription).toBeTruthy()
+        expect(typeof node.roadmapDescription).toBe('string')
+        expect(node.roadmapDescription.length).toBeGreaterThan(0)
       })
     })
   })
