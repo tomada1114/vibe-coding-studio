@@ -1,5 +1,4 @@
 import withMarkdoc from "@markdoc/next.js"
-import withSearch from "./src/markdoc/search.mjs"
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -128,5 +127,4 @@ if (process.env.ANALYZE === "true") {
   config = withBundleAnalyzer(nextConfig)
 }
 
-// withMarkdoc と withSearch をチェーンして適用
-export default withSearch(withMarkdoc({ schemaPath: "./src/markdoc" })(config))
+export default withMarkdoc({ schemaPath: "./src/markdoc" })(config)
