@@ -15,6 +15,7 @@ import { PlusGrid, PlusGridItem, PlusGridRow } from "./plus-grid"
 
 const navLinks = [
   { href: "/", label: "ホーム" },
+  { href: "/docs", label: "学習" },
   { href: "/community", label: "コミュニティ" },
   { href: "/coupons", label: "クーポン" },
   { href: "/roadmap", label: "ロードマップ" },

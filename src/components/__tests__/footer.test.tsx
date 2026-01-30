@@ -160,6 +160,20 @@ describe("Footer コンポーネント", () => {
     })
   })
 
+  describe("学習リンク", () => {
+    it("学習リンクが表示される", () => {
+      render(<Footer />)
+      const learningLink = screen.getByRole("link", { name: "学習" })
+      expect(learningLink).toBeInTheDocument()
+    })
+
+    it("学習リンクが正しいURLを持つ", () => {
+      render(<Footer />)
+      const learningLink = screen.getByRole("link", { name: "学習" })
+      expect(learningLink).toHaveAttribute("href", "/docs")
+    })
+  })
+
   describe("コピーライト", () => {
     it("現在の年が表示される", () => {
       render(<Footer />)
