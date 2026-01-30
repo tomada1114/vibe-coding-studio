@@ -8,6 +8,8 @@ import { navigation } from '@/lib/navigation'
 export function generateChapterMetadata(courseSlug: string, chapterSlug: string): Metadata {
   const course = navigation.find((c) => c.slug === courseSlug)
   if (!course) {
+    // eslint-disable-next-line no-console
+    console.warn(`[metadata-utils] Course not found for slug: ${courseSlug}`)
     return { title: 'Not Found' }
   }
 

@@ -176,7 +176,7 @@ export const navigation = [
         href: '/docs/rspec/system_specs',
         children: [
           {
-            title: 'RSpeccとCapybaraでブラウザ操作をテストしよう',
+            title: 'RSpecとCapybaraでブラウザ操作をテストしよう',
             href: '/docs/rspec/system_specs/capybara_basics',
           },
           {
