@@ -38,10 +38,18 @@ const nodes = {
       // カスタムslugify関数を設定
       documentSlugifyMap.set(config, createCustomSlugify())
 
+      let frontmatter = {}
+      try {
+        frontmatter = yaml.load(node.attributes.frontmatter) ?? {}
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('[markdoc] Failed to parse YAML frontmatter:', error)
+      }
+
       return new Tag(
         this.render,
         {
-          frontmatter: yaml.load(node.attributes.frontmatter),
+          frontmatter,
           nodes: node.children,
         },
         node.transformChildren(config)

@@ -37,6 +37,10 @@ export function Fence({ children, language }: { children: string; language: stri
     const link = document.createElement('link')
     link.rel = 'stylesheet'
     link.href = '/styles/prism.css'
+    link.onerror = () => {
+      // eslint-disable-next-line no-console
+      console.warn('[Fence] Failed to load Prism CSS stylesheet')
+    }
     document.head.appendChild(link)
   }, [])
 
