@@ -75,20 +75,24 @@ function useAutocomplete({ close }: { close: (autocomplete: Autocomplete) => voi
         navigate,
       },
       getSources({ query }) {
-        return import('@/markdoc/search.mjs').then(({ search }) => {
-          return [
-            {
-              sourceId: 'documentation',
-              getItems() {
-                return search(query, { limit: 5 })
+        return import('@/markdoc/search.mjs')
+          .then(({ search }) => {
+            return [
+              {
+                sourceId: 'documentation',
+                getItems() {
+                  return search(query, { limit: 5 })
+                },
+                getItemUrl({ item }: { item: Result }) {
+                  return item.url
+                },
+                onSelect: navigate,
               },
-              getItemUrl({ item }) {
-                return item.url
-              },
-              onSelect: navigate,
-            },
-          ]
-        })
+            ]
+          })
+          .catch((): [] => {
+            return []
+          })
       },
     })
   )

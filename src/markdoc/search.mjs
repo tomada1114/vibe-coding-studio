@@ -32,7 +32,10 @@ function extractSections(node, sections, isRoot = true) {
       let hash = node.attributes?.id ?? slugify(content)
       sections.push([content, hash, []])
     } else {
-      sections.at(-1)[2].push(content)
+      const lastSection = sections.at(-1)
+      if (lastSection) {
+        lastSection[2].push(content)
+      }
     }
   } else if ('children' in node) {
     for (let child of node.children) {
@@ -55,27 +58,33 @@ export default function withSearch(nextConfig = {}) {
 
             let files = glob.sync('**/page.md', { cwd: pagesDir })
             let data = files.map((file) => {
-              let url =
-                file === 'page.md' ? '/' : `/${file.replace(/\/page\.md$/, '')}`
-              let md = fs.readFileSync(path.join(pagesDir, file), 'utf8')
+              try {
+                let url =
+                  file === 'page.md' ? '/' : `/${file.replace(/\/page\.md$/, '')}`
+                let md = fs.readFileSync(path.join(pagesDir, file), 'utf8')
 
-              let sections
+                let sections
 
-              if (cache.get(file)?.[0] === md) {
-                sections = cache.get(file)[1]
-              } else {
-                let ast = Markdoc.parse(md)
-                let title =
-                  ast.attributes?.frontmatter?.match(
-                    /^title:\s*(.*?)\s*$/m,
-                  )?.[1]
-                sections = [[title, null, []]]
-                extractSections(ast, sections)
-                cache.set(file, [md, sections])
+                if (cache.get(file)?.[0] === md) {
+                  sections = cache.get(file)[1]
+                } else {
+                  let ast = Markdoc.parse(md)
+                  let title =
+                    ast.attributes?.frontmatter?.match(
+                      /^title:\s*(.*?)\s*$/m,
+                    )?.[1]
+                  sections = [[title, null, []]]
+                  extractSections(ast, sections)
+                  cache.set(file, [md, sections])
+                }
+
+                return { url, sections }
+              } catch (error) {
+                // eslint-disable-next-line no-console
+                console.warn(`[search] Failed to process ${file}:`, error.message)
+                return null
               }
-
-              return { url, sections }
-            })
+            }).filter(Boolean)
 
             // When this file is imported within the application
             // the following module is loaded:
