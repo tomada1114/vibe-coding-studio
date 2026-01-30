@@ -16,8 +16,6 @@ export interface CourseInfo {
   slug: string
   /** コースの表示タイトル */
   title: string
-  /** コースの詳細説明 */
-  description: string
   /** コースの短い説明（一覧ページ等で使用） */
   shortDescription: string
   /** コーストップページへのパス */
@@ -46,8 +44,6 @@ export const ALL_COURSES: CourseInfo[] = [
   {
     slug: "ruby",
     title: "Ruby",
-    description:
-      "オブジェクト指向プログラミングの基本から実践的なRubyコーディングまで",
     shortDescription: "初めてのプログラミングに最適",
     topPagePath: "/docs/ruby",
     category: "backend",
@@ -62,7 +58,6 @@ export const ALL_COURSES: CourseInfo[] = [
   {
     slug: "rails",
     title: "Ruby on Rails",
-    description: "Webアプリケーション開発のための実践的なRailsスキルを習得",
     shortDescription: "モダンなWebアプリ開発を学ぶ",
     topPagePath: "/docs/rails",
     category: "backend",
@@ -77,7 +72,6 @@ export const ALL_COURSES: CourseInfo[] = [
   {
     slug: "rspec",
     title: "RSpec",
-    description: "プロの開発現場で求められるテスト自動化スキルを体系的に学ぶ",
     shortDescription: "テスト駆動開発の実践スキル",
     topPagePath: "/docs/rspec",
     category: "backend",
@@ -94,8 +88,6 @@ export const ALL_COURSES: CourseInfo[] = [
   {
     slug: "python",
     title: "Python",
-    description:
-      "データ分析とAI開発の基盤となるPythonプログラミングの基本から応用まで",
     shortDescription: "データサイエンス・AI開発の定番言語",
     topPagePath: "/docs/python",
     category: "data-ai",
@@ -112,7 +104,6 @@ export const ALL_COURSES: CourseInfo[] = [
   {
     slug: "javascript",
     title: "JavaScript",
-    description: "Webブラウザで動作するスクリプト言語の基本から応用まで",
     shortDescription: "ブラウザとの対話を実現する言語",
     topPagePath: "/docs/javascript",
     category: "frontend",
@@ -127,7 +118,6 @@ export const ALL_COURSES: CourseInfo[] = [
   {
     slug: "typescript",
     title: "TypeScript",
-    description: "型安全性とコード品質を向上させるJavaScriptの拡張言語",
     shortDescription: "型システムで開発効率とコード品質を向上",
     topPagePath: "/docs/typescript",
     category: "frontend",
@@ -142,7 +132,6 @@ export const ALL_COURSES: CourseInfo[] = [
   {
     slug: "react",
     title: "React",
-    description: "UI設計から状態管理まで、コンポーネントベースの開発手法を学ぶ",
     shortDescription: "モダンUI開発の定番ライブラリ",
     topPagePath: "/docs/react",
     category: "frontend",

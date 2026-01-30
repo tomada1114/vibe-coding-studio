@@ -31,7 +31,6 @@ function CourseCard({ course }: { course: CourseInfo }) {
       </div>
 
       <p className="mt-4 text-gray-600">{course.shortDescription}</p>
-      <p className="mt-2 text-sm text-gray-500">{course.description}</p>
 
       <Link
         href={course.topPagePath}
