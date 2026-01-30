@@ -91,16 +91,6 @@ export default async function DocsPage() {
         <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-600">
           スキルアップをサポートする体系的なプログラミング学習コンテンツ
         </p>
-
-        <div className="mt-8">
-          <Link
-            href="/docs/how-to-use"
-            className="inline-flex items-center rounded-lg bg-blue-50 px-4 py-2 text-sm font-medium text-blue-700 ring-1 ring-blue-200 transition-all hover:bg-blue-100 hover:ring-blue-300"
-          >
-            📚 ドキュメントの使い方ガイド
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
-        </div>
       </div>
 
       <CourseSection title="フロントエンド開発" courses={frontendCourses} />
