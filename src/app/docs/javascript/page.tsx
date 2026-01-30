@@ -9,45 +9,25 @@ const slug = 'javascript'
  * JavaScript コース用のテーマカラー
  */
 const javascriptThemeColors: ThemeColors = {
-  // 基本色
   primary: 'yellow',
   accent: 'yellow-600',
-  accentDark: 'yellow-500',
-
-  // グラデーション用
   gradient: {
     from: 'from-yellow-600',
     to: 'to-yellow-500',
-    darkFrom: 'dark:from-yellow-700',
-    darkTo: 'dark:to-yellow-600',
   },
-
-  // 背景用
   bg: {
     light: 'from-yellow-50',
-    dark: 'dark:from-yellow-950/30',
   },
-
-  // ボーダー用
   border: {
     light: 'border-l-yellow-600',
-    dark: 'dark:border-l-yellow-500',
   },
-
-  // テキスト用
   text: {
     accent: 'text-yellow-600',
-    accentDark: 'dark:text-yellow-500',
     hover: 'hover:text-yellow-600',
-    hoverDark: 'dark:hover:text-yellow-500',
   },
-
-  // ボタン用
   button: {
     bg: 'bg-yellow-600',
     bgHover: 'hover:bg-yellow-500',
-    bgDark: 'dark:bg-yellow-700',
-    bgHoverDark: 'dark:hover:bg-yellow-600',
     outline: 'focus-visible:outline-yellow-600',
   },
 }

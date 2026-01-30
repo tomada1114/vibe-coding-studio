@@ -9,45 +9,25 @@ const slug = 'rails'
  * Rails コース用のテーマカラー
  */
 const railsThemeColors: ThemeColors = {
-  // 基本色
   primary: 'red',
   accent: 'red-600',
-  accentDark: 'red-500',
-
-  // グラデーション用
   gradient: {
     from: 'from-red-600',
     to: 'to-red-500',
-    darkFrom: 'dark:from-red-700',
-    darkTo: 'dark:to-red-600',
   },
-
-  // 背景用
   bg: {
     light: 'from-red-50',
-    dark: 'dark:from-red-950/30',
   },
-
-  // ボーダー用
   border: {
     light: 'border-l-red-600',
-    dark: 'dark:border-l-red-500',
   },
-
-  // テキスト用
   text: {
     accent: 'text-red-600',
-    accentDark: 'dark:text-red-500',
     hover: 'hover:text-red-600',
-    hoverDark: 'dark:hover:text-red-500',
   },
-
-  // ボタン用
   button: {
     bg: 'bg-red-600',
     bgHover: 'hover:bg-red-500',
-    bgDark: 'dark:bg-red-700',
-    bgHoverDark: 'dark:hover:bg-red-600',
     outline: 'focus-visible:outline-red-600',
   },
 }

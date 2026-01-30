@@ -9,45 +9,25 @@ const slug = 'react'
  * React コース用のテーマカラー
  */
 const reactThemeColors: ThemeColors = {
-  // 基本色（React公式のライトブルー）
   primary: 'cyan',
   accent: 'cyan-500',
-  accentDark: 'cyan-400',
-
-  // グラデーション用
   gradient: {
     from: 'from-cyan-500',
     to: 'to-blue-500',
-    darkFrom: 'dark:from-cyan-600',
-    darkTo: 'dark:to-blue-600',
   },
-
-  // 背景用
   bg: {
     light: 'from-cyan-50',
-    dark: 'dark:from-cyan-950/30',
   },
-
-  // ボーダー用
   border: {
     light: 'border-l-cyan-500',
-    dark: 'dark:border-l-cyan-400',
   },
-
-  // テキスト用
   text: {
     accent: 'text-cyan-500',
-    accentDark: 'dark:text-cyan-400',
     hover: 'hover:text-cyan-500',
-    hoverDark: 'dark:hover:text-cyan-400',
   },
-
-  // ボタン用
   button: {
     bg: 'bg-cyan-500',
     bgHover: 'hover:bg-cyan-600',
-    bgDark: 'dark:bg-cyan-600',
-    bgHoverDark: 'dark:hover:bg-cyan-700',
     outline: 'focus-visible:outline-cyan-500',
   },
 }

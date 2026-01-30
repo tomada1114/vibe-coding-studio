@@ -9,45 +9,25 @@ const slug = 'typescript'
  * TypeScript コース用のテーマカラー
  */
 const typescriptThemeColors: ThemeColors = {
-  // 基本色（TypeScript公式のブルー）
   primary: 'blue',
   accent: 'blue-500',
-  accentDark: 'blue-400',
-
-  // グラデーション用
   gradient: {
     from: 'from-blue-500',
     to: 'to-indigo-600',
-    darkFrom: 'dark:from-blue-600',
-    darkTo: 'dark:to-indigo-700',
   },
-
-  // 背景用
   bg: {
     light: 'from-blue-50',
-    dark: 'dark:from-blue-950/30',
   },
-
-  // ボーダー用
   border: {
     light: 'border-l-blue-500',
-    dark: 'dark:border-l-blue-400',
   },
-
-  // テキスト用
   text: {
     accent: 'text-blue-500',
-    accentDark: 'dark:text-blue-400',
     hover: 'hover:text-blue-500',
-    hoverDark: 'dark:hover:text-blue-400',
   },
-
-  // ボタン用
   button: {
     bg: 'bg-blue-500',
     bgHover: 'hover:bg-blue-600',
-    bgDark: 'dark:bg-blue-600',
-    bgHoverDark: 'dark:hover:bg-blue-700',
     outline: 'focus-visible:outline-blue-500',
   },
 }
