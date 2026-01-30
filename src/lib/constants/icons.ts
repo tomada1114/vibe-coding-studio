@@ -32,21 +32,6 @@ export const DEVICON_COLORS: Record<
     bg: "bg-cyan-500",
     hover: "hover:bg-cyan-400",
   },
-  git: {
-    text: "text-orange-600",
-    bg: "bg-orange-600",
-    hover: "hover:bg-orange-500",
-  },
-  terminal: {
-    text: "text-gray-800",
-    bg: "bg-gray-800",
-    hover: "hover:bg-gray-700",
-  },
-  docker: {
-    text: "text-blue-600",
-    bg: "bg-blue-600",
-    hover: "hover:bg-blue-500",
-  },
 }
 
 /**
@@ -60,9 +45,6 @@ export const DEVICON_MAPPING: Record<string, string> = {
   javascript: "javascript-original",
   typescript: "typescript-original",
   react: "react-original",
-  git: "git-original",
-  terminal: "bash-original",
-  docker: "docker-original",
 }
 
 /**
