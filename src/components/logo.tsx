@@ -26,6 +26,8 @@ export function Logo({
   )
 }
 
+export const Logomark = Mark
+
 export function Mark({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 34 34" fill="none" className={className}>

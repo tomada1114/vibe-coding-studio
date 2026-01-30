@@ -1,7 +1,13 @@
+import withMarkdoc from "@markdoc/next.js"
+import withSearch from "./src/markdoc/search.mjs"
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // React configuration
   reactStrictMode: true,
+
+  // Markdownファイルをページとして認識させる
+  pageExtensions: ["js", "jsx", "md", "ts", "tsx"],
 
   // Image optimization - simplified
   images: {
@@ -97,8 +103,6 @@ const nextConfig = {
       process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   },
 
-  // No custom webpack config - use Next.js defaults
-
   // TypeScript configuration
   typescript: {
     // Fail build on TypeScript errors in production
@@ -124,4 +128,7 @@ if (process.env.ANALYZE === "true") {
   config = withBundleAnalyzer(nextConfig)
 }
 
-export default config
+// withMarkdoc と withSearch をチェーンして適用
+export default withSearch(
+  withMarkdoc({ schemaPath: "./src/markdoc" })(config),
+)

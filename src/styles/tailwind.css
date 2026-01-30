@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@plugin "@tailwindcss/typography";
+
 @theme {
   --font-sans:
     "Helvetica Neue", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial",
