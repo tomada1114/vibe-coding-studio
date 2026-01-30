@@ -205,32 +205,23 @@ export type CourseContent = {
 export type ThemeColors = {
   primary: string
   accent: string
-  accentDark: string
   gradient: {
     from: string
     to: string
-    darkFrom: string
-    darkTo: string
   }
   bg: {
     light: string
-    dark: string
   }
   border: {
     light: string
-    dark: string
   }
   text: {
     accent: string
-    accentDark: string
     hover: string
-    hoverDark: string
   }
   button: {
     bg: string
     bgHover: string
-    bgDark: string
-    bgHoverDark: string
     outline: string
   }
 }
@@ -265,6 +256,10 @@ export function Curriculum({ slug, courseContent, themeColors }: CurriculumProps
 
   // 現在のコースのナビゲーション情報を取得
   const currentCourse = navigation.find(course => course.slug === slug)
+  if (!currentCourse) {
+    // eslint-disable-next-line no-console
+    console.warn(`[Curriculum] Navigation not found for slug: ${slug}`)
+  }
   const chapters = currentCourse?.links || []
 
   return (

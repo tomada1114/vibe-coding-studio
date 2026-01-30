@@ -91,7 +91,9 @@ function formatDate(dateString: string): string {
       day: 'numeric',
       timeZone: 'Asia/Tokyo', // 明示的にタイムゾーンを指定
     })
-  } catch {
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn('[AuthorCredit] Failed to format date:', dateString, error)
     return dateString
   }
 }
