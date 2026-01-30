@@ -3,26 +3,8 @@
 import { usePathname } from 'next/navigation'
 
 import { navigation } from '@/lib/navigation'
-import { AuthorCredit } from '@/components/docs/AuthorCredit'
 
-export interface DocsHeaderProps {
-  title?: string
-  /**
-   * 作成者情報を表示するかどうか
-   * @default false
-   */
-  showAuthor?: boolean
-  /**
-   * 作成日時（ISO形式またはDate文字列）
-   */
-  createdAt?: string
-  /**
-   * 更新日時（ISO形式またはDate文字列）
-   */
-  updatedAt?: string
-}
-
-export function DocsHeader({ title, showAuthor = false, createdAt, updatedAt }: DocsHeaderProps) {
+export function DocsHeader({ title }: { title?: string }) {
   const pathname = usePathname()
   const section = navigation.find(section => section.links.find(link => link.href === pathname))
 
@@ -37,11 +19,6 @@ export function DocsHeader({ title, showAuthor = false, createdAt, updatedAt }: 
         <h1 className="font-display text-3xl tracking-tight text-slate-900">
           {title}
         </h1>
-      )}
-
-      {/* 作成者情報の表示（学習コンテンツページのみ） */}
-      {showAuthor && (
-        <AuthorCredit createdAt={createdAt} updatedAt={updatedAt} className="mt-4 text-left" />
       )}
     </header>
   )

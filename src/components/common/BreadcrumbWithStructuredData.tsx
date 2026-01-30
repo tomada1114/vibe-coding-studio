@@ -1,5 +1,5 @@
-import Breadcrumb, { type BreadcrumbItem } from './Breadcrumb'
-import { generateBreadcrumbStructuredData, breadcrumbToJsonLd } from '@/lib/seo/breadcrumb-utils'
+import Breadcrumb from './Breadcrumb'
+import { type BreadcrumbItem, generateBreadcrumbStructuredData } from '@/lib/seo/breadcrumb-utils'
 
 interface BreadcrumbWithStructuredDataProps {
   items: BreadcrumbItem[]
@@ -10,7 +10,6 @@ export default function BreadcrumbWithStructuredData({
   items,
   className,
 }: BreadcrumbWithStructuredDataProps) {
-  // ホームページや空の場合は何も表示しない
   if (items.length === 0) {
     return null
   }
@@ -21,7 +20,7 @@ export default function BreadcrumbWithStructuredData({
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: breadcrumbToJsonLd(structuredData) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <Breadcrumb items={items} className={className} />
     </>

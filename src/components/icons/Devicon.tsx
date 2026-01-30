@@ -61,7 +61,7 @@ const sizeClasses: Record<IconSize, string> = {
  * <Devicon slug="rails" size="xl" className="mr-2" />
  * ```
  */
-export const Devicon = ({ slug, size = 'md', className = '', alt = '' }: DeviconProps) => {
+export function Devicon({ slug, size = 'md', className = '', alt = '' }: DeviconProps) {
   // スラグが存在しない場合はnullを返す
   if (!slug) return null
 

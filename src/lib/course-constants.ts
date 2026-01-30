@@ -219,134 +219,74 @@ export const ALL_COURSES: CourseInfo[] = [
 // ヘルパー関数群
 // ========================================
 
-/**
- * 全コース情報を取得
- */
-export const getAllCourses = (): CourseInfo[] => [...ALL_COURSES]
+export function getAllCourses(): CourseInfo[] {
+  return [...ALL_COURSES]
+}
 
-/**
- * 公開中のコース一覧を取得
- */
-export const getAvailableCourses = (): CourseInfo[] => {
+export function getAvailableCourses(): CourseInfo[] {
   return ALL_COURSES.filter(course => course.available)
 }
 
-/**
- * 準備中のコース一覧を取得
- */
-export const getComingSoonCourses = (): CourseInfo[] => {
+export function getComingSoonCourses(): CourseInfo[] {
   return ALL_COURSES.filter(course => !course.available)
 }
 
-/**
- * カテゴリ別のコース一覧を取得
- */
-export const getCoursesByCategory = (
-  category: 'foundations' | 'frontend' | 'backend' | 'infrastructure' | 'data-ai'
-): CourseInfo[] => {
+export function getCoursesByCategory(
+  category: CourseInfo['category']
+): CourseInfo[] {
   return ALL_COURSES.filter(course => course.category === category)
 }
 
-/**
- * 公開中のカテゴリ別コース一覧を取得（並び順でソート）
- */
-export const getAvailableCoursesByCategory = (
-  category: 'foundations' | 'frontend' | 'backend' | 'infrastructure' | 'data-ai'
-): CourseInfo[] => {
+export function getAvailableCoursesByCategory(
+  category: CourseInfo['category']
+): CourseInfo[] {
   return ALL_COURSES.filter(course => course.category === category && course.available).sort(
     (a, b) => a.order - b.order
   )
 }
 
-/**
- * 準備中のカテゴリ別コース一覧を取得（並び順でソート）
- */
-export const getComingSoonCoursesByCategory = (
-  category: 'foundations' | 'frontend' | 'backend' | 'infrastructure' | 'data-ai'
-): CourseInfo[] => {
+export function getComingSoonCoursesByCategory(
+  category: CourseInfo['category']
+): CourseInfo[] {
   return ALL_COURSES.filter(course => course.category === category && !course.available).sort(
     (a, b) => a.order - b.order
   )
 }
 
-/**
- * スラッグからコース情報を取得
- */
-export const getCourseBySlug = (slug: string): CourseInfo | undefined => {
+export function getCourseBySlug(slug: string): CourseInfo | undefined {
   return ALL_COURSES.find(course => course.slug === slug)
 }
 
-/**
- * スラッグからコースタイトルを取得
- */
-export const getCourseTitle = (slug: string): string => {
+export function getCourseTitle(slug: string): string {
   const course = getCourseBySlug(slug)
   return course?.title || slug
 }
 
-/**
- * スラッグからコースの公開ステータスを取得
- */
-export const isCourseAvailable = (slug: string): boolean => {
+export function isCourseAvailable(slug: string): boolean {
   const course = getCourseBySlug(slug)
   return course?.available || false
 }
 
-/**
- * コース一覧ページ用のソート済みコース情報を取得
- * 利用可能なコースを先に表示し、同じ利用可能性の場合は順序で並べる
- */
-export const getCoursesForListPage = () => {
-  const foundationsCourses = ALL_COURSES.filter(course => course.category === 'foundations').sort(
-    (a, b) => {
-      if (a.available !== b.available) {
-        return a.available ? -1 : 1
-      }
-      return a.order - b.order
-    }
-  )
+function sortByAvailabilityThenOrder(a: CourseInfo, b: CourseInfo): number {
+  if (a.available !== b.available) {
+    return a.available ? -1 : 1
+  }
+  return a.order - b.order
+}
 
-  const frontendCourses = ALL_COURSES.filter(course => course.category === 'frontend').sort(
-    (a, b) => a.order - b.order
-  )
-
-  const backendCourses = ALL_COURSES.filter(course => course.category === 'backend').sort(
-    (a, b) => {
-      if (a.available !== b.available) {
-        return a.available ? -1 : 1
-      }
-      return a.order - b.order
-    }
-  )
-
-  const infrastructureCourses = ALL_COURSES.filter(
-    course => course.category === 'infrastructure'
-  ).sort((a, b) => {
-    if (a.available !== b.available) {
-      return a.available ? -1 : 1
-    }
-    return a.order - b.order
-  })
-
-  const dataAiCourses = ALL_COURSES.filter(course => course.category === 'data-ai').sort((a, b) => {
-    if (a.available !== b.available) {
-      return a.available ? -1 : 1
-    }
-    return a.order - b.order
-  })
+export function getCoursesForListPage() {
+  const byCategory = (category: CourseInfo['category']) =>
+    ALL_COURSES.filter(course => course.category === category).sort(sortByAvailabilityThenOrder)
 
   return {
-    foundationsCourses,
-    frontendCourses,
-    backendCourses,
-    infrastructureCourses,
-    dataAiCourses,
+    foundationsCourses: byCategory('foundations'),
+    frontendCourses: byCategory('frontend'),
+    backendCourses: byCategory('backend'),
+    infrastructureCourses: byCategory('infrastructure'),
+    dataAiCourses: byCategory('data-ai'),
   }
 }
 
-/**
- * 指定されたコース以外のコース一覧を取得
- */
-export const getOtherCourses = (currentSlug: string): CourseInfo[] => {
+export function getOtherCourses(currentSlug: string): CourseInfo[] {
   return ALL_COURSES.filter(course => course.slug !== currentSlug)
 }

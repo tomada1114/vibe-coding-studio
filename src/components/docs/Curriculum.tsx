@@ -259,7 +259,7 @@ export type CurriculumProps = {
  * このコンポーネントは言語やフレームワークごとのカリキュラムページを
  * 統一されたレイアウトで表示するために使用します。
  */
-export const Curriculum = ({ slug, courseContent, themeColors }: CurriculumProps) => {
+export function Curriculum({ slug, courseContent, themeColors }: CurriculumProps) {
   // パンくずリストのデータ
   const breadcrumbs = generateDocsBreadcrumb(slug, courseContent.title)
 

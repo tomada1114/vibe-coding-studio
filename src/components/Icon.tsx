@@ -75,9 +75,5 @@ export function Gradient({
 }
 
 export function LightMode({ className, ...props }: React.ComponentPropsWithoutRef<'g'>) {
-  return <g className={clsx('', className)} {...props} />
-}
-
-export function DarkMode({ className, ...props }: React.ComponentPropsWithoutRef<'g'>) {
-  return <g className={clsx('hidden', className)} {...props} />
+  return <g className={className} {...props} />
 }

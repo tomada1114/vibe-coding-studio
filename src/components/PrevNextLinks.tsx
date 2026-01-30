@@ -25,14 +25,11 @@ function PageLink({
   title,
   href,
   dir = 'next',
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  children: _children,
   ...props
-}: Omit<React.ComponentPropsWithoutRef<'div'>, 'dir' | 'title' | 'children'> & {
+}: Omit<React.ComponentPropsWithoutRef<'div'>, 'dir' | 'title'> & {
   title: string
   href: string
   dir?: 'previous' | 'next'
-  children?: NavigationLink[]
 }) {
   return (
     <div {...props}>
@@ -87,8 +84,8 @@ export function PrevNextLinks() {
 
   return (
     <dl className="mt-12 flex border-t border-slate-200 pt-6">
-      {previousPage && <PageLink dir="previous" {...previousPage} />}
-      {nextPage && <PageLink className="ml-auto text-right" {...nextPage} />}
+      {previousPage && <PageLink dir="previous" title={previousPage.title} href={previousPage.href} />}
+      {nextPage && <PageLink className="ml-auto text-right" title={nextPage.title} href={nextPage.href} />}
     </dl>
   )
 }

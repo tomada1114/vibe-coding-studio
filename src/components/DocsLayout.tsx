@@ -1,5 +1,4 @@
 import { DocsHeader } from '@/components/DocsHeader'
-import { DocsStructuredData } from '@/components/DocsStructuredData'
 import { DocsArticleStructuredData } from '@/components/structured-data/DocsArticleStructuredData'
 import { PrevNextLinks } from '@/components/PrevNextLinks'
 import { Prose } from '@/components/Prose'
@@ -20,17 +19,6 @@ export function DocsLayout({
 }) {
   return (
     <>
-      {/* 既存の構造化データ（互換性のため残す） */}
-      {title && (
-        <DocsStructuredData
-          title={title}
-          author={author}
-          datePublished={createdAt}
-          dateModified={updatedAt}
-        />
-      )}
-
-      {/* 新しいDocs専用の構造化データ */}
       {title && (
         <DocsArticleStructuredData
           title={title}
@@ -46,7 +34,6 @@ export function DocsLayout({
           <DocsHeader title={title} />
           <Prose>{children}</Prose>
 
-          {/* 作成者情報をコンテンツ下部に目立たない形で表示 */}
           <AuthorCredit
             authorName={author}
             createdAt={createdAt}
