@@ -16,7 +16,6 @@ export const metadata: Metadata = {
 export default function RoadmapPage() {
   return (
     <div className="overflow-hidden">
-      {/* ヘッダーセクション */}
       <AsyncErrorBoundary>
         <div className="relative">
           <Gradient className="absolute inset-2 bottom-0 rounded-4xl ring-1 ring-black/5 ring-inset" />
@@ -26,7 +25,6 @@ export default function RoadmapPage() {
         </div>
       </AsyncErrorBoundary>
 
-      {/* メインコンテンツ */}
       <main>
         <Suspense
           fallback={
@@ -39,7 +37,6 @@ export default function RoadmapPage() {
         </Suspense>
       </main>
 
-      {/* フッターセクション */}
       <AsyncErrorBoundary>
         <Footer />
       </AsyncErrorBoundary>

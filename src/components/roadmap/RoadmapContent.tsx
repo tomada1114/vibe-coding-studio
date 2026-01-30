@@ -4,6 +4,7 @@ import { Container } from "@/components/container"
 import { RoadmapFlow } from "@/components/roadmap/RoadmapFlow"
 import { RoadmapTabs } from "@/components/roadmap/RoadmapTabs"
 import { getCourseById, isValidCourseId, type CourseId } from "@/data/roadmaps"
+import { ChevronRightIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -62,19 +63,7 @@ export function RoadmapContent() {
             </Link>
           </li>
           <li className="flex items-center">
-            <svg
-              className="mx-2 h-4 w-4 text-gray-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
+            <ChevronRightIcon className="mx-2 h-4 w-4 text-gray-400" />
             <span className="font-medium text-gray-950">ロードマップ</span>
           </li>
         </ol>
