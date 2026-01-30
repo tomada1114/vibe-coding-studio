@@ -1,9 +1,9 @@
-'use client'
+"use client"
 
-import { usePathname } from 'next/navigation'
-import { navigation } from '@/lib/navigation'
-import BreadcrumbWithStructuredData from '@/components/common/BreadcrumbWithStructuredData'
-import { generateDocsBreadcrumb } from '@/lib/seo/breadcrumb-utils'
+import BreadcrumbWithStructuredData from "@/components/common/BreadcrumbWithStructuredData"
+import { navigation } from "@/lib/navigation"
+import { generateDocsBreadcrumb } from "@/lib/seo/breadcrumb-utils"
+import { usePathname } from "next/navigation"
 
 interface DocsBreadcrumbProps {
   title?: string
@@ -17,15 +17,15 @@ export function DocsBreadcrumb({ title }: DocsBreadcrumbProps) {
   const pathname = usePathname()
 
   // /docs以外は表示しない
-  if (!pathname.startsWith('/docs')) {
+  if (!pathname.startsWith("/docs")) {
     return null
   }
 
   // パスを解析
-  const pathSegments = pathname.split('/').filter(Boolean)
+  const pathSegments = pathname.split("/").filter(Boolean)
 
   // /docs 配下である必要がある
-  if (pathSegments.length < 1 || pathSegments[0] !== 'docs') {
+  if (pathSegments.length < 1 || pathSegments[0] !== "docs") {
     return null
   }
 
@@ -50,7 +50,11 @@ export function DocsBreadcrumb({ title }: DocsBreadcrumbProps) {
   }
 
   // パンくずデータを生成
-  const breadcrumbs = generateDocsBreadcrumb(courseSlug, courseTitle, chapterTitle)
+  const breadcrumbs = generateDocsBreadcrumb(
+    courseSlug,
+    courseTitle,
+    chapterTitle
+  )
 
   return <BreadcrumbWithStructuredData items={breadcrumbs} className="mb-8" />
 }

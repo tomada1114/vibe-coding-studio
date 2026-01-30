@@ -1,5 +1,8 @@
-import Breadcrumb from './Breadcrumb'
-import { type BreadcrumbItem, generateBreadcrumbStructuredData } from '@/lib/seo/breadcrumb-utils'
+import {
+  type BreadcrumbItem,
+  generateBreadcrumbStructuredData,
+} from "@/lib/seo/breadcrumb-utils"
+import Breadcrumb from "./Breadcrumb"
 
 interface BreadcrumbWithStructuredDataProps {
   items: BreadcrumbItem[]

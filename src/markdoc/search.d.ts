@@ -1,4 +1,4 @@
-declare module '@/markdoc/search.mjs' {
+declare module "@/markdoc/search.mjs" {
   export interface Result {
     url: string
     title: string

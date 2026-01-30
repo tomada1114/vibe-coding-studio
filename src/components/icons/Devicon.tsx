@@ -5,11 +5,11 @@
  * React コンポーネントを定義しています。
  */
 
-import { DEVICON_MAPPING, getDeviconUrl } from '@/lib/constants/icons'
-import Image from 'next/image'
+import { DEVICON_MAPPING, getDeviconUrl } from "@/lib/constants/icons"
+import Image from "next/image"
 
 // サイズのバリエーション定義
-type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl'
+type IconSize = "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl"
 
 /**
  * Devicon コンポーネントのプロパティ
@@ -37,14 +37,14 @@ type DeviconProps = {
  * サイズに応じたTailwind CSSクラスのマッピング
  */
 const sizeClasses: Record<IconSize, string> = {
-  xs: 'w-4 h-4',
-  sm: 'w-5 h-5',
-  md: 'w-6 h-6',
-  lg: 'w-8 h-8',
-  xl: 'w-10 h-10',
-  '2xl': 'w-12 h-12',
-  '3xl': 'w-16 h-16',
-  '4xl': 'w-20 h-20',
+  xs: "w-4 h-4",
+  sm: "w-5 h-5",
+  md: "w-6 h-6",
+  lg: "w-8 h-8",
+  xl: "w-10 h-10",
+  "2xl": "w-12 h-12",
+  "3xl": "w-16 h-16",
+  "4xl": "w-20 h-20",
 }
 
 /**
@@ -61,7 +61,12 @@ const sizeClasses: Record<IconSize, string> = {
  * <Devicon slug="rails" size="xl" className="mr-2" />
  * ```
  */
-export function Devicon({ slug, size = 'md', className = '', alt = '' }: DeviconProps) {
+export function Devicon({
+  slug,
+  size = "md",
+  className = "",
+  alt = "",
+}: DeviconProps) {
   // スラグが存在しない場合はnullを返す
   if (!slug) return null
 
@@ -74,7 +79,9 @@ export function Devicon({ slug, size = 'md', className = '', alt = '' }: Devicon
       <div
         className={`inline-flex items-center justify-center rounded-full bg-slate-100 text-slate-500 ${sizeClasses[size]} ${className}`}
       >
-        <span className="text-xs font-medium">{slug.slice(0, 2).toUpperCase()}</span>
+        <span className="text-xs font-medium">
+          {slug.slice(0, 2).toUpperCase()}
+        </span>
       </div>
     )
   }

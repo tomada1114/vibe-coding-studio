@@ -1,14 +1,14 @@
-'use client'
+"use client"
 
 /**
  * /docs/[course]/[chapter]ページ用の記事構造化データコンポーネント
  * 既存のDocsStructuredDataコンポーネントを拡張・改良
  */
 
-import { renderDocsArticleJsonLd } from '@/lib/constants/structured_data/docs'
-import { getRequiredPlan } from '@/lib/access-control'
-import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { getRequiredPlan } from "@/lib/access-control"
+import { renderDocsArticleJsonLd } from "@/lib/constants/structured_data/docs"
+import { usePathname } from "next/navigation"
+import { useEffect, useState } from "react"
 
 interface DocsArticleStructuredDataProps {
   /** 記事のタイトル */
@@ -47,10 +47,10 @@ export function DocsArticleStructuredData({
   }
 
   // URLからコースのスラッグを抽出 (/docs/[course]/... の形式)
-  const pathSegments = pathname.split('/')
+  const pathSegments = pathname.split("/")
   const courseSlug = pathSegments[2] // /docs/ruby/... -> 'ruby'
 
-  if (!courseSlug || pathSegments[1] !== 'docs') {
+  if (!courseSlug || pathSegments[1] !== "docs") {
     return null // docsページ以外では何も表示しない
   }
 
@@ -69,7 +69,12 @@ export function DocsArticleStructuredData({
     isAccessibleForFree,
   }
 
-  const structuredDataJson = renderDocsArticleJsonLd(courseSlug, title, url, options)
+  const structuredDataJson = renderDocsArticleJsonLd(
+    courseSlug,
+    title,
+    url,
+    options
+  )
 
   if (!structuredDataJson) {
     return null

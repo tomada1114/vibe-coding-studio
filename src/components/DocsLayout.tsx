@@ -1,9 +1,9 @@
-import { DocsHeader } from '@/components/DocsHeader'
-import { DocsArticleStructuredData } from '@/components/structured-data/DocsArticleStructuredData'
-import { PrevNextLinks } from '@/components/PrevNextLinks'
-import { Prose } from '@/components/Prose'
-import { AuthorCredit } from '@/components/docs/AuthorCredit'
-import { DocsBreadcrumb } from '@/components/docs/DocsBreadcrumb'
+import { DocsHeader } from "@/components/DocsHeader"
+import { PrevNextLinks } from "@/components/PrevNextLinks"
+import { Prose } from "@/components/Prose"
+import { AuthorCredit } from "@/components/docs/AuthorCredit"
+import { DocsBreadcrumb } from "@/components/docs/DocsBreadcrumb"
+import { DocsArticleStructuredData } from "@/components/structured-data/DocsArticleStructuredData"
 
 export function DocsLayout({
   children,

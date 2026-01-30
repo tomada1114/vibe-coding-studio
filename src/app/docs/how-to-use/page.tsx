@@ -1,13 +1,13 @@
-import { ArrowRight, BookOpen, Search, Navigation } from 'lucide-react'
-import { type Metadata } from 'next'
+import { ArrowRight, BookOpen, Navigation, Search } from "lucide-react"
+import { type Metadata } from "next"
 
-import { Button } from '@/components/catalyst/button'
-import { HeroBackground } from '@/components/HeroBackground'
+import { Button } from "@/components/catalyst/button"
+import { HeroBackground } from "@/components/HeroBackground"
 
 export const metadata: Metadata = {
-  title: 'ドキュメントの使い方 - Vibe Coding Studio',
+  title: "ドキュメントの使い方 - Vibe Coding Studio",
   description:
-    'Vibe Coding Studioのドキュメント機能の使い方を詳しく解説。体系的な学習カリキュラム、効率的な読み進め方、検索機能の活用法まで、技術ドキュメントを最大限活用する方法をご紹介します。',
+    "Vibe Coding Studioのドキュメント機能の使い方を詳しく解説。体系的な学習カリキュラム、効率的な読み進め方、検索機能の活用法まで、技術ドキュメントを最大限活用する方法をご紹介します。",
 }
 
 interface StepCardProps {
@@ -20,17 +20,20 @@ interface StepCardProps {
 function StepCard({ step, title, description, details }: StepCardProps) {
   return (
     <div className="rounded-xl bg-white p-6 shadow-sm ring-1 ring-zinc-950/5">
-      <div className="flex items-center gap-4 mb-4">
-        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white font-bold text-lg">
+      <div className="mb-4 flex items-center gap-4">
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-lg font-bold text-white">
           {step}
         </div>
         <h3 className="text-xl font-semibold text-zinc-950">{title}</h3>
       </div>
-      <p className="text-zinc-700 mb-4">{description}</p>
+      <p className="mb-4 text-zinc-700">{description}</p>
       <ul className="space-y-2">
         {details.map((detail, index) => (
-          <li key={index} className="flex items-start gap-2 text-sm text-zinc-600">
-            <div className="h-1.5 w-1.5 rounded-full bg-blue-600 mt-2 flex-shrink-0" />
+          <li
+            key={index}
+            className="flex items-start gap-2 text-sm text-zinc-600"
+          >
+            <div className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-blue-600" />
             {detail}
           </li>
         ))}
@@ -47,35 +50,49 @@ interface FeatureCardProps {
   tips: string[]
 }
 
-function FeatureCard({ icon, title, description, benefits, tips }: FeatureCardProps) {
+function FeatureCard({
+  icon,
+  title,
+  description,
+  benefits,
+  tips,
+}: FeatureCardProps) {
   return (
     <div className="rounded-xl bg-white p-6 shadow-sm ring-1 ring-zinc-950/5">
-      <div className="flex items-center gap-3 mb-4">
+      <div className="mb-4 flex items-center gap-3">
         <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100 text-blue-600">
           {icon}
         </div>
         <h3 className="text-lg font-semibold text-zinc-950">{title}</h3>
       </div>
-      <p className="text-zinc-700 mb-4">{description}</p>
-      
+      <p className="mb-4 text-zinc-700">{description}</p>
+
       <div className="mb-4">
-        <h4 className="text-sm font-medium text-zinc-950 mb-2">学習効果</h4>
+        <h4 className="mb-2 text-sm font-medium text-zinc-950">学習効果</h4>
         <ul className="space-y-1">
           {benefits.map((benefit, index) => (
-            <li key={index} className="flex items-start gap-2 text-sm text-zinc-600">
-              <div className="h-1.5 w-1.5 rounded-full bg-green-600 mt-2 flex-shrink-0" />
+            <li
+              key={index}
+              className="flex items-start gap-2 text-sm text-zinc-600"
+            >
+              <div className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-green-600" />
               {benefit}
             </li>
           ))}
         </ul>
       </div>
-      
+
       <div>
-        <h4 className="text-sm font-medium text-zinc-950 mb-2">効率的な活用法</h4>
+        <h4 className="mb-2 text-sm font-medium text-zinc-950">
+          効率的な活用法
+        </h4>
         <ul className="space-y-1">
           {tips.map((tip, index) => (
-            <li key={index} className="flex items-start gap-2 text-sm text-zinc-600">
-              <div className="h-1.5 w-1.5 rounded-full bg-amber-600 mt-2 flex-shrink-0" />
+            <li
+              key={index}
+              className="flex items-start gap-2 text-sm text-zinc-600"
+            >
+              <div className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-600" />
               {tip}
             </li>
           ))}
@@ -101,11 +118,16 @@ export default function DocsHowToUsePage() {
               <span className="mt-2 block text-blue-600">使い方ガイド</span>
             </h1>
             <p className="mx-auto mt-6 max-w-3xl text-lg text-zinc-700 md:text-xl">
-              ドキュメントは、プログラミングを体系的に学べる教材です。<br />
+              ドキュメントは、プログラミングを体系的に学べる教材です。
+              <br />
               50以上のレッスンで、基礎から実践まで学べます。
             </p>
             <div className="mt-10">
-              <Button href="/docs" color="blue" className="flex items-center gap-2">
+              <Button
+                href="/docs"
+                color="blue"
+                className="flex items-center gap-2"
+              >
                 ドキュメントを見る
                 <ArrowRight className="h-4 w-4" />
               </Button>
@@ -117,10 +139,8 @@ export default function DocsHowToUsePage() {
       {/* ドキュメント学習手順セクション */}
       <section className="bg-white py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-zinc-950">
-              学習の進め方
-            </h2>
+          <div className="mb-16 text-center">
+            <h2 className="text-3xl font-bold text-zinc-950">学習の進め方</h2>
             <p className="mt-4 text-lg text-zinc-700">
               効果的な学習方法をご紹介します
             </p>
@@ -132,9 +152,9 @@ export default function DocsHowToUsePage() {
               title="コースを選ぶ"
               description="まずは学びたい分野を決めましょう"
               details={[
-                'Ruby、JavaScript、Reactなど豊富な分野から選択',
-                '各コースの説明を読んで内容を確認',
-                '初心者は基礎コースからスタート',
+                "Ruby、JavaScript、Reactなど豊富な分野から選択",
+                "各コースの説明を読んで内容を確認",
+                "初心者は基礎コースからスタート",
               ]}
             />
             <StepCard
@@ -142,9 +162,9 @@ export default function DocsHowToUsePage() {
               title="学習ペースを決める"
               description="無理のないスケジュールを立てましょう"
               details={[
-                '毎日の学習時間を決める（例：30分）',
-                '無理のない目標を設定する',
-                '管理できるペースで進める',
+                "毎日の学習時間を決める（例：30分）",
+                "無理のない目標を設定する",
+                "管理できるペースで進める",
               ]}
             />
             <StepCard
@@ -152,9 +172,9 @@ export default function DocsHowToUsePage() {
               title="継続して学習する"
               description="レッスンを順番に進めていきましょう"
               details={[
-                '最初から順番にレッスンを進める',
-                'コード例は実際に試してみる',
-                'わからないことは練習問題で確認',
+                "最初から順番にレッスンを進める",
+                "コード例は実際に試してみる",
+                "わからないことは練習問題で確認",
               ]}
             />
           </div>
@@ -164,7 +184,7 @@ export default function DocsHowToUsePage() {
       {/* ドキュメント機能セクション */}
       <section className="bg-zinc-50 py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="mb-16 text-center">
             <h2 className="text-3xl font-bold text-zinc-950">
               ドキュメントの便利機能
             </h2>
@@ -179,14 +199,14 @@ export default function DocsHowToUsePage() {
               title="体系的なカリキュラム"
               description="基礎から応用まで、ステップバイステップで学べます"
               benefits={[
-                '基礎から順番にスキルを積み上げられる',
-                '必要な知識が明確で迷わない',
-                '実務で使えるスキルが身につく',
+                "基礎から順番にスキルを積み上げられる",
+                "必要な知識が明確で迷わない",
+                "実務で使えるスキルが身につく",
               ]}
               tips={[
-                '飛ばさずに最初から順番に進める',
-                'わからないときは前のレッスンに戻る',
-                '一区切りで全体を振り返ってみる',
+                "飛ばさずに最初から順番に進める",
+                "わからないときは前のレッスンに戻る",
+                "一区切りで全体を振り返ってみる",
               ]}
             />
             <FeatureCard
@@ -194,14 +214,14 @@ export default function DocsHowToUsePage() {
               title="検索機能"
               description="忘れた内容や知りたい情報をすぐに見つけられます"
               benefits={[
-                '忘れた内容をすぐに確認できる',
-                '関連する情報もまとめて見つかる',
-                '辞書代わりに使える',
+                "忘れた内容をすぐに確認できる",
+                "関連する情報もまとめて見つかる",
+                "辞書代わりに使える",
               ]}
               tips={[
-                'キーワードで気軽に検索してみる',
-                '検索結果から新しい発見もある',
-                'たまに過去の学習を振り返ってみる',
+                "キーワードで気軽に検索してみる",
+                "検索結果から新しい発見もある",
+                "たまに過去の学習を振り返ってみる",
               ]}
             />
             <FeatureCard
@@ -209,52 +229,50 @@ export default function DocsHowToUsePage() {
               title="ナビゲーション"
               description="今どこを学んでいるか一目でわかります"
               benefits={[
-                '学習の全体像がわかる',
-                '今どこを学んでいるか明確',
-                '関連するトピックへ簡単に移動',
+                "学習の全体像がわかる",
+                "今どこを学んでいるか明確",
+                "関連するトピックへ簡単に移動",
               ]}
               tips={[
-                'たまに全体を見渡してみる',
-                '関連する内容を一緒に学ぶ',
-                '気になるトピックを先に見てみる',
+                "たまに全体を見渡してみる",
+                "関連する内容を一緒に学ぶ",
+                "気になるトピックを先に見てみる",
               ]}
             />
           </div>
         </div>
       </section>
 
-
       {/* よくある質問セクション */}
       <section className="bg-white py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl font-bold text-zinc-950">
-              よくある質問
-            </h2>
+          <div className="mb-12 text-center">
+            <h2 className="text-2xl font-bold text-zinc-950">よくある質問</h2>
           </div>
 
           <div className="mx-auto max-w-2xl space-y-6">
             {[
               {
-                question: 'どのコースから始めればいいですか？',
-                answer: '初心者の方はRubyから、Web開発に興味がある方はJavaScriptから始めるのがおすすめです。',
+                question: "どのコースから始めればいいですか？",
+                answer:
+                  "初心者の方はRubyから、Web開発に興味がある方はJavaScriptから始めるのがおすすめです。",
               },
               {
-                question: 'どのくらいのペースで進めればいいですか？',
-                answer: '毎日30分から1時間程度がおすすめです。無理せず継続できるペースで進めてください。',
+                question: "どのくらいのペースで進めればいいですか？",
+                answer:
+                  "毎日30分から1時間程度がおすすめです。無理せず継続できるペースで進めてください。",
               },
               {
-                question: 'わからないことがあったらどうしますか？',
-                answer: '検索機能で関連する情報を調べたり、練習問題で実際に試してみることで理解が深まります。',
+                question: "わからないことがあったらどうしますか？",
+                answer:
+                  "検索機能で関連する情報を調べたり、練習問題で実際に試してみることで理解が深まります。",
               },
             ].map((faq, index) => (
               <div key={index} className="rounded-lg bg-zinc-50 p-6">
-                <h3 className="text-sm font-semibold text-zinc-950 mb-2">
+                <h3 className="mb-2 text-sm font-semibold text-zinc-950">
                   {faq.question}
                 </h3>
-                <p className="text-sm text-zinc-600">
-                  {faq.answer}
-                </p>
+                <p className="text-sm text-zinc-600">{faq.answer}</p>
               </div>
             ))}
           </div>
@@ -264,7 +282,7 @@ export default function DocsHowToUsePage() {
       {/* CTAセクション */}
       <section className="bg-zinc-50 py-16">
         <div className="container mx-auto px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-zinc-950 mb-4">
+          <h2 className="mb-4 text-2xl font-bold text-zinc-950">
             ドキュメントで学習を始めましょう
           </h2>
           <div className="flex flex-wrap justify-center gap-4">

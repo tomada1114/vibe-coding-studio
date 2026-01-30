@@ -1,15 +1,15 @@
-'use client'
+"use client"
 
-import { Dialog } from '@headlessui/react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { Dialog } from "@headlessui/react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { useEffect, useState } from "react"
 
-import { Logomark } from '@/components/Logo'
-import { Navigation } from '@/components/Navigation'
-import { shouldShowNavigation } from '@/lib/navigation-utils'
+import { Logomark } from "@/components/Logo"
+import { Navigation } from "@/components/Navigation"
+import { shouldShowNavigation } from "@/lib/navigation-utils"
 
-function MenuIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
+function MenuIcon(props: React.ComponentPropsWithoutRef<"svg">) {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
       <path
@@ -22,10 +22,15 @@ function MenuIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   )
 }
 
-function CloseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
+function CloseIcon(props: React.ComponentPropsWithoutRef<"svg">) {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-      <path d="M6 18L18 6M6 6l12 12" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M6 18L18 6M6 6l12 12"
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   )
 }
@@ -55,10 +60,10 @@ export function MobileNavigation() {
       setIsOpen(false)
     }
 
-    window.addEventListener('popstate', onRouteChange)
+    window.addEventListener("popstate", onRouteChange)
 
     return () => {
-      window.removeEventListener('popstate', onRouteChange)
+      window.removeEventListener("popstate", onRouteChange)
     }
   }, [isOpen])
 
@@ -88,7 +93,12 @@ export function MobileNavigation() {
             >
               <CloseIcon className="h-5 w-5 stroke-slate-900 dark:stroke-white" />
             </button>
-            <Link href="/" className="ml-6" aria-label="Home page" prefetch={true}>
+            <Link
+              href="/"
+              className="ml-6"
+              aria-label="Home page"
+              prefetch={true}
+            >
               <Logomark className="h-9 w-9" />
             </Link>
           </div>

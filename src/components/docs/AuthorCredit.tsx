@@ -1,5 +1,5 @@
-import { UserIcon } from 'lucide-react'
-import Link from 'next/link'
+import { UserIcon } from "lucide-react"
+import Link from "next/link"
 
 export interface AuthorCreditProps {
   /**
@@ -36,9 +36,9 @@ export interface AuthorCreditProps {
  * - SEO・信頼性向上を目的とした作成者情報表示
  */
 export function AuthorCredit({
-  authorName = 'とまだ',
-  authorUrl = '/founder',
-  className = 'text-right',
+  authorName = "とまだ",
+  authorUrl = "/founder",
+  className = "text-right",
   createdAt,
   updatedAt,
 }: AuthorCreditProps) {
@@ -85,15 +85,15 @@ function formatDate(dateString: string): string {
   try {
     const date = new Date(dateString)
     // タイムゾーンに依存しないようにUTCで処理
-    return date.toLocaleDateString('ja-JP', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      timeZone: 'Asia/Tokyo', // 明示的にタイムゾーンを指定
+    return date.toLocaleDateString("ja-JP", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      timeZone: "Asia/Tokyo", // 明示的にタイムゾーンを指定
     })
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.warn('[AuthorCredit] Failed to format date:', dateString, error)
+    console.warn("[AuthorCredit] Failed to format date:", dateString, error)
     return dateString
   }
 }

@@ -1,5 +1,5 @@
-import { UserIcon } from 'lucide-react'
-import Link from 'next/link'
+import { UserIcon } from "lucide-react"
+import Link from "next/link"
 
 export interface AuthorCreditProps {
   /**
@@ -36,14 +36,16 @@ export interface AuthorCreditProps {
  * - SEO・信頼性向上を目的とした作成者情報表示
  */
 export function AuthorCredit({
-  authorName = 'とまだ',
-  authorUrl = '/author',
-  className = 'text-right',
+  authorName = "とまだ",
+  authorUrl = "/author",
+  className = "text-right",
   createdAt,
   updatedAt,
 }: AuthorCreditProps) {
   return (
-    <div className={`mt-8 pt-4 text-xs text-slate-500 dark:border-slate-700 ${className}`}>
+    <div
+      className={`mt-8 pt-4 text-xs text-slate-500 dark:border-slate-700 ${className}`}
+    >
       <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
         {/* 作成者情報 */}
         <div className="flex items-center gap-1.5">
@@ -85,11 +87,11 @@ function formatDate(dateString: string): string {
   try {
     const date = new Date(dateString)
     // タイムゾーンに依存しないようにUTCで処理
-    return date.toLocaleDateString('ja-JP', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      timeZone: 'Asia/Tokyo', // 明示的にタイムゾーンを指定
+    return date.toLocaleDateString("ja-JP", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      timeZone: "Asia/Tokyo", // 明示的にタイムゾーンを指定
     })
   } catch {
     return dateString

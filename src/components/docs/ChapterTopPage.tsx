@@ -1,11 +1,11 @@
-import { ChevronRight } from 'lucide-react'
-import Link from 'next/link'
-import { notFound } from 'next/navigation'
+import { ChevronRight } from "lucide-react"
+import Link from "next/link"
+import { notFound } from "next/navigation"
 
-import { Devicon } from '@/components/icons/Devicon'
-import { navigation } from '@/lib/navigation'
-import BreadcrumbWithStructuredData from '@/components/common/BreadcrumbWithStructuredData'
-import { generateDocsBreadcrumb } from '@/lib/seo/breadcrumb-utils'
+import BreadcrumbWithStructuredData from "@/components/common/BreadcrumbWithStructuredData"
+import { Devicon } from "@/components/icons/Devicon"
+import { navigation } from "@/lib/navigation"
+import { generateDocsBreadcrumb } from "@/lib/seo/breadcrumb-utils"
 
 type ChapterTopPageProps = {
   courseSlug: string
@@ -16,7 +16,10 @@ type ChapterTopPageProps = {
  * チャプタートップページコンポーネント
  * navigation.tsからデータを読み込み、チャプターの概要と子リンク一覧を表示します
  */
-export function ChapterTopPage({ courseSlug, chapterSlug }: ChapterTopPageProps) {
+export function ChapterTopPage({
+  courseSlug,
+  chapterSlug,
+}: ChapterTopPageProps) {
   // コースの情報を取得
   const course = navigation.find(course => course.slug === courseSlug)
   if (!course) {
@@ -24,16 +27,22 @@ export function ChapterTopPage({ courseSlug, chapterSlug }: ChapterTopPageProps)
   }
 
   // チャプターの情報を取得
-  const chapter = course.links.find(link => link.href.includes(`/${courseSlug}/${chapterSlug}`))
+  const chapter = course.links.find(link =>
+    link.href.includes(`/${courseSlug}/${chapterSlug}`)
+  )
   if (!chapter) {
     notFound()
   }
 
   // 共通のカラーテーマ（青系統）を使用
-  const iconColor = 'text-sky-600'
+  const iconColor = "text-sky-600"
 
   // パンくずリストのデータ
-  const breadcrumbs = generateDocsBreadcrumb(courseSlug, course.title, chapter.title)
+  const breadcrumbs = generateDocsBreadcrumb(
+    courseSlug,
+    course.title,
+    chapter.title
+  )
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -55,7 +64,9 @@ export function ChapterTopPage({ courseSlug, chapterSlug }: ChapterTopPageProps)
       </div>
 
       <div className="mx-auto max-w-4xl">
-        <h2 className="mb-6 text-xl font-semibold tracking-tight">このチャプターで学べる内容</h2>
+        <h2 className="mb-6 text-xl font-semibold tracking-tight">
+          このチャプターで学べる内容
+        </h2>
         <div className="space-y-2.5">
           {chapter.children?.map((lesson, index) => (
             <Link
@@ -75,7 +86,6 @@ export function ChapterTopPage({ courseSlug, chapterSlug }: ChapterTopPageProps)
             </Link>
           ))}
         </div>
-
       </div>
     </div>
   )

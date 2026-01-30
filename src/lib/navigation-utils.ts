@@ -4,5 +4,7 @@
  * @returns Boolean indicating if curriculum navigation should be shown
  */
 export function shouldShowNavigation(path: string): boolean {
-  return path.startsWith('/docs/') && path !== '/docs/' && !path.startsWith('/blog')
+  return (
+    path.startsWith("/docs/") && path !== "/docs/" && !path.startsWith("/blog")
+  )
 }

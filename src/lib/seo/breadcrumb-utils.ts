@@ -13,11 +13,11 @@ export interface BreadcrumbItem {
 export function generateDocsBreadcrumb(
   courseSlug?: string,
   courseTitle?: string,
-  chapterTitle?: string,
+  chapterTitle?: string
 ): BreadcrumbItem[] {
   const items: BreadcrumbItem[] = [
-    { label: 'ホーム', href: '/' },
-    { label: 'ドキュメント', href: '/docs' },
+    { label: "ホーム", href: "/" },
+    { label: "ドキュメント", href: "/docs" },
   ]
 
   if (courseSlug && courseTitle) {
@@ -35,13 +35,14 @@ export function generateDocsBreadcrumb(
  * BreadcrumbList JSON-LD構造化データを生成
  */
 export function generateBreadcrumbStructuredData(items: BreadcrumbItem[]) {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://vibecoding.studio'
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://vibecoding.studio"
 
   return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
     itemListElement: items.map((item, index) => ({
-      '@type': 'ListItem',
+      "@type": "ListItem",
       position: index + 1,
       name: item.label,
       ...(item.href ? { item: `${siteUrl}${item.href}` } : {}),
@@ -52,6 +53,8 @@ export function generateBreadcrumbStructuredData(items: BreadcrumbItem[]) {
 /**
  * 構造化データをJSON文字列に変換
  */
-export function breadcrumbToJsonLd(data: ReturnType<typeof generateBreadcrumbStructuredData>): string {
+export function breadcrumbToJsonLd(
+  data: ReturnType<typeof generateBreadcrumbStructuredData>
+): string {
   return JSON.stringify(data)
 }

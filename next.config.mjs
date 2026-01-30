@@ -129,6 +129,4 @@ if (process.env.ANALYZE === "true") {
 }
 
 // withMarkdoc と withSearch をチェーンして適用
-export default withSearch(
-  withMarkdoc({ schemaPath: "./src/markdoc" })(config),
-)
+export default withSearch(withMarkdoc({ schemaPath: "./src/markdoc" })(config))

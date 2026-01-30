@@ -1,14 +1,14 @@
-import { ArrowRight, Construction } from 'lucide-react'
-import Link from 'next/link'
+import { ArrowRight, Construction } from "lucide-react"
+import Link from "next/link"
 
-import { Devicon } from '@/components/icons/Devicon'
-import { getCoursesForListPage } from '@/lib/course-constants'
-import BreadcrumbWithStructuredData from '@/components/common/BreadcrumbWithStructuredData'
-import { generateDocsBreadcrumb } from '@/lib/seo/breadcrumb-utils'
+import BreadcrumbWithStructuredData from "@/components/common/BreadcrumbWithStructuredData"
+import { Devicon } from "@/components/icons/Devicon"
+import { getCoursesForListPage } from "@/lib/course-constants"
+import { generateDocsBreadcrumb } from "@/lib/seo/breadcrumb-utils"
 
 export const metadata = {
-  title: '学習コース一覧',
-  description: 'プログラミングの各種スキルを体系的に学べるオンラインコース一覧',
+  title: "学習コース一覧",
+  description: "プログラミングの各種スキルを体系的に学べるオンラインコース一覧",
 }
 
 /**
@@ -27,8 +27,12 @@ export default async function DocsPage() {
   } = getCoursesForListPage()
 
   // フロントエンドコースを利用可能なものと準備中のものに分離
-  const availableFrontendCourses = frontendCourses.filter(course => course.available)
-  const comingSoonFrontendCourses = frontendCourses.filter(course => !course.available)
+  const availableFrontendCourses = frontendCourses.filter(
+    course => course.available
+  )
+  const comingSoonFrontendCourses = frontendCourses.filter(
+    course => !course.available
+  )
 
   // パンくずリストのデータ
   const breadcrumbs = generateDocsBreadcrumb()
@@ -41,7 +45,7 @@ export default async function DocsPage() {
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
           学習コース一覧
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
+        <p className="text-muted-foreground mx-auto mt-6 max-w-2xl text-lg">
           スキルアップをサポートする体系的なプログラミング学習コンテンツ
         </p>
 
@@ -79,7 +83,11 @@ export default async function DocsPage() {
             >
               <div className="flex flex-col items-center justify-between gap-2">
                 <div className="flex items-center gap-3">
-                  <Devicon slug={course.slug} size="lg" className={course.colors.text} />
+                  <Devicon
+                    slug={course.slug}
+                    size="lg"
+                    className={course.colors.text}
+                  />
                   <h2
                     id={`course-${course.slug}`}
                     className={`text-xl font-semibold ${course.colors.text}`}
@@ -113,8 +121,15 @@ export default async function DocsPage() {
             >
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center gap-3">
-                  <Devicon slug={course.slug} size="lg" className="text-gray-500" />
-                  <h2 id={`course-${course.slug}`} className="text-xl font-semibold text-gray-500">
+                  <Devicon
+                    slug={course.slug}
+                    size="lg"
+                    className="text-gray-500"
+                  />
+                  <h2
+                    id={`course-${course.slug}`}
+                    className="text-xl font-semibold text-gray-500"
+                  >
                     {course.title}
                   </h2>
                 </div>
@@ -146,7 +161,7 @@ export default async function DocsPage() {
             <div
               key={course.slug}
               className={`rounded-3xl border border-gray-200 p-8 transition-all ${
-                course.available ? 'hover:shadow-lg' : 'opacity-70 grayscale'
+                course.available ? "hover:shadow-lg" : "opacity-70 grayscale"
               }`}
             >
               <div className="flex flex-col items-center justify-between gap-2">
@@ -154,12 +169,14 @@ export default async function DocsPage() {
                   <Devicon
                     slug={course.slug}
                     size="lg"
-                    className={course.available ? course.colors.text : 'text-gray-500'}
+                    className={
+                      course.available ? course.colors.text : "text-gray-500"
+                    }
                   />
                   <h2
                     id={`course-${course.slug}`}
                     className={`text-xl font-semibold ${
-                      course.available ? course.colors.text : 'text-gray-500'
+                      course.available ? course.colors.text : "text-gray-500"
                     }`}
                   >
                     {course.title}
@@ -206,7 +223,7 @@ export default async function DocsPage() {
             <div
               key={course.slug}
               className={`rounded-3xl border border-gray-200 p-8 transition-all ${
-                course.available ? 'hover:shadow-lg' : 'opacity-70 grayscale'
+                course.available ? "hover:shadow-lg" : "opacity-70 grayscale"
               }`}
             >
               <div className="flex flex-col items-center justify-between gap-2">
@@ -214,12 +231,14 @@ export default async function DocsPage() {
                   <Devicon
                     slug={course.slug}
                     size="lg"
-                    className={course.available ? course.colors.text : 'text-gray-500'}
+                    className={
+                      course.available ? course.colors.text : "text-gray-500"
+                    }
                   />
                   <h2
                     id={`course-${course.slug}`}
                     className={`text-xl font-semibold ${
-                      course.available ? course.colors.text : 'text-gray-500'
+                      course.available ? course.colors.text : "text-gray-500"
                     }`}
                   >
                     {course.title}
@@ -266,7 +285,7 @@ export default async function DocsPage() {
             <div
               key={course.slug}
               className={`rounded-3xl border border-gray-200 p-8 transition-all ${
-                course.available ? 'hover:shadow-lg' : 'opacity-70 grayscale'
+                course.available ? "hover:shadow-lg" : "opacity-70 grayscale"
               }`}
             >
               <div className="flex flex-col items-center justify-between gap-2">
@@ -274,12 +293,14 @@ export default async function DocsPage() {
                   <Devicon
                     slug={course.slug}
                     size="lg"
-                    className={course.available ? course.colors.text : 'text-gray-500'}
+                    className={
+                      course.available ? course.colors.text : "text-gray-500"
+                    }
                   />
                   <h2
                     id={`course-${course.slug}`}
                     className={`text-xl font-semibold ${
-                      course.available ? course.colors.text : 'text-gray-500'
+                      course.available ? course.colors.text : "text-gray-500"
                     }`}
                   >
                     {course.title}
@@ -326,7 +347,7 @@ export default async function DocsPage() {
             <div
               key={course.slug}
               className={`rounded-3xl border border-gray-200 p-8 transition-all ${
-                course.available ? 'hover:shadow-lg' : 'opacity-70 grayscale'
+                course.available ? "hover:shadow-lg" : "opacity-70 grayscale"
               }`}
             >
               <div className="flex flex-col items-center justify-between gap-2">
@@ -334,12 +355,14 @@ export default async function DocsPage() {
                   <Devicon
                     slug={course.slug}
                     size="lg"
-                    className={course.available ? course.colors.text : 'text-gray-500'}
+                    className={
+                      course.available ? course.colors.text : "text-gray-500"
+                    }
                   />
                   <h2
                     id={`course-${course.slug}`}
                     className={`text-xl font-semibold ${
-                      course.available ? course.colors.text : 'text-gray-500'
+                      course.available ? course.colors.text : "text-gray-500"
                     }`}
                   >
                     {course.title}
@@ -378,7 +401,7 @@ export default async function DocsPage() {
         <h2 className="text-2xl font-semibold tracking-tight">
           定期的に新しいコンテンツを追加しています
         </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
+        <p className="text-muted-foreground mx-auto mt-4 max-w-2xl">
           あなたのスキル向上をサポートする様々なコースをご用意しています。
         </p>
       </div>

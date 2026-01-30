@@ -1,20 +1,20 @@
-import Markdoc from '@markdoc/markdoc'
-import { slugifyWithCounter } from '@sindresorhus/slugify'
-import glob from 'fast-glob'
-import * as fs from 'fs'
-import * as path from 'path'
-import { createLoader } from 'simple-functional-loader'
-import * as url from 'url'
+import Markdoc from "@markdoc/markdoc"
+import { slugifyWithCounter } from "@sindresorhus/slugify"
+import glob from "fast-glob"
+import * as fs from "fs"
+import * as path from "path"
+import { createLoader } from "simple-functional-loader"
+import * as url from "url"
 
 const __filename = url.fileURLToPath(import.meta.url)
 const slugify = slugifyWithCounter()
 
 function toString(node) {
   let str =
-    node.type === 'text' && typeof node.attributes?.content === 'string'
+    node.type === "text" && typeof node.attributes?.content === "string"
       ? node.attributes.content
-      : ''
-  if ('children' in node) {
+      : ""
+  if ("children" in node) {
     for (let child of node.children) {
       str += toString(child)
     }
@@ -26,15 +26,15 @@ function extractSections(node, sections, isRoot = true) {
   if (isRoot) {
     slugify.reset()
   }
-  if (node.type === 'heading' || node.type === 'paragraph') {
+  if (node.type === "heading" || node.type === "paragraph") {
     let content = toString(node).trim()
-    if (node.type === 'heading' && node.attributes.level <= 2) {
+    if (node.type === "heading" && node.attributes.level <= 2) {
       let hash = node.attributes?.id ?? slugify(content)
       sections.push([content, hash, []])
     } else {
       sections.at(-1)[2].push(content)
     }
-  } else if ('children' in node) {
+  } else if ("children" in node) {
     for (let child of node.children) {
       extractSections(child, sections, false)
     }
@@ -50,14 +50,14 @@ export default function withSearch(nextConfig = {}) {
         test: __filename,
         use: [
           createLoader(function () {
-            let pagesDir = path.resolve('./src/app')
+            let pagesDir = path.resolve("./src/app")
             this.addContextDependency(pagesDir)
 
-            let files = glob.sync('**/page.md', { cwd: pagesDir })
-            let data = files.map((file) => {
+            let files = glob.sync("**/page.md", { cwd: pagesDir })
+            let data = files.map(file => {
               let url =
-                file === 'page.md' ? '/' : `/${file.replace(/\/page\.md$/, '')}`
-              let md = fs.readFileSync(path.join(pagesDir, file), 'utf8')
+                file === "page.md" ? "/" : `/${file.replace(/\/page\.md$/, "")}`
+              let md = fs.readFileSync(path.join(pagesDir, file), "utf8")
 
               let sections
 
@@ -67,7 +67,7 @@ export default function withSearch(nextConfig = {}) {
                 let ast = Markdoc.parse(md)
                 let title =
                   ast.attributes?.frontmatter?.match(
-                    /^title:\s*(.*?)\s*$/m,
+                    /^title:\s*(.*?)\s*$/m
                   )?.[1]
                 sections = [[title, null, []]]
                 extractSections(ast, sections)
@@ -128,7 +128,7 @@ export default function withSearch(nextConfig = {}) {
         ],
       })
 
-      if (typeof nextConfig.webpack === 'function') {
+      if (typeof nextConfig.webpack === "function") {
         return nextConfig.webpack(config, options)
       }
 

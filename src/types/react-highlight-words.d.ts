@@ -1,5 +1,5 @@
-declare module 'react-highlight-words' {
-  import type { ComponentType } from 'react'
+declare module "react-highlight-words" {
+  import type { ComponentType } from "react"
 
   interface HighlighterProps {
     highlightClassName?: string

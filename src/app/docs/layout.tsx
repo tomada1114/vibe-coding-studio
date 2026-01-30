@@ -1,12 +1,12 @@
-'use client'
+"use client"
 
-import { Footer } from '@/components/footer'
-import { MobileNavigation } from '@/components/MobileNavigation'
-import { Navigation } from '@/components/Navigation'
-import { Search } from '@/components/Search'
-import { shouldShowNavigation } from '@/lib/navigation-utils'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { Footer } from "@/components/footer"
+import { MobileNavigation } from "@/components/MobileNavigation"
+import { Navigation } from "@/components/Navigation"
+import { Search } from "@/components/Search"
+import { shouldShowNavigation } from "@/lib/navigation-utils"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 function DocsNavbar() {
   return (
@@ -43,15 +43,15 @@ export default function DocsLayout({
   return (
     <>
       <DocsNavbar />
-      <div className="relative mx-auto flex max-w-8xl justify-center sm:px-2 lg:px-8 xl:px-12">
+      <div className="max-w-8xl relative mx-auto flex justify-center sm:px-2 lg:px-8 xl:px-12">
         {showNav && (
           <div className="hidden lg:relative lg:block lg:flex-none">
-            <div className="sticky top-[4.5rem] -ml-0.5 h-[calc(100vh-4.5rem)] w-64 overflow-y-auto overflow-x-hidden py-16 pl-0.5 pr-8 xl:w-72 xl:pr-16">
+            <div className="sticky top-[4.5rem] -ml-0.5 h-[calc(100vh-4.5rem)] w-64 overflow-x-hidden overflow-y-auto py-16 pr-8 pl-0.5 xl:w-72 xl:pr-16">
               <Navigation />
             </div>
           </div>
         )}
-        <div className="min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-none lg:pr-0 lg:pl-8 xl:px-16">
+        <div className="max-w-2xl min-w-0 flex-auto px-4 py-16 lg:max-w-none lg:pr-0 lg:pl-8 xl:px-16">
           {children}
         </div>
       </div>

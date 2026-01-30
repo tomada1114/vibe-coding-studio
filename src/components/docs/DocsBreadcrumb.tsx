@@ -1,9 +1,9 @@
-'use client'
+"use client"
 
-import { usePathname } from 'next/navigation'
-import { navigation } from '@/lib/navigation'
-import BreadcrumbWithStructuredData from '@/components/common/BreadcrumbWithStructuredData'
-import { generateDocsBreadcrumb } from '@/lib/seo/breadcrumb-utils'
+import BreadcrumbWithStructuredData from "@/components/common/BreadcrumbWithStructuredData"
+import { navigation } from "@/lib/navigation"
+import { generateDocsBreadcrumb } from "@/lib/seo/breadcrumb-utils"
+import { usePathname } from "next/navigation"
 
 interface DocsBreadcrumbProps {
   title?: string
@@ -16,11 +16,11 @@ interface DocsBreadcrumbProps {
 export function DocsBreadcrumb({ title }: DocsBreadcrumbProps) {
   const pathname = usePathname()
 
-  if (!pathname.startsWith('/docs')) {
+  if (!pathname.startsWith("/docs")) {
     return null
   }
 
-  const pathSegments = pathname.split('/').filter(Boolean)
+  const pathSegments = pathname.split("/").filter(Boolean)
 
   let courseSlug: string | undefined
   let courseTitle: string | undefined
@@ -37,7 +37,11 @@ export function DocsBreadcrumb({ title }: DocsBreadcrumbProps) {
     }
   }
 
-  const breadcrumbs = generateDocsBreadcrumb(courseSlug, courseTitle, chapterTitle)
+  const breadcrumbs = generateDocsBreadcrumb(
+    courseSlug,
+    courseTitle,
+    chapterTitle
+  )
 
   return <BreadcrumbWithStructuredData items={breadcrumbs} className="mb-8" />
 }

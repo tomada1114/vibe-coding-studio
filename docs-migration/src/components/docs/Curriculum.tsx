@@ -1,11 +1,11 @@
-import { ArrowRight, List, LucideIcon } from 'lucide-react'
-import Link from 'next/link'
+import { ArrowRight, List, LucideIcon } from "lucide-react"
+import Link from "next/link"
 
-import { Heading } from '@/components/catalyst/heading'
-import BreadcrumbWithStructuredData from '@/components/common/BreadcrumbWithStructuredData'
-import { Devicon } from '@/components/icons/Devicon'
-import { navigation } from '@/lib/navigation'
-import { generateDocsBreadcrumb } from '@/lib/seo/breadcrumb-utils'
+import { Heading } from "@/components/catalyst/heading"
+import BreadcrumbWithStructuredData from "@/components/common/BreadcrumbWithStructuredData"
+import { Devicon } from "@/components/icons/Devicon"
+import { navigation } from "@/lib/navigation"
+import { generateDocsBreadcrumb } from "@/lib/seo/breadcrumb-utils"
 
 /**
  * 特徴セクションの項目の型定義
@@ -259,7 +259,11 @@ export type CurriculumProps = {
  * このコンポーネントは言語やフレームワークごとのカリキュラムページを
  * 統一されたレイアウトで表示するために使用します。
  */
-export const Curriculum = ({ slug, courseContent, themeColors }: CurriculumProps): JSX.Element => {
+export const Curriculum = ({
+  slug,
+  courseContent,
+  themeColors,
+}: CurriculumProps): JSX.Element => {
   // パンくずリストのデータ
   const breadcrumbs = generateDocsBreadcrumb(slug, courseContent.title)
 
@@ -301,7 +305,9 @@ export const Curriculum = ({ slug, courseContent, themeColors }: CurriculumProps
           <div className="rounded-xl border border-gray-200 bg-white shadow-sm">
             <div className="flex items-center gap-3 border-b border-gray-200 px-4 py-3">
               <List className={`h-5 w-5 ${themeColors.text.accent} `} />
-              <h2 className="text-lg font-semibold text-slate-900">チャプター一覧</h2>
+              <h2 className="text-lg font-semibold text-slate-900">
+                チャプター一覧
+              </h2>
             </div>
             <div className="p-4">
               <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
@@ -317,7 +323,9 @@ export const Curriculum = ({ slug, courseContent, themeColors }: CurriculumProps
                       {index + 1}
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-medium text-slate-900">{chapter.title}</p>
+                      <p className="truncate text-sm font-medium text-slate-900">
+                        {chapter.title}
+                      </p>
                       <p className="text-xs text-slate-500">
                         {chapter.children?.length || 0}個のレッスン
                       </p>
@@ -348,18 +356,24 @@ export const Curriculum = ({ slug, courseContent, themeColors }: CurriculumProps
                   <div
                     className={`h-10 w-10 rounded-lg bg-gradient-to-r ${themeColors.gradient.from} ${themeColors.gradient.to} p-2.5 text-white shadow-md sm:h-12 sm:w-12 sm:rounded-xl sm:p-3`}
                   >
-                    {feature.icon && <feature.icon className="h-5 w-5 sm:h-6 sm:w-6" />}
+                    {feature.icon && (
+                      <feature.icon className="h-5 w-5 sm:h-6 sm:w-6" />
+                    )}
                   </div>
                   <div className="h-12 w-12 opacity-10 sm:h-16 sm:w-16">
                     {feature.icon && (
-                      <feature.icon className={`h-full w-full ${themeColors.text.accent}`} />
+                      <feature.icon
+                        className={`h-full w-full ${themeColors.text.accent}`}
+                      />
                     )}
                   </div>
                 </div>
                 <Heading level={3} className="text-lg font-bold sm:text-xl">
                   <strong>{feature.title}</strong>
                 </Heading>
-                <p className="text-sm text-slate-600 sm:text-base">{feature.description}</p>
+                <p className="text-sm text-slate-600 sm:text-base">
+                  {feature.description}
+                </p>
               </div>
             </div>
           ))}
@@ -385,12 +399,16 @@ export const Curriculum = ({ slug, courseContent, themeColors }: CurriculumProps
                 <div
                   className={`mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r ${themeColors.gradient.from} ${themeColors.gradient.to} text-white shadow-md transition-transform group-hover:scale-110 sm:mb-6 sm:h-14 sm:w-14`}
                 >
-                  {target.icon && <target.icon className="h-6 w-6 sm:h-7 sm:w-7" />}
+                  {target.icon && (
+                    <target.icon className="h-6 w-6 sm:h-7 sm:w-7" />
+                  )}
                 </div>
                 <h3 className="mb-2 text-xl font-bold text-slate-900 sm:mb-3 sm:text-2xl">
                   <strong>{target.title}</strong>
                 </h3>
-                <p className="text-base text-slate-600 sm:text-lg">{target.description}</p>
+                <p className="text-base text-slate-600 sm:text-lg">
+                  {target.description}
+                </p>
               </div>
             ))}
           </div>
@@ -405,8 +423,8 @@ export const Curriculum = ({ slug, courseContent, themeColors }: CurriculumProps
             <span className={`${themeColors.text.accent} `}>内容</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base text-slate-600 sm:mt-6 sm:text-lg md:text-xl">
-            <strong>{courseContent.chapterCount}つのチャプター</strong>で体系的に{' '}
-            {courseContent.title} を学びます
+            <strong>{courseContent.chapterCount}つのチャプター</strong>
+            で体系的に {courseContent.title} を学びます
           </p>
         </div>
 
@@ -429,7 +447,9 @@ export const Curriculum = ({ slug, courseContent, themeColors }: CurriculumProps
                           level={3}
                           className="flex-1 text-base font-bold sm:text-lg md:text-xl"
                         >
-                          <strong className={`${themeColors.text.hover} transition-colors`}>
+                          <strong
+                            className={`${themeColors.text.hover} transition-colors`}
+                          >
                             {chapter.title}
                           </strong>
                         </Heading>
@@ -441,10 +461,14 @@ export const Curriculum = ({ slug, courseContent, themeColors }: CurriculumProps
                     <div className="bg-white pt-2 pr-4 pb-6 pl-4 sm:pr-6 sm:pl-6">
                       <p
                         className="text-sm text-slate-600 sm:text-base"
-                        dangerouslySetInnerHTML={{ __html: chapter.description }}
+                        dangerouslySetInnerHTML={{
+                          __html: chapter.description,
+                        }}
                       ></p>
                       {navChapter.children && (
-                        <p className={`mt-2 text-xs ${themeColors.text.accent} font-medium`}>
+                        <p
+                          className={`mt-2 text-xs ${themeColors.text.accent} font-medium`}
+                        >
                           {navChapter.children.length}個のレッスン
                         </p>
                       )}
@@ -453,14 +477,19 @@ export const Curriculum = ({ slug, courseContent, themeColors }: CurriculumProps
                 ) : (
                   <>
                     <div className="bg-white pt-6 pb-2 pl-4 sm:pl-6">
-                      <Heading level={3} className="text-base font-bold sm:text-lg md:text-xl">
+                      <Heading
+                        level={3}
+                        className="text-base font-bold sm:text-lg md:text-xl"
+                      >
                         <strong>{chapter.title}</strong>
                       </Heading>
                     </div>
                     <div className="bg-white pt-2 pb-6 pl-4 sm:pl-6">
                       <p
                         className="text-sm text-slate-600 sm:text-base"
-                        dangerouslySetInnerHTML={{ __html: chapter.description }}
+                        dangerouslySetInnerHTML={{
+                          __html: chapter.description,
+                        }}
                       ></p>
                     </div>
                   </>
@@ -498,8 +527,12 @@ export const Curriculum = ({ slug, courseContent, themeColors }: CurriculumProps
                       {feature.icon && <feature.icon className="h-6 w-6" />}
                     </div>
                     <div>
-                      <h3 className="mb-2 text-lg font-bold text-slate-900">{feature.title}</h3>
-                      <p className="text-sm text-slate-600 sm:text-base">{feature.description}</p>
+                      <h3 className="mb-2 text-lg font-bold text-slate-900">
+                        {feature.title}
+                      </h3>
+                      <p className="text-sm text-slate-600 sm:text-base">
+                        {feature.description}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -541,7 +574,7 @@ export const Curriculum = ({ slug, courseContent, themeColors }: CurriculumProps
               href={courseContent.cta.secondaryButtonLink}
               className={`flex w-full items-center justify-center text-sm font-semibold text-slate-900 transition-colors ${themeColors.text.hover} sm:w-auto sm:justify-start sm:text-base`}
             >
-              {courseContent.cta.secondaryButtonText}{' '}
+              {courseContent.cta.secondaryButtonText}{" "}
               <ArrowRight className="ml-1 h-3 w-3 sm:h-4 sm:w-4" />
             </Link>
           </div>

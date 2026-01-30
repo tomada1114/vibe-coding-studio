@@ -1,6 +1,6 @@
-import Image from 'next/image'
-import { Callout } from '@/components/Callout'
-import { QuickLink, QuickLinks } from '@/components/QuickLinks'
+import { Callout } from "@/components/Callout"
+import { QuickLink, QuickLinks } from "@/components/QuickLinks"
+import Image from "next/image"
 
 const tags = {
   callout: {
@@ -8,9 +8,9 @@ const tags = {
       title: { type: String },
       type: {
         type: String,
-        default: 'note',
-        matches: ['note', 'warning'],
-        errorLevel: 'critical',
+        default: "note",
+        matches: ["note", "warning"],
+        errorLevel: "critical",
       },
     },
     render: Callout,
@@ -22,9 +22,9 @@ const tags = {
       alt: { type: String },
       caption: { type: String },
     },
-    render: ({ src, alt = '', caption }) => {
+    render: ({ src, alt = "", caption }) => {
       // 相対パスの場合は絶対パスに変換
-      const imageSrc = src?.startsWith('/') ? src : `/img/${src}`
+      const imageSrc = src?.startsWith("/") ? src : `/img/${src}`
 
       return (
         <figure>
@@ -38,16 +38,18 @@ const tags = {
             loading="lazy"
           />
           {caption && (
-            <figcaption className="mt-2 text-center text-sm text-gray-600">{caption}</figcaption>
+            <figcaption className="mt-2 text-center text-sm text-gray-600">
+              {caption}
+            </figcaption>
           )}
         </figure>
       )
     },
   },
-  'quick-links': {
+  "quick-links": {
     render: QuickLinks,
   },
-  'quick-link': {
+  "quick-link": {
     selfClosing: true,
     render: QuickLink,
     attributes: {
