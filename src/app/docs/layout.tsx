@@ -1,61 +1,41 @@
-"use client"
-
+import { Container } from "@/components/container"
+import { DocsMobileMenu } from "@/components/docs/DocsMobileMenu"
+import { DocsSidebar } from "@/components/docs/DocsSidebar"
+import { AsyncErrorBoundary } from "@/components/error-boundary"
 import { Footer } from "@/components/footer"
-import { MobileNavigation } from "@/components/MobileNavigation"
-import { Navigation } from "@/components/Navigation"
-import { Search } from "@/components/Search"
-import { shouldShowNavigation } from "@/lib/navigation-utils"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-
-function DocsNavbar() {
-  return (
-    <div className="sticky top-0 z-50 flex flex-wrap items-center justify-between gap-x-6 border-b border-slate-200 bg-white px-4 py-3 shadow-sm sm:px-6 lg:px-8">
-      <div className="flex items-center gap-4">
-        <div className="lg:hidden">
-          <MobileNavigation />
-        </div>
-        <Link href="/" className="text-lg font-semibold text-slate-900">
-          Vibe Coding Studio
-        </Link>
-      </div>
-      <div className="flex items-center gap-4">
-        <Search />
-        <Link
-          href="/docs"
-          className="hidden text-sm font-medium text-slate-600 hover:text-slate-900 lg:block"
-        >
-          コース一覧
-        </Link>
-      </div>
-    </div>
-  )
-}
+import { Gradient } from "@/components/gradient"
+import { Navbar } from "@/components/navbar"
 
 export default function DocsLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const pathname = usePathname()
-  const showNav = shouldShowNavigation(pathname)
-
   return (
-    <>
-      <DocsNavbar />
-      <div className="max-w-8xl relative mx-auto flex justify-center sm:px-2 lg:px-8 xl:px-12">
-        {showNav && (
-          <div className="hidden lg:relative lg:block lg:flex-none">
-            <div className="sticky top-[4.5rem] -ml-0.5 h-[calc(100vh-4.5rem)] w-64 overflow-x-hidden overflow-y-auto py-16 pr-8 pl-0.5 xl:w-72 xl:pr-16">
-              <Navigation />
-            </div>
-          </div>
-        )}
-        <div className="max-w-2xl min-w-0 flex-auto px-4 py-16 lg:max-w-none lg:pr-0 lg:pl-8 xl:px-16">
-          {children}
+    <div className="overflow-hidden">
+      <AsyncErrorBoundary>
+        <div className="relative">
+          <Gradient className="absolute inset-2 bottom-0 rounded-4xl ring-1 ring-black/5 ring-inset" />
+          <Container className="relative">
+            <Navbar />
+          </Container>
         </div>
-      </div>
-      <Footer />
-    </>
+      </AsyncErrorBoundary>
+
+      <DocsMobileMenu />
+
+      <main>
+        <div className="max-w-8xl relative mx-auto flex justify-center sm:px-2 lg:px-8 xl:px-12">
+          <DocsSidebar />
+          <div className="max-w-2xl min-w-0 flex-auto px-4 py-16 lg:max-w-none lg:pr-0 lg:pl-8 xl:px-16">
+            {children}
+          </div>
+        </div>
+      </main>
+
+      <AsyncErrorBoundary>
+        <Footer />
+      </AsyncErrorBoundary>
+    </div>
   )
 }
