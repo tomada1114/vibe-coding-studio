@@ -63,6 +63,7 @@ function Sitemap() {
           <SitemapLink href="/community">コミュニティ</SitemapLink>
           <SitemapLink href="/coupons">クーポン</SitemapLink>
           <SitemapLink href="/founder">運営者</SitemapLink>
+          <SitemapLink href="/roadmap">ロードマップ</SitemapLink>
         </SitemapLinks>
       </div>
       <div>

@@ -46,6 +46,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteUrl,
   },
+  icons: {
+    icon: "/vcs-logo-square-transparent.png",
+    apple: "/vcs-logo-square-transparent.png",
+  },
 }
 
 export default function RootLayout({
