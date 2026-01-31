@@ -1,10 +1,10 @@
 "use client"
 
+import BreadcrumbWithStructuredData from "@/components/common/BreadcrumbWithStructuredData"
 import { Container } from "@/components/container"
 import { RoadmapFlow } from "@/components/roadmap/RoadmapFlow"
 import { RoadmapTabs } from "@/components/roadmap/RoadmapTabs"
 import { getCourseById, isValidCourseId, type CourseId } from "@/data/roadmaps"
-import { ChevronRightIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -52,22 +52,13 @@ export function RoadmapContent() {
 
   return (
     <Container className="pb-24">
-      <nav className="pt-8" aria-label="Breadcrumb">
-        <ol className="flex items-center space-x-2 text-sm">
-          <li>
-            <Link
-              href="/"
-              className="text-gray-500 transition-colors hover:text-gray-700"
-            >
-              ホーム
-            </Link>
-          </li>
-          <li className="flex items-center">
-            <ChevronRightIcon className="mx-2 h-4 w-4 text-gray-400" />
-            <span className="font-medium text-gray-950">ロードマップ</span>
-          </li>
-        </ol>
-      </nav>
+      <BreadcrumbWithStructuredData
+        items={[
+          { label: "ホーム", href: "/" },
+          { label: "ロードマップ" },
+        ]}
+        className="pt-8"
+      />
 
       <h1 className="mt-6 text-3xl font-bold text-gray-950">
         学習ロードマップ
