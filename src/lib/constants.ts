@@ -59,5 +59,5 @@ export const SITE_METADATA = {
   title: "Vibe Coding Studio",
   description:
     "AI駆動開発を学ぶ仲間が集まり、情報を共有し合い、一緒に成長するコミュニティ",
-  url: "https://vibecoding.studio",
+  url: "https://www.vibecodingstudio.dev",
 } as const

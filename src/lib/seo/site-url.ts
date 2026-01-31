@@ -7,7 +7,7 @@
  * - Logs warnings/errors for missing or invalid URLs
  */
 
-const FALLBACK_URL = "https://vibe-coding-studio.com"
+const FALLBACK_URL = "https://www.vibecodingstudio.dev"
 
 /**
  * Get validated site URL from environment variable.

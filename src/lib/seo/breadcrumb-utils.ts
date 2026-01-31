@@ -2,6 +2,8 @@
  * パンくずリスト関連ユーティリティ
  */
 
+import { getSiteUrl } from "./site-url"
+
 export interface BreadcrumbItem {
   label: string
   href?: string
@@ -35,8 +37,7 @@ export function generateDocsBreadcrumb(
  * BreadcrumbList JSON-LD構造化データを生成
  */
 export function generateBreadcrumbStructuredData(items: BreadcrumbItem[]) {
-  const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://vibecoding.studio"
+  const siteUrl = getSiteUrl()
 
   return {
     "@context": "https://schema.org",

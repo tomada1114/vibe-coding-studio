@@ -1,3 +1,4 @@
+import { getSiteUrl } from "@/lib/seo/site-url"
 import type { ArticleStructuredDataProps } from "@/types/structured_data"
 
 const DEFAULT_AUTHOR = {
@@ -11,8 +12,7 @@ const DEFAULT_AUTHOR = {
 export function generateArticleStructuredDataString(
   props: ArticleStructuredDataProps
 ): string {
-  const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://vibecoding.studio"
+  const siteUrl = getSiteUrl()
   const authorInfo = props.author || DEFAULT_AUTHOR
 
   const data: Record<string, unknown> = {

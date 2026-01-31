@@ -2,6 +2,8 @@
  * Docs記事構造化データの生成
  */
 
+import { getSiteUrl } from "@/lib/seo/site-url"
+
 const DEFAULT_AUTHOR = {
   name: "とまだ",
   url: "/founder",
@@ -28,8 +30,7 @@ export function renderDocsArticleJsonLd(
     return null
   }
 
-  const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://vibecoding.studio"
+  const siteUrl = getSiteUrl()
   const authorUrl = options.author
     ? `${siteUrl}/founder`
     : `${siteUrl}${DEFAULT_AUTHOR.url}`

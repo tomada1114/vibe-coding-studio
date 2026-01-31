@@ -40,7 +40,7 @@ export function DocsArticleStructuredData({
     return null
   }
 
-  const url = `${process.env.NEXT_PUBLIC_SITE_URL || "https://vibecoding.studio"}${pathname}`
+  const url = `${process.env.NEXT_PUBLIC_SITE_URL || "https://www.vibecodingstudio.dev"}${pathname}`
 
   const structuredDataJson = renderDocsArticleJsonLd(courseSlug, title, url, {
     description,
