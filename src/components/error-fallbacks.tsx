@@ -149,8 +149,8 @@ export function NotFoundFallback() {
         </Subheading>
         <div className="flex justify-center gap-3">
           <Button href="/">Go Home</Button>
-          <Button variant="secondary" href="/pricing">
-            See Pricing
+          <Button variant="secondary" href="/docs">
+            学習コースを見る
           </Button>
         </div>
       </div>
