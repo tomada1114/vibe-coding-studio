@@ -159,7 +159,7 @@ describe("constants.ts", () => {
       const { title, description, url } = SITE_METADATA
       expect(title).toBe("Vibe Coding Studio")
       expect(description).toContain("AI駆動開発")
-      expect(url).toBe("https://vibecoding.studio")
+      expect(url).toBe("https://www.vibecodingstudio.dev")
     })
   })
 })

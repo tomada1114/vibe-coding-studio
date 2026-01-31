@@ -75,7 +75,7 @@ describe("RoadmapContent", () => {
 
     it("should render breadcrumb with home link", () => {
       render(<RoadmapContent />)
-      const breadcrumb = screen.getByLabelText("Breadcrumb")
+      const breadcrumb = screen.getByLabelText("パンくずリスト")
       expect(breadcrumb).toBeInTheDocument()
       expect(screen.getByText("ホーム")).toBeInTheDocument()
     })

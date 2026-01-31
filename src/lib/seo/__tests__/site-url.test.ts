@@ -5,7 +5,7 @@
 import { getSiteUrl } from "../site-url"
 
 describe("getSiteUrl", () => {
-  const FALLBACK_URL = "https://vibe-coding-studio.com"
+  const FALLBACK_URL = "https://www.vibecodingstudio.dev"
   const originalEnv = process.env
 
   beforeEach(() => {
