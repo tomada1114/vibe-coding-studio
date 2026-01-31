@@ -16,10 +16,36 @@ import {
 import type { Metadata } from "next"
 import Image from "next/image"
 
+const founderTitle = "とまだ - Founder | Vibe Coding Studio"
+const founderDescription =
+  "Vibe Coding Studioの主催者とまだ（Tomada）のプロフィール。AI駆動開発のスペシャリストとして、コミュニティ運営・教育活動・開発実績をご紹介します。"
+
 export const metadata: Metadata = {
-  title: "とまだ - Founder | Vibe Coding Studio",
-  description:
-    "Vibe Coding Studioの主催者とまだ（Tomada）のプロフィール。AI駆動開発のスペシャリストとして、コミュニティ運営・教育活動・開発実績をご紹介します。",
+  title: founderTitle,
+  description: founderDescription,
+  openGraph: {
+    title: founderTitle,
+    description: founderDescription,
+    type: "profile",
+    url: "/founder",
+    images: [
+      {
+        url: "/tomada.png",
+        width: 800,
+        height: 800,
+        alt: "とまだ（Tomada）のプロフィール画像",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: founderTitle,
+    description: founderDescription,
+    images: ["/tomada.png"],
+  },
+  alternates: {
+    canonical: "/founder",
+  },
 }
 
 /**
@@ -460,9 +486,37 @@ function MissionSection() {
  * - ミッション
  * - フッター
  */
+function FounderStructuredData() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "とまだ（Tomada）",
+    jobTitle: "フリーランスエンジニア / AI駆動開発スペシャリスト",
+    url: "/founder",
+    sameAs: [
+      "https://x.com/muscle_coding",
+      "https://www.youtube.com/@vibe-coding-studio",
+      "https://qiita.com/tomada",
+      "https://note.com/tomada",
+    ],
+    worksFor: {
+      "@type": "Organization",
+      name: "Vibe Coding Studio",
+    },
+  }
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+    />
+  )
+}
+
 export default function FounderPage() {
   return (
     <div className="overflow-hidden">
+      <FounderStructuredData />
       <AsyncErrorBoundary>
         <HeroSection />
       </AsyncErrorBoundary>

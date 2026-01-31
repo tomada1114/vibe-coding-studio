@@ -6,9 +6,36 @@ import { Devicon } from "@/components/icons/Devicon"
 import { type CourseInfo, getCoursesForListPage } from "@/lib/course-constants"
 import { generateDocsBreadcrumb } from "@/lib/seo/breadcrumb-utils"
 
+const docsTitle = "学習コース一覧"
+const docsDescription =
+  "プログラミングの各種スキルを体系的に学べるオンラインコース一覧"
+
 export const metadata = {
-  title: "学習コース一覧",
-  description: "プログラミングの各種スキルを体系的に学べるオンラインコース一覧",
+  title: docsTitle,
+  description: docsDescription,
+  openGraph: {
+    title: docsTitle,
+    description: docsDescription,
+    type: "website",
+    url: "/docs",
+    images: [
+      {
+        url: "/vcs-logo-wide-transparent.png",
+        width: 1200,
+        height: 630,
+        alt: docsTitle,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: docsTitle,
+    description: docsDescription,
+    images: ["/vcs-logo-wide-transparent.png"],
+  },
+  alternates: {
+    canonical: "/docs",
+  },
 }
 
 function CourseCard({ course }: { course: CourseInfo }) {

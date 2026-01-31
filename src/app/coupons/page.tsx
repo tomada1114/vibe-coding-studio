@@ -57,6 +57,9 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       images: ["https://school.learning-next.app/img/author/tomada.png"],
     },
+    alternates: {
+      canonical: "/coupons",
+    },
   }
 }
 

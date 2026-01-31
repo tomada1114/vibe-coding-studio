@@ -24,10 +24,36 @@ import {
 import type { Metadata } from "next"
 import Image from "next/image"
 
+const communityTitle = "コミュニティ - Vibe Coding Studio"
+const communityDescription =
+  "AI駆動開発を学ぶ仲間と繋がり、最新検証を見ながら一緒に成長するDiscordコミュニティに参加しよう"
+
 export const metadata: Metadata = {
-  title: "コミュニティ - Vibe Coding Studio",
-  description:
-    "AI駆動開発を学ぶ仲間と繋がり、最新検証を見ながら一緒に成長するDiscordコミュニティに参加しよう",
+  title: communityTitle,
+  description: communityDescription,
+  openGraph: {
+    title: communityTitle,
+    description: communityDescription,
+    type: "website",
+    url: "/community",
+    images: [
+      {
+        url: "/vcs-logo-wide-transparent.png",
+        width: 1200,
+        height: 630,
+        alt: communityTitle,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: communityTitle,
+    description: communityDescription,
+    images: ["/vcs-logo-wide-transparent.png"],
+  },
+  alternates: {
+    canonical: "/community",
+  },
 }
 
 // 1時間ごとに再検証
@@ -542,9 +568,33 @@ function FinalCTASection() {
  * - 最終CTAセクション（タスク10）
  * - AsyncErrorBoundaryによるエラーハンドリング
  */
+function CommunityStructuredData() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Vibe Coding Studio",
+    url: "/community",
+    sameAs: [
+      "https://x.com/muscle_coding",
+      "https://www.youtube.com/@vibe-coding-studio",
+      "https://qiita.com/tomada",
+      "https://note.com/tomada",
+    ],
+    description: communityDescription,
+  }
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+    />
+  )
+}
+
 export default function CommunityPage() {
   return (
     <div className="overflow-hidden">
+      <CommunityStructuredData />
       <AsyncErrorBoundary>
         <CommunityHeroSection />
       </AsyncErrorBoundary>

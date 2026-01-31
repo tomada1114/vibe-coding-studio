@@ -15,6 +15,9 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "動画一覧",
     description:
       "YouTube動画の一覧ページです。Next.js、TypeScript、AI駆動開発などの技術について解説しています。",
+    alternates: {
+      canonical: "/videos",
+    },
   }
 }
 
