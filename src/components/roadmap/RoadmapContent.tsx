@@ -53,10 +53,7 @@ export function RoadmapContent() {
   return (
     <Container className="pb-24">
       <BreadcrumbWithStructuredData
-        items={[
-          { label: "ホーム", href: "/" },
-          { label: "ロードマップ" },
-        ]}
+        items={[{ label: "ホーム", href: "/" }, { label: "ロードマップ" }]}
         className="pt-8"
       />
 
