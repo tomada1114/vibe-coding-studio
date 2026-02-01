@@ -264,7 +264,7 @@ describe("Error Fallback Components", () => {
       expect(screen.getByText("404")).toBeInTheDocument()
       expect(screen.getByText("Page Not Found")).toBeInTheDocument()
       expect(screen.getByText("Go Home")).toBeInTheDocument()
-      expect(screen.getByText("See Pricing")).toBeInTheDocument()
+      expect(screen.getByText("学習コースを見る")).toBeInTheDocument()
     })
   })
 
