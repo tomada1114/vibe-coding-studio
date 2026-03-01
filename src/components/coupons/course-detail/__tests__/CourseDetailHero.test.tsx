@@ -24,23 +24,6 @@ jest.mock("next/link", () => {
   return MockLink
 })
 
-// Mock next/image
-jest.mock("next/image", () => {
-  const MockImage = ({
-    src,
-    alt,
-    className,
-  }: {
-    src: string
-    alt: string
-    className?: string
-  }) => {
-    return <img src={src} alt={alt} className={className} />
-  }
-  MockImage.displayName = "MockImage"
-  return MockImage
-})
-
 // Mock lucide-react
 jest.mock("lucide-react", () => ({
   ArrowLeft: () => <span data-testid="arrow-left-icon">Arrow Left</span>,

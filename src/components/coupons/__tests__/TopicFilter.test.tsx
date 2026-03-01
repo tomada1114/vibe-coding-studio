@@ -4,23 +4,6 @@ import { fireEvent, render, screen } from "@testing-library/react"
 import React from "react"
 import { TopicFilter } from "../TopicFilter"
 
-// Mock next/image
-jest.mock("next/image", () => {
-  const MockImage = ({
-    src,
-    alt,
-    className,
-  }: {
-    src: string
-    alt: string
-    className?: string
-  }) => {
-    return <img src={src} alt={alt} className={className} />
-  }
-  MockImage.displayName = "MockImage"
-  return MockImage
-})
-
 // Mock Catalyst Button
 jest.mock("@/components/catalyst/button", () => ({
   Button: ({

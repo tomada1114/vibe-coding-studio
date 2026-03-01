@@ -2,23 +2,6 @@ import "@testing-library/jest-dom"
 import { render, screen } from "@testing-library/react"
 import { Devicon } from "../Devicon"
 
-// Mock next/image
-jest.mock("next/image", () => {
-  const MockImage = ({
-    src,
-    alt,
-    className,
-  }: {
-    src: string
-    alt: string
-    className?: string
-  }) => {
-    return <img src={src} alt={alt} className={className} />
-  }
-  MockImage.displayName = "MockImage"
-  return MockImage
-})
-
 describe("Devicon", () => {
   describe("Rendering", () => {
     it("renders icon image for known slug", () => {
