@@ -8,9 +8,12 @@ const nextConfig = {
   // Markdownファイルをページとして認識させる
   pageExtensions: ["js", "jsx", "md", "ts", "tsx"],
 
-  // Image optimization - simplified
+  // Image optimization
   images: {
     formats: ["image/avif", "image/webp"],
+    // Cache TTL for optimized images served via /_next/image.
+    // Use minimumCacheTTL (not headers()) as Next.js controls /_next/image internally.
+    minimumCacheTTL: 86400, // 1 day
     remotePatterns: [
       {
         protocol: "https",
@@ -56,27 +59,39 @@ const nextConfig = {
         : false,
   },
 
-  // Headers configuration - simplified
+  // Headers configuration
   async headers() {
+    // Helper: generates a Cache-Control header entry. sMaxAge and swr are in seconds.
+    const cacheHeader = (source, sMaxAge, swr) => ({
+      source,
+      headers: [
+        {
+          key: "Cache-Control",
+          value: `public, s-maxage=${sMaxAge}, stale-while-revalidate=${swr}`,
+        },
+      ],
+    })
+
     return [
       {
         // Apply security headers to all routes
         source: "/:path*",
         headers: [
-          {
-            key: "X-Frame-Options",
-            value: "SAMEORIGIN",
-          },
-          {
-            key: "X-Content-Type-Options",
-            value: "nosniff",
-          },
-          {
-            key: "Referrer-Policy",
-            value: "origin-when-cross-origin",
-          },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Referrer-Policy", value: "origin-when-cross-origin" },
         ],
       },
+      // Cache-Control for static assets in public/.
+      // /_next/static/ uses immutable SHA-hashed filenames — Next.js sets its own
+      // Cache-Control and it cannot be overridden here, so no entry needed.
+      // /_next/image is controlled via images.minimumCacheTTL above.
+      cacheHeader("/images/udemy/:path*", 604800, 2592000), // s-maxage=7d, swr=30d
+      cacheHeader("/testimonials/:path*", 604800, 2592000), // s-maxage=7d, swr=30d
+      cacheHeader("/img/:path*", 86400, 604800), // s-maxage=1d, swr=7d
+      cacheHeader("/images/topics/:path*", 2592000, 31536000), // s-maxage=30d, swr=1y
+      cacheHeader("/logo-timeline/:path*", 2592000, 31536000), // s-maxage=30d, swr=1y
+      cacheHeader("/linked-avatars/:path*", 2592000, 31536000), // s-maxage=30d, swr=1y
     ]
   },
 
