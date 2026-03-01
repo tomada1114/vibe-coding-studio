@@ -7,7 +7,10 @@
 import FounderPage from "@/app/founder/page"
 import { render, screen } from "@testing-library/react"
 
-// モックを設定
+// next/image のカスタムモック（jest.setup.js のグローバルモックを意図的に上書き）
+// このファイルでは `data-priority` 属性のアサーションがあるため、
+// グローバルモック（fill/priority をフィルタリングするもの）では検証できない。
+// このカスタムモックを削除すると「data-priority」テストが失敗するので維持すること。
 jest.mock("next/image", () => ({
   __esModule: true,
   default: (props: {

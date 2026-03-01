@@ -12,37 +12,6 @@ jest.mock("next/navigation", () => ({
   usePathname: () => "/",
 }))
 
-// Next.js Image コンポーネントをモック
-jest.mock("next/image", () => ({
-  __esModule: true,
-  default: ({
-    src,
-    alt,
-    width,
-    height,
-    className,
-    sizes,
-  }: {
-    src: string
-    alt: string
-    width?: number
-    height?: number
-    className?: string
-    sizes?: string
-    priority?: boolean
-    fill?: boolean
-  }) => (
-    <img
-      src={src}
-      alt={alt || ""}
-      width={width}
-      height={height}
-      className={className}
-      data-sizes={sizes}
-    />
-  ),
-}))
-
 // framer-motion をモック
 jest.mock("framer-motion", () => ({
   motion: {
