@@ -1,5 +1,25 @@
 import "@testing-library/jest-dom"
 
+// Mock next/image globally to render a plain img element.
+// next/image-specific props (fill, sizes, priority, etc.) are excluded
+// because they are not valid HTML img attributes and cause React DOM warnings.
+jest.mock("next/image", () => ({
+  __esModule: true,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  default: ({
+    src,
+    alt,
+    fill,
+    sizes,
+    priority,
+    quality,
+    placeholder,
+    blurDataURL,
+    unoptimized,
+    ...rest
+  }) => <img src={src} alt={alt ?? ""} {...rest} />,
+}))
+
 // Mock environment variables for testing
 process.env.NODE_ENV = "test"
 
