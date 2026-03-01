@@ -1,5 +1,9 @@
 import withMarkdoc from "@markdoc/next.js"
 
+// 静的アセット用キャッシュヘッダー値（30日 + 1日 stale-while-revalidate）
+const STATIC_ASSET_CACHE_CONTROL =
+  "public, max-age=2592000, stale-while-revalidate=86400"
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // React configuration
@@ -15,6 +19,11 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "cdn.jsdelivr.net",
+      },
+      // YouTubeサムネイル画像用
+      {
+        protocol: "https",
+        hostname: "img.youtube.com",
       },
     ],
   },
@@ -60,7 +69,7 @@ const nextConfig = {
   async headers() {
     return [
       {
-        // Apply security headers to all routes
+        // 全ルートにセキュリティヘッダーを適用
         source: "/:path*",
         headers: [
           {
@@ -74,6 +83,27 @@ const nextConfig = {
           {
             key: "Referrer-Policy",
             value: "origin-when-cross-origin",
+          },
+        ],
+      },
+      {
+        // 画像・フォント・静的アセット（30日キャッシュ）
+        source:
+          "/:path(.*\\.(?:png|jpg|jpeg|gif|webp|avif|ico|svg|woff|woff2|ttf|otf))",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: STATIC_ASSET_CACHE_CONTROL,
+          },
+        ],
+      },
+      {
+        // /images/ ディレクトリ（30日キャッシュ）
+        source: "/images/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: STATIC_ASSET_CACHE_CONTROL,
           },
         ],
       },
