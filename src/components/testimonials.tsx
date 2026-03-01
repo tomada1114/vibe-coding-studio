@@ -11,6 +11,7 @@ import {
   useSpring,
   type HTMLMotionProps,
 } from "framer-motion"
+import Image from "next/image"
 import { useCallback, useLayoutEffect, useRef, useState } from "react"
 import useMeasure, { type RectReadOnly } from "react-use-measure"
 import { Container } from "./container"
@@ -21,7 +22,10 @@ import { Heading, Subheading } from "./text"
  * テスティモニアルデータの型定義
  */
 export interface Testimonial {
-  /** 画像パス */
+  /**
+   * 画像パス。`public/` 配下のローカルパス（例: `/testimonials/foo.jpg`）のみ使用可。
+   * 外部 URL を渡すと next/image の remotePatterns チェックで本番エラーになる。
+   */
   img: string
   /** 参加者名 */
   name: string
@@ -33,20 +37,20 @@ export interface Testimonial {
 
 const defaultTestimonials: Testimonial[] = [
   {
-    img: "/testimonials/community-member-1.jpg",
+    img: "/testimonials/amy-chase.jpg",
     name: "コミュニティメンバー",
     title: "開発者",
     quote:
       "AI駆動開発を学ぶ仲間と繋がり、とまだの最新検証を見ながら一緒に成長できています。",
   },
   {
-    img: "/testimonials/community-member-2.jpg",
+    img: "/testimonials/conor-neville.jpg",
     name: "コミュニティメンバー",
     title: "エンジニア",
     quote: "コミュニティメンバーと気軽に質問し合える環境が素晴らしいです。",
   },
   {
-    img: "/testimonials/community-member-3.jpg",
+    img: "/testimonials/dillon-lenora.jpg",
     name: "コミュニティメンバー",
     title: "開発者",
     quote: "同じ目標を持つ仲間と繋がれて、モチベーションが維持できています。",
@@ -110,10 +114,12 @@ function TestimonialCard({
       {...props}
       className="relative flex aspect-9/16 w-72 shrink-0 snap-start scroll-ml-(--scroll-padding) flex-col justify-end overflow-hidden rounded-3xl sm:aspect-3/4 sm:w-96"
     >
-      <img
+      <Image
         alt=""
         src={img}
-        className="absolute inset-x-0 top-0 aspect-square w-full object-cover"
+        fill
+        sizes="(max-width: 640px) 288px, 384px"
+        className="absolute inset-x-0 top-0 object-cover"
       />
       <div
         aria-hidden="true"
