@@ -16,6 +16,7 @@ import { video_gXwS9dJewrU } from "@/data/videos/gXwS9dJewrU"
 import { video_H5TGzM_PCW4 } from "@/data/videos/H5TGzM_PCW4"
 import { video_HM0SLThgXqE } from "@/data/videos/HM0SLThgXqE"
 import { video_Mwp4_DYGzTI } from "@/data/videos/Mwp4_DYGzTI"
+import { video_0Jp1O6Se7E8 } from "@/data/videos/0Jp1O6Se7E8"
 import { video_NpA5f4Y1IsY } from "@/data/videos/NpA5f4Y1IsY"
 import { video_OfXZCu6xJJg } from "@/data/videos/OfXZCu6xJJg"
 import { video_pRHyMLH1bcU } from "@/data/videos/pRHyMLH1bcU"
@@ -46,6 +47,7 @@ import type { VideoMetadata } from "@/types/video"
  * 新しい動画を追加する場合は、ここにimportとデータを追加してください。
  */
 const allVideosData: VideoMetadata[] = [
+  video_0Jp1O6Se7E8,
   video_NpA5f4Y1IsY,
   video_DDP9_YzjUYU,
   video_1_1NAB5jIjo,
