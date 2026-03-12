@@ -56,8 +56,7 @@ YouTube動画のメタデータファイルと概要欄テキストを`.tmp/next
 
 **コンテンツ情報**:
 - **概要/Opening**: 動画の冒頭説明部分
-- **学べること/特徴**: `💡` や `✅` で始まる項目、または箇条書き
-- **タイムスタンプ/タイムライン**: `00:00` 形式のタイムスタンプと説明
+- **学べること/特徴**: `💡` や `・` で始まる項目、または箇条書き
 - **関連リンク**: URLや参考資料
 - **文字起こし**: 動画の詳細な内容（あれば）
 
@@ -248,21 +247,19 @@ export const video_$1: VideoMetadata = {
   learningPoints: {
     title: "💡 この動画で学べること",
     items: [
-      "✅ 【学習ポイント1】",
-      "✅ 【学習ポイント2】",
-      // 4-6項目
+      "・【学習ポイント1】",
+      "・【学習ポイント2】",
+      // 4-6項目、「・」プレフィックス
     ]
   },
 
-  // Timestamps セクション
-  timestamps: {
-    title: "⏰ タイムライン",
-    items: [
-      { time: "00:00", label: "【説明】" },
-      { time: "05:30", label: "【説明】" },
-      // HH:MM または HH:MM:SS 形式
-    ]
-  },
+  // Timestamps セクション（省略可 - ユーザー提供時のみ）
+  // timestamps: {
+  //   title: "⏰ タイムライン",
+  //   items: [
+  //     { time: "00:00", label: "【説明】" },
+  //   ]
+  // },
 
   // Tags
   tags: ["タグ1", "タグ2", "タグ3"], // 10-15個
@@ -352,7 +349,7 @@ const allVideosData: VideoMetadata[] = [
 
 YouTube概要欄用のプレーンテキストを生成:
 
-**セクション構成**:
+**セクション構成**（シンプル版）:
 
 ```
 【動画タイトル】
@@ -363,38 +360,36 @@ YouTube概要欄用のプレーンテキストを生成:
 ...
 
 💡 この動画で学べること
-✅ 学習ポイント1
-✅ 学習ポイント2
+・学習ポイント1
+・学習ポイント2
 ...
 
-⏰ タイムライン
-00:00 説明1
-05:30 説明2
-...
-
-🎬 関連動画
-・動画1: https://www.youtube.com/watch?v=video-id-1
-・動画2: https://www.youtube.com/watch?v=video-id-2
-...
-
-🚀 体系的に学びたい方へ
+🚀 体系的にClaude Codeを学んで一歩先へ！
 【Udemy講座の説明】
-・講座1
-・講座2
-...
-🎁 限定クーポンで最大90%OFF!
+限定クーポンで最大90%OFF！
 【Udemy講座URL】
 
-🐦 SNSでフォロー
-【SNSリンク】
+🔗 SNS・コミュニティ
+・X(Twitter): https://x.com/muscle_coding
+・Zenn: https://zenn.dev/tmasuyama1114
+・Discord: https://www.vibecodingstudio.dev/community
 
-📢 Discordコミュニティ
-【Discordリンク】
+📚 関連動画
+・動画1タイトル
+https://www.youtube.com/watch?v=video-id-1
 
-【エンゲージメント（いいね・チャンネル登録のお願い）】
+・動画2タイトル
+https://www.youtube.com/watch?v=video-id-2
 
 #タグ1 #タグ2 #タグ3 ...
 ```
+
+**注意事項**:
+- タイムスタンプは概要欄に含めない（コスパ観点で省略）
+- 学べることの項目は `・` を使用（`✅` は使わない）
+- SNSはX・Zenn・Discordの3つのみ
+- エンゲージメントセクション（コメント・チャンネル登録のお願い）は不要
+- 🎁 などの絵文字は極力使わずシンプルに
 
 ### 5.2 Write Description File
 
@@ -470,7 +465,6 @@ npm run test -- src/lib/videos/__tests__/video-data.test.ts
 - **タイトル**: 【タイトル】
 - **公開日**: YYYY-MM-DD
 - **タグ数**: X個
-- **タイムスタンプ**: X項目
 
 ## 🎬 関連動画の選定結果
 
