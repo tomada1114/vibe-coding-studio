@@ -9,7 +9,7 @@ export const video_DYRJvDiiprA: VideoMetadata = {
   // 基本情報
   id: "DYRJvDiiprA",
   title:
-    "【Verdent AI】設計から実装・レビューまで全自動？新しいAIコーディングツールを本音レビュー",
+    "Verdent AIを初見レビュー！並列×マルチモデルレビューを試した感想",
   publishedAt: "2026-03-21T12:00:00+09:00",
   videoUrl: "https://www.youtube.com/watch?v=DYRJvDiiprA",
 
