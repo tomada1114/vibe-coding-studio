@@ -91,15 +91,12 @@ jest.mock("@/components/coupons/TechStackBadges", () => ({
 jest.mock("@/lib/coupons/coupon-data", () => ({
   calculateDiscountRate: (original: number, discount: number) =>
     Math.round(((original - discount) / original) * 100),
-  formatDateToJST: () => "2025年12月31日",
 }))
 
 // Mock lucide-react
 jest.mock("lucide-react", () => ({
   ArrowLeft: () => <span data-testid="arrow-left">←</span>,
-  Calendar: () => <span data-testid="calendar">Calendar</span>,
   CheckCircle: () => <span data-testid="check-circle">Check</span>,
-  Clock: () => <span data-testid="clock">Clock</span>,
   Gift: () => <span data-testid="gift">Gift</span>,
   Tag: () => <span data-testid="tag">Tag</span>,
 }))
@@ -140,11 +137,6 @@ describe("CouponDetail", () => {
       render(<CouponDetail coupon={mockCoupon} />)
       const backLink = screen.getByText("クーポン一覧").closest("a")
       expect(backLink).toHaveAttribute("href", "/coupons")
-    })
-
-    it("renders end date", () => {
-      render(<CouponDetail coupon={mockCoupon} />)
-      expect(screen.getByText(/2025年12月31日 まで/)).toBeInTheDocument()
     })
   })
 

@@ -5,19 +5,9 @@ import { Button } from "@/components/catalyst/button"
 import { Heading } from "@/components/catalyst/heading"
 import { Text } from "@/components/catalyst/text"
 import { TechStackBadges } from "@/components/coupons/TechStackBadges"
-import {
-  calculateDiscountRate,
-  formatDateToJST,
-} from "@/lib/coupons/coupon-data"
+import { calculateDiscountRate } from "@/lib/coupons/coupon-data"
 import type { Coupon } from "@/types/coupon"
-import {
-  ArrowLeft,
-  Calendar,
-  CheckCircle,
-  Clock,
-  Gift,
-  Tag,
-} from "lucide-react"
+import { ArrowLeft, CheckCircle, Gift, Tag } from "lucide-react"
 import Link from "next/link"
 
 interface CouponDetailProps {
@@ -30,15 +20,7 @@ export function CouponDetail({ coupon }: CouponDetailProps) {
     courseInfo.originalPrice,
     coupon.discountPrice
   )
-  const formattedEndDate = formatDateToJST(coupon.endDateTime)
   const savings = courseInfo.originalPrice - coupon.discountPrice
-
-  // Calculate days remaining
-  const now = new Date()
-  const endDate = new Date(coupon.endDateTime)
-  const daysRemaining = Math.ceil(
-    (endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)
-  )
 
   return (
     <div className="mx-auto max-w-4xl px-4 sm:px-6">
@@ -62,7 +44,7 @@ export function CouponDetail({ coupon }: CouponDetailProps) {
               {courseInfo.title}
             </Heading>
 
-            {/* ステータスバッジとメタ情報 */}
+            {/* ステータスバッジ */}
             <div className="flex flex-wrap items-center gap-3">
               <Badge
                 color="red"
@@ -71,16 +53,6 @@ export function CouponDetail({ coupon }: CouponDetailProps) {
                 <Tag className="h-3 w-3" />
                 <span>{discountRate}% OFF</span>
               </Badge>
-
-              <div className="flex items-center gap-1.5 rounded-md border border-zinc-950/10 bg-white px-2.5 py-1 text-xs font-medium text-zinc-950">
-                <Clock className="h-3 w-3" />
-                <span>残り{daysRemaining}日</span>
-              </div>
-
-              <div className="flex items-center gap-1.5 text-xs text-zinc-600">
-                <Calendar className="h-3 w-3" />
-                <span>{formattedEndDate} まで</span>
-              </div>
             </div>
           </div>
         </div>

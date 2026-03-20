@@ -6,15 +6,8 @@ import {
   formatDateToJST,
 } from "@/lib/coupons/coupon-data"
 import type { Coupon } from "@/types/coupon"
-import {
-  AlertCircle,
-  Check,
-  Clock,
-  Copy,
-  ExternalLink,
-  Gift,
-} from "lucide-react"
-import { useEffect, useState } from "react"
+import { Check, Copy, ExternalLink, Gift } from "lucide-react"
+import { useState } from "react"
 
 interface PriceSectionProps {
   coupon: Coupon
@@ -22,9 +15,6 @@ interface PriceSectionProps {
 
 export function PriceSection({ coupon }: PriceSectionProps) {
   const [copied, setCopied] = useState(false)
-  const [isExpired, setIsExpired] = useState(false)
-  const [daysRemaining, setDaysRemaining] = useState<number | null>(null)
-  const [isClient, setIsClient] = useState(false)
 
   const { courseInfo } = coupon
   const discountRate = calculateDiscountRate(
@@ -34,88 +24,12 @@ export function PriceSection({ coupon }: PriceSectionProps) {
   const savings = courseInfo.originalPrice - coupon.discountPrice
   const formattedEndDate = formatDateToJST(coupon.endDateTime)
 
-  useEffect(() => {
-    setIsClient(true)
-    const now = new Date()
-    // Handle both Date object and string (ISO format) for endDateTime
-    const endDate = new Date(coupon.endDateTime)
-    const remaining = Math.ceil(
-      (endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)
-    )
-    setDaysRemaining(remaining)
-    setIsExpired(remaining < 0)
-  }, [coupon.endDateTime])
-
   const handleCopyCode = async () => {
-    if (!isExpired) {
-      await navigator.clipboard.writeText(coupon.couponCode)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    }
+    await navigator.clipboard.writeText(coupon.couponCode)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
   }
 
-  // 期限切れの場合の表示
-  if (isExpired) {
-    return (
-      <div className="overflow-hidden bg-white shadow-lg sm:rounded-2xl sm:ring-1 sm:ring-zinc-950/5">
-        {/* 期限切れヘッダー */}
-        <div className="bg-gradient-to-r from-zinc-400 to-zinc-500 p-4 text-center">
-          <div className="text-2xl font-bold text-white">クーポン期限切れ</div>
-          <div className="mt-1 text-sm text-white/90">
-            現在このクーポンはご利用いただけません
-          </div>
-        </div>
-
-        <div className="space-y-4 p-4 sm:space-y-6 sm:p-6">
-          {/* 期限切れメッセージ */}
-          <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 sm:p-4">
-            <div className="flex items-start gap-3">
-              <AlertCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-600" />
-              <div className="space-y-1">
-                <p className="text-sm font-medium text-amber-900">
-                  クーポンの有効期限が終了しました
-                </p>
-                <p className="text-xs text-amber-700">
-                  終了日: {formattedEndDate}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* 通常価格の表示 */}
-          <div className="rounded-lg bg-zinc-50 p-3 sm:p-4">
-            <div className="text-center">
-              <div className="text-sm text-zinc-600">通常価格</div>
-              <div className="mt-1 text-2xl font-bold text-zinc-950">
-                ¥{courseInfo.originalPrice.toLocaleString()}
-              </div>
-            </div>
-          </div>
-
-          {/* 通常購入ボタン */}
-          <Button
-            href={
-              courseInfo.promotionUrl ||
-              `https://www.udemy.com/course/${courseInfo.slug}/`
-            }
-            target="_blank"
-            rel="noopener noreferrer"
-            color="zinc"
-            className="flex w-full items-center justify-center gap-2 rounded-xl py-3 text-base font-medium shadow-lg transition-all hover:scale-105"
-          >
-            講座ページを見る
-            <ExternalLink className="h-4 w-4" />
-          </Button>
-
-          <p className="text-center text-xs text-zinc-500">
-            通常価格での購入ページへ移動します
-          </p>
-        </div>
-      </div>
-    )
-  }
-
-  // 通常のクーポン表示
   return (
     <div className="overflow-hidden bg-white shadow-lg sm:rounded-2xl sm:ring-1 sm:ring-zinc-950/5">
       {/* 割引率ヘッダー */}
@@ -153,19 +67,9 @@ export function PriceSection({ coupon }: PriceSectionProps) {
           </div>
         </div>
 
-        {/* 残り時間 */}
-        <div className="rounded-lg border border-orange-200 bg-orange-50 p-3 sm:p-4">
-          <div className="flex items-center gap-2 text-orange-800">
-            <Clock className="h-4 w-4" />
-            <span className="text-sm font-medium">
-              {isClient && daysRemaining !== null
-                ? `残り${daysRemaining}日で終了`
-                : "終了間近"}
-            </span>
-          </div>
-          <div className="mt-1 text-xs text-orange-600">
-            {formattedEndDate} まで
-          </div>
+        {/* 有効期限 */}
+        <div className="text-center text-sm text-zinc-500">
+          有効期限: {formattedEndDate}
         </div>
 
         {/* クーポンコード */}
