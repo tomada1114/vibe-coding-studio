@@ -44,7 +44,10 @@ export const video_0Jp1O6Se7E8: VideoMetadata = {
       { time: "02:30", label: "Accept Edits モードの実演" },
       { time: "04:00", label: "Shift+Tab でのモード切替" },
       { time: "05:00", label: "Plan モードの実演" },
-      { time: "07:00", label: "Bypass Permissions モード（--dangerously-skip-permissions）" },
+      {
+        time: "07:00",
+        label: "Bypass Permissions モード（--dangerously-skip-permissions）",
+      },
       { time: "08:30", label: "Don't Ask モード（settings.json 設定）" },
       { time: "10:30", label: "Auto モードの紹介" },
       { time: "11:30", label: "まとめ・使い分けのコツ" },

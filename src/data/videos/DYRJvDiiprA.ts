@@ -8,8 +8,7 @@ import type { VideoMetadata } from "@/types/video"
 export const video_DYRJvDiiprA: VideoMetadata = {
   // 基本情報
   id: "DYRJvDiiprA",
-  title:
-    "Verdent AIを初見レビュー！並列×マルチモデルレビューを試した感想",
+  title: "Verdent AIを初見レビュー！並列×マルチモデルレビューを試した感想",
   publishedAt: "2026-03-21T12:00:00+09:00",
   videoUrl: "https://www.youtube.com/watch?v=DYRJvDiiprA",
 
