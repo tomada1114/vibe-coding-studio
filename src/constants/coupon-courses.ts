@@ -53,10 +53,10 @@ export const COURSE_INFO: Record<string, CourseInfo> = {
   "6732543": {
     originalPrice: 12800,
     description:
-      "Claude Codeを使ってStripeサブスク型家計簿アプリを開発。AI駆動開発の実践的なスキルを身につけ、決済機能を持つWebアプリケーションを作成します。",
+      "Vibe Codingで誰でも作れる！課金機能・Clerk認証・Supabaseを統合した本格SaaSアプリ開発。個人開発でストック収入を目指す完全実践ガイド",
     slug: "claude-code-expenses-app",
     title:
-      "【Claude Code】プログラミング未経験OK！Stripe サブスク型家計簿アプリで学ぶAI駆動開発マスター講座",
+      "【Claude Code】実践！本格的なサブスク型家計簿アプリ開発で学ぶAI駆動開発マスター講座",
     topics: ["claude-code", "typescript"],
     promotionUrl:
       "https://www.udemy.com/course/claude-code-expenses-app/?referralCode=D8072C627C9E0B5828E4",
