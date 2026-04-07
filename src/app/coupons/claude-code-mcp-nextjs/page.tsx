@@ -18,7 +18,10 @@ import type { Metadata } from "next"
 export const dynamic = "force-static"
 export const revalidate = 3600 // 1時間ごとに再生成
 
-// udemy-course-info-temp.md に記載の正式タイトル（照合用）
+// クーポン検索用の courseId（COURSE_INFO のキー）
+const COURSE_ID = "6769253"
+
+// udemy-course-info-temp.md に記載の正式タイトル（表示用）
 const COURSE_TITLE =
   "【Claude Code × MCP完全攻略】Next.jsアプリ開発を劇的に効率化する5つの最新MCPツール実践ガイド"
 
@@ -162,10 +165,7 @@ MCP（Model Context Protocol）は、AIエージェントの能力を大幅に�
 export default function ClaudeCodeMcpCoursePage() {
   const coupons = getLatestCoupons()
 
-  // クーポンはMDのコースタイトルで照合（コースIDを明示しない）
-  const coupon = coupons.find(
-    c => c.courseInfo.title === COURSE_TITLE || c.courseName === COURSE_TITLE
-  )
+  const coupon = coupons.find(c => c.courseId === COURSE_ID)
 
   if (!coupon) {
     return (

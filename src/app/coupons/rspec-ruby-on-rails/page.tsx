@@ -18,7 +18,10 @@ import type { Metadata } from "next"
 export const dynamic = "force-static"
 export const revalidate = 3600 // 1時間ごとに再生成
 
-// udemy-course-info-temp.md に記載の正式タイトル・サブタイトルのみを使用
+// クーポン検索用の courseId（COURSE_INFO のキー）
+const COURSE_ID = "6327241"
+
+// udemy-course-info-temp.md に記載の正式タイトル・サブタイトル（表示用）
 const COURSE_TITLE =
   "【RSpec 実践入門】Ruby on Rails 開発者のためのテスト自動化 - 完全ガイド"
 const COURSE_SUBTITLE =
@@ -225,10 +228,7 @@ RSpecは、Rubyコミュニティで最も利用されているテストフレ�
 export default function RSpecRailsCoursePage() {
   const coupons = getLatestCoupons()
 
-  // クーポンはMDのコースタイトルで照合（コースIDを明示しない）
-  const coupon = coupons.find(
-    c => c.courseInfo.title === COURSE_TITLE || c.courseName === COURSE_TITLE
-  )
+  const coupon = coupons.find(c => c.courseId === COURSE_ID)
 
   if (!coupon) {
     return (

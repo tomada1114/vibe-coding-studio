@@ -18,6 +18,10 @@ import type { Metadata } from "next"
 export const dynamic = "force-static"
 export const revalidate = 3600 // 1時間ごとに再生成
 
+// クーポン検索用の courseId（COURSE_INFO のキー）
+const COURSE_ID = "6801509"
+
+// 表示用のコースタイトル
 const COURSE_TITLE =
   "【Codex CLI】実践レベルのアプリ開発で学ぶバイブコーディング！カスタムコマンド・MCP連携の完全ガイド"
 
@@ -177,9 +181,7 @@ const courseDetails = {
 export default function CodexNextjsCoursePage() {
   const coupons = getLatestCoupons()
 
-  const coupon = coupons.find(
-    c => c.courseInfo.title === COURSE_TITLE || c.courseName === COURSE_TITLE
-  )
+  const coupon = coupons.find(c => c.courseId === COURSE_ID)
 
   if (!coupon) {
     return (

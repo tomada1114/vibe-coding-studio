@@ -17,7 +17,10 @@ import type { Metadata } from "next"
 export const dynamic = "force-static"
 export const revalidate = 3600 // 1時間ごとに再生成
 
-// udemy-course-info-temp.md に記載の正式タイトル（照合用）
+// クーポン検索用の courseId（COURSE_INFO のキー）
+const COURSE_ID = "6739725"
+
+// udemy-course-info-temp.md に記載の正式タイトル（表示用）
 const COURSE_TITLE =
   "【Claude Code】Next.js で作るサブスク型・作業時間管理アプリで学ぶ AI 駆動開発【完全版】"
 
@@ -150,10 +153,7 @@ Claudeのサブスクリプション（ProまたはMax）以外は全て無料�
 export default function ClaudeCodeProjectTrackerPage() {
   const coupons = getLatestCoupons()
 
-  // クーポンはMDのコースタイトルで照合（コースIDを明示しない）
-  const coupon = coupons.find(
-    c => c.courseInfo.title === COURSE_TITLE || c.courseName === COURSE_TITLE
-  )
+  const coupon = coupons.find(c => c.courseId === COURSE_ID)
 
   if (!coupon) {
     return (
