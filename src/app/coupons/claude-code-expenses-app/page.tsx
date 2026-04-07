@@ -19,11 +19,11 @@ export const revalidate = 3600 // 1時間ごとに再生成
 
 // udemy-course-info-temp.md に記載の正式タイトル（照合用）
 const COURSE_TITLE =
-  "【Claude Code】プログラミング未経験OK！Stripe サブスク型家計簿アプリで学ぶAI駆動開発マスター講座"
+  "【Claude Code】実践！本格的なサブスク型家計簿アプリ開発で学ぶAI駆動開発マスター講座"
 
 // サブタイトルも udemy-course-info-temp.md の内容をそのまま使用
 const COURSE_SUBTITLE =
-  "Vibe Codingで誰でも作れる！Stripe決済・Clerk認証・Supabaseを統合した本格SaaSアプリ開発。個人開発でストック収入を目指す完全実践ガイド"
+  "Vibe Codingで誰でも作れる！課金機能・Clerk認証・Supabaseを統合した本格SaaSアプリ開発。個人開発でストック収入を目指す完全実践ガイド"
 
 export const metadata: Metadata = {
   title: COURSE_TITLE,
