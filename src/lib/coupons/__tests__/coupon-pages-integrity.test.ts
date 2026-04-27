@@ -25,7 +25,14 @@ import { getLatestCoupons } from "../coupon-data"
 
 // テストファイルからの相対パスでクーポンページディレクトリを解決
 // (process.cwd() だと Jest の実行場所に依存するため使わない)
-const COUPONS_APP_DIR = path.resolve(__dirname, "..", "..", "..", "app", "coupons")
+const COUPONS_APP_DIR = path.resolve(
+  __dirname,
+  "..",
+  "..",
+  "..",
+  "app",
+  "coupons"
+)
 
 /**
  * src/app/coupons/ 配下のクーポン詳細ページディレクトリ一覧を取得
@@ -61,9 +68,7 @@ describe("クーポンページ整合性", () => {
     it.each(pageSlugs)(
       "ページ '%s' に対応する COURSE_INFO エントリが存在すること",
       slug => {
-        const matched = courseInfoEntries.find(
-          ([, info]) => info.slug === slug
-        )
+        const matched = courseInfoEntries.find(([, info]) => info.slug === slug)
         expect(matched).toBeDefined()
       }
     )
@@ -71,9 +76,7 @@ describe("クーポンページ整合性", () => {
     it.each(pageSlugs)(
       "ページ '%s' のクーポンが getLatestCoupons() で取得できること",
       slug => {
-        const matched = courseInfoEntries.find(
-          ([, info]) => info.slug === slug
-        )
+        const matched = courseInfoEntries.find(([, info]) => info.slug === slug)
         // 上のテストで検証済みだが、型ナローイングのため再チェック
         expect(matched).toBeDefined()
         const courseId = matched![0]
