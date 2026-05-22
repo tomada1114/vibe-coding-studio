@@ -208,4 +208,29 @@ describe("CouponCard", () => {
       expect(screen.getByText("3% OFF")).toBeInTheDocument()
     })
   })
+
+  describe("Image loading priority (LCP)", () => {
+    // jest.setup.js の next/image モックは priority プロパティを <img> へは
+    // 流さないため、代わりに loading 属性で挙動を検証する。
+    // 実装は priority=true のとき loading="lazy" を付けず、Next.js に
+    // eager + fetchpriority=high を任せる方針。
+
+    it("priority を渡さない場合、画像は loading='lazy' になること", () => {
+      render(<CouponCard coupon={mockCoupon} />)
+      const image = screen.getByAltText("Test Course Title")
+      expect(image).toHaveAttribute("loading", "lazy")
+    })
+
+    it("priority=false を渡した場合、画像は loading='lazy' になること", () => {
+      render(<CouponCard coupon={mockCoupon} priority={false} />)
+      const image = screen.getByAltText("Test Course Title")
+      expect(image).toHaveAttribute("loading", "lazy")
+    })
+
+    it("priority=true を渡した場合、画像に loading 属性が付かないこと", () => {
+      render(<CouponCard coupon={mockCoupon} priority={true} />)
+      const image = screen.getByAltText("Test Course Title")
+      expect(image).not.toHaveAttribute("loading")
+    })
+  })
 })

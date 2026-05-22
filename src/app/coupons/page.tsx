@@ -4,27 +4,19 @@ import { AsyncErrorBoundary } from "@/components/error-boundary"
 import { Footer } from "@/components/footer"
 import { Gradient } from "@/components/gradient"
 import { Navbar } from "@/components/navbar"
-import {
-  calculateDiscountRate,
-  getLatestCoupons,
-} from "@/lib/coupons/coupon-data"
+import { getLatestCoupons, getMaxDiscountRate } from "@/lib/coupons/coupon-data"
 import { ChevronRight } from "lucide-react"
 import type { Metadata } from "next"
 import Link from "next/link"
 
+// 静的生成 + ISR（1時間ごとに再生成）
+export const dynamic = "force-static"
+export const revalidate = 3600
+
 // 動的メタデータ生成（サーバー側で生成）
 export async function generateMetadata(): Promise<Metadata> {
   const coupons = getLatestCoupons()
-
-  // 最大割引率を計算
-  const maxDiscountRate = Math.max(
-    ...coupons.map(coupon =>
-      calculateDiscountRate(
-        coupon.courseInfo.originalPrice,
-        coupon.discountPrice
-      )
-    )
-  )
+  const maxDiscountRate = getMaxDiscountRate(coupons)
 
   // 現在の年月を取得（SSG時に決定）
   const metadataDate = new Date()
@@ -65,16 +57,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function CouponsPage() {
   const coupons = getLatestCoupons()
-
-  // 最大割引率を計算
-  const maxDiscountRate = Math.max(
-    ...coupons.map(coupon =>
-      calculateDiscountRate(
-        coupon.courseInfo.originalPrice,
-        coupon.discountPrice
-      )
-    )
-  )
+  const maxDiscountRate = getMaxDiscountRate(coupons)
 
   // 現在の年月を取得（SSG時に決定、Hydration Error防止）
   const pageDate = new Date()

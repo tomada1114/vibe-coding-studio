@@ -6,8 +6,17 @@ import { CouponPageLayout } from "../CouponPageLayout"
 
 // Mock child components
 jest.mock("../CouponCard", () => ({
-  CouponCard: ({ coupon }: { coupon: Coupon }) => (
-    <div data-testid={`coupon-card-${coupon.courseId}`}>
+  CouponCard: ({
+    coupon,
+    priority,
+  }: {
+    coupon: Coupon
+    priority?: boolean
+  }) => (
+    <div
+      data-testid={`coupon-card-${coupon.courseId}`}
+      data-priority={priority ? "true" : "false"}
+    >
       {coupon.courseInfo.title}
     </div>
   ),
@@ -371,6 +380,68 @@ describe("CouponPageLayout", () => {
         expect(button).toBeInTheDocument()
         expect(button).toHaveClass("rounded-full")
       })
+    })
+  })
+
+  describe("Above-the-fold image priority (LCP)", () => {
+    // デスクトップは横3カラムグリッドのため、先頭3枚に priority を付ける。
+    const buildCoupons = (count: number): Coupon[] =>
+      Array.from({ length: count }, (_, i) => ({
+        ...mockCoupons[0],
+        courseId: `c${i}`,
+        couponCode: `CODE-${i}`,
+        courseInfo: {
+          ...mockCoupons[0].courseInfo,
+          id: `c${i}`,
+          slug: `slug-${i}`,
+          title: `Course ${i}`,
+        },
+      }))
+
+    it("先頭3枚の CouponCard には priority=true が渡ること", () => {
+      const coupons = buildCoupons(5)
+      render(<CouponPageLayout coupons={coupons} />)
+
+      expect(screen.getByTestId("coupon-card-c0")).toHaveAttribute(
+        "data-priority",
+        "true"
+      )
+      expect(screen.getByTestId("coupon-card-c1")).toHaveAttribute(
+        "data-priority",
+        "true"
+      )
+      expect(screen.getByTestId("coupon-card-c2")).toHaveAttribute(
+        "data-priority",
+        "true"
+      )
+    })
+
+    it("4枚目以降の CouponCard には priority=false が渡ること", () => {
+      const coupons = buildCoupons(5)
+      render(<CouponPageLayout coupons={coupons} />)
+
+      expect(screen.getByTestId("coupon-card-c3")).toHaveAttribute(
+        "data-priority",
+        "false"
+      )
+      expect(screen.getByTestId("coupon-card-c4")).toHaveAttribute(
+        "data-priority",
+        "false"
+      )
+    })
+
+    it("クーポンが3件以下の場合は全件 priority=true になること", () => {
+      const coupons = buildCoupons(2)
+      render(<CouponPageLayout coupons={coupons} />)
+
+      expect(screen.getByTestId("coupon-card-c0")).toHaveAttribute(
+        "data-priority",
+        "true"
+      )
+      expect(screen.getByTestId("coupon-card-c1")).toHaveAttribute(
+        "data-priority",
+        "true"
+      )
     })
   })
 })

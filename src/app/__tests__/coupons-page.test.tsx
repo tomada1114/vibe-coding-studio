@@ -1,4 +1,7 @@
-import CouponsPage from "@/app/coupons/page"
+import CouponsPage, {
+  dynamic as pageDynamic,
+  revalidate as pageRevalidate,
+} from "@/app/coupons/page"
 import { render, screen } from "@testing-library/react"
 
 // Mock components
@@ -65,6 +68,18 @@ jest.mock("@/lib/coupons/coupon-data", () => ({
   ],
   calculateDiscountRate: (original: number, discount: number) =>
     Math.round(((original - discount) / original) * 100),
+  getMaxDiscountRate: (
+    coupons: { courseInfo: { originalPrice: number }; discountPrice: number }[]
+  ) =>
+    Math.max(
+      ...coupons.map(c =>
+        Math.round(
+          ((c.courseInfo.originalPrice - c.discountPrice) /
+            c.courseInfo.originalPrice) *
+            100
+        )
+      )
+    ),
 }))
 
 jest.mock("lucide-react", () => ({
@@ -117,5 +132,15 @@ describe("CouponsPage", () => {
 
     expect(screen.getByTestId("navbar")).toBeInTheDocument()
     expect(screen.getByTestId("footer")).toBeInTheDocument()
+  })
+
+  describe("Static rendering config (SSG + ISR)", () => {
+    it("ページを静的生成にするため dynamic = 'force-static' を export していること", () => {
+      expect(pageDynamic).toBe("force-static")
+    })
+
+    it("1時間ごとに再生成するため revalidate = 3600 を export していること", () => {
+      expect(pageRevalidate).toBe(3600)
+    })
   })
 })
