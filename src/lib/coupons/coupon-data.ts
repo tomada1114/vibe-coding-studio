@@ -309,6 +309,17 @@ export function calculateDiscountRate(
   return Math.round(((originalPrice - discountPrice) / originalPrice) * 100)
 }
 
+export function getMaxDiscountRate(coupons: Coupon[]): number {
+  return Math.max(
+    ...coupons.map(coupon =>
+      calculateDiscountRate(
+        coupon.courseInfo.originalPrice,
+        coupon.discountPrice
+      )
+    )
+  )
+}
+
 export function formatDateToJST(date: Date | string): string {
   const d = typeof date === "string" ? new Date(date) : date
   // PDTからJSTへの変換（+16時間）
