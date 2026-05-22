@@ -127,10 +127,11 @@ export const CouponPageLayout = memo(function CouponPageLayout({
       {/* メインコンテンツ */}
       {sortedCoupons.length > 0 ? (
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:gap-10">
-          {sortedCoupons.map(coupon => (
+          {sortedCoupons.map((coupon, index) => (
             <CouponCard
               key={`${coupon.courseId}-${coupon.couponCode}`}
               coupon={coupon}
+              priority={index < 3}
             />
           ))}
         </div>

@@ -1,9 +1,10 @@
 import { COURSE_INFO } from "@/constants/coupon-courses"
-import type { RawCouponData } from "@/types/coupon"
+import type { Coupon, RawCouponData } from "@/types/coupon"
 import {
   calculateDiscountRate,
   formatDateToJST,
   getLatestCoupons,
+  getMaxDiscountRate,
   getRelatedCoupons,
   parseCouponData,
 } from "../coupon-data"
@@ -309,6 +310,48 @@ describe("coupon-data", () => {
 
     it("エッジケース: 非常に大きな価格", () => {
       expect(calculateDiscountRate(1000000, 1500)).toBe(100)
+    })
+  })
+
+  describe("getMaxDiscountRate", () => {
+    const makeCoupon = (originalPrice: number, discountPrice: number): Coupon =>
+      ({
+        courseInfo: { originalPrice },
+        discountPrice,
+      }) as unknown as Coupon
+
+    it("複数クーポンの中から最大割引率を返すこと", () => {
+      const coupons = [
+        makeCoupon(10000, 5000), // 50%
+        makeCoupon(10000, 1500), // 85%
+        makeCoupon(10000, 8000), // 20%
+      ]
+      expect(getMaxDiscountRate(coupons)).toBe(85)
+    })
+
+    it("クーポンが1件のときはそのクーポンの割引率を返すこと", () => {
+      const coupons = [makeCoupon(20000, 2000)] // 90%
+      expect(getMaxDiscountRate(coupons)).toBe(90)
+    })
+
+    it("すべて同じ割引率の場合、その値を返すこと", () => {
+      const coupons = [
+        makeCoupon(10000, 3000), // 70%
+        makeCoupon(20000, 6000), // 70%
+      ]
+      expect(getMaxDiscountRate(coupons)).toBe(70)
+    })
+
+    it("実データ（getLatestCoupons）に対しても正しい範囲の値を返すこと", () => {
+      const coupons = getLatestCoupons()
+      const max = getMaxDiscountRate(coupons)
+      expect(max).toBeGreaterThanOrEqual(0)
+      expect(max).toBeLessThanOrEqual(100)
+      // 全クーポンの割引率の最大値と一致すること
+      const rates = coupons.map(c =>
+        calculateDiscountRate(c.courseInfo.originalPrice, c.discountPrice)
+      )
+      expect(max).toBe(Math.max(...rates))
     })
   })
 

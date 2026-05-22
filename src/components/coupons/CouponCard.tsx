@@ -9,10 +9,12 @@ import { memo } from "react"
 
 interface CouponCardProps {
   coupon: Coupon
+  priority?: boolean
 }
 
 export const CouponCard = memo(function CouponCard({
   coupon,
+  priority = false,
 }: CouponCardProps) {
   const { courseInfo } = coupon
   const discountRate = calculateDiscountRate(
@@ -35,7 +37,7 @@ export const CouponCard = memo(function CouponCard({
           width={640}
           height={360}
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-          loading="lazy"
+          {...(priority ? { priority: true } : { loading: "lazy" })}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           placeholder="blur"
           blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
