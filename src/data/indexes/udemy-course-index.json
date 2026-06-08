@@ -47,17 +47,6 @@
       "description": "Claude Code×Vibe Codingでプログラミング未経験でもReact・Next.jsで5つのアプリを開発！実践的な開発スキルを身につけることができます。"
     },
     {
-      "courseId": "6694011",
-      "title": "【無料ではじめる】Gemini CLI x Vibe Coding入門 - プログラミング未経験から作れるマインドマップ",
-      "topics": [
-        "gemini",
-        "nextjs",
-        "react"
-      ],
-      "promotionUrl": "https://www.udemy.com/course/gemini_cli_vibe_coding_mind_map/?referralCode=0FBF56A85D2B6FD677EC",
-      "description": "Gemini CLIとVibe Codingを使って、プログラミング未経験でもマインドマップアプリを開発！無料で始められる実践的な開発講座です。"
-    },
-    {
       "courseId": "6732543",
       "title": "【Claude Code】プログラミング未経験OK！Stripe サブスク型家計簿アプリで学ぶAI駆動開発マスター講座",
       "topics": [
@@ -224,10 +213,6 @@
         "url": "/coupons?topic=nextjs"
       },
       {
-        "courseId": "6694011",
-        "url": "/coupons?topic=nextjs"
-      },
-      {
         "courseId": "6739725",
         "url": "/coupons?topic=nextjs"
       },
@@ -252,19 +237,11 @@
       {
         "courseId": "6691241",
         "url": "/coupons?topic=react"
-      },
-      {
-        "courseId": "6694011",
-        "url": "/coupons?topic=react"
       }
     ],
     "gemini": [
       {
         "courseId": "6536597",
-        "url": "/coupons?topic=gemini"
-      },
-      {
-        "courseId": "6694011",
         "url": "/coupons?topic=gemini"
       },
       {

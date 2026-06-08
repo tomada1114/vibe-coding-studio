@@ -61,18 +61,6 @@ export const COURSE_INFO: Record<string, CourseInfo> = {
     promotionUrl:
       "https://www.udemy.com/course/claude-code-expenses-app/?referralCode=D8072C627C9E0B5828E4",
   },
-  // Gemini CLI 講座
-  "6694011": {
-    originalPrice: 5600,
-    description:
-      "Gemini CLIとVibe Codingを使って、プログラミング未経験でもマインドマップアプリを開発！無料で始められる実践的な開発講座です。",
-    slug: "gemini_cli_vibe_coding_mind_map",
-    title:
-      "【無料ではじめる】Gemini CLI x Vibe Coding入門 - プログラミング未経験から作れるマインドマップ",
-    topics: ["gemini", "nextjs", "react"],
-    promotionUrl:
-      "https://www.udemy.com/course/gemini_cli_vibe_coding_mind_map/?referralCode=0FBF56A85D2B6FD677EC",
-  },
   // Claude Code × Vibe Coding 講座
   "6691241": {
     originalPrice: 8800,
@@ -342,9 +330,8 @@ export const POPULAR_COURSE_IDS = [
  * 優先順位:
  * 1. Claude Codeシリーズ（基礎 → 応用 → スマホアプリ → Python）
  * 2. Codexシリーズ（基礎 → 応用・スマホアプリ → バックエンド）
- * 3. Gemini CLIシリーズ
- * 4. Kiroシリーズ
- * 5. その他（Next.js、Rails、RSpec）
+ * 3. Kiroシリーズ
+ * 4. その他（Next.js、Rails、RSpec）
  */
 export const COURSE_DISPLAY_ORDER = [
   // === Claude Codeシリーズ ===
@@ -367,9 +354,6 @@ export const COURSE_DISPLAY_ORDER = [
   "6801509", // Codex CLI - Next.jsアプリ開発でカスタムコマンド・MCP連携（基礎）
   "6851913", // Codex × React Native - スマホアプリ開発実践（応用）
   "6826831", // Codex × FastAPI - Python FastAPI天気予報API開発（バックエンド）
-
-  // === Gemini CLIシリーズ ===
-  "6694011", // Gemini CLI - マインドマップアプリ
 
   // === Kiroシリーズ ===
   "6772961", // AWS Kiro - 仕様駆動開発でNext.jsメモアプリ

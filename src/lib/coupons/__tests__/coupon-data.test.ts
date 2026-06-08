@@ -26,7 +26,6 @@ const EXPECTED_COURSE_IDS = [
   "6769253", // Claude Code × MCP
   "6739725", // Claude Code × 作業時間管理
   "6732543", // Claude Code × 家計簿
-  "6694011", // Gemini CLI
   "6691241", // Claude Code × Vibe Coding
   "6536597", // Next.js
   "6387599", // Rails

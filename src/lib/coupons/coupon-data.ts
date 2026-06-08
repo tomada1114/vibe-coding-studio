@@ -138,16 +138,6 @@ const COUPON_DATA: RawCouponData[] = [
     discountPrice: 1500,
   },
   {
-    courseId: "6694011",
-    couponType: "custom_price",
-    maximumRedemptions: "unlimited",
-    couponCode: "2026-05-17",
-    startDateTime: "2026-05-17T00:00:00-07:00",
-    endDateTime: "2026-06-17T23:00:00-07:00",
-    currency: "JPY",
-    discountPrice: 1500,
-  },
-  {
     courseId: "6691241",
     couponType: "custom_price",
     maximumRedemptions: "unlimited",
