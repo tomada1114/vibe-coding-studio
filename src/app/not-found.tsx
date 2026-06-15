@@ -20,10 +20,10 @@ export default function NotFound() {
           <div className="mx-auto max-w-lg text-center">
             <p className="text-8xl font-bold text-gray-200">404</p>
             <h1 className="mt-6 text-3xl font-bold text-gray-950 sm:text-4xl">
-              ページが見つかりません
+              迷子になりましたか？
             </h1>
             <p className="mt-4 text-base/7 text-gray-600">
-              お探しのページは存在しないか、移動した可能性があります。
+              お探しのページは存在しないか、どこかへ旅立ってしまったようです。
             </p>
             <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <Button href="/">ホームに戻る</Button>

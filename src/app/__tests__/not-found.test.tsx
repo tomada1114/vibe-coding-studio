@@ -57,7 +57,7 @@ describe("NotFound Page", () => {
     render(<NotFound />)
 
     expect(
-      screen.getByRole("heading", { name: "ページが見つかりません" })
+      screen.getByRole("heading", { name: "迷子になりましたか？" })
     ).toBeInTheDocument()
   })
 
@@ -66,7 +66,7 @@ describe("NotFound Page", () => {
 
     expect(
       screen.getByText(
-        "お探しのページは存在しないか、移動した可能性があります。"
+        "お探しのページは存在しないか、どこかへ旅立ってしまったようです。"
       )
     ).toBeInTheDocument()
   })
