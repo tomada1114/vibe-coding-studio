@@ -6,7 +6,8 @@ allowed-tools: Read, Write, Edit, Bash
 
 # Vibe Coding Studio クーポンシステム知識ベース
 
-`/update-coupons <csv-file-path>` カスタムコマンド実装のための包括的な知識ベース。
+`/update-coupons` カスタムコマンド実装のための包括的な知識ベース。
+CSVパスを渡す方式（`/update-coupons <csv-file-path>`）と、CSVを渡さず既存状態から生成する**定期更新の標準フロー**（下記「標準運用ルール」）の両方に対応する。
 
 ## システムアーキテクチャ
 
@@ -22,6 +23,36 @@ CSV File → CSVパーサー → RawCouponData配列 → COUPON_DATA更新
 - **日付ベースの有効期限管理**（時刻は無視）
 - **UTCベースの日付比較**（タイムゾーン依存性なし）
 - 5分間メモリキャッシュ
+
+---
+
+## 標準運用ルール（定期更新の標準フロー）
+
+`/update-coupons` が **明示的なCSVファイルパスなし**（例:「クーポンを更新したCSVを用意しつつ、各種ファイルも更新せよ」）で呼び出された場合は、**既存の状態から新しいCSVを生成してから各種ファイルを更新する**。以下を**標準デフォルト**とし、特段の指示がない限りそのまま適用する（毎回の再確認は不要）。
+
+| 項目 | 標準デフォルト |
+|------|---------------|
+| 開始日（start_date / coupon_code） | **実行日（本日の日付）** |
+| 有効期限（endDateTime の日付） | 開始日の**ちょうど1ヶ月後の同日** |
+| 割引価格（custom_price） | **¥1,500** |
+| 対象講座 | **`COURSE_INFO` に存在する全講座**（ドロップ済み講座は自動除外） |
+| クーポンタイプ | `custom_price` |
+| maximumRedemptions | `unlimited` |
+| 通貨 | `JPY` |
+
+### 生成するCSV
+- 保存先: `src/data/coupons/uploads/bulk_coupon_upload - {YYYY-MM-DD}.csv`（`{YYYY-MM-DD}` は開始日＝実行日）
+- 行順: 直近のCSV / `COUPON_DATA` の並び（`COURSE_DISPLAY_ORDER` ベース）を踏襲
+- `COURSE_INFO` に存在しないID（ドロップ済み講座）は含めない
+
+### 更新フロー（引数なし時）
+1. `COURSE_INFO` から対象講座IDを取得（全講座。ドロップ済みは存在しないので自動的に除外される）
+2. 実行日を開始日として CSV を生成・保存
+3. `COUPON_DATA` 各エントリの `couponCode` / `startDateTime` / `endDateTime` を一括更新（価格・並び順は据え置き）
+4. `npm run type-check && npm run lint && npx jest src/lib/coupons` で検証
+5. 結果レポート出力
+
+> **例外時のみ確認**: セール等で価格・対象講座・開始日を標準から変える場合のみ AskUserQuestion で確認する。通常の定期更新はデフォルト適用でよい。
 
 ---
 
@@ -82,27 +113,40 @@ RawCouponData: {
 | couponType | CSV coupon_type をそのまま使用 |
 | maximumRedemptions | 常に `"unlimited"` |
 | couponCode | CSV coupon_code をそのまま使用（文字列） |
-| startDateTime | `{start_date}T00:00:00-07:00`（start_timeは無視） |
-| endDateTime | startDateから1ヶ月後 `T23:00:00-08:00` |
+| startDateTime | `{start_date}T00:00:00{offset}`（start_timeは無視、offsetはDST判定） |
+| endDateTime | startDateの**1ヶ月後の同日** `T23:00:00{offset}`（offsetはDST判定） |
 | currency | 常に `"JPY"` |
 | discountPrice | CSV custom_price を数値変換 |
 
 ### 重要な実装ポイント
 
 ```typescript
-// ✅ start_timeは無視し、常に00:00:00に正規化
-const startDateTime = `${csvRow.start_date}T00:00:00-07:00`
+// ✅ start_timeは無視し、常に00:00:00に正規化（offsetはその日付のDST判定）
+const startDateTime = `${csvRow.start_date}T00:00:00${pacificOffset(csvRow.start_date)}`
 
-// ✅ 1ヶ月後の計算
+// ✅ 1ヶ月後の同日を計算（offsetはその日付のDST判定）
 function addMonthToDate(dateString: string): string {
   const date = new Date(dateString + "Z")
   date.setUTCMonth(date.getUTCMonth() + 1)
-  return `${year}-${month}-${day}T23:00:00-08:00`
+  return `${year}-${month}-${day}T23:00:00${pacificOffset(dateString)}` // PDT -07:00 / PST -08:00
 }
 
 // ✅ クーポンコードは文字列として扱う（日付として解釈しない）
 const couponCode = csvRow.coupon_code.trim()  // 単なる文字列
 ```
+
+### タイムゾーンオフセット（DST判定）
+
+`startDateTime` / `endDateTime` のオフセットは、**その日付が米国太平洋時間の夏時間（DST）期間内か**で決まる。
+
+| 期間 | オフセット | 該当時期（毎年おおよそ） |
+|------|-----------|------------------------|
+| 夏時間（PDT） | `-07:00` | 3月第2日曜 〜 11月第1日曜 |
+| 標準時（PST） | `-08:00` | 11月第1日曜 〜 3月第2日曜 |
+
+- start / end **それぞれの日付**に対して個別にオフセットを判定する。
+- 春〜秋の通常更新では start・end とも `-07:00`（例: `2026-06-14` → `2026-07-14` は両方 PDT）。
+- DST境界（11月初旬・3月初旬）をまたぐ更新のときだけ start と end でオフセットが異なる（例: `2025-11-01T...-07:00` → `2025-12-01T...-08:00`）。
 
 ---
 
@@ -115,8 +159,8 @@ export interface RawCouponData {
   couponType: "custom_price" | "free"
   maximumRedemptions: string  // "unlimited"
   couponCode: string          // 文字列（日付形式だが文字列として扱う）
-  startDateTime: string       // ISO 8601 (-07:00)
-  endDateTime: string         // ISO 8601 (-08:00)
+  startDateTime: string       // ISO 8601（PDT -07:00 / PST -08:00、DST判定）
+  endDateTime: string         // ISO 8601（PDT -07:00 / PST -08:00、DST判定）
   currency: string            // "JPY"
   discountPrice: number
 }
@@ -314,7 +358,7 @@ npm run type-check && npm run lint && npm run test
 - ✅ couponCodeは文字列（日付として解釈しない）
 - ✅ 有効期限判定はUTCベース日付比較（時刻無視）
 - ✅ formatDateToJST()は日付のみ返す（時刻なし）
-- ✅ タイムゾーン: startDateTime=-07:00, endDateTime=-08:00
+- ✅ タイムゾーン: DST判定で PDT -07:00 / PST -08:00（通常の春〜秋更新は両方 -07:00）
 
 ---
 
@@ -332,7 +376,7 @@ npm run type-check && npm run lint && npm run test
 - start_timeは無視（常に00:00:00）
 - couponCodeは文字列として扱う
 - UTCベース日付比較（時刻無視）
-- タイムゾーン: -07:00 / -08:00
+- タイムゾーン: DST判定（PDT -07:00 / PST -08:00）。日付ごとに該当オフセットを使用
 - 既存クーポン保持（CSV外）
 - 全検証パス後のみ完了
 
