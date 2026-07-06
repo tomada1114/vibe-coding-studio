@@ -51,6 +51,9 @@ export const metadata: Metadata = {
     description: COURSE_SUBTITLE,
     images: ["/images/udemy/claude-code-expenses-app.png"],
   },
+  alternates: {
+    canonical: "/coupons/claude-code-expenses-app",
+  },
 }
 
 // udemy-course-info-temp.md の内容をもとに、ユーザーに見える情報のみを定義（新規情報の創作は禁止）

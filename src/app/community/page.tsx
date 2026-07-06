@@ -8,6 +8,7 @@ import { Navbar } from "@/components/navbar"
 // import { Testimonials, type Testimonial } from "@/components/testimonials"
 import { Heading, Subheading } from "@/components/text"
 import { DISCORD_INVITE_URL } from "@/lib/constants"
+import { getSiteUrl } from "@/lib/seo/site-url"
 import {
   Disclosure,
   DisclosureButton,
@@ -24,7 +25,8 @@ import {
 import type { Metadata } from "next"
 import Image from "next/image"
 
-const communityTitle = "コミュニティ - Vibe Coding Studio"
+const communityTitle = "コミュニティ"
+const communityOgTitle = "コミュニティ - Vibe Coding Studio"
 const communityDescription =
   "AI駆動開発を学ぶ仲間と繋がり、最新検証を見ながら一緒に成長するDiscordコミュニティに参加しよう"
 
@@ -32,7 +34,7 @@ export const metadata: Metadata = {
   title: communityTitle,
   description: communityDescription,
   openGraph: {
-    title: communityTitle,
+    title: communityOgTitle,
     description: communityDescription,
     type: "website",
     url: "/community",
@@ -41,13 +43,13 @@ export const metadata: Metadata = {
         url: "/vcs-logo-wide-transparent.png",
         width: 1200,
         height: 630,
-        alt: communityTitle,
+        alt: communityOgTitle,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: communityTitle,
+    title: communityOgTitle,
     description: communityDescription,
     images: ["/vcs-logo-wide-transparent.png"],
   },
@@ -573,7 +575,7 @@ function CommunityStructuredData() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Vibe Coding Studio",
-    url: "/community",
+    url: `${getSiteUrl()}/community`,
     sameAs: [
       "https://x.com/muscle_coding",
       "https://www.youtube.com/@vibe-coding-studio",

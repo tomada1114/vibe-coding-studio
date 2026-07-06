@@ -14,6 +14,7 @@ import {
   type CourseContent,
   type ThemeColors,
 } from "@/components/docs/Curriculum"
+import type { Metadata } from "next"
 
 // コースのスラッグを定義
 const slug = "react"
@@ -173,7 +174,26 @@ const reactContent: CourseContent = {
 }
 
 // メタデータをエクスポート
-export const metadata = reactContent.meta
+export const metadata: Metadata = {
+  ...reactContent.meta,
+  openGraph: {
+    title: `${reactContent.meta.title} - Vibe Coding Studio`,
+    description: reactContent.meta.description,
+    type: "website",
+    url: "/docs/react",
+    images: [
+      {
+        url: "/vcs-logo-wide-transparent.png",
+        width: 1200,
+        height: 630,
+        alt: `${reactContent.meta.title} - Vibe Coding Studio`,
+      },
+    ],
+  },
+  alternates: {
+    canonical: "/docs/react",
+  },
+}
 
 /**
  * React カリキュラムのランディングページ

@@ -49,6 +49,9 @@ export const metadata: Metadata = {
       "Claude Code×Vibe Codingでプログラミング未経験でもReact・Next.jsで5つのアプリを開発！",
     images: ["/images/udemy/claude-code-vibe-coding.png"],
   },
+  alternates: {
+    canonical: "/coupons/claude-code-vibe-coding",
+  },
 }
 
 const courseDetails = {

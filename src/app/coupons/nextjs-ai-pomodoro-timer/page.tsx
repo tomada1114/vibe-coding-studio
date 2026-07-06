@@ -49,6 +49,9 @@ export const metadata: Metadata = {
     description: COURSE_SUBTITLE,
     images: ["/images/udemy/nextjs-ai-pomodoro-timer.png"],
   },
+  alternates: {
+    canonical: "/coupons/nextjs-ai-pomodoro-timer",
+  },
 }
 
 // udemy-course-info-temp.md の内容をもとに、ユーザーに見える情報のみを定義（新規情報の創作は禁止）

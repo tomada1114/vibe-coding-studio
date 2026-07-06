@@ -4,6 +4,7 @@ import { Footer } from "@/components/footer"
 import { Gradient } from "@/components/gradient"
 import { Navbar } from "@/components/navbar"
 import { Heading, Subheading } from "@/components/text"
+import { getSiteUrl } from "@/lib/seo/site-url"
 import {
   AcademicCapIcon,
   BookOpenIcon,
@@ -16,7 +17,8 @@ import {
 import type { Metadata } from "next"
 import Image from "next/image"
 
-const founderTitle = "とまだ - Founder | Vibe Coding Studio"
+const founderTitle = "とまだ - Founder"
+const founderOgTitle = "とまだ - Founder | Vibe Coding Studio"
 const founderDescription =
   "Vibe Coding Studioの主催者とまだ（Tomada）のプロフィール。AI駆動開発のスペシャリストとして、コミュニティ運営・教育活動・開発実績をご紹介します。"
 
@@ -24,7 +26,7 @@ export const metadata: Metadata = {
   title: founderTitle,
   description: founderDescription,
   openGraph: {
-    title: founderTitle,
+    title: founderOgTitle,
     description: founderDescription,
     type: "profile",
     url: "/founder",
@@ -39,7 +41,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: founderTitle,
+    title: founderOgTitle,
     description: founderDescription,
     images: ["/tomada.png"],
   },
@@ -493,7 +495,7 @@ function FounderStructuredData() {
     "@type": "Person",
     name: "とまだ（Tomada）",
     jobTitle: "フリーランスエンジニア / AI駆動開発スペシャリスト",
-    url: "/founder",
+    url: `${getSiteUrl()}/founder`,
     sameAs: [
       "https://x.com/muscle_coding",
       "https://www.youtube.com/@vibe-coding-studio",

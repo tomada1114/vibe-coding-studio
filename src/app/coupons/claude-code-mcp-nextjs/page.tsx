@@ -51,6 +51,9 @@ export const metadata: Metadata = {
       "Vibe Codingの次のステップへ！Serena、Context7、Playwright、Sequential Thinking、Supabaseを統合し、トークン節約・自動テスト・DB連携まで完全マスター。無料で始められる実践的MCP活用術",
     images: ["/images/udemy/claude-code-mcp-nextjs.png"],
   },
+  alternates: {
+    canonical: "/coupons/claude-code-mcp-nextjs",
+  },
 }
 
 // udemy-course-info-temp.md の内容をもとに、ユーザーに見える情報のみを定義

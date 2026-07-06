@@ -13,6 +13,7 @@ import {
   type CourseContent,
   type ThemeColors,
 } from "@/components/docs/Curriculum"
+import type { Metadata } from "next"
 
 // コースのスラグを定義
 const slug = "rspec"
@@ -170,7 +171,26 @@ const rspecContent: CourseContent = {
 }
 
 // メタデータをエクスポート
-export const metadata = rspecContent.meta
+export const metadata: Metadata = {
+  ...rspecContent.meta,
+  openGraph: {
+    title: `${rspecContent.meta.title} - Vibe Coding Studio`,
+    description: rspecContent.meta.description,
+    type: "website",
+    url: "/docs/rspec",
+    images: [
+      {
+        url: "/vcs-logo-wide-transparent.png",
+        width: 1200,
+        height: 630,
+        alt: `${rspecContent.meta.title} - Vibe Coding Studio`,
+      },
+    ],
+  },
+  alternates: {
+    canonical: "/docs/rspec",
+  },
+}
 
 /**
  * RSpec カリキュラムのランディングページ

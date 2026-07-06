@@ -14,6 +14,7 @@ import {
   type CourseContent,
   type ThemeColors,
 } from "@/components/docs/Curriculum"
+import type { Metadata } from "next"
 
 // コースのスラグを定義
 const slug = "rails"
@@ -164,7 +165,26 @@ const railsContent: CourseContent = {
 }
 
 // メタデータをエクスポート
-export const metadata = railsContent.meta
+export const metadata: Metadata = {
+  ...railsContent.meta,
+  openGraph: {
+    title: `${railsContent.meta.title} - Vibe Coding Studio`,
+    description: railsContent.meta.description,
+    type: "website",
+    url: "/docs/rails",
+    images: [
+      {
+        url: "/vcs-logo-wide-transparent.png",
+        width: 1200,
+        height: 630,
+        alt: `${railsContent.meta.title} - Vibe Coding Studio`,
+      },
+    ],
+  },
+  alternates: {
+    canonical: "/docs/rails",
+  },
+}
 
 /**
  * Ruby on Rails カリキュラムのランディングページ

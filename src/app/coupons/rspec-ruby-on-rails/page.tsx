@@ -50,6 +50,9 @@ export const metadata: Metadata = {
     description: COURSE_SUBTITLE,
     images: ["/images/udemy/rspec-ruby-on-rails.png"],
   },
+  alternates: {
+    canonical: "/coupons/rspec-ruby-on-rails",
+  },
 }
 
 // udemy-course-info-temp.md の内容をもとに、ユーザーに見える情報のみを定義（新規情報の創作は禁止）

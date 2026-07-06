@@ -49,6 +49,9 @@ export const metadata: Metadata = {
       "プログラミング未経験でもClaude CodeとReact Nativeでスマホアプリ開発！5つのアプリを作りながら実践的に学習。",
     images: ["/images/udemy/claude-code-react-native-5apps.png"],
   },
+  alternates: {
+    canonical: "/coupons/claude-code-react-native-5apps",
+  },
 }
 
 const courseDetails = {

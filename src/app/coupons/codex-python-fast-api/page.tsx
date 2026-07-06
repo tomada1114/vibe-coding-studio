@@ -49,6 +49,9 @@ export const metadata: Metadata = {
       "プログラミング未経験でもCodex IDE & CLIでPythonの基礎からFastAPI開発まで完全習得！",
     images: ["/images/udemy/codex-python-fast-api.png"],
   },
+  alternates: {
+    canonical: "/coupons/codex-python-fast-api",
+  },
 }
 
 const courseDetails = {

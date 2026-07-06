@@ -51,6 +51,9 @@ export const metadata: Metadata = {
       "初心者も安心！OpenAI Codexの基礎から実践まで完全網羅。カスタムコマンドとMCP（Context7・Playwright・Supabase）で開発効率10倍。React/Next.jsアプリを作りながら次世代のAI開発手法を習得！",
     images: ["/images/udemy/codex-nextjs.png"],
   },
+  alternates: {
+    canonical: "/coupons/codex-nextjs",
+  },
 }
 
 const courseDetails = {

@@ -49,6 +49,9 @@ export const metadata: Metadata = {
       "Claude CodeとPythonでプログラミング未経験でも7つの実践アプリを開発！実践的なPythonスキルを身につける",
     images: ["/images/udemy/claude-code-python.png"],
   },
+  alternates: {
+    canonical: "/coupons/claude-code-python",
+  },
 }
 
 const courseDetails = {

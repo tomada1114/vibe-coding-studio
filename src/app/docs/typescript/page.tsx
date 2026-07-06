@@ -13,6 +13,7 @@ import {
   type CourseContent,
   type ThemeColors,
 } from "@/components/docs/Curriculum"
+import type { Metadata } from "next"
 
 // コースのスラッグを定義
 const slug = "typescript"
@@ -171,7 +172,26 @@ const typescriptContent: CourseContent = {
 }
 
 // メタデータをエクスポート
-export const metadata = typescriptContent.meta
+export const metadata: Metadata = {
+  ...typescriptContent.meta,
+  openGraph: {
+    title: `${typescriptContent.meta.title} - Vibe Coding Studio`,
+    description: typescriptContent.meta.description,
+    type: "website",
+    url: "/docs/typescript",
+    images: [
+      {
+        url: "/vcs-logo-wide-transparent.png",
+        width: 1200,
+        height: 630,
+        alt: `${typescriptContent.meta.title} - Vibe Coding Studio`,
+      },
+    ],
+  },
+  alternates: {
+    canonical: "/docs/typescript",
+  },
+}
 
 /**
  * TypeScript カリキュラムのランディングページ

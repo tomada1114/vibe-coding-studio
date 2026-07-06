@@ -49,6 +49,9 @@ export const metadata: Metadata = {
       "CLAUDE.md・rules・カスタムコマンド・サブエージェント・Skills・Hooksを完全マスター",
     images: ["/images/udemy/claude-code-perfect-guide.png"],
   },
+  alternates: {
+    canonical: "/coupons/claude-code-perfect-guide",
+  },
 }
 
 const courseDetails = {

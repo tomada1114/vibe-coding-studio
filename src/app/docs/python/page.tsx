@@ -5,6 +5,7 @@ import {
   type CourseContent,
   type ThemeColors,
 } from "@/components/docs/Curriculum"
+import type { Metadata } from "next"
 
 // コースのスラッグを定義
 const slug = "python"
@@ -184,7 +185,26 @@ const pythonContent: CourseContent = {
 }
 
 // メタデータをエクスポート
-export const metadata = pythonContent.meta
+export const metadata: Metadata = {
+  ...pythonContent.meta,
+  openGraph: {
+    title: `${pythonContent.meta.title} - Vibe Coding Studio`,
+    description: pythonContent.meta.description,
+    type: "website",
+    url: "/docs/python",
+    images: [
+      {
+        url: "/vcs-logo-wide-transparent.png",
+        width: 1200,
+        height: 630,
+        alt: `${pythonContent.meta.title} - Vibe Coding Studio`,
+      },
+    ],
+  },
+  alternates: {
+    canonical: "/docs/python",
+  },
+}
 
 /**
  * Python カリキュラムのランディングページ

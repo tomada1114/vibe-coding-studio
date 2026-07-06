@@ -49,6 +49,9 @@ export const metadata: Metadata = {
       "バイブコーディング専用の開発環境を構築。E2E自動テストやMCP連携でアプリ開発を爆速化。",
     images: ["/images/udemy/claude-code-expo-template.png"],
   },
+  alternates: {
+    canonical: "/coupons/claude-code-expo-template",
+  },
 }
 
 const courseDetails = {

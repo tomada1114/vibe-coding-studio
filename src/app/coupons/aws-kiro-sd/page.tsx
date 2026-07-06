@@ -51,6 +51,9 @@ export const metadata: Metadata = {
       "計画を立ててから開発する新スタイル！要件・設計・タスクの3段階ドキュメント生成、エージェントフック、MCP連携まで。品質重視のAI駆動開発を基礎から実践まで徹底解説",
     images: ["/images/udemy/aws-kiro-sd.png"],
   },
+  alternates: {
+    canonical: "/coupons/aws-kiro-sd",
+  },
 }
 
 // udemy-course-info-temp.md の内容をもとに、ユーザーに見える情報のみを定義

@@ -49,6 +49,9 @@ export const metadata: Metadata = {
       "OpenAI CodexとReact Native(Expo)でプログラミング初心者でもゼロからスマホアプリを開発！",
     images: ["/images/udemy/codex-react-native.png"],
   },
+  alternates: {
+    canonical: "/coupons/codex-react-native",
+  },
 }
 
 const courseDetails = {

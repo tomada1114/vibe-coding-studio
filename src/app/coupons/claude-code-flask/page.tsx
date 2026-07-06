@@ -49,6 +49,9 @@ export const metadata: Metadata = {
       "FlaskとGemini AIでプロの開発フローを体験！要件定義から実装まで学べる実践講座",
     images: ["/images/udemy/claude-code-flask.png"],
   },
+  alternates: {
+    canonical: "/coupons/claude-code-flask",
+  },
 }
 
 const courseDetails = {

@@ -14,6 +14,7 @@ import {
   type CourseContent,
   type ThemeColors,
 } from "@/components/docs/Curriculum"
+import type { Metadata } from "next"
 
 // コースのスラッグを定義
 const slug = "javascript"
@@ -187,7 +188,26 @@ const javascriptContent: CourseContent = {
 }
 
 // メタデータをエクスポート
-export const metadata = javascriptContent.meta
+export const metadata: Metadata = {
+  ...javascriptContent.meta,
+  openGraph: {
+    title: `${javascriptContent.meta.title} - Vibe Coding Studio`,
+    description: javascriptContent.meta.description,
+    type: "website",
+    url: "/docs/javascript",
+    images: [
+      {
+        url: "/vcs-logo-wide-transparent.png",
+        width: 1200,
+        height: 630,
+        alt: `${javascriptContent.meta.title} - Vibe Coding Studio`,
+      },
+    ],
+  },
+  alternates: {
+    canonical: "/docs/javascript",
+  },
+}
 
 /**
  * JavaScript カリキュラムのランディングページ

@@ -9,7 +9,6 @@ interface MockCurriculumProps {
     chapterCount: number
     cta: {
       primaryButtonLink: string
-      secondaryButtonLink: string
     }
     features: Array<{ title: string; description: string }>
     targetAudience: Array<{ title: string; description: string }>
@@ -33,9 +32,6 @@ jest.mock("@/components/docs/Curriculum", () => ({
       <div data-testid="chapter-count">{courseContent.chapterCount}</div>
       <div data-testid="cta-primary-link">
         {courseContent.cta.primaryButtonLink}
-      </div>
-      <div data-testid="cta-secondary-link">
-        {courseContent.cta.secondaryButtonLink}
       </div>
 
       {/* Feature sections */}
@@ -236,11 +232,8 @@ describe("JavaScriptCurriculumPage", () => {
     it("CTAリンクが正しく設定される", () => {
       render(<JavaScriptCurriculumPage />)
 
-      // プライマリボタンのリンク（コース一覧ページ）
-      expect(screen.getByTestId("cta-primary-link")).toHaveTextContent("/docs")
-
-      // セカンダリボタンのリンク（最初のチャプター）
-      expect(screen.getByTestId("cta-secondary-link")).toHaveTextContent(
+      // プライマリボタンのリンク（最初のレッスン）
+      expect(screen.getByTestId("cta-primary-link")).toHaveTextContent(
         "/docs/javascript/introduction/what_is_javascript"
       )
     })
@@ -254,6 +247,24 @@ describe("JavaScriptCurriculumPage", () => {
         title: "JavaScript 基礎カリキュラム",
         description:
           "Webページに動きを与える、フロントエンド開発の必須言語を基礎から実践まで体系的に学ぶ",
+        openGraph: {
+          title: "JavaScript 基礎カリキュラム - Vibe Coding Studio",
+          description:
+            "Webページに動きを与える、フロントエンド開発の必須言語を基礎から実践まで体系的に学ぶ",
+          type: "website",
+          url: "/docs/javascript",
+          images: [
+            {
+              url: "/vcs-logo-wide-transparent.png",
+              width: 1200,
+              height: 630,
+              alt: "JavaScript 基礎カリキュラム - Vibe Coding Studio",
+            },
+          ],
+        },
+        alternates: {
+          canonical: "/docs/javascript",
+        },
       })
     })
   })
