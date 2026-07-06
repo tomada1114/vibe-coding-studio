@@ -11,7 +11,7 @@ function CallToAction() {
   return (
     <div className="relative pt-20 pb-16 text-center sm:py-24">
       <hgroup>
-        <Subheading>コミュニティに参加</Subheading>
+        <Subheading className="justify-center">COMMUNITY</Subheading>
         <p className="mt-6 text-3xl font-medium tracking-tight text-gray-950 sm:text-3xl">
           AI駆動開発を一緒に学びませんか？
         </p>

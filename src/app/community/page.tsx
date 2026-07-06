@@ -143,7 +143,7 @@ function AnxietyReliefSection() {
   return (
     <div className="bg-white py-32">
       <Container>
-        <Subheading>DON&apos;T WORRY</Subheading>
+        <Subheading>CONCERNS</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           こんな不安、ありませんか?
         </Heading>
@@ -211,7 +211,7 @@ function ValuePropositionSection() {
   return (
     <div className="bg-linear-to-b from-white from-50% to-gray-100 py-32">
       <Container>
-        <Subheading>VALUE PROPOSITION</Subheading>
+        <Subheading>VALUE</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           ここで得られること
         </Heading>
@@ -256,7 +256,7 @@ function CommunityDescriptionSection() {
   return (
     <div className="relative py-32">
       <Container className="relative">
-        <Subheading>About Community</Subheading>
+        <Subheading>COMMUNITY</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           コミュニティについて
         </Heading>
@@ -336,7 +336,7 @@ function ChannelIntroductionSection() {
   return (
     <div className="bg-white py-32">
       <Container>
-        <Subheading>DISCORD CHANNELS</Subheading>
+        <Subheading>CHANNELS</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           チャンネル紹介
         </Heading>
@@ -431,7 +431,7 @@ function RecommendedForSection() {
   return (
     <div className="relative py-32">
       <Container className="relative">
-        <Subheading>Who should join</Subheading>
+        <Subheading>AUDIENCE</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           こんな人におすすめ
         </Heading>

@@ -109,7 +109,7 @@ function ExpertiseSection() {
   return (
     <div className="bg-gradient-to-b from-white from-50% to-gray-100 py-32">
       <Container>
-        <Subheading>Expertise</Subheading>
+        <Subheading>EXPERTISE</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           AI駆動開発のスペシャリスト
         </Heading>
@@ -213,7 +213,7 @@ function EducationSection() {
   return (
     <div className="relative py-32">
       <Container className="relative">
-        <Subheading>Education</Subheading>
+        <Subheading>EDUCATION</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           教育活動
         </Heading>
@@ -291,7 +291,7 @@ function CurrentActivitiesSection() {
   return (
     <div className="bg-gradient-to-b from-white from-50% to-gray-100 py-32">
       <Container>
-        <Subheading>Current Activities</Subheading>
+        <Subheading>ACTIVITIES</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           現在の活動
         </Heading>
@@ -350,7 +350,7 @@ function TechStackSection() {
   return (
     <div className="relative py-32">
       <Container className="relative">
-        <Subheading>Tech Stack</Subheading>
+        <Subheading>TECH STACK</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           技術スタック
         </Heading>
@@ -390,7 +390,7 @@ function SpeakingSection() {
   return (
     <div className="bg-gradient-to-b from-white from-50% to-gray-100 py-32">
       <Container>
-        <Subheading>Speaking</Subheading>
+        <Subheading>SPEAKING</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           登壇実績
         </Heading>
@@ -437,7 +437,7 @@ function MissionSection() {
   return (
     <div className="relative py-32">
       <Container className="relative">
-        <Subheading>Mission</Subheading>
+        <Subheading>MISSION</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           ミッション
         </Heading>

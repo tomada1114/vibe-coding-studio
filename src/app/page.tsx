@@ -97,7 +97,7 @@ function CommunityOverviewSection() {
   return (
     <div className="relative bg-linear-to-b from-white from-50% to-gray-100 py-32">
       <Container>
-        <Subheading>Community</Subheading>
+        <Subheading>COMMUNITY</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           コミュニティについて
         </Heading>
@@ -163,7 +163,7 @@ function CouponSection() {
           <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-purple-500 to-pink-500">
             <TicketIcon className="h-10 w-10 text-white" aria-hidden="true" />
           </div>
-          <Subheading className="mt-8">Udemy Coupons</Subheading>
+          <Subheading className="mt-8 justify-center">COUPONS</Subheading>
           <Heading as="h2" className="mt-2">
             講座を特別価格で受講
           </Heading>
@@ -255,7 +255,7 @@ function ProfileSection() {
   return (
     <div className="relative py-32">
       <Container className="relative">
-        <Subheading>About</Subheading>
+        <Subheading>ABOUT</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           とまだについて
         </Heading>

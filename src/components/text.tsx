@@ -29,18 +29,23 @@ export function Heading({
 export function Subheading({
   className,
   as: Element = "h2",
-  dark = false,
+  children,
   ...props
-}: HeadingProps) {
+}: Omit<HeadingProps, "dark">) {
   return (
     <Element
       {...props}
-      data-dark={dark ? "true" : undefined}
       className={clsx(
         className,
-        "font-mono text-xs/5 font-semibold tracking-widest text-gray-500 uppercase data-dark:text-gray-400"
+        "flex items-center gap-2 font-mono text-xs/5 font-semibold tracking-widest text-gray-500 uppercase"
       )}
-    />
+    >
+      <span
+        aria-hidden="true"
+        className="h-0.5 w-3 shrink-0 bg-(image:--gradient-spectrum)"
+      />
+      {children}
+    </Element>
   )
 }
 
