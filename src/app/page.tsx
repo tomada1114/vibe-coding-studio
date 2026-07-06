@@ -4,14 +4,17 @@ import { DiscordMemberCount } from "@/components/discord-member-count"
 import { AsyncErrorBoundary } from "@/components/error-boundary"
 import { Footer } from "@/components/footer"
 import { Navbar } from "@/components/navbar"
+import { SpectrumBeam } from "@/components/spectrum-beam"
 import { Heading, Subheading } from "@/components/text"
 import { getLatestCoupons, getMaxDiscountRate } from "@/lib/coupons/coupon-data"
+import { navigation } from "@/lib/navigation"
+import { getAllVideos } from "@/lib/videos/video-data"
 import {
   BookOpenIcon,
   ChatBubbleLeftRightIcon,
-  CodeBracketIcon,
   LightBulbIcon,
-  QuestionMarkCircleIcon,
+  MapIcon,
+  PlayCircleIcon,
   TicketIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/outline"
@@ -38,8 +41,11 @@ function HeroSection() {
         <Navbar />
         <div className="pt-16 pb-24 sm:pt-24 sm:pb-32 md:pt-32 md:pb-48">
           {/* キャッチコピー */}
-          <h1 className="font-display text-4xl/[1.2] font-medium tracking-tight text-balance text-gray-950 sm:text-5xl/[1.15] md:text-6xl/[1.1]">
-            AI駆動開発を仲間と
+          <h1 className="font-display text-4xl/[1.2] font-bold tracking-tight text-balance text-gray-950 sm:text-5xl/[1.15] md:text-6xl/[1.1]">
+            AI駆動開発を
+            <span className="box-decoration-clone bg-(image:--gradient-spectrum) bg-no-repeat pb-1 [background-position:0_100%] [background-size:100%_4px]">
+              仲間と
+            </span>
             <br />
             一緒に学ぼう
           </h1>
@@ -59,6 +65,9 @@ function HeroSection() {
           {/* コミュニティ参加ボタン */}
           <div className="mt-12 flex flex-col gap-x-6 gap-y-4 sm:flex-row">
             <Button href="/community">コミュニティに参加</Button>
+            <Button variant="secondary" href="/coupons">
+              クーポンを見る
+            </Button>
           </div>
         </div>
       </Container>
@@ -95,7 +104,7 @@ function CommunityOverviewSection() {
   ]
 
   return (
-    <div className="relative bg-linear-to-b from-white from-50% to-gray-100 py-32">
+    <div className="relative border-t border-gray-200 bg-gray-50 py-24 sm:py-32">
       <Container>
         <Subheading>COMMUNITY</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
@@ -157,10 +166,10 @@ function CommunityOverviewSection() {
 function CouponSection() {
   const maxDiscountRate = getMaxDiscountRate(getLatestCoupons())
   return (
-    <div className="relative py-32">
+    <div className="relative border-t border-gray-200 bg-gray-50 py-24 sm:py-32">
       <Container className="relative">
         <div className="text-center">
-          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-purple-500 to-pink-500">
+          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-(image:--gradient-spectrum)">
             <TicketIcon className="h-10 w-10 text-white" aria-hidden="true" />
           </div>
           <Subheading className="mt-8 justify-center">COUPONS</Subheading>
@@ -187,58 +196,81 @@ function CouponSection() {
 }
 
 /**
- * 工事中セクション
- * - 準備中コンテンツの告知
- * - レスポンシブグリッド（スマホ: 1カラム、タブレット: 2カラム、PC: 3カラム）
+ * Learn セクション
+ * - 実在するコンテンツ（学習コース・動画・ロードマップ）への導線
+ * - 各カードに mono の実数値を表示
  */
-function WorkInProgressSection() {
-  const upcomingFeatures = [
-    {
-      icon: CodeBracketIcon,
-      title: "学習リソース",
-      description: "コピペで使える設定ファイルやテンプレートを提供",
-    },
-    {
-      icon: QuestionMarkCircleIcon,
-      title: "FAQ・トラブルシューティング",
-      description: "コミュニティで出た質問やトラブルをまとめて解説",
-    },
+function LearnSection() {
+  const courseCount = navigation.length
+  const lessonCount = navigation.reduce(
+    (sum, course) =>
+      sum +
+      course.links.reduce((s, link) => s + (link.children?.length ?? 0), 0),
+    0
+  )
+  const videoCount = getAllVideos().length
+
+  const learnContents = [
     {
       icon: BookOpenIcon,
-      title: "コンテンツ一覧",
-      description: "AI駆動開発に役立つ動画や記事を探しやすく",
+      title: "学習コース",
+      description:
+        "Ruby・Rails・JavaScript・React など、基礎から実践まで体系的に学べる無料カリキュラム",
+      href: "/docs",
+      stat: `${courseCount} COURSES / ${lessonCount} LESSONS`,
+    },
+    {
+      icon: PlayCircleIcon,
+      title: "動画",
+      description:
+        "Claude Code や Codex など、最新AIツールの検証・解説動画をメタデータ付きで一覧",
+      href: "/videos",
+      stat: `${videoCount} VIDEOS`,
+    },
+    {
+      icon: MapIcon,
+      title: "ロードマップ",
+      description:
+        "目的別に最適な学習パスを選べる、AI駆動開発の学習ロードマップ",
+      href: "/roadmap",
+      stat: "LEARNING PATHS",
     },
   ]
 
   return (
-    <div className="bg-linear-to-b from-white from-50% to-gray-100 py-32">
+    <div className="border-t border-gray-200 bg-white py-24 sm:py-32">
       <Container>
-        <Subheading>Coming Soon</Subheading>
+        <Subheading>LEARN</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
-          準備中のコンテンツ
+          学べるコンテンツ
         </Heading>
         <p className="mt-6 max-w-3xl text-lg text-gray-600">
-          当サイトでは、コミュニティと連携したコンテンツを準備中です。
+          コミュニティと連携した学習コンテンツを無料で公開しています。
         </p>
 
         {/* レスポンシブグリッド */}
         <div className="mt-10 grid grid-cols-1 gap-8 sm:mt-16 md:grid-cols-2 lg:grid-cols-3">
-          {upcomingFeatures.map(feature => (
-            <div
-              key={feature.title}
-              className="relative rounded-3xl bg-white p-8 shadow-sm ring-1 ring-gray-950/5"
+          {learnContents.map(content => (
+            <a
+              key={content.title}
+              href={content.href}
+              className="group relative overflow-hidden rounded-2xl bg-white p-8 ring-1 ring-gray-950/5 transition-shadow hover:ring-gray-950/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
-              <feature.icon
+              <SpectrumBeam className="absolute inset-x-0 top-0 opacity-0 transition-opacity group-hover:opacity-100" />
+              <content.icon
                 className="h-10 w-10 text-gray-950"
                 aria-hidden="true"
               />
               <h3 className="mt-6 text-xl/7 font-semibold text-gray-950">
-                {feature.title}
+                {content.title}
               </h3>
               <p className="mt-4 text-base/7 text-gray-600">
-                {feature.description}
+                {content.description}
               </p>
-            </div>
+              <p className="mt-6 font-mono text-xs/5 font-medium tracking-widest text-gray-500 uppercase">
+                {content.stat}
+              </p>
+            </a>
           ))}
         </div>
       </Container>
@@ -253,7 +285,7 @@ function WorkInProgressSection() {
  */
 function ProfileSection() {
   return (
-    <div className="relative py-32">
+    <div className="relative border-t border-gray-200 bg-white py-24 sm:py-32">
       <Container className="relative">
         <Subheading>ABOUT</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
@@ -299,8 +331,8 @@ function ProfileSection() {
  * トップページ
  * - ファーストビュー
  * - コミュニティ概要セクション
- * - クーポンセクション（新規追加）
- * - 工事中セクション
+ * - Learn セクション（実在コンテンツへの導線）
+ * - クーポンセクション
  * - プロフィール紹介
  * - AsyncErrorBoundaryによるエラーハンドリング
  */
@@ -315,10 +347,10 @@ export default function Home() {
           <CommunityOverviewSection />
         </AsyncErrorBoundary>
         <AsyncErrorBoundary>
-          <CouponSection />
+          <LearnSection />
         </AsyncErrorBoundary>
         <AsyncErrorBoundary>
-          <WorkInProgressSection />
+          <CouponSection />
         </AsyncErrorBoundary>
         <AsyncErrorBoundary>
           <ProfileSection />

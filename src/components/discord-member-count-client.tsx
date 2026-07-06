@@ -49,7 +49,7 @@ export function DiscordMemberCountClient({
     >
       {/* メンバー数情報 */}
       <div className="flex items-baseline gap-3">
-        <span className="font-display text-7xl font-bold tracking-tight text-gray-950">
+        <span className="font-mono text-7xl font-bold tracking-tight text-gray-950">
           <motion.span>{rounded}</motion.span>+
         </span>
         <span className="text-2xl font-medium text-gray-600">
