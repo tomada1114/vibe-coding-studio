@@ -153,13 +153,15 @@ describe("CouponCard", () => {
     it("has hover transition classes", () => {
       render(<CouponCard coupon={mockCoupon} />)
       const link = screen.getByRole("link")
-      expect(link).toHaveClass("transition-all", "duration-300")
+      expect(link).toHaveClass("transition-shadow", "hover:ring-gray-950/10")
     })
 
-    it("applies shadow and border styling", () => {
+    it("applies ring styling and hover spectrum beam", () => {
       render(<CouponCard coupon={mockCoupon} />)
       const link = screen.getByRole("link")
-      expect(link).toHaveClass("shadow-sm", "border")
+      expect(link).toHaveClass("ring-1", "ring-gray-950/5")
+      const beam = link.querySelector("span[aria-hidden='true']")
+      expect(beam).not.toBeNull()
     })
   })
 
