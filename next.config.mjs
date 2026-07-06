@@ -13,13 +13,8 @@ const nextConfig = {
     formats: ["image/avif", "image/webp"],
     // Cache TTL for optimized images served via /_next/image.
     // Use minimumCacheTTL (not headers()) as Next.js controls /_next/image internally.
-    minimumCacheTTL: 86400, // 1 day
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "cdn.jsdelivr.net",
-      },
-    ],
+    // ファイル名が不変のローカル画像のみなので長期キャッシュで変換クォータを節約する。
+    minimumCacheTTL: 2678400, // 31 days
   },
 
   // Basic optimizations
@@ -32,20 +27,13 @@ const nextConfig = {
       "@heroicons/react",
       "@headlessui/react",
       "framer-motion",
-      "clsx",
-      "dayjs",
     ],
 
     // Enable partial prerendering (experimental)
     ppr: false,
 
-    // Enable server actions
-    serverActions: {
-      bodySizeLimit: "2mb",
-    },
-
     // Web vitals attribution
-    webVitalsAttribution: ["CLS", "LCP", "FCP", "FID", "TTFB"],
+    webVitalsAttribution: ["CLS", "LCP", "FCP", "INP", "TTFB"],
   },
 
   // Compiler options
@@ -106,12 +94,6 @@ const nextConfig = {
         permanent: true,
       },
     ]
-  },
-
-  // Environment variables to expose to the browser
-  env: {
-    NEXT_PUBLIC_SITE_URL:
-      process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   },
 
   // TypeScript configuration
