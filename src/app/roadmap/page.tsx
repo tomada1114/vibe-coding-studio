@@ -80,7 +80,7 @@ export default function RoadmapPage() {
         </div>
       </AsyncErrorBoundary>
 
-      <main>
+      <main id="main-content">
         <Suspense
           fallback={
             <div className="flex min-h-screen items-center justify-center">

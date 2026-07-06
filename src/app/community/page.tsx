@@ -600,7 +600,7 @@ export default function CommunityPage() {
       <AsyncErrorBoundary>
         <CommunityHeroSection />
       </AsyncErrorBoundary>
-      <main>
+      <main id="main-content">
         <AsyncErrorBoundary>
           <AnxietyReliefSection />
         </AsyncErrorBoundary>

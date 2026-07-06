@@ -168,7 +168,7 @@ function SocialLinks() {
             {...(link.url.startsWith("http")
               ? { target: "_blank", rel: "noopener noreferrer" }
               : {})}
-            aria-label={`Visit us on ${link.name}`}
+            aria-label={`${link.name}を見る`}
             className="text-gray-950 data-hover:text-gray-950/75"
           >
             <IconComponent className="size-4" />

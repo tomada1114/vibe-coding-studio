@@ -95,7 +95,7 @@ export default async function VideoDetailPage({
       </AsyncErrorBoundary>
 
       {/* メインコンテンツ */}
-      <main>
+      <main id="main-content">
         <AsyncErrorBoundary>
           <Container className="mt-16 mb-32 sm:mt-32">
             <div className="mb-8 flex items-center justify-between">

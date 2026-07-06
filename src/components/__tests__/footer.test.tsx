@@ -110,7 +110,7 @@ describe("Footer コンポーネント", () => {
     it("Xリンクが表示される", () => {
       render(<Footer />)
       const xLink = screen.getByRole("link", {
-        name: /Visit us on X/i,
+        name: /^Xを見る$/,
       })
       expect(xLink).toBeInTheDocument()
     })

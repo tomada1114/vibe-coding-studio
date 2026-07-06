@@ -48,12 +48,12 @@ function CourseCard({ course }: { course: CourseInfo }) {
             size="lg"
             className={course.colors.text}
           />
-          <h2
+          <h3
             id={`course-${course.slug}`}
             className={`text-xl font-semibold ${course.colors.text}`}
           >
             {course.title}
-          </h2>
+          </h3>
         </div>
       </div>
 

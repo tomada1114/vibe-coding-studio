@@ -71,7 +71,7 @@ function MobileNavButton() {
   return (
     <DisclosureButton
       className="flex size-12 items-center justify-center self-center rounded-lg transition-colors data-hover:bg-black/5 lg:hidden"
-      aria-label="Open main menu"
+      aria-label="メニューを開く"
     >
       <Bars2Icon className="size-6" />
     </DisclosureButton>

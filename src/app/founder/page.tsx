@@ -523,7 +523,7 @@ export default function FounderPage() {
       <AsyncErrorBoundary>
         <HeroSection />
       </AsyncErrorBoundary>
-      <main>
+      <main id="main-content">
         <AsyncErrorBoundary>
           <ExpertiseSection />
         </AsyncErrorBoundary>

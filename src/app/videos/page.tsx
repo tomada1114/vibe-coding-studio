@@ -40,7 +40,7 @@ export default function VideosPage() {
       </AsyncErrorBoundary>
 
       {/* メインコンテンツ */}
-      <main>
+      <main id="main-content">
         <AsyncErrorBoundary>
           <Container className="mt-16 mb-32 sm:mt-32">
             <header className="max-w-2xl">
