@@ -87,11 +87,8 @@ const nextConfig = {
       // Cache-Control and it cannot be overridden here, so no entry needed.
       // /_next/image is controlled via images.minimumCacheTTL above.
       cacheHeader("/images/udemy/:path*", 604800, 2592000), // s-maxage=7d, swr=30d
-      cacheHeader("/testimonials/:path*", 604800, 2592000), // s-maxage=7d, swr=30d
       cacheHeader("/img/:path*", 86400, 604800), // s-maxage=1d, swr=7d
       cacheHeader("/images/topics/:path*", 2592000, 31536000), // s-maxage=30d, swr=1y
-      cacheHeader("/logo-timeline/:path*", 2592000, 31536000), // s-maxage=30d, swr=1y
-      cacheHeader("/linked-avatars/:path*", 2592000, 31536000), // s-maxage=30d, swr=1y
     ]
   },
 
