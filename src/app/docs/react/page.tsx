@@ -163,11 +163,9 @@ const reactContent: CourseContent = {
   cta: {
     title: "モダンなUI開発のスタンダードを身につけよう",
     description:
-      "<strong>月額サブスクリプション</strong>にご登録いただくと、このカリキュラムの全コンテンツにアクセスできます。Reactをマスターすることで、Next.js や Gatsby などのより高度なフレームワークへの道筋も見えてきます。コンポーネント指向の開発手法を身につけて、現代的なWeb開発者への第一歩を踏み出しましょう！",
-    primaryButtonText: "サブスクリプションを見る", // 不変
-    primaryButtonLink: "/docs", // 料金ページへのリンク（全カリキュラムで共通）
-    secondaryButtonText: "学習をスタート", // 不変
-    secondaryButtonLink: "/docs/react/introduction/react_basic_concepts", // 最初のチャプターへのリンク
+      "このカリキュラムはすべて無料で学べます。Reactをマスターすることで、Next.js や Gatsby などのより高度なフレームワークへの道筋も見えてきます。コンポーネント指向の開発手法を身につけて、現代的なWeb開発者への第一歩を踏み出しましょう！",
+    primaryButtonText: "学習をスタート",
+    primaryButtonLink: "/docs/react/introduction/react_basic_concepts", // 最初のレッスンへのリンク
   },
 
   // チャプターの総数 - curriculum の長さと一致させる

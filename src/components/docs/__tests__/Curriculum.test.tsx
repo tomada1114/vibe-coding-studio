@@ -128,8 +128,6 @@ const mockCourseContent: CourseContent = {
     description: "無料で学習を開始できます",
     primaryButtonText: "学習開始",
     primaryButtonLink: "/docs/ruby/basics",
-    secondaryButtonText: "詳しく見る",
-    secondaryButtonLink: "/docs/ruby",
   },
   chapterCount: 5,
 }
@@ -310,7 +308,7 @@ describe("Curriculum", () => {
       )
     })
 
-    it("renders secondary button", () => {
+    it("does not render a secondary button", () => {
       render(
         <Curriculum
           slug="ruby"
@@ -318,7 +316,7 @@ describe("Curriculum", () => {
           themeColors={mockThemeColors}
         />
       )
-      expect(screen.getByText(/詳しく見る/)).toBeInTheDocument()
+      expect(screen.queryByText(/詳しく見る/)).not.toBeInTheDocument()
     })
   })
 

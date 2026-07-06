@@ -161,11 +161,9 @@ const typescriptContent: CourseContent = {
   cta: {
     title: "型安全な開発で、コードの品質を次のレベルへ",
     description:
-      "<strong>月額サブスクリプション</strong>にご登録いただくと、このカリキュラムの全コンテンツにアクセスできます。TypeScriptをマスターすることで、React、Vue、Node.jsなどの人気フレームワークでも型安全な開発が可能になります。バグを未然に防ぎ、開発効率を大幅に向上させる現代必須のスキルを身につけましょう！",
-    primaryButtonText: "サブスクリプションを見る", // 不変
-    primaryButtonLink: "/docs", // 料金ページへのリンク（全カリキュラムで共通）
-    secondaryButtonText: "学習をスタート", // 不変
-    secondaryButtonLink: "/docs/typescript/introduction/what_is_typescript", // 最初のチャプターへのリンク
+      "このカリキュラムはすべて無料で学べます。TypeScriptをマスターすることで、React、Vue、Node.jsなどの人気フレームワークでも型安全な開発が可能になります。バグを未然に防ぎ、開発効率を大幅に向上させる現代必須のスキルを身につけましょう！",
+    primaryButtonText: "学習をスタート",
+    primaryButtonLink: "/docs/typescript/introduction/what_is_typescript", // 最初のレッスンへのリンク
   },
 
   // チャプターの総数 - curriculum の長さと一致させる

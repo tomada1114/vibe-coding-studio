@@ -160,11 +160,9 @@ const rspecContent: CourseContent = {
   cta: {
     title: "テスト駆動開発のスキルで、あなたのエンジニアとしての価値を高めよう",
     description:
-      "<strong>月額サブスクリプション</strong>にご登録いただくと、このカリキュラムの全コンテンツにアクセスできます。Ruby・Railsの基礎知識を活かして、プロレベルのテスト技術を自分のペースで着実に身につけていきましょう！",
-    primaryButtonText: "サブスクリプションを見る", // 不変
-    primaryButtonLink: "/docs", // 料金ページへのリンク（全カリキュラムで共通）
-    secondaryButtonText: "学習をスタート", // 不変
-    secondaryButtonLink: "/docs/rspec/introduction/what_is_rspec", // 最初のチャプターへのリンク
+      "このカリキュラムはすべて無料で学べます。Ruby・Railsの基礎知識を活かして、プロレベルのテスト技術を自分のペースで着実に身につけていきましょう！",
+    primaryButtonText: "学習をスタート",
+    primaryButtonLink: "/docs/rspec/basics_and_introduction/rspec_basics", // 最初のレッスンへのリンク
   },
 
   // チャプターの総数 - curriculum の長さと一致させる

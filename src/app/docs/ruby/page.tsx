@@ -154,11 +154,9 @@ const rubyContent: CourseContent = {
     title:
       "Ruby の基礎をマスターして、あなたのプログラミングスキルを広げましょう",
     description:
-      "<strong>月額サブスクリプション</strong>にご登録いただくと、このカリキュラムの全コンテンツにアクセスできます。自分のペースで学習を進め、Ruby プログラミングのスキルを着実に身につけていきましょう！",
-    primaryButtonText: "サブスクリプションを見る", // 不変
-    primaryButtonLink: "/docs", // 料金ページへのリンク（全カリキュラムで共通）
-    secondaryButtonText: "学習をスタート", // 不変
-    secondaryButtonLink: "/docs/ruby/introduction/what_is_ruby", // 最初のチャプターへのリンク
+      "このカリキュラムはすべて無料で学べます。自分のペースで学習を進め、Ruby プログラミングのスキルを着実に身につけていきましょう！",
+    primaryButtonText: "学習をスタート",
+    primaryButtonLink: "/docs/ruby/introduction/what_is_ruby", // 最初のレッスンへのリンク
   },
 
   // チャプターの総数 - curriculum の長さと一致させる
