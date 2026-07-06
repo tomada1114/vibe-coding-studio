@@ -180,7 +180,7 @@ export const metadata: Metadata = {
     url: "/docs/rspec",
     images: [
       {
-        url: "/vcs-logo-wide-transparent.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: `${rspecContent.meta.title} - Vibe Coding Studio`,

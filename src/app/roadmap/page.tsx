@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     url: "/roadmap",
     images: [
       {
-        url: "/vcs-logo-wide-transparent.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: ogTitle,
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: ogTitle,
     description,
-    images: ["/vcs-logo-wide-transparent.png"],
+    images: ["/og-image.png"],
   },
   alternates: {
     canonical: "/roadmap",

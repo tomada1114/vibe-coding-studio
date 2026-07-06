@@ -174,7 +174,7 @@ export const metadata: Metadata = {
     url: "/docs/ruby",
     images: [
       {
-        url: "/vcs-logo-wide-transparent.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: `${rubyContent.meta.title} - Vibe Coding Studio`,

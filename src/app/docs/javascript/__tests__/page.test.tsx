@@ -255,7 +255,7 @@ describe("JavaScriptCurriculumPage", () => {
           url: "/docs/javascript",
           images: [
             {
-              url: "/vcs-logo-wide-transparent.png",
+              url: "/og-image.png",
               width: 1200,
               height: 630,
               alt: "JavaScript 基礎カリキュラム - Vibe Coding Studio",

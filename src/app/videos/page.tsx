@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
       url: "/videos",
       images: [
         {
-          url: "/vcs-logo-wide-transparent.png",
+          url: "/og-image.png",
           width: 1200,
           height: 630,
           alt: `${title} - Vibe Coding Studio`,

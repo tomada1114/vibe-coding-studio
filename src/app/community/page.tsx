@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     url: "/community",
     images: [
       {
-        url: "/vcs-logo-wide-transparent.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: communityOgTitle,
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: communityOgTitle,
     description: communityDescription,
-    images: ["/vcs-logo-wide-transparent.png"],
+    images: ["/og-image.png"],
   },
   alternates: {
     canonical: "/community",

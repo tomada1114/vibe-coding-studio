@@ -183,7 +183,7 @@ export const metadata: Metadata = {
     url: "/docs/react",
     images: [
       {
-        url: "/vcs-logo-wide-transparent.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: `${reactContent.meta.title} - Vibe Coding Studio`,

@@ -41,7 +41,7 @@ export const metadata: Metadata = {
       "AI駆動開発を学ぶ仲間が集まり、情報を共有し合い、一緒に成長するDiscordコミュニティ",
     images: [
       {
-        url: "/vcs-logo-wide-transparent.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Vibe Coding Studio",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     title: "Vibe Coding Studio - AI駆動開発コミュニティ",
     description:
       "AI駆動開発を学ぶ仲間が集まり、情報を共有し合い、一緒に成長するDiscordコミュニティ",
-    images: ["/vcs-logo-wide-transparent.png"],
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
@@ -64,10 +64,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteUrl,
   },
-  icons: {
-    icon: "/vcs-logo-square-transparent.png",
-    apple: "/vcs-logo-square-transparent.png",
-  },
+  // アイコンは app/icon.png・app/apple-icon.png のファイル規約で自動配信
 }
 
 export default function RootLayout({

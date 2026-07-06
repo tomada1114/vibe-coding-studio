@@ -194,7 +194,7 @@ export const metadata: Metadata = {
     url: "/docs/python",
     images: [
       {
-        url: "/vcs-logo-wide-transparent.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: `${pythonContent.meta.title} - Vibe Coding Studio`,

@@ -20,7 +20,7 @@ export const metadata = {
     url: "/docs",
     images: [
       {
-        url: "/vcs-logo-wide-transparent.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: docsTitle,
@@ -31,7 +31,7 @@ export const metadata = {
     card: "summary_large_image",
     title: docsTitle,
     description: docsDescription,
-    images: ["/vcs-logo-wide-transparent.png"],
+    images: ["/og-image.png"],
   },
   alternates: {
     canonical: "/docs",

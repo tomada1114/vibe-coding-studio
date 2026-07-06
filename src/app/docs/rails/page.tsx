@@ -174,7 +174,7 @@ export const metadata: Metadata = {
     url: "/docs/rails",
     images: [
       {
-        url: "/vcs-logo-wide-transparent.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: `${railsContent.meta.title} - Vibe Coding Studio`,
