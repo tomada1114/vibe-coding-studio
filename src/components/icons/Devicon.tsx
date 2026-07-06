@@ -97,8 +97,8 @@ export function Devicon({
         alt={altText}
         className={className}
         fill
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        priority
+        sizes="64px"
+        loading="lazy"
         unoptimized // SVGは最適化の必要がないため
       />
     </div>
