@@ -1,19 +1,21 @@
 /**
  * Discordメンバー数表示コンポーネント（クライアント側）
  *
- * Framer Motionを使用したアニメーション付きの表示コンポーネント。
- * シンプルで視認性の高いデザイン。
- * 数字がカウントアップするアニメーション効果付き。
+ * requestAnimationFrame による軽量なカウントアップ表示。
+ * prefers-reduced-motion 時はアニメーションせず即座に最終値を表示する。
+ * （アニメーションライブラリ非依存でホーム初期バンドルを削減）
  */
 
 "use client"
 
-import { animate, motion, useMotionValue, useTransform } from "framer-motion"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 interface DiscordMemberCountClientProps {
   formattedCount: string
 }
+
+/** カウントアップにかける時間（ms） */
+const COUNT_UP_DURATION = 1500
 
 /**
  * Discordメンバー数表示コンポーネント（クライアント側）
@@ -24,38 +26,48 @@ export function DiscordMemberCountClient({
   formattedCount,
 }: DiscordMemberCountClientProps) {
   // formattedCountから数値部分を抽出（例: "1,230+" -> 1230）
-  const targetNumber = parseInt(formattedCount.replace(/[^0-9]/g, ""), 10)
-
-  // Framer Motionのモーション値
-  const count = useMotionValue(0)
-  const rounded = useTransform(count, Math.round)
+  const targetNumber = Number.parseInt(
+    formattedCount.replace(/[^0-9]/g, ""),
+    10
+  )
+  const [displayNumber, setDisplayNumber] = useState(0)
 
   useEffect(() => {
-    // カウントアップアニメーション（0から目標値まで）
-    const controls = animate(count, targetNumber, {
-      duration: 1.5, // 1.5秒かけてカウントアップ
-      ease: "easeOut",
-    })
+    if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      !Number.isFinite(targetNumber)
+    ) {
+      setDisplayNumber(targetNumber)
+      return
+    }
 
-    return controls.stop
-  }, [count, targetNumber])
+    let rafId = 0
+    const start = performance.now()
+
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / COUNT_UP_DURATION, 1)
+      const eased = 1 - Math.pow(1 - progress, 3) // ease-out
+      setDisplayNumber(Math.round(targetNumber * eased))
+      if (progress < 1) {
+        rafId = requestAnimationFrame(tick)
+      }
+    }
+
+    rafId = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(rafId)
+  }, [targetNumber])
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
-      className="flex items-center justify-center"
-    >
+    <div className="flex items-center justify-center">
       {/* メンバー数情報 */}
       <div className="flex items-baseline gap-3">
         <span className="font-mono text-7xl font-bold tracking-tight text-gray-950">
-          <motion.span>{rounded}</motion.span>+
+          {displayNumber.toLocaleString("ja-JP")}+
         </span>
         <span className="text-2xl font-medium text-gray-600">
           名の仲間が参加中
         </span>
       </div>
-    </motion.div>
+    </div>
   )
 }
