@@ -30,7 +30,6 @@ export function VideoCard({ video }: VideoCardProps) {
     >
       <SpectrumBeam className="absolute inset-x-0 top-0 z-10 opacity-0 transition-opacity group-hover:opacity-100" />
       {/* hqdefault は 480×360 (4:3) のため 16:9 にクロップして表示 */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
         alt=""
