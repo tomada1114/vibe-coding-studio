@@ -3,7 +3,6 @@ import { Container } from "@/components/container"
 import { DiscordMemberCount } from "@/components/discord-member-count"
 import { AsyncErrorBoundary } from "@/components/error-boundary"
 import { Footer } from "@/components/footer"
-import { Gradient } from "@/components/gradient"
 import { Navbar } from "@/components/navbar"
 import { Heading, Subheading } from "@/components/text"
 import { getLatestCoupons, getMaxDiscountRate } from "@/lib/coupons/coupon-data"
@@ -35,7 +34,6 @@ export const revalidate = 3600
 function HeroSection() {
   return (
     <div className="relative">
-      <Gradient className="absolute inset-2 bottom-0 rounded-4xl ring-1 ring-black/5 ring-inset" />
       <Container className="relative">
         <Navbar />
         <div className="pt-16 pb-24 sm:pt-24 sm:pb-32 md:pt-32 md:pb-48">
@@ -160,7 +158,6 @@ function CouponSection() {
   const maxDiscountRate = getMaxDiscountRate(getLatestCoupons())
   return (
     <div className="relative py-32">
-      <Gradient className="absolute inset-2 rounded-4xl ring-1 ring-black/5 ring-inset" />
       <Container className="relative">
         <div className="text-center">
           <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-purple-500 to-pink-500">
@@ -257,7 +254,6 @@ function WorkInProgressSection() {
 function ProfileSection() {
   return (
     <div className="relative py-32">
-      <Gradient className="absolute inset-2 rounded-4xl ring-1 ring-black/5 ring-inset" />
       <Container className="relative">
         <Subheading>About</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">

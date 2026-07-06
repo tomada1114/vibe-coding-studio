@@ -1,7 +1,6 @@
 import { Button } from "@/components/button"
 import { Container } from "@/components/container"
 import { Footer } from "@/components/footer"
-import { Gradient } from "@/components/gradient"
 import { Navbar } from "@/components/navbar"
 import Link from "next/link"
 
@@ -9,7 +8,6 @@ export default function NotFound() {
   return (
     <div className="overflow-hidden">
       <div className="relative">
-        <Gradient className="absolute inset-2 bottom-0 rounded-4xl ring-1 ring-black/5 ring-inset" />
         <Container className="relative">
           <Navbar />
         </Container>

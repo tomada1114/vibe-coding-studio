@@ -1,7 +1,6 @@
 import { Container } from "@/components/container"
 import { AsyncErrorBoundary } from "@/components/error-boundary"
 import { Footer } from "@/components/footer"
-import { Gradient } from "@/components/gradient"
 import { Navbar } from "@/components/navbar"
 import { VideoCard } from "@/components/videos/video-card"
 import { getLatestVideos } from "@/lib/videos/video-data"
@@ -32,7 +31,6 @@ export default function VideosPage() {
       {/* ヘッダー */}
       <AsyncErrorBoundary>
         <div className="relative">
-          <Gradient className="absolute inset-2 bottom-0 rounded-4xl ring-1 ring-black/5 ring-inset" />
           <Container className="relative">
             <Navbar />
           </Container>

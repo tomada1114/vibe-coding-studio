@@ -1,8 +1,8 @@
 import { PlusGrid, PlusGridItem, PlusGridRow } from "@/components/plus-grid"
+import { SpectrumBeam } from "@/components/spectrum-beam"
 import { DISCORD_INVITE_URL, SOCIAL_LINKS } from "@/lib/constants"
 import { Button } from "./button"
 import { Container } from "./container"
-import { Gradient } from "./gradient"
 import { Link } from "./link"
 import { Logo } from "./logo"
 import { Subheading } from "./text"
@@ -194,8 +194,8 @@ export function Footer({
 }) {
   return (
     <footer>
-      <Gradient className="relative">
-        <div className="absolute inset-2 rounded-4xl bg-white/80" />
+      <SpectrumBeam className="h-px" />
+      <div className="relative bg-gray-50">
         <Container>
           {!hideCallToAction && <CallToAction />}
           <PlusGrid className="pb-16">
@@ -225,7 +225,7 @@ export function Footer({
             </PlusGridRow>
           </PlusGrid>
         </Container>
-      </Gradient>
+      </div>
     </footer>
   )
 }

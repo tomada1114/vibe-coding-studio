@@ -31,12 +31,6 @@ jest.mock("@/components/footer", () => ({
   Footer: () => <footer data-testid="footer" />,
 }))
 
-jest.mock("@/components/gradient", () => ({
-  Gradient: ({ className }: { className?: string }) => (
-    <div className={className} data-testid="gradient" />
-  ),
-}))
-
 jest.mock("@/components/navbar", () => ({
   Navbar: () => <nav data-testid="navbar" />,
 }))

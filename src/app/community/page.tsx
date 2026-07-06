@@ -3,9 +3,7 @@ import { Container } from "@/components/container"
 import { DiscordMemberCount } from "@/components/discord-member-count"
 import { AsyncErrorBoundary } from "@/components/error-boundary"
 import { Footer } from "@/components/footer"
-import { Gradient } from "@/components/gradient"
 import { Navbar } from "@/components/navbar"
-// import { Testimonials, type Testimonial } from "@/components/testimonials"
 import { Heading, Subheading } from "@/components/text"
 import { DISCORD_INVITE_URL } from "@/lib/constants"
 import { getSiteUrl } from "@/lib/seo/site-url"
@@ -70,7 +68,6 @@ export const revalidate = 3600
 function CommunityHeroSection() {
   return (
     <div className="relative">
-      <Gradient className="absolute inset-2 bottom-0 rounded-4xl ring-1 ring-black/5 ring-inset" />
       <Container className="relative">
         <Navbar />
         <div className="pt-16 pb-24 sm:pt-24 sm:pb-32 md:pt-32 md:pb-48">
@@ -258,7 +255,6 @@ function ValuePropositionSection() {
 function CommunityDescriptionSection() {
   return (
     <div className="relative py-32">
-      <Gradient className="absolute inset-2 rounded-4xl ring-1 ring-black/5 ring-inset" />
       <Container className="relative">
         <Subheading>About Community</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
@@ -434,7 +430,6 @@ function RecommendedForSection() {
 
   return (
     <div className="relative py-32">
-      <Gradient className="absolute inset-2 rounded-4xl ring-1 ring-black/5 ring-inset" />
       <Container className="relative">
         <Subheading>Who should join</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">

@@ -1,7 +1,6 @@
 import { Container } from "@/components/container"
 import { AsyncErrorBoundary } from "@/components/error-boundary"
 import { Footer } from "@/components/footer"
-import { Gradient } from "@/components/gradient"
 import { Navbar } from "@/components/navbar"
 import { Heading, Subheading } from "@/components/text"
 import { getSiteUrl } from "@/lib/seo/site-url"
@@ -59,7 +58,6 @@ export const metadata: Metadata = {
 function HeroSection() {
   return (
     <div className="relative">
-      <Gradient className="absolute inset-2 bottom-0 rounded-4xl ring-1 ring-black/5 ring-inset" />
       <Container className="relative">
         <Navbar />
         <div className="pt-16 pb-24 sm:pt-24 sm:pb-32 md:pt-32 md:pb-48">
@@ -214,7 +212,6 @@ function EducationSection() {
 
   return (
     <div className="relative py-32">
-      <Gradient className="absolute inset-2 rounded-4xl ring-1 ring-black/5 ring-inset" />
       <Container className="relative">
         <Subheading>Education</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
@@ -352,7 +349,6 @@ function TechStackSection() {
 
   return (
     <div className="relative py-32">
-      <Gradient className="absolute inset-2 rounded-4xl ring-1 ring-black/5 ring-inset" />
       <Container className="relative">
         <Subheading>Tech Stack</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
@@ -440,7 +436,6 @@ function SpeakingSection() {
 function MissionSection() {
   return (
     <div className="relative py-32">
-      <Gradient className="absolute inset-2 rounded-4xl ring-1 ring-black/5 ring-inset" />
       <Container className="relative">
         <Subheading>Mission</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">

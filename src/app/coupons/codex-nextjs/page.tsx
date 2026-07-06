@@ -10,7 +10,6 @@ import { TargetAudience } from "@/components/coupons/course-detail/TargetAudienc
 import { RelatedCoupons } from "@/components/coupons/RelatedCoupons"
 import { AsyncErrorBoundary } from "@/components/error-boundary"
 import { Footer } from "@/components/footer"
-import { Gradient } from "@/components/gradient"
 import { Navbar } from "@/components/navbar"
 import { getLatestCoupons, getRelatedCoupons } from "@/lib/coupons/coupon-data"
 import type { Metadata } from "next"
@@ -199,7 +198,6 @@ export default function CodexNextjsCoursePage() {
       {/* ヘッダーセクション */}
       <AsyncErrorBoundary>
         <div className="relative">
-          <Gradient className="absolute inset-2 bottom-0 rounded-4xl ring-1 ring-black/5 ring-inset" />
           <Container className="relative">
             <Navbar />
           </Container>
