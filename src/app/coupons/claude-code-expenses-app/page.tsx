@@ -1,4 +1,5 @@
 import { Container } from "@/components/container"
+import { CouponExpiredFallback } from "@/components/coupons/CouponExpiredFallback"
 import { CourseContent } from "@/components/coupons/course-detail/CourseContent"
 import { CourseDetailHero } from "@/components/coupons/course-detail/CourseDetailHero"
 import { CourseFeatures } from "@/components/coupons/course-detail/CourseFeatures"
@@ -157,13 +158,7 @@ export default function ClaudeCodeExpensesAppPage() {
   const coupon = coupons.find(c => c.courseId === COURSE_ID)
 
   if (!coupon) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <p className="text-lg text-zinc-600">
-          クーポン情報が見つかりませんでした
-        </p>
-      </div>
-    )
+    return <CouponExpiredFallback />
   }
 
   // 関連クーポンを取得（最大4件）
