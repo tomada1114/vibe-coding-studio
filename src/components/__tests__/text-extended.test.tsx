@@ -24,14 +24,7 @@ describe("Heading", () => {
     expect(heading.tagName).toBe("H1")
   })
 
-  it("applies dark mode data attribute", () => {
-    render(<Heading dark>Dark Heading</Heading>)
-
-    const heading = screen.getByText("Dark Heading")
-    expect(heading).toHaveAttribute("data-dark", "true")
-  })
-
-  it("does not set data-dark when dark is false", () => {
+  it("data-dark 属性を付与しない（ダークモード非対応）", () => {
     render(<Heading>Light Heading</Heading>)
 
     const heading = screen.getByText("Light Heading")

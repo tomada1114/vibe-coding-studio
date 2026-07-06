@@ -43,7 +43,7 @@ function HeroSection() {
           {/* キャッチコピー */}
           <h1 className="font-display text-4xl/[1.2] font-bold tracking-tight text-balance text-gray-950 sm:text-5xl/[1.15] md:text-6xl/[1.1]">
             AI駆動開発を
-            <span className="box-decoration-clone bg-(image:--gradient-spectrum) bg-no-repeat pb-1 [background-position:0_100%] [background-size:100%_4px]">
+            <span className="bg-(image:--gradient-spectrum) box-decoration-clone [background-size:100%_4px] [background-position:0_100%] bg-no-repeat pb-1">
               仲間と
             </span>
             <br />
@@ -254,7 +254,7 @@ function LearnSection() {
             <a
               key={content.title}
               href={content.href}
-              className="group relative overflow-hidden rounded-2xl bg-white p-8 ring-1 ring-gray-950/5 transition-shadow hover:ring-gray-950/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              className="group focus-visible:outline-accent relative overflow-hidden rounded-2xl bg-white p-8 ring-1 ring-gray-950/5 transition-shadow hover:ring-gray-950/10 focus-visible:outline-2 focus-visible:outline-offset-2"
             >
               <SpectrumBeam className="absolute inset-x-0 top-0 opacity-0 transition-opacity group-hover:opacity-100" />
               <content.icon

@@ -107,10 +107,7 @@ export default function CouponsPage() {
       </AsyncErrorBoundary>
 
       {/* メインコンテンツ */}
-      <main
-        id="main-content"
-        className="min-h-screen bg-gradient-to-br from-zinc-50/50 via-white to-blue-50/30"
-      >
+      <main id="main-content" className="min-h-screen bg-white">
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           {/* パンくずリスト */}
           <nav className="mb-10" aria-label="Breadcrumb">
@@ -133,16 +130,14 @@ export default function CouponsPage() {
           {/* ヘッダーセクション */}
           <div className="mb-16">
             <div className="mb-8 text-center">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-50 to-indigo-50 px-4 py-2 text-sm font-medium text-blue-700 ring-1 ring-blue-700/10">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-2 text-sm font-medium text-blue-700 ring-1 ring-blue-700/10">
                 <span className="text-xs">🎆</span>
                 {year}年{month}月 特別オファー
               </div>
               <h1 className="mb-6 text-4xl leading-tight font-bold text-zinc-950 sm:text-5xl lg:text-6xl">
                 当サイト限定！
                 <br className="sm:hidden" />
-                <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                  Udemy講座特別クーポン
-                </span>
+                <span className="text-zinc-950">Udemy講座特別クーポン</span>
               </h1>
             </div>
 

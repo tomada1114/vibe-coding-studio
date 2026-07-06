@@ -28,7 +28,7 @@ export const CouponCard = memo(function CouponCard({
     <Link
       href={`/coupons/${courseInfo.slug}`}
       id={`course-${courseInfo.slug}`}
-      className="group relative block cursor-pointer scroll-mt-20 overflow-hidden rounded-2xl bg-white ring-1 ring-gray-950/5 transition-shadow hover:ring-gray-950/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      className="group focus-visible:outline-accent relative block cursor-pointer scroll-mt-20 overflow-hidden rounded-2xl bg-white ring-1 ring-gray-950/5 transition-shadow hover:ring-gray-950/10 focus-visible:outline-2 focus-visible:outline-offset-2"
     >
       <SpectrumBeam className="absolute inset-x-0 top-0 z-10 opacity-0 transition-opacity group-hover:opacity-100" />
       {/* コースサムネイル画像 */}

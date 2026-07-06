@@ -209,7 +209,7 @@ function ValuePropositionSection() {
   ]
 
   return (
-    <div className="bg-linear-to-b from-white from-50% to-gray-100 py-32">
+    <div className="border-t border-gray-200 bg-gray-50 py-24 sm:py-32">
       <Container>
         <Subheading>VALUE</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">

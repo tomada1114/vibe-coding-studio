@@ -19,7 +19,7 @@ export function SpectrumBeam({
       aria-hidden="true"
       className={clsx(
         "block h-0.5 w-full bg-(image:--gradient-spectrum)",
-        animated && "origin-left animate-beam-draw motion-reduce:animate-none",
+        animated && "animate-beam-draw origin-left motion-reduce:animate-none",
         className
       )}
     />

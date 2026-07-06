@@ -104,9 +104,10 @@ describe("トップページ（/）", () => {
         "href",
         "/docs"
       )
-      expect(
-        screen.getByRole("link", { name: /VIDEOS/ })
-      ).toHaveAttribute("href", "/videos")
+      expect(screen.getByRole("link", { name: /VIDEOS/ })).toHaveAttribute(
+        "href",
+        "/videos"
+      )
       expect(
         screen.getByRole("link", { name: /LEARNING PATHS/ })
       ).toHaveAttribute("href", "/roadmap")
