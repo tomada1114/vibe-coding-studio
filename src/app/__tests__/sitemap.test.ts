@@ -21,7 +21,7 @@ jest.mock("@/lib/course-constants", () => ({
 }))
 
 jest.mock("@/lib/seo/site-url", () => ({
-  getSiteUrl: () => "https://school.learning-next.app",
+  getSiteUrl: () => "https://www.vibecodingstudio.dev",
 }))
 
 jest.mock("@/lib/videos/video-data", () => ({
@@ -43,22 +43,22 @@ describe("sitemap", () => {
     const result = sitemap()
     const urls = result.map(entry => entry.url)
 
-    expect(urls).toContain("https://school.learning-next.app")
-    expect(urls).toContain("https://school.learning-next.app/community")
-    expect(urls).toContain("https://school.learning-next.app/videos")
-    expect(urls).toContain("https://school.learning-next.app/docs")
-    expect(urls).toContain("https://school.learning-next.app/coupons")
-    expect(urls).toContain("https://school.learning-next.app/founder")
-    expect(urls).toContain("https://school.learning-next.app/roadmap")
+    expect(urls).toContain("https://www.vibecodingstudio.dev")
+    expect(urls).toContain("https://www.vibecodingstudio.dev/community")
+    expect(urls).toContain("https://www.vibecodingstudio.dev/videos")
+    expect(urls).toContain("https://www.vibecodingstudio.dev/docs")
+    expect(urls).toContain("https://www.vibecodingstudio.dev/coupons")
+    expect(urls).toContain("https://www.vibecodingstudio.dev/founder")
+    expect(urls).toContain("https://www.vibecodingstudio.dev/roadmap")
   })
 
   it("includes course pages", () => {
     const result = sitemap()
     const urls = result.map(entry => entry.url)
 
-    expect(urls).toContain("https://school.learning-next.app/docs/ruby")
-    expect(urls).toContain("https://school.learning-next.app/docs/rails")
-    expect(urls).toContain("https://school.learning-next.app/docs/javascript")
+    expect(urls).toContain("https://www.vibecodingstudio.dev/docs/ruby")
+    expect(urls).toContain("https://www.vibecodingstudio.dev/docs/rails")
+    expect(urls).toContain("https://www.vibecodingstudio.dev/docs/javascript")
   })
 
   it("includes coupon detail pages", () => {
@@ -66,10 +66,10 @@ describe("sitemap", () => {
     const urls = result.map(entry => entry.url)
 
     expect(urls).toContain(
-      "https://school.learning-next.app/coupons/react-course"
+      "https://www.vibecodingstudio.dev/coupons/react-course"
     )
     expect(urls).toContain(
-      "https://school.learning-next.app/coupons/rails-course"
+      "https://www.vibecodingstudio.dev/coupons/rails-course"
     )
   })
 
@@ -77,14 +77,14 @@ describe("sitemap", () => {
     const result = sitemap()
     const urls = result.map(entry => entry.url)
 
-    expect(urls).toContain("https://school.learning-next.app/videos/video-1")
-    expect(urls).toContain("https://school.learning-next.app/videos/video-2")
+    expect(urls).toContain("https://www.vibecodingstudio.dev/videos/video-1")
+    expect(urls).toContain("https://www.vibecodingstudio.dev/videos/video-2")
   })
 
   it("sets correct priorities", () => {
     const result = sitemap()
 
-    const home = result.find(e => e.url === "https://school.learning-next.app")
+    const home = result.find(e => e.url === "https://www.vibecodingstudio.dev")
     expect(home?.priority).toBe(1.0)
 
     const community = result.find(e => e.url?.includes("/community"))

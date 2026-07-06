@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     description:
       "計画を立ててから開発する新スタイル！要件・設計・タスクの3段階ドキュメント生成、エージェントフック、MCP連携まで。品質重視のAI駆動開発を基礎から実践まで徹底解説",
     type: "website",
-    url: "https://school.learning-next.app/coupons/aws-kiro-sd",
+    url: "/coupons/aws-kiro-sd",
     images: [
       {
         url: "/images/udemy/aws-kiro-sd.png",

@@ -165,8 +165,9 @@ function SocialLinks() {
           <Link
             key={link.name}
             href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
+            {...(link.url.startsWith("http")
+              ? { target: "_blank", rel: "noopener noreferrer" }
+              : {})}
             aria-label={`Visit us on ${link.name}`}
             className="text-gray-950 data-hover:text-gray-950/75"
           >

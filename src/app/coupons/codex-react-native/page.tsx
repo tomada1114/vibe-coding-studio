@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     description:
       "OpenAI CodexとReact Native(Expo)でプログラミング初心者でもゼロからスマホアプリを開発！",
     type: "website",
-    url: "https://school.learning-next.app/coupons/codex-react-native",
+    url: "/coupons/codex-react-native",
     images: [
       {
         url: "/images/udemy/codex-react-native.png",

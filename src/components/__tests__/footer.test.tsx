@@ -93,13 +93,17 @@ describe("Footer コンポーネント", () => {
       })
     })
 
-    it("各ソーシャルメディアリンクが新しいタブで開く（要件4.4）", () => {
+    it("外部ソーシャルメディアリンクが新しいタブで開く（要件4.4）", () => {
       render(<Footer />)
       SOCIAL_LINKS.forEach(link => {
         const element = screen.getByRole("link", {
           name: new RegExp(link.name, "i"),
         })
-        expect(element).toHaveAttribute("target", "_blank")
+        if (link.url.startsWith("http")) {
+          expect(element).toHaveAttribute("target", "_blank")
+        } else {
+          expect(element).not.toHaveAttribute("target")
+        }
       })
     })
 

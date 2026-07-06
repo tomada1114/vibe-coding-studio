@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     title: COURSE_TITLE,
     description: COURSE_SUBTITLE,
     type: "website",
-    url: "https://school.learning-next.app/coupons/nextjs-ai-pomodoro-timer",
+    url: "/coupons/nextjs-ai-pomodoro-timer",
     images: [
       {
         url: "/images/udemy/nextjs-ai-pomodoro-timer.png",

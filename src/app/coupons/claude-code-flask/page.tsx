@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     description:
       "FlaskとGemini AIでプロの開発フローを体験！要件定義から実装まで学べる実践講座",
     type: "website",
-    url: "https://school.learning-next.app/coupons/claude-code-flask",
+    url: "/coupons/claude-code-flask",
     images: [
       {
         url: "/images/udemy/claude-code-flask.png",

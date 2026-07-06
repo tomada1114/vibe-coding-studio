@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     description:
       "CLAUDE.md・rules・カスタムコマンド・サブエージェント・Skills・Hooksを完全マスター",
     type: "website",
-    url: "https://school.learning-next.app/coupons/claude-code-perfect-guide",
+    url: "/coupons/claude-code-perfect-guide",
     images: [
       {
         url: "/images/udemy/claude-code-perfect-guide.png",

@@ -189,7 +189,7 @@ function EducationSection() {
         "AI駆動開発分野で複数のベストセラーコースを運営。Claude Code、Codex、Cursor など最新AIツールの実践的な使い方を解説しています。プログラミング未経験の方でも分かりやすく解説していますので、AI駆動開発の基礎から実践までを学べます。",
       link: {
         text: "コース一覧を見る（クーポン付き）",
-        url: "https://school.learning-next.app/coupons",
+        url: "/coupons",
       },
     },
     {
@@ -244,8 +244,9 @@ function EducationSection() {
                 {activity.link && (
                   <a
                     href={activity.link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    {...(activity.link.url.startsWith("http")
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
                     className="mt-4 inline-block text-sm font-medium text-gray-950 underline decoration-gray-950/20 underline-offset-4 data-hover:decoration-gray-950"
                   >
                     {activity.link.text} →

@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     title: COURSE_TITLE,
     description: COURSE_SUBTITLE,
     type: "website",
-    url: "https://school.learning-next.app/coupons/ruby-on-rails-rspec",
+    url: "/coupons/ruby-on-rails-rspec",
     images: [
       {
         url: "/images/udemy/ruby-on-rails-rspec.png",

@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     description:
       "Claude Code×Vibe Codingでプログラミング未経験でもReact・Next.jsで5つのアプリを開発！",
     type: "website",
-    url: "https://school.learning-next.app/coupons/claude-code-vibe-coding",
+    url: "/coupons/claude-code-vibe-coding",
     images: [
       {
         url: "/images/udemy/claude-code-vibe-coding.png",

@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     description:
       "プログラミング未経験でもClaude CodeとReact Nativeでスマホアプリ開発！5つのアプリを作りながら実践的に学習。",
     type: "website",
-    url: "https://school.learning-next.app/coupons/claude-code-react-native-5apps",
+    url: "/coupons/claude-code-react-native-5apps",
     images: [
       {
         url: "/images/udemy/claude-code-react-native-5apps.png",

@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const month = metadataDate.getMonth() + 1
 
   const title = `【${year}年${month}月】当サイト限定！オリジナルUdemy講座の特別割引クーポン一覧`
-  const description = `Learning Next限定の特別価格でUdemy講座を受講できます。最大${maxDiscountRate}%OFFのクーポンを配布中。AI開発、React、Next.js、Ruby on Rails、RSpecなど実践的な技術を学べる講座が勢揃い。`
+  const description = `Vibe Coding Studio限定の特別価格でUdemy講座を受講できます。最大${maxDiscountRate}%OFFのクーポンを配布中。AI開発、React、Next.js、Ruby on Rails、RSpecなど実践的な技術を学べる講座が勢揃い。`
 
   return {
     title,
@@ -33,12 +33,12 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       type: "website",
-      url: "https://school.learning-next.app/coupons",
+      url: "/coupons",
       images: [
         {
-          url: "https://school.learning-next.app/img/author/tomada.png",
-          width: 800,
-          height: 600,
+          url: "/vcs-logo-wide-transparent.png",
+          width: 1200,
+          height: 630,
           alt: title,
         },
       ],
@@ -47,7 +47,7 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       title,
       description,
-      images: ["https://school.learning-next.app/img/author/tomada.png"],
+      images: ["/vcs-logo-wide-transparent.png"],
     },
     alternates: {
       canonical: "/coupons",
@@ -69,7 +69,7 @@ export default function CouponsPage() {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: `【${year}年${month}月】当サイト限定！オリジナルUdemy講座の特別割引クーポン一覧`,
-    description: `Learning Next限定の特別価格でUdemy講座を受講できます。最大${maxDiscountRate}%OFFのクーポンを配布中。`,
+    description: `Vibe Coding Studio限定の特別価格でUdemy講座を受講できます。最大${maxDiscountRate}%OFFのクーポンを配布中。`,
     itemListElement: coupons.map((coupon, index) => ({
       "@type": "Course",
       position: index + 1,
@@ -147,7 +147,7 @@ export default function CouponsPage() {
 
             <div className="mx-auto max-w-4xl text-center">
               <p className="text-lg leading-relaxed text-zinc-600 sm:text-xl">
-                Learning Nextでは、著者が作成したUdemy講座を
+                Vibe Coding Studioでは、著者が作成したUdemy講座を
                 <span className="mx-1 inline-flex items-center gap-1 rounded-lg bg-red-50 px-2 py-1 text-base font-semibold text-red-700">
                   最大{maxDiscountRate}%OFF
                 </span>

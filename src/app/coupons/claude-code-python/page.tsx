@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     description:
       "Claude CodeとPythonでプログラミング未経験でも7つの実践アプリを開発！実践的なPythonスキルを身につける",
     type: "website",
-    url: "https://school.learning-next.app/coupons/claude-code-python",
+    url: "/coupons/claude-code-python",
     images: [
       {
         url: "/images/udemy/claude-code-python.png",

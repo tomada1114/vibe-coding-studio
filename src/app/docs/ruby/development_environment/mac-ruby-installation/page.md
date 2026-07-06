@@ -247,7 +247,6 @@ Ruby のインストールにあたっては、お使いのPC次第で手順通�
 
 * [MacでRubyをインストールする方法をわかりやすく解説【初心者必見】](https://www.sejuku.net/blog/3958)
 * [Rubyの開発環境を用意しよう！（macOS用）](https://prog-8.com/docs/ruby-env)
-* [MacでRubyをrbenvでインストールする方法 初心者向け徹底ガイド](https://learning-next.app/blog/programming-languages/ruby-rbenv-installation-mac-for-beginners)
 
 ## よくある問題と解決方法
 

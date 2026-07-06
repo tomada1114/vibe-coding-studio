@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     description:
       "プログラミング未経験でもCodex IDE & CLIでPythonの基礎からFastAPI開発まで完全習得！",
     type: "website",
-    url: "https://school.learning-next.app/coupons/codex-python-fast-api",
+    url: "/coupons/codex-python-fast-api",
     images: [
       {
         url: "/images/udemy/codex-python-fast-api.png",

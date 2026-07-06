@@ -149,12 +149,8 @@ describe("運営者プロフィールページ（/founder）", () => {
         name: /コース一覧を見る（クーポン付き）/i,
       })
       expect(udemyLink).toBeInTheDocument()
-      expect(udemyLink).toHaveAttribute(
-        "href",
-        "https://school.learning-next.app/coupons"
-      )
-      expect(udemyLink).toHaveAttribute("target", "_blank")
-      expect(udemyLink).toHaveAttribute("rel", "noopener noreferrer")
+      expect(udemyLink).toHaveAttribute("href", "/coupons")
+      expect(udemyLink).not.toHaveAttribute("target")
     })
 
     it("YouTubeチャンネルへのリンクが表示される", () => {

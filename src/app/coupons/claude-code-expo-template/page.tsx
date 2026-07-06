@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     description:
       "バイブコーディング専用の開発環境を構築。E2E自動テストやMCP連携でアプリ開発を爆速化。",
     type: "website",
-    url: "https://school.learning-next.app/coupons/claude-code-expo-template",
+    url: "/coupons/claude-code-expo-template",
     images: [
       {
         url: "/images/udemy/claude-code-expo-template.png",

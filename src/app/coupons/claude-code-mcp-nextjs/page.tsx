@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     description:
       "Vibe Codingの次のステップへ！Serena、Context7、Playwright、Sequential Thinking、Supabaseを統合し、トークン節約・自動テスト・DB連携まで完全マスター。無料で始められる実践的MCP活用術",
     type: "website",
-    url: "https://school.learning-next.app/coupons/claude-code-mcp-nextjs",
+    url: "/coupons/claude-code-mcp-nextjs",
     images: [
       {
         url: "/images/udemy/claude-code-mcp-nextjs.png",

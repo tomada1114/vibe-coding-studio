@@ -43,9 +43,9 @@ describe("constants.ts", () => {
       })
     })
 
-    it("各ソーシャルリンクのURLが有効なHTTPS URL形式である", () => {
+    it("各ソーシャルリンクのURLがHTTPS URLまたは内部パスである", () => {
       SOCIAL_LINKS.forEach(link => {
-        expect(link.url).toMatch(/^https:\/\//)
+        expect(link.url).toMatch(/^(https:\/\/|\/)/)
       })
     })
 
@@ -88,7 +88,7 @@ describe("constants.ts", () => {
     it("SOCIAL_LINKSがUdemyリンクを含む", () => {
       const udemyLink = SOCIAL_LINKS.find(link => link.name === "Udemy")
       expect(udemyLink).toBeDefined()
-      expect(udemyLink?.url).toMatch(/school\.learning-next\.app/)
+      expect(udemyLink?.url).toBe("/coupons")
     })
   })
 

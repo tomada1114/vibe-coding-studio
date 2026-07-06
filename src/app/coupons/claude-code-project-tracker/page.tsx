@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     title: COURSE_TITLE,
     description: COURSE_SUBTITLE,
     type: "website",
-    url: "https://school.learning-next.app/coupons/claude-code-project-tracker",
+    url: "/coupons/claude-code-project-tracker",
     images: [
       {
         url: "/images/udemy/claude-code-project-tracker.png",
