@@ -216,7 +216,7 @@ export function VideoDetail({ video }: VideoDetailProps) {
         href={video.videoUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="group relative block overflow-hidden rounded-2xl ring-1 ring-gray-950/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        className="group focus-visible:outline-accent relative block overflow-hidden rounded-2xl ring-1 ring-gray-950/5 focus-visible:outline-2 focus-visible:outline-offset-2"
         aria-label={`YouTubeで「${video.title}」を見る`}
       >
         <img
@@ -230,7 +230,7 @@ export function VideoDetail({ video }: VideoDetailProps) {
       </a>
 
       {/* タイトルと公開日 */}
-      <h1 className="mt-8 font-display text-3xl/tight font-bold tracking-tight text-gray-950 sm:text-4xl/tight">
+      <h1 className="font-display mt-8 text-3xl/tight font-bold tracking-tight text-gray-950 sm:text-4xl/tight">
         {video.title}
       </h1>
       <p className="mt-3 font-mono text-sm text-gray-500">{publishedDate}</p>
@@ -266,7 +266,7 @@ export function VideoDetail({ video }: VideoDetailProps) {
                   href={`https://www.youtube.com/watch?v=${video.id}&t=${timestampToSeconds(timestamp.time)}s`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="shrink-0 font-mono text-sm text-accent underline decoration-accent/30 underline-offset-4 hover:decoration-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  className="text-accent decoration-accent/30 hover:decoration-accent focus-visible:outline-accent shrink-0 font-mono text-sm underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2"
                 >
                   {timestamp.time}
                 </a>
@@ -286,7 +286,9 @@ export function VideoDetail({ video }: VideoDetailProps) {
           <ul className="mt-4 space-y-3">
             {video.relatedVideos.videos.map(relatedVideo => {
               const relatedId = extractYouTubeId(relatedVideo.url)
-              const isInternal = relatedId ? Boolean(getVideoById(relatedId)) : false
+              const isInternal = relatedId
+                ? Boolean(getVideoById(relatedId))
+                : false
               const linkClassName =
                 "text-base/7 font-medium text-gray-950 underline decoration-gray-950/20 underline-offset-4 hover:decoration-gray-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               return (
@@ -337,7 +339,7 @@ export function VideoDetail({ video }: VideoDetailProps) {
               href={video.udemyCourses.cta.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-base/7 font-medium text-gray-950 underline decoration-gray-950/20 underline-offset-4 hover:decoration-gray-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              className="focus-visible:outline-accent text-base/7 font-medium text-gray-950 underline decoration-gray-950/20 underline-offset-4 hover:decoration-gray-950 focus-visible:outline-2 focus-visible:outline-offset-2"
             >
               {video.udemyCourses.cta.text}
             </a>

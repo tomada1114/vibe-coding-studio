@@ -27,7 +27,7 @@ export function CopyDescriptionButton({ text }: { text: string }) {
         if (timerRef.current) clearTimeout(timerRef.current)
         timerRef.current = setTimeout(() => setCopied(false), 2000)
       }}
-      className="rounded-full bg-gray-950 px-4 py-2 font-mono text-sm text-white hover:bg-gray-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      className="focus-visible:outline-accent rounded-full bg-gray-950 px-4 py-2 font-mono text-sm text-white hover:bg-gray-800 focus-visible:outline-2 focus-visible:outline-offset-2"
     >
       {copied ? "コピーしました" : "概要欄をコピー"}
     </button>
