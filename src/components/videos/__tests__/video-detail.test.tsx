@@ -232,11 +232,12 @@ describe("VideoDetail", () => {
       }
 
       const { container } = render(<VideoDetail video={videoWithRelated} />)
-      const text = container.textContent || ""
+      // コピー用プレーンテキスト内のフォーマットを確認
+      const text = container.querySelector("pre")?.textContent || ""
       // タイトルに中点が使用されていることを確認
       expect(text).toContain("・関連動画1")
-      // 絵文字が使用されていないことを確認
-      expect(text).not.toMatch(/[🎯📱💻🔧].*関連動画1/)
+      // 絵文字の箇条書きが使用されていないことを確認
+      expect(text).not.toMatch(/[🎯📱💻🔧]\s*関連動画1/)
     })
   })
 
@@ -404,11 +405,12 @@ describe("VideoDetail", () => {
   })
 
   describe("スタイリングのテスト", () => {
-    it("カード形式で表示される", () => {
+    it("h1 が1つだけ存在し、コピー用ブロックが折りたたみで表示される", () => {
       const { container } = render(<VideoDetail video={mockVideoData} />)
-      const card = container.querySelector(".rounded-lg.border")
-      expect(card).toBeInTheDocument()
-      expect(card).toHaveClass("bg-white")
+      expect(container.querySelectorAll("h1")).toHaveLength(1)
+      const details = container.querySelector("details")
+      expect(details).toBeInTheDocument()
+      expect(details?.querySelector("pre")).toBeInTheDocument()
     })
 
     it("プレーンテキストに適切なスタイルが適用される", () => {
