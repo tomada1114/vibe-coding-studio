@@ -6,6 +6,7 @@ import { Footer } from "@/components/footer"
 import { Gradient } from "@/components/gradient"
 import { Navbar } from "@/components/navbar"
 import { Heading, Subheading } from "@/components/text"
+import { getLatestCoupons, getMaxDiscountRate } from "@/lib/coupons/coupon-data"
 import {
   BookOpenIcon,
   ChatBubbleLeftRightIcon,
@@ -153,9 +154,10 @@ function CommunityOverviewSection() {
 /**
  * クーポンセクション
  * - Udemyクーポンの案内
- * - 最大90% OFFの訴求
+ * - 最大割引率はクーポンデータから算出
  */
 function CouponSection() {
+  const maxDiscountRate = getMaxDiscountRate(getLatestCoupons())
   return (
     <div className="relative py-32">
       <Gradient className="absolute inset-2 rounded-4xl ring-1 ring-black/5 ring-inset" />
@@ -171,7 +173,9 @@ function CouponSection() {
           <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-600">
             運営者である「とまだ」のUdemy講座を
             <br />
-            <span className="font-semibold text-gray-950">最大90% OFF</span>
+            <span className="font-semibold text-gray-950">
+              最大{maxDiscountRate}% OFF
+            </span>
             で受講できるクーポンを配布中。
             <br />
             AI駆動開発を実践的に学べる講座を特別価格でお届けします。
@@ -285,7 +289,6 @@ function ProfileSection() {
                   fill
                   className="object-contain"
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  priority
                 />
               </div>
             </div>

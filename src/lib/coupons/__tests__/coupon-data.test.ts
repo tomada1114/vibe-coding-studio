@@ -333,6 +333,11 @@ describe("coupon-data", () => {
       expect(getMaxDiscountRate(coupons)).toBe(90)
     })
 
+    it("¥19,800の講座が¥1,500になる場合は92%を返すこと", () => {
+      const coupons = [makeCoupon(19800, 1500)]
+      expect(getMaxDiscountRate(coupons)).toBe(92)
+    })
+
     it("すべて同じ割引率の場合、その値を返すこと", () => {
       const coupons = [
         makeCoupon(10000, 3000), // 70%
