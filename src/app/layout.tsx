@@ -2,6 +2,23 @@ import { ErrorBoundary } from "@/components/error-boundary"
 import { getSiteUrl } from "@/lib/seo/site-url"
 import "@/styles/tailwind.css"
 import type { Metadata } from "next"
+import { IBM_Plex_Mono, IBM_Plex_Sans_JP } from "next/font/google"
+
+const plexSansJP = IBM_Plex_Sans_JP({
+  weight: ["400", "500", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  preload: false,
+  variable: "--font-plex-sans-jp",
+})
+
+const plexMono = IBM_Plex_Mono({
+  weight: ["400", "500"],
+  subsets: ["latin"],
+  display: "swap",
+  preload: false,
+  variable: "--font-plex-mono",
+})
 
 const siteUrl = getSiteUrl()
 
@@ -58,7 +75,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ja">
+    <html lang="ja" className={`${plexSansJP.variable} ${plexMono.variable}`}>
       <head></head>
       <body className="text-gray-950 antialiased">
         <a

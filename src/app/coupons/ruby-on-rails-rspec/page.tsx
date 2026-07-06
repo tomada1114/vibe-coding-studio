@@ -163,7 +163,10 @@ export default function RailsCoursePage() {
       </AsyncErrorBoundary>
 
       {/* メインコンテンツ */}
-      <main id="main-content" className="min-h-screen bg-gradient-to-br from-blue-50/50 via-white to-indigo-50/30">
+      <main
+        id="main-content"
+        className="min-h-screen bg-gradient-to-br from-blue-50/50 via-white to-indigo-50/30"
+      >
         <CourseDetailHero
           title={courseDetails.title}
           subtitle={courseDetails.subtitle}

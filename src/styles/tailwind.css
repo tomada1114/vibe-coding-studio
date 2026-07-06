@@ -3,11 +3,16 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --font-sans:
-    "Helvetica Neue", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial",
-    "Yu Gothic", "Meiryo", sans-serif;
-
   --radius-4xl: 2rem;
+}
+
+/* next/font の CSS 変数を参照するため inline が必須 */
+@theme inline {
+  --font-sans:
+    var(--font-plex-sans-jp), "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+    "Yu Gothic", "Meiryo", sans-serif;
+  --font-display: var(--font-plex-sans-jp), "Hiragino Sans", sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", monospace;
 }
 
 @keyframes move-x {
