@@ -16,7 +16,7 @@ import type { Metadata } from "next"
 
 // 静的生成を明示的に設定
 export const dynamic = "force-static"
-export const revalidate = 3600 // 1時間ごとに再生成
+export const revalidate = 21600 // 6時間ごとに再生成
 
 const COURSE_ID = "6826831"
 

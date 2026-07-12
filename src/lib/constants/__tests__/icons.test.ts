@@ -91,7 +91,7 @@ describe("icons", () => {
       const result = getDeviconUrl("python")
 
       expect(result).toBe(
-        "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
+        "https://cdn.jsdelivr.net/gh/devicons/devicon@2.16.0/icons/python/python-original.svg"
       )
     })
 
