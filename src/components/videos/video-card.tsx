@@ -51,7 +51,7 @@ export function VideoCard({ video }: VideoCardProps) {
                 key={tag}
                 className="rounded-full bg-gray-50 px-2 py-0.5 font-mono text-xs text-gray-600 ring-1 ring-gray-950/5"
               >
-                {tag}
+                #{tag}
               </li>
             ))}
           </ul>

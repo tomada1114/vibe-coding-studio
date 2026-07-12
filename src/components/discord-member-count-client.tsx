@@ -26,17 +26,13 @@ export function DiscordMemberCountClient({
   formattedCount,
 }: DiscordMemberCountClientProps) {
   // formattedCountから数値部分を抽出（例: "1,230+" -> 1230）
-  const targetNumber = Number.parseInt(
-    formattedCount.replace(/[^0-9]/g, ""),
-    10
-  )
+  // 数字を含まない文字列でも "NaN+" と表示しないよう 0 に丸める
+  const parsedCount = Number.parseInt(formattedCount.replace(/[^0-9]/g, ""), 10)
+  const targetNumber = Number.isFinite(parsedCount) ? parsedCount : 0
   const [displayNumber, setDisplayNumber] = useState(0)
 
   useEffect(() => {
-    if (
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-      !Number.isFinite(targetNumber)
-    ) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setDisplayNumber(targetNumber)
       return
     }

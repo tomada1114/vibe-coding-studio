@@ -51,4 +51,27 @@ describe("CopyDescriptionButton", () => {
       screen.getByRole("button", { name: "概要欄をコピー" })
     ).toBeInTheDocument()
   })
+
+  it("コピー失敗時は握りつぶさず「コピーできませんでした」を表示する", async () => {
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime })
+    const writeText = jest.fn().mockRejectedValue(new Error("not allowed"))
+    Object.defineProperty(navigator, "clipboard", {
+      value: { writeText },
+      configurable: true,
+    })
+
+    render(<CopyDescriptionButton text="text" />)
+    await user.click(screen.getByRole("button", { name: "概要欄をコピー" }))
+
+    expect(
+      await screen.findByRole("button", { name: "コピーできませんでした" })
+    ).toBeInTheDocument()
+
+    await act(async () => {
+      await jest.advanceTimersByTimeAsync(2000)
+    })
+    expect(
+      screen.getByRole("button", { name: "概要欄をコピー" })
+    ).toBeInTheDocument()
+  })
 })

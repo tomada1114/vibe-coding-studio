@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { useEffect } from "react"
 
 /**
  * ルートエラー境界
@@ -9,11 +10,19 @@ import Link from "next/link"
  * 再試行とホームへの導線を提供する（ライトテーマ・日本語）。
  */
 export default function Error({
+  error,
   reset,
 }: {
   error: Error & { digest?: string }
   reset: () => void
 }) {
+  useEffect(() => {
+    if (process.env.NODE_ENV === "development") {
+      // eslint-disable-next-line no-console
+      console.error("[app/error]", error)
+    }
+  }, [error])
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-white px-6 py-24 text-center">
       <h1 className="text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">

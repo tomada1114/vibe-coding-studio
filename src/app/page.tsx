@@ -20,6 +20,7 @@ import {
 } from "@heroicons/react/24/outline"
 import type { Metadata } from "next"
 import Image from "next/image"
+import Link from "next/link"
 
 export const metadata: Metadata = {
   title: "ホーム",
@@ -38,7 +39,6 @@ function HeroSection() {
   return (
     <div className="relative">
       <Container className="relative">
-        <Navbar />
         <div className="pt-16 pb-24 sm:pt-24 sm:pb-32 md:pt-32 md:pb-48">
           {/* キャッチコピー */}
           <h1 className="font-display text-4xl/[1.2] font-bold tracking-tight text-balance text-gray-950 sm:text-5xl/[1.15] md:text-6xl/[1.1]">
@@ -251,10 +251,10 @@ function LearnSection() {
         {/* レスポンシブグリッド */}
         <div className="mt-10 grid grid-cols-1 gap-8 sm:mt-16 md:grid-cols-2 lg:grid-cols-3">
           {learnContents.map(content => (
-            <a
+            <Link
               key={content.title}
               href={content.href}
-              className="group focus-visible:outline-accent relative overflow-hidden rounded-2xl bg-white p-8 ring-1 ring-gray-950/5 transition-shadow hover:ring-gray-950/10 focus-visible:outline-2 focus-visible:outline-offset-2"
+              className="group focus-visible:outline-accent relative block overflow-hidden rounded-2xl bg-white p-8 ring-1 ring-gray-950/5 transition-shadow hover:ring-gray-950/10 focus-visible:outline-2 focus-visible:outline-offset-2"
             >
               <SpectrumBeam className="absolute inset-x-0 top-0 opacity-0 transition-opacity group-hover:opacity-100" />
               <content.icon
@@ -270,7 +270,7 @@ function LearnSection() {
               <p className="mt-6 font-mono text-xs/5 font-medium tracking-widest text-gray-500 uppercase">
                 {content.stat}
               </p>
-            </a>
+            </Link>
           ))}
         </div>
       </Container>
@@ -339,6 +339,14 @@ function ProfileSection() {
 export default function Home() {
   return (
     <div className="overflow-hidden">
+      {/* Navbar は main の外に置く（スキップリンクがナビを飛ばせるようにするため） */}
+      <AsyncErrorBoundary>
+        <div className="relative">
+          <Container className="relative">
+            <Navbar />
+          </Container>
+        </div>
+      </AsyncErrorBoundary>
       <main id="main-content">
         <AsyncErrorBoundary>
           <HeroSection />

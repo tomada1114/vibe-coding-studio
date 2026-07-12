@@ -1,4 +1,5 @@
 import { CopyDescriptionButton } from "@/components/videos/copy-description-button"
+import { VideoThumbnail } from "@/components/videos/video-thumbnail"
 import { timestampToSeconds } from "@/lib/videos/timestamp"
 import { getVideoById } from "@/lib/videos/video-data"
 import type { CustomSection, VideoMetadata } from "@/types/video"
@@ -219,12 +220,8 @@ export function VideoDetail({ video }: VideoDetailProps) {
         className="group focus-visible:outline-accent relative block overflow-hidden rounded-2xl ring-1 ring-gray-950/5 focus-visible:outline-2 focus-visible:outline-offset-2"
         aria-label={`YouTubeで「${video.title}」を見る`}
       >
-        <img
-          src={`https://i.ytimg.com/vi/${video.id}/maxresdefault.jpg`}
-          alt=""
-          width={1280}
-          height={720}
-          decoding="async"
+        <VideoThumbnail
+          videoId={video.id}
           className="aspect-video w-full object-cover"
         />
       </a>

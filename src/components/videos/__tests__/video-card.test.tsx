@@ -20,7 +20,8 @@ const mockVideo: VideoMetadata = {
     title: "⏰ タイムスタンプ",
     items: [{ time: "00:00", label: "イントロ" }],
   },
-  tags: ["#テスト"],
+  // 実データと同様に # は含まない（表示時に付与される）
+  tags: ["テスト"],
   social: {
     title: "🔗 SNS",
     accounts: [
@@ -67,10 +68,10 @@ describe("VideoCard", () => {
     expect(publishedDate).toHaveClass("font-mono")
   })
 
-  test("タグが上位3件まで mono バッジで表示される", () => {
+  test("タグが上位3件まで # 付きの mono バッジで表示される", () => {
     const video = {
       ...mockVideo,
-      tags: ["#タグ1", "#タグ2", "#タグ3", "#タグ4"],
+      tags: ["タグ1", "タグ2", "タグ3", "タグ4"],
     }
     render(<VideoCard video={video} />)
 

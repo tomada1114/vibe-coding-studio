@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { useEffect } from "react"
 
 /**
  * グローバルエラー境界
@@ -9,11 +10,19 @@ import Link from "next/link"
  * html/body を自前でレンダリングする必要がある。
  */
 export default function GlobalError({
+  error,
   reset,
 }: {
   error: Error & { digest?: string }
   reset: () => void
 }) {
+  useEffect(() => {
+    if (process.env.NODE_ENV === "development") {
+      // eslint-disable-next-line no-console
+      console.error("[app/global-error]", error)
+    }
+  }, [error])
+
   return (
     <html lang="ja">
       <body>

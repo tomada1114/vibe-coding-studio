@@ -5,6 +5,8 @@ import "@/styles/tailwind.css"
 import type { Metadata } from "next"
 import { IBM_Plex_Mono, IBM_Plex_Sans_JP } from "next/font/google"
 
+// subsets は latin のみ。japanese サブセットは数MB規模になるため配信せず、
+// 日本語グリフは font-sans のフォールバック（Hiragino Sans 等）に任せる。
 const plexSansJP = IBM_Plex_Sans_JP({
   weight: ["400", "500", "700"],
   subsets: ["latin"],
