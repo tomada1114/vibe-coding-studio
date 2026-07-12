@@ -255,17 +255,12 @@ describe("logCacheStats", () => {
     const consoleTableSpy = jest
       .spyOn(console, "table")
       .mockImplementation(() => {})
-    const consoleLogSpy = jest
-      .spyOn(console, "log")
-      .mockImplementation(() => {})
 
     logCacheStats()
 
     expect(consoleTableSpy).toHaveBeenCalled()
-    expect(consoleLogSpy).toHaveBeenCalled()
 
     consoleTableSpy.mockRestore()
-    consoleLogSpy.mockRestore()
     process.env.NODE_ENV = originalEnv
   })
 
@@ -278,17 +273,12 @@ describe("logCacheStats", () => {
     const consoleTableSpy = jest
       .spyOn(console, "table")
       .mockImplementation(() => {})
-    const consoleLogSpy = jest
-      .spyOn(console, "log")
-      .mockImplementation(() => {})
 
     logCacheStats()
 
     expect(consoleTableSpy).not.toHaveBeenCalled()
-    expect(consoleLogSpy).not.toHaveBeenCalled()
 
     consoleTableSpy.mockRestore()
-    consoleLogSpy.mockRestore()
     process.env.NODE_ENV = originalEnv
   })
 
@@ -312,18 +302,13 @@ describe("logCacheStats", () => {
     const consoleTableSpy = jest
       .spyOn(console, "table")
       .mockImplementation(() => {})
-    const consoleLogSpy = jest
-      .spyOn(console, "log")
-      .mockImplementation(() => {})
 
     logCacheStats()
 
     // Should call console.table twice (once for stats, once for entries)
-    expect(consoleTableSpy).toHaveBeenCalled()
-    expect(consoleLogSpy).toHaveBeenCalledWith("Top cached entries:")
+    expect(consoleTableSpy).toHaveBeenCalledTimes(2)
 
     consoleTableSpy.mockRestore()
-    consoleLogSpy.mockRestore()
     process.env.NODE_ENV = originalEnv
   })
 })
