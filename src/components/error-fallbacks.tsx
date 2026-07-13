@@ -2,7 +2,7 @@
 
 import { Button } from "./button"
 import { Container } from "./container"
-import { Heading, Subheading } from "./text"
+import { Heading } from "./text"
 
 interface ErrorFallbackProps {
   error?: Error
@@ -35,10 +35,10 @@ export function NetworkErrorFallback({ reset }: ErrorFallbackProps) {
         <Heading as="h3" className="mb-2">
           Connection Issue
         </Heading>
-        <Subheading className="mb-6 text-gray-600">
+        <p className="mb-6 text-sm/6 text-gray-600">
           We&apos;re having trouble connecting to our servers. Please check your
           internet connection and try again.
-        </Subheading>
+        </p>
         {reset && (
           <Button onClick={reset} variant="secondary">
             Try Again
@@ -74,10 +74,10 @@ export function DataErrorFallback({ reset, message }: ErrorFallbackProps) {
         <Heading as="h3" className="mb-2">
           Unable to Load Data
         </Heading>
-        <Subheading className="mb-6 text-gray-600">
+        <p className="mb-6 text-sm/6 text-gray-600">
           {message ||
             "We encountered an error while loading the data. Please try again later."}
-        </Subheading>
+        </p>
         {reset && (
           <div className="flex justify-center gap-3">
             <Button onClick={reset}>Retry</Button>
@@ -116,10 +116,10 @@ export function PermissionErrorFallback({ reset }: ErrorFallbackProps) {
         <Heading as="h3" className="mb-2">
           Access Denied
         </Heading>
-        <Subheading className="mb-6 text-gray-600">
+        <p className="mb-6 text-sm/6 text-gray-600">
           You don&apos;t have permission to access this resource. Please contact
           support if you believe this is an error.
-        </Subheading>
+        </p>
         <div className="flex justify-center gap-3">
           {reset && (
             <Button onClick={reset} variant="secondary">
@@ -144,9 +144,9 @@ export function NotFoundFallback() {
         <Heading as="h2" className="mb-2">
           Page Not Found
         </Heading>
-        <Subheading className="mb-6 text-gray-600">
+        <p className="mb-6 text-sm/6 text-gray-600">
           The page you&apos;re looking for doesn&apos;t exist or has been moved.
-        </Subheading>
+        </p>
         <div className="flex justify-center gap-3">
           <Button href="/">Go Home</Button>
           <Button variant="secondary" href="/docs">

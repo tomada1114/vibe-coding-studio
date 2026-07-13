@@ -1,7 +1,6 @@
 import { Container } from "@/components/container"
 import { AsyncErrorBoundary } from "@/components/error-boundary"
 import { Footer } from "@/components/footer"
-import { Gradient } from "@/components/gradient"
 import { Navbar } from "@/components/navbar"
 import { VideoDetail } from "@/components/videos/video-detail"
 import { getAllVideoIds, getVideoById } from "@/lib/videos/video-data"
@@ -87,7 +86,6 @@ export default async function VideoDetailPage({
       {/* ヘッダー */}
       <AsyncErrorBoundary>
         <div className="relative">
-          <Gradient className="absolute inset-2 bottom-0 rounded-4xl ring-1 ring-black/5 ring-inset" />
           <Container className="relative">
             <Navbar />
           </Container>
@@ -95,7 +93,7 @@ export default async function VideoDetailPage({
       </AsyncErrorBoundary>
 
       {/* メインコンテンツ */}
-      <main>
+      <main id="main-content">
         <AsyncErrorBoundary>
           <Container className="mt-16 mb-32 sm:mt-32">
             <div className="mb-8 flex items-center justify-between">

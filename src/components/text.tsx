@@ -3,7 +3,6 @@ import { Link } from "./link"
 
 type HeadingProps = {
   as?: "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
-  dark?: boolean
 } & React.ComponentPropsWithoutRef<
   "div" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
 >
@@ -11,16 +10,14 @@ type HeadingProps = {
 export function Heading({
   className,
   as: Element = "h2",
-  dark = false,
   ...props
 }: HeadingProps) {
   return (
     <Element
       {...props}
-      data-dark={dark ? "true" : undefined}
       className={clsx(
         className,
-        "text-4xl font-medium tracking-tighter text-pretty text-gray-950 data-dark:text-white sm:text-6xl"
+        "text-4xl font-bold tracking-tight text-pretty text-gray-950 sm:text-5xl md:text-6xl"
       )}
     />
   )
@@ -29,18 +26,23 @@ export function Heading({
 export function Subheading({
   className,
   as: Element = "h2",
-  dark = false,
+  children,
   ...props
 }: HeadingProps) {
   return (
     <Element
       {...props}
-      data-dark={dark ? "true" : undefined}
       className={clsx(
         className,
-        "font-mono text-xs/5 font-semibold tracking-widest text-gray-500 uppercase data-dark:text-gray-400"
+        "flex items-center gap-2 font-mono text-xs/5 font-semibold tracking-widest text-gray-500 uppercase"
       )}
-    />
+    >
+      <span
+        aria-hidden="true"
+        className="h-0.5 w-3 shrink-0 bg-(image:--gradient-spectrum)"
+      />
+      {children}
+    </Element>
   )
 }
 
@@ -66,10 +68,7 @@ export function Text({
     <p
       data-slot="text"
       {...props}
-      className={clsx(
-        className,
-        "text-base/6 text-zinc-500 sm:text-sm/6 dark:text-zinc-400"
-      )}
+      className={clsx(className, "text-base/6 text-zinc-500 sm:text-sm/6")}
     />
   )
 }
@@ -83,7 +82,7 @@ export function TextLink({
       {...props}
       className={clsx(
         className,
-        "text-zinc-950 underline decoration-zinc-950/50 data-hover:decoration-zinc-950 dark:text-white dark:decoration-white/50 dark:data-hover:decoration-white"
+        "text-zinc-950 underline decoration-zinc-950/50 data-hover:decoration-zinc-950"
       )}
     />
   )
@@ -96,7 +95,7 @@ export function Strong({
   return (
     <strong
       {...props}
-      className={clsx(className, "font-medium text-zinc-950 dark:text-white")}
+      className={clsx(className, "font-medium text-zinc-950")}
     />
   )
 }
@@ -110,7 +109,7 @@ export function Code({
       {...props}
       className={clsx(
         className,
-        "rounded-sm border border-zinc-950/10 bg-zinc-950/2.5 px-0.5 text-sm font-medium text-zinc-950 sm:text-[0.8125rem] dark:border-white/20 dark:bg-white/5 dark:text-white"
+        "rounded-sm border border-zinc-950/10 bg-zinc-950/2.5 px-0.5 text-sm font-medium text-zinc-950 sm:text-[0.8125rem]"
       )}
     />
   )

@@ -1,14 +1,14 @@
 import { Container } from "@/components/container"
 import { AsyncErrorBoundary } from "@/components/error-boundary"
 import { Footer } from "@/components/footer"
-import { Gradient } from "@/components/gradient"
 import { Navbar } from "@/components/navbar"
 import { RoadmapContent } from "@/components/roadmap/RoadmapContent"
 import { getAllCourses } from "@/data/roadmaps"
 import type { Metadata } from "next"
 import { Suspense } from "react"
 
-const title = "ロードマップ | Vibe Coding Studio"
+const title = "ロードマップ"
+const ogTitle = "ロードマップ | Vibe Coding Studio"
 const description =
   "Claude Codeを使ったAI駆動開発の学習ロードマップ。目的別に最適な学習パスを選び、プログラミング未経験からプロフェッショナルまで効率的にスキルを習得できます。"
 
@@ -16,24 +16,24 @@ export const metadata: Metadata = {
   title,
   description,
   openGraph: {
-    title,
+    title: ogTitle,
     description,
     type: "website",
     url: "/roadmap",
     images: [
       {
-        url: "/vcs-logo-wide-transparent.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: title,
+        alt: ogTitle,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title,
+    title: ogTitle,
     description,
-    images: ["/vcs-logo-wide-transparent.png"],
+    images: ["/og-image.png"],
   },
   alternates: {
     canonical: "/roadmap",
@@ -72,14 +72,13 @@ export default function RoadmapPage() {
       <RoadmapStructuredData />
       <AsyncErrorBoundary>
         <div className="relative">
-          <Gradient className="absolute inset-2 bottom-0 rounded-4xl ring-1 ring-black/5 ring-inset" />
           <Container className="relative">
             <Navbar />
           </Container>
         </div>
       </AsyncErrorBoundary>
 
-      <main>
+      <main id="main-content">
         <Suspense
           fallback={
             <div className="flex min-h-screen items-center justify-center">

@@ -43,9 +43,9 @@ export function TopicFilter({
 
   return (
     <div className="mb-12 rounded-2xl border border-zinc-950/5 bg-white p-8 shadow-sm backdrop-blur-sm">
-      <h3 className="mb-6 text-xl font-semibold text-zinc-950">
+      <h2 className="mb-6 text-xl font-semibold text-zinc-950">
         技術スタックでフィルタ
-      </h3>
+      </h2>
 
       <div className="flex flex-wrap gap-4">
         {availableTopics.map(topic => {

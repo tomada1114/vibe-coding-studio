@@ -20,7 +20,8 @@ const mockVideo: VideoMetadata = {
     title: "⏰ タイムスタンプ",
     items: [{ time: "00:00", label: "イントロ" }],
   },
-  tags: ["#テスト"],
+  // 実データと同様に # は含まない（表示時に付与される）
+  tags: ["テスト"],
   social: {
     title: "🔗 SNS",
     accounts: [
@@ -45,12 +46,40 @@ describe("VideoCard", () => {
     expect(title).toBeInTheDocument()
   })
 
-  test("公開日が日本語形式で表示される", () => {
+  test("YouTubeサムネイルが遅延読み込みで表示される（next/image 不使用）", () => {
+    const { container } = render(<VideoCard video={mockVideo} />)
+
+    const img = container.querySelector("img")
+    expect(img).not.toBeNull()
+    expect(img).toHaveAttribute(
+      "src",
+      "https://i.ytimg.com/vi/test-video-001/hqdefault.jpg"
+    )
+    expect(img).toHaveAttribute("loading", "lazy")
+    expect(img).toHaveAttribute("width", "480")
+    expect(img).toHaveAttribute("height", "360")
+  })
+
+  test("公開日が mono の日付として表示される", () => {
     render(<VideoCard video={mockVideo} />)
 
-    const publishedDate = screen.getByText(/公開日:/)
+    const publishedDate = screen.getByText("2025-10-01")
     expect(publishedDate).toBeInTheDocument()
-    expect(publishedDate.textContent).toContain("2025")
+    expect(publishedDate).toHaveClass("font-mono")
+  })
+
+  test("タグが上位3件まで # 付きの mono バッジで表示される", () => {
+    const video = {
+      ...mockVideo,
+      tags: ["タグ1", "タグ2", "タグ3", "タグ4"],
+    }
+    render(<VideoCard video={video} />)
+
+    expect(screen.getByText("#タグ1")).toBeInTheDocument()
+    expect(screen.getByText("#タグ2")).toBeInTheDocument()
+    expect(screen.getByText("#タグ3")).toBeInTheDocument()
+    expect(screen.queryByText("#タグ4")).not.toBeInTheDocument()
+    expect(screen.getByText("#タグ1")).toHaveClass("font-mono")
   })
 
   test("詳細ページへのリンクが正しい", () => {
@@ -60,10 +89,12 @@ describe("VideoCard", () => {
     expect(link).toHaveAttribute("href", "/videos/test-video-001")
   })
 
-  test("ホバー時のスタイルが適用されている", () => {
+  test("ホバー時は ring 強調とスペクトラムビームが適用される", () => {
     render(<VideoCard video={mockVideo} />)
 
     const link = screen.getByRole("link")
-    expect(link).toHaveClass("hover:shadow-md")
+    expect(link).toHaveClass("hover:ring-gray-950/10")
+    const beam = link.querySelector("span[aria-hidden='true']")
+    expect(beam).not.toBeNull()
   })
 })

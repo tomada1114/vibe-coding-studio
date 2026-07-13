@@ -14,6 +14,7 @@ import {
   type CourseContent,
   type ThemeColors,
 } from "@/components/docs/Curriculum"
+import type { Metadata } from "next"
 
 // コースのスラッグを定義
 const slug = "javascript"
@@ -177,11 +178,9 @@ const javascriptContent: CourseContent = {
   cta: {
     title: "Webページに命を吹き込み、ユーザーとの対話を実現しよう",
     description:
-      "<strong>月額サブスクリプション</strong>にご登録いただくと、このカリキュラムの全コンテンツにアクセスできます。JavaScriptの基礎をしっかり学ぶことで、React や Vue.js などのモダンなフレームワークへの道筋も見えてきます。自分のペースでプログラミングの楽しさを体験していきましょう！",
-    primaryButtonText: "サブスクリプションを見る", // 不変
-    primaryButtonLink: "/docs", // 料金ページへのリンク（全カリキュラムで共通）
-    secondaryButtonText: "学習をスタート", // 不変
-    secondaryButtonLink: "/docs/javascript/introduction/what_is_javascript", // 最初のチャプターへのリンク
+      "このカリキュラムはすべて無料で学べます。JavaScriptの基礎をしっかり学ぶことで、React や Vue.js などのモダンなフレームワークへの道筋も見えてきます。自分のペースでプログラミングの楽しさを体験していきましょう！",
+    primaryButtonText: "学習をスタート",
+    primaryButtonLink: "/docs/javascript/introduction/what_is_javascript", // 最初のレッスンへのリンク
   },
 
   // チャプターの総数 - curriculum の長さと一致させる
@@ -189,7 +188,26 @@ const javascriptContent: CourseContent = {
 }
 
 // メタデータをエクスポート
-export const metadata = javascriptContent.meta
+export const metadata: Metadata = {
+  ...javascriptContent.meta,
+  openGraph: {
+    title: `${javascriptContent.meta.title} - Vibe Coding Studio`,
+    description: javascriptContent.meta.description,
+    type: "website",
+    url: "/docs/javascript",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: `${javascriptContent.meta.title} - Vibe Coding Studio`,
+      },
+    ],
+  },
+  alternates: {
+    canonical: "/docs/javascript",
+  },
+}
 
 /**
  * JavaScript カリキュラムのランディングページ

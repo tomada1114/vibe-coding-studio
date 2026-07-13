@@ -241,8 +241,6 @@ export function logCacheStats(): void {
 
     if (stats.entries.length > 0) {
       // eslint-disable-next-line no-console
-      console.log("Top cached entries:")
-      // eslint-disable-next-line no-console
       console.table(stats.entries.sort((a, b) => b.hits - a.hits).slice(0, 5))
     }
   }

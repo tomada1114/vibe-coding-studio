@@ -1,11 +1,12 @@
 import { COURSE_DISPLAY_ORDER, COURSE_INFO } from "@/constants/coupon-courses"
+import { getSiteUrl } from "@/lib/seo/site-url"
 import type {
   UdemyCourseApiInfo,
   UdemyCoursesApiResponse,
 } from "@/types/udemy-course-api"
 import { NextRequest, NextResponse } from "next/server"
 
-const BASE_URL = "https://www.vibecodingstudio.dev"
+const BASE_URL = getSiteUrl()
 
 /**
  * COURSE_INFO から API用の講座情報を生成

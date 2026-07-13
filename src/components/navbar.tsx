@@ -12,10 +12,12 @@ import { usePathname } from "next/navigation"
 import { Link } from "./link"
 import { Logo } from "./logo"
 import { PlusGrid, PlusGridItem, PlusGridRow } from "./plus-grid"
+import { SpectrumBeam } from "./spectrum-beam"
 
 const navLinks = [
   { href: "/", label: "ホーム" },
   { href: "/docs", label: "学習" },
+  { href: "/videos", label: "動画" },
   { href: "/community", label: "コミュニティ" },
   { href: "/coupons", label: "クーポン" },
   { href: "/roadmap", label: "ロードマップ" },
@@ -53,12 +55,15 @@ function DesktopNav({
               aria-current={active ? "page" : undefined}
               data-active={active ? "true" : undefined}
               className={clsx(
-                "flex items-center px-4 py-3 text-base font-medium text-gray-950",
+                "relative flex items-center px-4 py-3 text-base font-medium text-gray-950",
                 "bg-blend-multiply transition-colors data-hover:bg-black/2.5",
-                "data-[active=true]:bg-black/10 data-[active=true]:text-gray-950 data-[active=true]:shadow-inner"
+                "data-[active=true]:font-semibold"
               )}
             >
               {label}
+              {active && (
+                <SpectrumBeam className="absolute inset-x-0 bottom-0" />
+              )}
             </Link>
           </PlusGridItem>
         )
@@ -71,7 +76,7 @@ function MobileNavButton() {
   return (
     <DisclosureButton
       className="flex size-12 items-center justify-center self-center rounded-lg transition-colors data-hover:bg-black/5 lg:hidden"
-      aria-label="Open main menu"
+      aria-label="メニューを開く"
     >
       <Bars2Icon className="size-6" />
     </DisclosureButton>
@@ -106,11 +111,14 @@ function MobileNav({
                 aria-current={active ? "page" : undefined}
                 data-active={active ? "true" : undefined}
                 className={clsx(
-                  "text-base font-medium text-gray-950 transition-colors",
-                  "data-[active=true]:font-semibold data-[active=true]:text-gray-950 data-[active=true]:underline"
+                  "relative inline-block text-base font-medium text-gray-950 transition-colors",
+                  "data-[active=true]:font-semibold"
                 )}
               >
                 {label}
+                {active && (
+                  <SpectrumBeam className="absolute inset-x-0 -bottom-1" />
+                )}
               </Link>
             </motion.div>
           )

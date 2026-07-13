@@ -1,7 +1,6 @@
 import { Container } from "@/components/container"
 import { AsyncErrorBoundary } from "@/components/error-boundary"
 import { Footer } from "@/components/footer"
-import { Gradient } from "@/components/gradient"
 import { Navbar } from "@/components/navbar"
 import { VideoCard } from "@/components/videos/video-card"
 import { getLatestVideos } from "@/lib/videos/video-data"
@@ -11,10 +10,27 @@ import type { Metadata } from "next"
  * メタデータ生成
  */
 export async function generateMetadata(): Promise<Metadata> {
+  const title = "動画一覧"
+  const description =
+    "Claude Code・Codex など最新AIツールの検証・解説動画を、学べる内容やタイムスタンプ付きで一覧できます。"
+
   return {
-    title: "動画一覧",
-    description:
-      "YouTube動画の一覧ページです。Next.js、TypeScript、AI駆動開発などの技術について解説しています。",
+    title,
+    description,
+    openGraph: {
+      title: `${title} - Vibe Coding Studio`,
+      description,
+      type: "website",
+      url: "/videos",
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: `${title} - Vibe Coding Studio`,
+        },
+      ],
+    },
     alternates: {
       canonical: "/videos",
     },
@@ -32,7 +48,6 @@ export default function VideosPage() {
       {/* ヘッダー */}
       <AsyncErrorBoundary>
         <div className="relative">
-          <Gradient className="absolute inset-2 bottom-0 rounded-4xl ring-1 ring-black/5 ring-inset" />
           <Container className="relative">
             <Navbar />
           </Container>
@@ -40,15 +55,16 @@ export default function VideosPage() {
       </AsyncErrorBoundary>
 
       {/* メインコンテンツ */}
-      <main>
+      <main id="main-content">
         <AsyncErrorBoundary>
           <Container className="mt-16 mb-32 sm:mt-32">
             <header className="max-w-2xl">
-              <h1 className="text-4xl font-bold tracking-tight text-gray-950 sm:text-5xl">
+              <h1 className="font-display text-4xl font-bold tracking-tight text-gray-950 sm:text-5xl">
                 動画一覧
               </h1>
               <p className="mt-6 text-base text-gray-600">
-                YouTube動画のメタデータをご覧いただけます。Next.js、TypeScript、AI駆動開発などの技術について解説しています。
+                Claude Code・Codex
+                など最新AIツールの検証・解説動画を、学べる内容やタイムスタンプ付きでご覧いただけます。
               </p>
             </header>
 

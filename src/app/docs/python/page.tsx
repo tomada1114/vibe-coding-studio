@@ -5,6 +5,7 @@ import {
   type CourseContent,
   type ThemeColors,
 } from "@/components/docs/Curriculum"
+import type { Metadata } from "next"
 
 // コースのスラッグを定義
 const slug = "python"
@@ -174,11 +175,9 @@ const pythonContent: CourseContent = {
   cta: {
     title: "データサイエンス・AI開発への第一歩を踏み出そう",
     description:
-      "<strong>月額サブスクリプション</strong>にご登録いただくと、このカリキュラムの全コンテンツにアクセスできます。Pythonをマスターすることで、データ分析、機械学習、Web開発など幅広い分野への道が開けます。世界で最も人気の高いプログラミング言語の基礎を固めて、次世代のテクノロジー分野で活躍できるスキルを身につけましょう！",
-    primaryButtonText: "サブスクリプションを見る", // 不変
-    primaryButtonLink: "/docs", // 料金ページへのリンク（全カリキュラムで共通）
-    secondaryButtonText: "学習をスタート", // 不変
-    secondaryButtonLink: "/docs/python/introduction/what_is_python", // 最初のチャプターへのリンク
+      "このカリキュラムはすべて無料で学べます。Pythonをマスターすることで、データ分析、機械学習、Web開発など幅広い分野への道が開けます。世界で最も人気の高いプログラミング言語の基礎を固めて、次世代のテクノロジー分野で活躍できるスキルを身につけましょう！",
+    primaryButtonText: "学習をスタート",
+    primaryButtonLink: "/docs/python/introduction/what_is_python", // 最初のレッスンへのリンク
   },
 
   // チャプターの総数 - curriculum の長さと一致させる
@@ -186,7 +185,26 @@ const pythonContent: CourseContent = {
 }
 
 // メタデータをエクスポート
-export const metadata = pythonContent.meta
+export const metadata: Metadata = {
+  ...pythonContent.meta,
+  openGraph: {
+    title: `${pythonContent.meta.title} - Vibe Coding Studio`,
+    description: pythonContent.meta.description,
+    type: "website",
+    url: "/docs/python",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: `${pythonContent.meta.title} - Vibe Coding Studio`,
+      },
+    ],
+  },
+  alternates: {
+    canonical: "/docs/python",
+  },
+}
 
 /**
  * Python カリキュラムのランディングページ

@@ -4,7 +4,7 @@ import type { ErrorInfo, ReactNode } from "react"
 import { Component } from "react"
 import { Button } from "./button"
 import { Container } from "./container"
-import { Heading, Subheading } from "./text"
+import { Heading } from "./text"
 
 interface Props {
   children: ReactNode
@@ -102,10 +102,10 @@ export class ErrorBoundary extends Component<Props, State> {
                 <Heading as="h2" className="mb-2">
                   Oops! Something went wrong
                 </Heading>
-                <Subheading className="mb-6 text-gray-600">
+                <p className="mb-6 text-sm/6 text-gray-600">
                   We encountered an unexpected error. Please try refreshing the
                   page or contact support if the problem persists.
-                </Subheading>
+                </p>
               </div>
 
               {/* Show error details in development */}

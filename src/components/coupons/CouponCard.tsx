@@ -1,5 +1,6 @@
 "use client"
 
+import { SpectrumBeam } from "@/components/spectrum-beam"
 import { calculateDiscountRate } from "@/lib/coupons/coupon-data"
 import type { Coupon } from "@/types/coupon"
 import { Gift } from "lucide-react"
@@ -27,8 +28,9 @@ export const CouponCard = memo(function CouponCard({
     <Link
       href={`/coupons/${courseInfo.slug}`}
       id={`course-${courseInfo.slug}`}
-      className="group block cursor-pointer scroll-mt-20 overflow-hidden rounded-2xl border border-zinc-950/5 bg-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-2xl hover:shadow-zinc-950/10"
+      className="group focus-visible:outline-accent relative block cursor-pointer scroll-mt-20 overflow-hidden rounded-2xl bg-white ring-1 ring-gray-950/5 transition-shadow hover:ring-gray-950/10 focus-visible:outline-2 focus-visible:outline-offset-2"
     >
+      <SpectrumBeam className="absolute inset-x-0 top-0 z-10 opacity-0 transition-opacity group-hover:opacity-100" />
       {/* コースサムネイル画像 */}
       <div className="relative aspect-video w-full overflow-hidden bg-zinc-100">
         <Image

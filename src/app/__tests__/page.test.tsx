@@ -89,22 +89,34 @@ describe("トップページ（/）", () => {
     })
   })
 
-  describe("工事中セクション", () => {
-    it("工事中セクションが表示される", () => {
+  describe("Learnセクション", () => {
+    it("Learnセクションが表示される", () => {
       render(<Home />)
       const heading = screen.getByRole("heading", {
-        name: /準備中のコンテンツ/i,
+        name: /学べるコンテンツ/i,
       })
       expect(heading).toBeInTheDocument()
     })
 
-    it("工事中コンテンツの説明が表示される", () => {
+    it("学習コース・動画・ロードマップへの導線カードが表示される", () => {
       render(<Home />)
-      // 工事中セクションの説明文を探す
-      const section = screen.getByText(
-        /当サイトでは、コミュニティと連携したコンテンツを準備中です/i
+      expect(screen.getByRole("link", { name: /学習コース/ })).toHaveAttribute(
+        "href",
+        "/docs"
       )
-      expect(section).toBeInTheDocument()
+      expect(screen.getByRole("link", { name: /VIDEOS/ })).toHaveAttribute(
+        "href",
+        "/videos"
+      )
+      expect(
+        screen.getByRole("link", { name: /LEARNING PATHS/ })
+      ).toHaveAttribute("href", "/roadmap")
+    })
+
+    it("実数値の mono 統計ラベルが表示される", () => {
+      render(<Home />)
+      expect(screen.getByText(/\d+ COURSES \/ \d+ LESSONS/)).toBeInTheDocument()
+      expect(screen.getByText(/\d+ VIDEOS/)).toBeInTheDocument()
     })
   })
 

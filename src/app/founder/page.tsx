@@ -1,9 +1,9 @@
 import { Container } from "@/components/container"
 import { AsyncErrorBoundary } from "@/components/error-boundary"
 import { Footer } from "@/components/footer"
-import { Gradient } from "@/components/gradient"
 import { Navbar } from "@/components/navbar"
 import { Heading, Subheading } from "@/components/text"
+import { getSiteUrl } from "@/lib/seo/site-url"
 import {
   AcademicCapIcon,
   BookOpenIcon,
@@ -16,7 +16,8 @@ import {
 import type { Metadata } from "next"
 import Image from "next/image"
 
-const founderTitle = "とまだ - Founder | Vibe Coding Studio"
+const founderTitle = "とまだ - Founder"
+const founderOgTitle = "とまだ - Founder | Vibe Coding Studio"
 const founderDescription =
   "Vibe Coding Studioの主催者とまだ（Tomada）のプロフィール。AI駆動開発のスペシャリストとして、コミュニティ運営・教育活動・開発実績をご紹介します。"
 
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
   title: founderTitle,
   description: founderDescription,
   openGraph: {
-    title: founderTitle,
+    title: founderOgTitle,
     description: founderDescription,
     type: "profile",
     url: "/founder",
@@ -39,7 +40,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: founderTitle,
+    title: founderOgTitle,
     description: founderDescription,
     images: ["/tomada.png"],
   },
@@ -57,7 +58,6 @@ export const metadata: Metadata = {
 function HeroSection() {
   return (
     <div className="relative">
-      <Gradient className="absolute inset-2 bottom-0 rounded-4xl ring-1 ring-black/5 ring-inset" />
       <Container className="relative">
         <Navbar />
         <div className="pt-16 pb-24 sm:pt-24 sm:pb-32 md:pt-32 md:pb-48">
@@ -107,9 +107,9 @@ function HeroSection() {
  */
 function ExpertiseSection() {
   return (
-    <div className="bg-gradient-to-b from-white from-50% to-gray-100 py-32">
+    <div className="border-t border-gray-200 bg-gray-50 py-24 sm:py-32">
       <Container>
-        <Subheading>Expertise</Subheading>
+        <Subheading>EXPERTISE</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           AI駆動開発のスペシャリスト
         </Heading>
@@ -189,7 +189,7 @@ function EducationSection() {
         "AI駆動開発分野で複数のベストセラーコースを運営。Claude Code、Codex、Cursor など最新AIツールの実践的な使い方を解説しています。プログラミング未経験の方でも分かりやすく解説していますので、AI駆動開発の基礎から実践までを学べます。",
       link: {
         text: "コース一覧を見る（クーポン付き）",
-        url: "https://school.learning-next.app/coupons",
+        url: "/coupons",
       },
     },
     {
@@ -212,9 +212,8 @@ function EducationSection() {
 
   return (
     <div className="relative py-32">
-      <Gradient className="absolute inset-2 rounded-4xl ring-1 ring-black/5 ring-inset" />
       <Container className="relative">
-        <Subheading>Education</Subheading>
+        <Subheading>EDUCATION</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           教育活動
         </Heading>
@@ -244,8 +243,9 @@ function EducationSection() {
                 {activity.link && (
                   <a
                     href={activity.link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    {...(activity.link.url.startsWith("http")
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
                     className="mt-4 inline-block text-sm font-medium text-gray-950 underline decoration-gray-950/20 underline-offset-4 data-hover:decoration-gray-950"
                   >
                     {activity.link.text} →
@@ -289,9 +289,9 @@ function CurrentActivitiesSection() {
   ]
 
   return (
-    <div className="bg-gradient-to-b from-white from-50% to-gray-100 py-32">
+    <div className="border-t border-gray-200 bg-gray-50 py-24 sm:py-32">
       <Container>
-        <Subheading>Current Activities</Subheading>
+        <Subheading>ACTIVITIES</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           現在の活動
         </Heading>
@@ -349,9 +349,8 @@ function TechStackSection() {
 
   return (
     <div className="relative py-32">
-      <Gradient className="absolute inset-2 rounded-4xl ring-1 ring-black/5 ring-inset" />
       <Container className="relative">
-        <Subheading>Tech Stack</Subheading>
+        <Subheading>TECH STACK</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           技術スタック
         </Heading>
@@ -389,9 +388,9 @@ function TechStackSection() {
  */
 function SpeakingSection() {
   return (
-    <div className="bg-gradient-to-b from-white from-50% to-gray-100 py-32">
+    <div className="border-t border-gray-200 bg-gray-50 py-24 sm:py-32">
       <Container>
-        <Subheading>Speaking</Subheading>
+        <Subheading>SPEAKING</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           登壇実績
         </Heading>
@@ -437,9 +436,8 @@ function SpeakingSection() {
 function MissionSection() {
   return (
     <div className="relative py-32">
-      <Gradient className="absolute inset-2 rounded-4xl ring-1 ring-black/5 ring-inset" />
       <Container className="relative">
-        <Subheading>Mission</Subheading>
+        <Subheading>MISSION</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           ミッション
         </Heading>
@@ -492,7 +490,7 @@ function FounderStructuredData() {
     "@type": "Person",
     name: "とまだ（Tomada）",
     jobTitle: "フリーランスエンジニア / AI駆動開発スペシャリスト",
-    url: "/founder",
+    url: `${getSiteUrl()}/founder`,
     sameAs: [
       "https://x.com/muscle_coding",
       "https://www.youtube.com/@vibe-coding-studio",
@@ -520,7 +518,7 @@ export default function FounderPage() {
       <AsyncErrorBoundary>
         <HeroSection />
       </AsyncErrorBoundary>
-      <main>
+      <main id="main-content">
         <AsyncErrorBoundary>
           <ExpertiseSection />
         </AsyncErrorBoundary>

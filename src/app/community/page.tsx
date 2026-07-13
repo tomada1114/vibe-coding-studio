@@ -3,11 +3,10 @@ import { Container } from "@/components/container"
 import { DiscordMemberCount } from "@/components/discord-member-count"
 import { AsyncErrorBoundary } from "@/components/error-boundary"
 import { Footer } from "@/components/footer"
-import { Gradient } from "@/components/gradient"
 import { Navbar } from "@/components/navbar"
-// import { Testimonials, type Testimonial } from "@/components/testimonials"
 import { Heading, Subheading } from "@/components/text"
 import { DISCORD_INVITE_URL } from "@/lib/constants"
+import { getSiteUrl } from "@/lib/seo/site-url"
 import {
   Disclosure,
   DisclosureButton,
@@ -24,7 +23,8 @@ import {
 import type { Metadata } from "next"
 import Image from "next/image"
 
-const communityTitle = "コミュニティ - Vibe Coding Studio"
+const communityTitle = "コミュニティ"
+const communityOgTitle = "コミュニティ - Vibe Coding Studio"
 const communityDescription =
   "AI駆動開発を学ぶ仲間と繋がり、最新検証を見ながら一緒に成長するDiscordコミュニティに参加しよう"
 
@@ -32,24 +32,24 @@ export const metadata: Metadata = {
   title: communityTitle,
   description: communityDescription,
   openGraph: {
-    title: communityTitle,
+    title: communityOgTitle,
     description: communityDescription,
     type: "website",
     url: "/community",
     images: [
       {
-        url: "/vcs-logo-wide-transparent.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: communityTitle,
+        alt: communityOgTitle,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: communityTitle,
+    title: communityOgTitle,
     description: communityDescription,
-    images: ["/vcs-logo-wide-transparent.png"],
+    images: ["/og-image.png"],
   },
   alternates: {
     canonical: "/community",
@@ -68,7 +68,6 @@ export const revalidate = 3600
 function CommunityHeroSection() {
   return (
     <div className="relative">
-      <Gradient className="absolute inset-2 bottom-0 rounded-4xl ring-1 ring-black/5 ring-inset" />
       <Container className="relative">
         <Navbar />
         <div className="pt-16 pb-24 sm:pt-24 sm:pb-32 md:pt-32 md:pb-48">
@@ -144,7 +143,7 @@ function AnxietyReliefSection() {
   return (
     <div className="bg-white py-32">
       <Container>
-        <Subheading>DON&apos;T WORRY</Subheading>
+        <Subheading>CONCERNS</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           こんな不安、ありませんか?
         </Heading>
@@ -210,9 +209,9 @@ function ValuePropositionSection() {
   ]
 
   return (
-    <div className="bg-linear-to-b from-white from-50% to-gray-100 py-32">
+    <div className="border-t border-gray-200 bg-gray-50 py-24 sm:py-32">
       <Container>
-        <Subheading>VALUE PROPOSITION</Subheading>
+        <Subheading>VALUE</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           ここで得られること
         </Heading>
@@ -256,9 +255,8 @@ function ValuePropositionSection() {
 function CommunityDescriptionSection() {
   return (
     <div className="relative py-32">
-      <Gradient className="absolute inset-2 rounded-4xl ring-1 ring-black/5 ring-inset" />
       <Container className="relative">
-        <Subheading>About Community</Subheading>
+        <Subheading>COMMUNITY</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           コミュニティについて
         </Heading>
@@ -338,7 +336,7 @@ function ChannelIntroductionSection() {
   return (
     <div className="bg-white py-32">
       <Container>
-        <Subheading>DISCORD CHANNELS</Subheading>
+        <Subheading>CHANNELS</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           チャンネル紹介
         </Heading>
@@ -432,9 +430,8 @@ function RecommendedForSection() {
 
   return (
     <div className="relative py-32">
-      <Gradient className="absolute inset-2 rounded-4xl ring-1 ring-black/5 ring-inset" />
       <Container className="relative">
-        <Subheading>Who should join</Subheading>
+        <Subheading>AUDIENCE</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           こんな人におすすめ
         </Heading>
@@ -573,7 +570,7 @@ function CommunityStructuredData() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Vibe Coding Studio",
-    url: "/community",
+    url: `${getSiteUrl()}/community`,
     sameAs: [
       "https://x.com/muscle_coding",
       "https://www.youtube.com/@vibe-coding-studio",
@@ -598,7 +595,7 @@ export default function CommunityPage() {
       <AsyncErrorBoundary>
         <CommunityHeroSection />
       </AsyncErrorBoundary>
-      <main>
+      <main id="main-content">
         <AsyncErrorBoundary>
           <AnxietyReliefSection />
         </AsyncErrorBoundary>

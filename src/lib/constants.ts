@@ -47,7 +47,7 @@ export const SOCIAL_LINKS: readonly SocialLink[] = [
   },
   {
     name: "Udemy",
-    url: "https://school.learning-next.app/coupons",
+    url: "/coupons",
     icon: "udemy",
   },
 ] as const

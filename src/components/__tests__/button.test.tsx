@@ -56,7 +56,17 @@ describe("Button", () => {
         </Button>
       )
       const link = screen.getByRole("link")
-      expect(link).toHaveClass("bg-white/15", "text-gray-950")
+      expect(link).toHaveClass("bg-white", "ring-gray-300", "text-gray-950")
+    })
+
+    it("applies accent focus-visible outline", () => {
+      render(<Button href="/test">Focusable</Button>)
+      const link = screen.getByRole("link")
+      expect(link).toHaveClass(
+        "focus-visible:outline-2",
+        "focus-visible:outline-offset-2",
+        "focus-visible:outline-accent"
+      )
     })
 
     it("applies outline variant classes", () => {
@@ -122,7 +132,7 @@ describe("Button", () => {
     it("applies secondary variant to button", () => {
       render(<Button variant="secondary">Secondary Button</Button>)
       const button = screen.getByRole("button")
-      expect(button).toHaveClass("bg-white/15", "text-gray-950")
+      expect(button).toHaveClass("bg-white", "ring-gray-300", "text-gray-950")
     })
 
     it("applies outline variant to button", () => {

@@ -4,6 +4,7 @@ import yaml from "js-yaml"
 
 import { DocsLayout } from "@/components/DocsLayout"
 import { Fence } from "@/components/Fence"
+import { transformImageNode } from "@/markdoc/image-node"
 
 let documentSlugifyMap = new Map()
 
@@ -96,6 +97,10 @@ const nodes = {
         type: String,
       },
     },
+  },
+  image: {
+    ...defaultNodes.image,
+    transform: transformImageNode,
   },
 }
 

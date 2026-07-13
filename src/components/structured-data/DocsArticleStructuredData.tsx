@@ -1,8 +1,8 @@
 "use client"
 
 import { renderDocsArticleJsonLd } from "@/lib/constants/structured_data/docs"
+import { getSiteUrl } from "@/lib/seo/site-url"
 import { usePathname } from "next/navigation"
-import { useEffect, useState } from "react"
 
 interface DocsArticleStructuredDataProps {
   title: string
@@ -14,6 +14,11 @@ interface DocsArticleStructuredDataProps {
 
 /**
  * Docsページ用のArticle + LearningResource構造化データコンポーネント
+ *
+ * page.md は @markdoc/next.js のローダーが直接ページ化するため、courseSlug 等の
+ * ルート情報を props で渡す経路が存在せず、client component + usePathname で解決する。
+ * isClient ゲートは置かない（client componentもSSR自体はされるため、外すことで
+ * JSON-LD が静的HTMLに含まれる）。
  */
 export function DocsArticleStructuredData({
   title,
@@ -23,15 +28,6 @@ export function DocsArticleStructuredData({
   author,
 }: DocsArticleStructuredDataProps) {
   const pathname = usePathname()
-  const [isClient, setIsClient] = useState(false)
-
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
-
-  if (!isClient) {
-    return null
-  }
 
   const pathSegments = pathname.split("/")
   const courseSlug = pathSegments[2]
@@ -40,7 +36,7 @@ export function DocsArticleStructuredData({
     return null
   }
 
-  const url = `${process.env.NEXT_PUBLIC_SITE_URL || "https://www.vibecodingstudio.dev"}${pathname}`
+  const url = `${getSiteUrl()}${pathname}`
 
   const structuredDataJson = renderDocsArticleJsonLd(courseSlug, title, url, {
     description,

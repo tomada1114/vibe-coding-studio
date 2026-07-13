@@ -24,14 +24,7 @@ describe("Heading", () => {
     expect(heading.tagName).toBe("H1")
   })
 
-  it("applies dark mode data attribute", () => {
-    render(<Heading dark>Dark Heading</Heading>)
-
-    const heading = screen.getByText("Dark Heading")
-    expect(heading).toHaveAttribute("data-dark", "true")
-  })
-
-  it("does not set data-dark when dark is false", () => {
+  it("data-dark 属性を付与しない（ダークモード非対応）", () => {
     render(<Heading>Light Heading</Heading>)
 
     const heading = screen.getByText("Light Heading")
@@ -62,11 +55,20 @@ describe("Subheading", () => {
     expect(sub.tagName).toBe("H3")
   })
 
-  it("applies dark data attribute", () => {
-    render(<Subheading dark>Dark Sub</Subheading>)
+  it("スペクトラム短線マーカーを前置する", () => {
+    render(<Subheading>Marked Sub</Subheading>)
 
-    const sub = screen.getByText("Dark Sub")
-    expect(sub).toHaveAttribute("data-dark", "true")
+    const sub = screen.getByText("Marked Sub")
+    const marker = sub.querySelector("span[aria-hidden='true']")
+    expect(marker).toBeInTheDocument()
+    expect(marker?.className).toContain("bg-(image:--gradient-spectrum)")
+  })
+
+  it("data-dark 属性を付与しない（ダークモード非対応）", () => {
+    render(<Subheading>Light Sub</Subheading>)
+
+    const sub = screen.getByText("Light Sub")
+    expect(sub).not.toHaveAttribute("data-dark")
   })
 
   it("applies mono font styling", () => {

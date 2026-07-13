@@ -44,8 +44,8 @@ describe("動画一覧ページ", () => {
   test("公開日が表示される", () => {
     render(<VideosPage />)
 
-    // 公開日が表示される
-    const dateElements = screen.getAllByText(/\d{4}年\d{1,2}月\d{1,2}日/)
+    // 公開日（mono の YYYY-MM-DD 形式）が表示される
+    const dateElements = screen.getAllByText(/\d{4}-\d{2}-\d{2}/)
     expect(dateElements.length).toBeGreaterThan(0)
   })
 

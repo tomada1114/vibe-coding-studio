@@ -28,20 +28,6 @@ jest.mock("@/components/footer", () => ({
   ),
 }))
 
-jest.mock("@/components/gradient", () => ({
-  Gradient: ({
-    children,
-    className,
-  }: {
-    children?: React.ReactNode
-    className?: string
-  }) => (
-    <div data-testid="gradient" className={className}>
-      {children}
-    </div>
-  ),
-}))
-
 jest.mock("@/components/navbar", () => ({
   Navbar: () => <nav data-testid="navbar" />,
 }))

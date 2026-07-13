@@ -31,11 +31,6 @@ nextjs:
 
 それでは、前章で作成した Rails プロジェクト techlog-app を、GitHub のリモートリポジトリにプッシュ（アップロード）するための準備をします。Git には多くの専門用語がありますが、基本的な流れを理解すれば難しくありません。
 
-Git に関する用語について詳しく知りたい方は、以下の資料も参考にしてみてください。
-
-参考リンク：
-- [【Git】よく使われる用語の意味をわかりやすく解説 - 初心者向けの基本と実務活用](https://learning-next.app/blog/web-development/git-terminology)
-
 ## リモートリポジトリの設定
 
 まずは VS Code で techlog-app フォルダをターミナルで開きます。その後、コマンドを使い、techlog-app のアップロード先であるリモートリポジトリの場所を指定します。
@@ -144,11 +139,6 @@ $ git commit -m "プロジェクト開始"
  create mode 100644 Gemfile.lock
  ...
 ```
-
-コミットメッセージの書き方には色々な流儀があります。興味があれば以下の記事も参考にしてみてください。
-
-参考リンク：
-- [コミットメッセージの書き方を初心者向けにわかりやすく解説](https://learning-next.app/blog/web-development/git-commit-message-guide)
 
 ## コミットをリモートリポジトリにプッシュ
 

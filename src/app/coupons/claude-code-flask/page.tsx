@@ -1,4 +1,5 @@
 import { Container } from "@/components/container"
+import { CouponExpiredFallback } from "@/components/coupons/CouponExpiredFallback"
 import { CourseContent } from "@/components/coupons/course-detail/CourseContent"
 import { CourseDetailHero } from "@/components/coupons/course-detail/CourseDetailHero"
 import { CourseFeatures } from "@/components/coupons/course-detail/CourseFeatures"
@@ -9,14 +10,13 @@ import { TargetAudience } from "@/components/coupons/course-detail/TargetAudienc
 import { RelatedCoupons } from "@/components/coupons/RelatedCoupons"
 import { AsyncErrorBoundary } from "@/components/error-boundary"
 import { Footer } from "@/components/footer"
-import { Gradient } from "@/components/gradient"
 import { Navbar } from "@/components/navbar"
 import { getLatestCoupons, getRelatedCoupons } from "@/lib/coupons/coupon-data"
 import type { Metadata } from "next"
 
 // 静的生成を明示的に設定
 export const dynamic = "force-static"
-export const revalidate = 3600 // 1時間ごとに再生成
+export const revalidate = 21600 // 6時間ごとに再生成
 
 const COURSE_ID = "6827941"
 
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     description:
       "FlaskとGemini AIでプロの開発フローを体験！要件定義から実装まで学べる実践講座",
     type: "website",
-    url: "https://school.learning-next.app/coupons/claude-code-flask",
+    url: "/coupons/claude-code-flask",
     images: [
       {
         url: "/images/udemy/claude-code-flask.png",
@@ -48,6 +48,9 @@ export const metadata: Metadata = {
     description:
       "FlaskとGemini AIでプロの開発フローを体験！要件定義から実装まで学べる実践講座",
     images: ["/images/udemy/claude-code-flask.png"],
+  },
+  alternates: {
+    canonical: "/coupons/claude-code-flask",
   },
 }
 
@@ -176,13 +179,7 @@ export default function ClaudeCodeFlaskPage() {
   const coupon = coupons.find(c => c.courseId === COURSE_ID)
 
   if (!coupon) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <p className="text-lg text-zinc-600">
-          クーポン情報が見つかりませんでした
-        </p>
-      </div>
-    )
+    return <CouponExpiredFallback />
   }
 
   // 関連クーポンを取得（最大4件）
@@ -193,7 +190,6 @@ export default function ClaudeCodeFlaskPage() {
       {/* ヘッダーセクション */}
       <AsyncErrorBoundary>
         <div className="relative">
-          <Gradient className="absolute inset-2 bottom-0 rounded-4xl ring-1 ring-black/5 ring-inset" />
           <Container className="relative">
             <Navbar />
           </Container>
@@ -201,7 +197,10 @@ export default function ClaudeCodeFlaskPage() {
       </AsyncErrorBoundary>
 
       {/* メインコンテンツ */}
-      <main className="min-h-screen bg-gradient-to-br from-blue-50/50 via-white to-indigo-50/30">
+      <main
+        id="main-content"
+        className="min-h-screen bg-gradient-to-br from-blue-50/50 via-white to-indigo-50/30"
+      >
         <CourseDetailHero
           title={courseDetails.title}
           subtitle={courseDetails.subtitle}

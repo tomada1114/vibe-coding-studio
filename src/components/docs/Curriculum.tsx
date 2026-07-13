@@ -77,14 +77,6 @@ export type CtaSection = {
    * メインボタンのリンク先
    */
   primaryButtonLink: string
-  /**
-   * サブボタンのテキスト
-   */
-  secondaryButtonText: string
-  /**
-   * サブボタンのリンク先
-   */
-  secondaryButtonLink: string
 }
 
 /**
@@ -564,13 +556,6 @@ export function Curriculum({
               className={`w-full rounded-md ${themeColors.button.bg} px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all ${themeColors.button.bgHover} hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${themeColors.button.outline} sm:w-auto sm:px-5 sm:py-3 sm:text-base`}
             >
               {courseContent.cta.primaryButtonText}
-            </Link>
-            <Link
-              href={courseContent.cta.secondaryButtonLink}
-              className={`flex w-full items-center justify-center text-sm font-semibold text-slate-900 transition-colors ${themeColors.text.hover} sm:w-auto sm:justify-start sm:text-base`}
-            >
-              {courseContent.cta.secondaryButtonText}{" "}
-              <ArrowRight className="ml-1 h-3 w-3 sm:h-4 sm:w-4" />
             </Link>
           </div>
         </div>

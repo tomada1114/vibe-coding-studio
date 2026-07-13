@@ -55,5 +55,5 @@ export function getDeviconUrl(slug: string): string {
   if (!iconName) {
     return ""
   }
-  return `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${iconName.split("-")[0]}/${iconName}.svg`
+  return `https://cdn.jsdelivr.net/gh/devicons/devicon@2.16.0/icons/${iconName.split("-")[0]}/${iconName}.svg`
 }
