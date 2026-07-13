@@ -50,11 +50,40 @@ describe("運営者プロフィールページ（/founder）", () => {
       expect(heading.textContent).toContain("Tomada")
     })
 
+    it("本名が併記される", () => {
+      render(<FounderPage />)
+      const realName = screen.getByText(/増山 友司 \/ Tomoshi Masuyama/i)
+      expect(realName).toBeInTheDocument()
+    })
+
     it("キャッチコピーが表示される", () => {
       render(<FounderPage />)
-      const catchphrase =
-        screen.getByText(/カナダ在住のフリーランスエンジニア/i)
+      const catchphrase = screen.getByText(/AI駆動開発の実践者・教育者/i)
       expect(catchphrase).toBeInTheDocument()
+    })
+
+    it("LinkedInプロフィールへのリンクが表示される", () => {
+      render(<FounderPage />)
+      const linkedInLink = screen.getByRole("link", {
+        name: /とまだのLinkedInプロフィールを見る/i,
+      })
+      expect(linkedInLink).toHaveAttribute(
+        "href",
+        "https://www.linkedin.com/in/tomoshi-masuyama-5b4b31199/"
+      )
+      expect(linkedInLink).toHaveAttribute("target", "_blank")
+      expect(linkedInLink).toHaveAttribute("rel", "noopener noreferrer")
+    })
+
+    it("GitHubプロフィールへのリンクが表示される", () => {
+      render(<FounderPage />)
+      const gitHubLink = screen.getByRole("link", {
+        name: /とまだのGitHubプロフィールを見る/i,
+      })
+      expect(gitHubLink).toHaveAttribute(
+        "href",
+        "https://github.com/tomada1114"
+      )
     })
 
     it("プロフィール画像が表示される", () => {
@@ -67,6 +96,58 @@ describe("運営者プロフィールページ（/founder）", () => {
       render(<FounderPage />)
       const image = screen.getByAltText(/とまだ（Tomada）のプロフィール画像/i)
       expect(image).toHaveAttribute("data-priority", "true")
+    })
+  })
+
+  describe("経歴セクション", () => {
+    it("経歴セクションが表示される", () => {
+      render(<FounderPage />)
+      const heading = screen.getByRole("heading", {
+        name: "経歴",
+        level: 2,
+      })
+      expect(heading).toBeInTheDocument()
+    })
+
+    it("大学院修了とSIerでのキャリア開始が表示される", () => {
+      render(<FounderPage />)
+      const item = screen.getByRole("heading", {
+        name: /北海道大学大学院を修了、SIerでキャリアをスタート/i,
+        level: 3,
+      })
+      expect(item).toBeInTheDocument()
+    })
+
+    it("セキュリティベンダーへの転職が表示される", () => {
+      render(<FounderPage />)
+      const item = screen.getByRole("heading", {
+        name: /セキュリティベンダーへ転職/i,
+        level: 3,
+      })
+      expect(item).toBeInTheDocument()
+    })
+
+    it("Webアプリケーションエンジニアへの転身が表示される", () => {
+      render(<FounderPage />)
+      const item = screen.getByRole("heading", {
+        name: /Webアプリケーションエンジニアに転身/i,
+        level: 3,
+      })
+      expect(item).toBeInTheDocument()
+    })
+
+    it("フリーランス独立とカナダ移住が表示される", () => {
+      render(<FounderPage />)
+      const item = screen.getByRole("heading", {
+        name: /フリーランスとして独立、カナダへ移住/i,
+        level: 3,
+      })
+      expect(item).toBeInTheDocument()
+    })
+
+    it("書籍への言及が含まれない", () => {
+      const { container } = render(<FounderPage />)
+      expect(container.textContent).not.toMatch(/書籍|技術評論社|刊行/)
     })
   })
 
@@ -168,23 +249,23 @@ describe("運営者プロフィールページ（/founder）", () => {
     })
   })
 
-  describe("現在の活動セクション", () => {
-    it("現在の活動セクションが表示される", () => {
+  describe("活動領域セクション", () => {
+    it("活動領域セクションが表示される", () => {
       render(<FounderPage />)
       const heading = screen.getByRole("heading", {
-        name: /現在の活動/i,
+        name: /活動領域/i,
         level: 2,
       })
       expect(heading).toBeInTheDocument()
     })
 
-    it("フリーランスエンジニアについての説明が表示される", () => {
+    it("ソフトウェアエンジニアリングについての説明が表示される", () => {
       render(<FounderPage />)
-      const freelanceHeading = screen.getByRole("heading", {
-        name: /フリーランスエンジニア/i,
+      const engineeringHeading = screen.getByRole("heading", {
+        name: /ソフトウェアエンジニアリング/i,
         level: 3,
       })
-      expect(freelanceHeading).toBeInTheDocument()
+      expect(engineeringHeading).toBeInTheDocument()
     })
 
     it("AI駆動開発の導入支援についての説明が表示される", () => {

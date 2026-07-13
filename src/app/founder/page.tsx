@@ -19,7 +19,7 @@ import Image from "next/image"
 const founderTitle = "とまだ - Founder"
 const founderOgTitle = "とまだ - Founder | Vibe Coding Studio"
 const founderDescription =
-  "Vibe Coding Studioの主催者とまだ（Tomada）のプロフィール。AI駆動開発のスペシャリストとして、コミュニティ運営・教育活動・開発実績をご紹介します。"
+  "Vibe Coding Studioの主催者とまだ（増山友司 / Tomoshi Masuyama）のプロフィール。AI駆動開発の実践者・教育者。金融系メディアや運輸系システムなど多様な開発現場での実務経験をもとに、UdemyベストセラーコースやYouTubeでAI駆動開発の実践知を発信しています。"
 
 export const metadata: Metadata = {
   title: founderTitle,
@@ -49,11 +49,67 @@ export const metadata: Metadata = {
   },
 }
 
+function ProfileIconX(props: React.ComponentPropsWithoutRef<"svg">) {
+  return (
+    <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" {...props}>
+      <path d="M12.6 0h2.454l-5.36 6.778L16 16h-4.937l-3.867-5.594L2.771 16H.316l5.733-7.25L0 0h5.063l3.495 5.114L12.6 0zm-.86 14.376h1.36L4.323 1.539H2.865l8.875 12.837z" />
+    </svg>
+  )
+}
+
+function ProfileIconGitHub(props: React.ComponentPropsWithoutRef<"svg">) {
+  return (
+    <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" {...props}>
+      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+    </svg>
+  )
+}
+
+function ProfileIconLinkedIn(props: React.ComponentPropsWithoutRef<"svg">) {
+  return (
+    <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" {...props}>
+      <path d="M14.82 0H1.18A1.169 1.169 0 000 1.154v13.694A1.168 1.168 0 001.18 16h13.64A1.17 1.17 0 0016 14.845V1.15A1.171 1.171 0 0014.82 0zM4.744 13.64H2.369V5.996h2.375v7.644zm-1.18-8.684a1.377 1.377 0 11.52-.106 1.377 1.377 0 01-.527.103l.007.003zm10.075 8.683h-2.375V9.921c0-.885-.015-2.025-1.234-2.025-1.218 0-1.425.966-1.425 1.968v3.775H6.233V5.997H8.51v1.05h.032c.317-.601 1.09-1.235 2.246-1.235 2.405-.005 2.851 1.578 2.851 3.63v4.197z" />
+    </svg>
+  )
+}
+
+function ProfileIconYouTube(props: React.ComponentPropsWithoutRef<"svg">) {
+  return (
+    <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" {...props}>
+      <path d="M15.841 4.8s-.156-1.103-.636-1.587c-.608-.636-1.29-.638-1.602-.676-2.237-.162-5.594-.162-5.594-.162h-.007s-3.357 0-5.594.162c-.311.038-.994.04-1.602.676C.327 3.697.171 4.8.171 4.8S.015 6.09.015 7.382v1.216c0 1.291.156 2.582.156 2.582s.156 1.103.635 1.587c.608.636 1.407.616 1.762.683 1.279.123 5.436.161 5.436.161s3.362-.005 5.599-.167c.312-.039.994-.041 1.602-.677.48-.484.636-1.587.636-1.587s.156-1.291.156-2.582V7.382c0-1.292-.156-2.582-.156-2.582zM6.352 10.059V4.993l4.322 2.539-4.322 2.527z" />
+    </svg>
+  )
+}
+
+const profileLinks = [
+  {
+    name: "X",
+    url: "https://x.com/muscle_coding",
+    icon: ProfileIconX,
+  },
+  {
+    name: "GitHub",
+    url: "https://github.com/tomada1114",
+    icon: ProfileIconGitHub,
+  },
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/in/tomoshi-masuyama-5b4b31199/",
+    icon: ProfileIconLinkedIn,
+  },
+  {
+    name: "YouTube",
+    url: "https://www.youtube.com/@vibe-coding-studio",
+    icon: ProfileIconYouTube,
+  },
+]
+
 /**
  * ヒーローセクション
  * - プロフィール写真
- * - 名前とキャッチコピー
+ * - 名前（ハンドルネーム + 本名併記）とキャッチコピー
  * - 簡潔な自己紹介
+ * - SNS・外部プロフィールへのリンク
  */
 function HeroSection() {
   return (
@@ -69,15 +125,35 @@ function HeroSection() {
                 <br />
                 <span className="text-gray-950/60">Tomada</span>
               </h1>
+              <p className="mt-4 text-sm font-medium tracking-wide text-gray-500">
+                増山 友司 / Tomoshi Masuyama
+              </p>
               <p className="mt-8 text-xl/8 font-medium text-gray-950/75 sm:text-2xl/9">
-                カナダ在住のフリーランスエンジニア
+                AI駆動開発の実践者・教育者
                 <br />
-                AI駆動開発実践者
+                カナダ在住のソフトウェアエンジニア
               </p>
               <p className="mt-6 max-w-2xl text-base/7 text-gray-700">
-                プログラミング未経験から独学とスクールを経てWebエンジニアに転身。
-                現在は開発案件に従事しつつ、法人向けにAI駆動開発の導入支援、そしてYouTube・Udemy・コミュニティでAI駆動開発の普及に尽力しています。
+                SIerでのネットワーク・サーバ基盤構築を経てWebアプリケーション開発に転身後、フリーランスのソフトウェアエンジニアとして独立。
+                月間数百万ユーザー規模の金融系メディアや運輸系システムの開発、大規模システムのリプレイスなど、インフラからアプリケーションまで幅広い開発を最前線で担ってきました。
+                Claude
+                Codeをはじめとする最新のAIツールを開発の主力に据え、現場で磨いた実践知をYouTube・Udemy・コミュニティを通じて共有しています。
               </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                {profileLinks.map(link => (
+                  <a
+                    key={link.name}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`とまだの${link.name}プロフィールを見る`}
+                    className="inline-flex items-center gap-2 rounded-full border border-gray-950/15 px-4 py-1.5 text-sm font-medium text-gray-950 transition-colors hover:bg-gray-950 hover:text-white"
+                  >
+                    <link.icon className="size-3.5" />
+                    {link.name}
+                  </a>
+                ))}
+              </div>
             </div>
 
             {/* 右側: プロフィール画像 */}
@@ -154,12 +230,12 @@ function ExpertiseSection() {
               </div>
               <div className="mt-6 space-y-4 text-base/7 text-gray-700">
                 <p>
-                  開発案件では、AI駆動開発により
+                  大規模な金融系メディアや運輸系システムなど、
                   <strong className="font-semibold text-gray-950">
-                    高速な開発サイクル
+                    多様な開発現場でAI駆動開発を実践
                   </strong>
-                  を実現。個人開発でも、プログラミング学習プラットフォーム「Learning
-                  Next」をはじめ、複数のWebアプリを短期間で構築・運営しています。
+                  。個人開発でも、プログラミング学習プラットフォーム「Learning
+                  Next」をはじめ、複数のWebアプリを短期間で構築・運営してきました。
                 </p>
                 <p>
                   未経験の技術領域でも、AIの力を借りることで即座に挑戦可能。
@@ -169,6 +245,86 @@ function ExpertiseSection() {
             </div>
           </div>
         </div>
+      </Container>
+    </div>
+  )
+}
+
+/**
+ * 経歴セクション
+ * - 大学院修了からフリーランス独立までのタイムライン
+ * - 会社名は出さず「SIer」「セキュリティベンダー」等の業種表現を使用
+ */
+function CareerSection() {
+  const careerTimeline = [
+    {
+      year: "2016",
+      title: "北海道大学大学院を修了、SIerでキャリアをスタート",
+      description:
+        "理学院 物性物理学専攻を修了後、SIerでネットワーク・サーバ基盤構築のシステムエンジニアに。提案から要件定義・設計・構築・保守運用までを一貫して担当し、チームを率いるプロジェクトマネジメントも経験。",
+    },
+    {
+      year: "2019",
+      title: "セキュリティベンダーへ転職",
+      description:
+        "法人向けセキュリティ製品のテクニカルサポートエンジニアとして、ログ解析や高度なトラブルシューティングに従事。Pythonによる業務自動化をきっかけに、プログラミングの面白さに目覚める。",
+    },
+    {
+      year: "2021",
+      title: "Webアプリケーションエンジニアに転身",
+      description:
+        "独学とスクールでの学習を経て、大規模な金融系メディアの開発へ。開発チームリーダー・スクラムマスターとして、新規機能開発とチーム運営をリード。",
+    },
+    {
+      year: "2024",
+      title: "フリーランスとして独立、カナダへ移住",
+      description:
+        "金融系メディアや運輸系システムの開発、大規模システムのリプレイス、海外企業の案件など、多様な開発を経験。法人向けのAI駆動開発導入支援・コンサルティングも手がける。",
+    },
+  ]
+
+  return (
+    <div className="relative py-32">
+      <Container className="relative">
+        <Subheading>CAREER</Subheading>
+        <Heading as="h2" className="mt-2 max-w-3xl">
+          経歴
+        </Heading>
+
+        <ol className="mt-10 sm:mt-16">
+          {careerTimeline.map((item, index) => (
+            <li key={item.year} className="relative flex gap-6 sm:gap-10">
+              {/* 年ラベル */}
+              <div className="w-14 flex-shrink-0 pt-0.5 text-right sm:w-16">
+                <span className="font-display text-lg font-medium tracking-tight text-gray-950">
+                  {item.year}
+                </span>
+              </div>
+
+              {/* タイムラインレール */}
+              <div className="relative flex flex-col items-center">
+                <div className="mt-2 h-3 w-3 flex-shrink-0 rounded-full bg-gray-950" />
+                {index < careerTimeline.length - 1 && (
+                  <div className="w-px flex-grow bg-gray-300" />
+                )}
+              </div>
+
+              {/* 内容 */}
+              <div
+                className={
+                  index < careerTimeline.length - 1 ? "pb-12" : undefined
+                }
+              >
+                <h3 className="text-xl/7 font-semibold text-gray-950">
+                  {item.title}
+                </h3>
+                <p className="mt-3 max-w-2xl text-base/7 text-gray-700">
+                  {item.description}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
       </Container>
     </div>
   )
@@ -186,7 +342,7 @@ function EducationSection() {
       icon: AcademicCapIcon,
       title: "Udemy講師",
       description:
-        "AI駆動開発分野で複数のベストセラーコースを運営。Claude Code、Codex、Cursor など最新AIツールの実践的な使い方を解説しています。プログラミング未経験の方でも分かりやすく解説していますので、AI駆動開発の基礎から実践までを学べます。",
+        "AI駆動開発分野で複数のベストセラーコースを運営し、受講生は累計1万人を超えます。Claude Code、Codex、Cursor など最新AIツールの実践的な使い方を解説しています。プログラミング未経験の方でも分かりやすく解説していますので、AI駆動開発の基礎から実践までを学べます。",
       link: {
         text: "コース一覧を見る（クーポン付き）",
         url: "/coupons",
@@ -206,13 +362,13 @@ function EducationSection() {
       icon: BookOpenIcon,
       title: "元プログラミングスクール講師",
       description:
-        "100名以上の未経験者を指導した実績。初心者の挫折ポイントを熟知し、技術的な内容を分かりやすく伝えることを得意としています。常に最新の情報を追いながらも、初心者の方が分かりやすいよう、丁寧すぎるぐらいに解説することを心がけています。",
+        "メンターとして数多くの未経験者を指導し、カリキュラム執筆も担当。初心者の挫折ポイントを熟知し、技術的な内容を分かりやすく伝えることを得意としています。常に最新の情報を追いながらも、初心者の方が分かりやすいよう、丁寧すぎるぐらいに解説することを心がけています。",
     },
   ]
 
   return (
-    <div className="relative py-32">
-      <Container className="relative">
+    <div className="border-t border-gray-200 bg-gray-50 py-24 sm:py-32">
+      <Container>
         <Subheading>EDUCATION</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           教育活動
@@ -261,39 +417,39 @@ function EducationSection() {
 }
 
 /**
- * 現在の活動セクション
- * - フリーランスエンジニア
- * - AI駆動開発導入支援
+ * 活動領域セクション
+ * - ソフトウェアエンジニアリング
+ * - AI駆動開発の導入支援
  * - コンテンツ発信
  */
-function CurrentActivitiesSection() {
+function ActivitiesSection() {
   const activities = [
     {
       icon: BriefcaseIcon,
-      title: "フリーランスエンジニア",
+      title: "ソフトウェアエンジニアリング",
       description:
-        "開発案件に従事。カナダから完全リモートで働く自由なスタイルを実現。フルスタックエンジニアとして主にWebアプリケーションを開発しています。",
+        "フリーランスのソフトウェアエンジニアとして独立し、カナダから日本・北米の開発プロジェクトにフルリモートで参画してきました。インフラからアプリケーション開発まで、多様な開発実績を持ちます。",
     },
     {
       icon: RocketLaunchIcon,
       title: "AI駆動開発の導入支援",
       description:
-        "法人向けにAI駆動開発の導入サポートを提供。現場でのAI活用ノウハウを実践的にアドバイス。初心者から経験者まで、レベルに応じた教育が可能。",
+        "法人向けにAI駆動開発の導入支援・コンサルティングを手がけます。開発環境の整備からチームへの定着支援まで、現場での実践ノウハウをもとにサポート。初心者から経験者まで、レベルに応じた教育が可能です。",
     },
     {
       icon: GlobeAltIcon,
       title: "コンテンツ発信",
       description:
-        "XやYoutube、QiitaにZennなど、各種メディアでAI駆動開発の情報を発信しています。AI駆動開発やプログラミングがはじめての方にも分かりやすく解説しています。",
+        "YouTube・Udemy・X・Zenn・Qiitaなど、各種メディアでAI駆動開発の情報を発信しています。AI駆動開発やプログラミングがはじめての方にも分かりやすく解説しています。",
     },
   ]
 
   return (
-    <div className="border-t border-gray-200 bg-gray-50 py-24 sm:py-32">
-      <Container>
+    <div className="relative py-32">
+      <Container className="relative">
         <Subheading>ACTIVITIES</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
-          現在の活動
+          活動領域
         </Heading>
 
         <div className="mt-10 grid grid-cols-1 gap-8 sm:mt-16 md:grid-cols-3">
@@ -327,7 +483,7 @@ function TechStackSection() {
     },
     {
       category: "フレームワーク・ライブラリ",
-      items: ["Ruby on Rails", "React", "Next.js", "Vue.js", "Flask"],
+      items: ["Ruby on Rails", "React", "Next.js", "Vue.js", "Laravel"],
     },
     {
       category: "インフラ・クラウド",
@@ -348,8 +504,8 @@ function TechStackSection() {
   ]
 
   return (
-    <div className="relative py-32">
-      <Container className="relative">
+    <div className="border-t border-gray-200 bg-gray-50 py-24 sm:py-32">
+      <Container>
         <Subheading>TECH STACK</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           技術スタック
@@ -388,8 +544,8 @@ function TechStackSection() {
  */
 function SpeakingSection() {
   return (
-    <div className="border-t border-gray-200 bg-gray-50 py-24 sm:py-32">
-      <Container>
+    <div className="relative py-32">
+      <Container className="relative">
         <Subheading>SPEAKING</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           登壇実績
@@ -411,7 +567,7 @@ function SpeakingSection() {
                   Claude Code vs Codex CLI 徹底比較（オンライン）
                 </p>
                 <p className="mt-4 text-base/7 text-gray-700">
-                  両ツールを日常的に併用している経験から、カスタムコマンドの柔軟性、サブエージェント機能、IDE拡張対応、コミュニティの充実度など、実務で本当に重要となる機能を徹底比較。100名以上に参加いただき、AI駆動開発のツール選定の参考になる内容を提供しました。現場経験を活かした実践的観点を生かした内容であり、参加者の方からも高い評価をいただきました。
+                  両ツールを日常的に併用している経験から、カスタムコマンドの柔軟性、サブエージェント機能、IDE拡張対応、コミュニティの充実度など、実務で本当に重要となる機能を徹底比較。多くのエンジニアの方に参加いただき、AI駆動開発のツール選定の参考になる内容を提供しました。現場経験を活かした実践的な観点が、参加者の方からも高い評価をいただきました。
                 </p>
                 <a
                   href="https://ai-fest-tokyo.connpass.com/event/369543/"
@@ -435,8 +591,8 @@ function SpeakingSection() {
  */
 function MissionSection() {
   return (
-    <div className="relative py-32">
-      <Container className="relative">
+    <div className="border-t border-gray-200 bg-gray-50 py-24 sm:py-32">
+      <Container>
         <Subheading>MISSION</Subheading>
         <Heading as="h2" className="mt-2 max-w-3xl">
           ミッション
@@ -477,8 +633,9 @@ function MissionSection() {
  * Founderページ
  * - ヒーローセクション
  * - AI駆動開発のスペシャリスト
+ * - 経歴
  * - 教育活動
- * - 現在の活動
+ * - 活動領域
  * - 技術スタック
  * - 登壇実績
  * - ミッション
@@ -489,14 +646,22 @@ function FounderStructuredData() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "とまだ（Tomada）",
-    jobTitle: "フリーランスエンジニア / AI駆動開発スペシャリスト",
+    alternateName: ["増山友司", "Tomoshi Masuyama"],
+    jobTitle: "ソフトウェアエンジニア / AI駆動開発の実践者・教育者",
     url: `${getSiteUrl()}/founder`,
     sameAs: [
       "https://x.com/muscle_coding",
       "https://www.youtube.com/@vibe-coding-studio",
+      "https://github.com/tomada1114",
+      "https://www.linkedin.com/in/tomoshi-masuyama-5b4b31199/",
       "https://qiita.com/tomada",
+      "https://zenn.dev/tmasuyama1114",
       "https://note.com/tomada",
     ],
+    alumniOf: {
+      "@type": "CollegeOrUniversity",
+      name: "北海道大学大学院",
+    },
     worksFor: {
       "@type": "Organization",
       name: "Vibe Coding Studio",
@@ -523,10 +688,13 @@ export default function FounderPage() {
           <ExpertiseSection />
         </AsyncErrorBoundary>
         <AsyncErrorBoundary>
+          <CareerSection />
+        </AsyncErrorBoundary>
+        <AsyncErrorBoundary>
           <EducationSection />
         </AsyncErrorBoundary>
         <AsyncErrorBoundary>
-          <CurrentActivitiesSection />
+          <ActivitiesSection />
         </AsyncErrorBoundary>
         <AsyncErrorBoundary>
           <TechStackSection />
