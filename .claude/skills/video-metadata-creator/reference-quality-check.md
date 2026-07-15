@@ -288,11 +288,11 @@ npm run dev
 **手順**:
 
 1. ブラウザで `http://localhost:3000/videos` を開く
-2. または Chrome DevTools MCPを使用：
-   ```bash
-   # Chrome DevToolsで確認
-   mcp__chrome-devtools__navigate_page --url http://localhost:3000/videos
-   mcp__chrome-devtools__take_snapshot
+2. または標準機能の Claude in Chrome（`mcp__claude-in-chrome__*`）を使用（グローバル `operating-chrome` スキル参照）：
+   ```typescript
+   // Claude in Chromeで確認
+   mcp__claude-in-chrome__navigate({ url: "http://localhost:3000/videos", tabId })
+   mcp__claude-in-chrome__read_page({ filter: "interactive", tabId })
    ```
 
 **確認項目**:
@@ -318,10 +318,10 @@ uid=X_Y link "リアルなAI駆動開発の全工程！現役エンジニアの�
 **手順**:
 
 1. ブラウザで `http://localhost:3000/videos/1-1NAB5jIjo` を開く
-2. または Chrome DevTools MCPを使用：
-   ```bash
-   mcp__chrome-devtools__navigate_page --url http://localhost:3000/videos/1-1NAB5jIjo
-   mcp__chrome-devtools__take_snapshot
+2. または標準機能の Claude in Chrome（`mcp__claude-in-chrome__*`）を使用：
+   ```typescript
+   mcp__claude-in-chrome__navigate({ url: "http://localhost:3000/videos/1-1NAB5jIjo", tabId })
+   mcp__claude-in-chrome__read_page({ filter: "interactive", tabId })
    ```
 
 **確認項目**:
@@ -385,37 +385,36 @@ uid=X_Y link "リアルなAI駆動開発の全工程！現役エンジニアの�
 - [ ] メッセージが表示
 - [ ] CTAが表示
 
-### Chrome DevTools MCPの活用
+### 標準機能の Claude in Chrome の活用
 
-**スナップショット取得**:
+ブラウザ操作は常に標準機能の Claude in Chrome（`mcp__claude-in-chrome__*`）を最優先で使う（詳細はグローバル `operating-chrome` スキル参照）。
+
+**ページ内容の取得**:
 ```typescript
-// ページ全体のスナップショット
-mcp__chrome-devtools__take_snapshot()
+// インタラクティブ要素のみ
+mcp__claude-in-chrome__read_page({ filter: "interactive", tabId })
 
-// 特定要素のスナップショット
-mcp__chrome-devtools__take_snapshot({ uid: "element_id" })
+// 特定要素配下のみ（read_page/find で得た ref_id を指定）
+mcp__claude-in-chrome__read_page({ ref_id: "element_id", tabId })
+
+// テキストのみ取得したい場合
+mcp__claude-in-chrome__get_page_text({ tabId })
 ```
 
 **スクリーンショット取得**:
 ```typescript
-// ページ全体のスクリーンショット
-mcp__chrome-devtools__take_screenshot({ fullPage: true })
+// スクリーンショット
+mcp__claude-in-chrome__computer({ action: "screenshot", tabId })
 
-// ビューポートのみ
-mcp__chrome-devtools__take_screenshot()
-
-// 保存先を指定
-mcp__chrome-devtools__take_screenshot({
-  fullPage: true,
-  filePath: "/tmp/video-detail-page.png"
-})
+// 保存して共有する場合
+mcp__claude-in-chrome__computer({ action: "screenshot", tabId, save_to_disk: true })
 ```
 
 **要素の検索**:
-```bash
-# スナップショット内でキーワード検索
-grep "関連動画" <snapshot_output>
-grep "Udemy" <snapshot_output>
+```typescript
+// 自然言語で要素を検索（find が最速・最安）
+mcp__claude-in-chrome__find({ query: "関連動画セクション", tabId })
+mcp__claude-in-chrome__find({ query: "Udemy講座セクション", tabId })
 ```
 
 ### 改行位置の確認
@@ -535,14 +534,15 @@ const allVideosData: VideoMetadata[] = [
 2. `video-data.ts` のインポートを確認
 3. 開発サーバーを再起動
 
-### Issue: Chrome DevToolsが動作しない
+### Issue: 標準機能の Claude in Chrome が動作しない
 
 **症状**: MCPコマンドでエラー
 
 **対処法**:
-1. Chrome DevTools MCPが有効か確認
+1. `claude-in-chrome` 拡張機能が接続されているか確認（`tabs_context_mcp` で確認、無ければ `createIfEmpty: true`）
 2. ブラウザが起動しているか確認
-3. 手動でブラウザを開いて確認
+3. 対象ドメインの拡張機能サイト権限が許可されているか確認（詳細はグローバル `operating-chrome` スキル参照）
+4. 手動でブラウザを開いて確認
 
 ## Quick Commands
 

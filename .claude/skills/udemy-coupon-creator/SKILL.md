@@ -2,7 +2,7 @@
 name: udemy-coupon-creator
 description: Markdownファイルから新しいUdemy講座のクーポン配布ページを自動生成するスキル。講座情報をパースし、詳細ページ・一覧ページ更新・データファイル更新を一括で実行します。Udemyクーポン追加、新講座公開、クーポンページ作成時に使用してください。
 argument-hint: <markdown-file-path>
-allowed-tools: [Read, Write, Edit, Bash, Glob, Grep, mcp__chrome-devtools__navigate_page, mcp__chrome-devtools__take_snapshot, mcp__chrome-devtools__take_screenshot]
+allowed-tools: [Read, Write, Edit, Bash, Glob, Grep, mcp__claude-in-chrome__tabs_context_mcp, mcp__claude-in-chrome__navigate, mcp__claude-in-chrome__read_page, mcp__claude-in-chrome__computer, mcp__claude-in-chrome__find]
 ---
 
 # Udemy Coupon Creator
@@ -39,7 +39,7 @@ Markdownファイルから新しいUdemy講座のクーポン配布ページを�
 - **型チェック**：TypeScript厳格モードでの検証
 - **リント検査**：ESLintによるコード品質チェック
 - **テスト実行**：Jestでのデータ整合性テスト
-- **ブラウザ確認**：Chrome DevTools MCPでの動作確認
+- **ブラウザ確認**：標準機能の Claude in Chrome（`mcp__claude-in-chrome__*`）での動作確認（グローバル `operating-chrome` スキル参照）
 
 ## Instructions
 
@@ -349,7 +349,9 @@ npm run test -- src/lib/coupons/__tests__/coupon-data.test.ts
 npm run dev
 ```
 
-#### 5.2 Chrome DevTools MCPでの確認
+#### 5.2 標準機能の Claude in Chrome での確認
+
+ブラウザ操作は常に標準機能の Claude in Chrome（`mcp__claude-in-chrome__*`）を使用する（詳細はグローバル `operating-chrome` スキル参照）。
 
 **一覧ページ確認**（`/coupons`）：
 1. ページにアクセス
@@ -371,16 +373,16 @@ npm run dev
 **確認コマンド例**：
 ```typescript
 // ページにアクセス
-mcp__chrome-devtools__navigate_page({ url: "http://localhost:3000/coupons" })
+mcp__claude-in-chrome__navigate({ url: "http://localhost:3000/coupons", tabId })
 
-// スナップショット取得
-mcp__chrome-devtools__take_snapshot({ verbose: false })
+// インタラクティブ要素の取得
+mcp__claude-in-chrome__read_page({ filter: "interactive", tabId })
 
 // スクリーンショット取得
-mcp__chrome-devtools__take_screenshot({ fullPage: true })
+mcp__claude-in-chrome__computer({ action: "screenshot", tabId })
 
 // 詳細ページにアクセス
-mcp__chrome-devtools__navigate_page({ url: "http://localhost:3000/coupons/{slug}" })
+mcp__claude-in-chrome__navigate({ url: "http://localhost:3000/coupons/{slug}", tabId })
 ```
 
 ### Step 6: 完了報告
@@ -594,7 +596,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
    ```
    - テストが失敗した場合は必ず修正
 
-### Phase 5: 動作確認（Chrome DevTools MCP使用）
+### Phase 5: 動作確認（Claude in Chrome使用）
 
 1. **開発サーバー起動**：
    ```bash
@@ -604,13 +606,13 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 
 2. **一覧ページ確認**：
    - `/coupons` にアクセス
-   - スナップショットで新講座カードを確認
-   - スクリーンショットで視覚的に確認
+   - `read_page`（filter: "interactive"）で新講座カードを確認
+   - `computer`（screenshot）で視覚的に確認
 
 3. **詳細ページ確認**：
    - `/coupons/{slug}` にアクセス
    - 全セクションが正しく表示されているか確認
-   - フルページスクリーンショットを取得
+   - `computer`（screenshot）でフルページを確認
 
 ### Phase 6: 完了報告
 

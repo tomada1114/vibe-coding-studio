@@ -371,13 +371,14 @@ npm run build       # 本番ビルドが動作することを確認
 当リポジトリでは以下のMCPを使用可能な場合がありますので、開発の上では積極的に活用してください。
 
 - Context7
-- Chrome DevTools - UIの動作確認とテストに活用可能
-  - ページのスクリーンショット・スナップショット取得
-  - ブラウザスナップショットでの要素検査
-  - フォーム操作（入力、クリック、ドラッグ）
-  - コンソール・ネットワークの確認
-  - パフォーマンス計測・トレース
-  - ネットワーク・CPU・メモリエミュレーション
+- Claude in Chrome（標準機能 `mcp__claude-in-chrome__*`） - UIの動作確認とテストに活用可能
+  - ブラウザ操作は、Playwright MCP・Chrome DevTools MCP等の他MCPがenableでも常にこちらを最優先で使い、`operating-chrome` スキルの知見に従う（実Chromeプロファイルでログイン済みセッションを利用可・複数セッション同時利用可）
+  - ページのスクリーンショット取得（`computer`）
+  - 要素検査・特定（`find` / `read_page`）
+  - フォーム操作（`form_input`、クリックは ref 指定）
+  - コンソール・ネットワークの確認（`read_console_messages` は pattern 指定、`read_network_requests` は計測前に一度空呼び）
+  - 複数アクションは `browser_batch` で1往復にまとめる
+  - フォールバック（Chrome DevTools MCP等）は、拡張機能が未接続で解決しない場合・クリーンプロファイルが必要な場合・パフォーマンストレース等のCDP固有機能が必要な場合のみ
 
 ## アクティブな仕様（Active Specifications）
 

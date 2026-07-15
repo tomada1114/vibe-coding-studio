@@ -1,6 +1,6 @@
 ---
 description: Create new Udemy course coupon pages from markdown file using udemy-coupon-creator skill
-allowed-tools: Read, Write, Edit, Bash, Glob, Grep, mcp__chrome-devtools__navigate_page, mcp__chrome-devtools__take_snapshot, mcp__chrome-devtools__take_screenshot
+allowed-tools: Read, Write, Edit, Bash, Glob, Grep, mcp__claude-in-chrome__tabs_context_mcp, mcp__claude-in-chrome__navigate, mcp__claude-in-chrome__read_page, mcp__claude-in-chrome__computer, mcp__claude-in-chrome__find
 argument-hint: <markdown-file-path>
 model: sonnet
 ---
@@ -108,7 +108,9 @@ npm run type-check && npm run lint && npm run test -- src/lib/coupons/__tests__/
 
 ## Browser Verification
 
-開発サーバー（`npm run dev`）で以下を確認：
+開発サーバー（`npm run dev`）で、標準機能の Claude in Chrome（`mcp__claude-in-chrome__*`）を使って以下を確認：
 
 - `/coupons` - 一覧ページに新講座が表示されること
 - `/coupons/{slug}` - 詳細ページが正常に表示されること
+
+`navigate` でページ遷移し、`read_page`（filter: "interactive"）や `computer`（screenshot）で表示内容を確認する。詳細はグローバル `operating-chrome` スキル参照。

@@ -219,7 +219,7 @@ UdemyCoursesSection = {
 
 - **[VideoMetadata型構造](reference-video-structure.md)**: 型定義、必須/オプションセクション、各フィールドの詳細
 - **[関連コンテンツ判別ガイド](reference-related-content.md)**: 関連動画の選定基準、Udemy講座URLの判別ロジック
-- **[品質チェックガイド](reference-quality-check.md)**: テスト方法、動作確認手順、Chrome DevToolsの使用方法
+- **[品質チェックガイド](reference-quality-check.md)**: テスト方法、動作確認手順、Claude in Chromeの使用方法
 
 ## Examples
 
