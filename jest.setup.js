@@ -48,6 +48,7 @@ jest.mock("framer-motion", () => ({
     get: () => transformer(value.get ? value.get() : value),
   }),
   useInView: () => true,
+  useReducedMotion: () => false,
   useScroll: () => ({
     scrollX: {
       get: () => 0,
