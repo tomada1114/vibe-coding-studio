@@ -5,7 +5,7 @@
  */
 
 import FounderPage from "@/app/founder/page"
-import { render, screen } from "@testing-library/react"
+import { render, screen, within } from "@testing-library/react"
 
 // next/image のカスタムモック（jest.setup.js のグローバルモックを意図的に上書き）
 // このファイルでは `data-priority` 属性のアサーションがあるため、
@@ -136,10 +136,19 @@ describe("運営者プロフィールページ（/founder）", () => {
       expect(item).toBeInTheDocument()
     })
 
-    it("フリーランス独立とカナダ移住が表示される", () => {
+    it("フリーランスとしての独立が表示される", () => {
       render(<FounderPage />)
       const item = screen.getByRole("heading", {
-        name: /フリーランスとして独立、カナダへ移住/i,
+        name: /フリーランスとして独立/i,
+        level: 3,
+      })
+      expect(item).toBeInTheDocument()
+    })
+
+    it("現在の拠点についての項目が表示される", () => {
+      render(<FounderPage />)
+      const item = screen.getByRole("heading", {
+        name: /カナダを経てアメリカへ拠点を移す/i,
         level: 3,
       })
       expect(item).toBeInTheDocument()
@@ -402,6 +411,19 @@ describe("運営者プロフィールページ（/founder）", () => {
       render(<FounderPage />)
       const navbar = document.querySelector("nav")
       expect(navbar).toBeInTheDocument()
+    })
+
+    it("ページ専用ヘッダーからトップページに戻れる", () => {
+      render(<FounderPage />)
+      const homeLink = screen.getByRole("link", { name: /Vibe Coding Studio/i })
+      expect(homeLink).toHaveAttribute("href", "/")
+    })
+
+    it("ヘッダーの現在地（運営者）がaria-currentで示される", () => {
+      render(<FounderPage />)
+      const nav = screen.getByRole("navigation", { name: "サイト内メニュー" })
+      const currentLink = within(nav).getByRole("link", { name: /運営者/i })
+      expect(currentLink).toHaveAttribute("aria-current", "page")
     })
 
     it("Footerが表示される", () => {
