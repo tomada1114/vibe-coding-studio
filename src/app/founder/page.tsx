@@ -19,7 +19,7 @@ import Image from "next/image"
 const founderTitle = "とまだ - Founder"
 const founderOgTitle = "とまだ - Founder | Vibe Coding Studio"
 const founderDescription =
-  "Vibe Coding Studioの主催者とまだ（増山友司 / Tomoshi Masuyama）のプロフィール。AI駆動開発の実践者・教育者。金融系メディアや運輸系システムなど多様な開発現場での実務経験をもとに、UdemyベストセラーコースやYouTubeでAI駆動開発の実践知を発信しています。"
+  "Vibe Coding Studioの主催者とまだ（増山友司 / Tomoshi Masuyama）のプロフィール。AI駆動開発の実践者・教育者。金融系メディアや運輸系システム、アメリカ企業の英語環境での開発など多様な実務経験をもとに、UdemyベストセラーコースやYouTubeでAI駆動開発の実践知を発信しています。"
 
 export const metadata: Metadata = {
   title: founderTitle,
@@ -131,13 +131,18 @@ function HeroSection() {
               <p className="mt-8 text-xl/8 font-medium text-gray-950/75 sm:text-2xl/9">
                 AI駆動開発の実践者・教育者
                 <br />
-                カナダ在住のソフトウェアエンジニア
+                アメリカ在住のソフトウェアエンジニア
               </p>
+              {/* TODO: 書籍発売の告知解禁後に有効化
+              <p className="mt-4 text-base/7 font-medium text-gray-950/75">
+                『作って学ぶ Claude CodeによるAI駆動アプリ開発入門』（技術評論社）著者
+              </p>
+              */}
               <p className="mt-6 max-w-2xl text-base/7 text-gray-700">
                 SIerでのネットワーク・サーバ基盤構築を経てWebアプリケーション開発に転身後、フリーランスのソフトウェアエンジニアとして独立。
-                月間数百万ユーザー規模の金融系メディアや運輸系システムの開発、大規模システムのリプレイスなど、インフラからアプリケーションまで幅広い開発を最前線で担ってきました。
-                Claude
-                Codeをはじめとする最新のAIツールを開発の主力に据え、現場で磨いた実践知をYouTube・Udemy・コミュニティを通じて共有しています。
+                月間数百万ユーザー規模の金融系メディアや運輸系システムの開発、アメリカ企業の開発プロジェクト、法人向けのAI駆動開発導入支援など、インフラからアプリケーションまで幅広い開発を最前線で担ってきました。
+                現在はアメリカを拠点に、Claude
+                Codeをはじめとする最新のAIツールを開発の主力に据え、OSS・個人開発での実践と、YouTube・Udemy・コミュニティを通じた教育・発信に注力しています。
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 {profileLinks.map(link => (
@@ -244,6 +249,33 @@ function ExpertiseSection() {
               </div>
             </div>
           </div>
+
+          <div className="mt-12 rounded-3xl bg-white/80 p-8 shadow-sm ring-1 ring-gray-950/5 sm:p-10">
+            <div className="inline-flex items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gray-950">
+                <GlobeAltIcon className="h-6 w-6 text-white" />
+              </div>
+              <h3 className="text-2xl/8 font-semibold text-gray-950">
+                アメリカ企業・英語環境での開発経験
+              </h3>
+            </div>
+            <div className="mt-6 space-y-4 text-base/7 text-gray-700">
+              <p>
+                カナダ在住時には、
+                <strong className="font-semibold text-gray-950">
+                  アメリカに本社を置く企業の開発プロジェクトに参画
+                </strong>
+                。開発に関わるコミュニケーションがすべて英語という環境で、フルリモートの開発を担いました。
+              </p>
+              <p>
+                経験のなかった技術スタックの案件でしたが、
+                <strong className="font-semibold text-gray-950">
+                  AI駆動開発を武器に短期間でキャッチアップし、半年間のプロジェクトを完遂
+                </strong>
+                。言語や技術スタックが変わっても、AIを活用して素早く適応できることを実証した経験です。
+              </p>
+            </div>
+          </div>
         </div>
       </Container>
     </div>
@@ -277,9 +309,21 @@ function CareerSection() {
     },
     {
       year: "2024",
-      title: "フリーランスとして独立、カナダへ移住",
+      title: "フリーランスとして独立",
       description:
-        "金融系メディアや運輸系システムの開発、大規模システムのリプレイス、海外企業の案件など、多様な開発を経験。法人向けのAI駆動開発導入支援・コンサルティングも手がける。",
+        "金融系メディアや運輸系システムの開発、大規模システムのリプレイスなど、多様な開発を経験。法人向けのAI駆動開発導入支援・コンサルティングも手がけた。",
+    },
+    {
+      year: "2025",
+      title: "アメリカ企業の開発プロジェクトに参画",
+      description:
+        "カナダからの応募をきっかけに、アメリカに本社を置く企業と業務委託契約を締結。英語でのコミュニケーションのもと、未経験の技術スタックにもAI駆動開発で対応し、半年間のプロジェクトを完遂した。",
+    },
+    {
+      year: "現在",
+      title: "カナダを経てアメリカへ拠点を移す",
+      description:
+        "カナダ在住時は日本・北米の開発プロジェクトにフルリモートで参画。現在はアメリカを拠点に、OSS・個人開発での実践と、Udemy・YouTube・コミュニティを通じたAI駆動開発の教育・発信に注力している。",
     },
   ]
 
@@ -338,6 +382,13 @@ function CareerSection() {
  */
 function EducationSection() {
   const educationActivities = [
+    // TODO: 書籍発売の告知解禁後に有効化（発売情報ページへのリンクも追加する）
+    // {
+    //   icon: BookOpenIcon,
+    //   title: "書籍執筆",
+    //   description:
+    //     "技術評論社より『作って学ぶ Claude CodeによるAI駆動アプリ開発入門』を出版。Claude Codeを使ったAI駆動開発の進め方を、実際にアプリを作りながら体系的に学べる一冊です。開発現場とコンテンツ制作で培った実践知を凝縮しています。",
+    // },
     {
       icon: AcademicCapIcon,
       title: "Udemy講師",
@@ -428,13 +479,13 @@ function ActivitiesSection() {
       icon: BriefcaseIcon,
       title: "ソフトウェアエンジニアリング",
       description:
-        "フリーランスのソフトウェアエンジニアとして独立し、カナダから日本・北米の開発プロジェクトにフルリモートで参画してきました。インフラからアプリケーション開発まで、多様な開発実績を持ちます。",
+        "フリーランスのソフトウェアエンジニアとして、日本・北米の開発プロジェクトにフルリモートで参画してきました。インフラからアプリケーション開発まで、多様な開発実績を持ちます。現在はOSS・個人開発を中心に、AI駆動開発の実践を続けています。",
     },
     {
       icon: RocketLaunchIcon,
       title: "AI駆動開発の導入支援",
       description:
-        "法人向けにAI駆動開発の導入支援・コンサルティングを手がけます。開発環境の整備からチームへの定着支援まで、現場での実践ノウハウをもとにサポート。初心者から経験者まで、レベルに応じた教育が可能です。",
+        "法人向けにAI駆動開発の導入支援・コンサルティングを手がけてきました。開発環境の整備からチームへの定着支援まで、現場での実践ノウハウをもとにサポートした実績があります。初心者から経験者まで、レベルに応じた教育を得意としています。",
     },
     {
       icon: GlobeAltIcon,
@@ -473,7 +524,7 @@ function ActivitiesSection() {
 }
 
 /**
- * 技術スタックセクション
+ * 技術スタック・取得資格セクション
  */
 function TechStackSection() {
   const techStacks = [
@@ -501,6 +552,16 @@ function TechStackSection() {
         "Gemini",
       ],
     },
+  ]
+
+  const certifications = [
+    "AWS認定ソリューションアーキテクト - プロフェッショナル",
+    "AWS認定DevOpsエンジニア - プロフェッショナル",
+    "AWS認定セキュリティ - 専門知識",
+    "CCNP Routing and Switching",
+    "情報処理安全確保支援士試験 合格",
+    "応用情報技術者",
+    "TOEIC 910点",
   ]
 
   return (
@@ -533,6 +594,29 @@ function TechStackSection() {
               </ul>
             </div>
           ))}
+        </div>
+
+        <div className="mt-24">
+          <Subheading>CERTIFICATIONS</Subheading>
+          <Heading as="h2" className="mt-2 max-w-3xl">
+            取得資格
+          </Heading>
+          <p className="mt-6 max-w-3xl text-lg text-gray-600">
+            インフラ・セキュリティ領域を中心に、これまでに取得してきた資格・認定です。
+          </p>
+          <div className="mt-10 rounded-3xl bg-white/80 p-8 shadow-sm ring-1 ring-gray-950/5">
+            <ul className="grid grid-cols-1 gap-x-8 gap-y-3 sm:grid-cols-2">
+              {certifications.map(item => (
+                <li
+                  key={item}
+                  className="flex items-center gap-3 text-base/7 text-gray-700"
+                >
+                  <div className="h-1.5 w-1.5 rounded-full bg-gray-950" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </Container>
     </div>
@@ -656,7 +740,7 @@ function FounderStructuredData() {
       "https://www.linkedin.com/in/tomoshi-masuyama-5b4b31199/",
       "https://qiita.com/tomada",
       "https://zenn.dev/tmasuyama1114",
-      "https://note.com/tomada",
+      "https://note.com/muscle_coding",
     ],
     alumniOf: {
       "@type": "CollegeOrUniversity",
