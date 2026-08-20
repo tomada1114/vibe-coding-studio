@@ -89,6 +89,56 @@ describe("トップページ（/）", () => {
     })
   })
 
+  describe("著書セクション", () => {
+    it("著書セクションが表示される", () => {
+      render(<Home />)
+      const heading = screen.getByRole("heading", {
+        name: /運営者の著書/i,
+      })
+      expect(heading).toBeInTheDocument()
+    })
+
+    it("書名が正式表記で表示される", () => {
+      render(<Home />)
+      const bookHeading = screen.getByRole("heading", {
+        name: /『Claude Codeで作って学ぶ AI駆動アプリ開発入門』/,
+      })
+      expect(bookHeading).toBeInTheDocument()
+    })
+
+    it("書影が表示される", () => {
+      render(<Home />)
+      const cover = screen.getByAltText(
+        /『Claude Codeで作って学ぶ AI駆動アプリ開発入門』（技術評論社）の書影/
+      )
+      expect(cover).toBeInTheDocument()
+    })
+
+    it("Amazonの購入導線が新規タブで開く", () => {
+      render(<Home />)
+      const amazonLink = screen.getByRole("link", {
+        name: /Amazonで予約する/i,
+      })
+      expect(amazonLink).toHaveAttribute("href", "https://amzn.asia/d/0f0bQMI4")
+      expect(amazonLink).toHaveAttribute("target", "_blank")
+      expect(amazonLink).toHaveAttribute("rel", "noopener noreferrer")
+    })
+
+    it("運営者ページへの導線が表示される", () => {
+      render(<Home />)
+      const detailLink = screen.getByRole("link", {
+        name: /書籍の詳細を見る/i,
+      })
+      expect(detailLink).toHaveAttribute("href", "/founder")
+    })
+
+    it("発売日と価格が表示される", () => {
+      const { container } = render(<Home />)
+      expect(container.textContent).toContain("2026年9月8日発売")
+      expect(container.textContent).toContain("3,080円（税込）")
+    })
+  })
+
   describe("Learnセクション", () => {
     it("Learnセクションが表示される", () => {
       render(<Home />)

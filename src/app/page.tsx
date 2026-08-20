@@ -6,6 +6,7 @@ import { Footer } from "@/components/footer"
 import { Navbar } from "@/components/navbar"
 import { SpectrumBeam } from "@/components/spectrum-beam"
 import { Heading, Subheading } from "@/components/text"
+import { book } from "@/data/book"
 import { getLatestCoupons, getMaxDiscountRate } from "@/lib/coupons/coupon-data"
 import { navigation } from "@/lib/navigation"
 import { getAllVideos } from "@/lib/videos/video-data"
@@ -68,6 +69,75 @@ function HeroSection() {
             <Button variant="secondary" href="/coupons">
               クーポンを見る
             </Button>
+          </div>
+        </div>
+      </Container>
+    </div>
+  )
+}
+
+/**
+ * 著書セクション
+ * - 書影と書誌情報、Amazon（予約）と運営者ページへの導線
+ * - 書誌情報は src/data/book.ts が単一の出どころ
+ */
+function BookSection() {
+  return (
+    <div className="relative border-t border-gray-200 bg-white py-24 sm:py-32">
+      <Container>
+        <Subheading>BOOK</Subheading>
+        <Heading as="h2" className="mt-2 max-w-3xl">
+          運営者の著書
+        </Heading>
+        <p className="mt-6 max-w-3xl text-lg text-gray-600">
+          Claude Codeでの開発を、実際にアプリを作りながら追える入門書です。
+        </p>
+
+        <div className="mt-10 grid grid-cols-1 items-start gap-10 sm:mt-16 lg:grid-cols-12 lg:gap-16">
+          {/* 書影 */}
+          <div className="lg:col-span-4">
+            <Image
+              src={book.cover.src}
+              alt={book.cover.alt}
+              width={book.cover.width}
+              height={book.cover.height}
+              sizes="(max-width: 1024px) 280px, 340px"
+              className="mx-auto h-auto w-full max-w-[280px] rounded-lg shadow-xl ring-1 ring-gray-950/10 lg:mx-0 lg:max-w-none"
+            />
+          </div>
+
+          {/* 書誌情報と導線 */}
+          <div className="lg:col-span-8">
+            <p className="font-mono text-xs/5 font-medium tracking-widest text-gray-500 uppercase">
+              {book.releaseDateLabel} / {book.status}
+            </p>
+            <h3 className="mt-4 text-2xl/8 font-semibold text-balance text-gray-950 sm:text-3xl/9">
+              『{book.title}』
+            </h3>
+            <p className="mt-3 text-base/7 text-gray-600">
+              {`${book.publisher} | ${book.releaseDate}発売 | ${book.price} | ${book.format}`}
+            </p>
+
+            <p className="mt-6 text-base/7 text-gray-700">
+              Claude
+              Codeのインストールと最初の対話から始めて、CLAUDE.mdでプロジェクトのルールを渡す方法、MCPでPlaywrightやSupabaseとつなぐ手順までを、手を動かしながら追える構成にしました。
+            </p>
+            <p className="mt-4 text-base/7 text-gray-700">
+              終盤では学んだことを総動員して、Next.jsとSupabaseでタスク管理アプリを作り、Vercelにデプロイして公開するところまで進みます。既存コードの読み解きとリファクタリング、チーム開発での運用も扱っています。
+            </p>
+
+            <div className="mt-10 flex flex-col gap-x-6 gap-y-4 sm:flex-row">
+              <Button
+                href={book.amazonUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {book.ctaLabel}
+              </Button>
+              <Button variant="secondary" href="/founder">
+                書籍の詳細を見る
+              </Button>
+            </div>
           </div>
         </div>
       </Container>
@@ -330,6 +400,7 @@ function ProfileSection() {
 /**
  * トップページ
  * - ファーストビュー
+ * - 著書セクション
  * - コミュニティ概要セクション
  * - Learn セクション（実在コンテンツへの導線）
  * - クーポンセクション
@@ -350,6 +421,9 @@ export default function Home() {
       <main id="main-content">
         <AsyncErrorBoundary>
           <HeroSection />
+        </AsyncErrorBoundary>
+        <AsyncErrorBoundary>
+          <BookSection />
         </AsyncErrorBoundary>
         <AsyncErrorBoundary>
           <CommunityOverviewSection />

@@ -1,5 +1,6 @@
 import { AsyncErrorBoundary } from "@/components/error-boundary"
 import { Footer } from "@/components/footer"
+import { book } from "@/data/book"
 import { getSiteUrl } from "@/lib/seo/site-url"
 import { clsx } from "clsx"
 import type { Metadata } from "next"
@@ -100,26 +101,6 @@ const textLink = clsx(
 // SVG feTurbulence をそのまま背景に敷いて、紙面に極薄い粒子感を与える。
 const noiseTexture =
   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E\")"
-
-/**
- * 著書『Claude Codeで作って学ぶ AI駆動アプリ開発入門』（技術評論社）
- * 書名は正式表記のまま扱う（略さない・言い換えない）。
- * 発売日を過ぎたら status を「発売中」、Amazon の導線文言を「Amazonで見る」に切り替える。
- */
-const book = {
-  title: "Claude Codeで作って学ぶ AI駆動アプリ開発入門",
-  publisher: "技術評論社",
-  releaseDate: "2026年9月8日",
-  releaseDateISO: "2026-09-08",
-  releaseDateLabel: "2026.09.08",
-  status: "予約受付中",
-  price: "3,080円（税込）",
-  format: "B5変形 / 384ページ",
-  pages: 384,
-  isbn: "978-4-297-15823-1",
-  amazonUrl: "https://amzn.asia/d/0f0bQMI4",
-  publisherUrl: "https://gihyo.jp/book/2026/978-4-297-15823-1",
-}
 
 const profileLinks = [
   {
@@ -322,12 +303,15 @@ function Section({
   label,
   title,
   intro,
+  aside,
   glow,
   children,
 }: {
   label: string
   title: string
   intro?: string
+  /** 左カラムの見出しの下に置く補助ビジュアル（書影など） */
+  aside?: React.ReactNode
   glow: string
   children: React.ReactNode
 }) {
@@ -347,6 +331,7 @@ function Section({
             {intro && (
               <p className="mt-5 max-w-md text-sm/7 text-[#B9C3D6]">{intro}</p>
             )}
+            {aside}
           </div>
           <div className="lg:col-span-8">{children}</div>
         </div>
@@ -564,71 +549,90 @@ function BookSection() {
       title="著書"
       glow={glowTealBottomLeft}
       intro="Claude Codeでの開発を、実際にアプリを作りながら追える入門書を書きました。"
+      aside={
+        /* 書影。暗い紙面で白い表紙が浮くので、額装は細いヘアラインだけに留める */
+        <figure className="mt-9 w-full max-w-[300px]">
+          <div className="border border-[#22304A] bg-[#10182B] p-2">
+            <Image
+              src={book.cover.src}
+              alt={book.cover.alt}
+              width={book.cover.width}
+              height={book.cover.height}
+              sizes="(max-width: 1024px) 300px, 300px"
+              className="h-auto w-full"
+            />
+          </div>
+        </figure>
+      }
     >
       <article className="border-y border-[#22304A] py-10">
-        <p
-          className={clsx(
-            mono,
-            "flex flex-wrap items-center gap-3 text-[11px] tracking-[0.18em] text-[#6FA8E8]"
-          )}
-        >
-          <span>{book.releaseDateLabel}</span>
-          <span className="border border-[#6FA8E8]/40 px-1.5 py-0.5 text-[10px]">
-            {book.status}
-          </span>
-        </p>
-
-        <h3 className="mt-4 text-2xl font-bold tracking-tight text-[#F0F3F9] sm:text-3xl">
-          『{book.title}』
-        </h3>
-        <p className="mt-3 text-base font-medium text-[#F0F3F9]/80">
-          {book.publisher}
-        </p>
-
-        <div className={clsx(bodyText, "mt-7 max-w-2xl space-y-5")}>
-          <p>
-            Claude
-            Codeのインストールと最初の対話から始めて、@記法やスラッシュコマンドといった対話の基本、
-            <strong className={strongMark}>
-              CLAUDE.mdでプロジェクトのルールを渡す方法
-            </strong>
-            、MCPでPlaywrightやSupabaseとつなぐ手順までを、手を動かしながら追える構成にしました。
+        <div>
+          <p
+            className={clsx(
+              mono,
+              "flex flex-wrap items-center gap-3 text-[11px] tracking-[0.18em] text-[#6FA8E8]"
+            )}
+          >
+            <span>{book.releaseDateLabel}</span>
+            <span className="border border-[#6FA8E8]/40 px-1.5 py-0.5 text-[10px]">
+              {book.status}
+            </span>
           </p>
-          <p>
-            終盤では学んだことを総動員して、Next.jsとSupabaseでタスク管理アプリを作り、
-            <strong className={strongMark}>Vercelにデプロイして公開する</strong>
-            ところまで進みます。既存コードの読み解きとリファクタリング、GitHub上でのレビュー依頼やチーム開発での運用も扱っています。
-          </p>
-          <p>
-            これからClaude
-            Codeを使う方に向けた入門書ですが、すでに使っている方にも、CLAUDE.mdの階層的な管理やMCPの実運用、チームへの展開といった形で読んでいただける内容です。
-          </p>
-        </div>
 
-        <dl className="mt-9 grid grid-cols-1 gap-x-12 border-t border-[#22304A] sm:grid-cols-2">
-          {bookSpecs.map(spec => (
-            <div
-              key={spec.label}
-              className="flex items-baseline justify-between gap-6 border-b border-[#22304A] py-3"
-            >
-              <dt
-                className={clsx(
-                  mono,
-                  "text-[11px] tracking-[0.18em] text-[#93A0B8]"
-                )}
+          <h3 className="mt-4 text-2xl font-bold tracking-tight text-[#F0F3F9] sm:text-3xl">
+            『{book.title}』
+          </h3>
+          <p className="mt-3 text-base font-medium text-[#F0F3F9]/80">
+            {book.publisher}
+          </p>
+
+          <div className={clsx(bodyText, "mt-7 max-w-2xl space-y-5")}>
+            <p>
+              Claude
+              Codeのインストールと最初の対話から始めて、@記法やスラッシュコマンドといった対話の基本、
+              <strong className={strongMark}>
+                CLAUDE.mdでプロジェクトのルールを渡す方法
+              </strong>
+              、MCPでPlaywrightやSupabaseとつなぐ手順までを、手を動かしながら追える構成にしました。
+            </p>
+            <p>
+              終盤では学んだことを総動員して、Next.jsとSupabaseでタスク管理アプリを作り、
+              <strong className={strongMark}>
+                Vercelにデプロイして公開する
+              </strong>
+              ところまで進みます。既存コードの読み解きとリファクタリング、GitHub上でのレビュー依頼やチーム開発での運用も扱っています。
+            </p>
+            <p>
+              これからClaude
+              Codeを使う方に向けた入門書ですが、すでに使っている方にも、CLAUDE.mdの階層的な管理やMCPの実運用、チームへの展開といった形で読んでいただける内容です。
+            </p>
+          </div>
+
+          <dl className="mt-9 grid grid-cols-1 gap-x-12 border-t border-[#22304A] sm:grid-cols-2">
+            {bookSpecs.map(spec => (
+              <div
+                key={spec.label}
+                className="flex items-baseline justify-between gap-6 border-b border-[#22304A] py-3"
               >
-                {spec.label}
-              </dt>
-              <dd className="text-sm text-[#B9C3D6]">{spec.value}</dd>
-            </div>
-          ))}
-        </dl>
+                <dt
+                  className={clsx(
+                    mono,
+                    "text-[11px] tracking-[0.18em] text-[#93A0B8]"
+                  )}
+                >
+                  {spec.label}
+                </dt>
+                <dd className="text-sm text-[#B9C3D6]">{spec.value}</dd>
+              </div>
+            ))}
+          </dl>
 
-        <div className="flex flex-wrap items-center gap-x-10">
-          <ArrowLink href={book.amazonUrl}>Amazonで予約する</ArrowLink>
-          <ArrowLink href={book.publisherUrl}>
-            目次を見る（{book.publisher}）
-          </ArrowLink>
+          <div className="flex flex-wrap items-center gap-x-10">
+            <ArrowLink href={book.amazonUrl}>{book.ctaLabel}</ArrowLink>
+            <ArrowLink href={book.publisherUrl}>
+              目次を見る（{book.publisher}）
+            </ArrowLink>
+          </div>
         </div>
       </article>
     </Section>

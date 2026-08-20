@@ -174,6 +174,14 @@ describe("運営者プロフィールページ（/founder）", () => {
       expect(bookHeading).toBeInTheDocument()
     })
 
+    it("書影が表示される", () => {
+      render(<FounderPage />)
+      const cover = screen.getByAltText(
+        /『Claude Codeで作って学ぶ AI駆動アプリ開発入門』（技術評論社）の書影/
+      )
+      expect(cover).toBeInTheDocument()
+    })
+
     it("書誌情報（発売日・定価・判型・ISBN）が表示される", () => {
       const { container } = render(<FounderPage />)
       expect(container.textContent).toContain("2026年9月8日")
