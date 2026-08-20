@@ -153,10 +153,85 @@ describe("運営者プロフィールページ（/founder）", () => {
       })
       expect(item).toBeInTheDocument()
     })
+  })
 
-    it("書籍への言及が含まれない", () => {
+  describe("著書セクション", () => {
+    it("著書セクションが表示される", () => {
+      render(<FounderPage />)
+      const heading = screen.getByRole("heading", {
+        name: "著書",
+        level: 2,
+      })
+      expect(heading).toBeInTheDocument()
+    })
+
+    it("書名が正式表記で表示される", () => {
+      render(<FounderPage />)
+      const bookHeading = screen.getByRole("heading", {
+        name: /『Claude Codeで作って学ぶ AI駆動アプリ開発入門』/,
+        level: 3,
+      })
+      expect(bookHeading).toBeInTheDocument()
+    })
+
+    it("書誌情報（発売日・定価・判型・ISBN）が表示される", () => {
       const { container } = render(<FounderPage />)
-      expect(container.textContent).not.toMatch(/書籍|技術評論社|刊行/)
+      expect(container.textContent).toContain("2026年9月8日")
+      expect(container.textContent).toContain("3,080円（税込）")
+      expect(container.textContent).toContain("B5変形 / 384ページ")
+      expect(container.textContent).toContain("978-4-297-15823-1")
+    })
+
+    it("Amazonの購入導線が表示される", () => {
+      render(<FounderPage />)
+      const amazonLinks = screen.getAllByRole("link", {
+        name: /Amazonで予約する/i,
+      })
+      expect(amazonLinks.length).toBeGreaterThan(0)
+      amazonLinks.forEach(link => {
+        expect(link).toHaveAttribute("href", "https://amzn.asia/d/0f0bQMI4")
+        expect(link).toHaveAttribute("target", "_blank")
+        expect(link).toHaveAttribute("rel", "noopener noreferrer")
+      })
+    })
+
+    it("版元の書籍ページへのリンクが表示される", () => {
+      render(<FounderPage />)
+      const publisherLink = screen.getByRole("link", {
+        name: /目次を見る（技術評論社）/i,
+      })
+      expect(publisherLink).toHaveAttribute(
+        "href",
+        "https://gihyo.jp/book/2026/978-4-297-15823-1"
+      )
+      expect(publisherLink).toHaveAttribute("target", "_blank")
+    })
+
+    it("ヒーローセクションで著者であることが告知される", () => {
+      render(<FounderPage />)
+      const announcement = screen.getByText(
+        /『Claude Codeで作って学ぶ AI駆動アプリ開発入門』（技術評論社）著者/
+      )
+      expect(announcement).toBeInTheDocument()
+    })
+
+    it("旧仮題や他著者の書名が混入していない", () => {
+      const { container } = render(<FounderPage />)
+      expect(container.textContent).not.toMatch(
+        /作って学ぶ Claude CodeによるAI駆動アプリ開発入門/
+      )
+      expect(container.textContent).not.toMatch(/Claude Code実践入門/)
+    })
+  })
+
+  describe("教育活動セクション（書籍）", () => {
+    it("書籍執筆が教育活動として表示される", () => {
+      render(<FounderPage />)
+      const heading = screen.getByRole("heading", {
+        name: /書籍執筆/i,
+        level: 3,
+      })
+      expect(heading).toBeInTheDocument()
     })
   })
 
@@ -451,6 +526,37 @@ describe("運営者プロフィールページ（/founder）", () => {
       const pageModule = await import("@/app/founder/page")
       const description = pageModule.metadata.description as string
       expect(description).toMatch(/AI駆動開発/i)
+    })
+
+    it("metadataの説明に著書が含まれる", async () => {
+      const pageModule = await import("@/app/founder/page")
+      const description = pageModule.metadata.description as string
+      expect(description).toContain(
+        "『Claude Codeで作って学ぶ AI駆動アプリ開発入門』"
+      )
+    })
+
+    it("構造化データにPersonとBookが含まれる", () => {
+      const { container } = render(<FounderPage />)
+      const script = container.querySelector(
+        'script[type="application/ld+json"]'
+      )
+      expect(script).toBeInTheDocument()
+
+      const parsed = JSON.parse(script?.innerHTML ?? "{}")
+      const types = (parsed["@graph"] as { "@type": string }[]).map(
+        node => node["@type"]
+      )
+      expect(types).toContain("Person")
+      expect(types).toContain("Book")
+
+      const bookNode = (
+        parsed["@graph"] as { "@type": string; name?: string; isbn?: string }[]
+      ).find(node => node["@type"] === "Book")
+      expect(bookNode?.name).toBe(
+        "Claude Codeで作って学ぶ AI駆動アプリ開発入門"
+      )
+      expect(bookNode?.isbn).toBe("978-4-297-15823-1")
     })
   })
 

@@ -18,7 +18,7 @@ import { FadeUp, RevealOnScroll } from "./founder-motion"
 const founderTitle = "とまだ - Founder"
 const founderOgTitle = "とまだ - Founder | Vibe Coding Studio"
 const founderDescription =
-  "Vibe Coding Studioの主催者とまだ（増山友司 / Tomoshi Masuyama）のプロフィール。AI駆動開発の実践者・教育者。金融系メディアや運輸系システム、アメリカ企業の英語環境での開発など多様な実務経験をもとに、UdemyベストセラーコースやYouTubeでAI駆動開発の実践知を発信しています。"
+  "Vibe Coding Studioの主催者とまだ（増山友司 / Tomoshi Masuyama）のプロフィール。AI駆動開発の実践者・教育者で、『Claude Codeで作って学ぶ AI駆動アプリ開発入門』（技術評論社、2026年9月8日発売）の著者。金融系メディアや運輸系システムなど多様な実務経験をもとに、UdemyベストセラーコースやYouTubeでAI駆動開発の実践知を発信しています。"
 
 export const metadata: Metadata = {
   title: founderTitle,
@@ -69,7 +69,7 @@ const jetBrainsMono = JetBrains_Mono({
  * 文字 主 #F0F3F9 / 中 #B9C3D6 / 弱 #93A0B8
  * 主アクセント（青）テキスト用 #6FA8E8 / 発光装飾用 #4C8DFF
  * 副アクセント（ティール）#3ECF9B … 数値強調・技術カテゴリ・Mission のルール線のみ
- * 暖色シグナル（琥珀）#E3A857 … 経歴タイムラインの「現在」ノードと HEAD バッジのみ
+ * 暖色シグナル（琥珀）#E3A857 … ヒーローの発売日と、経歴タイムラインの「現在」ノード・HEAD バッジのみ
  *
  * コントラスト比（背景 #0B1020 上、WCAG AA の小さい文字 4.5:1 基準）
  *   #F0F3F9 16.5:1 / #B9C3D6 10.7:1 / #93A0B8 7.2:1 / #6FA8E8 7.6:1 / #3ECF9B 9.6:1
@@ -100,6 +100,26 @@ const textLink = clsx(
 // SVG feTurbulence をそのまま背景に敷いて、紙面に極薄い粒子感を与える。
 const noiseTexture =
   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E\")"
+
+/**
+ * 著書『Claude Codeで作って学ぶ AI駆動アプリ開発入門』（技術評論社）
+ * 書名は正式表記のまま扱う（略さない・言い換えない）。
+ * 発売日を過ぎたら status を「発売中」、Amazon の導線文言を「Amazonで見る」に切り替える。
+ */
+const book = {
+  title: "Claude Codeで作って学ぶ AI駆動アプリ開発入門",
+  publisher: "技術評論社",
+  releaseDate: "2026年9月8日",
+  releaseDateISO: "2026-09-08",
+  releaseDateLabel: "2026.09.08",
+  status: "予約受付中",
+  price: "3,080円（税込）",
+  format: "B5変形 / 384ページ",
+  pages: 384,
+  isbn: "978-4-297-15823-1",
+  amazonUrl: "https://amzn.asia/d/0f0bQMI4",
+  publisherUrl: "https://gihyo.jp/book/2026/978-4-297-15823-1",
+}
 
 const profileLinks = [
   {
@@ -436,11 +456,24 @@ function HeroSection() {
                 アメリカ在住のソフトウェアエンジニア
               </p>
             </FadeUp>
-            {/* TODO: 書籍発売の告知解禁後に有効化
-            <p className="mt-4 text-base/7 font-medium text-gray-950/75">
-              『作って学ぶ Claude CodeによるAI駆動アプリ開発入門』（技術評論社）著者
-            </p>
-            */}
+            {/* 著書の告知。ページで最初に目に入る位置に置く。
+                琥珀（#E3A857）は「現在・アクティブ」を指す唯一の暖色シグナルで、
+                使用箇所はここと経歴タイムラインの HEAD ノードの2箇所に限る。 */}
+            <FadeUp delay={0.16}>
+              <p className="mt-6 text-base/8 font-medium text-[#F0F3F9]">
+                <span
+                  className={clsx(
+                    mono,
+                    "mr-3 inline-block text-[13px] tracking-[0.18em] text-[#E3A857]"
+                  )}
+                >
+                  {book.releaseDateLabel} 発売
+                </span>
+                <span className="inline-block">
+                  『{book.title}』（{book.publisher}）著者
+                </span>
+              </p>
+            </FadeUp>
 
             <FadeUp delay={0.18}>
               <p className={clsx(bodyText, "mt-7 max-w-2xl")}>
@@ -509,6 +542,96 @@ function HeroSection() {
         </div>
       </Shell>
     </div>
+  )
+}
+
+/**
+ * 著書セクション
+ * ヒーロー直下に置き、書誌情報は等幅のスペックシートとして並べる
+ */
+function BookSection() {
+  const bookSpecs = [
+    { label: "出版社", value: book.publisher },
+    { label: "発売日", value: book.releaseDate },
+    { label: "判型・頁数", value: book.format },
+    { label: "定価", value: book.price },
+    { label: "ISBN", value: book.isbn },
+  ]
+
+  return (
+    <Section
+      label="Book"
+      title="著書"
+      glow={glowTealBottomLeft}
+      intro="Claude Codeでの開発を、実際にアプリを作りながら追える入門書を書きました。"
+    >
+      <article className="border-y border-[#22304A] py-10">
+        <p
+          className={clsx(
+            mono,
+            "flex flex-wrap items-center gap-3 text-[11px] tracking-[0.18em] text-[#6FA8E8]"
+          )}
+        >
+          <span>{book.releaseDateLabel}</span>
+          <span className="border border-[#6FA8E8]/40 px-1.5 py-0.5 text-[10px]">
+            {book.status}
+          </span>
+        </p>
+
+        <h3 className="mt-4 text-2xl font-bold tracking-tight text-[#F0F3F9] sm:text-3xl">
+          『{book.title}』
+        </h3>
+        <p className="mt-3 text-base font-medium text-[#F0F3F9]/80">
+          {book.publisher}
+        </p>
+
+        <div className={clsx(bodyText, "mt-7 max-w-2xl space-y-5")}>
+          <p>
+            Claude
+            Codeのインストールと最初の対話から始めて、@記法やスラッシュコマンドといった対話の基本、
+            <strong className={strongMark}>
+              CLAUDE.mdでプロジェクトのルールを渡す方法
+            </strong>
+            、MCPでPlaywrightやSupabaseとつなぐ手順までを、手を動かしながら追える構成にしました。
+          </p>
+          <p>
+            終盤では学んだことを総動員して、Next.jsとSupabaseでタスク管理アプリを作り、
+            <strong className={strongMark}>Vercelにデプロイして公開する</strong>
+            ところまで進みます。既存コードの読み解きとリファクタリング、GitHub上でのレビュー依頼やチーム開発での運用も扱っています。
+          </p>
+          <p>
+            これからClaude
+            Codeを使う方に向けた入門書ですが、すでに使っている方にも、CLAUDE.mdの階層的な管理やMCPの実運用、チームへの展開といった形で読んでいただける内容です。
+          </p>
+        </div>
+
+        <dl className="mt-9 grid grid-cols-1 gap-x-12 border-t border-[#22304A] sm:grid-cols-2">
+          {bookSpecs.map(spec => (
+            <div
+              key={spec.label}
+              className="flex items-baseline justify-between gap-6 border-b border-[#22304A] py-3"
+            >
+              <dt
+                className={clsx(
+                  mono,
+                  "text-[11px] tracking-[0.18em] text-[#93A0B8]"
+                )}
+              >
+                {spec.label}
+              </dt>
+              <dd className="text-sm text-[#B9C3D6]">{spec.value}</dd>
+            </div>
+          ))}
+        </dl>
+
+        <div className="flex flex-wrap items-center gap-x-10">
+          <ArrowLink href={book.amazonUrl}>Amazonで予約する</ArrowLink>
+          <ArrowLink href={book.publisherUrl}>
+            目次を見る（{book.publisher}）
+          </ArrowLink>
+        </div>
+      </article>
+    </Section>
   )
 }
 
@@ -763,12 +886,22 @@ function CareerSection() {
  */
 function EducationSection() {
   const educationActivities = [
-    // TODO: 書籍発売の告知解禁後に有効化（発売情報ページへのリンクも追加する）
-    // {
-    //   title: "書籍執筆",
-    //   description:
-    //     "技術評論社より『作って学ぶ Claude CodeによるAI駆動アプリ開発入門』を出版。Claude Codeを使ったAI駆動開発の進め方を、実際にアプリを作りながら体系的に学べる一冊です。開発現場とコンテンツ制作で培った実践知を凝縮しています。",
-    // },
+    {
+      title: "書籍執筆",
+      description: (
+        <>
+          {book.publisher}より『{book.title}』を出版します（
+          {book.releaseDate}発売）。
+          <span className={clsx(mono, "text-[#3ECF9B]")}>384ページ</span>
+          を通して、Claude
+          Codeでの環境構築からアプリを作って公開するまでを、手を動かしながら学べる構成にしました。スクール講師時代から向き合ってきた「初心者がつまずくところ」を踏まえて解説しています。
+        </>
+      ),
+      link: {
+        text: "Amazonで予約する",
+        url: book.amazonUrl,
+      },
+    },
     {
       title: "Udemy講師",
       description: (
@@ -1057,30 +1190,53 @@ function MissionSection() {
 }
 
 function FounderStructuredData() {
+  const personId = `${getSiteUrl()}/founder#person`
+
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    name: "とまだ（Tomada）",
-    alternateName: ["増山友司", "Tomoshi Masuyama"],
-    jobTitle: "ソフトウェアエンジニア / AI駆動開発の実践者・教育者",
-    url: `${getSiteUrl()}/founder`,
-    sameAs: [
-      "https://x.com/muscle_coding",
-      "https://www.youtube.com/@vibe-coding-studio",
-      "https://github.com/tomada1114",
-      "https://www.linkedin.com/in/tomoshi-masuyama-5b4b31199/",
-      "https://qiita.com/tomada",
-      "https://zenn.dev/tmasuyama1114",
-      "https://note.com/muscle_coding",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": personId,
+        name: "とまだ（Tomada）",
+        alternateName: ["増山友司", "Tomoshi Masuyama"],
+        jobTitle: "ソフトウェアエンジニア / AI駆動開発の実践者・教育者",
+        url: `${getSiteUrl()}/founder`,
+        sameAs: [
+          "https://x.com/muscle_coding",
+          "https://www.youtube.com/@vibe-coding-studio",
+          "https://github.com/tomada1114",
+          "https://www.linkedin.com/in/tomoshi-masuyama-5b4b31199/",
+          "https://qiita.com/tomada",
+          "https://zenn.dev/tmasuyama1114",
+          "https://note.com/muscle_coding",
+        ],
+        alumniOf: {
+          "@type": "CollegeOrUniversity",
+          name: "北海道大学大学院",
+        },
+        worksFor: {
+          "@type": "Organization",
+          name: "Vibe Coding Studio",
+        },
+      },
+      {
+        "@type": "Book",
+        "@id": `${getSiteUrl()}/founder#book`,
+        name: book.title,
+        author: { "@id": personId },
+        publisher: {
+          "@type": "Organization",
+          name: book.publisher,
+        },
+        isbn: book.isbn,
+        numberOfPages: book.pages,
+        datePublished: book.releaseDateISO,
+        inLanguage: "ja",
+        bookFormat: "https://schema.org/Paperback",
+        url: book.publisherUrl,
+      },
     ],
-    alumniOf: {
-      "@type": "CollegeOrUniversity",
-      name: "北海道大学大学院",
-    },
-    worksFor: {
-      "@type": "Organization",
-      name: "Vibe Coding Studio",
-    },
   }
 
   return (
@@ -1094,6 +1250,7 @@ function FounderStructuredData() {
 /**
  * Founderページ
  * - ヒーローセクション
+ * - 著書
  * - AI駆動開発のスペシャリスト
  * - 経歴
  * - 教育活動
@@ -1117,6 +1274,9 @@ export default function FounderPage() {
         <HeroSection />
       </AsyncErrorBoundary>
       <main id="main-content">
+        <AsyncErrorBoundary>
+          <BookSection />
+        </AsyncErrorBoundary>
         <AsyncErrorBoundary>
           <ExpertiseSection />
         </AsyncErrorBoundary>
