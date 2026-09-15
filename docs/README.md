@@ -1,6 +1,6 @@
-# Radiant Template Documentation
+# Vibe Coding Studio Documentation
 
-Welcome to the Radiant template documentation. This directory contains comprehensive documentation for the project.
+Welcome to the Vibe Coding Studio documentation. This directory contains comprehensive documentation for the project.
 
 ## 📚 Documentation Structure
 
@@ -14,11 +14,11 @@ Welcome to the Radiant template documentation. This directory contains comprehen
 
 Located in the [`design/`](./design/) subdirectory:
 
-- **[DESIGN_SYSTEM.md](./design/DESIGN_SYSTEM.md)** - Core design system principles and guidelines
+- **[DESIGN_SYSTEM.md](./design/DESIGN_SYSTEM.md)** - Geist Grid design system principles and guidelines
 - **[DESIGN_SYSTEM_COMPONENTS.md](./design/DESIGN_SYSTEM_COMPONENTS.md)** - Component-specific design documentation
 - **[DESIGN_SYSTEM_PATTERNS.md](./design/DESIGN_SYSTEM_PATTERNS.md)** - Common design patterns and best practices
-- **[DESIGN_SYSTEM_JA.md](./design/DESIGN_SYSTEM_JA.md)** - Japanese version of design system documentation
-- **[CATALYST_COMPONENTS.md](./design/CATALYST_COMPONENTS.md)** - Catalyst UI component integration guide
+- **[THEME_AND_I18N.md](./design/THEME_AND_I18N.md)** - Theme implementation and i18n policy
+- **[CATALYST_COMPONENTS.md](./design/CATALYST_COMPONENTS.md)** - Legacy Catalyst UI component guide (kept until migration completes)
 
 ## 🚀 Quick Links
 
@@ -32,7 +32,8 @@ Located in the [`design/`](./design/) subdirectory:
 
 - Start with [Design System Overview](./design/DESIGN_SYSTEM.md)
 - Review [Component Patterns](./design/DESIGN_SYSTEM_PATTERNS.md)
-- See [Catalyst Components](./design/CATALYST_COMPONENTS.md) for UI kit
+- See [Component Specifications](./design/DESIGN_SYSTEM_COMPONENTS.md) for the current UI kit
+- Legacy pages not yet migrated still use [Catalyst Components](./design/CATALYST_COMPONENTS.md)
 
 ### For Developers
 

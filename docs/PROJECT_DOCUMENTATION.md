@@ -1,4 +1,4 @@
-# Radiant Template - Comprehensive Project Documentation
+# Vibe Coding Studio - Comprehensive Project Documentation
 
 ## Table of Contents
 
@@ -15,7 +15,7 @@
 
 ## Project Overview
 
-Radiant is a modern, production-ready Next.js 15 template with TypeScript, Tailwind CSS v4, and Sanity CMS integration. It features enterprise-grade security, performance monitoring, and a comprehensive component library.
+Vibe Coding Studio is a modern, production-ready Next.js 15 site with TypeScript, Tailwind CSS v4, and Sanity CMS integration. It features enterprise-grade security, performance monitoring, and a comprehensive component library.
 
 ### Key Features
 

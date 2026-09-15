@@ -1,4 +1,4 @@
-# Radiant - Technology Stack
+# Vibe Coding Studio - Technology Stack
 
 **Inclusion Mode**: Always
 
