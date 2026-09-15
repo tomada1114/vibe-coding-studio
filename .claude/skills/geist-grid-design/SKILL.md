@@ -8,6 +8,8 @@ description: |
   テーマ実装、Do / Don't、実装チェックリストを定義する。
   Use when ページのデザイン刷新, デザインシステム適用, 新規ページ作成, ダーク/ライトテーマ,
   テーマトグル, トークン追加, Geist Grid, redesign a page to match the site's design system.
+metadata:
+  platforms: claude-code, codex
 ---
 
 # Geist Grid デザインシステム
