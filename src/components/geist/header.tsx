@@ -125,7 +125,7 @@ export function Header({ dictionary }: { dictionary?: Dictionary } = {}) {
           </button>
           <Link
             href={localizePath("/", locale)}
-            className="text-text-primary text-[15px] font-medium"
+            className="text-text-primary text-[15px] font-medium whitespace-nowrap"
           >
             Vibe Coding Studio
           </Link>
