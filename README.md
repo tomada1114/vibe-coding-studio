@@ -1,8 +1,8 @@
-# Radiant - Minimal Static Site Template
+# Vibe Coding Studio
 
-Radiant is a minimal [Tailwind Plus](https://tailwindcss.com/plus) site template built using [Tailwind CSS](https://tailwindcss.com) and [Next.js](https://nextjs.org).
+Vibe Coding Studio is a static site built with [Tailwind CSS](https://tailwindcss.com) and [Next.js](https://nextjs.org), based on the [Tailwind Plus](https://tailwindcss.com/plus) Radiant template.
 
-This template has been simplified to serve as a clean, static site foundation with no external dependencies like CMS or authentication systems.
+The template has been customized to serve as a clean, static site foundation with no external dependencies like CMS or authentication systems.
 
 ## Features
 

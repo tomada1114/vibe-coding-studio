@@ -17,10 +17,4 @@ describe("CouponExpiredFallback", () => {
     const link = screen.getByRole("link", { name: /クーポン一覧を見る/ })
     expect(link).toHaveAttribute("href", "/coupons")
   })
-
-  it("ナビゲーションとフッターを表示する", () => {
-    render(<CouponExpiredFallback />)
-    expect(screen.getAllByRole("navigation").length).toBeGreaterThan(0)
-    expect(screen.getByRole("contentinfo")).toBeInTheDocument()
-  })
 })

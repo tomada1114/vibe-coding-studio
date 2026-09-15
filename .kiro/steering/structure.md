@@ -1,4 +1,4 @@
-# Radiant - Project Structure
+# Vibe Coding Studio - Project Structure
 
 **Inclusion Mode**: Always
 
@@ -263,12 +263,12 @@ src/__tests__/
 
 ```
 docs/
-├── design/                           # デザインシステム
-│   ├── CATALYST_COMPONENTS.md       # Catalyst UI統合ガイド
-│   ├── DESIGN_SYSTEM.md             # デザインシステム（英語）
-│   ├── DESIGN_SYSTEM_JA.md          # デザインシステム（日本語）
+├── design/                           # デザインシステム（Geist Grid）
+│   ├── CATALYST_COMPONENTS.md       # 旧Catalyst UI統合ガイド（移行完了まで残置）
+│   ├── DESIGN_SYSTEM.md             # デザインシステム（トークン・原則）
 │   ├── DESIGN_SYSTEM_COMPONENTS.md  # コンポーネント仕様
-│   └── DESIGN_SYSTEM_PATTERNS.md    # デザインパターン
+│   ├── DESIGN_SYSTEM_PATTERNS.md    # デザインパターン
+│   └── THEME_AND_I18N.md            # テーマ実装・i18n方針
 ├── API_REFERENCE.md                 # APIリファレンス
 ├── COMPONENT_GUIDE.md               # コンポーネントガイド
 ├── PROJECT_DOCUMENTATION.md         # プロジェクト全体ドキュメント

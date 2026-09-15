@@ -41,7 +41,7 @@ describe("AuthorCredit", () => {
     it("renders author link with default href", () => {
       render(<AuthorCredit />)
       const link = screen.getByRole("link")
-      expect(link).toHaveAttribute("href", "/founder")
+      expect(link).toHaveAttribute("href", "/")
     })
 
     it("renders user icon", () => {

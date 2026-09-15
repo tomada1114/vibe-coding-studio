@@ -1,7 +1,5 @@
 import { Container } from "@/components/container"
 import { AsyncErrorBoundary } from "@/components/error-boundary"
-import { Footer } from "@/components/footer"
-import { Navbar } from "@/components/navbar"
 import { VideoCard } from "@/components/videos/video-card"
 import { getLatestVideos } from "@/lib/videos/video-data"
 import type { Metadata } from "next"
@@ -45,15 +43,6 @@ export default function VideosPage() {
 
   return (
     <div className="overflow-hidden">
-      {/* ヘッダー */}
-      <AsyncErrorBoundary>
-        <div className="relative">
-          <Container className="relative">
-            <Navbar />
-          </Container>
-        </div>
-      </AsyncErrorBoundary>
-
       {/* メインコンテンツ */}
       <main id="main-content">
         <AsyncErrorBoundary>
@@ -82,11 +71,6 @@ export default function VideosPage() {
           </Container>
         </AsyncErrorBoundary>
       </main>
-
-      {/* フッター */}
-      <AsyncErrorBoundary>
-        <Footer />
-      </AsyncErrorBoundary>
     </div>
   )
 }

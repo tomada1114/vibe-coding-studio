@@ -1,27 +1,26 @@
 import { ErrorBoundary } from "@/components/error-boundary"
-import { SpectrumBeam } from "@/components/spectrum-beam"
+import { Footer } from "@/components/geist/footer"
+import { Header } from "@/components/geist/header"
+import { THEME_INIT_SCRIPT } from "@/components/geist/theme-toggle"
 import { getSiteUrl } from "@/lib/seo/site-url"
 import "@/styles/tailwind.css"
+import { GeistMono } from "geist/font/mono"
+import { GeistSans } from "geist/font/sans"
 import type { Metadata } from "next"
-import { IBM_Plex_Mono, IBM_Plex_Sans_JP } from "next/font/google"
 
-// subsets は latin のみ。japanese サブセットは数MB規模になるため配信せず、
-// 日本語グリフは font-sans のフォールバック（Hiragino Sans 等）に任せる。
-const plexSansJP = IBM_Plex_Sans_JP({
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-  variable: "--font-plex-sans-jp",
-})
-
-const plexMono = IBM_Plex_Mono({
-  weight: ["400", "500"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-  variable: "--font-plex-mono",
-})
+/**
+ * 和文グリフ（Noto Sans JP）。
+ *
+ * `next/font/google` は Noto Sans JP に `japanese` サブセットを公開しておらず
+ * （指定できるのは cyrillic / latin / latin-ext / vietnamese のみ）、和文グリフを
+ * self-host できない。Google Fonts の CSS2 スタイルシートは同じフォントを
+ * unicode-range で約 120 スライスに分けて配信するため、ブラウザはページが実際に
+ * 使うスライスだけを取得する。ここではそちらを直接読み込む。
+ *
+ * weight は本文 400 と見出し 500 のみ。`display=swap` で LCP をブロックしない。
+ */
+const NOTO_SANS_JP_HREF =
+  "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&display=swap"
 
 const siteUrl = getSiteUrl()
 
@@ -29,18 +28,18 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     template: "%s - Vibe Coding Studio",
-    default: "Vibe Coding Studio - AI駆動開発コミュニティ",
+    default: "とまだ（増山友司） - AI駆動開発の実践者・教育者",
   },
   description:
-    "AI駆動開発を学ぶ仲間が集まり、情報を共有し合い、一緒に成長するDiscordコミュニティ",
+    "アメリカ在住のソフトウェアエンジニア。技術評論社から『Claude Codeで作って学ぶ AI駆動アプリ開発入門』を刊行。Udemy・YouTube でAI駆動開発を教えています。",
   openGraph: {
     type: "website",
     locale: "ja_JP",
     url: siteUrl,
     siteName: "Vibe Coding Studio",
-    title: "Vibe Coding Studio - AI駆動開発コミュニティ",
+    title: "とまだ（増山友司） - AI駆動開発の実践者・教育者",
     description:
-      "AI駆動開発を学ぶ仲間が集まり、情報を共有し合い、一緒に成長するDiscordコミュニティ",
+      "アメリカ在住のソフトウェアエンジニア。技術評論社から『Claude Codeで作って学ぶ AI駆動アプリ開発入門』を刊行。Udemy・YouTube でAI駆動開発を教えています。",
     images: [
       {
         url: "/og-image.png",
@@ -54,9 +53,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@muscle_coding",
     creator: "@muscle_coding",
-    title: "Vibe Coding Studio - AI駆動開発コミュニティ",
+    title: "とまだ（増山友司） - AI駆動開発の実践者・教育者",
     description:
-      "AI駆動開発を学ぶ仲間が集まり、情報を共有し合い、一緒に成長するDiscordコミュニティ",
+      "アメリカ在住のソフトウェアエンジニア。技術評論社から『Claude Codeで作って学ぶ AI駆動アプリ開発入門』を刊行。Udemy・YouTube でAI駆動開発を教えています。",
     images: ["/og-image.png"],
   },
   robots: {
@@ -75,19 +74,38 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ja" className={`${plexSansJP.variable} ${plexMono.variable}`}>
-      <head></head>
-      <body className="text-gray-950 antialiased">
-        <SpectrumBeam animated />
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-gray-950 focus:ring-2 focus:ring-gray-950/20"
-        >
-          メインコンテンツへスキップ
-        </a>
-        <ErrorBoundary showDetails={process.env.NODE_ENV === "development"}>
-          {children}
-        </ErrorBoundary>
+    <html
+      lang="ja"
+      data-theme="dark"
+      suppressHydrationWarning
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
+    >
+      <head>
+        {/* ハイドレーション前に data-theme を確定させ、初回描画のフラッシュを防ぐ */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link rel="stylesheet" href={NOTO_SANS_JP_HREF} />
+      </head>
+      <body className="bg-bg text-text-primary antialiased">
+        <Header />
+        {/*
+          未移行ページ（旧 Radiant デザイン）は自前の背景を持たず、body が白・文字が
+          gray-950 である前提で書かれている。Geist Grid のダーク既定をそのまま被せると
+          黒地に黒文字になるため、移行が完了するまでここで明るい地を敷いておく。
+          Geist Grid へ移行済みのページは、自身のルート要素に `gg-surface` を付けて
+          この地を上書きする（トップページ `src/app/page.tsx` が正典）。
+        */}
+        <div className="bg-white text-gray-950">
+          <ErrorBoundary showDetails={process.env.NODE_ENV === "development"}>
+            {children}
+          </ErrorBoundary>
+        </div>
+        <Footer />
       </body>
     </html>
   )

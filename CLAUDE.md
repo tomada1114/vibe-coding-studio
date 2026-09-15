@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Vibe Coding Studio**は、Next.js 15とTailwind CSS v4を使用したモダンなWebアプリケーションです。YouTube動画のメタデータ管理機能を中心に、技術コンテンツを構造化して提供するプラットフォームです。
 
-Radiantテンプレートをベースに、エンタープライズグレードのセキュリティ、パフォーマンス最適化、型安全性を実現しています。
+デザインシステム「Geist Grid」（Vercel Geist のトークン基盤 / 1px 罫線のセルグリッド / ダーク既定＋ライト手動切替）を土台に、エンタープライズグレードのセキュリティ、パフォーマンス最適化、型安全性を実現しています。
 
 ## 開発コマンド
 
@@ -113,8 +113,9 @@ export const video_VIDEO_ID: VideoMetadata = {
 ### 技術スタック
 
 - **フレームワーク**: Next.js 15.4.4 with App Router
-- **スタイリング**: Tailwind CSS v4 with PostCSS
-- **UIコンポーネント**: Headless UI + カスタムコンポーネント
+- **スタイリング**: Tailwind CSS v4 with PostCSS（デザインシステム「Geist Grid」のセマンティックトークン経由で色を参照）
+- **デザインシステム**: Geist Grid（Vercel Geist トークン / Geist Sans・Geist Mono・Noto Sans JP / `data-theme` によるダーク・ライト切替）
+- **UIコンポーネント**: Headless UI + セルベースのカスタムコンポーネント
 - **アニメーション**: Framer Motion
 - **型安全性**: TypeScriptの厳密モードが有効
 - **セキュリティ**: 基本的なセキュリティヘッダー（X-Frame-Options, X-Content-Type-Options等）
@@ -159,33 +160,43 @@ docs/                      # プロジェクトドキュメント
 
 ## デザイン方針
 
-### Blueprint Night デザインシステム（移行中）
+### Geist Grid デザインシステム
 
-サイトのターゲットデザインは、ダークエディトリアル基調の **「Blueprint Night（夜の設計室）」** です。
-ページのデザイン刷新・新規ページ作成・ダーク移行の際は、必ず `blueprint-night-design` スキル
-（`.claude/skills/blueprint-night-design/SKILL.md`）に従ってください。カラースキーマ・タイポグラフィ・
-レイアウト・質感・実装の落とし穴・移行チェックリストが定義されています。
+サイトのターゲットデザインは **「Geist Grid」**（黒い方眼紙の上に置かれた、エンジニアの職務経歴書）です。
+Vercel Geist の厳密なトークンで組み、1px の罫線がセルを切り、そこに青い光が一点だけ差します。
+ページのデザイン刷新・新規ページ作成・テーマやトークンの変更の際は、必ず `geist-grid-design` スキル
+（`.claude/skills/geist-grid-design/SKILL.md`）に従ってください。カラートークン（ダーク／ライト）・
+派手さ予算の数値上限・タイポグラフィ・セル構造・コンポーネント規則・テーマ実装・Do / Don't・
+実装チェックリストが定義されています。詳細な根拠と Decision ledger は
+`docs/design/proposals/2026-09-geist-grid.md` にあります。
 
-- **正典実装**: `src/app/founder/page.tsx`（移行第1号）
-- **移行ステータス**: `/founder` のみ移行済み。他ページは旧ライトデザイン（Radiantベース）のまま
-- 基調色: 背景 `#0B1020` / 主アクセント青 `#6FA8E8`・`#4C8DFF` / 副アクセントティール `#3ECF9B` /
-  暖色シグナル琥珀 `#E3A857`（詳細と使用ルールはスキル参照）
+- **正典実装**: 未着手。最初に Geist Grid へ移行するページ（トップページを予定）が正典になります
+- **移行ステータス**: 全ページ未移行（旧 Radiant ベースのライトデザイン、`/founder` は旧 Blueprint Night）。
+  Blueprint Night は廃止済みで、そのトークン（`#0B1020` 系の背景、紫アクセント `#7c5cfc` 等）は一切継承しません
 
-### ダークモード切り替え非対応
+### ダーク既定＋ライト手動切替
 
-「Blueprint Night」は固定の見た目であり、OS設定連動のダークモード切り替えには対応しません。
+Geist Grid はダークを既定とし、ヘッダーのトグルボタンでライトへ手動切替できます
+（`dark` ⇄ `light` の 2 状態のみ。"system" の第3状態とプルダウンは持ちません）。
 
-- `dark:` プレフィックスのTailwindクラスは使用しない（移行済み・未移行ページ共通の禁止事項）
-- 色は明示的なクラス指定で固定する
+- テーマは `<html data-theme="dark|light">` ＋ CSS 変数で解決し、Tailwind v4 の `@custom-variant` で
+  `dark:` を属性に紐付けます
+- **コンポーネントには `dark:` を書きません。** `bg-bg` `text-text-secondary` `border-border` のような
+  セマンティッククラスだけを使い、テーマ差はトークン層で吸収します。`dark:` の直接使用は、
+  トークンで表現できないと証明できる場合のみの例外で、レビューで理由を問います
+- **色は必ずセマンティックトークン経由で参照します。** 生の hex / `gray-*` の直接指定、および
+  Geist トークン外の色は禁止です
+- `prefers-color-scheme` は「明示的にライトを好む人」の検出にのみ使い、既定はダークに倒します
 
-### 未移行ページ（旧ライトデザイン）の保守
+### 未移行ページ（旧デザイン）の保守
 
-未移行ページに小さな修正を入れる場合は、既存のライトデザインの流儀に合わせます:
+**新規ページは必ず Geist Grid で作成してください。** 未移行ページに小さな修正を入れる場合に限り、
+移行完了までは既存の流儀に合わせます:
 
 - **プライマリカラー**: Gray系（`gray-*`）、背景 `bg-white`、テキスト `text-gray-950`／`text-gray-600`、ボーダー `border-gray-200`
-- `Heading`／`Subheading` コンポーネントは `text-zinc-950` が適用される（明るい背景前提。ダークページでは使用しない）
+- `Heading`／`Subheading` コンポーネントは `text-zinc-950` が適用される（明るい背景前提）
 
-ページ単位のデザイン刷新をする場合は旧流儀に合わせず、Blueprint Night へ移行してください。
+ページ単位のデザイン刷新をする場合は旧流儀に合わせず、Geist Grid へ移行してください。
 
 ## セキュリティ機能
 
@@ -226,7 +237,7 @@ docs/                      # プロジェクトドキュメント
 - ✅ Kiro仕様駆動開発システム統合
 - ✅ コアコンポーネントの完全なテストカバレッジ
 - ✅ `/docs`ディレクトリの包括的なドキュメント
-- ✅ Catalyst UIコンポーネント統合
+- 🚧 デザインシステム「Geist Grid」への移行（提案承認済み・実装未着手）
 - 🚧 カスタムコマンド公開機能（開発中）
 
 ## 開発ワークフロー
@@ -342,11 +353,12 @@ npm run build       # 本番ビルドが動作することを確認
 
 #### デザインシステム（`/docs/design`）
 
-- `DESIGN_SYSTEM.md` - デザイン原則とガイドライン
+- `DESIGN_SYSTEM.md` - Geist Grid の概要・設計原則・トークン
 - `DESIGN_SYSTEM_COMPONENTS.md` - コンポーネント固有のデザイン仕様
 - `DESIGN_SYSTEM_PATTERNS.md` - 一般的なパターンとベストプラクティス
-- `DESIGN_SYSTEM_JA.md` - 日本語デザインドキュメント
-- `CATALYST_COMPONENTS.md` - Catalyst UI統合ガイド
+- `THEME_AND_I18N.md` - テーマ切替（`data-theme`）と i18n 方針
+- `CATALYST_COMPONENTS.md` - Catalyst UI統合ガイド（旧・移行完了まで残置）
+- `proposals/2026-09-geist-grid.md` - Geist Grid 提案書（根拠・Decision ledger）
 
 ### 開発ベストプラクティス
 

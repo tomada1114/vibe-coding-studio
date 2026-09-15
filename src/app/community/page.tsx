@@ -2,8 +2,6 @@ import { Button } from "@/components/button"
 import { Container } from "@/components/container"
 import { DiscordMemberCount } from "@/components/discord-member-count"
 import { AsyncErrorBoundary } from "@/components/error-boundary"
-import { Footer } from "@/components/footer"
-import { Navbar } from "@/components/navbar"
 import { Heading, Subheading } from "@/components/text"
 import { DISCORD_INVITE_URL } from "@/lib/constants"
 import { getSiteUrl } from "@/lib/seo/site-url"
@@ -69,7 +67,6 @@ function CommunityHeroSection() {
   return (
     <div className="relative">
       <Container className="relative">
-        <Navbar />
         <div className="pt-16 pb-24 sm:pt-24 sm:pb-32 md:pt-32 md:pb-48">
           {/* メインメッセージ */}
           <h1 className="font-display text-5xl/[1.15] font-medium tracking-tight text-balance text-gray-950 sm:text-6xl/[1.1] md:text-7xl/[1.1]">
@@ -260,6 +257,22 @@ function CommunityDescriptionSection() {
         <Heading as="h2" className="mt-2 max-w-3xl">
           コミュニティについて
         </Heading>
+        {/* 旧トップページ（コミュニティLP）から移設したリード文とワイドロゴ */}
+        <p className="mt-6 max-w-3xl text-lg text-gray-600">
+          初心者大歓迎 | 見るだけでもOK | 温かい雰囲気
+        </p>
+
+        <div className="mt-10 flex items-center justify-center sm:mt-16">
+          <div className="overflow-hidden rounded-2xl">
+            <Image
+              src="/vcs-logo-wide-transparent.png"
+              alt="Vibe Coding Studio"
+              width={300}
+              height={100}
+              sizes="(max-width: 640px) 240px, 300px"
+            />
+          </div>
+        </div>
 
         <div className="mt-10 sm:mt-16">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
@@ -618,9 +631,6 @@ export default function CommunityPage() {
           <FinalCTASection />
         </AsyncErrorBoundary>
       </main>
-      <AsyncErrorBoundary>
-        <Footer hideCallToAction={true} />
-      </AsyncErrorBoundary>
     </div>
   )
 }

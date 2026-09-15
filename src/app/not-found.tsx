@@ -1,18 +1,10 @@
 import { Button } from "@/components/button"
 import { Container } from "@/components/container"
-import { Footer } from "@/components/footer"
-import { Navbar } from "@/components/navbar"
 import Link from "next/link"
 
 export default function NotFound() {
   return (
     <div className="overflow-hidden">
-      <div className="relative">
-        <Container className="relative">
-          <Navbar />
-        </Container>
-      </div>
-
       <main id="main-content">
         <Container className="py-24 sm:py-32">
           <div className="mx-auto max-w-lg text-center">
@@ -76,8 +68,6 @@ export default function NotFound() {
           </div>
         </Container>
       </main>
-
-      <Footer hideCallToAction={true} />
     </div>
   )
 }

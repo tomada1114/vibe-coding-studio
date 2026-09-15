@@ -63,7 +63,7 @@ describe("renderDocsArticleJsonLd", () => {
       )
 
       expect(result.author.name).toBe("とまだ")
-      expect(result.author.url).toBe("https://www.vibecodingstudio.dev/founder")
+      expect(result.author.url).toBe("https://www.vibecodingstudio.dev/")
     })
 
     it("sets publisher as Vibe Coding Studio", () => {

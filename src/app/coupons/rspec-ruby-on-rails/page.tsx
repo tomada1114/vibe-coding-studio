@@ -1,4 +1,3 @@
-import { Container } from "@/components/container"
 import { CouponExpiredFallback } from "@/components/coupons/CouponExpiredFallback"
 import { CourseContent } from "@/components/coupons/course-detail/CourseContent"
 import { CourseDetailHero } from "@/components/coupons/course-detail/CourseDetailHero"
@@ -8,9 +7,6 @@ import { FloatingCTA } from "@/components/coupons/course-detail/FloatingCTA"
 import { PriceSection } from "@/components/coupons/course-detail/PriceSection"
 import { TargetAudience } from "@/components/coupons/course-detail/TargetAudience"
 import { RelatedCoupons } from "@/components/coupons/RelatedCoupons"
-import { AsyncErrorBoundary } from "@/components/error-boundary"
-import { Footer } from "@/components/footer"
-import { Navbar } from "@/components/navbar"
 import { getLatestCoupons, getRelatedCoupons } from "@/lib/coupons/coupon-data"
 import type { Metadata } from "next"
 
@@ -242,15 +238,6 @@ export default function RSpecRailsCoursePage() {
 
   return (
     <div className="overflow-hidden">
-      {/* ヘッダーセクション */}
-      <AsyncErrorBoundary>
-        <div className="relative">
-          <Container className="relative">
-            <Navbar />
-          </Container>
-        </div>
-      </AsyncErrorBoundary>
-
       {/* メインコンテンツ */}
       <main
         id="main-content"
@@ -287,9 +274,6 @@ export default function RSpecRailsCoursePage() {
       </main>
 
       {/* フッターセクション */}
-      <AsyncErrorBoundary>
-        <Footer />
-      </AsyncErrorBoundary>
     </div>
   )
 }

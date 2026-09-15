@@ -1,4 +1,4 @@
-# Radiant - Product Overview
+# Vibe Coding Studio - Product Overview
 
 **Inclusion Mode**: Always
 
@@ -6,7 +6,7 @@
 
 ## Product Overview
 
-Radiant は、Next.js 15 と Tailwind CSS v4 を使用した最小限の静的サイトテンプレートです。Tailwind Plus サイトテンプレートをベースに、CMS や認証システムなどの外部依存関係を排除し、クリーンで静的なサイト基盤として簡素化されています。
+Vibe Coding Studio は、Next.js 15 と Tailwind CSS v4 を使用したモダンな静的サイトです。Tailwind Plus の Radiant サイトテンプレートをベースに、CMS や認証システムなどの外部依存関係を排除し、クリーンで静的なサイト基盤として構築されています。
 
 エンタープライズグレードのセキュリティ機能、パフォーマンス最適化、包括的なコンポーネントライブラリを備えた、本番環境対応のテンプレートです。
 

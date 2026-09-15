@@ -2,19 +2,82 @@
 
 @plugin "@tailwindcss/typography";
 
+/* ==========================================================================
+   Geist Grid — テーマ変数
+   `<html data-theme="dark|light">` で解決する。値の出典は
+   docs/design/DESIGN_SYSTEM.md / .claude/skills/geist-grid-design/SKILL.md。
+   コンポーネントからは必ずセマンティッククラス（bg-bg / text-text-secondary
+   / border-border 等）経由で参照し、生 hex を書かない。
+   ========================================================================== */
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root,
+[data-theme="light"] {
+  --bg: #ffffff;
+  --bg-subtle: #fafafa;
+  --surface-1: #f2f2f2;
+  --surface-2: #ebebeb;
+  --surface-3: #e6e6e6;
+  --border: #eaeaea;
+  --border-hover: #c9c9c9;
+  --border-strong: #a8a8a8;
+  --text-primary: #171717;
+  --text-secondary: #4d4d4d;
+  --text-muted: #7d7d7d;
+  /* Mono ラベル専用。ライトの --text-muted (#7d7d7d) は 4.12:1 しかなく、
+     11px のラベルでは AA を満たさないため、ライトだけ secondary 相当に格上げする。
+     コンポーネントに dark: を書かずにテーマ差を吸収するための専用トークン。 */
+  --text-label: #4d4d4d;
+  --link: #005edc;
+  --accent-solid: #0070f7;
+  --accent-glow: #51aeff;
+  --amber: #ff9900;
+  --focus: #0070f7;
+  --grid-line: rgba(0, 0, 0, 0.035);
+}
+
+[data-theme="dark"] {
+  --bg: #000000;
+  --bg-subtle: #000000;
+  --surface-1: #1a1a1a;
+  --surface-2: #1f1f1f;
+  --surface-3: #292929;
+  --border: #2e2e2e;
+  --border-hover: #454545;
+  --border-strong: #878787;
+  --text-primary: #ededed;
+  --text-secondary: #a0a0a0;
+  --text-muted: #8f8f8f;
+  --text-label: #8f8f8f;
+  --link: #50a8ff;
+  --accent-solid: #0071f6;
+  --accent-glow: #0090ff;
+  --amber: #ffb200;
+  --focus: #50a8ff;
+  --grid-line: rgba(255, 255, 255, 0.025);
+}
+
 @theme {
+  /* 和文書体。Google Fonts の CSS2 スタイルシートで読み込む
+     （`src/app/layout.tsx` を参照）。Geist Sans に従属させる。 */
+  --font-noto-sans-jp: "Noto Sans JP";
+
+  /* 形状トークン。この 3 値以外の角丸を使わない。 */
+  --radius-cell: 0px;
+  --radius-control: 6px;
+  --radius-pill: 9999px;
+
+  /* --- 以下は未移行ページ（旧 Radiant デザイン）が参照する既存トークン。
+         Geist Grid への移行が完了するまで残置する。新規面では使わない。 --- */
   --radius-4xl: 2rem;
 
-  /* spectrum: ロゴ5色（左→右） */
   --color-spectrum-orange: #f0883e;
   --color-spectrum-magenta: #e9439b;
   --color-spectrum-violet: #7c5cfc;
   --color-spectrum-blue: #4f6ef7;
   --color-spectrum-teal: #43c6ac;
-  /* 単色アクセント（リンク・フォーカス・アクティブ状態） */
-  --color-accent: #7c5cfc;
 
-  /* スペクトラムグラデ（beam 用・全箇所これを使う） */
   --gradient-spectrum: linear-gradient(
     90deg,
     #f0883e 0%,
@@ -27,6 +90,39 @@
   --animate-beam-draw: beam-draw 0.6s ease-out both;
 }
 
+/* next/font の CSS 変数を参照するため inline が必須 */
+@theme inline {
+  --font-sans:
+    var(--font-geist-sans), var(--font-noto-sans-jp), "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  --font-mono:
+    var(--font-geist-mono), var(--font-noto-sans-jp), ui-monospace,
+    "SFMono-Regular", monospace;
+  /* 未移行ページが参照する見出し用エイリアス */
+  --font-display:
+    var(--font-geist-sans), var(--font-noto-sans-jp), "Hiragino Sans",
+    sans-serif;
+
+  /* Geist Grid のセマンティックカラーを Tailwind クラスに公開する */
+  --color-bg: var(--bg);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+  --color-border-strong: var(--border-strong);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-label: var(--text-label);
+  --color-link: var(--link);
+  --color-accent: var(--accent-solid);
+  --color-accent-glow: var(--accent-glow);
+  --color-amber: var(--amber);
+  --color-focus: var(--focus);
+}
+
 @keyframes beam-draw {
   from {
     transform: scaleX(0);
@@ -36,20 +132,246 @@
   }
 }
 
-/* next/font の CSS 変数を参照するため inline が必須 */
-@theme inline {
-  --font-sans:
-    var(--font-plex-sans-jp), "Hiragino Sans", "Hiragino Kaku Gothic ProN",
-    "Yu Gothic", "Meiryo", sans-serif;
-  --font-display: var(--font-plex-sans-jp), "Hiragino Sans", sans-serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", monospace;
-}
-
 @keyframes move-x {
   0% {
     transform: translateX(var(--move-x-from));
   }
   100% {
     transform: translateX(var(--move-x-to));
+  }
+}
+
+/* ==========================================================================
+   Geist Grid — ベース
+   ========================================================================== */
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-feature-settings:
+      "liga" 1,
+      "ss05" 1;
+  }
+
+  /* Geist の二重リング。全インタラクティブ要素で共通。
+     `outline: none` を単独で書かない。 */
+  :where(
+    a,
+    button,
+    input,
+    select,
+    textarea,
+    summary,
+    [tabindex]
+  ):focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px var(--bg),
+      0 0 0 4px var(--focus);
+  }
+}
+
+/* ==========================================================================
+   Geist Grid — ユーティリティ
+   ========================================================================== */
+
+@utility gg-surface {
+  /* Geist Grid で組んだ面。未移行ページに影響を与えないよう、
+     ページ側でこのクラスを明示的に付けたときだけ配色が切り替わる。 */
+  background-color: var(--bg);
+  color: var(--text-primary);
+}
+
+/* 和文本文。欧文既定の 1.5 のままだと詰まって読めない。 */
+@utility gg-prose-ja {
+  line-height: 1.85;
+  letter-spacing: 0;
+  line-break: strict;
+  text-spacing-trim: normal;
+  word-break: auto-phrase;
+}
+
+/* セルグリッド。個別 border だと交点が 2px になるため
+   gap: 1px + 親背景で 1px の罫線を描く。 */
+@utility gg-cell-grid {
+  display: grid;
+  gap: 1px;
+  background-color: var(--border);
+  border: 1px solid var(--border);
+}
+
+@utility gg-cell {
+  background-color: var(--bg);
+  padding: 16px;
+  transition: background-color 150ms ease-out;
+
+  @media (width >= 640px) {
+    padding: 20px;
+  }
+}
+
+@utility gg-cell-hover {
+  &:hover {
+    background-color: var(--surface-1);
+  }
+}
+
+/* モノラベル。uppercase 前提なので和文を入れない。 */
+@utility gg-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-label);
+}
+
+@utility gg-meta {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
+
+@utility gg-tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.4;
+  background-color: var(--surface-1);
+  color: var(--text-secondary);
+  border-radius: var(--radius-control);
+  padding: 3px 8px;
+  transition: background-color 150ms ease-out;
+
+  &:hover {
+    background-color: var(--surface-2);
+  }
+}
+
+@utility gg-link {
+  color: var(--link);
+  text-decoration-line: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in oklab, var(--link) 40%, transparent);
+
+  &:hover {
+    text-decoration-color: var(--link);
+  }
+}
+
+/* 派手さ担当 A: ヒーローのグロー。1 ビューポートに 1 個、
+   1 ページ 2 個まで。不透明度 0.18 / ぼかし半径上限 160px。静止。 */
+@utility gg-glow {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: -20%;
+    block-size: 60%;
+    pointer-events: none;
+    background: radial-gradient(
+      60% 50% at 50% 0%,
+      color-mix(in oklab, var(--accent-glow) 18%, transparent) 0%,
+      transparent 70%
+    );
+  }
+}
+
+/* 派手さ担当 B: faint grid の背景テクスチャ。線幅 1px / セル 64px 固定。 */
+@utility gg-grid-field {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(80% 60% at 50% 0%, #000 0%, transparent 100%);
+}
+
+/* 派手さ担当 C: グラデーション罫線。1 ページ 2 本まで。 */
+@utility gg-rule-accent {
+  block-size: 1px;
+  opacity: 0.5;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--accent-glow) 35%,
+    var(--accent-glow) 65%,
+    transparent 100%
+  );
+}
+
+/* ボタン階層。グラデーション塗りのボタンは存在しない。 */
+@utility gg-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  transition:
+    background-color 150ms ease-out,
+    border-color 150ms ease-out,
+    color 150ms ease-out;
+}
+
+@utility gg-btn-primary {
+  /* 白 on --accent-solid は 4.47:1。16px / weight 500 未満にしない。 */
+  height: 40px;
+  padding-inline: 20px;
+  border-radius: var(--radius-pill);
+  background-color: var(--accent-solid);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+
+  &:hover {
+    background-color: color-mix(in oklab, var(--accent-solid) 88%, black);
+  }
+}
+
+@utility gg-btn-secondary {
+  height: 40px;
+  padding-inline: 20px;
+  border-radius: var(--radius-pill);
+  background-color: var(--text-primary);
+  color: var(--bg);
+  font-size: 16px;
+  font-weight: 500;
+
+  &:hover {
+    background-color: color-mix(in oklab, var(--text-primary) 85%, var(--bg));
+  }
+}
+
+@utility gg-btn-outline {
+  height: 36px;
+  padding-inline: 16px;
+  border-radius: var(--radius-control);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 500;
+
+  &:hover {
+    border-color: var(--border-hover);
+    background-color: var(--surface-1);
+  }
+}
+
+@utility gg-btn-ghost {
+  color: var(--text-secondary);
+  border-radius: var(--radius-control);
+
+  &:hover {
+    color: var(--text-primary);
+    background-color: var(--surface-1);
   }
 }

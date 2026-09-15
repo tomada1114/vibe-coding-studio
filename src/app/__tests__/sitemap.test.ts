@@ -48,7 +48,6 @@ describe("sitemap", () => {
     expect(urls).toContain("https://www.vibecodingstudio.dev/videos")
     expect(urls).toContain("https://www.vibecodingstudio.dev/docs")
     expect(urls).toContain("https://www.vibecodingstudio.dev/coupons")
-    expect(urls).toContain("https://www.vibecodingstudio.dev/founder")
     expect(urls).toContain("https://www.vibecodingstudio.dev/roadmap")
   })
 

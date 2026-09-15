@@ -1,8 +1,8 @@
-# API Reference - Radiant Template
+# API Reference - Vibe Coding Studio
 
 ## Overview
 
-This document provides detailed API documentation for all endpoints, utilities, and integrations in the Radiant template.
+This document provides detailed API documentation for all endpoints, utilities, and integrations in Vibe Coding Studio.
 
 ## Table of Contents
 
@@ -612,4 +612,4 @@ curl -X POST https://your-domain.com/api/revalidate \
 
 ---
 
-_Generated from Radiant Template v0.1.0_
+_Generated from Vibe Coding Studio v0.1.0_

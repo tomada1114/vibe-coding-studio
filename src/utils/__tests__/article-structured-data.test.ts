@@ -87,7 +87,7 @@ describe("generateArticleStructuredDataString", () => {
       const result = JSON.parse(generateArticleStructuredDataString(baseProps))
 
       expect(result.author.name).toBe("とまだ")
-      expect(result.author.url).toBe("https://www.vibecodingstudio.dev/founder")
+      expect(result.author.url).toBe("https://www.vibecodingstudio.dev/")
     })
 
     it("uses custom author when provided", () => {

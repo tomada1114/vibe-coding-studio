@@ -1,5 +1,9 @@
 # Catalyst UI Components Documentation
 
+> **注記**: 本ドキュメントは旧デザイン（Radiant / Catalyst）向けです。デザインシステムは
+> [Geist Grid](./DESIGN_SYSTEM.md) へ移行中であり、Geist Grid への移行完了後に本ドキュメントは
+> 削除予定です。**新規ページでは Catalyst コンポーネントを使用しないでください。**
+
 ## Overview
 
 This document provides comprehensive documentation for all Catalyst UI components that have been integrated into the project. These components follow a consistent design system with excellent TypeScript support, accessibility features, and dark mode compatibility.

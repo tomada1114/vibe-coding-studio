@@ -1,674 +1,207 @@
-# Radiant Design System - Component Specifications
+# Geist Grid コンポーネント仕様
 
-## 🎯 Component Architecture Philosophy
-
-Each component follows these principles:
-
-1. **Single Responsibility**: One component, one purpose
-2. **Composition Over Configuration**: Build complex UI from simple parts
-3. **Predictable Behavior**: Consistent patterns across all components
-4. **Graceful Enhancement**: Base functionality works everywhere
+> 提案書（唯一の情報源）: [`docs/design/proposals/2026-09-geist-grid.md`](./proposals/2026-09-geist-grid.md) §6
+> トークン値は [`DESIGN_SYSTEM.md`](./DESIGN_SYSTEM.md) を参照。ここではコンポーネント単位の実装仕様のみを扱う。
 
 ---
 
-## 🔘 Button Component
+## 1. ヘッダー
 
-### Anatomy
+- 高さ 56px、`position: sticky; top: 0`、背景 `color-mix(in oklab, var(--bg) 80%, transparent)` + `backdrop-filter: blur(8px)`、下辺に 1px `--border`。
+- 左: サイト名／氏名（Sans 15px / 500）。ナビ: Sans 14px、`--text-secondary`、現在地のみ `--text-primary` ＋ 下辺 1px `--accent-solid`。
+- **右上に言語トグルとテーマトグルを並べる。プルダウンは使わない。**
 
-```
-[Optional Icon] [Text Label] [Optional Icon]
-```
-
-### Detailed Specifications
-
-#### Dimensions
-
-- **Height**: 40px (fixed)
-- **Min Width**: 80px
-- **Padding Horizontal**: 16px (without icon), 12px (with icon)
-- **Padding Vertical**: 10px
-- **Icon Size**: 16px × 16px
-- **Icon Gap**: 8px from text
-
-#### States & Interactions
-
-**Default State**
-
-- Background: Gray-950
-- Text: White
-- Border: None
-- Shadow: None
-
-**Hover State**
-
-- Background: Gray-800
-- Transform: None (no scale/translate)
-- Transition: 150ms ease-in-out
-- Cursor: Pointer
-
-**Active State**
-
-- Background: Gray-700
-- Transform: scale(0.98)
-- Transition: 75ms ease-in
-
-**Focus State**
-
-- Ring: 2px solid Gray-950
-- Ring Offset: 2px
-- Ring Offset Color: White
-- Outline: None
-
-**Disabled State**
-
-- Background: Gray-400
-- Text: Gray-600
-- Opacity: 0.5
-- Cursor: Not-allowed
-- Pointer Events: None
-
-#### Variants Logic
-
-**Primary (Default)**
+### 言語トグル（セグメント型ボタン）
 
 ```
-bg-gray-950 text-white
-hover:bg-gray-800
-active:bg-gray-700
-disabled:bg-gray-400 disabled:text-gray-600
+┌──────┬──────┐
+│  JA  │  EN  │   ← 2つのセグメントが1px罫線で仕切られた1つのセル
+└──────┴──────┘
 ```
 
-**Secondary**
+- マークアップ: `<div role="group" aria-label="言語切り替え">` の中に `<a>` を 2 つ（`hreflang` つき）。**リンクであることが重要**（URL が変わる遷移のため、ボタンではなくリンク）。
+- サイズ: 高さ 28px、各セグメント `padding: 0 10px`、Geist Mono 11px / uppercase / +0.08em。
+- 見た目: 外枠 1px `--border`、`--radius-control`（6px）。非アクティブ `--text-muted` 透明地、アクティブ `--text-primary` ＋ 地 `--surface-1`。
+- アクティブ側に `aria-current="true"`。
 
-```
-bg-white text-gray-950
-ring-1 ring-inset ring-gray-300
-shadow-sm
-hover:bg-gray-50
-active:bg-gray-100
-```
-
-**Outline**
-
-```
-bg-transparent text-gray-950
-ring-1 ring-inset ring-gray-300
-hover:bg-gray-50
-active:bg-gray-100
+```tsx
+<div role="group" aria-label="言語切り替え" className="inline-flex rounded-[6px] border border-border">
+  <a href="/" hrefLang="ja" aria-current="true" className="px-[10px] h-7 flex items-center font-mono text-[11px] uppercase tracking-[0.08em] text-text-primary bg-surface-1">
+    JA
+  </a>
+  <a href="/en" hrefLang="en" className="px-[10px] h-7 flex items-center font-mono text-[11px] uppercase tracking-[0.08em] text-text-muted border-l border-border">
+    EN
+  </a>
+</div>
 ```
 
-**Danger**
+### テーマトグル（2 状態のアイコンボタン）
 
-```
-bg-red-600 text-white
-hover:bg-red-700
-active:bg-red-800
-```
+- 言語トグルの右に 8px 空けて配置。28×28px、`--radius-control`、外枠 1px `--border`。
+- 中身は月／太陽のアウトラインアイコン（1.5px ストローク、`--text-muted`、hover で `--text-primary`）。
+- `<button type="button" aria-label="テーマを切り替え" aria-pressed={isDark}>`。dark ⇄ light の**2 状態のみ**（"system" は持たない）。
+- 初回のみ `prefers-color-scheme` で初期値を決めるが、判定不能・no-preference はダーク（詳細は `THEME_AND_I18N.md`）。
+- モバイル（`< 640px`）ではヘッダーバーに残す。折り畳まれるのはナビだけ。
 
----
+## 2. ボタン階層
 
-## 🃏 Card Component
+| 階層 | 見た目 | 用途 |
+|---|---|---|
+| Primary | 地 `--accent-solid`、文字 `#ffffff`、`--radius-pill`、`padding: 0 20px`、高さ 40px、16px / weight 500 以上（コントラスト 4.47 のため小さくしない） | ページに 1 つ。書籍購入・講座申込 |
+| Secondary | 地 `--text-primary`、文字 `--bg`、`--radius-pill`、高さ 40px | Primary が無いページの主要導線 |
+| Outline | 透明地、文字 `--text-primary`、枠 1px `--border`、`--radius-control`、高さ 36px。hover で枠 `--border-hover` ＋ 地 `--surface-1` | 一覧の「もっと見る」、副次導線 |
+| Ghost | 透明地、文字 `--text-secondary`、枠なし。hover で文字 `--text-primary` ＋ 地 `--surface-1` | ヘッダーナビ、セル内の補助操作 |
+| Link-button | 文字 `--link`、下線なし、hover で下線 | 外部リンク。末尾に `↗`（12px） |
 
-### Anatomy
-
-```
-┌─────────────────────────┐
-│ [Optional Image/Graphic] │
-├─────────────────────────┤
-│ [Eyebrow Text]          │
-│ [Title]                 │
-│ [Description]           │
-│ [Optional Actions]      │
-└─────────────────────────┘
-```
-
-### Detailed Specifications
-
-#### Dimensions
-
-- **Width**: Fluid (100% of container)
-- **Min Height**: None (content-driven)
-- **Padding**: 24px (mobile), 32px (desktop)
-- **Border Radius**: 8px
-- **Border Width**: 1px
-- **Max Width**: None (controlled by grid)
-
-#### Visual Hierarchy
-
-**Eyebrow Text**
-
-- Font: Mono
-- Size: 12px
-- Weight: 600
-- Color: Gray-500
-- Letter Spacing: 0.1em (widest)
-- Text Transform: Uppercase
-- Margin Bottom: 8px
-
-**Title**
-
-- Font: Sans
-- Size: 20px (mobile), 24px (desktop)
-- Weight: 600
-- Color: Gray-950
-- Line Height: 1.2
-- Margin Bottom: 12px
-
-**Description**
-
-- Font: Sans
-- Size: 16px
-- Weight: 400
-- Color: Gray-600
-- Line Height: 1.5
-- Margin Bottom: 16px (if actions present)
-
-#### Card Variants
-
-**Basic Card**
-
-```
-bg-white
-border border-gray-200
-shadow-sm
-```
-
-**Elevated Card**
-
-```
-bg-white
-shadow-lg
-no border
-```
-
-**Interactive Card**
-
-```
-bg-white
-border border-gray-200
-shadow-sm
-hover:shadow-md
-transition-shadow duration-200
-cursor-pointer
-```
-
-**Dark Card**
-
-```
-bg-gray-900
-border border-gray-800
-text-white
-[Title]: text-white
-[Description]: text-gray-400
-```
-
-**Gradient Card**
-
-```
-bg-gradient-to-br from-gray-50 to-white
-border border-gray-200
-```
-
----
-
-## 🧭 Navigation Component
-
-### Anatomy
-
-```
-[Logo] [────────Space────────] [Nav Items] [CTA Button]
-```
-
-### Detailed Specifications
-
-#### Dimensions
-
-- **Height**: 64px (fixed)
-- **Padding Horizontal**: 24px (mobile), 32px (desktop)
-- **Logo Height**: 32px
-- **Nav Item Height**: 64px (full height for click target)
-
-#### Layout Rules
-
-**Desktop (≥1024px)**
-
-- Logo: Flex start
-- Nav Items: Centered with 32px gaps
-- CTA: Flex end
-- All items: Horizontal alignment
-
-**Mobile (<1024px)**
-
-- Logo: Flex start
-- Hamburger: Flex end
-- Nav Items: Hidden (drawer)
-- Drawer: Full width, below navbar
-
-#### Navigation States
-
-**Default Link**
-
-- Color: Gray-600
-- Weight: 500
-- Size: 14px
-
-**Hover Link**
-
-- Color: Gray-950
-- Transition: 150ms ease-in-out
-
-**Active Link**
-
-- Color: Gray-950
-- Weight: 600
-- Border Bottom: 2px solid Gray-950 (optional)
-
-**Mobile Drawer**
-
-- Background: White
-- Border Top: 1px solid Gray-200
-- Animation: Slide down 200ms ease-out
-- Backdrop: Black/20 with blur
-
----
-
-## 📄 Layout Container
-
-### Specifications
-
-#### Widths
-
-- **Base**: 100% width
-- **Max Width**: 1152px (6xl)
-- **Padding Mobile**: 24px left/right
-- **Padding Desktop**: 32px left/right
-
-#### Breakpoint Behavior
-
-```
-< 640px:  px-6 (24px)
-≥ 640px:  px-6 (24px)
-≥ 768px:  px-8 (32px)
-≥ 1024px: px-8 (32px)
-≥ 1216px: No padding (max-width constrains)
-```
-
-#### Centering Logic
+全てフォーカス時に Geist の二重リング。**グラデーション塗りのボタンは存在しない。**
 
 ```css
-margin-left: auto;
-margin-right: auto;
-```
-
----
-
-## 📝 Form Components
-
-### Input Field
-
-#### Anatomy
-
-```
-[Label]
-┌──────────────────────┐
-│ Placeholder Text     │
-└──────────────────────┘
-[Helper Text/Error]
-```
-
-#### Specifications
-
-**Dimensions**
-
-- Height: 40px
-- Padding: 12px horizontal, 8px vertical
-- Border Radius: 6px
-- Border Width: 1px
-- Font Size: 14px
-
-**States**
-
-**Default**
-
-```
-border-gray-300
-bg-white
-text-gray-950
-placeholder-gray-500
-```
-
-**Focus**
-
-```
-ring-2 ring-gray-950
-border-transparent
-outline-none
-```
-
-**Error**
-
-```
-border-red-600
-text-red-900
-focus:ring-red-600
-```
-
-**Disabled**
-
-```
-bg-gray-50
-text-gray-500
-cursor-not-allowed
-```
-
-### Select Dropdown
-
-Same dimensions as Input Field, with:
-
-- Chevron Icon: 16px, right-aligned
-- Dropdown Shadow: shadow-lg
-- Dropdown Border: 1px solid Gray-200
-- Option Hover: bg-gray-50
-- Option Selected: bg-gray-100
-
-### Checkbox & Radio
-
-**Dimensions**
-
-- Size: 16px × 16px
-- Border Radius: 4px (checkbox), full (radio)
-- Border: 1px solid Gray-300
-
-**States**
-
-- Checked: bg-gray-950, white checkmark
-- Focus: ring-2 ring-offset-2 ring-gray-950
-- Disabled: bg-gray-100
-
----
-
-## 🎨 Special UI Elements
-
-### Gradient Overlays
-
-#### Fade Overlay (Top)
-
-```
-background: linear-gradient(
-  to bottom,
-  rgba(255,255,255,1) 0%,
-  rgba(255,255,255,0.8) 50%,
-  rgba(255,255,255,0) 100%
-);
-height: 120px;
-```
-
-#### Fade Overlay (Bottom)
-
-```
-background: linear-gradient(
-  to top,
-  rgba(255,255,255,1) 0%,
-  rgba(255,255,255,0.8) 50%,
-  rgba(255,255,255,0) 100%
-);
-height: 120px;
-```
-
-### Loading Skeletons
-
-#### Skeleton Base
-
-```
-bg-gray-200
-animate-pulse
-rounded (matching content shape)
-```
-
-#### Animation Timing
-
-```
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+.btn-primary {
+  background: var(--accent-solid);
+  color: #ffffff;
+  border-radius: var(--radius-pill);
+  padding: 0 20px;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 500;
 }
-animation: pulse 2s ease-in-out infinite;
-```
-
-### Tooltips
-
-#### Specifications
-
-- Background: Gray-950
-- Text: White
-- Padding: 8px 12px
-- Border Radius: 6px
-- Font Size: 12px
-- Arrow Size: 6px
-- Shadow: shadow-lg
-- Animation: Fade in 150ms
-
-### Badges
-
-#### Specifications
-
-- Padding: 4px horizontal, 2px vertical
-- Border Radius: 4px
-- Font Size: 12px
-- Font Weight: 600
-- Letter Spacing: 0.025em
-
-#### Variants
-
-```
-Default: bg-gray-100 text-gray-700
-Success: bg-green-100 text-green-700
-Warning: bg-yellow-100 text-yellow-700
-Danger: bg-red-100 text-red-700
-Info: bg-blue-100 text-blue-700
-```
-
----
-
-## 🎬 Animation Specifications
-
-### Micro-Interactions
-
-#### Button Press
-
-```
-transform: scale(0.98);
-transition: transform 75ms ease-in;
-```
-
-#### Link Hover
-
-```
-color change only
-transition: color 150ms ease-in-out;
-```
-
-#### Card Hover
-
-```
-box-shadow change
-transition: box-shadow 200ms ease-in-out;
-```
-
-### Page Transitions
-
-#### Fade In
-
-```
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.btn-primary:focus-visible {
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--focus);
 }
-animation: fadeIn 300ms ease-out;
 ```
 
-#### Slide Up
+## 3. リンク
 
-```
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+- 本文中: `--link` 色、`text-decoration: underline`、`text-underline-offset: 0.2em`、`text-decoration-thickness: 1px`、`text-decoration-color: color-mix(in oklab, var(--link) 40%, transparent)`。hover で下線を不透明に。
+- 外部リンク: 末尾に `↗`（Geist Mono 由来の記号、12px、`--text-muted`）。
+- ナビ・一覧のタイトル: 既定で下線なし、hover で下線。
+
+```css
+.link-body {
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in oklab, var(--link) 40%, transparent);
 }
-animation: slideUp 300ms ease-out;
-```
-
-#### Scale In
-
-```
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.link-body:hover {
+  text-decoration-color: var(--link);
 }
-animation: scaleIn 300ms ease-out;
 ```
 
-### Stagger Animation
+## 4. タグ / バッジ（モノラベル）
 
-```
-Children delay: index * 50ms
-Max delay: 300ms
-Each child: fadeIn + slideUp
-```
+| 種類 | 仕様 |
+|---|---|
+| Mono ラベル（セル見出し） | Geist Mono 11px / uppercase / +0.08em / `--text-muted` / 装飾なし |
+| タグ（分類） | Geist Mono 11px、地 `--surface-1`、文字 `--text-secondary`、枠なし、`--radius-control`、`padding: 3px 8px`。hover で地 `--surface-2` |
+| 状態バッジ | 同上に 6px のドットを前置。`NEW` = `--accent-solid`、`UPDATED` = `--ds-amber-700`（ダーク `#ffb200` / ライト `#f90`）。**状態色はこの 2 つだけ** |
+| カウントバッジ | Geist Mono 11px / tabular-nums / `--text-muted` |
 
----
+タグに色を持たせない（カテゴリごとの色分け禁止）。近似色のタグが並ぶと near-achromatic 規律が崩れる。
 
-## 📐 Grid Systems
-
-### Container Grid
-
-```
-12-column grid
-Gap: 24px (mobile), 32px (desktop)
-```
-
-### Card Grid
-
-```
-Mobile: 1 column
-Tablet (≥640px): 2 columns
-Desktop (≥1024px): 3 columns
-Large (≥1280px): 4 columns (optional)
-Gap: 24px always
+```css
+.tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: var(--surface-1);
+  color: var(--text-secondary);
+  border-radius: var(--radius-control);
+  padding: 3px 8px;
+}
+.tag:hover { background: var(--surface-2); }
 ```
 
-### Form Grid
+## 5. セル（カード）
 
-```
-Mobile: 1 column
-Desktop (≥768px): 2 columns for related fields
-Gap: 24px horizontal, 16px vertical
-```
+独立した「カード」コンポーネントは作らない。**全てのカードはグリッドセル（`.cell`）である。**
 
-### Bento Grid
+- 地 `--bg`、枠は親グリッドの 1px gap が担当、radius 0、padding 20px（デスクトップ）/ 16px（モバイル）。
+- hover: 地 `--surface-1`（150ms ease-out）。**translateY やスケールは使わない。**
+- セル内で角丸を持てるのは画像・埋め込みのみ（`--radius-control` 6px）。
 
-```
-Variable columns using CSS Grid
-Span options: 1, 2, 3 columns
-Aspect ratios: Free, 1:1, 16:9, 4:3
-Gap: 16px (mobile), 24px (desktop)
-```
-
----
-
-## 🎯 Interaction Patterns
-
-### Click Targets
-
-- Minimum Size: 44px × 44px (mobile)
-- Desktop Minimum: 32px × 32px
-- Padding for Small Elements: Extend clickable area
-
-### Focus Management
-
-- Tab Order: Logical top-to-bottom, left-to-right
-- Focus Trap: Modals and dropdowns
-- Skip Links: Hidden but accessible
-
-### Touch Gestures
-
-- Swipe: Horizontal for carousels
-- Pull to Refresh: Optional, 100px threshold
-- Long Press: 500ms for context menu
-
-### Scroll Behavior
-
-- Smooth Scroll: 300ms ease-in-out
-- Parallax: Transform only, 0.5-0.8 speed ratio
-- Sticky Elements: Navbar, sidebars
-
----
-
-## 🔍 Responsive Scaling
-
-### Font Size Scaling
-
-```
-Mobile Base: 16px
-Desktop Base: 16px (no change)
-Headings: +20% on desktop
-Line Height: Consistent ratios
+```css
+.cell-grid {
+  display: grid;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.cell {
+  background: var(--bg);
+  padding: 20px;
+  transition: background 150ms ease-out;
+}
+.cell:hover { background: var(--surface-1); }
 ```
 
-### Spacing Scaling
+セル構造・グリッド全体の規則は `DESIGN_SYSTEM_PATTERNS.md` を参照。
 
+## 6. コードブロック
+
+- 地 `--surface-1`、枠 1px `--border`、radius **0**（本文幅から左右のガターぶんはみ出して全幅にしてよい）。
+- Geist Mono 13px / line-height 1.7 / tabular-nums off。
+- 上辺に言語ラベル（Mono 11px / uppercase / `--text-muted`）＋ 右端にコピーボタン（Ghost, 24×24px）。
+- シンタックスハイライト: `prism-react-renderer` を使い、**キーワードのみ `--link`、文字列は `--ds-teal-700`、コメントは `--text-muted`、それ以外は `--text-primary`** の 4 色に制限。多色テーマ（Dracula 等）は使わない。
+- インラインコード: 地 `--surface-1`、`padding: 1px 5px`、`--radius-control`、Geist Mono 0.9em、`--text-primary`。
+
+```css
+.code-block {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.code-inline {
+  background: var(--surface-1);
+  padding: 1px 5px;
+  border-radius: var(--radius-control);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
 ```
-Mobile: Base values
-Tablet: Base values
-Desktop: 1.25× for major spacing
-Large Desktop: 1.5× for hero sections
+
+## 7. 記事本文のタイポ
+
+| 要素 | 仕様 |
+|---|---|
+| 本文幅 | 720px（約 40〜45 全角字/行） |
+| `p` | `body`（16px / 1.85 / ls 0）、段落間 24px、`--text-primary` |
+| `h2` | `heading-lg`（32px / 500）、上に全幅 1px 罫線、`margin-top: 64px`、罫線からの間隔 24px |
+| `h3` | `heading`（24px / 500）、`margin-top: 40px` |
+| `ul` / `ol` | マーカーは `--text-muted`、`li` 間 8px、インデント 1.4em |
+| `blockquote` | 左に 2px の縦線（`--border-strong`）、地なし、`--text-secondary`、斜体にしない |
+| `img` | 全幅、`--radius-control`、下にキャプション（`caption` / `--text-muted` / 中央揃え） |
+| `table` | セルグリッドと同じ 1px 罫線。ヘッダ行は Mono 11px uppercase、数値列は tabular-nums 右寄せ |
+| `hr` | 全幅 1px `--border`、上下 48px |
+
+`@tailwindcss/typography` は使い続けてよいが、`prose` の色・行間・見出しマージンは上記トークンで全て上書きする。
+
+```css
+h2 {
+  margin-top: 64px;
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+  font-size: 32px;
+  font-weight: 500;
+}
 ```
 
-### Component Scaling
+## 8. フォーカスリング
 
+Geist の二重リングを全インタラクティブ要素で共通に使う。`outline: none` を単独で書かない。
+
+```css
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--focus);
+}
 ```
-Buttons: Same size all breakpoints
-Cards: Padding increases on desktop
-Inputs: Same size all breakpoints
-Navigation: Height consistent
-```
 
----
+## 9. 関連ドキュメント
 
-## 🌈 Theme Variations
-
-### Light Theme (Default)
-
-- Background: White
-- Surface: Gray-50
-- Text: Gray-950
-- Borders: Gray-200
-
-### Dark Theme
-
-- Background: Gray-950
-- Surface: Gray-900
-- Text: White
-- Borders: Gray-800
-
-### High Contrast
-
-- Background: Pure White
-- Text: Pure Black
-- Borders: Black
-- No shadows, only borders
-
----
-
-This comprehensive specification ensures pixel-perfect recreation of the Radiant design system across any platform or framework.
+- トークン全表・派手さ予算・タイポグラフィ: [`DESIGN_SYSTEM.md`](./DESIGN_SYSTEM.md)
+- レイアウト・グリッド規則・ページ骨格: [`DESIGN_SYSTEM_PATTERNS.md`](./DESIGN_SYSTEM_PATTERNS.md)
+- テーマ実装・i18n: [`THEME_AND_I18N.md`](./THEME_AND_I18N.md)

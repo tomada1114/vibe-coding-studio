@@ -1,8 +1,8 @@
-# Component Guide - Radiant Template
+# Component Guide - Vibe Coding Studio
 
 ## Overview
 
-This guide provides detailed documentation for all React components in the Radiant template, including usage examples, props, and best practices.
+This guide provides detailed documentation for all React components in Vibe Coding Studio, including usage examples, props, and best practices.
 
 ## Component Categories
 
