@@ -1,8 +1,4 @@
-import { Container } from "@/components/container"
 import { CouponPageLayout } from "@/components/coupons/CouponPageLayout"
-import { AsyncErrorBoundary } from "@/components/error-boundary"
-import { Footer } from "@/components/footer"
-import { Navbar } from "@/components/navbar"
 import { getLatestCoupons, getMaxDiscountRate } from "@/lib/coupons/coupon-data"
 import { ChevronRight } from "lucide-react"
 import type { Metadata } from "next"
@@ -97,15 +93,6 @@ export default function CouponsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
-      {/* ヘッダーセクション */}
-      <AsyncErrorBoundary>
-        <div className="relative">
-          <Container className="relative">
-            <Navbar />
-          </Container>
-        </div>
-      </AsyncErrorBoundary>
-
       {/* メインコンテンツ */}
       <main id="main-content" className="min-h-screen bg-white">
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
@@ -161,11 +148,6 @@ export default function CouponsPage() {
           <CouponPageLayout coupons={coupons} />
         </div>
       </main>
-
-      {/* フッターセクション */}
-      <AsyncErrorBoundary>
-        <Footer />
-      </AsyncErrorBoundary>
     </div>
   )
 }

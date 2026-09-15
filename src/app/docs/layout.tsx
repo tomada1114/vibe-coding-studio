@@ -1,9 +1,5 @@
-import { Container } from "@/components/container"
 import { DocsMobileMenu } from "@/components/docs/DocsMobileMenu"
 import { DocsSidebar } from "@/components/docs/DocsSidebar"
-import { AsyncErrorBoundary } from "@/components/error-boundary"
-import { Footer } from "@/components/footer"
-import { Navbar } from "@/components/navbar"
 
 export default function DocsLayout({
   children,
@@ -12,14 +8,6 @@ export default function DocsLayout({
 }) {
   return (
     <div className="overflow-hidden">
-      <AsyncErrorBoundary>
-        <div className="relative">
-          <Container className="relative">
-            <Navbar />
-          </Container>
-        </div>
-      </AsyncErrorBoundary>
-
       <DocsMobileMenu />
 
       <main id="main-content">
@@ -30,10 +18,6 @@ export default function DocsLayout({
           </div>
         </div>
       </main>
-
-      <AsyncErrorBoundary>
-        <Footer />
-      </AsyncErrorBoundary>
     </div>
   )
 }

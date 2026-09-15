@@ -69,19 +69,7 @@ describe("コミュニティページ（/community）", () => {
     })
   })
 
-  describe("レイアウトとナビゲーション", () => {
-    it("Navbarが表示される", () => {
-      render(<CommunityPage />)
-      const navbar = document.querySelector("nav")
-      expect(navbar).toBeInTheDocument()
-    })
-
-    it("Footerが表示される", () => {
-      render(<CommunityPage />)
-      const footer = document.querySelector("footer")
-      expect(footer).toBeInTheDocument()
-    })
-  })
+  describe("レイアウトとナビゲーション", () => {})
 
   describe("ページメタデータ", () => {
     it("metadataオブジェクトがエクスポートされている", async () => {

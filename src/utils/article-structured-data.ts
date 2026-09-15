@@ -3,7 +3,7 @@ import type { ArticleStructuredDataProps } from "@/types/structured_data"
 
 const DEFAULT_AUTHOR = {
   name: "とまだ",
-  url: "/founder",
+  url: "/",
 }
 
 /**

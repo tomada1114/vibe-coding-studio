@@ -1,7 +1,3 @@
-import { Container } from "@/components/container"
-import { AsyncErrorBoundary } from "@/components/error-boundary"
-import { Footer } from "@/components/footer"
-import { Navbar } from "@/components/navbar"
 import { RoadmapContent } from "@/components/roadmap/RoadmapContent"
 import { getAllCourses } from "@/data/roadmaps"
 import type { Metadata } from "next"
@@ -70,14 +66,6 @@ export default function RoadmapPage() {
   return (
     <div className="overflow-hidden">
       <RoadmapStructuredData />
-      <AsyncErrorBoundary>
-        <div className="relative">
-          <Container className="relative">
-            <Navbar />
-          </Container>
-        </div>
-      </AsyncErrorBoundary>
-
       <main id="main-content">
         <Suspense
           fallback={
@@ -89,10 +77,6 @@ export default function RoadmapPage() {
           <RoadmapContent />
         </Suspense>
       </main>
-
-      <AsyncErrorBoundary>
-        <Footer />
-      </AsyncErrorBoundary>
     </div>
   )
 }

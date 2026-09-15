@@ -93,6 +93,12 @@ const nextConfig = {
         destination: "/",
         permanent: true,
       },
+      {
+        // 運営者プロフィールはトップページへ統合した（Geist Grid 移行 第1弾）
+        source: "/founder",
+        destination: "/",
+        permanent: true,
+      },
     ]
   },
 

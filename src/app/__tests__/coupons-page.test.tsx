@@ -27,14 +27,6 @@ jest.mock("@/components/error-boundary", () => ({
   ),
 }))
 
-jest.mock("@/components/footer", () => ({
-  Footer: () => <footer data-testid="footer" />,
-}))
-
-jest.mock("@/components/navbar", () => ({
-  Navbar: () => <nav data-testid="navbar" />,
-}))
-
 jest.mock("@/lib/coupons/coupon-data", () => ({
   getLatestCoupons: () => [
     {
@@ -119,13 +111,6 @@ describe("CouponsPage", () => {
 
     const script = container.querySelector('script[type="application/ld+json"]')
     expect(script).toBeInTheDocument()
-  })
-
-  it("renders navbar and footer", () => {
-    render(<CouponsPage />)
-
-    expect(screen.getByTestId("navbar")).toBeInTheDocument()
-    expect(screen.getByTestId("footer")).toBeInTheDocument()
   })
 
   describe("Static rendering config (SSG + ISR)", () => {

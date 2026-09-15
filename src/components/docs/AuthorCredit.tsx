@@ -37,7 +37,7 @@ export interface AuthorCreditProps {
  */
 export function AuthorCredit({
   authorName = "とまだ",
-  authorUrl = "/founder",
+  authorUrl = "/",
   className = "text-right",
   createdAt,
   updatedAt,

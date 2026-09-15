@@ -32,27 +32,17 @@ describe("レスポンシブデザイン（タスク12.4）", () => {
       expect(htmlContent).toMatch(/sm:|md:|lg:/)
     })
 
-    it("工事中セクションにグリッドレスポンシブクラスが適用される", () => {
+    it("セルグリッドにレスポンシブな列数が適用される", () => {
       const { container } = render(<HomePage />)
       const htmlContent = container.innerHTML
 
-      // grid-cols-1（スマホ）、md:grid-cols-2（タブレット）、lg:grid-cols-3（PC）
-      // のパターンを確認
-      expect(htmlContent).toMatch(/grid-cols-1/)
-      expect(htmlContent).toMatch(/md:grid-cols-2|lg:grid-cols-3/)
+      // Geist Grid のセルグリッドは < 640px で 1 列、以降 2 列 / 3〜4 列に開く
+      expect(htmlContent).toMatch(/grid-cols-1|grid-cols-2/)
+      expect(htmlContent).toMatch(/sm:grid-cols-\d|lg:grid-cols-\d/)
     })
 
-    it("ナビゲーションが表示される", () => {
-      const { container } = render(<HomePage />)
-      const navbar = container.querySelector("nav")
-      expect(navbar).toBeInTheDocument()
-    })
-
-    it("フッターが表示される", () => {
-      const { container } = render(<HomePage />)
-      const footer = container.querySelector("footer")
-      expect(footer).toBeInTheDocument()
-    })
+    // ヘッダー・フッターはルートレイアウト（src/app/layout.tsx）が描画するため、
+    // ページ単体のレンダリング結果には含まれない。
   })
 
   describe("コミュニティページのレスポンシブデザイン", () => {
@@ -92,18 +82,6 @@ describe("レスポンシブデザイン（タスク12.4）", () => {
       expect(htmlContent).toMatch(/sm:flex-row|md:flex-row/)
     })
 
-    it("ナビゲーションが表示される", () => {
-      const { container } = render(<CommunityPage />)
-      const navbar = container.querySelector("nav")
-      expect(navbar).toBeInTheDocument()
-    })
-
-    it("フッターが表示される", () => {
-      const { container } = render(<CommunityPage />)
-      const footer = container.querySelector("footer")
-      expect(footer).toBeInTheDocument()
-    })
-
     it("コンテンツエリアが存在する", () => {
       const { container } = render(<CommunityPage />)
       const main = container.querySelector("main")
@@ -112,12 +90,13 @@ describe("レスポンシブデザイン（タスク12.4）", () => {
   })
 
   describe("レスポンシブテキストサイズ", () => {
-    it("トップページでレスポンシブテキストクラスが使用される", () => {
+    it("トップページでレスポンシブな文字サイズが使用される", () => {
       const { container } = render(<HomePage />)
       const htmlContent = container.innerHTML
 
-      // text-xl, sm:text-2xl, md:text-3xl などのパターンを確認
-      expect(htmlContent).toMatch(/text-\w+\/\d+|sm:text-\w+\/\d+|md:text-\w+/)
+      // Geist Grid は型スケールを px 指定で持つため、sm: 付きの
+      // 任意値クラス（例: sm:text-[56px]）が現れる
+      expect(htmlContent).toMatch(/sm:text-\[|sm:text-\w+/)
     })
 
     it("コミュニティページでレスポンシブテキストクラスが使用される", () => {

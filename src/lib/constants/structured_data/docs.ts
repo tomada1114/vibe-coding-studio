@@ -6,7 +6,7 @@ import { getSiteUrl } from "@/lib/seo/site-url"
 
 const DEFAULT_AUTHOR = {
   name: "とまだ",
-  url: "/founder",
+  url: "/",
 }
 
 interface DocsArticleJsonLdOptions {
@@ -32,7 +32,7 @@ export function renderDocsArticleJsonLd(
 
   const siteUrl = getSiteUrl()
   const authorUrl = options.author
-    ? `${siteUrl}/founder`
+    ? `${siteUrl}/`
     : `${siteUrl}${DEFAULT_AUTHOR.url}`
 
   const data = {

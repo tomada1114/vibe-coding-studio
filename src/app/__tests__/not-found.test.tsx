@@ -22,16 +22,6 @@ jest.mock("@/components/container", () => ({
   }) => <div className={className}>{children}</div>,
 }))
 
-jest.mock("@/components/footer", () => ({
-  Footer: ({ hideCallToAction }: { hideCallToAction?: boolean }) => (
-    <footer data-testid="footer" data-hide-cta={hideCallToAction} />
-  ),
-}))
-
-jest.mock("@/components/navbar", () => ({
-  Navbar: () => <nav data-testid="navbar" />,
-}))
-
 describe("NotFound Page", () => {
   it("renders 404 text", () => {
     render(<NotFound />)
@@ -72,13 +62,6 @@ describe("NotFound Page", () => {
     expect(screen.getByText("クーポン")).toBeInTheDocument()
     expect(screen.getByText("動画一覧")).toBeInTheDocument()
     expect(screen.getByText("ロードマップ")).toBeInTheDocument()
-  })
-
-  it("renders footer with hideCallToAction", () => {
-    render(<NotFound />)
-
-    const footer = screen.getByTestId("footer")
-    expect(footer).toHaveAttribute("data-hide-cta", "true")
   })
 
   it("renders navigation landmark", () => {
