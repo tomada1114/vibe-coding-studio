@@ -51,7 +51,7 @@ const PROFILE_LINKS = [
 /** 外部リンクの末尾に置く矢印 */
 function ExternalArrow() {
   return (
-    <span aria-hidden="true" className="text-text-muted ml-1 text-[12px]">
+    <span aria-hidden="true" className="text-text-secondary ml-1 text-[12px]">
       ↗
     </span>
   )

@@ -32,7 +32,7 @@ export function CourseCard({
 
         <div className="mt-5 flex items-center justify-between gap-3">
           <p className="gg-label">Course</p>
-          <span aria-hidden="true" className="text-text-muted text-sm">
+          <span aria-hidden="true" className="text-text-secondary text-sm">
             ↗
           </span>
         </div>
