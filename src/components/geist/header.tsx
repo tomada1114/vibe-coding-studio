@@ -61,7 +61,7 @@ function LanguageToggle({
             aria-current={active ? "true" : undefined}
             className={clsx(
               "relative z-0 flex h-full items-center px-[10px] font-mono text-[11px] tracking-[0.08em] uppercase transition-colors focus-visible:z-10",
-              index === 0 ? "rounded-l-[5px]" : "rounded-r-[5px]",
+              index === 0 ? "rounded-l-[6px]" : "rounded-r-[6px]",
               index > 0 && "border-border border-l",
               active
                 ? "bg-surface-1 text-text-primary"

@@ -164,7 +164,7 @@ export default function CommunityPage({
                   width={300}
                   height={100}
                   sizes="(max-width: 640px) 240px, 300px"
-                  className="h-auto w-full max-w-[300px]"
+                  className="h-auto w-full max-w-[300px] rounded-[6px]"
                 />
                 <div className="mt-6 space-y-4">
                   {copy.about.paragraphs.map(paragraph => (
@@ -184,7 +184,7 @@ export default function CommunityPage({
                   width={560}
                   height={560}
                   sizes="(max-width: 1024px) 50vw, 280px"
-                  className="h-auto w-full max-w-[280px]"
+                  className="h-auto w-full max-w-[280px] rounded-[6px]"
                 />
               </div>
             </div>
