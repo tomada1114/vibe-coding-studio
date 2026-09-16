@@ -16,9 +16,6 @@
 # production
 /build
 
-# coupon migration package
-/coupon-migration-package
-
 # misc
 .DS_Store
 *.pem

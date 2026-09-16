@@ -30,7 +30,6 @@
     "**/*.test.ts",
     "**/*.test.tsx",
     "__tests__/**/*",
-    "coupon-migration-package",
     "docs-migration"
   ]
 }
