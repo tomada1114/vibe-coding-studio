@@ -8,13 +8,6 @@ import CommunityPage from "@/app/community/page"
 import { DISCORD_INVITE_URL } from "@/lib/constants"
 import { render, screen } from "@testing-library/react"
 
-// モックを設定
-jest.mock("@/components/logo", () => ({
-  Logo: () => (
-    <img alt="Vibe Coding Studio Logo" src="/vcs-logo-square-transparent.png" />
-  ),
-}))
-
 jest.mock("@/components/discord-member-count", () => ({
   DiscordMemberCount: () => null, // テスト環境では何も表示しない
 }))
