@@ -1,7 +1,7 @@
 /**
  * i18n — メッセージ辞書
  *
- * 翻訳対象はヘッダー・フッター・トップページ（個人プロフィール）の 3 面のみ。
+ * 翻訳対象はヘッダー・フッター・トップページ（個人プロフィール）・講座一覧・コミュニティの 5 面。
  * `ja` を基準とし、`en` は同じ構造を持つ（型で強制する）。
  *
  * 英訳はオーナーによる校正を前提とした下書き。
@@ -20,6 +20,24 @@ type CareerEntry = {
   year: string
   title: string
   body: string
+}
+
+type CommunityQuestion = {
+  question: string
+  answer: string
+}
+
+type CommunityValueItem = {
+  label: string
+  title: string
+  description: string
+  benefits: string[]
+}
+
+type CommunityChannel = {
+  label: string
+  name: string
+  description: string
 }
 
 export type Dictionary = {
@@ -109,6 +127,67 @@ export type Dictionary = {
     label: string
     heading: string
     lead: string
+  }
+  courses: {
+    metaTitle: string
+    metaDescription: string
+    label: string
+    title: string
+    lead: string
+  }
+  community: {
+    metaTitle: string
+    metaDescription: string
+    ogTitle: string
+    hero: {
+      label: string
+      title: string
+      lead: string
+      highlights: string
+      memberLabel: string
+      cta: string
+    }
+    value: {
+      label: string
+      heading: string
+      items: CommunityValueItem[]
+    }
+    about: {
+      label: string
+      heading: string
+      lead: string
+      logoAlt: string
+      profileAlt: string
+      paragraphs: string[]
+    }
+    startHere: {
+      label: string
+      heading: string
+      items: CommunityQuestion[]
+    }
+    channels: {
+      label: string
+      heading: string
+      lead: string
+      items: CommunityChannel[]
+    }
+    audience: {
+      label: string
+      heading: string
+      items: string[]
+    }
+    faq: {
+      label: string
+      heading: string
+      lead: string
+      items: CommunityQuestion[]
+    }
+    join: {
+      label: string
+      heading: string
+      lead: string[]
+      cta: string
+    }
   }
 }
 
@@ -263,6 +342,199 @@ const ja: Dictionary = {
     heading: "リンク",
     lead: "発信しているアカウントの一覧です。",
   },
+  courses: {
+    metaTitle: "講座一覧",
+    metaDescription: "著者が公開しているUdemy講座の一覧です。",
+    label: "Courses",
+    title: "講座一覧",
+    lead: "著者が公開しているUdemy講座を、公開順に紹介しています。",
+  },
+  community: {
+    metaTitle: "コミュニティ",
+    metaDescription:
+      "AI駆動開発を学ぶ仲間と繋がり、最新検証を見ながら一緒に成長するDiscordコミュニティに参加しよう",
+    ogTitle: "コミュニティ - Vibe Coding Studio",
+    hero: {
+      label: "COMMUNITY",
+      title: "AI駆動開発を一緒に学ぶ仲間が待っています",
+      lead: "とまだの最新検証をリアルタイムで見ながら、同じ目標を持つ仲間と一緒に成長できるDiscordコミュニティです。",
+      highlights: "初心者大歓迎 | 見るだけでもOK | 温かい雰囲気",
+      memberLabel: "名の仲間が参加中",
+      cta: "Discordに参加する",
+    },
+    value: {
+      label: "VALUE",
+      heading: "ここで得られること",
+      items: [
+        {
+          label: "PEOPLE",
+          title: "同じ目標を持つ仲間との繋がり",
+          description: "一人じゃない安心感で学習を継続",
+          benefits: [
+            "「こんなことできました！」を気軽に報告",
+            "他のメンバーの成果を見てモチベーションアップ",
+            "つまずいたときは助け合える",
+            "学習の孤独感から解放される",
+          ],
+        },
+        {
+          label: "RESEARCH",
+          title: "とまだの最新検証をリアルタイムで",
+          description: "YouTube動画になる前の情報をキャッチ",
+          benefits: [
+            "「今日はこの新機能試してます」をリアルタイム共有",
+            "失敗も含めた試行錯誤のプロセスが見られる",
+            "検証中のツールの生の様子",
+            "ほぼすべての投稿にとまだが反応",
+          ],
+        },
+        {
+          label: "SHARING",
+          title: "メンバー同士で教え合う文化",
+          description: "知識を持つ人が積極的に回答",
+          benefits: [
+            "とまだだけでなく、メンバーも質問に答える",
+            "「自分も同じところで詰まりました！」という共感",
+            "実際に試した人のリアルな感想が聞ける",
+            "気になるツールや記事をシェア",
+          ],
+        },
+      ],
+    },
+    about: {
+      label: "ABOUT",
+      heading: "コミュニティについて",
+      lead: "初心者大歓迎 | 見るだけでもOK | 温かい雰囲気",
+      logoAlt: "Vibe Coding Studio",
+      profileAlt: "とまだ（Tomada）のプロフィール画像",
+      paragraphs: [
+        "Vibe Coding Studioは、AI駆動開発を学ぶ仲間が集まる場所です。最新のAI技術を活用した開発手法を、実践を通じて学ぶコミュニティです。",
+        "また、最新のAI駆動開発情報を共有しあうことで、一緒に成長できる環境を提供しています。初心者からベテランまで、あらゆるレベルの開発者が参加しています。",
+      ],
+    },
+    startHere: {
+      label: "START HERE",
+      heading: "参加前の不安に答えます",
+      items: [
+        {
+          question: "初心者の自分でも参加して大丈夫?",
+          answer:
+            "もちろんです！プログラミングを始めたばかりの方が多数参加しています。初歩的な質問も大歓迎で、とまだが丁寧に回答します。",
+        },
+        {
+          question: "見ているだけでも価値ある?",
+          answer:
+            "はい！投稿3割、ROM7割の方も多いです。とまだの最新検証を見るだけでも勉強になりますし、他のメンバーの質問と回答から学べます。",
+        },
+        {
+          question: "質問したら迷惑じゃない?",
+          answer:
+            "全く迷惑ではありません。とまだはほぼすべての投稿に反応すると宣言しており、実際に温かく対応しています。知識を持つメンバーも積極的に回答してくれます。",
+        },
+        {
+          question: "忙しくても参加できる?",
+          answer:
+            "大丈夫です！毎日投稿する必要はありません。週1回、月1回の参加でもOK。過去のやり取りはいつでも見返せます。",
+        },
+      ],
+    },
+    channels: {
+      label: "CHANNELS",
+      heading: "チャンネル紹介",
+      lead: "Discordコミュニティには、目的に応じた複数のチャンネルがあります。",
+      items: [
+        {
+          label: "WELCOME",
+          name: "自己紹介",
+          description: "まずはここで簡単に自己紹介。数行で参加できます。",
+        },
+        {
+          label: "TIMES",
+          name: "times-all",
+          description:
+            "各自の個人スレッド（times）が集まる場所。X感覚で気軽につぶやけます。",
+        },
+        {
+          label: "PROGRESS",
+          name: "学習報告",
+          description:
+            "学んだことを報告するチャンネル。初歩的な内容も歓迎です。",
+        },
+        {
+          label: "LOUNGE",
+          name: "雑談",
+          description:
+            "日々の学習や開発の記録を自由に共有し、気軽に交流できます。",
+        },
+        {
+          label: "RESEARCH",
+          name: "とまだの検証部屋",
+          description:
+            "YouTube化前の最新情報をリアルタイム共有。失敗も含めた試行錯誤が見られます。",
+        },
+        {
+          label: "PRIVATE",
+          name: "お問合せ",
+          description: "とまだにクローズドで相談できるチャンネルです。",
+        },
+      ],
+    },
+    audience: {
+      label: "AUDIENCE",
+      heading: "こんな人におすすめ",
+      items: [
+        "AI駆動開発を学び始めたばかりの初心者",
+        "Claude Code / Cursor / Codex を使いこなしたい",
+        "一人での学習に限界を感じている",
+        "同じ目標を持つ仲間が欲しい",
+        "とまだに直接質問したい",
+        "最新のAIツール情報をいち早くキャッチアップしたい",
+        "見ているだけでも学べる環境が欲しい",
+        "自分のペースで参加したい",
+      ],
+    },
+    faq: {
+      label: "FAQ",
+      heading: "よくある質問",
+      lead: "コミュニティに関するよくある質問とその回答をまとめました。",
+      items: [
+        {
+          question: "Discordコミュニティは無料で参加できますか？",
+          answer:
+            "はい、完全無料で参加できます。Discordアカウントがあれば誰でも参加可能です。",
+        },
+        {
+          question: "初心者でも参加できますか？",
+          answer:
+            "もちろんです！初心者からベテランまで、あらゆるレベルの開発者が参加しています。プログラミング未経験の方も大歓迎です。わからないことは気軽に質問できる環境を提供しています。",
+        },
+        {
+          question: "どのような内容を学べますか？",
+          answer:
+            "AI駆動開発の最新技術、Claude Code / Codex / Cursor の活用方法、プロンプトエンジニアリング、実践的な開発手法などがシェアされています。とまだの最新検証も共有されますので、試行錯誤のプロセスを含めて学ぶ機会が得られます。",
+        },
+        {
+          question: "コミュニティのルールはありますか？",
+          answer:
+            "相互尊重とフレンドリーな雰囲気を大切にしており、厳密なルールは設けておりません。具体的なルールはDiscord参加後にご確認ください。",
+        },
+        {
+          question: "質問への回答はどのくらいで得られますか？",
+          answer:
+            "とまだが気付けば即座に回答しますので、普段は数時間〜半日ぐらいでお答えしています。また、コミュニティメンバーが回答してくださることもあるので、すぐに回答を得られることもあります。",
+        },
+      ],
+    },
+    join: {
+      label: "JOIN",
+      heading: "今すぐ参加しよう",
+      lead: [
+        "AI駆動開発を学ぶ仲間が待っています。",
+        "Discordコミュニティで一緒に成長しましょう！",
+      ],
+      cta: "Discordに参加する",
+    },
+  },
 }
 
 const en: Dictionary = {
@@ -416,6 +688,203 @@ const en: Dictionary = {
     label: "Links",
     heading: "Links",
     lead: "Where I publish.",
+  },
+  courses: {
+    metaTitle: "Courses",
+    metaDescription: "A list of Udemy courses published by Tomada.",
+    label: "Courses",
+    title: "Courses",
+    lead: "Browse Udemy courses in the order they were published.",
+  },
+  community: {
+    metaTitle: "Community",
+    metaDescription:
+      "Learn AI-driven development with peers, follow experiments as they happen, and grow together in our Discord community.",
+    ogTitle: "Community - Vibe Coding Studio",
+    hero: {
+      label: "COMMUNITY",
+      title:
+        "Learn AI-driven development with peers who are building alongside you",
+      lead: "Follow Tomada's latest experiments in real time and grow with people working toward the same goal in this Discord community.",
+      highlights:
+        "Beginners welcome | Lurking is fine | A friendly place to learn",
+      memberLabel: "members learning together",
+      cta: "Join Discord",
+    },
+    value: {
+      label: "VALUE",
+      heading: "What you can do here",
+      items: [
+        {
+          label: "PEOPLE",
+          title: "Stay connected to people with the same goal",
+          description:
+            "Keep learning with the reassurance that you are not alone",
+          benefits: [
+            "Share updates like “I built this!” without overthinking it",
+            "Stay motivated by seeing what other members make",
+            "Help each other when something gets stuck",
+            "Leave the isolation of learning on your own",
+          ],
+        },
+        {
+          label: "RESEARCH",
+          title: "See Tomada's latest experiments in real time",
+          description: "Catch the work before it becomes a YouTube video",
+          benefits: [
+            "See updates like “I am trying this new feature today” as they happen",
+            "Follow the trial-and-error process, including the failures",
+            "See tools in their raw testing phase",
+            "Tomada responds to almost every post",
+          ],
+        },
+        {
+          label: "SHARING",
+          title: "Learn from members who share what they know",
+          description: "People who have tried it answer questions",
+          benefits: [
+            "Get answers from members as well as Tomada",
+            "Hear “I got stuck in the same place” from people who understand",
+            "Learn from honest reactions by people who have tried it",
+            "Share useful tools and articles",
+          ],
+        },
+      ],
+    },
+    about: {
+      label: "ABOUT",
+      heading: "About the community",
+      lead: "Beginners welcome | Lurking is fine | A friendly place to learn",
+      logoAlt: "Vibe Coding Studio",
+      profileAlt: "Portrait of Tomada",
+      paragraphs: [
+        "Vibe Coding Studio is a place for people learning AI-driven development. It is a practical community for learning how to use the latest AI technology in development.",
+        "Members share what they learn about AI-driven development and grow together. Developers at every level, from beginners to experienced practitioners, take part.",
+      ],
+    },
+    startHere: {
+      label: "START HERE",
+      heading: "Questions people often have before joining",
+      items: [
+        {
+          question: "Is it okay to join as a beginner?",
+          answer:
+            "Absolutely. Many members are just starting out with programming. Beginner questions are welcome, and Tomada takes the time to answer them.",
+        },
+        {
+          question: "Is there value in just reading?",
+          answer:
+            "Yes. Many members mostly read. You can learn by following Tomada's latest experiments and reading other members' questions and answers.",
+        },
+        {
+          question: "Will questions bother people?",
+          answer:
+            "Not at all. Tomada aims to respond to almost every post, and members with relevant knowledge often join in with warm, practical answers.",
+        },
+        {
+          question: "Can I join when I am busy?",
+          answer:
+            "Yes. There is no need to post every day. Joining once a week or once a month is fine, and past conversations are always there to revisit.",
+        },
+      ],
+    },
+    channels: {
+      label: "CHANNELS",
+      heading: "Channel guide",
+      lead: "The Discord community has several channels for different kinds of participation.",
+      items: [
+        {
+          label: "WELCOME",
+          name: "Introductions",
+          description:
+            "Start with a short introduction. A few lines are enough.",
+        },
+        {
+          label: "TIMES",
+          name: "times-all",
+          description:
+            "A place for personal times threads. Post casually, like you would on X.",
+        },
+        {
+          label: "PROGRESS",
+          name: "Learning reports",
+          description:
+            "Share what you learned. Beginner-level updates are welcome.",
+        },
+        {
+          label: "LOUNGE",
+          name: "Lounge",
+          description:
+            "Share daily learning and development notes and talk with other members.",
+        },
+        {
+          label: "RESEARCH",
+          name: "Tomada's lab",
+          description:
+            "See the latest experiments before YouTube, including the failed attempts.",
+        },
+        {
+          label: "PRIVATE",
+          name: "Questions",
+          description: "A private channel for questions to Tomada.",
+        },
+      ],
+    },
+    audience: {
+      label: "AUDIENCE",
+      heading: "Who this is for",
+      items: [
+        "You are just starting to learn AI-driven development",
+        "You want to get more from Claude Code, Cursor, or Codex",
+        "You have reached the limits of learning alone",
+        "You want peers working toward the same goal",
+        "You want to ask Tomada questions directly",
+        "You want to keep up with new AI tools early",
+        "You want a place where reading alone is useful",
+        "You want to participate at your own pace",
+      ],
+    },
+    faq: {
+      label: "FAQ",
+      heading: "Frequently asked questions",
+      lead: "Answers to common questions about the community.",
+      items: [
+        {
+          question: "Is the Discord community free to join?",
+          answer:
+            "Yes. It is completely free; anyone with a Discord account can join.",
+        },
+        {
+          question: "Can beginners join?",
+          answer:
+            "Absolutely. Developers at every level take part, including people who have never programmed before. It is a friendly place to ask questions.",
+        },
+        {
+          question: "What can I learn there?",
+          answer:
+            "Members share the latest AI-driven development techniques, ways to use Claude Code, Codex, and Cursor, prompt engineering, and practical development methods. Tomada's latest experiments are shared too, including the process of trial and error.",
+        },
+        {
+          question: "Are there community rules?",
+          answer:
+            "Mutual respect and a friendly atmosphere matter here. The detailed rules are available after joining Discord.",
+        },
+        {
+          question: "How quickly do questions get answered?",
+          answer:
+            "Tomada often answers as soon as he sees a post, usually within a few hours to half a day. Other members may answer sooner.",
+        },
+      ],
+    },
+    join: {
+      label: "JOIN",
+      heading: "Join the community",
+      lead: [
+        "People learning AI-driven development are waiting to meet you.",
+        "Grow together in the Vibe Coding Studio Discord community.",
+      ],
+      cta: "Join Discord",
+    },
   },
 }
 

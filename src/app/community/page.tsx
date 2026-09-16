@@ -4,17 +4,14 @@ import { getSiteUrl } from "@/lib/seo/site-url"
 import type { Metadata } from "next"
 
 const siteUrl = getSiteUrl()
-const communityTitle = "コミュニティ"
-const communityOgTitle = "コミュニティ - Vibe Coding Studio"
-const communityDescription =
-  "AI駆動開発を学ぶ仲間と繋がり、最新検証を見ながら一緒に成長するDiscordコミュニティに参加しよう"
+const dict = getDictionary("ja")
 
 export const metadata: Metadata = {
-  title: communityTitle,
-  description: communityDescription,
+  title: dict.community.metaTitle,
+  description: dict.community.metaDescription,
   openGraph: {
-    title: communityOgTitle,
-    description: communityDescription,
+    title: dict.community.ogTitle,
+    description: dict.community.metaDescription,
     type: "website",
     url: `${siteUrl}/community`,
     images: [
@@ -22,14 +19,14 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: communityOgTitle,
+        alt: dict.community.ogTitle,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: communityOgTitle,
-    description: communityDescription,
+    title: dict.community.ogTitle,
+    description: dict.community.metaDescription,
     images: ["/og-image.png"],
   },
   alternates: {
@@ -40,5 +37,5 @@ export const metadata: Metadata = {
 export const revalidate = 3600
 
 export default function CommunityRoute() {
-  return <CommunityPage locale="ja" dict={getDictionary("ja")} />
+  return <CommunityPage locale="ja" dict={dict} />
 }

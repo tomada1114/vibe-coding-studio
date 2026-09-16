@@ -4,15 +4,16 @@ import { getSiteUrl } from "@/lib/seo/site-url"
 import type { Metadata } from "next"
 
 const siteUrl = getSiteUrl()
+const dict = getDictionary("ja")
 
 export const metadata: Metadata = {
-  title: "講座一覧",
-  description: "著者が公開しているUdemy講座の一覧です。",
+  title: dict.courses.metaTitle,
+  description: dict.courses.metaDescription,
   alternates: {
     canonical: `${siteUrl}/courses`,
   },
 }
 
 export default function CoursesRoute() {
-  return <CoursesPage locale="ja" dict={getDictionary("ja")} />
+  return <CoursesPage locale="ja" dict={dict} />
 }

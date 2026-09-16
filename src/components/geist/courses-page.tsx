@@ -14,15 +14,15 @@ export function CoursesPage({
 
   return (
     <div className="gg-surface" data-locale={locale}>
-      <main id="main-content" aria-label={dict.nav.items.courses}>
+      <main id="main-content" aria-label={dict.courses.title}>
         <div className="gg-rule-accent" aria-hidden="true" />
         <header className="mx-auto max-w-[1120px] px-4 pt-16 pb-10 sm:px-6 sm:pt-24 sm:pb-14 lg:px-8">
-          <p className="gg-label">Courses</p>
+          <p className="gg-label">{dict.courses.label}</p>
           <h1 className="text-text-primary mt-4 text-[40px] leading-[1.15] font-semibold tracking-[-0.02em] sm:text-[56px] sm:leading-[1.1]">
-            講座一覧
+            {dict.courses.title}
           </h1>
           <p className="gg-prose-ja text-text-secondary mt-5 max-w-[720px] text-[16px] sm:text-[18px]">
-            著者が公開しているUdemy講座を、公開順に紹介しています。
+            {dict.courses.lead}
           </p>
         </header>
 
