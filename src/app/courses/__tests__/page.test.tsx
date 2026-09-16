@@ -26,10 +26,25 @@ describe("/courses", () => {
     })
   })
 
-  it("グラデーション罫線は 1 ページ 2 本以内", () => {
-    const { container } = render(<CoursesPage />)
-    expect(
-      container.querySelectorAll(".gg-rule-accent").length
-    ).toBeLessThanOrEqual(2)
+  describe("Geist Grid の規則", () => {
+    it("生の hex カラーや gray-* のクラスを使っていない", () => {
+      const { container } = render(<CoursesPage />)
+      const classNames = Array.from(container.querySelectorAll("*"))
+        .map(el => el.getAttribute("class") ?? "")
+        .join(" ")
+
+      expect(classNames).not.toMatch(/\b(?:bg|text|border)-gray-\d/)
+      // 色の dark: 上書きは禁止。トークンで表現できない構造的な出し分けだけが
+      // SKILL.md の定める例外として許される。
+      expect(classNames).not.toMatch(/dark:(?:bg|text|border)-/)
+      expect(classNames).not.toMatch(/\[#[0-9a-fA-F]{3,8}\]/)
+    })
+
+    it("グラデーション罫線は 1 ページ 1〜2 本（このページで 1 本使う）", () => {
+      const { container } = render(<CoursesPage />)
+      const count = container.querySelectorAll(".gg-rule-accent").length
+      expect(count).toBeGreaterThan(0)
+      expect(count).toBeLessThanOrEqual(2)
+    })
   })
 })
