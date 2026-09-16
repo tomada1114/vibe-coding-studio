@@ -140,6 +140,14 @@ describe("Header", () => {
       expect(localStorage.getItem(THEME_STORAGE_KEY)).toBe("dark")
     })
 
+    it("<head> の同期スクリプトが light を確定させていれば aria-pressed が false で描画される", () => {
+      // <head> の THEME_INIT_SCRIPT がハイドレーション前に data-theme を確定させる状況を再現する。
+      document.documentElement.setAttribute("data-theme", "light")
+      render(<Header />)
+
+      expect(screen.getByRole("button", { pressed: false })).toBeInTheDocument()
+    })
+
     it("アイコンは state ではなく dark: バリアントで出し分けている（初回ペイントのチラつき防止）", () => {
       render(<Header />)
       const button = screen.getByRole("button", { pressed: true })
