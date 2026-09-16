@@ -21,7 +21,6 @@ const NAV: { key: NavKey; href: string }[] = [
   { key: "videos", href: "/videos" },
   { key: "community", href: "/community" },
   { key: "coupons", href: "/coupons" },
-  { key: "roadmap", href: "/roadmap" },
 ]
 
 function isPathActive(pathname: string | null, href: string, locale: Locale) {

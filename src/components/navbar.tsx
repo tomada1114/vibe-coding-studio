@@ -20,7 +20,6 @@ const navLinks = [
   { href: "/videos", label: "動画" },
   { href: "/community", label: "コミュニティ" },
   { href: "/coupons", label: "クーポン" },
-  { href: "/roadmap", label: "ロードマップ" },
   { href: "/founder", label: "運営者" },
 ]
 

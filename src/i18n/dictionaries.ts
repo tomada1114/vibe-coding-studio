@@ -13,13 +13,7 @@
 
 import type { Locale } from "./locale"
 
-export type NavKey =
-  | "home"
-  | "docs"
-  | "videos"
-  | "community"
-  | "coupons"
-  | "roadmap"
+export type NavKey = "home" | "docs" | "videos" | "community" | "coupons"
 
 type CareerEntry = {
   /** Mono ラベルに出す年。"NOW" は現在進行中を示す */
@@ -133,7 +127,6 @@ const ja: Dictionary = {
       videos: "動画",
       community: "コミュニティ",
       coupons: "クーポン",
-      roadmap: "ロードマップ",
     },
   },
   header: {
@@ -290,7 +283,6 @@ const en: Dictionary = {
       videos: "Videos",
       community: "Community",
       coupons: "Coupons",
-      roadmap: "Roadmap",
     },
   },
   header: {

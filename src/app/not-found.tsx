@@ -55,14 +55,6 @@ export default function NotFound() {
                     動画一覧
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    href="/roadmap"
-                    className="text-gray-700 hover:text-gray-950"
-                  >
-                    ロードマップ
-                  </Link>
-                </li>
               </ul>
             </nav>
           </div>
