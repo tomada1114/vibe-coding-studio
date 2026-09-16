@@ -288,8 +288,18 @@ export function ProfilePage({
               {dict.teaching.items.map((item, index) => {
                 const href = teachingHrefs[index]
                 const external = href.startsWith("http")
+                const isLast = index === dict.teaching.items.length - 1
                 return (
-                  <div key={item.label} className="gg-cell gg-cell-hover">
+                  <div
+                    key={item.label}
+                    className={clsx(
+                      "gg-cell gg-cell-hover",
+                      // 3件を sm:2列で並べると最終行が1個だけ余り、
+                      // gg-cell-grid の親背景（罫線色）がそのまま空セルとして
+                      // 露出してしまう。最後のセルを2列分に広げて埋める。
+                      isLast && "sm:col-span-2 lg:col-span-1"
+                    )}
+                  >
                     <p className="gg-label">{item.label}</p>
                     <h3 className="text-text-primary mt-3 text-[16px] font-medium">
                       {item.title}
@@ -404,10 +414,16 @@ export function ProfilePage({
           {/* ── LINKS ─────────────────────────────────────── */}
           <Section label={dict.links.label} heading={dict.links.heading}>
             <div className="gg-cell-grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7">
-              {PROFILE_LINKS.map(({ name, url, Icon }) => {
+              {PROFILE_LINKS.map(({ name, url, Icon }, index) => {
                 const external = url.startsWith("http")
-                const className =
-                  "gg-cell gg-cell-hover text-text-secondary hover:text-text-primary flex items-center gap-2 transition-colors"
+                const isLast = index === PROFILE_LINKS.length - 1
+                const className = clsx(
+                  "gg-cell gg-cell-hover text-text-secondary hover:text-text-primary flex items-center gap-2 transition-colors",
+                  // 7件を2列/4列で並べると最終行が余り、gg-cell-grid の
+                  // 親背景（罫線色）がそのまま空セルとして露出する。
+                  // 最後のセルを残り列数ぶん広げて埋める。
+                  isLast && "col-span-2 lg:col-span-1"
+                )
                 const content = (
                   <>
                     <Icon className="size-4 shrink-0" />
