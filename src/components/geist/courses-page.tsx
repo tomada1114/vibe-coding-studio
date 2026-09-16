@@ -32,10 +32,12 @@ export function CoursesPage({
         <div className="gg-rule-accent" aria-hidden="true" />
 
         <div className="gg-container pb-24 sm:pb-32">
-          <CourseList
-            courses={courses}
-            topicsLabel={dict.courses.topicsLabel}
-          />
+          <div className="mt-12 sm:mt-16">
+            <CourseList
+              courses={courses}
+              topicsLabel={dict.courses.topicsLabel}
+            />
+          </div>
         </div>
       </main>
     </div>
