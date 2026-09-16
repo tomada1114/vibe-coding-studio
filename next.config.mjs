@@ -112,12 +112,6 @@ const nextConfig = {
     // Fail build on TypeScript errors in production
     ignoreBuildErrors: false,
   },
-
-  // ESLint configuration
-  eslint: {
-    // Fail build on ESLint errors in production
-    ignoreDuringBuilds: false,
-  },
 }
 
 // Bundle analyzer configuration (only in development)

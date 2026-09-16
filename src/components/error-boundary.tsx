@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import type { ErrorInfo, ReactNode } from "react"
 import { Component } from "react"
 
@@ -110,13 +111,9 @@ export class ErrorBoundary extends Component<Props, State> {
               >
                 Try Again
               </button>
-              <button
-                type="button"
-                onClick={() => (window.location.href = "/")}
-                className="gg-btn gg-btn-outline"
-              >
+              <Link href="/" className="gg-btn gg-btn-outline">
                 Go to Homepage
-              </button>
+              </Link>
             </div>
 
             {this.state.errorCount > 2 && (

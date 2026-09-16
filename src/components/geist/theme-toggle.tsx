@@ -87,6 +87,8 @@ export function ThemeToggle({
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    // SSR 後にブラウザの永続テーマへ同期し、未確定の aria 状態を解除する。
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTheme(readTheme())
     setMounted(true)
   }, [])
