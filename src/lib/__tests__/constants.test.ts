@@ -88,7 +88,7 @@ describe("constants.ts", () => {
     it("SOCIAL_LINKSがUdemyリンクを含む", () => {
       const udemyLink = SOCIAL_LINKS.find(link => link.name === "Udemy")
       expect(udemyLink).toBeDefined()
-      expect(udemyLink?.url).toBe("/coupons")
+      expect(udemyLink?.url).toBe("/courses")
     })
   })
 

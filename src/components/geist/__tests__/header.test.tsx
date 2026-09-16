@@ -35,6 +35,13 @@ describe("Header", () => {
       ).toBeInTheDocument()
     })
 
+    it("講座リンクが /courses を指す", () => {
+      render(<Header />)
+      expect(
+        screen.getByRole("link", { name: ja.nav.items.courses })
+      ).toHaveAttribute("href", "/courses")
+    })
+
     it("現在地のリンクに aria-current が付く", () => {
       mockPathname = "/docs/ruby"
       render(<Header />)

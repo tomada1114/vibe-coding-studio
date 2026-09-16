@@ -25,7 +25,7 @@ describe("Footer", () => {
   it("サイトリンクが日本語で表示される", () => {
     render(<Footer />)
     expect(
-      screen.getByRole("link", { name: ja.nav.items.coupons })
+      screen.getByRole("link", { name: ja.nav.items.courses })
     ).toBeInTheDocument()
   })
 
@@ -33,8 +33,15 @@ describe("Footer", () => {
     mockPathname = "/en"
     render(<Footer />)
     expect(
-      screen.getByRole("link", { name: en.nav.items.coupons })
+      screen.getByRole("link", { name: en.nav.items.courses })
     ).toBeInTheDocument()
+  })
+
+  it("講座リンクが /courses を指す", () => {
+    render(<Footer />)
+    expect(
+      screen.getByRole("link", { name: ja.nav.items.courses })
+    ).toHaveAttribute("href", "/courses")
   })
 
   it("廃止済みの旧リンクを表示しない", () => {

@@ -61,7 +61,11 @@ describe("NotFound Page", () => {
 
     expect(screen.getByText("学習コース")).toBeInTheDocument()
     expect(screen.getByText("コミュニティ")).toBeInTheDocument()
-    expect(screen.getByText("クーポン")).toBeInTheDocument()
+    expect(screen.getByText("講座")).toBeInTheDocument()
+    expect(screen.getByRole("link", { name: "講座" })).toHaveAttribute(
+      "href",
+      "/courses"
+    )
     expect(
       screen
         .getAllByRole("link")

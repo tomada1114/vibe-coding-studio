@@ -13,11 +13,11 @@
  */
 
 import { book } from "@/data/book"
+import { getAllUdemyCourses } from "@/data/udemy-courses"
 import type { Dictionary } from "@/i18n/dictionaries"
 import type { Locale } from "@/i18n/locale"
 import { localizePath } from "@/i18n/locale"
 import { DISCORD_INVITE_URL } from "@/lib/constants"
-import { getLatestCoupons } from "@/lib/coupons/coupon-data"
 import { clsx } from "clsx"
 import Image from "next/image"
 import Link from "next/link"
@@ -45,7 +45,7 @@ const PROFILE_LINKS = [
   },
   { name: "Qiita", url: "https://qiita.com/tomada", Icon: QiitaIcon },
   { name: "note", url: "https://note.com/tomada", Icon: NoteIcon },
-  { name: "Udemy", url: "/coupons", Icon: UdemyIcon },
+  { name: "Udemy", url: "/courses", Icon: UdemyIcon },
 ] as const
 
 /** 外部リンクの末尾に置く矢印 */
@@ -100,7 +100,7 @@ export function ProfilePage({
   locale: Locale
   dict: Dictionary
 }) {
-  const courseCount = getLatestCoupons().length
+  const courseCount = getAllUdemyCourses().length
 
   const bookFacts = [
     { label: dict.book.releaseLabel, value: book.releaseDateLabel },
@@ -111,7 +111,7 @@ export function ProfilePage({
   ]
 
   const teachingHrefs = [
-    localizePath("/coupons", locale),
+    localizePath("/courses", locale),
     YOUTUBE_URL,
     localizePath("/community", locale),
   ]
@@ -153,7 +153,7 @@ export function ProfilePage({
                     {dict.hero.primaryCta}
                   </a>
                   <Link
-                    href={localizePath("/coupons", locale)}
+                    href={localizePath("/courses", locale)}
                     className="gg-btn gg-btn-outline"
                   >
                     {dict.hero.secondaryCta}
