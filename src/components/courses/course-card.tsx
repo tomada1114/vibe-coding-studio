@@ -27,20 +27,20 @@ export function CourseCard({
           width={640}
           height={360}
           sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 560px"
-          className="border-border aspect-video w-full rounded-[6px] border object-cover"
+          className="aspect-video w-full rounded-[6px] border border-border object-cover"
         />
 
         <div className="mt-5 flex items-center justify-between gap-3">
           <p className="gg-label">Course</p>
-          <span aria-hidden="true" className="text-text-secondary text-sm">
+          <span aria-hidden="true" className="text-sm text-text-secondary">
             ↗
           </span>
         </div>
 
-        <h2 className="text-text-primary mt-3 text-[20px] leading-[1.45] font-medium">
+        <h2 className="mt-3 text-[20px] leading-[1.45] font-medium text-text-primary">
           {course.title}
         </h2>
-        <p className="gg-prose-ja text-text-secondary mt-3 text-[14px]">
+        <p className="mt-3 text-[14px] gg-prose-ja text-text-secondary">
           {course.description}
         </p>
 

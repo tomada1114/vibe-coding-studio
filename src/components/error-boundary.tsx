@@ -71,13 +71,13 @@ export class ErrorBoundary extends Component<Props, State> {
       }
 
       return (
-        <div className="gg-surface flex min-h-[400px] items-center justify-center px-4 py-12">
-          <div className="gg-cell border-border w-full max-w-[560px] border text-center sm:p-10">
+        <div className="flex min-h-[400px] items-center justify-center gg-surface px-4 py-12">
+          <div className="gg-cell w-full max-w-[560px] border border-border text-center sm:p-10">
             <p className="gg-label">ERROR</p>
-            <h2 className="text-text-primary mt-3 text-[24px] leading-[1.3] font-medium tracking-[-0.015em] sm:text-[28px]">
+            <h2 className="mt-3 text-[24px] leading-[1.3] font-medium tracking-[-0.015em] text-text-primary sm:text-[28px]">
               Oops! Something went wrong
             </h2>
-            <p className="gg-prose-ja text-text-secondary mt-4 text-[14px]">
+            <p className="mt-4 text-[14px] gg-prose-ja text-text-secondary">
               We encountered an unexpected error. Please try refreshing the page
               or contact support if the problem persists.
             </p>
@@ -85,16 +85,16 @@ export class ErrorBoundary extends Component<Props, State> {
             {this.props.showDetails &&
               process.env.NODE_ENV === "development" &&
               this.state.error && (
-                <details className="border-border mt-6 border text-left">
-                  <summary className="text-text-secondary cursor-pointer px-3 py-2 text-sm font-medium">
+                <details className="mt-6 border border-border text-left">
+                  <summary className="cursor-pointer px-3 py-2 text-sm font-medium text-text-secondary">
                     Error Details (Development Only)
                   </summary>
-                  <div className="bg-surface-1 border-border overflow-auto border-t p-3 font-mono text-xs">
+                  <div className="overflow-auto border-t border-border bg-surface-1 p-3 font-mono text-xs">
                     <div className="text-text-primary">
                       {this.state.error.toString()}
                     </div>
                     {this.state.error.stack && (
-                      <pre className="gg-prose-ja text-text-secondary mt-2 whitespace-pre-wrap">
+                      <pre className="mt-2 gg-prose-ja whitespace-pre-wrap text-text-secondary">
                         {this.state.error.stack}
                       </pre>
                     )}
@@ -120,7 +120,7 @@ export class ErrorBoundary extends Component<Props, State> {
             </div>
 
             {this.state.errorCount > 2 && (
-              <p className="text-text-secondary mt-4 text-sm">
+              <p className="mt-4 text-sm text-text-secondary">
                 If this error persists, please try clearing your browser cache
                 or contact support.
               </p>
