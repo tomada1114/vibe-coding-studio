@@ -10,7 +10,7 @@ The template has been customized to serve as a clean, static site foundation wit
 - 🎨 **Tailwind CSS v4** with PostCSS
 - 🧩 **Headless UI** components
 - 🎬 **Framer Motion** animations
-- 🔒 **Content Security Policy (CSP)** with nonce-based inline scripts
+- 🔒 **Content Security Policy (CSP)** via static response headers (keeps pages statically generated)
 - ⚡ **Incremental Static Regeneration (ISR)** for optimal performance
 - 🧪 **Jest** for unit testing
 - 📝 **TypeScript** with strict mode enabled
@@ -36,9 +36,6 @@ Edit `.env.local` to configure optional settings:
 ```env
 # Optional: Canonical site URL used in metadata
 NEXT_PUBLIC_SITE_URL=https://yourdomain.com
-
-# Optional: Report URI for CSP violations
-NEXT_PUBLIC_CSP_REPORT_URI=/api/csp-report
 
 # Optional: Discord Bot Token for fetching server member count
 DISCORD_BOT_TOKEN=your_bot_token_here
@@ -183,7 +180,7 @@ The template is optimized for performance:
 
 Security features included:
 
-- Content Security Policy (CSP) with nonce-based inline scripts
+- Content Security Policy (CSP) set as a static header in `next.config.mjs` (no nonces; inline scripts are allowed so pages stay static — it blocks third-party script origins, plugins, base-tag and form hijacking, and framing)
 - Strict-Transport-Security (HSTS) with preload
 - X-Frame-Options, X-Content-Type-Options headers
 - Permissions-Policy restrictions

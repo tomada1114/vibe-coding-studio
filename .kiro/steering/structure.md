@@ -46,11 +46,8 @@ src/app/
 ├── page.tsx                # ホームページ（/）
 ├── pricing/
 │   └── page.tsx           # 料金ページ（/pricing）
-├── company/
-│   └── page.tsx           # 会社情報ページ（/company）
-└── api/
-    └── csp-report/
-        └── route.ts       # CSP違反レポートAPI
+└── company/
+    └── page.tsx           # 会社情報ページ（/company）
 ```
 
 **命名規則**:
@@ -87,7 +84,6 @@ src/components/
 ├── checkbox.tsx            # チェックボックス
 ├── combobox.tsx            # コンボボックス（検索可能セレクト）
 ├── container.tsx           # コンテナレイアウト
-├── csp-nonce-provider.tsx  # CSP nonceプロバイダー
 ├── description-list.tsx    # 説明リスト
 ├── dialog.tsx              # モーダルダイアログ
 ├── divider.tsx             # 区切り線
@@ -165,10 +161,7 @@ src/components/
 8. **アニメーション**:
    - animated-number.tsx
 
-9. **セキュリティ**:
-   - csp-nonce-provider.tsx
-
-10. **ユーティリティ**:
+9. **ユーティリティ**:
     - dynamic-imports.tsx, keyboard.tsx, map.tsx
 
 ### `/src/hooks/` - カスタムフック
@@ -202,26 +195,21 @@ src/lib/
 ├── __tests__/
 │   └── env-validation.test.ts  # 環境変数バリデーションテスト
 ├── cache.ts                    # キャッシュユーティリティ
-├── csp.ts                      # CSP設定
 ├── env-validation.ts           # 環境変数検証
 └── retry.ts                    # リトライロジック
 ```
 
 **ライブラリ分類**:
 
-1. **セキュリティ**:
-   - `csp.ts` - Content Security Policy設定
-   - エッジランタイム対応のnonce生成
-
-2. **環境管理**:
+1. **環境管理**:
    - `env-validation.ts` - 環境変数のランタイム検証
    - 開発者フレンドリーなエラーメッセージ
 
-3. **パフォーマンス**:
+2. **パフォーマンス**:
    - `cache.ts` - キャッシュ戦略ユーティリティ
    - Cache-Controlヘッダー生成
 
-4. **エラーハンドリング**:
+3. **エラーハンドリング**:
    - `retry.ts` - 指数バックオフリトライ
 
 **ユーティリティ命名規則**:
@@ -250,8 +238,6 @@ src/styles/
 ```
 src/__tests__/
 ├── cache.test.ts           # キャッシュユーティリティテスト
-├── csp.test.ts             # CSP設定テスト
-├── csp-report.test.ts      # CSPレポートAPIテスト
 ├── error-handling.test.tsx  # エラーハンドリングテスト
 ├── optimization.test.ts    # 最適化テスト
 └── retry.test.ts           # リトライロジックテスト
@@ -516,7 +502,7 @@ app (pages) → components → hooks → lib (utilities)
 ### 8. セキュリティ
 - **入力検証**: すべての外部入力を検証
 - **XSS対策**: Reactの自動エスケープ活用
-- **CSP**: nonceベースのスクリプト実行
+- **CSP**: CSP は `next.config.mjs` の `headers()` で静的に付与（nonce なし。静的生成・ISR を保つため。Issue #85）
 
 ### 9. エラーハンドリング
 - **早期リターン**: ガード節の活用

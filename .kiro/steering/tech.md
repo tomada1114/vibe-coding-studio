@@ -13,7 +13,7 @@
   - Incremental Static Regeneration (ISR)
   - Server Components（Next.js 15 App Router）
 - **デプロイメント**: エッジ最適化対応（Vercel、Netlify等）
-- **セキュリティレイヤー**: ミドルウェアベースのセキュリティヘッダー
+- **セキュリティレイヤー**: `next.config.mjs` の `headers()` による静的なセキュリティヘッダー
 
 ### Core Philosophy
 - **型安全性**: TypeScript厳格モード
@@ -67,7 +67,6 @@
 ### Server Runtime
 - **Next.js Server Components**: React Server Components
 - **API Routes**: `/api` ディレクトリ（Route Handlers）
-- **Middleware**: セキュリティヘッダー、CSP、キャッシュ制御
 - **Edge Runtime**: Web Crypto API対応
 
 ### Environment Configuration
@@ -75,8 +74,6 @@
 # Optional: サイトURL（メタデータ用）
 NEXT_PUBLIC_SITE_URL=https://yourdomain.com
 
-# Optional: CSP違反レポートURI
-NEXT_PUBLIC_CSP_REPORT_URI=/api/csp-report
 ```
 
 **環境変数検証**:
@@ -183,16 +180,6 @@ NEXT_PUBLIC_SITE_URL=https://yourdomain.com
 - OGP画像URL
 - canonical リンク
 
-### Internal Configuration
-```bash
-# CSP違反レポートエンドポイント
-NEXT_PUBLIC_CSP_REPORT_URI=/api/csp-report
-```
-
-**使用箇所**:
-- `src/lib/csp.ts` - CSP設定
-- `src/middleware.ts` - セキュリティヘッダー
-
 ### Build-time Variables
 ```bash
 # バンドル分析有効化
@@ -222,41 +209,38 @@ localhost:3000          # Next.js 本番サーバー（デフォルト）
 ## Security Configuration
 
 ### Content Security Policy (CSP)
-**実装箇所**: `src/lib/csp.ts`, `src/middleware.ts`
+**実装箇所**: `next.config.mjs` の `headers()`（全ルート `/:path*`）。middleware は使わない。
+テスト: `src/app/__tests__/security-headers.test.ts`
 
-**特徴**:
-- 開発環境: Report-Onlyモード
-- 本番環境: エンフォースモード（オプション）
-- Nonceベースのインラインスクリプト実行
-- Web Crypto API（エッジランタイム対応）
+**方針**（Issue #85）:
+- nonce は使わない。nonce は全ページを動的レンダリングにし、静的生成・ISR を失うため
+- Next.js の RSC ペイロード（`self.__next_f.push`）はビルドごとに中身が変わりハッシュを固定できないため、`script-src` / `style-src` は `'unsafe-inline'` を許可する
+- 違反レポート（`report-uri` / `report-to`）は持たない
+- 第三者スクリプトやユーザー入力を表示する機能を入れるときは nonce 方式を再検討する
 
-**CSP Directives**:
-```typescript
+**CSP Directives**（本番。開発時のみ `script-src` に `'unsafe-eval'` を追加）:
+```
 default-src 'self'
-script-src 'self' 'nonce-{nonce}'
-style-src 'self' 'unsafe-inline'
-img-src 'self' data: https:
-font-src 'self'
+script-src 'self' 'unsafe-inline'
+style-src 'self' 'unsafe-inline' https://fonts.googleapis.com
+font-src 'self' https://fonts.gstatic.com
+img-src 'self' data: blob:
 connect-src 'self'
-frame-ancestors 'self'
+object-src 'none'
 base-uri 'self'
 form-action 'self'
+frame-ancestors 'self'
 ```
 
 ### Security Headers
-**実装箇所**: `src/middleware.ts`
+**実装箇所**: `next.config.mjs` の `headers()`
 
-```typescript
-Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+```
 X-Frame-Options: SAMEORIGIN
 X-Content-Type-Options: nosniff
-Referrer-Policy: strict-origin-when-cross-origin
-Permissions-Policy: camera=(), microphone=(), geolocation=()
+Referrer-Policy: origin-when-cross-origin
+Content-Security-Policy: （上記）
 ```
-
-### CSP Violation Reporting
-**エンドポイント**: `/api/csp-report`
-**実装**: `src/app/api/csp-report/route.ts`
 
 ## Performance Optimization
 

@@ -25,9 +25,8 @@ Vibe Coding Studio は、Next.js 15 と Tailwind CSS v4 を使用したモダン
 - **カスタムコンポーネントライブラリ**: 50以上の再利用可能なコンポーネント
 
 ### セキュリティ
-- **Content Security Policy (CSP)**: nonceベースのインラインスクリプト実行
+- **Content Security Policy (CSP)**: CSP は `next.config.mjs` の `headers()` で静的に付与（nonce なし。静的生成・ISR を保つため。Issue #85）
 - **セキュリティヘッダー**: HSTS、X-Frame-Options、Permissions-Policy
-- **CSP違反レポート**: `/api/csp-report` エンドポイント
 - **エッジランタイム対応**: Web Crypto APIを使用した安全な実装
 
 ### パフォーマンス
@@ -91,7 +90,7 @@ Vibe Coding Studio は、Next.js 15 と Tailwind CSS v4 を使用したモダン
 ## Technical Differentiators
 
 ### セキュリティファースト
-- 開発環境からCSPを実装（Report-Onlyモード）
+- 静的生成を保ったまま全ルートに CSP を付与
 - すべてのリソースタイプへの包括的なディレクティブ
 - エッジランタイム対応のセキュアな実装
 
