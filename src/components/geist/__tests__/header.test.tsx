@@ -60,6 +60,14 @@ describe("Header", () => {
       ).toBeInTheDocument()
     })
 
+    it("/en/courses では英語の講座リンクが現在地になる", () => {
+      mockPathname = "/en/courses"
+      render(<Header />)
+      const link = screen.getByRole("link", { name: en.nav.items.courses })
+      expect(link).toHaveAttribute("href", "/en/courses")
+      expect(link).toHaveAttribute("aria-current", "page")
+    })
+
     it("廃止済みの旧リンクを表示しない", () => {
       render(<Header />)
       expect(

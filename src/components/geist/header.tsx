@@ -21,12 +21,19 @@ const NAV: { key: NavKey; href: string }[] = [
   { key: "courses", href: "/courses" },
 ]
 
+function normalizePathname(pathname: string, locale: Locale) {
+  if (locale !== "en") return pathname
+  if (pathname === "/en") return "/"
+  return pathname.startsWith("/en/") ? pathname.slice(3) : pathname
+}
+
 function isPathActive(pathname: string | null, href: string, locale: Locale) {
   if (!pathname) return false
-  if (href === "/") return pathname === "/" || pathname === "/en"
-  // 英語トップ以外は日本語 URL を共有するため、ロケールに関わらず前方一致で判定する
-  void locale
-  return pathname === href || pathname.startsWith(`${href}/`)
+  const normalizedPathname = normalizePathname(pathname, locale)
+  if (href === "/") return normalizedPathname === "/"
+  return (
+    normalizedPathname === href || normalizedPathname.startsWith(`${href}/`)
+  )
 }
 
 function LanguageToggle({
