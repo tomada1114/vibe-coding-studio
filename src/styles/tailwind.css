@@ -257,7 +257,11 @@
     content: "";
     position: absolute;
     inset-inline: 0;
-    top: -20%;
+    /* 中心（radial-gradient の at 50% 0%）をコンテナの上端に置く。
+       負のオフセットで上にはみ出させると、隣接するコンテナの
+       overflow-hidden がグラデーションの最も明るい中心部を
+       切り取ってしまい、可視部分がほぼ透明なテールだけになる。 */
+    top: 0%;
     block-size: 60%;
     pointer-events: none;
     background: radial-gradient(
