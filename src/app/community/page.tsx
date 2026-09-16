@@ -1,4 +1,5 @@
 import CommunityPage from "@/components/geist/community-page"
+import { getDictionary } from "@/i18n/dictionaries"
 import { getSiteUrl } from "@/lib/seo/site-url"
 import type { Metadata } from "next"
 
@@ -39,5 +40,5 @@ export const metadata: Metadata = {
 export const revalidate = 3600
 
 export default function CommunityRoute() {
-  return <CommunityPage />
+  return <CommunityPage locale="ja" dict={getDictionary("ja")} />
 }

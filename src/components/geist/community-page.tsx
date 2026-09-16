@@ -1,5 +1,7 @@
 import { DiscordMemberCount } from "@/components/discord-member-count"
 import { AsyncErrorBoundary } from "@/components/error-boundary"
+import type { Dictionary } from "@/i18n/dictionaries"
+import type { Locale } from "@/i18n/locale"
 import { DISCORD_INVITE_URL } from "@/lib/constants"
 import { getSiteUrl } from "@/lib/seo/site-url"
 import Image from "next/image"
@@ -227,11 +229,17 @@ function CommunityHero() {
   )
 }
 
-export default function CommunityPage() {
+export default function CommunityPage({
+  locale,
+  dict,
+}: {
+  locale: Locale
+  dict: Dictionary
+}) {
   return (
-    <div className="gg-surface">
+    <div className="gg-surface" data-locale={locale}>
       <CommunityStructuredData />
-      <main id="main-content">
+      <main id="main-content" aria-label={dict.nav.items.community}>
         <CommunityHero />
         <div aria-hidden="true" className="gg-rule-accent" />
 
