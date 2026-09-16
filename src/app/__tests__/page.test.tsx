@@ -154,7 +154,9 @@ describe("トップページ（/）", () => {
         .join(" ")
 
       expect(classNames).not.toMatch(/\b(?:bg|text|border)-gray-\d/)
-      expect(classNames).not.toContain(["dark", ":"].join(""))
+      // 色の dark: 上書きは禁止。トークンで表現できない構造的な出し分け（アイコンの
+      // 表示切替など）だけが SKILL.md の定める例外として許される。
+      expect(classNames).not.toMatch(/dark:(?:bg|text|border)-/)
       expect(classNames).not.toMatch(/\[#[0-9a-fA-F]{3,8}\]/)
     })
 
@@ -178,6 +180,20 @@ describe("トップページ（/）", () => {
       expect(
         container.querySelectorAll(".gg-rule-accent").length
       ).toBeLessThanOrEqual(2)
+    })
+
+    it("外部リンクの ↗ が AA を満たす text-secondary を使っている", () => {
+      const { container } = render(<Home />)
+      const arrows = Array.from(
+        container.querySelectorAll('[aria-hidden="true"]')
+      ).filter(el => el.textContent === "↗")
+
+      expect(arrows.length).toBeGreaterThan(0)
+      arrows.forEach(arrow => {
+        // text-muted は light テーマで 4.12:1 しか出ず AA (4.5:1) を満たさない。
+        expect(arrow).toHaveClass("text-text-secondary")
+        expect(arrow).not.toHaveClass("text-text-muted")
+      })
     })
   })
 })

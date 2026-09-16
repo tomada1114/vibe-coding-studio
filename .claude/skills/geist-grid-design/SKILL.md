@@ -65,7 +65,7 @@ Geist スケールの意味論（崩さない）: 100–300 = コンポーネン
 **コントラスト由来の強制ルール（守らないと AA 落ち）**
 
 - 塗りボタンのラベルは **16px / weight 500 以上に固定**（白 on `--accent-solid` は 4.47:1 = 大文字のみ AA）。
-- ライトの `--text-muted` は **13px 以下の本文に使用禁止**。日付等のメタは `--text-secondary` に格上げするか、18.66px 以上でのみ使う。
+- ライトの `--text-muted` は **13px 以下の本文に使用禁止**。日付等のメタは `--text-secondary` に格上げするか、18.66px 以上でのみ使う。`aria-hidden` な装飾テキスト（外部リンク末尾の `↗` など）は WCAG のコントラスト要件そのものの対象外だが、判読性を統一するハウスルールとして同じ格上げを適用する。
 - ライトのリンクは `blue-700` ではなく **`blue-800 #005edc`**（`blue-700` は `#fafafa` 上で 4.32:1 不合格）。
 - 罫線色は 3:1 を満たさない。**情報の識別に罫線だけを使わない**。フォーカス・選択・エラーは `--focus` / `--border-strong` / テキストラベルを必ず併用する（WCAG 1.4.11）。
 - **Mono ラベル（11px）には `--text-muted` ではなく `--text-label` を使う。** ライトの `--text-muted`（`#7d7d7d`）は 4.12:1 しかなく、11px のラベルは AA を満たさない。`--text-label` はダークでは `--text-muted` と同値、ライトだけ `#4d4d4d` に格上げする専用トークンで、コンポーネントに `dark:` を書かずにテーマ差を吸収する。実装は `src/styles/tailwind.css` の `gg-label`。
@@ -166,9 +166,9 @@ spacing base 4px（4/8/12/16/24/32/48/64/96）。element gap 12px、cell padding
 | Secondary | 地 `--text-primary` / 文字 `--bg` / pill / 高さ 40px | Primary が無いページの主要導線 |
 | Outline | 透明地 / 枠 1px `--border` / radius 6px / 高さ 36px、hover で枠 `--border-hover` + 地 `--surface-1` | 副次導線、「もっと見る」|
 | Ghost | 透明地・枠なし / 文字 `--text-secondary`、hover で `--text-primary` + 地 `--surface-1` | ヘッダーナビ、セル内補助 |
-| Link-button | 文字 `--link` / 下線なし、hover で下線、末尾に `↗`（12px）| 外部リンク |
+| Link-button（`gg-link`） | 文字 `--link` / 下線なし、hover で下線、末尾に `↗`（12〜14px / `--text-secondary`）| 外部リンク |
 
-**リンク** — 本文中は `--link` + `underline`、`text-underline-offset: 0.2em`、`text-decoration-thickness: 1px`、`text-decoration-color: color-mix(in oklab, var(--link) 40%, transparent)`、hover で不透明。ナビ・一覧タイトルは既定で下線なし、hover で下線。外部リンクは末尾に `↗`（12px / `--text-muted`）。
+**リンク** — 本文中は `--link` + `underline`、`text-underline-offset: 0.2em`、`text-decoration-thickness: 1px`、`text-decoration-color: color-mix(in oklab, var(--link) 40%, transparent)`、hover で不透明。ナビ・一覧タイトルは既定で下線なし、hover で下線。外部リンクは末尾に `↗`（12〜14px、周囲のテキストサイズに合わせる / `--text-secondary`。`--text-muted` を使わない理由は上記の強制ルールを参照）。
 
 **タグ / バッジ** — Mono 11px、地 `--surface-1`、文字 `--text-secondary`、枠なし、radius 6px、`padding: 3px 8px`、hover で地 `--surface-2`。**タグに色を持たせない**（カテゴリ色分け禁止）。状態バッジは 6px ドット前置で `NEW` = `--accent-solid`、`UPDATED` = `--ds-amber-700`（dark `#ffb200` / light `#f90`）の**2 色だけ**。カウントバッジは Mono 11px / tabular-nums / `--text-muted`。
 
@@ -194,7 +194,7 @@ spacing base 4px（4/8/12/16/24/32/48/64/96）。element gap 12px、cell padding
   --color-text-muted: var(--text-muted); --color-link: var(--link); --color-accent: var(--accent-solid); }
 ```
 
-**原則: コンポーネントは `bg-bg` `text-text-secondary` `border-border` のようなセマンティッククラスだけを使い、`dark:` を書かない。** `@custom-variant dark` は定義するが、トークンで表現できない稀なケース（グローの `mix-blend-mode` 切替など）の逃げ道であり、**使用時はレビューで理由を問う**。
+**原則: コンポーネントは `bg-bg` `text-text-secondary` `border-border` のようなセマンティッククラスだけを使い、`dark:` を書かない。** `@custom-variant dark` は定義するが、トークンで表現できない稀なケース（グローの `mix-blend-mode` 切替、テーマトグルのアイコンを state を介さず初回ペイントから出し分ける、など**色以外の**構造的な出し分け）の逃げ道であり、**使用時はレビューで理由を問う**。`dark:bg-*` / `dark:text-*` / `dark:border-*` のような色の上書きは例外なく禁止。
 
 **既定判定の優先順位**（localStorage キーは `"theme"`、値は `"dark"` / `"light"`）: (1) `localStorage.getItem("theme")` が `"dark"` / `"light"` ならそれを採用。(2) なければ `matchMedia("(prefers-color-scheme: light)").matches` が **true のときだけ** `light`。(3) それ以外（`dark` / `no-preference` / 判定不能）は **`dark`**。
 
@@ -281,7 +281,7 @@ const themeInit = `(function(){try{
 
 ## ページ実装チェックリスト
 
-- [ ] 生 hex / `gray-*` / `dark:` の直接指定がゼロ（grep で確認）。色は全てセマンティックトークン経由
+- [ ] 生 hex / `gray-*` / 色の `dark:bg-*` `dark:text-*` `dark:border-*` がゼロ（grep で確認）。色は全てセマンティックトークン経由
 - [ ] セルは radius 0、罫線は 1px、交点が 2px になっていない
 - [ ] 各セルに英語の Mono ラベルが付いている
 - [ ] グローは 1 ビューポート 1 個 / 1 ページ 2 個以内、静止、不透明度 0.18 以下。彩度を持つピクセルがビューポート面積の 8% 以下

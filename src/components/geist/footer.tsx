@@ -51,7 +51,7 @@ export function Footer() {
                   className="text-text-secondary hover:text-text-primary text-sm transition-colors hover:underline"
                 >
                   {dict.footer.discord}
-                  <span aria-hidden="true" className="text-text-muted ml-1">
+                  <span aria-hidden="true" className="text-text-secondary ml-1">
                     ↗
                   </span>
                 </a>

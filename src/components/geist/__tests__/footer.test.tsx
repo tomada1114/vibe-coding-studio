@@ -5,7 +5,7 @@
 import { Footer } from "@/components/geist/footer"
 import { getDictionary } from "@/i18n/dictionaries"
 import { DISCORD_INVITE_URL, SOCIAL_LINKS } from "@/lib/constants"
-import { render, screen } from "@testing-library/react"
+import { render, screen, within } from "@testing-library/react"
 
 let mockPathname = "/"
 
@@ -61,6 +61,11 @@ describe("Footer", () => {
     expect(link).toBeDefined()
     expect(link).toHaveAttribute("target", "_blank")
     expect(link).toHaveAttribute("rel", expect.stringContaining("noopener"))
+
+    // text-muted は light テーマで 4.12:1 しか出ず AA (4.5:1) を満たさない。
+    const arrow = within(link as HTMLElement).getByText("↗")
+    expect(arrow).toHaveClass("text-text-secondary")
+    expect(arrow).not.toHaveClass("text-text-muted")
   })
 
   it("全てのソーシャルリンクが aria-label 付きで表示される", () => {
@@ -83,6 +88,8 @@ describe("Footer", () => {
       .join(" ")
 
     expect(classNames).not.toMatch(/\b(?:bg|text|border)-gray-\d/)
-    expect(classNames).not.toContain(["dark", ":"].join(""))
+    // 色の dark: 上書きは禁止。トークンで表現できない構造的な出し分けだけが
+    // SKILL.md の定める例外として許される。
+    expect(classNames).not.toMatch(/dark:(?:bg|text|border)-/)
   })
 })
