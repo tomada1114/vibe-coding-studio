@@ -17,7 +17,6 @@ import { SpectrumBeam } from "./spectrum-beam"
 const navLinks = [
   { href: "/", label: "ホーム" },
   { href: "/docs", label: "学習" },
-  { href: "/videos", label: "動画" },
   { href: "/community", label: "コミュニティ" },
   { href: "/coupons", label: "クーポン" },
   { href: "/founder", label: "運営者" },

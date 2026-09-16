@@ -41,9 +41,5 @@ describe("shouldShowNavigation", () => {
     it("for non-docs path", () => {
       expect(shouldShowNavigation("/about")).toBe(false)
     })
-
-    it("for /videos path", () => {
-      expect(shouldShowNavigation("/videos")).toBe(false)
-    })
   })
 })

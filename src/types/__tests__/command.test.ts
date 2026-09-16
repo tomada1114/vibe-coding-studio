@@ -14,7 +14,6 @@ import {
 describe("Command Type Definitions", () => {
   describe("slugToTitle", () => {
     it("converts kebab-case to Title Case", () => {
-      expect(slugToTitle("convert-video")).toBe("Convert Video")
       expect(slugToTitle("pr-description")).toBe("Pr Description")
       expect(slugToTitle("review-code")).toBe("Review Code")
     })
@@ -64,7 +63,6 @@ describe("Command Type Definitions", () => {
 
   describe("isValidSlug", () => {
     it("accepts valid slugs with lowercase letters and hyphens", () => {
-      expect(isValidSlug("convert-video")).toBe(true)
       expect(isValidSlug("pr-description")).toBe(true)
       expect(isValidSlug("review-code")).toBe(true)
     })
@@ -80,16 +78,15 @@ describe("Command Type Definitions", () => {
     })
 
     it("rejects slugs with uppercase letters", () => {
-      expect(isValidSlug("Convert-Video")).toBe(false)
       expect(isValidSlug("PR-Description")).toBe(false)
     })
 
     it("rejects slugs with spaces", () => {
-      expect(isValidSlug("convert video")).toBe(false)
+      expect(isValidSlug("pr description")).toBe(false)
     })
 
     it("rejects slugs with special characters", () => {
-      expect(isValidSlug("convert@video")).toBe(false)
+      expect(isValidSlug("pr@description")).toBe(false)
       expect(isValidSlug("pr!description")).toBe(false)
       expect(isValidSlug("review.code")).toBe(false)
     })

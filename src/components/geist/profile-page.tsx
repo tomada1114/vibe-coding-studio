@@ -18,7 +18,6 @@ import type { Locale } from "@/i18n/locale"
 import { localizePath } from "@/i18n/locale"
 import { DISCORD_INVITE_URL } from "@/lib/constants"
 import { getLatestCoupons } from "@/lib/coupons/coupon-data"
-import { getAllVideos } from "@/lib/videos/video-data"
 import { clsx } from "clsx"
 import Image from "next/image"
 import Link from "next/link"
@@ -101,7 +100,6 @@ export function ProfilePage({
   locale: Locale
   dict: Dictionary
 }) {
-  const videoCount = getAllVideos().length
   const courseCount = getLatestCoupons().length
 
   const bookFacts = [
@@ -194,7 +192,7 @@ export function ProfilePage({
           {/* ── STATS ─────────────────────────────────────── */}
           <section className="mt-12 sm:mt-16">
             <h2 className="sr-only">{dict.hero.label}</h2>
-            <div className="gg-cell-grid grid-cols-2 lg:grid-cols-4">
+            <div className="gg-cell-grid grid-cols-1 sm:grid-cols-3">
               <StatCell
                 label={dict.stats.since}
                 value={dict.stats.sinceValue}
@@ -203,7 +201,6 @@ export function ProfilePage({
                 label={dict.stats.courses}
                 value={String(courseCount)}
               />
-              <StatCell label={dict.stats.videos} value={String(videoCount)} />
               <StatCell
                 label={dict.stats.students}
                 value={dict.stats.studentsValue}
