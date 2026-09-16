@@ -110,18 +110,18 @@ describe("コミュニティページ（/community）", () => {
       expect(classNames).not.toMatch(/\[#[0-9a-fA-F]{3,8}\]/)
     })
 
-    it("グローは 1 ページ 2 個以内", () => {
+    it("グローは 1 ページ 1〜2 個（このページはヒーローで 1 個使う）", () => {
       const { container } = render(<CommunityPage />)
-      expect(container.querySelectorAll(".gg-glow").length).toBeLessThanOrEqual(
-        2
-      )
+      const count = container.querySelectorAll(".gg-glow").length
+      expect(count).toBeGreaterThan(0)
+      expect(count).toBeLessThanOrEqual(2)
     })
 
-    it("グラデーション罫線は 1 ページ 2 本以内", () => {
+    it("グラデーション罫線は 1 ページ 1〜2 本（このページで 1 本使う）", () => {
       const { container } = render(<CommunityPage />)
-      expect(
-        container.querySelectorAll(".gg-rule-accent").length
-      ).toBeLessThanOrEqual(2)
+      const count = container.querySelectorAll(".gg-rule-accent").length
+      expect(count).toBeGreaterThan(0)
+      expect(count).toBeLessThanOrEqual(2)
     })
   })
 })
