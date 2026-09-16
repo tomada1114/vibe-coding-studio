@@ -21,6 +21,23 @@ Claude Code は `CLAUDE.md` 経由でこのファイルを読み込む。
 
 ウォッチ実行は `npx jest --watch <path>`（`test:watch` スクリプトは無い）。
 
+## スキル
+
+`.claude/skills/` 配下のスキルは、ある種類の変更に手を付けた**あとで**要る手順と判断を持つ。
+実体は `.claude/skills/` にあり、`.agents/skills/` はそこへのシンボリックリンクで Codex CLI の
+入口になる。スキルの書き方・境界宣言の書式・新しいスキルを起こす基準は `authoring-skills` が
+単一の情報源。
+
+| スキル | 読むとき |
+|---|---|
+| `geist-grid-design` | ページを新規作成する、デザインを刷新する、テーマやトークンを変更する |
+| `authoring-skills` | スキルを追加・編集・レビューする、`AGENTS.md` とスキルのどちらに書くか迷う |
+| `writing-tests` | テストを書く・直す、どこに置くか決める |
+| `changing-gates` | `.github/workflows/*`・`jest.config.js`・`eslint.config.mjs`・`.prettierrc`・`tsconfig.json`・`next.config.mjs` を変更する |
+| `managing-dependencies` | パッケージを追加・更新・削除する、Dependabot の PR を扱う |
+| `triaging-issues` | Issue を起票する、トリアージする、優先度を付ける |
+| `updating-docs` | その変更がドキュメント更新を要するか判断する |
+
 ## デザイン: Geist Grid
 
 ページの新規作成・デザイン刷新・テーマやトークンの変更をするときは、`geist-grid-design` skill
