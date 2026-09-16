@@ -8,7 +8,7 @@ Claude Code は `CLAUDE.md` 経由でこのファイルを読み込む。
 ## プロジェクト概要
 
 **Vibe Coding Studio** — Next.js 15（App Router）/ React 19 / Tailwind CSS v4 / TypeScript strict の
-静的サイト。Udemy クーポン、学習ドキュメント（Markdoc）を配信する。
+静的サイト。Udemy講座、学習ドキュメント（Markdoc）を配信する。
 デザインシステムは「Geist Grid」（ダーク既定＋ライト手動切替）。日本語が既定で、`/en` に英語トップがある。
 
 ## 開発コマンド
@@ -30,8 +30,8 @@ Claude Code は `CLAUDE.md` 経由でこのファイルを読み込む。
 
 このリポジトリ側で判断が要るのは次の 3 点:
 
-- **新規ページは Geist Grid で作る。** 移行済みはトップ（`/`・`/en`）と共通ヘッダー・フッターだけで、
-  `/docs` `/coupons` `/community` は旧 Radiant のライトデザインのまま混在している。
+- **新規ページは Geist Grid で作る。** 移行済みはトップ（`/`・`/en`）、共通ヘッダー・フッター、講座一覧（`/courses`）で、
+  `/docs` `/community` は旧 Radiant のライトデザインのまま混在している。
 - 未移行ページへの**小さな修正**のときだけ既存の流儀（`gray-*` / `bg-white`）に合わせる。
   ページ単位で作り直すなら旧流儀に合わせず Geist Grid へ移行する。
 - Geist Grid のコードでは色をセマンティックトークン（`bg-bg` / `text-text-secondary` / `border-border`）
@@ -59,7 +59,6 @@ Claude Code は `CLAUDE.md` 経由でこのファイルを読み込む。
 |---|---|
 | `docs/PROJECT_DOCUMENTATION.md` / `API_REFERENCE.md` / `COMPONENT_GUIDE.md` | プロジェクト全体 / API / コンポーネント |
 | `docs/design/` | デザインシステムの解説と `proposals/2026-09-geist-grid.md`（根拠・Decision ledger） |
-| `docs/UDEMY_COURSE_WORKFLOW.md` | Udemy講座まわりの運用 |
 | `.kiro/steering/` | product / tech / structure の指針 |
 | `.kiro/specs/` | 機能仕様（完了分は `archive/`）。`/kiro:*` コマンドは削除済みなので手で更新する |
 

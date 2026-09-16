@@ -97,11 +97,11 @@ npm run start            # Start production server
 # Code Quality
 npm run lint             # Run ESLint
 npm run type-check       # Run TypeScript type checking
-npm run pre-commit-check # Run all pre-commit checks
+npm run check:all        # Run all repository checks
 
 # Testing
 npm run test             # Run Jest tests
-npm run test:watch       # Run tests in watch mode
+npx jest --watch         # Run tests in watch mode
 ```
 
 ## Project Structure
@@ -126,25 +126,22 @@ You can start customizing this template by modifying the files in the `/src` fol
 ### Key Files to Edit
 
 - `src/app/page.tsx` - Home page content
-- `src/components/navbar.tsx` - Navigation links
-- `src/components/footer.tsx` - Footer content
+- `src/components/geist/header.tsx` - Navigation links
+- `src/components/geist/footer.tsx` - Footer content
+- `src/app/courses/page.tsx` - Udemy course listing
 - `src/app/layout.tsx` - Site metadata and global layout
 
 ## Development Workflow
 
 ### Before Committing
 
-Always run the pre-commit check to ensure code quality:
+Always run the repository checks to ensure code quality:
 
 ```bash
-npm run pre-commit-check
+npm run check:all
 ```
 
-This will:
-- ✅ Run ESLint checks
-- ✅ Verify TypeScript types
-- ✅ Validate environment configuration
-- ✅ Check for required files
+This runs formatting, ESLint, TypeScript, and the Jest test suite.
 
 ### Commit Convention
 

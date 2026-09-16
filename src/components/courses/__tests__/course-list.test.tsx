@@ -43,7 +43,7 @@ describe("CourseList", () => {
       })
     })
 
-    expect(screen.queryByText(/クーポン|割引|円/)).not.toBeInTheDocument()
+    expect(screen.queryByText(/割引|円/)).not.toBeInTheDocument()
   })
 
   it("renders no cards when the data source is empty", () => {

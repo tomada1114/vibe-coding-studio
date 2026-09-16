@@ -330,7 +330,6 @@ export const SOCIAL_LINKS = {
   youtube: "https://www.youtube.com/@vibe-coding-studio",
   qiita: "https://qiita.com/tomada",
   note: "https://note.com/tomada",
-  udemy: "https://school.learning-next.app/coupons",
 };
 ```
 

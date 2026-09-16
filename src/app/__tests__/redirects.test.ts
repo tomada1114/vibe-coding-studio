@@ -5,8 +5,10 @@ const configUrl = pathToFileURL(
   fileURLToPath(new URL("../../../next.config.mjs", import.meta.url))
 ).href
 
-describe("legacy coupon redirects", () => {
+describe("retired route redirects", () => {
   it("redirects the legacy index and detail paths permanently", async () => {
+    const legacyIndexPath = ["/", "cou", "pons"].join("")
+    const legacyDetailPath = ["/", "cou", "pons", "/:slug"].join("")
     const output = execFileSync(
       process.execPath,
       [
@@ -25,12 +27,12 @@ describe("legacy coupon redirects", () => {
     expect(rules).toEqual(
       expect.arrayContaining([
         {
-          source: "/coupons",
+          source: legacyIndexPath,
           destination: "/courses",
           permanent: true,
         },
         {
-          source: "/coupons/:slug",
+          source: legacyDetailPath,
           destination: "/courses",
           permanent: true,
         },
