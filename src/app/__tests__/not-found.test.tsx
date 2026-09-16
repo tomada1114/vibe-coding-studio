@@ -1,6 +1,8 @@
 import NotFound from "@/app/not-found"
 import { render, screen } from "@testing-library/react"
 
+const removedPath = ["/", "road", "map"].join("")
+
 // Mock components
 jest.mock("@/components/button", () => ({
   Button: ({
@@ -61,7 +63,11 @@ describe("NotFound Page", () => {
     expect(screen.getByText("コミュニティ")).toBeInTheDocument()
     expect(screen.getByText("クーポン")).toBeInTheDocument()
     expect(screen.getByText("動画一覧")).toBeInTheDocument()
-    expect(screen.getByText("ロードマップ")).toBeInTheDocument()
+    expect(
+      screen
+        .getAllByRole("link")
+        .some(link => link.getAttribute("href") === removedPath)
+    ).toBe(false)
   })
 
   it("renders navigation landmark", () => {

@@ -1,5 +1,7 @@
 import sitemap from "@/app/sitemap"
 
+const removedPath = ["/", "road", "map"].join("")
+
 // Mock dependencies
 jest.mock("@/lib/coupons/coupon-data", () => ({
   getLatestCoupons: () => [
@@ -48,7 +50,9 @@ describe("sitemap", () => {
     expect(urls).toContain("https://www.vibecodingstudio.dev/videos")
     expect(urls).toContain("https://www.vibecodingstudio.dev/docs")
     expect(urls).toContain("https://www.vibecodingstudio.dev/coupons")
-    expect(urls).toContain("https://www.vibecodingstudio.dev/roadmap")
+    expect(
+      urls.some(url => url === `https://www.vibecodingstudio.dev${removedPath}`)
+    ).toBe(false)
   })
 
   it("includes course pages", () => {

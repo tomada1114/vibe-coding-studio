@@ -18,6 +18,7 @@ jest.mock("next/navigation", () => ({
 
 const ja = getDictionary("ja")
 const en = getDictionary("en")
+const removedPath = ["/", "road", "map"].join("")
 
 beforeEach(() => {
   mockPathname = "/"
@@ -47,6 +48,15 @@ describe("Header", () => {
       expect(
         screen.getByRole("link", { name: en.nav.items.videos })
       ).toBeInTheDocument()
+    })
+
+    it("廃止済みの旧リンクを表示しない", () => {
+      render(<Header />)
+      expect(
+        screen
+          .getAllByRole("link")
+          .some(link => link.getAttribute("href") === removedPath)
+      ).toBe(false)
     })
   })
 

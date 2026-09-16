@@ -14,7 +14,6 @@ const SITE_LINKS: { key: NavKey; href: string }[] = [
   { key: "videos", href: "/videos" },
   { key: "community", href: "/community" },
   { key: "coupons", href: "/coupons" },
-  { key: "roadmap", href: "/roadmap" },
 ]
 
 export function Footer() {

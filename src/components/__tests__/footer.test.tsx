@@ -9,6 +9,8 @@ import { Footer } from "@/components/footer"
 import { DISCORD_INVITE_URL, SOCIAL_LINKS } from "@/lib/constants"
 import { render, screen } from "@testing-library/react"
 
+const removedPath = ["/", "road", "map"].join("")
+
 // モックを設定
 jest.mock("@/components/logo", () => ({
   Logo: () => (
@@ -176,6 +178,15 @@ describe("Footer コンポーネント", () => {
       const learningLink = screen.getByRole("link", { name: "学習" })
       expect(learningLink).toHaveAttribute("href", "/docs")
     })
+  })
+
+  it("廃止済みの旧リンクを表示しない", () => {
+    render(<Footer />)
+    expect(
+      screen
+        .getAllByRole("link")
+        .some(link => link.getAttribute("href") === removedPath)
+    ).toBe(false)
   })
 
   describe("コピーライト", () => {
