@@ -25,4 +25,11 @@ describe("/courses", () => {
       ).toBeInTheDocument()
     })
   })
+
+  it("グラデーション罫線は 1 ページ 2 本以内", () => {
+    const { container } = render(<CoursesPage />)
+    expect(
+      container.querySelectorAll(".gg-rule-accent").length
+    ).toBeLessThanOrEqual(2)
+  })
 })
