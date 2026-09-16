@@ -31,10 +31,11 @@ describe("CourseList", () => {
         within(card).getByRole("heading", { level: 2, name: course.title })
       ).toBeInTheDocument()
       expect(within(card).getByText(course.description)).toBeInTheDocument()
-      expect(within(card).getByText("↗")).toHaveAttribute(
-        "aria-hidden",
-        "true"
-      )
+      const arrow = within(card).getByText("↗")
+      expect(arrow).toHaveAttribute("aria-hidden", "true")
+      // text-muted は light テーマで 4.12:1 しか出ず AA (4.5:1) を満たさない。
+      expect(arrow).toHaveClass("text-text-secondary")
+      expect(arrow).not.toHaveClass("text-text-muted")
 
       course.topics.forEach(topic => {
         expect(

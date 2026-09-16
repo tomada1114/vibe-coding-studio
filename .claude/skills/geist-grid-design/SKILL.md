@@ -166,7 +166,7 @@ spacing base 4px（4/8/12/16/24/32/48/64/96）。element gap 12px、cell padding
 | Secondary | 地 `--text-primary` / 文字 `--bg` / pill / 高さ 40px | Primary が無いページの主要導線 |
 | Outline | 透明地 / 枠 1px `--border` / radius 6px / 高さ 36px、hover で枠 `--border-hover` + 地 `--surface-1` | 副次導線、「もっと見る」|
 | Ghost | 透明地・枠なし / 文字 `--text-secondary`、hover で `--text-primary` + 地 `--surface-1` | ヘッダーナビ、セル内補助 |
-| Link-button | 文字 `--link` / 下線なし、hover で下線、末尾に `↗`（12〜14px / `--text-secondary`）| 外部リンク |
+| Link-button（`gg-link`） | 文字 `--link` / 下線なし、hover で下線、末尾に `↗`（12〜14px / `--text-secondary`）| 外部リンク |
 
 **リンク** — 本文中は `--link` + `underline`、`text-underline-offset: 0.2em`、`text-decoration-thickness: 1px`、`text-decoration-color: color-mix(in oklab, var(--link) 40%, transparent)`、hover で不透明。ナビ・一覧タイトルは既定で下線なし、hover で下線。外部リンクは末尾に `↗`（12〜14px、周囲のテキストサイズに合わせる / `--text-secondary`。`--text-muted` を使わない理由は上記の強制ルールを参照）。
 

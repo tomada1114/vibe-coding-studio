@@ -181,6 +181,20 @@ describe("トップページ（/）", () => {
         container.querySelectorAll(".gg-rule-accent").length
       ).toBeLessThanOrEqual(2)
     })
+
+    it("外部リンクの ↗ が AA を満たす text-secondary を使っている", () => {
+      const { container } = render(<Home />)
+      const arrows = Array.from(
+        container.querySelectorAll('[aria-hidden="true"]')
+      ).filter(el => el.textContent === "↗")
+
+      expect(arrows.length).toBeGreaterThan(0)
+      arrows.forEach(arrow => {
+        // text-muted は light テーマで 4.12:1 しか出ず AA (4.5:1) を満たさない。
+        expect(arrow).toHaveClass("text-text-secondary")
+        expect(arrow).not.toHaveClass("text-text-muted")
+      })
+    })
   })
 })
 
