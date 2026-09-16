@@ -93,18 +93,9 @@ export default function RootLayout({
       </head>
       <body className="bg-bg text-text-primary antialiased">
         <Header />
-        {/*
-          未移行ページ（旧 Radiant デザイン）は自前の背景を持たず、body が白・文字が
-          gray-950 である前提で書かれている。Geist Grid のダーク既定をそのまま被せると
-          黒地に黒文字になるため、移行が完了するまでここで明るい地を敷いておく。
-          Geist Grid へ移行済みのページは、自身のルート要素に `gg-surface` を付けて
-          この地を上書きする（トップページ `src/app/page.tsx` が正典）。
-        */}
-        <div className="bg-white text-gray-950">
-          <ErrorBoundary showDetails={process.env.NODE_ENV === "development"}>
-            {children}
-          </ErrorBoundary>
-        </div>
+        <ErrorBoundary showDetails={process.env.NODE_ENV === "development"}>
+          {children}
+        </ErrorBoundary>
         <Footer />
       </body>
     </html>
