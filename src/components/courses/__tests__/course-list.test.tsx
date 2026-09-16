@@ -1,22 +1,48 @@
 import { CourseList } from "@/components/courses/course-list"
 import { getAllUdemyCourses } from "@/data/udemy-courses"
-import { render, screen } from "@testing-library/react"
+import { UDEMY_COURSE_TOPICS } from "@/data/udemy-courses/topics"
+import { render, screen, within } from "@testing-library/react"
 
 describe("CourseList", () => {
   it("renders every Udemy course as an external link", () => {
-    render(<CourseList courses={getAllUdemyCourses()} />)
+    const courses = getAllUdemyCourses()
+    const topicNames = new Map(
+      UDEMY_COURSE_TOPICS.map(topic => [topic.slug, topic.name])
+    )
 
-    expect(screen.getAllByRole("article")).toHaveLength(16)
+    render(<CourseList courses={courses} />)
 
-    for (const link of screen.getAllByRole("link")) {
+    const list = screen.getByTestId("course-list")
+    const cards = screen.getAllByRole("article")
+    expect(cards).toHaveLength(courses.length)
+    expect(list).toHaveClass("gg-cell-grid")
+
+    cards.forEach((card, index) => {
+      const course = courses[index]
+      const link = within(card).getByRole("link")
+
+      expect(card).toHaveClass("gg-cell")
+      expect(link).toHaveAttribute("href", course.url)
       expect(link).toHaveAttribute("target", "_blank")
       expect(link).toHaveAttribute("rel", expect.stringContaining("noopener"))
-    }
+      expect(link).toHaveAttribute("rel", expect.stringContaining("noreferrer"))
+      expect(within(card).getByRole("img")).toHaveAttribute("alt", course.title)
+      expect(
+        within(card).getByRole("heading", { level: 2, name: course.title })
+      ).toBeInTheDocument()
+      expect(within(card).getByText(course.description)).toBeInTheDocument()
+      expect(within(card).getByText("↗")).toHaveAttribute(
+        "aria-hidden",
+        "true"
+      )
 
-    expect(
-      screen.getByAltText(getAllUdemyCourses()[0].title)
-    ).toBeInTheDocument()
-    expect(screen.getAllByText("Claude Code").length).toBeGreaterThan(0)
+      course.topics.forEach(topic => {
+        expect(
+          within(card).getByText(topicNames.get(topic) ?? topic)
+        ).toBeInTheDocument()
+      })
+    })
+
     expect(screen.queryByText(/クーポン|割引|円/)).not.toBeInTheDocument()
   })
 

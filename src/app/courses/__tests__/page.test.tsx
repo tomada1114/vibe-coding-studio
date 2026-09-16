@@ -14,12 +14,15 @@ describe("/courses", () => {
   it("renders the complete course listing", () => {
     render(<CoursesPage />)
 
+    const courses = getAllUdemyCourses()
     expect(
       screen.getByRole("heading", { level: 1, name: "講座一覧" })
     ).toBeInTheDocument()
-    expect(screen.getAllByRole("article")).toHaveLength(
-      getAllUdemyCourses().length
-    )
-    expect(screen.getByText(getAllUdemyCourses()[0].title)).toBeInTheDocument()
+    expect(screen.getAllByRole("article")).toHaveLength(courses.length)
+    courses.forEach(course => {
+      expect(
+        screen.getByRole("heading", { level: 2, name: course.title })
+      ).toBeInTheDocument()
+    })
   })
 })
