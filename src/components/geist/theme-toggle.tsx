@@ -1,10 +1,6 @@
 "use client"
 
-import { useEffect, useLayoutEffect, useState } from "react"
-
-// SSR では useLayoutEffect が警告を出すため、ブラウザでのみ layout effect を使う。
-const useIsomorphicLayoutEffect =
-  typeof window !== "undefined" ? useLayoutEffect : useEffect
+import { useEffect, useState } from "react"
 
 export type Theme = "dark" | "light"
 
@@ -84,19 +80,13 @@ export function ThemeToggle({
   toLightLabel: string
   toDarkLabel: string
 }) {
-  // aria-label / aria-pressed 用。アイコン自体はこの state を経由せず CSS で出し分けるため
-  // （下記コメント参照）、SSR とマウント後の値が食い違っていても視覚的なチラつきは起きない。
-  //
-  // useLayoutEffect でハイドレーション直後・ブラウザが制御を返す前に同期する。これは
-  // 「ハイドレーション commit 〜 このタイミング」の window を閉じるだけで、SSR 出力（常に
-  // dark 前提）が最初にブラウザへ届いてからハイドレーションが完了するまでの間に
-  // aria-pressed / aria-label を読んだ支援技術には、依然として実テーマと異なる値が見える
-  // 可能性が残る。これを完全に無くすには theme をサーバー側（Cookie 等）で把握する必要があり、
-  // 本コンポーネントの localStorage ベースの設計を超える変更になるため見送っている。
+  // aria-label / aria-pressed 用。アイコン自体はこの state を経由せず CSS で出し分ける
+  // （下記コメント参照）。マウント前は実テーマが未確定なので、以下の JSX では両属性とも
+  // 「間違った値」ではなく「まだ値を主張しない」状態にする（isDark をそのまま出さない）。
   const [theme, setTheme] = useState<Theme>("dark")
   const [mounted, setMounted] = useState(false)
 
-  useIsomorphicLayoutEffect(() => {
+  useEffect(() => {
     setTheme(readTheme())
     setMounted(true)
   }, [])
@@ -120,7 +110,7 @@ export function ThemeToggle({
       type="button"
       onClick={toggle}
       aria-label={mounted ? (isDark ? toLightLabel : toDarkLabel) : label}
-      aria-pressed={isDark}
+      aria-pressed={mounted ? isDark : undefined}
       className="border-border text-text-muted hover:text-text-primary hover:bg-surface-1 flex size-7 items-center justify-center rounded-[6px] border transition-colors"
     >
       {/* アイコンは state ではなく <html data-theme> に紐づく dark: バリアントで出し分ける。
