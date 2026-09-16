@@ -45,6 +45,5 @@ describe("sitemap", () => {
 
     const courses = result.find(e => e.url?.endsWith("/courses"))
     expect(courses?.priority).toBe(0.7)
-
   })
 })
