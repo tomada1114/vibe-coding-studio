@@ -105,6 +105,8 @@ export function Header({ dictionary }: { dictionary?: Dictionary } = {}) {
 
   // ページ遷移したらモバイルメニューを閉じる
   useEffect(() => {
+    // pathname は Next.js ルーターという外部システムの状態なので、遷移時に同期する。
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMenuOpen(false)
   }, [pathname])
 
