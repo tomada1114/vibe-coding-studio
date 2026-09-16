@@ -96,8 +96,10 @@ describe("レスポンシブデザイン（タスク12.4）", () => {
       const { container } = render(<CommunityPage />)
       const htmlContent = container.innerHTML
 
-      // text-xl, sm:text-2xl, md:text-3xl などのパターンを確認
-      expect(htmlContent).toMatch(/text-\w+\/\d+|sm:text-\w+\/\d+|md:text-\w+/)
+      // Geist Grid の型スケールは任意値の px 指定を含む
+      expect(htmlContent).toMatch(
+        /text-\[\d+px\]|sm:text-\[\d+px\]|md:text-\[\d+px\]|text-\w+\/\d+/
+      )
     })
   })
 
