@@ -65,7 +65,7 @@ function LanguageToggle({
               index > 0 && "border-border border-l",
               active
                 ? "bg-surface-1 text-text-primary"
-                : "text-text-muted hover:text-text-primary"
+                : "text-text-label hover:text-text-primary"
             )}
           >
             {code}
