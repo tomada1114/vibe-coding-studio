@@ -6,14 +6,20 @@ const topicNames = new Map(
   UDEMY_COURSE_TOPICS.map(topic => [topic.slug, topic.name])
 )
 
-export function CourseCard({ course }: { course: UdemyCourse }) {
+export function CourseCard({
+  course,
+  topicsLabel,
+}: {
+  course: UdemyCourse
+  topicsLabel?: string
+}) {
   return (
     <article className="gg-cell gg-cell-hover">
       <a
         href={course.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="focus-visible:outline-focus block h-full focus-visible:outline-2 focus-visible:outline-offset-2"
+        className="block h-full"
       >
         <Image
           src={course.thumbnail}
@@ -21,24 +27,24 @@ export function CourseCard({ course }: { course: UdemyCourse }) {
           width={640}
           height={360}
           sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 560px"
-          className="border-border aspect-video w-full border object-cover"
+          className="border-border aspect-video w-full rounded-[6px] border object-cover"
         />
 
         <div className="mt-5 flex items-center justify-between gap-3">
           <p className="gg-label">Course</p>
-          <span aria-hidden="true" className="text-text-secondary text-sm">
+          <span aria-hidden="true" className="text-text-muted text-sm">
             ↗
           </span>
         </div>
 
-        <h2 className="text-text-primary mt-3 text-[20px] leading-[1.45] font-medium tracking-[-0.01em]">
+        <h2 className="text-text-primary mt-3 text-[20px] leading-[1.45] font-medium">
           {course.title}
         </h2>
         <p className="gg-prose-ja text-text-secondary mt-3 text-[14px]">
           {course.description}
         </p>
 
-        <ul aria-label="Topics" className="mt-5 flex flex-wrap gap-2">
+        <ul aria-label={topicsLabel} className="mt-5 flex flex-wrap gap-2">
           {course.topics.map(topic => (
             <li key={topic} className="gg-tag">
               {topicNames.get(topic) ?? topic}

@@ -62,7 +62,7 @@ function CommunityHero({ copy }: { copy: CommunityCopy["hero"] }) {
         aria-hidden="true"
         className="gg-grid-field pointer-events-none absolute inset-0 -z-10"
       />
-      <div className="mx-auto max-w-[1120px] px-4 pt-16 pb-14 sm:px-6 sm:pt-24 sm:pb-20 lg:px-8">
+      <div className="gg-container pt-16 pb-14 sm:pt-24 sm:pb-20">
         <p className="gg-label">{copy.label}</p>
         <h1 className="text-text-primary mt-4 max-w-[800px] text-[40px] leading-[1.15] font-semibold tracking-[-0.02em] sm:text-[56px] sm:leading-[1.1]">
           {copy.title}
@@ -116,7 +116,7 @@ export default function CommunityPage({
         <CommunityHero copy={copy.hero} />
         <div aria-hidden="true" className="gg-rule-accent" />
 
-        <div className="mx-auto max-w-[1120px] px-4 pb-24 sm:px-6 sm:pb-32 lg:px-8">
+        <div className="gg-container pb-24 sm:pb-32">
           <section className="mt-12 sm:mt-16">
             <SectionHeading label={copy.value.label}>
               {copy.value.heading}

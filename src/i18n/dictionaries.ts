@@ -134,6 +134,7 @@ export type Dictionary = {
     label: string
     title: string
     lead: string
+    topicsLabel: string
   }
   community: {
     metaTitle: string
@@ -348,6 +349,7 @@ const ja: Dictionary = {
     label: "Courses",
     title: "講座一覧",
     lead: "著者が公開しているUdemy講座を、公開順に紹介しています。",
+    topicsLabel: "トピック",
   },
   community: {
     metaTitle: "コミュニティ",
@@ -695,6 +697,7 @@ const en: Dictionary = {
     label: "Courses",
     title: "Courses",
     lead: "Browse Udemy courses in the order they were published.",
+    topicsLabel: "Topics",
   },
   community: {
     metaTitle: "Community",

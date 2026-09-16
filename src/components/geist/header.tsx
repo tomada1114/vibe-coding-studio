@@ -49,7 +49,7 @@ function LanguageToggle({
     <div
       role="group"
       aria-label={groupLabel}
-      className="border-border inline-flex h-7 overflow-hidden rounded-[6px] border"
+      className="border-border inline-flex h-7 rounded-[6px] border"
     >
       {(["ja", "en"] as const).map((code, index) => {
         const active = locale === code
@@ -60,11 +60,12 @@ function LanguageToggle({
             hrefLang={LOCALE_HTML_LANG[code]}
             aria-current={active ? "true" : undefined}
             className={clsx(
-              "flex items-center px-[10px] font-mono text-[11px] tracking-[0.08em] uppercase transition-colors",
+              "relative z-0 flex h-full items-center px-[10px] font-mono text-[11px] tracking-[0.08em] uppercase transition-colors focus-visible:z-10",
+              index === 0 ? "rounded-l-[5px]" : "rounded-r-[5px]",
               index > 0 && "border-border border-l",
               active
                 ? "bg-surface-1 text-text-primary"
-                : "text-text-secondary hover:text-text-primary"
+                : "text-text-muted hover:text-text-primary"
             )}
           >
             {code}
@@ -115,7 +116,7 @@ export function Header({ dictionary }: { dictionary?: Dictionary } = {}) {
       >
         {dict.header.skipToContent}
       </a>
-      <div className="mx-auto flex h-14 max-w-[1120px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+      <div className="gg-container flex h-14 items-center justify-between gap-4">
         <div className="flex items-center gap-2">
           <button
             type="button"
@@ -185,7 +186,7 @@ export function Header({ dictionary }: { dictionary?: Dictionary } = {}) {
           aria-label={dict.nav.label}
           className="border-border bg-bg border-t lg:hidden"
         >
-          <ul className="mx-auto max-w-[1120px] px-4 py-2 sm:px-6">
+          <ul className="gg-container py-2">
             {NAV.map(({ key, href }) => {
               const active = isPathActive(pathname, href, locale)
               return (

@@ -21,7 +21,7 @@ export default function Error({
     <div className="gg-surface min-h-screen">
       <main
         id="main-content"
-        className="mx-auto flex min-h-screen max-w-[1120px] items-center justify-center px-4 py-24 sm:px-6 lg:px-8"
+        className="gg-container flex min-h-screen items-center justify-center py-24"
       >
         <div className="gg-cell border-border w-full max-w-[560px] border text-center sm:p-10">
           <p className="gg-label">ERROR</p>

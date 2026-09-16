@@ -1,5 +1,6 @@
 "use client"
 
+import { THEME_INIT_SCRIPT } from "@/components/geist/theme-toggle"
 import "@/styles/tailwind.css"
 import Link from "next/link"
 import { useEffect } from "react"
@@ -20,11 +21,20 @@ export default function GlobalError({
 
   return (
     <html lang="ja" data-theme="dark" suppressHydrationWarning>
-      {/* root layout が利用できないため、テーマ初期化なしでも表示を安定させる */}
-      <body className="bg-bg text-text-primary antialiased">
+      <head>
+        {/* root layout が利用できない場合も、初回描画前にテーマを確定させる */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+      </head>
+      <body className="gg-surface antialiased">
+        <a
+          href="#main-content"
+          className="focus:bg-bg focus:text-text-primary focus:border-border sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-10 focus:rounded-[6px] focus:border focus:px-4 focus:py-2 focus:text-sm focus:font-medium"
+        >
+          メインコンテンツへスキップ
+        </a>
         <main
           id="main-content"
-          className="mx-auto flex min-h-screen max-w-[1120px] items-center justify-center px-4 py-24 sm:px-6 lg:px-8"
+          className="gg-container flex min-h-screen items-center justify-center py-24"
         >
           <div className="gg-cell border-border w-full max-w-[560px] border text-center sm:p-10">
             <p className="gg-label">ERROR</p>
