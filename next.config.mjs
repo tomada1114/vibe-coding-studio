@@ -43,6 +43,10 @@ const nextConfig = {
   // Basic optimizations
   poweredByHeader: false,
 
+  // `next dev` が AI エージェントを検出すると AGENTS.md に Next.js の管理ブロックを
+  // 自動追記し、作業ツリーを汚すため無効化する。エージェント向けの指示は AGENTS.md で管理する。
+  agentRules: false,
+
   // Experimental features
   experimental: {
     // Enable optimized package imports
