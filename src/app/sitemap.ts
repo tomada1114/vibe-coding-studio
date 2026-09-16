@@ -3,6 +3,7 @@
  *
  * Generates sitemap.xml with all site pages including:
  * - Static pages (varying priorities: 1.0 for home, 0.9-0.7 for others)
+ * - English counterparts for the three public surfaces
  * - Courses (priority 0.7)
  */
 import { getSiteUrl } from "@/lib/seo/site-url"
@@ -20,13 +21,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
+      url: `${baseUrl}/en`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 1.0,
+    },
+    {
       url: `${baseUrl}/community`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/en/community`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/courses`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/en/courses`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.7,
