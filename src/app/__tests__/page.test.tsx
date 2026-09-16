@@ -154,7 +154,9 @@ describe("トップページ（/）", () => {
         .join(" ")
 
       expect(classNames).not.toMatch(/\b(?:bg|text|border)-gray-\d/)
-      expect(classNames).not.toContain(["dark", ":"].join(""))
+      // 色の dark: 上書きは禁止。トークンで表現できない構造的な出し分け（アイコンの
+      // 表示切替など）だけが SKILL.md の定める例外として許される。
+      expect(classNames).not.toMatch(/dark:(?:bg|text|border)-/)
       expect(classNames).not.toMatch(/\[#[0-9a-fA-F]{3,8}\]/)
     })
 

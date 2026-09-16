@@ -83,6 +83,8 @@ describe("Footer", () => {
       .join(" ")
 
     expect(classNames).not.toMatch(/\b(?:bg|text|border)-gray-\d/)
-    expect(classNames).not.toContain(["dark", ":"].join(""))
+    // 色の dark: 上書きは禁止。トークンで表現できない構造的な出し分けだけが
+    // SKILL.md の定める例外として許される。
+    expect(classNames).not.toMatch(/dark:(?:bg|text|border)-/)
   })
 })

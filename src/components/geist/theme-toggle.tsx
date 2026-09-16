@@ -1,10 +1,6 @@
 "use client"
 
-import { useEffect, useLayoutEffect, useState } from "react"
-
-// SSR では useLayoutEffect が警告を出すため、ブラウザでのみ layout effect を使う。
-const useIsomorphicLayoutEffect =
-  typeof window !== "undefined" ? useLayoutEffect : useEffect
+import { useEffect, useState } from "react"
 
 export type Theme = "dark" | "light"
 
@@ -84,13 +80,12 @@ export function ThemeToggle({
   toLightLabel: string
   toDarkLabel: string
 }) {
-  // SSR 出力は常にダーク。マウント後に実際の data-theme と同期する。
+  // aria-label / aria-pressed 用。アイコン自体はこの state を経由せず CSS で出し分けるため
+  // （下記コメント参照）、SSR とマウント後の値が食い違っていても視覚的なチラつきは起きない。
   const [theme, setTheme] = useState<Theme>("dark")
   const [mounted, setMounted] = useState(false)
 
-  // <head> の同期スクリプトが data-theme を確定させた後、ブラウザの初回ペイント前に
-  // 実際のテーマへ同期する。useEffect だとペイント後に発火し、アイコンが一瞬入れ替わる。
-  useIsomorphicLayoutEffect(() => {
+  useEffect(() => {
     setTheme(readTheme())
     setMounted(true)
   }, [])
@@ -117,7 +112,16 @@ export function ThemeToggle({
       aria-pressed={isDark}
       className="border-border text-text-muted hover:text-text-primary hover:bg-surface-1 flex size-7 items-center justify-center rounded-[6px] border transition-colors"
     >
-      {isDark ? <MoonIcon /> : <SunIcon />}
+      {/* アイコンは state ではなく <html data-theme> に紐づく dark: バリアントで出し分ける。
+          <head> の同期スクリプトが data-theme をペイント前に確定させるので、SSR マークアップの
+          時点から正しい方だけが表示され、JS state 経由では避けられない「まず dark 側で描画され
+          てから切り替わる」チラつきが原理的に起きない。 */}
+      <span className="dark:hidden" aria-hidden="true">
+        <SunIcon />
+      </span>
+      <span className="hidden dark:inline" aria-hidden="true">
+        <MoonIcon />
+      </span>
     </button>
   )
 }

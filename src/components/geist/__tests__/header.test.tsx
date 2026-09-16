@@ -139,6 +139,18 @@ describe("Header", () => {
       expect(document.documentElement.getAttribute("data-theme")).toBe("dark")
       expect(localStorage.getItem(THEME_STORAGE_KEY)).toBe("dark")
     })
+
+    it("アイコンは state ではなく dark: バリアントで出し分けている（初回ペイントのチラつき防止）", () => {
+      render(<Header />)
+      const button = screen.getByRole("button", { pressed: true })
+      const icons = Array.from(button.querySelectorAll("span[aria-hidden]"))
+
+      expect(icons).toHaveLength(2)
+      // 両方のアイコンが state による条件レンダリングなしで常に DOM に存在し、
+      // <html data-theme> にひもづく CSS だけで表示が切り替わる。
+      expect(icons[0]).toHaveClass("dark:hidden")
+      expect(icons[1]).toHaveClass("hidden", "dark:inline")
+    })
   })
 
   describe("スキップリンク", () => {
@@ -159,7 +171,9 @@ describe("Header", () => {
         .join(" ")
 
       expect(classNames).not.toMatch(/\b(?:bg|text|border)-gray-\d/)
-      expect(classNames).not.toContain(["dark", ":"].join(""))
+      // 色の dark: 上書きは禁止。トークンで表現できない構造的な出し分け（テーマトグルの
+      // アイコン表示切替など）だけが SKILL.md の定める例外として許される。
+      expect(classNames).not.toMatch(/dark:(?:bg|text|border)-/)
     })
   })
 })
