@@ -1,14 +1,9 @@
 "use client"
 
+import "@/styles/tailwind.css"
 import Link from "next/link"
 import { useEffect } from "react"
 
-/**
- * グローバルエラー境界
- *
- * root layout 自体のエラーを捕捉する最終フォールバック。
- * html/body を自前でレンダリングする必要がある。
- */
 export default function GlobalError({
   error,
   reset,
@@ -24,58 +19,33 @@ export default function GlobalError({
   }, [error])
 
   return (
-    <html lang="ja">
-      <body>
+    <html lang="ja" data-theme="dark" suppressHydrationWarning>
+      {/* root layout が利用できないため、テーマ初期化なしでも表示を安定させる */}
+      <body className="bg-bg text-text-primary antialiased">
         <main
-          style={{
-            minHeight: "100vh",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: "#ffffff",
-            color: "#09090b",
-            fontFamily: "sans-serif",
-            padding: "6rem 1.5rem",
-            textAlign: "center",
-          }}
+          id="main-content"
+          className="mx-auto flex min-h-screen max-w-[1120px] items-center justify-center px-4 py-24 sm:px-6 lg:px-8"
         >
-          <h1 style={{ fontSize: "1.875rem", fontWeight: 600 }}>
-            エラーが発生しました
-          </h1>
-          <p style={{ marginTop: "1rem", color: "#52525b", lineHeight: 1.75 }}>
-            申し訳ありません。サイトの表示中に問題が発生しました。
-          </p>
-          <div style={{ marginTop: "2rem", display: "flex", gap: "1rem" }}>
-            <button
-              type="button"
-              onClick={reset}
-              style={{
-                borderRadius: "9999px",
-                backgroundColor: "#09090b",
-                color: "#ffffff",
-                padding: "0.625rem 1.5rem",
-                fontSize: "0.875rem",
-                border: "none",
-                cursor: "pointer",
-              }}
-            >
-              再試行する
-            </button>
-            <Link
-              href="/"
-              style={{
-                borderRadius: "9999px",
-                backgroundColor: "#ffffff",
-                color: "#09090b",
-                padding: "0.625rem 1.5rem",
-                fontSize: "0.875rem",
-                border: "1px solid #d4d4d8",
-                textDecoration: "none",
-              }}
-            >
-              ホームに戻る
-            </Link>
+          <div className="gg-cell border-border w-full max-w-[560px] border text-center sm:p-10">
+            <p className="gg-label">ERROR</p>
+            <h1 className="text-text-primary mt-4 text-[28px] leading-[1.3] font-medium tracking-[-0.015em] sm:text-[36px] sm:leading-[1.2]">
+              エラーが発生しました
+            </h1>
+            <p className="gg-prose-ja text-text-secondary mt-5 text-[16px]">
+              申し訳ありません。サイトの表示中に問題が発生しました。
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <button
+                type="button"
+                onClick={reset}
+                className="gg-btn gg-btn-outline"
+              >
+                再試行する
+              </button>
+              <Link href="/" className="gg-btn gg-btn-outline">
+                ホームに戻る
+              </Link>
+            </div>
           </div>
         </main>
       </body>
