@@ -9,6 +9,7 @@ import { THEME_STORAGE_KEY } from "@/components/geist/theme-toggle"
 import { getDictionary } from "@/i18n/dictionaries"
 import { render, screen, within } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
+import { renderToStaticMarkup } from "react-dom/server"
 
 let mockPathname = "/"
 
@@ -138,6 +139,21 @@ describe("Header", () => {
 
       expect(document.documentElement.getAttribute("data-theme")).toBe("dark")
       expect(localStorage.getItem(THEME_STORAGE_KEY)).toBe("dark")
+    })
+
+    it("SSR 出力では aria-pressed を主張しない（実テーマは <head> のスクリプトでしか分からないため）", () => {
+      // renderToStaticMarkup はエフェクトを一切実行しないので、実際の SSR 出力（マウント前）
+      // を再現する。ここで aria-pressed が出ていたら、それは実テーマと無関係な決め打ち値になる。
+      const html = renderToStaticMarkup(<Header />)
+      expect(html).not.toMatch(/aria-pressed/)
+    })
+
+    it("マウント後は実テーマに aria-pressed が追従する（<head> が light を確定させていた場合）", () => {
+      // <head> の THEME_INIT_SCRIPT がハイドレーション前に data-theme を確定させる状況を再現する。
+      document.documentElement.setAttribute("data-theme", "light")
+      render(<Header />)
+
+      expect(screen.getByRole("button", { pressed: false })).toBeInTheDocument()
     })
 
     it("アイコンは state ではなく dark: バリアントで出し分けている（初回ペイントのチラつき防止）", () => {

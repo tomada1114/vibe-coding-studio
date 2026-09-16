@@ -80,8 +80,9 @@ export function ThemeToggle({
   toLightLabel: string
   toDarkLabel: string
 }) {
-  // aria-label / aria-pressed 用。アイコン自体はこの state を経由せず CSS で出し分けるため
-  // （下記コメント参照）、SSR とマウント後の値が食い違っていても視覚的なチラつきは起きない。
+  // aria-label / aria-pressed 用。アイコン自体はこの state を経由せず CSS で出し分ける
+  // （下記コメント参照）。マウント前は実テーマが未確定なので、以下の JSX では両属性とも
+  // 「間違った値」ではなく「まだ値を主張しない」状態にする（isDark をそのまま出さない）。
   const [theme, setTheme] = useState<Theme>("dark")
   const [mounted, setMounted] = useState(false)
 
@@ -109,7 +110,7 @@ export function ThemeToggle({
       type="button"
       onClick={toggle}
       aria-label={mounted ? (isDark ? toLightLabel : toDarkLabel) : label}
-      aria-pressed={isDark}
+      aria-pressed={mounted ? isDark : undefined}
       className="border-border text-text-muted hover:text-text-primary hover:bg-surface-1 flex size-7 items-center justify-center rounded-[6px] border transition-colors"
     >
       {/* アイコンは state ではなく <html data-theme> に紐づく dark: バリアントで出し分ける。
