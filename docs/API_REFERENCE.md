@@ -1,455 +1,124 @@
-# API Reference - Vibe Coding Studio
+# Vibe Coding Studio — API Reference
 
-## Overview
+> Updated: 2026-09-15
 
-This document provides detailed API documentation for all endpoints, utilities, and integrations in Vibe Coding Studio.
+## Scope
 
-## Table of Contents
+This project currently exposes no public `src/app/api/**` route handlers. The site
+is a statically generated content site. The following functions are the supported
+internal interfaces used by route components and metadata generation.
 
-1. [REST API Endpoints](#rest-api-endpoints)
-2. [Utility Functions](#utility-functions)
-3. [Component APIs](#component-apis)
+## Locale and dictionary APIs
 
-## REST API Endpoints
+### `getDictionary(locale)`
 
-### CSP Report Endpoint
+```ts
+import { getDictionary } from "@/i18n/dictionaries"
 
-#### `POST /api/csp-report`
-
-Receives and processes Content Security Policy violation reports.
-
-**Request Headers:**
-
-- `Content-Type`: `application/csp-report` or `application/json`
-
-**Request Body:**
-
-```typescript
-interface CSPReport {
-  'csp-report': {
-    'document-uri': string
-    'violated-directive': string
-    'effective-directive': string
-    'original-policy': string
-    disposition: 'enforce' | 'report'
-    'blocked-uri': string
-    'line-number': number
-    'column-number': number
-    'source-file': string
-    'status-code': number
-    'script-sample': string
-  }
-}
+const dict = getDictionary("en")
 ```
 
-**Response:**
+Returns a `Dictionary` with the display copy for the requested `Locale` (`"ja"`
+or `"en"`). Both dictionaries are checked against the same TypeScript shape.
 
-- Status: `204 No Content` (success)
-- Status: `400 Bad Request` (invalid format)
-- Status: `500 Internal Server Error` (processing error)
+### `getLocaleFromPathname(pathname)`
 
-**Error Response:**
-
-```json
-{
-  "error": "Error message description"
-}
+```ts
+getLocaleFromPathname(pathname: string | null): Locale
 ```
 
-**Implementation Details:**
+Returns `"en"` for `/en` and `/en/*`; all other paths use the default locale
+`"ja"`.
 
-- Validates CSP report format using `parseCSPViolation`
-- Logs violations with appropriate severity levels
-- Detects critical violations (script-src, default-src)
-- Optional analytics integration for metrics tracking
+### `localizePath(pathname, locale)`
 
----
-
-#### `OPTIONS /api/csp-report`
-
-CORS preflight handler for CSP reporting.
-
-**Response Headers:**
-
-- `Access-Control-Allow-Origin`: `*`
-- `Access-Control-Allow-Methods`: `POST, OPTIONS`
-- `Access-Control-Allow-Headers`: `Content-Type`
-
----
-
-### Cache Revalidation Endpoint
-
-#### `POST /api/revalidate`
-
-On-demand cache revalidation for ISR pages.
-
-**Request Body:**
-
-```typescript
-interface RevalidateBody {
-  type?: 'path' | 'tag' | 'all'
-  path?: string
-  tag?: string
-  paths?: string[]
-  tags?: string[]
-  secret?: string
-}
+```ts
+localizePath(pathname: string, locale: Locale): string
 ```
 
-**Sanity Webhook Format:**
+Adds the `/en` prefix only for `EN_ENABLED_PATHS` (`/`, `/courses`, and
+`/community`). Japanese paths remain unchanged, and paths without an English
+page are returned unchanged rather than producing a broken link.
 
-```typescript
-interface SanityWebhook {
-  _type: 'page' | 'category' | string
-  slug?: {
-    current: string
-  }
-  // Other Sanity document fields
-}
+### `getLocaleAlternates(pathname)`
+
+```ts
+getLocaleAlternates(pathname: string | null): Record<Locale, string>
 ```
 
-**Response:**
+Returns the Japanese and English links for the language toggle. For a page without
+an English counterpart, the English link is `/en`.
 
-```json
-{
-  "revalidated": ["path:/pricing", "tag:marketing"],
-  "timestamp": "2024-01-01T00:00:00.000Z"
-}
+## SEO APIs
+
+### `getSiteUrl()`
+
+```ts
+getSiteUrl(): string
 ```
 
-**Security:**
+Reads `NEXT_PUBLIC_SITE_URL`, validates it, strips one trailing slash, and falls
+back to `https://www.vibecodingstudio.dev` when the value is missing or invalid.
 
-- Requires `REVALIDATION_SECRET` environment variable
-- Returns 401 for invalid secrets
+It is used by route metadata, `src/app/robots.ts`, and `src/app/sitemap.ts` so
+canonical URLs share one source of truth.
 
----
+## Content data APIs
 
-#### `GET /api/revalidate`
+### `getAllUdemyCourses()`
 
-Manual revalidation endpoint for testing.
-
-**Query Parameters:**
-
-- `path`: Path to revalidate
-- `tag`: Cache tag to revalidate
-- `secret`: Authentication secret
-
-**Info Response (no params):**
-
-```json
-{
-  "message": "Cache revalidation endpoint",
-  "usage": {
-    "POST": {
-      /* ... */
-    },
-    "GET": {
-      /* ... */
-    }
-  },
-  "examples": [
-    /* ... */
-  ]
-}
+```ts
+getAllUdemyCourses(): UdemyCourse[]
 ```
 
----
+Returns a copy of the complete course list. The function also copies each topic
+array so callers cannot mutate the source data in `src/data/udemy-courses/index.ts`.
+The returned title and description fields are the published Japanese source data.
 
-## Utility Functions
+### `formatMemberCount(count)`
 
-### CSP Utilities
-
-#### `parseCSPViolation(body)`
-
-Parse and validate CSP violation reports.
-
-**Parameters:**
-
-- `body`: Raw CSP report body
-
-**Returns:**
-
-```typescript
-{
-  documentUri: string
-  violatedDirective: string
-  effectiveDirective: string
-  blockedUri: string
-  sourceFile?: string
-  lineNumber?: number
-  columnNumber?: number
-  sample?: string
-  disposition: 'enforce' | 'report'
-  statusCode?: number
-  referrer?: string
-} | null
+```ts
+formatMemberCount(count: number): string
 ```
 
----
+Rounds a Discord member count down to the nearest ten and formats it with a
+locale-aware thousands separator and a trailing `+`. A zero count returns an
+empty string.
 
-### Image Utilities
+### `getDiscordMemberCount()`
 
-#### `urlForImage(source)`
-
-Generate optimized Sanity image URLs.
-
-**Parameters:**
-
-- `source`: Sanity image reference
-
-**Returns:** Sanity image URL builder instance
-
-**Methods:**
-
-- `.width(pixels)`: Set image width
-- `.height(pixels)`: Set image height
-- `.auto('format')`: Auto-format selection
-- `.quality(percentage)`: Set quality (0-100)
-- `.url()`: Generate final URL
-
----
-
-### Logger Utilities
-
-#### `logger`
-
-Structured logging utility with levels.
-
-**Methods:**
-
-- `logger.info(message, metadata?)`
-- `logger.warn(message, metadata?)`
-- `logger.error(message, metadata?)`
-- `logger.debug(message, metadata?)`
-
-**Metadata Structure:**
-
-```typescript
-{
-  [key: string]: any
-  timestamp?: number
-  context?: string
-}
+```ts
+getDiscordMemberCount(): Promise<number>
 ```
 
----
+Fetches approximate guild member counts from Discord API v10 using the private
+environment variables `DISCORD_BOT_TOKEN` and `DISCORD_GUILD_ID`. The request is
+cached for one hour with the `discord-member-count` tag. Missing credentials return
+`0`; HTTP and network failures throw `DiscordAPIError` after logging the failure.
 
-### Cache Utilities
+## Route metadata
 
-#### `revalidatePath(path)`
+The six public page routes are statically generated:
 
-Revalidate specific path cache.
+| Route | Canonical URL | Alternate URLs |
+| --- | --- | --- |
+| `/` | site root | `/en` |
+| `/en` | `/en` | site root |
+| `/courses` | `/courses` | `/en/courses` |
+| `/en/courses` | `/en/courses` | `/courses` |
+| `/community` | `/community` | `/en/community` |
+| `/en/community` | `/en/community` | `/community` |
 
-**Parameters:**
+The sitemap includes all six URLs. `robots.txt` allows the public site and
+disallows `/api/` and `/_next/` paths.
 
-- `path`: Path to revalidate (e.g., '/pricing')
+## Environment variables
 
----
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Recommended | Canonical URLs, robots, and sitemap |
+| `DISCORD_BOT_TOKEN` | Optional | Server-side Discord member count |
+| `DISCORD_GUILD_ID` | Optional | Discord guild selected for the count |
 
-#### `revalidateTag(tag)`
-
-Revalidate cache by tag.
-
-**Parameters:**
-
-- `tag`: Cache tag (e.g., 'marketing')
-
----
-
-### Retry Utilities
-
-#### `withRetry(fn, options?)`
-
-Execute function with automatic retry logic.
-
-**Parameters:**
-
-- `fn`: Function to execute
-- `options`: Retry configuration
-
-**Options:**
-
-```typescript
-{
-  maxAttempts?: number   // Default: 3
-  delay?: number        // Default: 1000ms
-  backoff?: number      // Default: 2 (exponential)
-  onRetry?: (error, attempt) => void
-}
-```
-
-## Component APIs
-
-### BentoCard
-
-```typescript
-interface BentoCardProps {
-  dark?: boolean
-  className?: string
-  eyebrow: React.ReactNode
-  title: React.ReactNode
-  description: React.ReactNode
-  graphic: React.ReactNode
-  fade?: ('top' | 'bottom')[]
-}
-```
-
-### AnimatedNumber
-
-```typescript
-interface AnimatedNumberProps {
-  value: number
-  duration?: number // Default: 2000ms
-  format?: (value: number) => string
-  className?: string
-}
-```
-
-### Container
-
-```typescript
-interface ContainerProps {
-  className?: string
-  children: React.ReactNode
-}
-```
-
-### Button
-
-```typescript
-interface ButtonProps {
-  variant?: 'primary' | 'secondary' | 'outline'
-  size?: 'sm' | 'md' | 'lg'
-  href?: string
-  onClick?: () => void
-  disabled?: boolean
-  className?: string
-  children: React.ReactNode
-}
-```
-
-### Screenshot
-
-```typescript
-interface ScreenshotProps {
-  src: string
-  alt: string
-  width: number
-  height: number
-  className?: string
-  priority?: boolean
-}
-```
-
-## Type Definitions
-
-### Security Types
-
-#### CSP Violation
-
-```typescript
-interface CSPViolation {
-  documentUri: string
-  violatedDirective: string
-  effectiveDirective: string
-  originalPolicy: string
-  disposition: 'enforce' | 'report'
-  blockedUri: string
-  lineNumber?: number
-  columnNumber?: number
-  sourceFile?: string
-  statusCode?: number
-  scriptSample?: string
-  referrer?: string
-}
-```
-
-## Error Codes
-
-### API Error Codes
-
-| Code | Description           | Resolution                   |
-| ---- | --------------------- | ---------------------------- |
-| 400  | Bad Request           | Check request format         |
-| 401  | Unauthorized          | Verify authentication secret |
-| 404  | Not Found             | Check endpoint URL           |
-| 500  | Internal Server Error | Check server logs            |
-
-### Validation Errors
-
-| Error                | Description                           | Resolution                         |
-| -------------------- | ------------------------------------- | ---------------------------------- |
-| `INVALID_CSP_FORMAT` | CSP report format invalid             | Ensure proper CSP report structure |
-| `INVALID_SECRET`     | Revalidation secret mismatch          | Check REVALIDATION_SECRET env var  |
-| `MISSING_ENV_VAR`    | Required environment variable missing | Set required environment variables |
-| `SANITY_API_ERROR`   | Sanity API request failed             | Check Sanity configuration         |
-
-## Rate Limiting
-
-### Endpoint Limits
-
-| Endpoint           | Rate Limit   | Window   |
-| ------------------ | ------------ | -------- |
-| `/api/csp-report`  | 100 req/min  | 1 minute |
-| `/api/performance` | 1000 req/min | 1 minute |
-| `/api/revalidate`  | 10 req/min   | 1 minute |
-
-### Response Headers
-
-```
-X-RateLimit-Limit: 100
-X-RateLimit-Remaining: 95
-X-RateLimit-Reset: 1234567890
-```
-
-## Webhook Integration
-
-### Sanity Webhooks
-
-Configure in Sanity Studio:
-
-**URL:** `https://your-domain.com/api/revalidate`
-
-**Headers:**
-
-```json
-{
-  "Content-Type": "application/json"
-}
-```
-
-**Body:**
-
-```json
-{
-  "secret": "your-revalidation-secret",
-  "_type": "{{doc._type}}",
-  "slug": "{{doc.slug}}"
-}
-```
-
-**Triggers:**
-
-- Create
-- Update
-- Delete
-
-## Examples
-
-### Manual Cache Revalidation
-
-```bash
-# Revalidate path
-curl -X POST https://your-domain.com/api/revalidate \
-  -H "Content-Type: application/json" \
-  -d '{"type":"path","path":"/pricing","secret":"your-secret"}'
-
-# Revalidate tag
-curl -X POST https://your-domain.com/api/revalidate \
-  -H "Content-Type: application/json" \
-  -d '{"type":"tag","tag":"marketing","secret":"your-secret"}'
-```
-
----
-
-_Generated from Vibe Coding Studio v0.1.0_
+Keep the bot token server-side. Do not expose it through a client component or a
+`NEXT_PUBLIC_*` variable.
