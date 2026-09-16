@@ -3,6 +3,14 @@
 このリポジトリでコードを扱う AI コーディングエージェント（Claude Code / Codex CLI）向けの共通ガイド。
 Claude Code は `CLAUDE.md` 経由でこのファイルを読み込む。
 
+このガイドは3層のうちの1つ。**設定ファイル**（`jest.config.js`・`eslint.config.mjs`・
+`.github/workflows/*` など）が機械的に強制できる値そのものを持ち、**スキル**
+（`.claude/skills/`）がある種類の変更に手を付けた**あとで**要る手順と判断を持つ。この
+ファイルが持つのは、どのタスクに手を付けるかが決まる**前**に真でなければならないこと
+——プロジェクトの形、承認の規約、どのスキルを読むべきか——だけ。1つのルールは1箇所
+にだけ書く。設定が持つ値をここやスキルに書き写さない。書き写した側が先に古くなる。
+ゲートを走らせれば学べることを、先回りして書かない。
+
 **日本語で回答すること。**
 
 ## プロジェクト概要
@@ -20,6 +28,25 @@ Claude Code は `CLAUDE.md` 経由でこのファイルを読み込む。
 | `npm run lint` / `type-check` / `test` / `test:coverage` | 個別実行 |
 
 ウォッチ実行は `npx jest --watch <path>`（`test:watch` スクリプトは無い）。
+
+## 変更を検証する
+
+落とせる最短のチェックをまず走らせ、最後に `npm run check:all` を通す。毎回フルゲート
+を待つのは遅く、結局誰も走らせなくなる。
+
+| 変更した対象 | 最短のチェック |
+|---|---|
+| `src/components/geist/**` | `npx jest src/components/geist` |
+| `src/i18n/**`（辞書・ロケール） | `npx jest src/i18n` |
+| `src/lib/**` | `npx jest src/lib` |
+| `src/data/**` | `npx jest src/data` |
+| `src/app/**` のページ・レイアウト | `npm run build`（App Router のエントリは `tsc` では届かない） |
+| `src/styles/tailwind.css`（トークン） | `npm run build` + 該当ページの Geist Grid 規則テスト |
+| 型だけの変更 | `npm run type-check` |
+| `.claude/skills/**`・`AGENTS.md` のスキル表 | `npx jest __tests__/skills.test.ts` |
+| `package.json` / `package-lock.json` | `npm ci && npm run check:all` |
+| `.github/workflows/**` | ローカルでは落とせない。`changing-gates` を読む |
+| 何を変更しても最後に | `npm run check:all` |
 
 ## スキル
 
@@ -61,6 +88,43 @@ Claude Code は `CLAUDE.md` 経由でこのファイルを読み込む。
 - コミット前に `npm run check:all` を通す。lint・型・テストのエラーを残したままコミットしない。
 - コミットは小さく原子的に、Conventional Commits で。
 - パスエイリアスは `@/` → `./src/`。
+
+## セキュリティと人間の承認
+
+グローバル `~/.claude/AGENTS.md` の「Ask before destructive or external writes」を、
+このリポジトリの具体に落とすと次になる。
+
+- commit・push・PR 作成・マージは常に人間の判断を通す。これは規約であり、機械が
+  強制しているわけではない（下の「強制の層」参照）。
+- `.env` と `.env.local` は読まない。読むこと自体が漏洩なので、`cat`・`grep`・一時
+  ファイルへのコピー・コマンドライン引数への露出も同じく避ける。参照してよいのは
+  `.env.example` と `config/env-definitions.json` だけ。
+- 秘密情報を追跡対象のファイルに書かない。`.claude/settings.local.json` は
+  gitignore 済みで、これも読まない。
+- `package-lock.json` は `npm install` / `npm ci` の生成物。手で編集しない。
+- **ゲートを緩めて CI を通さない。** 具体的に禁止する手段: `jest.config.js` の
+  `coverageThreshold` を下げる / `collectCoverageFrom` に除外を足す / `--no-verify` /
+  範囲を切らない `eslint-disable` / `@ts-ignore` / `it.skip` の追加 / `.github/workflows/`
+  のジョブやステップの削除 / `dependency-review.yml` の `fail-on-severity` の引き下げ。
+  ゲートの方が間違っていると思ったら、緩めるのではなく人間に聞く。
+- 最後の1項がスキルではなくここに要る理由: 赤い CI を前にしたエージェントは自分の
+  タスクを「CI を緑にする」と分類していて、どのスキルも発火しない。
+
+## 強制の層
+
+| 層 | いつ動くか | 適用範囲 | 何を持つか |
+|---|---|---|---|
+| `.github/workflows/ci.yml` | `main` への push と全 PR | リポジトリ全体・人もエージェントも | `format:check` → `lint` → `type-check` → `build`、および `test:coverage` |
+| このファイル | エージェントセッションの開始時 | エージェントの作業のみ | 設定が表現できない判断と、機械が強制しない禁止事項 |
+
+- **pre-commit フックは無い。** ローカルのコミットは何も検証されずに通る。
+  `npm run check:all` は自発的に走らせるもので、誰も強制しない。CI が唯一の機械的な
+  砦であり、「手元で緑だった」は着地の根拠にならない。フックの導入は #86 で追っている。
+- `.claude/settings.json` の `SessionStart` フックは `scripts/install_pkgs.sh`
+  （= `npm install`）を走らせるだけで、ゲートではない。
+- 第3層（`permissions.allow` / `deny`）は持たない。個人の許可リストは
+  `~/.claude/settings.json` か、gitignore 済みの `.claude/settings.local.json` に置く。
+- どの層も、他の層が持つルールを写さない。
 
 ## MCP
 
