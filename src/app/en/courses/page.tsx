@@ -1,16 +1,17 @@
 import { CoursesPage } from "@/components/geist/courses-page"
+import { HtmlLang } from "@/components/geist/html-lang"
 import { getDictionary } from "@/i18n/dictionaries"
 import { getSiteUrl } from "@/lib/seo/site-url"
 import type { Metadata } from "next"
 
+const dict = getDictionary("en")
 const siteUrl = getSiteUrl()
-const dict = getDictionary("ja")
 
 export const metadata: Metadata = {
   title: dict.courses.metaTitle,
   description: dict.courses.metaDescription,
   alternates: {
-    canonical: `${siteUrl}/courses`,
+    canonical: `${siteUrl}/en/courses`,
     languages: {
       ja: `${siteUrl}/courses`,
       en: `${siteUrl}/en/courses`,
@@ -19,6 +20,11 @@ export const metadata: Metadata = {
   },
 }
 
-export default function CoursesRoute() {
-  return <CoursesPage locale="ja" dict={dict} />
+export default function EnglishCourses() {
+  return (
+    <>
+      <HtmlLang locale="en" />
+      <CoursesPage locale="en" dict={dict} />
+    </>
+  )
 }

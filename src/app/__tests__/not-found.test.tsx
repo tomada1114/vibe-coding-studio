@@ -1,29 +1,6 @@
 import NotFound from "@/app/not-found"
 import { render, screen } from "@testing-library/react"
 
-const removedPaths = [["/", "road", "map"].join(""), ["/", "videos"].join("")]
-
-// Mock components
-jest.mock("@/components/button", () => ({
-  Button: ({
-    children,
-    href,
-  }: {
-    children: React.ReactNode
-    href?: string
-  }) => <a href={href}>{children}</a>,
-}))
-
-jest.mock("@/components/container", () => ({
-  Container: ({
-    children,
-    className,
-  }: {
-    children: React.ReactNode
-    className?: string
-  }) => <div className={className}>{children}</div>,
-}))
-
 describe("NotFound Page", () => {
   it("renders 404 text", () => {
     render(<NotFound />)
@@ -31,11 +8,11 @@ describe("NotFound Page", () => {
     expect(screen.getByText("404")).toBeInTheDocument()
   })
 
-  it("renders page not found heading", () => {
+  it("renders the page not found heading", () => {
     render(<NotFound />)
 
     expect(
-      screen.getByRole("heading", { name: "迷子になりましたか？" })
+      screen.getByRole("heading", { name: "ページが見つかりません" })
     ).toBeInTheDocument()
   })
 
@@ -44,7 +21,7 @@ describe("NotFound Page", () => {
 
     expect(
       screen.getByText(
-        "お探しのページは存在しないか、どこかへ旅立ってしまったようです。"
+        "お探しのページは存在しないか、移動した可能性があります。"
       )
     ).toBeInTheDocument()
   })
@@ -56,28 +33,19 @@ describe("NotFound Page", () => {
     expect(homeLink.closest("a")).toHaveAttribute("href", "/")
   })
 
-  it("renders frequently accessed pages", () => {
-    render(<NotFound />)
+  it("renders one Geist cell with a home link", () => {
+    const { container } = render(<NotFound />)
 
-    expect(screen.getByText("学習コース")).toBeInTheDocument()
-    expect(screen.getByText("コミュニティ")).toBeInTheDocument()
-    expect(screen.getByText("講座")).toBeInTheDocument()
-    expect(screen.getByRole("link", { name: "講座" })).toHaveAttribute(
-      "href",
-      "/courses"
-    )
-    expect(
-      screen
-        .getAllByRole("link")
-        .some(link => removedPaths.includes(link.getAttribute("href") ?? ""))
-    ).toBe(false)
+    expect(container.querySelectorAll(".gg-cell")).toHaveLength(1)
+    expect(container.querySelectorAll(".gg-cell-grid")).toHaveLength(0)
+
+    const homeLink = screen.getByRole("link", { name: "ホームに戻る" })
+    expect(homeLink).toHaveAttribute("href", "/")
   })
 
-  it("renders navigation landmark", () => {
+  it("does not expose removed navigation paths", () => {
     render(<NotFound />)
 
-    expect(
-      screen.getByRole("navigation", { name: "主要ページ" })
-    ).toBeInTheDocument()
+    expect(screen.getAllByRole("link")).toHaveLength(1)
   })
 })

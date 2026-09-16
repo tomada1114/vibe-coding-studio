@@ -2,7 +2,7 @@
  * トップページ（英語）— 個人プロフィール
  *
  * 実装は日本語版と共有（`src/components/geist/profile-page.tsx`）。
- * 英語版を持つのは現時点でこのページのみで、他のルートは日本語のまま。
+ * 英語版はトップ・講座一覧・コミュニティの 3 面で提供する。
  */
 import { HtmlLang } from "@/components/geist/html-lang"
 import { ProfilePage } from "@/components/geist/profile-page"

@@ -10,7 +10,6 @@ import { socialIconMap, XIcon } from "./social-icons"
 
 const SITE_LINKS: { key: NavKey; href: string }[] = [
   { key: "home", href: "/" },
-  { key: "docs", href: "/docs" },
   { key: "community", href: "/community" },
   { key: "courses", href: "/courses" },
 ]
@@ -23,7 +22,7 @@ export function Footer() {
 
   return (
     <footer className="bg-bg border-border border-t">
-      <div className="mx-auto max-w-[1120px] px-4 sm:px-6 lg:px-8">
+      <div className="gg-container">
         <div className="gg-cell-grid grid-cols-1 border-x-0 sm:grid-cols-3">
           <div className="gg-cell">
             <p className="gg-label">Site</p>
@@ -52,7 +51,7 @@ export function Footer() {
                   className="text-text-secondary hover:text-text-primary text-sm transition-colors hover:underline"
                 >
                   {dict.footer.discord}
-                  <span aria-hidden="true" className="text-text-secondary ml-1">
+                  <span aria-hidden="true" className="text-text-muted ml-1">
                     ↗
                   </span>
                 </a>

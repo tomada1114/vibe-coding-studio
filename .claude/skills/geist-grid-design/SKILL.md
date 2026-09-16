@@ -29,7 +29,7 @@ metadata:
 | フッター | `src/components/geist/footer.tsx` |
 | ルートレイアウト（フォント・`data-theme`・共通枠） | `src/app/layout.tsx` |
 
-**移行ステータス: トップページ（`/`・`/en`）・共通ヘッダー・共通フッターのみ移行済み。** 他のページは旧 Radiant デザインのまま。未移行ページは自前の背景を持たないため、`src/app/layout.tsx` が明るい地（`bg-white text-gray-950`）を敷いている。**Geist Grid へ移行したページは、自身のルート要素に `gg-surface` を付けてこの地を上書きする。**
+**移行ステータス: 公開ページ（`/`・`/en`・`/courses`・`/en/courses`・`/community`・`/en/community`）・共通ヘッダー・共通フッター・エラーページはすべて Geist Grid に移行済み。** 旧学習ドキュメント（`/docs` / Markdoc）は廃止済み。**各ページのルート要素には `gg-surface` を付け、テーマトークンの地を明示する。**
 
 ## 設計原則
 
@@ -215,13 +215,15 @@ const themeInit = `(function(){try{
 
 ## i18n（日本語が既定・英語がサブ）
 
-**現状: ライブラリなし。`/en` プレフィクスで、英語版を持つのはトップページだけ。** 日本語は既存 URL をそのまま使う（プレフィクスなし）。
+**現状: ライブラリなし。`/en` プレフィクスで、英語版はトップ・講座一覧・コミュニティの 3 面。** 日本語は既存 URL をそのまま使う（プレフィクスなし）。
 
 | 対象 | パス |
 |---|---|
 | ロケール定義・パス解決 | `src/i18n/locale.ts` |
 | メッセージ辞書（`ja` / `en`） | `src/i18n/dictionaries.ts` |
 | 日本語トップ / 英語トップ | `src/app/page.tsx` / `src/app/en/page.tsx` |
+| 日本語 / 英語の講座一覧 | `src/app/courses/page.tsx` / `src/app/en/courses/page.tsx` |
+| 日本語 / 英語のコミュニティ | `src/app/community/page.tsx` / `src/app/en/community/page.tsx` |
 
 規則:
 
@@ -236,7 +238,7 @@ const themeInit = `(function(){try{
 1. `src/i18n/dictionaries.ts` の `Dictionary` 型にそのページ用のキーを足し、`ja` と `en` の両方を埋める。
 2. ページ本体を「辞書と `locale` を受け取るコンポーネント」に切り出す（`src/components/geist/profile-page.tsx` が手本）。
 3. `src/app/en/<path>/page.tsx` を作り、`metadata.alternates.languages` と `HtmlLang` を付ける。
-4. `localizePath` を見直す。英語版ができたパスは、英語ロケールで `/en` 付きの URL を返すようにする。今は「トップ以外は日本語 URL を返す」という単純な実装になっている。
+4. `localizePath` と `getLocaleAlternates` を見直し、英語版を追加したパスを `EN_ENABLED_PATHS` に登録する。
 5. `sitemap.ts` に英語 URL を追加する。
 
 **next-intl へ移行する判断基準** — 英語化するページが 5 面を超えたら、`src/app/[locale]/` への全面リストラクチャと `next-intl` の導入を検討する。それ未満では、全ページ移動と middleware 追加のコストのほうが大きい。移行しても `src/i18n/dictionaries.ts` のメッセージ構造はそのまま流用できるよう、辞書はネストしたプレーンオブジェクトに保っておくこと。

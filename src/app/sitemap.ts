@@ -3,10 +3,9 @@
  *
  * Generates sitemap.xml with all site pages including:
  * - Static pages (varying priorities: 1.0 for home, 0.9-0.7 for others)
- * - Doc course pages (priority 0.7)
+ * - English counterparts for the three public surfaces
  * - Courses (priority 0.7)
  */
-import { getAllCourses } from "@/lib/course-constants"
 import { getSiteUrl } from "@/lib/seo/site-url"
 import type { MetadataRoute } from "next"
 
@@ -22,16 +21,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
+      url: `${baseUrl}/en`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 1.0,
+    },
+    {
       url: `${baseUrl}/community`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/docs`,
+      url: `${baseUrl}/en/community`,
       lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
+      changeFrequency: "weekly",
+      priority: 0.9,
     },
     {
       url: `${baseUrl}/courses`,
@@ -39,15 +44,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.7,
     },
+    {
+      url: `${baseUrl}/en/courses`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
   ]
 
-  // 学習コースページ
-  const coursePages: MetadataRoute.Sitemap = getAllCourses().map(course => ({
-    url: `${baseUrl}/docs/${course.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-  }))
-
-  return [...staticPages, ...coursePages]
+  return staticPages
 }

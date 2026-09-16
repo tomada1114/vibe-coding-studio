@@ -1,12 +1,7 @@
-import withMarkdoc from "@markdoc/next.js"
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // React configuration
   reactStrictMode: true,
-
-  // Markdownファイルをページとして認識させる
-  pageExtensions: ["js", "jsx", "md", "ts", "tsx"],
 
   // Image optimization
   images: {
@@ -137,4 +132,4 @@ if (process.env.ANALYZE === "true") {
   config = withBundleAnalyzer(nextConfig)
 }
 
-export default withMarkdoc({ schemaPath: "./src/markdoc" })(config)
+export default config

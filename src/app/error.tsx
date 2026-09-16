@@ -3,12 +3,6 @@
 import Link from "next/link"
 import { useEffect } from "react"
 
-/**
- * ルートエラー境界
- *
- * ページレンダリング中の未処理エラーを捕捉し、
- * 再試行とホームへの導線を提供する（ライトテーマ・日本語）。
- */
 export default function Error({
   error,
   reset,
@@ -24,30 +18,35 @@ export default function Error({
   }, [error])
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-white px-6 py-24 text-center">
-      <h1 className="text-3xl font-semibold tracking-tight text-gray-950 sm:text-4xl">
-        エラーが発生しました
-      </h1>
-      <p className="mt-4 text-base/7 text-gray-600">
-        申し訳ありません。ページの表示中に問題が発生しました。
-        <br />
-        時間をおいて再度お試しください。
-      </p>
-      <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row">
-        <button
-          type="button"
-          onClick={reset}
-          className="rounded-full bg-gray-950 px-6 py-2.5 text-sm font-medium text-white hover:bg-gray-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-950"
-        >
-          再試行する
-        </button>
-        <Link
-          href="/"
-          className="rounded-full bg-white px-6 py-2.5 text-sm font-medium text-gray-950 ring-1 ring-gray-300 hover:ring-gray-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-950"
-        >
-          ホームに戻る
-        </Link>
-      </div>
-    </main>
+    <div className="gg-surface min-h-screen">
+      <main
+        id="main-content"
+        className="gg-container flex min-h-screen items-center justify-center py-24"
+      >
+        <div className="gg-cell border-border w-full max-w-[560px] border text-center sm:p-10">
+          <p className="gg-label">ERROR</p>
+          <h1 className="text-text-primary mt-4 text-[28px] leading-[1.3] font-medium tracking-[-0.015em] sm:text-[36px] sm:leading-[1.2]">
+            エラーが発生しました
+          </h1>
+          <p className="gg-prose-ja text-text-secondary mt-5 text-[16px]">
+            申し訳ありません。ページの表示中に問題が発生しました。
+            <br />
+            時間をおいて再度お試しください。
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <button
+              type="button"
+              onClick={reset}
+              className="gg-btn gg-btn-outline"
+            >
+              再試行する
+            </button>
+            <Link href="/" className="gg-btn gg-btn-outline">
+              ホームに戻る
+            </Link>
+          </div>
+        </div>
+      </main>
+    </div>
   )
 }

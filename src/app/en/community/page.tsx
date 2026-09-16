@@ -1,10 +1,11 @@
 import CommunityPage from "@/components/geist/community-page"
+import { HtmlLang } from "@/components/geist/html-lang"
 import { getDictionary } from "@/i18n/dictionaries"
 import { getSiteUrl } from "@/lib/seo/site-url"
 import type { Metadata } from "next"
 
+const dict = getDictionary("en")
 const siteUrl = getSiteUrl()
-const dict = getDictionary("ja")
 
 export const metadata: Metadata = {
   title: dict.community.metaTitle,
@@ -13,7 +14,8 @@ export const metadata: Metadata = {
     title: dict.community.ogTitle,
     description: dict.community.metaDescription,
     type: "website",
-    url: `${siteUrl}/community`,
+    url: `${siteUrl}/en/community`,
+    locale: "en_US",
     images: [
       {
         url: "/og-image.png",
@@ -30,7 +32,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: `${siteUrl}/community`,
+    canonical: `${siteUrl}/en/community`,
     languages: {
       ja: `${siteUrl}/community`,
       en: `${siteUrl}/en/community`,
@@ -41,6 +43,11 @@ export const metadata: Metadata = {
 
 export const revalidate = 3600
 
-export default function CommunityRoute() {
-  return <CommunityPage locale="ja" dict={dict} />
+export default function EnglishCommunity() {
+  return (
+    <>
+      <HtmlLang locale="en" />
+      <CommunityPage locale="en" dict={dict} />
+    </>
+  )
 }

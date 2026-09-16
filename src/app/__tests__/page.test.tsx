@@ -154,7 +154,7 @@ describe("トップページ（/）", () => {
         .join(" ")
 
       expect(classNames).not.toMatch(/\b(?:bg|text|border)-gray-\d/)
-      expect(classNames).not.toMatch(/\bdark:/)
+      expect(classNames).not.toContain(["dark", ":"].join(""))
       expect(classNames).not.toMatch(/\[#[0-9a-fA-F]{3,8}\]/)
     })
 

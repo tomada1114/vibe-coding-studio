@@ -51,7 +51,7 @@ const PROFILE_LINKS = [
 /** 外部リンクの末尾に置く矢印 */
 function ExternalArrow() {
   return (
-    <span aria-hidden="true" className="text-text-secondary ml-1 text-[12px]">
+    <span aria-hidden="true" className="text-text-muted ml-1 text-[12px]">
       ↗
     </span>
   )
@@ -71,12 +71,12 @@ function Section({
   return (
     <section className={clsx("mt-16 sm:mt-24", className)}>
       <div className="flex items-baseline gap-3">
-        <h2 className="gg-label">{label}</h2>
+        <p className="gg-label">{label}</p>
         <span aria-hidden="true" className="bg-border h-px flex-1" />
       </div>
-      <p className="text-text-primary mt-3 text-[20px] leading-[1.5] font-medium tracking-[-0.01em] sm:text-2xl sm:tracking-[-0.015em]">
+      <h2 className="text-text-primary mt-3 text-[20px] leading-[1.5] font-medium sm:text-2xl sm:tracking-[-0.015em]">
         {heading}
-      </p>
+      </h2>
       <div className="mt-6">{children}</div>
     </section>
   )
@@ -126,7 +126,7 @@ export function ProfilePage({
             aria-hidden="true"
             className="gg-grid-field pointer-events-none absolute inset-0 -z-10"
           />
-          <div className="mx-auto max-w-[1120px] px-4 pt-16 pb-12 sm:px-6 sm:pt-24 sm:pb-16 lg:px-8">
+          <div className="gg-container pt-16 pb-12 sm:pt-24 sm:pb-16">
             <div className="grid items-start gap-10 lg:grid-cols-[1fr_auto]">
               <div className="max-w-[720px]">
                 <p className="gg-label">{dict.hero.label}</p>
@@ -170,7 +170,7 @@ export function ProfilePage({
                 </div>
               </div>
 
-              <div className="border-border w-full max-w-[280px] border">
+              <div className="border-border w-full max-w-[280px] overflow-hidden rounded-[6px] border">
                 <Image
                   src="/tomada.png"
                   alt={dict.hero.photoAlt}
@@ -188,7 +188,7 @@ export function ProfilePage({
         {/* グラデーション罫線。このページで唯一の 1 本。 */}
         <div aria-hidden="true" className="gg-rule-accent" />
 
-        <div className="mx-auto max-w-[1120px] px-4 pb-24 sm:px-6 sm:pb-32 lg:px-8">
+        <div className="gg-container pb-24 sm:pb-32">
           {/* ── STATS ─────────────────────────────────────── */}
           <section className="mt-12 sm:mt-16">
             <h2 className="sr-only">{dict.hero.label}</h2>
@@ -228,7 +228,7 @@ export function ProfilePage({
 
               <div className="gg-cell">
                 <p className="gg-label">Title</p>
-                <h3 className="text-text-primary mt-3 text-[20px] leading-[1.5] font-medium tracking-[-0.01em] sm:text-2xl">
+                <h3 className="text-text-primary mt-3 text-[20px] leading-[1.5] font-medium sm:text-2xl sm:tracking-[-0.015em]">
                   {book.title}
                 </h3>
 

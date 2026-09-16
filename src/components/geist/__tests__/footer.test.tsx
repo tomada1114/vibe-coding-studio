@@ -83,6 +83,6 @@ describe("Footer", () => {
       .join(" ")
 
     expect(classNames).not.toMatch(/\b(?:bg|text|border)-gray-\d/)
-    expect(classNames).not.toMatch(/\bdark:/)
+    expect(classNames).not.toContain(["dark", ":"].join(""))
   })
 })

@@ -8,8 +8,8 @@ Claude Code は `CLAUDE.md` 経由でこのファイルを読み込む。
 ## プロジェクト概要
 
 **Vibe Coding Studio** — Next.js 15（App Router）/ React 19 / Tailwind CSS v4 / TypeScript strict の
-静的サイト。Udemy講座、学習ドキュメント（Markdoc）を配信する。
-デザインシステムは「Geist Grid」（ダーク既定＋ライト手動切替）。日本語が既定で、`/en` に英語トップがある。
+静的サイト。プロフィール、Udemy講座、Discordコミュニティを配信する。旧学習ドキュメント（`/docs` / Markdoc）は廃止済み。
+デザインシステムは「Geist Grid」（ダーク既定＋ライト手動切替）。日本語が既定で、トップ・講座・コミュニティに英語版がある。
 
 ## 開発コマンド
 
@@ -30,10 +30,10 @@ Claude Code は `CLAUDE.md` 経由でこのファイルを読み込む。
 
 このリポジトリ側で判断が要るのは次の 3 点:
 
-- **新規ページは Geist Grid で作る。** 移行済みはトップ（`/`・`/en`）、共通ヘッダー・フッター、講座一覧（`/courses`）で、
-  `/docs` `/community` は旧 Radiant のライトデザインのまま混在している。
-- 未移行ページへの**小さな修正**のときだけ既存の流儀（`gray-*` / `bg-white`）に合わせる。
-  ページ単位で作り直すなら旧流儀に合わせず Geist Grid へ移行する。
+- **新規ページは Geist Grid で作る。** 公開ページ（`/`・`/en`・`/courses`・`/en/courses`・`/community`・`/en/community`）、
+  共通ヘッダー、フッター、エラーページはすべて Geist Grid に移行済み。
+- 旧学習ドキュメントページは存在しない。新しい表示文言は `src/i18n/dictionaries.ts` の日英両方へ追加し、
+  英語版があるパスは `src/i18n/locale.ts` の `EN_ENABLED_PATHS` で管理する。
 - Geist Grid のコードでは色をセマンティックトークン（`bg-bg` / `text-text-secondary` / `border-border`）
   経由でのみ参照する。生 hex・`gray-*`・コンポーネント内の `dark:` は書かない。
 

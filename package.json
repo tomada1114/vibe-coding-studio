@@ -12,28 +12,19 @@
     "test:coverage": "jest --coverage",
     "format": "prettier --write . --log-level=warn",
     "format:check": "prettier --check .",
-    "check:all": "npm run lint --silent && npm run format && npm run type-check && npm run test",
-    "optimize:docs-images": "tsx scripts/optimize-docs-images.ts"
+    "check:all": "npm run lint --silent && npm run format && npm run type-check && npm run test"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.6",
     "@heroicons/react": "^2.2.0",
-    "@markdoc/markdoc": "^0.5.4",
-    "@markdoc/next.js": "^0.5.0",
-    "@sindresorhus/slugify": "^3.0.0",
     "clsx": "^2.1.1",
-    "fast-glob": "^3.3.3",
     "framer-motion": "^12.23.11",
     "geist": "^1.7.2",
-    "js-yaml": "^4.1.1",
     "lucide-react": "^0.547.0",
     "next": "15.5.9",
-    "prism-react-renderer": "^2.4.1",
-    "prismjs": "^1.30.0",
     "react": "^19",
     "react-dom": "^19",
-    "react-use-measure": "^2.1.7",
-    "simple-functional-loader": "^1.2.1"
+    "react-use-measure": "^2.1.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -44,9 +35,7 @@
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
     "@types/jest": "^30.0.0",
-    "@types/js-yaml": "^4.0.9",
     "@types/node": "^24",
-    "@types/prismjs": "^1.26.5",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "dotenv": "^17.2.1",
