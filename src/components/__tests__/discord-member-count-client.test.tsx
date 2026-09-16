@@ -51,8 +51,8 @@ describe("DiscordMemberCountClient", () => {
     const { container } = render(
       <DiscordMemberCountClient formattedCount="1,230+" />
     )
-    const numberSpan = container.querySelector(".font-mono")
+    const numberSpan = container.querySelector(".gg-meta")
     expect(numberSpan).toBeInTheDocument()
-    expect(numberSpan).toHaveClass("text-7xl")
+    expect(numberSpan).toHaveClass("text-[32px]")
   })
 })

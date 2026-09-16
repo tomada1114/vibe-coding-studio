@@ -28,7 +28,11 @@ export function formatMemberCount(count: number): string {
  * Discordメンバー数表示コンポーネント（サーバー側）
  * データ取得のみを担当し、表示はクライアントコンポーネントに委譲
  */
-export async function DiscordMemberCount() {
+export async function DiscordMemberCount({
+  label = "名の仲間が参加中",
+}: {
+  label?: string
+} = {}) {
   try {
     const memberCount = await getDiscordMemberCount()
 
@@ -39,7 +43,9 @@ export async function DiscordMemberCount() {
 
     const formattedCount = formatMemberCount(memberCount)
 
-    return <DiscordMemberCountClient formattedCount={formattedCount} />
+    return (
+      <DiscordMemberCountClient formattedCount={formattedCount} label={label} />
+    )
   } catch (error) {
     // エラーが発生した場合は何も表示しない（ユーザー体験を損なわないため）
     // eslint-disable-next-line no-console

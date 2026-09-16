@@ -12,6 +12,7 @@ import { useEffect, useState } from "react"
 
 interface DiscordMemberCountClientProps {
   formattedCount: string
+  label?: string
 }
 
 /** カウントアップにかける時間（ms） */
@@ -24,6 +25,7 @@ const COUNT_UP_DURATION = 1500
  */
 export function DiscordMemberCountClient({
   formattedCount,
+  label = "名の仲間が参加中",
 }: DiscordMemberCountClientProps) {
   // formattedCountから数値部分を抽出（例: "1,230+" -> 1230）
   // 数字を含まない文字列でも "NaN+" と表示しないよう 0 に丸める
@@ -54,16 +56,13 @@ export function DiscordMemberCountClient({
   }, [targetNumber])
 
   return (
-    <div className="flex items-center justify-center">
-      {/* メンバー数情報 */}
-      <div className="flex items-baseline gap-3">
-        <span className="font-mono text-7xl font-bold tracking-tight text-gray-950">
-          {displayNumber.toLocaleString("ja-JP")}+
-        </span>
-        <span className="text-2xl font-medium text-gray-600">
-          名の仲間が参加中
-        </span>
-      </div>
+    <div className="flex flex-wrap items-baseline justify-center gap-3">
+      <span className="gg-meta text-text-primary text-[32px] leading-none font-medium sm:text-[40px]">
+        {displayNumber.toLocaleString("ja-JP")}+
+      </span>
+      <span className="text-text-secondary text-[14px] font-medium sm:text-[16px]">
+        {label}
+      </span>
     </div>
   )
 }
