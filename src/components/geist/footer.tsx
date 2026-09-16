@@ -11,7 +11,6 @@ import { socialIconMap, XIcon } from "./social-icons"
 const SITE_LINKS: { key: NavKey; href: string }[] = [
   { key: "home", href: "/" },
   { key: "docs", href: "/docs" },
-  { key: "videos", href: "/videos" },
   { key: "community", href: "/community" },
   { key: "coupons", href: "/coupons" },
 ]

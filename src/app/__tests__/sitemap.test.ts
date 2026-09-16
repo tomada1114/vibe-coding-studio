@@ -1,6 +1,6 @@
 import sitemap from "@/app/sitemap"
 
-const removedPath = ["/", "road", "map"].join("")
+const removedPaths = [["/", "road", "map"].join(""), ["/", "videos"].join("")]
 
 // Mock dependencies
 jest.mock("@/lib/coupons/coupon-data", () => ({
@@ -26,13 +26,6 @@ jest.mock("@/lib/seo/site-url", () => ({
   getSiteUrl: () => "https://www.vibecodingstudio.dev",
 }))
 
-jest.mock("@/lib/videos/video-data", () => ({
-  getAllVideos: () => [
-    { id: "video-1", publishedAt: "2024-01-15" },
-    { id: "video-2", publishedAt: "2024-06-01" },
-  ],
-}))
-
 describe("sitemap", () => {
   it("returns an array of sitemap entries", () => {
     const result = sitemap()
@@ -47,11 +40,14 @@ describe("sitemap", () => {
 
     expect(urls).toContain("https://www.vibecodingstudio.dev")
     expect(urls).toContain("https://www.vibecodingstudio.dev/community")
-    expect(urls).toContain("https://www.vibecodingstudio.dev/videos")
     expect(urls).toContain("https://www.vibecodingstudio.dev/docs")
     expect(urls).toContain("https://www.vibecodingstudio.dev/coupons")
     expect(
-      urls.some(url => url === `https://www.vibecodingstudio.dev${removedPath}`)
+      urls.some(url =>
+        removedPaths.some(
+          path => url === `https://www.vibecodingstudio.dev${path}`
+        )
+      )
     ).toBe(false)
   })
 
@@ -76,14 +72,6 @@ describe("sitemap", () => {
     )
   })
 
-  it("includes video detail pages", () => {
-    const result = sitemap()
-    const urls = result.map(entry => entry.url)
-
-    expect(urls).toContain("https://www.vibecodingstudio.dev/videos/video-1")
-    expect(urls).toContain("https://www.vibecodingstudio.dev/videos/video-2")
-  })
-
   it("sets correct priorities", () => {
     const result = sitemap()
 
@@ -99,41 +87,6 @@ describe("sitemap", () => {
     coursePages.forEach(page => {
       expect(page.priority).toBe(0.7)
     })
-  })
-
-  it("uses publishedAt as lastModified for videos", () => {
-    const result = sitemap()
-
-    const video1 = result.find(e => e.url?.includes("/videos/video-1"))
-    expect(video1?.lastModified).toEqual(new Date("2024-01-15"))
-  })
-
-  it("handles invalid date strings gracefully", () => {
-    // Reset modules to use a different mock
-    jest.resetModules()
-
-    jest.doMock("@/lib/videos/video-data", () => ({
-      getAllVideos: () => [{ id: "bad-date", publishedAt: "not-a-date" }],
-    }))
-    jest.doMock("@/lib/coupons/coupon-data", () => ({
-      getLatestCoupons: () => [],
-    }))
-    jest.doMock("@/lib/course-constants", () => ({
-      getAllCourses: () => [],
-    }))
-    jest.doMock("@/lib/seo/site-url", () => ({
-      getSiteUrl: () => "https://example.com",
-    }))
-
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { default: sitemapWithBadDate } = require("@/app/sitemap")
-    const result = sitemapWithBadDate()
-
-    const badVideo = result.find((e: { url: string }) =>
-      e.url?.includes("/videos/bad-date")
-    )
-    // Should still have a lastModified date (fallback to current date)
-    expect(badVideo?.lastModified).toBeInstanceOf(Date)
   })
 })
 
@@ -154,10 +107,6 @@ describe("sitemap error handling", () => {
     jest.doMock("@/lib/seo/site-url", () => ({
       getSiteUrl: () => "https://example.com",
     }))
-    jest.doMock("@/lib/videos/video-data", () => ({
-      getAllVideos: () => [],
-    }))
-
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { default: sitemapWithError } = require("@/app/sitemap")
     const result = sitemapWithError()
@@ -167,28 +116,5 @@ describe("sitemap error handling", () => {
     expect(
       result.some((e: { url: string }) => e.url === "https://example.com")
     ).toBe(true)
-  })
-
-  it("continues generating sitemap when video data fails", () => {
-    jest.doMock("@/lib/videos/video-data", () => ({
-      getAllVideos: () => {
-        throw new Error("Video data unavailable")
-      },
-    }))
-    jest.doMock("@/lib/coupons/coupon-data", () => ({
-      getLatestCoupons: () => [],
-    }))
-    jest.doMock("@/lib/course-constants", () => ({
-      getAllCourses: () => [],
-    }))
-    jest.doMock("@/lib/seo/site-url", () => ({
-      getSiteUrl: () => "https://example.com",
-    }))
-
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { default: sitemapWithError } = require("@/app/sitemap")
-    const result = sitemapWithError()
-
-    expect(result.length).toBeGreaterThan(0)
   })
 })

@@ -18,7 +18,7 @@ jest.mock("next/navigation", () => ({
 
 const ja = getDictionary("ja")
 const en = getDictionary("en")
-const removedPath = ["/", "road", "map"].join("")
+const removedPaths = [["/", "road", "map"].join(""), ["/", "videos"].join("")]
 
 beforeEach(() => {
   mockPathname = "/"
@@ -31,14 +31,14 @@ describe("Header", () => {
     it("日本語のナビ項目が表示される", () => {
       render(<Header />)
       expect(
-        screen.getByRole("link", { name: ja.nav.items.videos })
+        screen.getByRole("link", { name: ja.nav.items.docs })
       ).toBeInTheDocument()
     })
 
     it("現在地のリンクに aria-current が付く", () => {
-      mockPathname = "/videos"
+      mockPathname = "/docs/ruby"
       render(<Header />)
-      const link = screen.getAllByRole("link", { name: ja.nav.items.videos })[0]
+      const link = screen.getAllByRole("link", { name: ja.nav.items.docs })[0]
       expect(link).toHaveAttribute("aria-current", "page")
     })
 
@@ -46,7 +46,7 @@ describe("Header", () => {
       mockPathname = "/en"
       render(<Header />)
       expect(
-        screen.getByRole("link", { name: en.nav.items.videos })
+        screen.getByRole("link", { name: en.nav.items.docs })
       ).toBeInTheDocument()
     })
 
@@ -55,7 +55,7 @@ describe("Header", () => {
       expect(
         screen
           .getAllByRole("link")
-          .some(link => link.getAttribute("href") === removedPath)
+          .some(link => removedPaths.includes(link.getAttribute("href") ?? ""))
       ).toBe(false)
     })
   })
@@ -83,7 +83,7 @@ describe("Header", () => {
     })
 
     it("トップ以外では EN はトップの英語版を指す", () => {
-      mockPathname = "/videos"
+      mockPathname = "/docs/ruby"
       render(<Header />)
       const group = screen.getByRole("group", {
         name: ja.header.languageGroupLabel,

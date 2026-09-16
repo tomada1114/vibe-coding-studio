@@ -47,14 +47,6 @@ export default function NotFound() {
                     クーポン
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    href="/videos"
-                    className="text-gray-700 hover:text-gray-950"
-                  >
-                    動画一覧
-                  </Link>
-                </li>
               </ul>
             </nav>
           </div>

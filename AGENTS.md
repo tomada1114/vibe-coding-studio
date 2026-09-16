@@ -8,7 +8,7 @@ Claude Code は `CLAUDE.md` 経由でこのファイルを読み込む。
 ## プロジェクト概要
 
 **Vibe Coding Studio** — Next.js 15（App Router）/ React 19 / Tailwind CSS v4 / TypeScript strict の
-静的サイト。YouTube 動画メタデータ、Udemy クーポン、学習ドキュメント（Markdoc）を配信する。
+静的サイト。Udemy クーポン、学習ドキュメント（Markdoc）を配信する。
 デザインシステムは「Geist Grid」（ダーク既定＋ライト手動切替）。日本語が既定で、`/en` に英語トップがある。
 
 ## 開発コマンド
@@ -16,25 +16,10 @@ Claude Code は `CLAUDE.md` 経由でこのファイルを読み込む。
 | コマンド | 用途 |
 |---|---|
 | `npm run dev` / `build` / `start` | 開発サーバー / 本番ビルド / 本番起動 |
-| `npm run check:all` | lint → format → type-check → test → validate:indexes。コミット前にこれを通す |
+| `npm run check:all` | lint → format → type-check → test。コミット前にこれを通す |
 | `npm run lint` / `type-check` / `test` / `test:coverage` | 個別実行 |
-| `npm run update:video-indexes` | 動画・Udemy 講座インデックスを再生成して検証（generate → validate） |
 
 ウォッチ実行は `npx jest --watch <path>`（`test:watch` スクリプトは無い）。
-
-## 動画メタデータの追加
-
-型は `src/types/video.ts` の `VideoMetadata`。
-
-1. `src/data/videos/<VIDEO_ID>.ts` を作る。共通セクション（SNS / Discord / エンゲージメント）は
-   `src/data/shared/common-sections.ts` の `commonSections` を参照し、値を複製しない。
-2. `src/lib/videos/video-data.ts` に import と配列への追加を書く（全動画の集約点）。
-3. `npm run update:video-indexes` を実行する。`src/data/indexes/*.json` は自動再生成されないので、
-   これを忘れると `check:all` の `validate:indexes` で落ちる。
-4. タイムスタンプは `HH:MM` または `HH:MM:SS`。
-
-記法の詳細は `docs/video-data-guide.md`、インデックスの仕組みは `docs/VIDEO_METADATA_INDEXING.md`。
-コメント形式からの変換は `/convert-video`。
 
 ## デザイン: Geist Grid
 
@@ -46,7 +31,7 @@ Claude Code は `CLAUDE.md` 経由でこのファイルを読み込む。
 このリポジトリ側で判断が要るのは次の 3 点:
 
 - **新規ページは Geist Grid で作る。** 移行済みはトップ（`/`・`/en`）と共通ヘッダー・フッターだけで、
-  `/videos` `/docs` `/coupons` `/community` は旧 Radiant のライトデザインのまま混在している。
+  `/docs` `/coupons` `/community` は旧 Radiant のライトデザインのまま混在している。
 - 未移行ページへの**小さな修正**のときだけ既存の流儀（`gray-*` / `bg-white`）に合わせる。
   ページ単位で作り直すなら旧流儀に合わせず Geist Grid へ移行する。
 - Geist Grid のコードでは色をセマンティックトークン（`bg-bg` / `text-text-secondary` / `border-border`）
@@ -74,7 +59,7 @@ Claude Code は `CLAUDE.md` 経由でこのファイルを読み込む。
 |---|---|
 | `docs/PROJECT_DOCUMENTATION.md` / `API_REFERENCE.md` / `COMPONENT_GUIDE.md` | プロジェクト全体 / API / コンポーネント |
 | `docs/design/` | デザインシステムの解説と `proposals/2026-09-geist-grid.md`（根拠・Decision ledger） |
-| `docs/video-data-guide.md` / `VIDEO_METADATA_INDEXING.md` / `UDEMY_COURSE_WORKFLOW.md` | 動画・講座まわりの運用 |
+| `docs/UDEMY_COURSE_WORKFLOW.md` | Udemy講座まわりの運用 |
 | `.kiro/steering/` | product / tech / structure の指針 |
 | `.kiro/specs/` | 機能仕様（完了分は `archive/`）。`/kiro:*` コマンドは削除済みなので手で更新する |
 
