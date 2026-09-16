@@ -15,7 +15,6 @@ export function CoursesPage({
   return (
     <div className="gg-surface" data-locale={locale}>
       <main id="main-content" aria-label={dict.courses.title}>
-        <div className="gg-rule-accent" aria-hidden="true" />
         <header className="gg-container pt-16 pb-10 sm:pt-24 sm:pb-14">
           <p className="gg-label">{dict.courses.label}</p>
           {/* display（40px）まで。display-lg（56px）はトップページの氏名／肩書のみ。 */}
@@ -26,6 +25,11 @@ export function CoursesPage({
             {dict.courses.lead}
           </p>
         </header>
+
+        {/* グラデーション罫線。このページで唯一の 1 本。ヘッダー直下ではなく、
+            見出しブロックと一覧の区切りに置く（sticky header の下線・現在地タブの
+            下線と近接して意図が伝わりにくくなるのを避ける）。 */}
+        <div className="gg-rule-accent" aria-hidden="true" />
 
         <div className="gg-container pb-24 sm:pb-32">
           <CourseList
