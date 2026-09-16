@@ -29,7 +29,6 @@
     ".next",
     "**/*.test.ts",
     "**/*.test.tsx",
-    "__tests__/**/*",
-    "docs-migration"
+    "__tests__/**/*"
   ]
 }

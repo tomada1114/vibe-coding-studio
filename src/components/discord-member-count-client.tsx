@@ -23,10 +23,10 @@ export function DiscordMemberCountClient({
 }: DiscordMemberCountClientProps) {
   return (
     <div className="flex flex-wrap items-baseline justify-center gap-3">
-      <span className="gg-meta text-text-primary text-[32px] leading-none font-medium sm:text-[40px]">
+      <span className="gg-meta text-[32px] leading-none font-medium text-text-primary sm:text-[40px]">
         {formattedCount}
       </span>
-      <span className="text-text-secondary text-[14px] font-medium sm:text-[16px]">
+      <span className="text-[14px] font-medium text-text-secondary sm:text-[16px]">
         {label}
       </span>
     </div>

@@ -1,0 +1,58 @@
+name: Security audit
+
+on:
+  schedule:
+    # Weekly. An advisory published after a PR merged is found here, not by the
+    # PR-time dependency review.
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions: {}
+
+# The runner's default `bash -e` hides a failure inside a pipeline and expands
+# an unset variable to the empty string. A security check that fails that way
+# reports success, so the retry loop below runs under a shell that fails closed.
+defaults:
+  run:
+    shell: "bash --noprofile --norc -eo pipefail -u {0}"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  # A manual dispatch queues behind the scheduled run rather than cancelling it.
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    name: Audit production dependencies
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Only what consumers install. A dev-only advisory is handled by the
+      # Dependabot PR, and must not page whoever reads this schedule. Registry
+      # failures are retried briefly and then fail closed: an unavailable audit
+      # service must never produce a green security result.
+      - name: Audit
+        run: |
+          for attempt in 1 2 3; do
+            npm audit --omit=dev --audit-level=moderate && exit 0
+            if [ "${attempt}" -lt 3 ]; then
+              echo "Audit attempt ${attempt} failed; retrying in 10 seconds."
+              sleep 10
+            fi
+          done
+          echo "::error::Production dependency audit failed after 3 attempts."
+          exit 1

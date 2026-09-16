@@ -21,7 +21,7 @@ export function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="bg-bg border-border border-t">
+    <footer className="border-t border-border bg-bg">
       <div className="gg-container">
         <div className="gg-cell-grid grid-cols-1 border-x-0 sm:grid-cols-3">
           <div className="gg-cell">
@@ -31,7 +31,7 @@ export function Footer() {
                 <li key={key}>
                   <Link
                     href={localizePath(href, locale)}
-                    className="text-text-secondary hover:text-text-primary text-sm transition-colors hover:underline"
+                    className="text-sm text-text-secondary transition-colors hover:text-text-primary hover:underline"
                   >
                     {dict.nav.items[key]}
                   </Link>
@@ -48,10 +48,10 @@ export function Footer() {
                   href={DISCORD_INVITE_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-text-secondary hover:text-text-primary text-sm transition-colors hover:underline"
+                  className="text-sm text-text-secondary transition-colors hover:text-text-primary hover:underline"
                 >
                   {dict.footer.discord}
-                  <span aria-hidden="true" className="text-text-secondary ml-1">
+                  <span aria-hidden="true" className="ml-1 text-text-secondary">
                     ↗
                   </span>
                 </a>
@@ -73,7 +73,7 @@ export function Footer() {
                       {...(external
                         ? { target: "_blank", rel: "noopener noreferrer" }
                         : {})}
-                      className="text-text-muted hover:text-text-primary inline-flex size-7 items-center justify-center rounded-[6px] transition-colors"
+                      className="inline-flex size-7 items-center justify-center rounded-[6px] text-text-muted transition-colors hover:text-text-primary"
                     >
                       <Icon className="size-4" />
                     </a>
@@ -84,7 +84,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-border flex flex-col gap-2 border-t py-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-2 border-t border-border py-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="gg-meta text-text-secondary">
             © {year} {dict.footer.copyright}
           </p>
