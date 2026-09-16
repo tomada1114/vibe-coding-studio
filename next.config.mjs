@@ -99,6 +99,16 @@ const nextConfig = {
         destination: "/",
         permanent: true,
       },
+      {
+        source: "/coupons",
+        destination: "/courses",
+        permanent: true,
+      },
+      {
+        source: "/coupons/:slug",
+        destination: "/courses",
+        permanent: true,
+      },
     ]
   },
 

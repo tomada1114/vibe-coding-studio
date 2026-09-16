@@ -41,10 +41,10 @@ export default function NotFound() {
                 </li>
                 <li>
                   <Link
-                    href="/coupons"
+                    href="/courses"
                     className="text-gray-700 hover:text-gray-950"
                   >
-                    クーポン
+                    講座
                   </Link>
                 </li>
               </ul>

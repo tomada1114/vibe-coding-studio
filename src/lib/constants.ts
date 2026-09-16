@@ -47,7 +47,7 @@ export const SOCIAL_LINKS: readonly SocialLink[] = [
   },
   {
     name: "Udemy",
-    url: "/coupons",
+    url: "/courses",
     icon: "udemy",
   },
 ] as const

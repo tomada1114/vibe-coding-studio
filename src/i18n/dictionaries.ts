@@ -13,7 +13,7 @@
 
 import type { Locale } from "./locale"
 
-export type NavKey = "home" | "docs" | "community" | "coupons"
+export type NavKey = "home" | "docs" | "community" | "courses"
 
 type CareerEntry = {
   /** Mono ラベルに出す年。"NOW" は現在進行中を示す */
@@ -124,7 +124,7 @@ const ja: Dictionary = {
       home: "ホーム",
       docs: "学習",
       community: "コミュニティ",
-      coupons: "クーポン",
+      courses: "講座",
     },
   },
   header: {
@@ -186,7 +186,7 @@ const ja: Dictionary = {
         label: "Udemy",
         title: "Udemy講師",
         body: "AI駆動開発を中心に講座を公開しています。受講者は累計1万人を超えました。",
-        cta: "コース一覧を見る（クーポン付き）",
+        cta: "コース一覧を見る",
       },
       {
         label: "YouTube",
@@ -278,7 +278,7 @@ const en: Dictionary = {
       home: "Home",
       docs: "Learn",
       community: "Community",
-      coupons: "Coupons",
+      courses: "Courses",
     },
   },
   header: {
@@ -340,7 +340,7 @@ const en: Dictionary = {
         label: "Udemy",
         title: "Udemy instructor",
         body: "Courses centred on AI-driven development. More than 10,000 students to date.",
-        cta: "Browse the courses (with coupons)",
+        cta: "Browse the courses",
       },
       {
         label: "YouTube",

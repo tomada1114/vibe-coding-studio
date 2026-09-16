@@ -19,7 +19,7 @@ const NAV: { key: NavKey; href: string }[] = [
   { key: "home", href: "/" },
   { key: "docs", href: "/docs" },
   { key: "community", href: "/community" },
-  { key: "coupons", href: "/coupons" },
+  { key: "courses", href: "/courses" },
 ]
 
 function isPathActive(pathname: string | null, href: string, locale: Locale) {
