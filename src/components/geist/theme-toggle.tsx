@@ -1,6 +1,10 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useLayoutEffect, useState } from "react"
+
+// SSR では useLayoutEffect が警告を出すため、ブラウザでのみ layout effect を使う。
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect
 
 export type Theme = "dark" | "light"
 
@@ -84,7 +88,9 @@ export function ThemeToggle({
   const [theme, setTheme] = useState<Theme>("dark")
   const [mounted, setMounted] = useState(false)
 
-  useEffect(() => {
+  // <head> の同期スクリプトが data-theme を確定させた後、ブラウザの初回ペイント前に
+  // 実際のテーマへ同期する。useEffect だとペイント後に発火し、アイコンが一瞬入れ替わる。
+  useIsomorphicLayoutEffect(() => {
     setTheme(readTheme())
     setMounted(true)
   }, [])
