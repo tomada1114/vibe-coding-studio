@@ -2,6 +2,7 @@ import sitemap from "@/app/sitemap"
 
 const removedPaths = [["/", "road", "map"].join(""), ["/", "videos"].join("")]
 const retiredCoursePrefix = ["/", "cou", "pons"].join("")
+const removedDocsPrefix = ["/", "docs"].join("")
 
 jest.mock("@/lib/seo/site-url", () => ({
   getSiteUrl: () => "https://www.vibecodingstudio.dev",
@@ -22,7 +23,7 @@ describe("sitemap", () => {
     expect(urls).toContain("https://www.vibecodingstudio.dev")
     expect(urls).toContain("https://www.vibecodingstudio.dev/community")
     expect(urls).toContain("https://www.vibecodingstudio.dev/courses")
-    expect(urls.some(url => url.includes("/docs"))).toBe(false)
+    expect(urls.some(url => url.includes(removedDocsPrefix))).toBe(false)
     expect(urls.some(url => url.includes(retiredCoursePrefix))).toBe(false)
     expect(
       urls.some(url =>

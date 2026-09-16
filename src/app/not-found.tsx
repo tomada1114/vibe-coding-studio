@@ -25,7 +25,7 @@ export default function NotFound() {
               <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
                 <li>
                   <Link
-                    href="/docs"
+                    href="/courses"
                     className="text-gray-700 hover:text-gray-950"
                   >
                     学習コース

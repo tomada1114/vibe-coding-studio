@@ -31,7 +31,10 @@ describe("Header", () => {
     it("日本語のナビ項目が表示される", () => {
       render(<Header />)
       expect(
-        screen.getByRole("link", { name: ja.nav.items.docs })
+        screen.getByRole("link", { name: ja.nav.items.community })
+      ).toBeInTheDocument()
+      expect(
+        screen.getByRole("link", { name: ja.nav.items.courses })
       ).toBeInTheDocument()
     })
 
@@ -43,9 +46,9 @@ describe("Header", () => {
     })
 
     it("現在地のリンクに aria-current が付く", () => {
-      mockPathname = "/docs/ruby"
+      mockPathname = "/courses"
       render(<Header />)
-      const link = screen.getAllByRole("link", { name: ja.nav.items.docs })[0]
+      const link = screen.getByRole("link", { name: ja.nav.items.courses })
       expect(link).toHaveAttribute("aria-current", "page")
     })
 
@@ -53,7 +56,7 @@ describe("Header", () => {
       mockPathname = "/en"
       render(<Header />)
       expect(
-        screen.getByRole("link", { name: en.nav.items.docs })
+        screen.getByRole("link", { name: en.nav.items.community })
       ).toBeInTheDocument()
     })
 
@@ -90,7 +93,7 @@ describe("Header", () => {
     })
 
     it("トップ以外では EN はトップの英語版を指す", () => {
-      mockPathname = "/docs/ruby"
+      mockPathname = "/legacy"
       render(<Header />)
       const group = screen.getByRole("group", {
         name: ja.header.languageGroupLabel,
