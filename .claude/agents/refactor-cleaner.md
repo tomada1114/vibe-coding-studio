@@ -193,12 +193,11 @@ components/Button.tsx (with variant prop)
 ## Example Project-Specific Rules
 
 **CRITICAL - NEVER REMOVE:**
-- Privy authentication code
-- Solana wallet integration
-- Supabase database clients
-- Redis/OpenAI semantic search
-- Market trading logic
-- Real-time subscription handlers
+- Published data in `src/data/book.ts` and `src/data/udemy-courses/`
+- Locale contracts in `src/i18n/dictionaries.ts` and `src/i18n/locale.ts`
+- Canonical URL handling in `src/lib/seo/site-url.ts`
+- Geist Grid tokens and utilities in `src/styles/tailwind.css`
+- Coverage and test configuration in `jest.config.js`
 
 **SAFE TO REMOVE:**
 - Old unused components in components/ folder
@@ -208,10 +207,10 @@ components/Button.tsx (with variant prop)
 - Unused TypeScript types/interfaces
 
 **ALWAYS VERIFY:**
-- Semantic search functionality (lib/redis.js, lib/openai.js)
-- Market data fetching (api/markets/*, api/market/[slug]/)
-- Authentication flows (HeaderWallet.tsx, UserMenu.tsx)
-- Trading functionality (Meteora SDK integration)
+- Published course data and thumbnail paths (`src/data/udemy-courses/`)
+- Public route rendering (`src/app/`)
+- Locale switching and localized copy (`src/i18n/`)
+- Canonical, robots, and sitemap URLs (`src/lib/seo/`, `src/app/robots.ts`, `src/app/sitemap.ts`)
 
 ## Pull Request Template
 
