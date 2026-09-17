@@ -49,13 +49,6 @@ const nextConfig = {
 
   // Experimental features
   experimental: {
-    // Enable optimized package imports
-    optimizePackageImports: [
-      "@heroicons/react",
-      "@headlessui/react",
-      "framer-motion",
-    ],
-
     // Enable partial prerendering (experimental)
     ppr: false,
 
