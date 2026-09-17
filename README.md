@@ -1,15 +1,13 @@
 # Vibe Coding Studio
 
-Vibe Coding Studio is a static site built with [Tailwind CSS](https://tailwindcss.com) and [Next.js](https://nextjs.org), based on the [Tailwind Plus](https://tailwindcss.com/plus) Radiant template.
+Vibe Coding Studio is a static site built with [Next.js](https://nextjs.org), [Tailwind CSS](https://tailwindcss.com), and the Geist Grid design system.
 
-The template has been customized to serve as a clean, static site foundation with no external dependencies like CMS or authentication systems.
+The site presents a profile, Udemy courses, and a Discord community without a CMS or authentication system.
 
 ## Features
 
-- ✨ **Next.js 15** with App Router
+- ✨ **Next.js 16** with App Router
 - 🎨 **Tailwind CSS v4** with PostCSS
-- 🧩 **Headless UI** components
-- 🎬 **Framer Motion** animations
 - 🔒 **Content Security Policy (CSP)** via static response headers (keeps pages statically generated)
 - ⚡ **Incremental Static Regeneration (ISR)** for optimal performance
 - 🧪 **Jest** for unit testing
@@ -67,13 +65,7 @@ To display Discord server member count on the community page:
 
 **Note**: If these environment variables are not set, the member count will simply not be displayed.
 
-### 3. Validate Configuration (Optional)
-
-```bash
-npm run validate:env
-```
-
-### 4. Run Development Server
+### 3. Run Development Server
 
 ```bash
 npm run dev
@@ -98,6 +90,7 @@ npm run check:all        # Run all repository checks
 
 # Testing
 npm run test             # Run Jest tests
+npm run test:coverage    # Run Jest with coverage
 npx jest --watch         # Run tests in watch mode
 ```
 
@@ -105,20 +98,20 @@ npx jest --watch         # Run tests in watch mode
 
 ```
 ├── src/
-│   ├── app/              # Next.js App Router pages and layouts
-│   ├── components/       # Reusable UI components
-│   │   ├── __tests__/   # Component tests
-│   │   └── ...          # UI components (Button, Card, etc.)
-│   ├── hooks/           # Custom React hooks
-│   ├── lib/             # Utility libraries and configuration
-│   └── styles/          # Global styles and Tailwind configuration
-├── public/              # Static assets
-└── docs/                # Documentation
+│   ├── app/              # Next.js App Router routes and metadata
+│   ├── components/       # Shared components, including Geist Grid UI
+│   ├── data/             # Book and Udemy course data
+│   ├── i18n/             # Locale helpers and Japanese/English dictionaries
+│   ├── lib/              # SEO and Discord API utilities
+│   └── styles/           # Global Tailwind CSS tokens and utilities
+├── public/               # Static images and topic assets
+├── docs/                 # Project and design documentation
+└── .kiro/steering/       # Product, technical, and structure guidance
 ```
 
 ## Customizing
 
-You can start customizing this template by modifying the files in the `/src` folder. The site will auto-update as you edit these files.
+You can customize the site by modifying the files in the `/src` folder. The development server auto-updates as you edit the files.
 
 ### Key Files to Edit
 
@@ -127,6 +120,7 @@ You can start customizing this template by modifying the files in the `/src` fol
 - `src/components/geist/footer.tsx` - Footer content
 - `src/app/courses/page.tsx` - Udemy course listing
 - `src/app/layout.tsx` - Site metadata and global layout
+- `src/i18n/dictionaries.ts` - Japanese and English display copy
 
 ## Development Workflow
 
@@ -138,7 +132,7 @@ Always run the repository checks to ensure code quality:
 npm run check:all
 ```
 
-This runs formatting, ESLint, TypeScript, and the Jest test suite.
+This runs formatting, ESLint, TypeScript, and the Jest test suite. Run `npm run build` separately to verify Next.js route entry points.
 
 ### Commit Convention
 
@@ -152,11 +146,12 @@ Follow conventional commit format:
 
 ## Testing
 
-This template includes comprehensive test coverage:
+The project includes colocated Jest tests and a global 80% coverage gate:
 
 ```bash
 npm run test              # Run all tests
-npm run test:watch        # Run tests in watch mode
+npm run test:coverage     # Run tests with coverage
+npx jest --watch          # Run tests in watch mode
 ```
 
 ## Documentation
@@ -164,36 +159,28 @@ npm run test:watch        # Run tests in watch mode
 Comprehensive documentation is available in the `/docs` directory:
 
 - `PROJECT_DOCUMENTATION.md` - Complete project overview
-- `API_REFERENCE.md` - API endpoints and utilities
+- `API_REFERENCE.md` - Exported utilities and metadata contracts
 - `COMPONENT_GUIDE.md` - Component library reference
 - `design/` - Design system documentation
 
 ## Performance
 
-The template is optimized for performance:
+Performance-related settings include:
 
 - **Image Optimization**: AVIF/WebP support
-- **Bundle Analysis**: Available via `ANALYZE=true` environment variable
-- **Caching Strategy**: Optimized via middleware
+- **Bundle Analysis**: Available via `npm run analyze`
+- **Caching Strategy**: Cache-Control headers and Next.js image caching in `next.config.mjs`
 
 ## Security
 
 Security features included:
 
 - Content Security Policy (CSP) set as a static header in `next.config.mjs` (no nonces; inline scripts are allowed so pages stay static — it blocks third-party script origins, plugins, base-tag and form hijacking, and framing)
-- Strict-Transport-Security (HSTS) with preload
-- X-Frame-Options, X-Content-Type-Options headers
-- Permissions-Policy restrictions
-
-## License
-
-This site template is a commercial product and is licensed under the [Tailwind Plus license](https://tailwindcss.com/plus/license).
+- X-Frame-Options, X-Content-Type-Options, and Referrer-Policy headers
 
 ## Learn More
 
-To learn more about the technologies used in this site template:
+To learn more about the technologies used in this site:
 
 - [Tailwind CSS](https://tailwindcss.com/docs) - Official Tailwind CSS documentation
 - [Next.js](https://nextjs.org/docs) - Official Next.js documentation
-- [Headless UI](https://headlessui.dev) - Official Headless UI documentation
-- [Framer Motion](https://www.framer.com/motion/) - Animation library
