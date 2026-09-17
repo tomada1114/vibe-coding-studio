@@ -1,0 +1,19 @@
+glob_matcher: doublestar
+
+pre-commit:
+  parallel: true
+  jobs:
+    - name: format
+      run: npx --no-install prettier --write --ignore-unknown {staged_files}
+      stage_fixed: true
+
+    - name: lint
+      glob: "**/*.{js,jsx,ts,tsx,mjs,cjs}"
+      run: npx --no-install eslint --max-warnings 0 {staged_files}
+
+    - name: type-check
+      run: npx --no-install tsc --noEmit
+
+    - name: test
+      glob: "**/*.{js,jsx,ts,tsx,mjs,cjs}"
+      run: npx --no-install jest --findRelatedTests --passWithNoTests {staged_files}
