@@ -196,7 +196,7 @@ const ja: Dictionary = {
   meta: {
     title: "とまだ（増山友司） - AI駆動開発の実践者・教育者",
     description:
-      "アメリカ在住のソフトウェアエンジニア。技術評論社から『Claude Codeで作って学ぶ AI駆動アプリ開発入門』を刊行。Udemy・YouTube でAI駆動開発を教えています。",
+      "アメリカ在住のソフトウェアエンジニア。技術評論社から『Claude Codeで作って学ぶ AI駆動アプリ開発入門』を刊行。Claude Code や Codex CLI を日々の開発で使い込み、Udemy・YouTube でも発信しています。",
   },
   nav: {
     label: "メインナビゲーション",
@@ -228,7 +228,7 @@ const ja: Dictionary = {
     nameRomaji: "Tomada",
     legalName: "増山友司 / Tomoshi Masuyama",
     role: "ソフトウェアエンジニア／AI駆動開発の実践者・教育者",
-    lead: "アメリカ在住。2016年にSIerでキャリアを始め、2021年にWebアプリケーションエンジニアへ転身、2024年に独立しました。現在はアメリカ企業の開発プロジェクトに参画しながら、書籍・Udemy・YouTube を通じてAI駆動開発を教えています。",
+    lead: "アメリカ在住のソフトウェアエンジニア。2016年にSIerでキャリアを始め、2021年にWebアプリケーション開発へ、2024年に独立しました。金融メディアや大規模サービスのリプレイス、法人へのAI駆動開発の導入支援に携わる一方で、自分のツールを作りながら Claude Code や Codex CLI を試し続けています。その記録が、書籍と Udemy 講座、YouTube です。",
     photoAlt: "とまだ（Tomada）のプロフィール画像",
     primaryCta: "著書を見る",
     secondaryCta: "Udemy講座",
@@ -303,17 +303,22 @@ const ja: Dictionary = {
       {
         year: "2024",
         title: "フリーランスとして独立",
-        body: "金融系メディアや運輸系システムの開発、大規模システムのリプレイスなど、多様な開発を経験。法人向けのAI駆動開発導入支援・コンサルティングも手がけた。",
+        body: "正社員時代から担当していた金融系メディアの開発を、業務委託として継続。フルリモートで日本のチームに関わりながら、複数の案件を並行して受けるようになる。",
       },
       {
         year: "2025",
         title: "アメリカ企業の開発プロジェクトに参画",
-        body: "カナダからの応募をきっかけに、アメリカに本社を置く企業と業務委託契約を締結。英語でのコミュニケーションのもと、未経験の技術スタックにもAI駆動開発で対応し、半年間のプロジェクトを完遂した。",
+        body: "カナダからの応募をきっかけに、アメリカに本社を置く企業と業務委託契約を締結。英語でのコミュニケーションのもと、未経験の技術スタックである .NET にもAI駆動開発で対応し、半年間のプロジェクトを完遂した。",
       },
       {
-        year: "NOW",
+        year: "2025–2026",
+        title: "大規模リプレイスとAI駆動開発の導入支援を並行",
+        body: "国内大手ブログサービスの大規模リプレイスでは、スタッフ向け管理システムの設計・開発をPythonでほぼ一人でリードし、あわせて開発チームへのClaude Code導入と運用整備も進めた。並行して運送業界向けSaaSにAI駆動開発を導入。CLAUDE.md・CI/CD・仕様駆動開発ガイドを整備し、200を超えるコントローラを抱えるLaravelアプリの技術的負債を棚卸ししたうえで、開発チームの一員としてLaravelとReact（TypeScript）の実装にも入った。",
+      },
+      {
+        year: "2026",
         title: "カナダを経てアメリカへ拠点を移す",
-        body: "カナダ在住時は日本・北米の開発プロジェクトにフルリモートで参画。現在はアメリカを拠点に、OSS・個人開発での実践と、Udemy・YouTube・コミュニティを通じたAI駆動開発の教育・発信に注力している。",
+        body: "カナダ在住時は日本・北米の開発プロジェクトにフルリモートで参画。2026年にアメリカ・コロラド州へ拠点を移した。場所が変わっても開発の手は止めず、自分のツールを作りながら Claude Code や Codex CLI といった最新のAIコーディングツールを検証し、その結果を書籍・Udemy・YouTube・コミュニティで公開している。",
       },
     ],
   },
@@ -328,6 +333,7 @@ const ja: Dictionary = {
       "情報処理安全確保支援士試験 合格",
       "応用情報技術者",
       "TOEIC 910点",
+      "IELTS (General Training) 6.0",
     ],
     speakingLabel: "Speaking",
     speakingHeading: "登壇実績",
@@ -543,7 +549,7 @@ const en: Dictionary = {
   meta: {
     title: "Tomada (Tomoshi Masuyama) - AI-driven development, in practice",
     description:
-      "Software engineer based in the U.S. Author of “Building AI-Driven Apps with Claude Code” (Gijutsu-Hyohron). Teaching AI-driven development on Udemy and YouTube.",
+      "Software engineer based in the U.S. Author of “Building AI-Driven Apps with Claude Code” (Gijutsu-Hyohron). I use Claude Code and Codex CLI in my own development every day, and publish what I find on Udemy and YouTube.",
   },
   nav: {
     label: "Main navigation",
@@ -575,7 +581,7 @@ const en: Dictionary = {
     nameRomaji: "とまだ",
     legalName: "Tomoshi Masuyama",
     role: "Software engineer · practitioner and teacher of AI-driven development",
-    lead: "Based in the U.S. I started out at a systems integrator in 2016, moved into web application development in 2021, and went independent in 2024. I now work on a U.S. company's product while teaching AI-driven development through a book, Udemy courses, and YouTube.",
+    lead: "Software engineer based in the U.S. I started out at a systems integrator in 2016, moved into web application development in 2021, and went independent in 2024. Alongside financial media, large-scale service replacements and helping companies adopt AI-driven development, I keep building my own tools and putting Claude Code and Codex CLI through their paces. The book, the Udemy courses and the YouTube channel are the record of that.",
     photoAlt: "Portrait of Tomada (Tomoshi Masuyama)",
     primaryCta: "See the book",
     secondaryCta: "Udemy courses",
@@ -651,17 +657,23 @@ const en: Dictionary = {
       {
         year: "2024",
         title: "Went independent",
-        body: "Financial media, transport systems, and large-scale system replacements, among other work. I also advised companies on adopting AI-driven development.",
+        body: "I carried on with the financial media work I had been doing as an employee, now under contract, and began taking on several projects in parallel, working fully remotely with teams in Japan.",
       },
       {
         year: "2025",
         title: "Joined a U.S. company's development project",
-        body: "An application sent from Canada led to a contract with a U.S.-headquartered company. Working in English, I used AI-driven development to pick up a stack I had never touched, and saw the six-month project through to completion.",
+        body: "An application sent from Canada led to a contract with a U.S.-headquartered company. Working in English, I used AI-driven development to pick up .NET, a stack I had never touched, and saw the six-month project through to completion.",
       },
       {
-        year: "NOW",
+        year: "2025–2026",
+        title:
+          "A large-scale replacement and an AI-driven development rollout, in parallel",
+        body: "On the replacement of a major Japanese blogging service, I led the design and build of the staff-facing admin system in Python, largely on my own, and drove the team's adoption of Claude Code alongside it. In parallel I brought AI-driven development to a SaaS for the transport industry: setting up CLAUDE.md, CI/CD and a spec-driven development guide, taking stock of the technical debt across a Laravel application with more than 200 controllers, then joining the team to build in Laravel and React with TypeScript.",
+      },
+      {
+        year: "2026",
         title: "From Canada to the U.S.",
-        body: "While living in Canada I worked fully remotely on projects in Japan and North America. I am now based in the U.S., splitting my time between open source and personal projects and teaching AI-driven development through Udemy, YouTube and the community.",
+        body: "While living in Canada I worked fully remotely on projects in Japan and North America. In 2026 I moved to Colorado. The move has not slowed the work down: I keep building my own tools, putting Claude Code and Codex CLI to the test, and publishing what comes out of it through the book, Udemy, YouTube and the community.",
       },
     ],
   },
@@ -676,6 +688,7 @@ const en: Dictionary = {
       "Registered Information Security Specialist (Japan)",
       "Applied Information Technology Engineer (Japan)",
       "TOEIC 910",
+      "IELTS (General Training) 6.0",
     ],
     speakingLabel: "Speaking",
     speakingHeading: "Speaking",
