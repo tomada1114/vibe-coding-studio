@@ -27,6 +27,11 @@ describe("/courses", () => {
   })
 
   describe("Geist Grid の規則", () => {
+    it("ページルートに gg-surface を持つ", () => {
+      const { container } = render(<CoursesPage />)
+      expect(container.firstElementChild).toHaveClass("gg-surface")
+    })
+
     it("生の hex カラーや gray-* のクラスを使っていない", () => {
       const { container } = render(<CoursesPage />)
       const classNames = Array.from(container.querySelectorAll("*"))
