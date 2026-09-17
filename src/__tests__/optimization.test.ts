@@ -10,8 +10,7 @@ describe("Next.js Configuration Structure", () => {
     generateEtags: true,
     swcMinify: true,
     experimental: {
-      optimizePackageImports: ["@heroicons/react"],
-      webVitalsAttribution: ["CLS", "LCP", "FCP", "FID", "TTFB"],
+      webVitalsAttribution: ["CLS", "LCP", "FCP", "INP", "TTFB"],
     },
     typescript: {
       ignoreBuildErrors: false,
@@ -39,9 +38,6 @@ describe("Next.js Configuration Structure", () => {
 
   it("should have experimental features configured", () => {
     expect(expectedConfig.experimental).toBeDefined()
-    expect(expectedConfig.experimental.optimizePackageImports).toContain(
-      "@heroicons/react"
-    )
     expect(expectedConfig.experimental.webVitalsAttribution).toContain("LCP")
     expect(expectedConfig.experimental.webVitalsAttribution).toContain("CLS")
   })
