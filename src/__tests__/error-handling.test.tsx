@@ -1,4 +1,8 @@
-import { AsyncErrorBoundary, ErrorBoundary } from "@/components/error-boundary"
+import {
+  AsyncErrorBoundary,
+  ErrorBoundary,
+  useErrorHandler,
+} from "@/components/error-boundary"
 import "@testing-library/jest-dom"
 import { fireEvent, render, screen } from "@testing-library/react"
 import React, { Component } from "react"
@@ -173,4 +177,45 @@ describe("AsyncErrorBoundary", () => {
 
     expect(screen.getByText("Oops! Something went wrong")).toBeInTheDocument()
   })
+})
+
+describe("useErrorHandler", () => {
+  afterEach(() => {
+    jest.restoreAllMocks()
+  })
+
+  it.each([
+    { nodeEnv: "development" as const, shouldLog: true },
+    { nodeEnv: "production" as const, shouldLog: false },
+  ])(
+    "rethrows the error and logs only in $nodeEnv",
+    ({ nodeEnv, shouldLog }) => {
+      const consoleError = jest
+        .spyOn(console, "error")
+        .mockImplementation(() => {})
+      const environment = jest.replaceProperty(process.env, "NODE_ENV", nodeEnv)
+      const error = new Error("hook error")
+      let thrown: unknown
+
+      try {
+        try {
+          useErrorHandler()(error)
+        } catch (caught) {
+          thrown = caught
+        }
+
+        expect(thrown).toBe(error)
+        if (shouldLog) {
+          expect(consoleError).toHaveBeenCalledWith(
+            "Error caught by useErrorHandler:",
+            error
+          )
+        } else {
+          expect(consoleError).not.toHaveBeenCalled()
+        }
+      } finally {
+        environment.restore()
+      }
+    }
+  )
 })
