@@ -79,6 +79,22 @@ describe("ErrorBoundary", () => {
     nodeEnv.restore()
   })
 
+  it("keeps the fallback available in production mode", () => {
+    const nodeEnv = jest.replaceProperty(process.env, "NODE_ENV", "production")
+
+    try {
+      render(
+        <ErrorBoundary>
+          <ThrowError shouldThrow={true} />
+        </ErrorBoundary>
+      )
+
+      expect(screen.getByText("Oops! Something went wrong")).toBeInTheDocument()
+    } finally {
+      nodeEnv.restore()
+    }
+  })
+
   it("resets error state when Try Again is clicked", () => {
     let shouldThrow = true
     const TestComponent = () => {
