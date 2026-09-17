@@ -85,6 +85,9 @@ Claude Code は `CLAUDE.md` 経由でこのファイルを読み込む。
 
 - テストファースト（t-wada スタイルの TDD）を既定とする。テストは解を検証するものであって定義するものではない。
   テストケースへのハードコードは解決ではない。
+- `npm install` / `npm ci` の `prepare` script が Lefthook の pre-commit フックをインストールする。
+  `git commit` では、ステージ済みファイルのフォーマット、対象ソースの ESLint と関連テスト、プロジェクト全体の
+  TypeScript 型チェックを実行する。フォーマッターが直したファイルは自動で再ステージされる。
 - コミット前に `npm run check:all` を通す。lint・型・テストのエラーを残したままコミットしない。
 - コミットは小さく原子的に、Conventional Commits で。
 - パスエイリアスは `@/` → `./src/`。
@@ -117,9 +120,9 @@ Claude Code は `CLAUDE.md` 経由でこのファイルを読み込む。
 | `.github/workflows/ci.yml` | `main` への push と全 PR | リポジトリ全体・人もエージェントも | `format:check` → `lint` → `type-check` → `build`、および `test:coverage` |
 | このファイル | エージェントセッションの開始時 | エージェントの作業のみ | 設定が表現できない判断と、機械が強制しない禁止事項 |
 
-- **pre-commit フックは無い。** ローカルのコミットは何も検証されずに通る。
-  `npm run check:all` は自発的に走らせるもので、誰も強制しない。CI が唯一の機械的な
-  砦であり、「手元で緑だった」は着地の根拠にならない。フックの導入は #86 で追っている。
+- **pre-commit フックは Lefthook で有効。** `npm install` / `npm ci` の `prepare` script がフックを
+  インストールする。ローカルのコミット前に実行される検査は `lefthook.yml` を正典とし、フックは CI の代替ではない。
+  CI がリポジトリ全体の最終ゲートであり、「手元で緑だった」だけでは着地の根拠にならない。
 - `.claude/settings.json` の `SessionStart` フックは `scripts/install_pkgs.sh`
   （= `npm install`）を走らせるだけで、ゲートではない。
 - 第3層（`permissions.allow` / `deny`）は持たない。個人の許可リストは
