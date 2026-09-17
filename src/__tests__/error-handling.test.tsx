@@ -1,4 +1,8 @@
-import { AsyncErrorBoundary, ErrorBoundary } from "@/components/error-boundary"
+import {
+  AsyncErrorBoundary,
+  ErrorBoundary,
+  useErrorHandler,
+} from "@/components/error-boundary"
 import "@testing-library/jest-dom"
 import { fireEvent, render, screen } from "@testing-library/react"
 import React, { Component } from "react"
@@ -73,6 +77,22 @@ describe("ErrorBoundary", () => {
     expect(errorElements.length).toBeGreaterThan(0)
 
     nodeEnv.restore()
+  })
+
+  it("keeps the fallback available in production mode", () => {
+    const nodeEnv = jest.replaceProperty(process.env, "NODE_ENV", "production")
+
+    try {
+      render(
+        <ErrorBoundary>
+          <ThrowError shouldThrow={true} />
+        </ErrorBoundary>
+      )
+
+      expect(screen.getByText("Oops! Something went wrong")).toBeInTheDocument()
+    } finally {
+      nodeEnv.restore()
+    }
   })
 
   it("resets error state when Try Again is clicked", () => {
@@ -173,4 +193,45 @@ describe("AsyncErrorBoundary", () => {
 
     expect(screen.getByText("Oops! Something went wrong")).toBeInTheDocument()
   })
+})
+
+describe("useErrorHandler", () => {
+  afterEach(() => {
+    jest.restoreAllMocks()
+  })
+
+  it.each([
+    { nodeEnv: "development" as const, shouldLog: true },
+    { nodeEnv: "production" as const, shouldLog: false },
+  ])(
+    "rethrows the error and logs only in $nodeEnv",
+    ({ nodeEnv, shouldLog }) => {
+      const consoleError = jest
+        .spyOn(console, "error")
+        .mockImplementation(() => {})
+      const environment = jest.replaceProperty(process.env, "NODE_ENV", nodeEnv)
+      const error = new Error("hook error")
+      let thrown: unknown
+
+      try {
+        try {
+          useErrorHandler()(error)
+        } catch (caught) {
+          thrown = caught
+        }
+
+        expect(thrown).toBe(error)
+        if (shouldLog) {
+          expect(consoleError).toHaveBeenCalledWith(
+            "Error caught by useErrorHandler:",
+            error
+          )
+        } else {
+          expect(consoleError).not.toHaveBeenCalled()
+        }
+      } finally {
+        environment.restore()
+      }
+    }
+  )
 })
