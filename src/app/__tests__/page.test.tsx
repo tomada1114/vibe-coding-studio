@@ -147,6 +147,14 @@ describe("トップページ（/）", () => {
   })
 
   describe("Geist Grid の規則", () => {
+    it("ページルートに gg-surface を持つ", () => {
+      const { container } = render(<Home />)
+      const pageRoot = Array.from(container.children).find(element =>
+        element.classList.contains("gg-surface")
+      )
+      expect(pageRoot).toBeDefined()
+    })
+
     it("生の hex カラーや gray-* のクラスを使っていない", () => {
       const { container } = render(<Home />)
       const classNames = Array.from(container.querySelectorAll("*"))
