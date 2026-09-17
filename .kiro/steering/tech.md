@@ -23,7 +23,7 @@
 | `next` | `16.3.4` | App Router、画像最適化、ビルド |
 | `react` / `react-dom` | `^19` | UI ランタイム |
 | `geist` | `^1.7.2` | Geist Sans / Geist Mono |
-| `typescript` | `^5` | strict な型検査 |
+| `typescript` | `~6.0.3` | strict な型検査（typescript-eslint の対応範囲内） |
 | `tailwindcss` | `^4.1.11` | ユーティリティ CSS |
 | `@tailwindcss/postcss` / `postcss` | `^4.1.11` / `^8.5.6` | CSS ビルド |
 | `clsx` | `^2.1.1` | 条件付きクラス名 |
