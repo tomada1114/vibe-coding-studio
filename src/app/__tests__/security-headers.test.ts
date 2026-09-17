@@ -10,7 +10,9 @@ type HeaderRule = {
   headers: Array<{ key: string; value: string }>
 }
 
-function loadHeaderRules(nodeEnv: string): HeaderRule[] {
+type NodeEnv = "development" | "production" | "test"
+
+function loadHeaderRules(nodeEnv: NodeEnv): HeaderRule[] {
   const output = execFileSync(
     process.execPath,
     [
@@ -23,12 +25,12 @@ function loadHeaderRules(nodeEnv: string): HeaderRule[] {
   return JSON.parse(output) as HeaderRule[]
 }
 
-function globalHeaders(nodeEnv: string): Map<string, string> {
+function globalHeaders(nodeEnv: NodeEnv): Map<string, string> {
   const rule = loadHeaderRules(nodeEnv).find(r => r.source === "/:path*")
   return new Map((rule?.headers ?? []).map(h => [h.key, h.value]))
 }
 
-function cspDirectives(nodeEnv: string): string[] {
+function cspDirectives(nodeEnv: NodeEnv): string[] {
   const csp = globalHeaders(nodeEnv).get("Content-Security-Policy") ?? ""
   return csp
     .split(";")
