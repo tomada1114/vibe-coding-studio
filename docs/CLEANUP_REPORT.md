@@ -1,4 +1,4 @@
-# Cleanup Report - Radiant Template
+# Cleanup Report - Radiant Template (Historical)
 
 **Date**: 2025-08-27  
 **Status**: ✅ Completed
@@ -15,9 +15,8 @@ Comprehensive cleanup performed on the Radiant template repository to improve or
 
 - `DESIGN_SYSTEM.md` → `docs/design/`
 - `DESIGN_SYSTEM_COMPONENTS.md` → `docs/design/`
-- `DESIGN_SYSTEM_JA.md` → `docs/design/`
 - `DESIGN_SYSTEM_PATTERNS.md` → `docs/design/`
-- `CATALYST_COMPONENTS.md` → `docs/design/`
+- Legacy component documentation → `docs/design/` (later removed after the design migration)
 
 **Created documentation index:**
 
@@ -45,12 +44,11 @@ Comprehensive cleanup performed on the Radiant template repository to improve or
 
 ### 4. Code Quality Review ✅
 
-**Found TODOs/FIXMEs (2 instances):**
+**Found TODOs/FIXMEs (1 instance):**
 
 - `src/components/error-boundary.tsx` - TODO: Send to error reporting service
-- `src/lib/logger.ts` - TODO: Send to error monitoring service
 
-**Recommendation**: These TODOs are acceptable as they indicate future integration points for production deployments.
+**Recommendation**: This TODO is acceptable as it indicates a future integration point for production deployments.
 
 ## Current State
 
@@ -66,9 +64,9 @@ docs/
 └── design/                     # Design system docs
     ├── DESIGN_SYSTEM.md
     ├── DESIGN_SYSTEM_COMPONENTS.md
-    ├── DESIGN_SYSTEM_JA.md
     ├── DESIGN_SYSTEM_PATTERNS.md
-    └── CATALYST_COMPONENTS.md
+    ├── THEME_AND_I18N.md
+    └── proposals/2026-09-geist-grid.md
 ```
 
 ### Quality Metrics
@@ -90,7 +88,7 @@ None required - repository is in excellent condition.
 
 1. **Error Reporting Integration**
    - Implement Sentry or similar service
-   - Connect to error boundaries and logger
+   - Connect to the error boundary
    - Add to performance monitoring
 
 2. **CI/CD Pipeline**
@@ -115,9 +113,7 @@ As per updated CLAUDE.md:
 ### Pre-Commit Checklist
 
 ```bash
-npm run lint        # ✅ Must pass
-npm run type-check  # ✅ Must pass
-npm test           # ✅ All tests must pass
+npm run check:all   # ✅ Formatting, lint, type-check, and tests must pass
 ```
 
 ### TDD Cycle
