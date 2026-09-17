@@ -16,10 +16,17 @@ import type { Locale } from "./locale"
 export type NavKey = "home" | "community" | "courses"
 
 type CareerEntry = {
-  /** Mono ラベルに出す年。"NOW" は現在進行中を示す */
+  /** Mono ラベルに出す年。"2025–2026" のように期間を跨ぐ表記も取る */
   year: string
   title: string
   body: string
+}
+
+type StackGroup = {
+  /** セル上辺の Mono ラベル。uppercase 前提なので英語のみを入れる */
+  label: string
+  title: string
+  items: string[]
 }
 
 type CommunityQuestion = {
@@ -110,6 +117,12 @@ export type Dictionary = {
     label: string
     heading: string
     entries: CareerEntry[]
+  }
+  stack: {
+    label: string
+    heading: string
+    lead: string
+    groups: StackGroup[]
   }
   credentials: {
     certificationsLabel: string
@@ -319,6 +332,78 @@ const ja: Dictionary = {
         year: "2026",
         title: "カナダを経てアメリカへ拠点を移す",
         body: "カナダ在住時は日本・北米の開発プロジェクトにフルリモートで参画。2026年にアメリカ・コロラド州へ拠点を移した。場所が変わっても開発の手は止めず、自分のツールを作りながら Claude Code や Codex CLI といった最新のAIコーディングツールを検証し、その結果を書籍・Udemy・YouTube・コミュニティで公開している。",
+      },
+    ],
+  },
+  stack: {
+    label: "Stack",
+    heading: "技術スタック",
+    lead: "これまでの案件で実務として使ってきたものです。主戦場は Ruby on Rails と Python で、直近は React・TypeScript と Laravel が中心でした。",
+    groups: [
+      {
+        label: "Backend",
+        title: "バックエンド",
+        items: [
+          "Ruby on Rails",
+          "Python",
+          "PHP / Laravel",
+          "Node.js",
+          ".NET",
+          "GraphQL",
+          "MySQL",
+          "PostgreSQL",
+        ],
+      },
+      {
+        label: "Frontend",
+        title: "フロントエンド",
+        items: [
+          "TypeScript",
+          "React",
+          "Next.js",
+          "Vue.js",
+          "Redux",
+          "Tailwind CSS",
+          "jQuery",
+        ],
+      },
+      {
+        label: "Platform",
+        title: "インフラ・CI・テスト",
+        items: [
+          "AWS (EC2 / ECS / RDS / S3 / Lambda)",
+          "Terraform",
+          "Ansible",
+          "Docker",
+          "Nginx",
+          "Linux",
+          "GitHub Actions",
+          "CircleCI",
+          "GitLab CI",
+          "RSpec",
+          "PHPUnit",
+          "Jest",
+          "Datadog",
+          "Bugsnag",
+        ],
+      },
+      {
+        label: "AI & Collaboration",
+        title: "AI駆動開発・チーム運用",
+        items: [
+          "Claude Code",
+          "Codex CLI",
+          "Cursor",
+          "GitHub Copilot",
+          "Claude API",
+          "MCP",
+          "GitHub",
+          "GitLab",
+          "Redmine",
+          "Jira",
+          "Slack",
+          "Notion",
+        ],
       },
     ],
   },
@@ -674,6 +759,78 @@ const en: Dictionary = {
         year: "2026",
         title: "From Canada to the U.S.",
         body: "While living in Canada I worked fully remotely on projects in Japan and North America. In 2026 I moved to Colorado. The move has not slowed the work down: I keep building my own tools, putting Claude Code and Codex CLI to the test, and publishing what comes out of it through the book, Udemy, YouTube and the community.",
+      },
+    ],
+  },
+  stack: {
+    label: "Stack",
+    heading: "Stack",
+    lead: "What I have actually built with on client projects. Ruby on Rails and Python are where I am strongest; React with TypeScript and Laravel are what I have worked in most recently.",
+    groups: [
+      {
+        label: "Backend",
+        title: "Server-side and data",
+        items: [
+          "Ruby on Rails",
+          "Python",
+          "PHP / Laravel",
+          "Node.js",
+          ".NET",
+          "GraphQL",
+          "MySQL",
+          "PostgreSQL",
+        ],
+      },
+      {
+        label: "Frontend",
+        title: "Browser and UI",
+        items: [
+          "TypeScript",
+          "React",
+          "Next.js",
+          "Vue.js",
+          "Redux",
+          "Tailwind CSS",
+          "jQuery",
+        ],
+      },
+      {
+        label: "Platform",
+        title: "Infrastructure, CI and testing",
+        items: [
+          "AWS (EC2 / ECS / RDS / S3 / Lambda)",
+          "Terraform",
+          "Ansible",
+          "Docker",
+          "Nginx",
+          "Linux",
+          "GitHub Actions",
+          "CircleCI",
+          "GitLab CI",
+          "RSpec",
+          "PHPUnit",
+          "Jest",
+          "Datadog",
+          "Bugsnag",
+        ],
+      },
+      {
+        label: "AI & Collaboration",
+        title: "AI-driven development and team tooling",
+        items: [
+          "Claude Code",
+          "Codex CLI",
+          "Cursor",
+          "GitHub Copilot",
+          "Claude API",
+          "MCP",
+          "GitHub",
+          "GitLab",
+          "Redmine",
+          "Jira",
+          "Slack",
+          "Notion",
+        ],
       },
     ],
   },
