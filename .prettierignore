@@ -35,9 +35,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Sanity
-sanity/static/
-
 # Lock files
 package-lock.json
 yarn.lock
@@ -61,6 +58,3 @@ public/
 # Markdown files
 *.md
 *.mdx
-
-# Generated index files (auto-generated, no need to format)
-src/data/indexes/*.json

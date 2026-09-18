@@ -1,3 +1,31 @@
+/**
+ * Content-Security-Policy（Issue #85 で決定）。
+ *
+ * nonce は使わない。nonce を使うと全ページが動的レンダリングになり、静的生成と ISR を失う。
+ * Next.js が出す RSC ペイロードのインラインスクリプト（self.__next_f.push）は中身がビルド
+ * ごとに変わりハッシュを固定できず、ハッシュを1つでも書くと 'unsafe-inline' が無視されて
+ * ページが壊れるため、script-src / style-src は 'unsafe-inline' を許可する。
+ * インラインの注入は防げないが、他オリジンのスクリプト・プラグイン・<base> やフォーム送信先
+ * の差し替え・フレーム埋め込みは防げる。
+ */
+const isDev = process.env.NODE_ENV === "development"
+
+const contentSecurityPolicy = [
+  "default-src 'self'",
+  // THEME_INIT_SCRIPT と RSC ペイロードのインラインスクリプト。dev は React が eval を使う
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
+  // next/image の style 属性と Noto Sans JP の CSS（layout.tsx）
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src 'self' https://fonts.gstatic.com",
+  "img-src 'self' data: blob:",
+  "connect-src 'self'",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  // X-Frame-Options: SAMEORIGIN と同じ意味にそろえる
+  "frame-ancestors 'self'",
+].join("; ")
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // React configuration
@@ -15,15 +43,12 @@ const nextConfig = {
   // Basic optimizations
   poweredByHeader: false,
 
+  // `next dev` が AI エージェントを検出すると AGENTS.md に Next.js の管理ブロックを
+  // 自動追記し、作業ツリーを汚すため無効化する。エージェント向けの指示は AGENTS.md で管理する。
+  agentRules: false,
+
   // Experimental features
   experimental: {
-    // Enable optimized package imports
-    optimizePackageImports: [
-      "@heroicons/react",
-      "@headlessui/react",
-      "framer-motion",
-    ],
-
     // Enable partial prerendering (experimental)
     ppr: false,
 
@@ -63,6 +88,7 @@ const nextConfig = {
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "Referrer-Policy", value: "origin-when-cross-origin" },
+          { key: "Content-Security-Policy", value: contentSecurityPolicy },
         ],
       },
       // Cache-Control for static assets in public/.
@@ -111,12 +137,6 @@ const nextConfig = {
   typescript: {
     // Fail build on TypeScript errors in production
     ignoreBuildErrors: false,
-  },
-
-  // ESLint configuration
-  eslint: {
-    // Fail build on ESLint errors in production
-    ignoreDuringBuilds: false,
   },
 }
 

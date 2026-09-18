@@ -18,17 +18,17 @@ export default function Error({
   }, [error])
 
   return (
-    <div className="gg-surface min-h-screen">
+    <div className="min-h-screen gg-surface">
       <main
         id="main-content"
         className="gg-container flex min-h-screen items-center justify-center py-24"
       >
-        <div className="gg-cell border-border w-full max-w-[560px] border text-center sm:p-10">
+        <div className="gg-cell w-full max-w-[560px] border border-border text-center sm:p-10">
           <p className="gg-label">ERROR</p>
-          <h1 className="text-text-primary mt-4 text-[28px] leading-[1.3] font-medium tracking-[-0.015em] sm:text-[36px] sm:leading-[1.2]">
+          <h1 className="mt-4 text-[28px] leading-[1.3] font-medium tracking-[-0.015em] text-text-primary sm:text-[36px] sm:leading-[1.2]">
             エラーが発生しました
           </h1>
-          <p className="gg-prose-ja text-text-secondary mt-5 text-[16px]">
+          <p className="mt-5 text-[16px] gg-prose-ja text-text-secondary">
             申し訳ありません。ページの表示中に問題が発生しました。
             <br />
             時間をおいて再度お試しください。

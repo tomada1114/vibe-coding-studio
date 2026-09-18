@@ -81,15 +81,18 @@ describe("Footer", () => {
     expect(screen.getByText(new RegExp(year))).toBeInTheDocument()
   })
 
-  it("生の hex カラーや gray-* のクラスを使っていない", () => {
-    const { container } = render(<Footer />)
-    const classNames = Array.from(container.querySelectorAll("*"))
-      .map(el => el.getAttribute("class") ?? "")
-      .join(" ")
+  describe("Geist Grid の規則", () => {
+    it("生の hex カラーや gray-* のクラスを使っていない", () => {
+      const { container } = render(<Footer />)
+      const classNames = Array.from(container.querySelectorAll("*"))
+        .map(el => el.getAttribute("class") ?? "")
+        .join(" ")
 
-    expect(classNames).not.toMatch(/\b(?:bg|text|border)-gray-\d/)
-    // 色の dark: 上書きは禁止。トークンで表現できない構造的な出し分けだけが
-    // SKILL.md の定める例外として許される。
-    expect(classNames).not.toMatch(/dark:(?:bg|text|border)-/)
+      expect(classNames).not.toMatch(/\b(?:bg|text|border)-gray-\d/)
+      // 色の dark: 上書きは禁止。トークンで表現できない構造的な出し分けだけが
+      // SKILL.md の定める例外として許される。
+      expect(classNames).not.toMatch(/dark:(?:bg|text|border)-/)
+      expect(classNames).not.toMatch(/\[#[0-9a-fA-F]{3,8}\]/)
+    })
   })
 })

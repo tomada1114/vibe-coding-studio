@@ -87,6 +87,8 @@ export function ThemeToggle({
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    // SSR 後にブラウザの永続テーマへ同期し、未確定の aria 状態を解除する。
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTheme(readTheme())
     setMounted(true)
   }, [])
@@ -111,7 +113,7 @@ export function ThemeToggle({
       onClick={toggle}
       aria-label={mounted ? (isDark ? toLightLabel : toDarkLabel) : label}
       aria-pressed={mounted ? isDark : undefined}
-      className="border-border text-text-muted hover:text-text-primary hover:bg-surface-1 flex size-7 items-center justify-center rounded-[6px] border transition-colors"
+      className="flex size-7 items-center justify-center rounded-[6px] border border-border text-text-muted transition-colors hover:bg-surface-1 hover:text-text-primary"
     >
       {/* アイコンは state ではなく <html data-theme> に紐づく dark: バリアントで出し分ける。
           <head> の同期スクリプトが data-theme をペイント前に確定させるので、SSR マークアップの

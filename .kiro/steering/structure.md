@@ -4,574 +4,171 @@
 
 ---
 
-## Root Directory Organization
+この文書は、現在のリポジトリに存在する主要なディレクトリと責務を示します。新しい構成を
+説明するときは、まず `rg --files` で実在を確認してください。
+
+## Root Directory
 
 ```
 vibe-coding-studio/
-├── .kiro/                    # Kiro仕様駆動開発の設定とドキュメント
-│   └── steering/            # プロジェクトコンテキストドキュメント
-├── __tests__/               # プロジェクトレベルのテスト
-├── config/                  # 設定ファイル（将来の拡張用）
-├── docs/                    # プロジェクトドキュメント
-│   └── design/             # デザインシステムドキュメント
-├── public/                  # 静的アセット（画像、フォント等）
-├── src/                     # ソースコード
-│   ├── app/                # Next.js App Router
-│   ├── components/         # UIコンポーネント
-│   ├── hooks/              # カスタムReactフック
-│   ├── lib/                # ユーティリティライブラリ
-│   └── styles/             # グローバルスタイル
-├── .env.example             # 環境変数テンプレート
-├── .env.local              # ローカル環境変数（gitignore）
-├── jest.config.js          # Jestテスト設定
-├── jest.setup.js           # Jestセットアップ
-├── next.config.js          # Next.js設定
-├── package.json            # プロジェクト依存関係
-├── postcss.config.js       # PostCSS設定
-├── prettier.config.js      # Prettier設定
-├── tsconfig.json           # TypeScript設定
-├── CLAUDE.md               # Claude Code向けガイドライン
-└── README.md               # プロジェクトREADME
+├── .claude/                 # Claude Code のエージェント・コマンド・設定
+├── .github/                 # Issue、PR、Dependabot、GitHub Actions
+├── .kiro/                   # プロダクト・技術・構造の方針
+│   └── steering/
+├── __tests__/               # リポジトリ横断のメタテスト
+├── config/                  # 環境変数定義
+├── docs/                    # プロジェクト・デザインドキュメント
+├── public/                  # 画像などの静的アセット
+├── scripts/                 # 開発用スクリプト
+├── src/                     # Next.js アプリケーション
+├── .env.example             # 設定項目の例
+├── AGENTS.md                # エージェント共通ガイド
+├── CLAUDE.md                # Claude Code 用の入口
+├── eslint.config.mjs        # ESLint flat config
+├── jest.config.js           # Jest とカバレッジ閾値
+├── jest.setup.js            # Jest セットアップ
+├── next.config.mjs          # Next.js 設定、ヘッダー、リダイレクト
+├── package.json             # npm scripts と依存関係
+├── package-lock.json        # npm のロックファイル
+├── postcss.config.js        # Tailwind CSS の PostCSS 設定
+├── tsconfig.json            # TypeScript 設定
+└── .prettierrc              # Prettier 設定
 ```
 
-## Subdirectory Structures
+## Application Structure
 
-### `/src/app/` - Next.js App Router
-
-Next.js 15 App Routerの構造：
+### `src/app/` — App Router
 
 ```
 src/app/
-├── layout.tsx              # ルートレイアウト
-├── page.tsx                # ホームページ（/）
-├── pricing/
-│   └── page.tsx           # 料金ページ（/pricing）
-├── company/
-│   └── page.tsx           # 会社情報ページ（/company）
-└── api/
-    └── csp-report/
-        └── route.ts       # CSP違反レポートAPI
+├── layout.tsx                  # 共通 HTML、メタデータ、Header、Footer
+├── page.tsx                    # 日本語プロフィール（/）
+├── error.tsx                   # ルートのエラー画面
+├── global-error.tsx            # ドキュメント全体のエラー画面
+├── not-found.tsx               # 404 画面
+├── robots.ts                   # robots.txt のメタデータ
+├── sitemap.ts                  # sitemap.xml のメタデータ
+├── courses/page.tsx            # 日本語講座一覧（/courses）
+├── community/page.tsx          # 日本語コミュニティ（/community）
+└── en/
+    ├── page.tsx                # 英語プロフィール（/en）
+    ├── courses/page.tsx        # 英語講座一覧（/en/courses）
+    └── community/page.tsx      # 英語コミュニティ（/en/community）
 ```
 
-**命名規則**:
-- `layout.tsx` - 共有レイアウト
-- `page.tsx` - ページコンポーネント
-- `route.ts` - APIルートハンドラー
-- `loading.tsx` - ローディング状態（オプション）
-- `error.tsx` - エラー境界（オプション）
+現在、公開 API の Route Handler はありません。ページの実装は主に `src/components/geist/`
+へ委譲し、`src/app/` ではルート固有の辞書・メタデータ・再検証設定を定義します。
 
-**ルーティング**:
-- ファイルシステムベースルーティング
-- 動的ルート: `[slug]/page.tsx`
-- ルートグループ: `(marketing)/page.tsx`
-
-### `/src/components/` - UIコンポーネント
-
-再利用可能なUIコンポーネントライブラリ：
+### `src/components/` — Shared UI
 
 ```
 src/components/
-├── __tests__/              # コンポーネントテスト
-│   ├── button.test.tsx
-│   ├── badge.test.tsx
-│   ├── heading.test.tsx
-│   └── ...
-├── alert.tsx               # アラート/通知コンポーネント
-├── animated-number.tsx     # アニメーション付き数値
-├── avatar.tsx              # ユーザーアバター
-├── badge.tsx               # バッジ/タグ
-├── bento-card.tsx          # Bentoグリッドカード
-├── button.tsx              # ボタンコンポーネント
-├── catalyst-button.tsx     # Catalyst UIボタン
-├── catalyst-navbar.tsx     # Catalyst UIナビゲーション
-├── checkbox.tsx            # チェックボックス
-├── combobox.tsx            # コンボボックス（検索可能セレクト）
-├── container.tsx           # コンテナレイアウト
-├── csp-nonce-provider.tsx  # CSP nonceプロバイダー
-├── description-list.tsx    # 説明リスト
-├── dialog.tsx              # モーダルダイアログ
-├── divider.tsx             # 区切り線
-├── dropdown.tsx            # ドロップダウンメニュー
-├── dynamic-imports.tsx     # 動的インポートラッパー
-├── error-boundary.tsx      # エラー境界
-├── error-fallbacks.tsx     # エラーフォールバック
-├── fieldset.tsx            # フィールドセット
-├── footer.tsx              # フッター
-├── gradient.tsx            # グラデーション背景
-├── heading.tsx             # 見出し
-├── input.tsx               # テキスト入力
-├── keyboard.tsx            # キーボードショートカット表示
-├── link.tsx                # カスタムリンク
-├── linked-avatars.tsx      # 連結アバター
-├── listbox.tsx             # リストボックス
-├── loading-skeleton.tsx    # スケルトンローディング
-├── loading-wrapper.tsx     # ローディングラッパー
-├── logo.tsx                # ロゴコンポーネント
-├── logo-cloud.tsx          # ロゴクラウド
-├── logo-cluster.tsx        # ロゴクラスター
-├── logo-timeline.tsx       # ロゴタイムライン
-├── map.tsx                 # マップコンポーネント
-├── navbar.tsx              # ナビゲーションバー
-├── navbar-wrapper.tsx      # ナビゲーションラッパー
-├── pagination.tsx          # ページネーション
-├── plus-grid.tsx           # Plusグリッド
-├── radio.tsx               # ラジオボタン
-├── screenshot.tsx          # スクリーンショット表示
-├── select.tsx              # セレクトボックス
-├── sidebar.tsx             # サイドバー
-├── sidebar-layout.tsx      # サイドバーレイアウト
-├── stacked-layout.tsx      # スタックレイアウト
-├── switch.tsx              # トグルスイッチ
-├── table.tsx               # テーブル
-├── testimonials.tsx        # お客様の声
-├── text.tsx                # テキストコンポーネント
-└── textarea.tsx            # テキストエリア
+├── courses/
+│   ├── course-card.tsx
+│   └── course-list.tsx
+├── geist/
+│   ├── community-page.tsx
+│   ├── courses-page.tsx
+│   ├── footer.tsx
+│   ├── header.tsx
+│   ├── html-lang.tsx
+│   ├── profile-page.tsx
+│   ├── profile-structured-data.tsx
+│   ├── social-icons.tsx
+│   └── theme-toggle.tsx
+├── discord-member-count.tsx
+├── discord-member-count-client.tsx
+└── error-boundary.tsx
 ```
 
-**コンポーネント分類**:
+`geist/` は公開ページと共通シェルの正典実装です。機能固有の部品は機能ディレクトリに置き、
+テストは対応するディレクトリの `__tests__/` にコロケーションします。
 
-1. **基本UI** (Catalyst統合):
-   - button.tsx, catalyst-button.tsx
-   - input.tsx, textarea.tsx, select.tsx
-   - checkbox.tsx, radio.tsx, switch.tsx
-   - badge.tsx, avatar.tsx
-
-2. **レイアウト**:
-   - container.tsx, sidebar-layout.tsx, stacked-layout.tsx
-   - navbar.tsx, footer.tsx, sidebar.tsx
-   - divider.tsx
-
-3. **フィードバック**:
-   - alert.tsx, dialog.tsx
-   - loading-skeleton.tsx, loading-wrapper.tsx
-   - error-boundary.tsx, error-fallbacks.tsx
-
-4. **ナビゲーション**:
-   - pagination.tsx, dropdown.tsx
-   - link.tsx, navbar-wrapper.tsx
-
-5. **データ表示**:
-   - table.tsx, description-list.tsx
-   - testimonials.tsx, screenshot.tsx
-
-6. **フォーム**:
-   - fieldset.tsx, combobox.tsx, listbox.tsx
-
-7. **ビジュアル**:
-   - gradient.tsx, plus-grid.tsx
-   - logo.tsx, logo-cloud.tsx, logo-cluster.tsx, logo-timeline.tsx
-   - linked-avatars.tsx, bento-card.tsx
-
-8. **アニメーション**:
-   - animated-number.tsx
-
-9. **セキュリティ**:
-   - csp-nonce-provider.tsx
-
-10. **ユーティリティ**:
-    - dynamic-imports.tsx, keyboard.tsx, map.tsx
-
-### `/src/hooks/` - カスタムフック
-
-Reactカスタムフック：
+### `src/data/`, `src/i18n/`, `src/lib/`
 
 ```
-src/hooks/
-├── __tests__/
-│   └── use-retry.test.tsx  # use-retryテスト
-└── use-retry.ts            # リトライロジックフック
-```
+src/data/
+├── book.ts
+└── udemy-courses/
+    ├── index.ts
+    └── topics.ts
 
-**フック命名規則**:
-- `use-` プレフィックス必須
-- ケバブケース: `use-fetch-data.ts`
-- テストファイル: `use-fetch-data.test.tsx`
+src/i18n/
+├── dictionaries.ts
+└── locale.ts
 
-**フックのベストプラクティス**:
-- 副作用の適切な管理（useEffect）
-- 依存配列の明示
-- クリーンアップ関数の実装
-- TypeScript型定義の完全性
-
-### `/src/lib/` - ユーティリティライブラリ
-
-共有ユーティリティとヘルパー関数：
-
-```
 src/lib/
-├── __tests__/
-│   └── env-validation.test.ts  # 環境変数バリデーションテスト
-├── cache.ts                    # キャッシュユーティリティ
-├── csp.ts                      # CSP設定
-├── env-validation.ts           # 環境変数検証
-└── retry.ts                    # リトライロジック
+├── constants.ts
+├── discord-api.ts
+└── seo/site-url.ts
 ```
 
-**ライブラリ分類**:
+- `src/data/` はプロフィールと講座の公開データを型付きで管理する
+- `src/i18n/` はロケール判定、URL変換、日英辞書を管理する
+- `src/lib/` は外部 API、サイト定数、SEO の共有ロジックを管理する
+- `src/styles/tailwind.css` は Geist Grid のテーマトークンと CSS ユーティリティを管理する
 
-1. **セキュリティ**:
-   - `csp.ts` - Content Security Policy設定
-   - エッジランタイム対応のnonce生成
-
-2. **環境管理**:
-   - `env-validation.ts` - 環境変数のランタイム検証
-   - 開発者フレンドリーなエラーメッセージ
-
-3. **パフォーマンス**:
-   - `cache.ts` - キャッシュ戦略ユーティリティ
-   - Cache-Controlヘッダー生成
-
-4. **エラーハンドリング**:
-   - `retry.ts` - 指数バックオフリトライ
-
-**ユーティリティ命名規則**:
-- 機能を表す名詞: `cache.ts`, `validation.ts`
-- ケバブケース推奨
-- 単一責任原則に従う
-
-### `/src/styles/` - グローバルスタイル
+### Tests
 
 ```
-src/styles/
-└── tailwind.css            # Tailwind CSS エントリーポイント
+src/app/**/__tests__/          # ページ、メタデータ、エラー画面のテスト
+src/components/**/__tests__/  # コンポーネントの振る舞いテスト
+src/data/**/__tests__/         # 公開データの不変性・順序のテスト
+src/i18n/__tests__/            # ロケール・パス変換のテスト
+src/lib/**/__tests__/          # ユーティリティのテスト
+src/__tests__/                 # 複数モジュールにまたがるテスト
+__tests__/                     # リポジトリの構成・規約・ワークフローのテスト
 ```
 
-**スタイル構成**:
-```css
-@import "tailwindcss";
+テストは private な実装ではなく、公開関数、画面、リンク、メタデータ、エラーから観測できる
+振る舞いを検証します。テスト配置とフェイク／モックの判断は `writing-tests` skill に従います。
 
-/* カスタムスタイルはここに追加 */
-```
-
-### `/src/__tests__/` - プロジェクトレベルテスト
-
-統合テストと高レベルテスト：
-
-```
-src/__tests__/
-├── cache.test.ts           # キャッシュユーティリティテスト
-├── csp.test.ts             # CSP設定テスト
-├── csp-report.test.ts      # CSPレポートAPIテスト
-├── error-handling.test.tsx  # エラーハンドリングテスト
-├── optimization.test.ts    # 最適化テスト
-└── retry.test.ts           # リトライロジックテスト
-```
-
-### `/docs/` - ドキュメント
-
-包括的なプロジェクトドキュメント：
+## Documentation Structure
 
 ```
 docs/
-├── design/                           # デザインシステム（Geist Grid）
-│   ├── CATALYST_COMPONENTS.md       # 旧Catalyst UI統合ガイド（移行完了まで残置）
-│   ├── DESIGN_SYSTEM.md             # デザインシステム（トークン・原則）
-│   ├── DESIGN_SYSTEM_COMPONENTS.md  # コンポーネント仕様
-│   ├── DESIGN_SYSTEM_PATTERNS.md    # デザインパターン
-│   └── THEME_AND_I18N.md            # テーマ実装・i18n方針
-├── API_REFERENCE.md                 # APIリファレンス
-├── COMPONENT_GUIDE.md               # コンポーネントガイド
-├── PROJECT_DOCUMENTATION.md         # プロジェクト全体ドキュメント
-└── README.md                        # ドキュメント索引
+├── README.md
+├── PROJECT_DOCUMENTATION.md
+├── API_REFERENCE.md
+├── COMPONENT_GUIDE.md
+├── CLEANUP_REPORT.md
+└── design/
+    ├── DESIGN_SYSTEM.md
+    ├── DESIGN_SYSTEM_COMPONENTS.md
+    ├── DESIGN_SYSTEM_PATTERNS.md
+    ├── THEME_AND_I18N.md
+    └── proposals/2026-09-geist-grid.md
 ```
 
-### `/public/` - 静的アセット
+`.kiro/steering/` は product、tech、structure の方針を持ちます。完了済みの仕様は
+`.kiro/specs/archive/` に保存され、現行の実装説明として書き換えません。
 
-```
-public/
-├── company/                # 会社関連画像
-├── fonts/                  # カスタムフォント
-├── individual-investors/   # 投資家関連画像
-├── investors/              # 投資家情報
-├── linked-avatars/         # アバター画像
-├── logo-cloud/             # ロゴクラウド画像
-├── logo-cluster/           # ロゴクラスター画像
-├── logo-timeline/          # ロゴタイムライン画像
-├── map/                    # マップ画像
-├── screenshots/            # スクリーンショット
-├── team/                   # チーム写真
-└── testimonials/           # お客様の声画像
-```
+## Naming and Import Conventions
 
-**アセット命名規則**:
-- ケバブケース: `logo-company.svg`
-- 説明的な名前: `team-photo-john-doe.jpg`
-- 最適化された画像形式: WebP、AVIF推奨
+- TypeScript / TSX はケバブケース（例: `course-list.tsx`）にする
+- テストは `*.test.ts` または `*.test.tsx` にする
+- App Router の予約ファイルは Next.js のファイル規約に従う
+- `@/*` は `./src/*` のパスエイリアスとして使う
+- 共通 UI の色は `src/styles/tailwind.css` のセマンティックトークンを使う
+- 新しい表示文言は、対応する英語面がある場合は日英辞書の両方へ追加する
 
-## Code Organization Patterns
+## Development Scripts
 
-### 1. コンポーネント構造
+利用可能なコマンドは `package.json` が正典です。
 
-```typescript
-// コンポーネントファイルの標準構造
-import { ComponentProps } from 'react'
-import clsx from 'clsx'
-
-// 型定義
-interface MyComponentProps extends ComponentProps<'div'> {
-  variant?: 'primary' | 'secondary'
-  size?: 'sm' | 'md' | 'lg'
-}
-
-// コンポーネント本体
-export default function MyComponent({
-  variant = 'primary',
-  size = 'md',
-  className,
-  children,
-  ...props
-}: MyComponentProps) {
-  return (
-    <div
-      className={clsx(
-        'base-classes',
-        variant === 'primary' && 'primary-classes',
-        variant === 'secondary' && 'secondary-classes',
-        size === 'sm' && 'sm-classes',
-        size === 'md' && 'md-classes',
-        size === 'lg' && 'lg-classes',
-        className,
-      )}
-      {...props}
-    >
-      {children}
-    </div>
-  )
-}
+```bash
+npm run dev
+npm run build
+npm run start
+npm run lint
+npm run type-check
+npm run test
+npm run test:coverage
+npm run format
+npm run format:check
+npm run check:all
+npm run analyze
 ```
 
-### 2. ユーティリティ関数
-
-```typescript
-// ユーティリティファイルの標準構造
-/**
- * 関数の説明
- * @param param1 - パラメータの説明
- * @returns 戻り値の説明
- */
-export function myUtility(param1: string): string {
-  // 実装
-  return result
-}
-```
-
-### 3. カスタムフック
-
-```typescript
-// フックの標準構造
-import { useState, useEffect } from 'react'
-
-export function useMyHook(dependency: string) {
-  const [state, setState] = useState<StateType>(initialValue)
-
-  useEffect(() => {
-    // 副作用
-    return () => {
-      // クリーンアップ
-    }
-  }, [dependency])
-
-  return { state, setState }
-}
-```
-
-### 4. APIルートハンドラー
-
-```typescript
-// API Route Handlerの標準構造
-import { NextRequest, NextResponse } from 'next/server'
-
-export async function POST(request: NextRequest) {
-  try {
-    const body = await request.json()
-
-    // ビジネスロジック
-
-    return NextResponse.json({ success: true }, { status: 200 })
-  } catch (error) {
-    return NextResponse.json(
-      { error: 'Error message' },
-      { status: 500 }
-    )
-  }
-}
-```
-
-## File Naming Conventions
-
-### TypeScript/TSX
-- **コンポーネント**: ケバブケース `button.tsx`, `logo-cloud.tsx`
-- **ユーティリティ**: ケバブケース `env-validation.ts`, `retry.ts`
-- **フック**: ケバブケース `use-retry.ts`, `use-fetch-data.ts`
-- **テスト**: `*.test.ts`, `*.test.tsx`
-
-### 設定ファイル
-- **Next.js**: `next.config.js`
-- **TypeScript**: `tsconfig.json`
-- **ESLint**: `.eslintrc.json`, `eslint.config.js`
-- **Prettier**: `prettier.config.js`, `.prettierrc`
-- **Jest**: `jest.config.js`, `jest.setup.js`
-
-### ドキュメント
-- **Markdown**: 大文字スネークケース `README.md`, `API_REFERENCE.md`
-- **プロジェクト固有**: `CLAUDE.md`, `CHANGELOG.md`
-
-### 特殊ファイル
-- **環境変数**: `.env.local`, `.env.example`
-- **Git**: `.gitignore`, `.gitattributes`
-- **npm**: `package.json`, `package-lock.json`
-
-## Import Organization
-
-### インポート順序（Prettierで自動整理）
-
-```typescript
-// 1. Reactと外部ライブラリ
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import clsx from 'clsx'
-
-// 2. 内部コンポーネント
-import Button from '@/components/button'
-import Heading from '@/components/heading'
-
-// 3. ユーティリティとヘルパー
-import { retry } from '@/lib/retry'
-import { validateEnv } from '@/lib/env-validation'
-
-// 4. 型定義
-import type { ComponentProps } from 'react'
-import type { CustomType } from '@/types'
-
-// 5. スタイルとアセット
-import '@/styles/tailwind.css'
-```
-
-**設定**: `prettier-plugin-organize-imports` が自動で整理
-
-### パスエイリアス
-
-```typescript
-// ✅ パスエイリアス使用（推奨）
-import Button from '@/components/button'
-import { retry } from '@/lib/retry'
-
-// ❌ 相対パス（非推奨）
-import Button from '../../../components/button'
-import { retry } from '../../lib/retry'
-```
-
-**設定**: `tsconfig.json`
-```json
-{
-  "compilerOptions": {
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  }
-}
-```
-
-## Key Architectural Principles
-
-### 1. 単一責任原則（SRP）
-- 各コンポーネントは1つの責務のみ
-- ユーティリティ関数は単一の目的
-- ファイルは1つの主要エクスポート
-
-### 2. DRY（Don't Repeat Yourself）
-- 共通ロジックはユーティリティに抽出
-- コンポーネントの再利用
-- 設定の一元管理
-
-### 3. 依存性の方向
-```
-app (pages) → components → hooks → lib (utilities)
-```
-
-- 上位層が下位層に依存
-- 下位層は上位層を知らない
-- 循環依存の禁止
-
-### 4. 型安全性
-- すべての関数に型注釈
-- `any`の使用禁止（やむを得ない場合のみ`unknown`）
-- PropsにはTypeScript interfaceを定義
-
-### 5. コンポーネント設計
-- **Composition over Inheritance**: 継承より合成
-- **Props drilling回避**: Context、状態管理
-- **アクセシビリティ**: WCAG 2.1 AA準拠
-
-### 6. パフォーマンス
-- **遅延読み込み**: 重いコンポーネントは動的インポート
-- **メモ化**: 高コストな計算はuseMemo
-- **最適化**: React.memo、useCallback適切に使用
-
-### 7. テスタビリティ
-- **純粋関数**: 副作用の分離
-- **依存注入**: モック可能な設計
-- **振る舞いテスト**: 実装詳細ではなく振る舞いをテスト
-
-### 8. セキュリティ
-- **入力検証**: すべての外部入力を検証
-- **XSS対策**: Reactの自動エスケープ活用
-- **CSP**: nonceベースのスクリプト実行
-
-### 9. エラーハンドリング
-- **早期リターン**: ガード節の活用
-- **エラー境界**: コンポーネントレベルのエラーハンドリング
-- **ログ記録**: 開発環境での詳細なログ
-
-### 10. ドキュメント
-- **コードコメント**: 「なぜ」を説明
-- **型定義**: 自己文書化コード
-- **README**: セットアップと使用方法
-
-## Directory Creation Guidelines
-
-### 新しいディレクトリを作成する場合
-
-1. **目的の明確化**: ディレクトリの責務を定義
-2. **命名**: 複数形を使用（`components`, `hooks`, `utils`）
-3. **index.ts**: エクスポート集約（必要に応じて）
-4. **README.md**: ディレクトリの目的を説明（大規模な場合）
-
-### テストディレクトリ
-- 各ディレクトリに`__tests__/`を配置
-- テストファイルは対象ファイルの隣に配置可能
-
-### 型定義ディレクトリ（将来の拡張）
-```
-src/types/
-├── index.ts
-├── api.ts
-├── components.ts
-└── utils.ts
-```
-
-## Module Boundaries
-
-### 公開インターフェース
-- `src/components/` - 公開UIコンポーネント
-- `src/hooks/` - 公開カスタムフック
-- `src/lib/` - 公開ユーティリティ
-
-### 内部実装
-- `src/app/` - Next.jsルーティング（外部から直接インポート禁止）
-- `__tests__/` - テストコード（本番バンドルから除外）
-
-### インポートルール
-```typescript
-// ✅ 許可されたインポート
-import Button from '@/components/button'
-import { useRetry } from '@/hooks/use-retry'
-import { retry } from '@/lib/retry'
-
-// ❌ 禁止されたインポート
-import Layout from '@/app/layout'  // app/は内部実装
-```
-
----
-
-**Note**: プロジェクト構造に変更があった際は、このドキュメントを更新してください。
+`check:all` は lint、format:check、type-check、test を実行します。Next.js のルート入口まで
+確認する場合は `npm run build` を別途実行します。

@@ -1,0 +1,48 @@
+# Declarative label source. Applied manually with:
+#   gh label create <name> --color <hex> --description "<description>" --force
+# (there is no sync script in this repository; labels.yml documents intent,
+# it does not run itself).
+
+# type
+- name: bug
+  color: d73a4a
+  description: Something isn't working
+- name: enhancement
+  color: a2eeef
+  description: New feature or request
+- name: documentation
+  color: 0075ca
+  description: Improvements or additions to documentation
+- name: chore
+  color: fef2c0
+  description: Maintenance work with no user-facing behavior change
+- name: security
+  color: 5319e7
+  description: Security-related issue or fix
+
+# priority
+- name: "priority: P0"
+  color: B60205
+  description: 最優先。他をブロックする／影響範囲が最大
+- name: "priority: P1"
+  color: D93F0B
+  description: 高優先度
+- name: "priority: P2"
+  color: FBCA04
+  description: 中優先度
+- name: "priority: P3"
+  color: 0E8A16
+  description: 低優先度
+
+# blocked / on hold
+- name: "blocked: dependency"
+  color: f9d0c4
+  description: Blocked on another dependency landing first
+
+# PR automation
+- name: dependencies
+  color: "0366d6"
+  description: Pull requests that update a dependency
+- name: ci
+  color: "006b75"
+  description: Continuous integration related changes

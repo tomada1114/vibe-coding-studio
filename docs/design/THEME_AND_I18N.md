@@ -102,7 +102,7 @@ const themeInit = `(function(){try{
 - `<html>` の初期値は `data-theme="dark"`（SSR の出力もダーク＝多数派に合わせる）。
 - `suppressHydrationWarning` を `<html>` に付ける。
 - `color-scheme` を同時に設定してスクロールバー・フォームの既定色も揃える。
-- CSP で `unsafe-inline` を許可していない場合は nonce を付与する。`next.config.mjs` の現行ヘッダー設定に CSP は無いため、当面は問題なし。
+- CSP（`next.config.mjs`）は `script-src 'unsafe-inline'` を許可しているため nonce は不要。nonce 方式に移るときはこのスクリプトにも nonce を付与する（Issue #85）。
 - テーマ切替時の全体トランジションは**入れない**（大面積の色補間は安っぽく見える）。切り替えは瞬時。
 
 ### 1.4 テーマトグルの仕様

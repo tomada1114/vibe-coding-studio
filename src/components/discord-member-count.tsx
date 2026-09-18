@@ -33,23 +33,25 @@ export async function DiscordMemberCount({
 }: {
   label?: string
 } = {}) {
+  let memberCount: number
+
   try {
-    const memberCount = await getDiscordMemberCount()
-
-    // メンバー数が0の場合は何も表示しない
-    if (memberCount === 0) {
-      return null
-    }
-
-    const formattedCount = formatMemberCount(memberCount)
-
-    return (
-      <DiscordMemberCountClient formattedCount={formattedCount} label={label} />
-    )
+    memberCount = await getDiscordMemberCount()
   } catch (error) {
     // エラーが発生した場合は何も表示しない（ユーザー体験を損なわないため）
     // eslint-disable-next-line no-console
     console.error("Failed to display Discord member count:", error)
     return null
   }
+
+  // メンバー数が0の場合は何も表示しない
+  if (memberCount === 0) {
+    return null
+  }
+
+  const formattedCount = formatMemberCount(memberCount)
+
+  return (
+    <DiscordMemberCountClient formattedCount={formattedCount} label={label} />
+  )
 }
