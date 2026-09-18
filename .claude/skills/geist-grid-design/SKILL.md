@@ -8,11 +8,15 @@ description: |
   テーマ実装、Do / Don't、実装チェックリストを定義する。
   Use when ページのデザイン刷新, デザインシステム適用, 新規ページ作成, ダーク/ライトテーマ,
   テーマトグル, トークン追加, Geist Grid, redesign a page to match the site's design system.
-metadata:
-  platforms: claude-code, codex
 ---
 
 # Geist Grid デザインシステム
+
+**扱う:** 色・タイポグラフィ・セル構造・派手さ予算・`data-theme` によるテーマ実装・
+コンポーネントの見た目の規則。
+**扱わない:** テストの書き方と置き場所（`writing-tests`）; 表示文言の追加とドキュメント
+更新の要否（`updating-docs`）; `eslint.config.mjs` や `.prettierrc` のようなゲート側
+ファイル（`changing-gates`）。
 
 **北極星: 黒い方眼紙の上に置かれた、エンジニアの職務経歴書。** Vercel Geist の厳密なトークンで組み、1px の罫線がセルを切り、そこに青い光が一点だけ差す。「方眼紙」= 構造が見えていること（罫線とセルが主役）。「職務経歴書」= 装飾ではなく事実（書籍・講座・経歴）が読まれること。「青い光が一点だけ」= 派手さは**数を制限された特権**であること。
 

@@ -6,6 +6,7 @@ import CommunityPage from "@/app/community/page"
 import { DISCORD_INVITE_URL } from "@/lib/constants"
 import { render, screen } from "@testing-library/react"
 
+// 外部 API に依存するカウント表示をこのページの規則テストから切り離す。実装変更時はトークン準拠を再確認する。
 jest.mock("@/components/discord-member-count", () => ({
   DiscordMemberCount: () => null,
 }))
@@ -97,6 +98,11 @@ describe("コミュニティページ（/community）", () => {
   })
 
   describe("Geist Grid の規則", () => {
+    it("ページルートに gg-surface を持つ", () => {
+      const { container } = render(<CommunityPage />)
+      expect(container.firstElementChild).toHaveClass("gg-surface")
+    })
+
     it("生の hex カラーや gray-* のクラスを使っていない", () => {
       const { container } = render(<CommunityPage />)
       const classNames = Array.from(container.querySelectorAll("*"))

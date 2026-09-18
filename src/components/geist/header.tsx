@@ -49,7 +49,7 @@ function LanguageToggle({
     <div
       role="group"
       aria-label={groupLabel}
-      className="border-border inline-flex h-7 rounded-[6px] border"
+      className="inline-flex h-7 rounded-[6px] border border-border"
     >
       {(["ja", "en"] as const).map((code, index) => {
         const active = locale === code
@@ -62,7 +62,7 @@ function LanguageToggle({
             className={clsx(
               "relative z-0 flex h-full items-center px-[10px] font-mono text-[11px] tracking-[0.08em] uppercase transition-colors focus-visible:z-10",
               index === 0 ? "rounded-l-[6px]" : "rounded-r-[6px]",
-              index > 0 && "border-border border-l",
+              index > 0 && "border-l border-border",
               active
                 ? "bg-surface-1 text-text-primary"
                 : "text-text-label hover:text-text-primary"
@@ -105,14 +105,16 @@ export function Header({ dictionary }: { dictionary?: Dictionary } = {}) {
 
   // ページ遷移したらモバイルメニューを閉じる
   useEffect(() => {
+    // pathname は Next.js ルーターという外部システムの状態なので、遷移時に同期する。
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMenuOpen(false)
   }, [pathname])
 
   return (
-    <header className="bg-bg/80 border-border sticky top-0 z-50 border-b backdrop-blur-[8px]">
+    <header className="sticky top-0 z-50 border-b border-border bg-bg/80 backdrop-blur-[8px]">
       <a
         href="#main-content"
-        className="focus:bg-bg focus:text-text-primary focus:border-border sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-[60] focus:rounded-[6px] focus:border focus:px-4 focus:py-2 focus:text-sm focus:font-medium"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-[60] focus:rounded-[6px] focus:border focus:border-border focus:bg-bg focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-text-primary"
       >
         {dict.header.skipToContent}
       </a>
@@ -124,13 +126,13 @@ export function Header({ dictionary }: { dictionary?: Dictionary } = {}) {
             aria-expanded={menuOpen}
             aria-controls="gg-mobile-nav"
             aria-label={menuOpen ? dict.header.menuClose : dict.header.menuOpen}
-            className="text-text-secondary hover:text-text-primary hover:bg-surface-1 -ml-1 flex size-8 items-center justify-center rounded-[6px] transition-colors lg:hidden"
+            className="-ml-1 flex size-8 items-center justify-center rounded-[6px] text-text-secondary transition-colors hover:bg-surface-1 hover:text-text-primary lg:hidden"
           >
             <MenuIcon open={menuOpen} />
           </button>
           <Link
             href={localizePath("/", locale)}
-            className="text-text-primary text-[15px] font-medium whitespace-nowrap"
+            className="text-[15px] font-medium whitespace-nowrap text-text-primary"
           >
             Vibe Coding Studio
           </Link>
@@ -158,7 +160,7 @@ export function Header({ dictionary }: { dictionary?: Dictionary } = {}) {
                 {active && (
                   <span
                     aria-hidden="true"
-                    className="bg-accent absolute inset-x-0 bottom-0 h-px"
+                    className="absolute inset-x-0 bottom-0 h-px bg-accent"
                   />
                 )}
               </Link>
@@ -184,7 +186,7 @@ export function Header({ dictionary }: { dictionary?: Dictionary } = {}) {
         <nav
           id="gg-mobile-nav"
           aria-label={dict.nav.label}
-          className="border-border bg-bg border-t lg:hidden"
+          className="border-t border-border bg-bg lg:hidden"
         >
           <ul className="gg-container py-2">
             {NAV.map(({ key, href }) => {
@@ -197,7 +199,7 @@ export function Header({ dictionary }: { dictionary?: Dictionary } = {}) {
                     className={clsx(
                       "block py-2.5 text-sm transition-colors",
                       active
-                        ? "text-text-primary font-medium"
+                        ? "font-medium text-text-primary"
                         : "text-text-secondary hover:text-text-primary"
                     )}
                   >

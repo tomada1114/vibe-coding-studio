@@ -8,5 +8,10 @@
   "arrowParens": "avoid",
   "endOfLine": "lf",
   "useTabs": false,
-  "plugins": ["prettier-plugin-organize-imports", "prettier-plugin-tailwindcss"]
+  "plugins": [
+    "prettier-plugin-organize-imports",
+    "prettier-plugin-tailwindcss"
+  ],
+  "tailwindFunctions": ["clsx"],
+  "tailwindStylesheet": "./src/styles/tailwind.css"
 }

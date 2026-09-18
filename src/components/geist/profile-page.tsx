@@ -7,7 +7,7 @@
  *   - 各セルの上辺に英語の Mono ラベル（`gg-label`）
  *   - グローは 1 ページ 2 個以内・1 ビューポート 1 個・静止（ここではヒーローの 1 個のみ）
  *   - グラデーション罫線（`gg-rule-accent`）は 1 ページ 2 本まで（ここでは 1 本）
- *   - 行の形が違うセクションを混ぜる（数値セル / 2 カラム / 年表 / リスト）
+ *   - 行の形が違うセクションを混ぜる（数値セル / 2 カラム / 年表 / タグ群 / リスト）
  *
  * 詳細は `.claude/skills/geist-grid-design/SKILL.md`。
  */
@@ -51,7 +51,7 @@ const PROFILE_LINKS = [
 /** 外部リンクの末尾に置く矢印 */
 function ExternalArrow() {
   return (
-    <span aria-hidden="true" className="text-text-secondary ml-1 text-[12px]">
+    <span aria-hidden="true" className="ml-1 text-[12px] text-text-secondary">
       ↗
     </span>
   )
@@ -72,9 +72,9 @@ function Section({
     <section className={clsx("mt-16 sm:mt-24", className)}>
       <div className="flex items-baseline gap-3">
         <p className="gg-label">{label}</p>
-        <span aria-hidden="true" className="bg-border h-px flex-1" />
+        <span aria-hidden="true" className="h-px flex-1 bg-border" />
       </div>
-      <h2 className="text-text-primary mt-3 text-[20px] leading-[1.5] font-medium sm:text-2xl sm:tracking-[-0.015em]">
+      <h2 className="mt-3 text-[20px] leading-[1.5] font-medium text-text-primary sm:text-2xl sm:tracking-[-0.015em]">
         {heading}
       </h2>
       <div className="mt-6">{children}</div>
@@ -86,7 +86,7 @@ function StatCell({ label, value }: { label: string; value: string }) {
   return (
     <div className="gg-cell">
       <p className="gg-label">{label}</p>
-      <p className="text-text-primary mt-3 font-mono text-[32px] leading-none font-medium tabular-nums sm:text-[40px]">
+      <p className="mt-3 font-mono text-[32px] leading-none font-medium text-text-primary tabular-nums sm:text-[40px]">
         {value}
       </p>
     </div>
@@ -124,22 +124,22 @@ export function ProfilePage({
         <div className="gg-glow relative isolate overflow-hidden">
           <div
             aria-hidden="true"
-            className="gg-grid-field pointer-events-none absolute inset-0 -z-10"
+            className="pointer-events-none absolute inset-0 -z-10 gg-grid-field"
           />
           <div className="gg-container pt-16 pb-12 sm:pt-24 sm:pb-16">
             <div className="grid items-start gap-10 lg:grid-cols-[1fr_auto]">
               <div className="max-w-[720px]">
                 <p className="gg-label">{dict.hero.label}</p>
-                <h1 className="text-text-primary mt-4 text-[40px] leading-[1.15] font-semibold tracking-[-0.02em] sm:text-[56px] sm:leading-[1.1]">
+                <h1 className="mt-4 text-[40px] leading-[1.15] font-semibold tracking-[-0.02em] text-text-primary sm:text-[56px] sm:leading-[1.1]">
                   {dict.hero.name}
                 </h1>
-                <p className="gg-meta text-text-secondary mt-3">
+                <p className="mt-3 gg-meta text-text-secondary">
                   {dict.hero.legalName}
                 </p>
-                <p className="text-text-primary mt-6 text-[18px] leading-[1.6] font-medium">
+                <p className="mt-6 text-[18px] leading-[1.6] font-medium text-text-primary">
                   {dict.hero.role}
                 </p>
-                <p className="gg-prose-ja text-text-secondary mt-4 text-[16px]">
+                <p className="mt-4 text-[16px] gg-prose-ja text-text-secondary">
                   {dict.hero.lead}
                 </p>
 
@@ -170,7 +170,7 @@ export function ProfilePage({
                 </div>
               </div>
 
-              <div className="border-border w-full max-w-[280px] overflow-hidden rounded-[6px] border">
+              <div className="w-full max-w-[280px] overflow-hidden rounded-[6px] border border-border">
                 <Image
                   src="/tomada.png"
                   alt={dict.hero.photoAlt}
@@ -210,7 +210,7 @@ export function ProfilePage({
 
           {/* ── BOOK ──────────────────────────────────────── */}
           <Section label={dict.book.label} heading={dict.book.heading}>
-            <p className="gg-prose-ja text-text-secondary mb-6 max-w-[720px] text-[18px]">
+            <p className="mb-6 max-w-[720px] text-[18px] gg-prose-ja text-text-secondary">
               {dict.book.lead}
             </p>
             <div className="gg-cell-grid grid-cols-1 lg:grid-cols-[320px_1fr]">
@@ -228,17 +228,17 @@ export function ProfilePage({
 
               <div className="gg-cell">
                 <p className="gg-label">Title</p>
-                <h3 className="text-text-primary mt-3 text-[20px] leading-[1.5] font-medium sm:text-2xl sm:tracking-[-0.015em]">
+                <h3 className="mt-3 text-[20px] leading-[1.5] font-medium text-text-primary sm:text-2xl sm:tracking-[-0.015em]">
                   {book.title}
                 </h3>
 
-                <dl className="border-border mt-5 border-t">
+                <dl className="mt-5 border-t border-border">
                   {bookFacts.map(fact => (
                     <div
                       key={fact.label}
-                      className="border-border flex gap-4 border-b py-2.5"
+                      className="flex gap-4 border-b border-border py-2.5"
                     >
-                      <dt className="text-text-secondary w-[88px] shrink-0 text-[14px]">
+                      <dt className="w-[88px] shrink-0 text-[14px] text-text-secondary">
                         {fact.label}
                       </dt>
                       <dd className="gg-meta text-text-primary">
@@ -252,7 +252,7 @@ export function ProfilePage({
                   {dict.book.body.map((paragraph, index) => (
                     <p
                       key={index}
-                      className="gg-prose-ja text-text-secondary text-[14px]"
+                      className="text-[14px] gg-prose-ja text-text-secondary"
                     >
                       {paragraph}
                     </p>
@@ -272,7 +272,7 @@ export function ProfilePage({
                     href={book.publisherUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="gg-link text-[14px]"
+                    className="text-[14px] gg-link"
                   >
                     {dict.book.tocCta}
                     <ExternalArrow />
@@ -301,10 +301,10 @@ export function ProfilePage({
                     )}
                   >
                     <p className="gg-label">{item.label}</p>
-                    <h3 className="text-text-primary mt-3 text-[16px] font-medium">
+                    <h3 className="mt-3 text-[16px] font-medium text-text-primary">
                       {item.title}
                     </h3>
-                    <p className="gg-prose-ja text-text-secondary mt-3 text-[14px]">
+                    <p className="mt-3 text-[14px] gg-prose-ja text-text-secondary">
                       {item.body}
                     </p>
                     {external ? (
@@ -312,7 +312,7 @@ export function ProfilePage({
                         href={href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="gg-link mt-4 inline-block text-[14px]"
+                        className="mt-4 inline-block text-[14px] gg-link"
                       >
                         {item.cta}
                         <ExternalArrow />
@@ -320,7 +320,7 @@ export function ProfilePage({
                     ) : (
                       <Link
                         href={href}
-                        className="gg-link mt-4 inline-block text-[14px]"
+                        className="mt-4 inline-block text-[14px] gg-link"
                       >
                         {item.cta}
                       </Link>
@@ -329,7 +329,7 @@ export function ProfilePage({
                 )
               })}
             </div>
-            <p className="gg-meta text-text-secondary mt-4">
+            <p className="mt-4 gg-meta text-text-secondary">
               Discord:{" "}
               <a
                 href={DISCORD_INVITE_URL}
@@ -349,16 +349,40 @@ export function ProfilePage({
               {dict.career.entries.map(entry => (
                 <div key={entry.year} className="gg-cell">
                   <div className="grid gap-3 sm:grid-cols-[96px_1fr] sm:gap-6">
-                    <p className="gg-label pt-1">{entry.year}</p>
+                    <p className="pt-1 gg-label">{entry.year}</p>
                     <div>
-                      <h3 className="text-text-primary text-[16px] font-medium">
+                      <h3 className="text-[16px] font-medium text-text-primary">
                         {entry.title}
                       </h3>
-                      <p className="gg-prose-ja text-text-secondary mt-2 text-[14px]">
+                      <p className="mt-2 text-[14px] gg-prose-ja text-text-secondary">
                         {entry.body}
                       </p>
                     </div>
                   </div>
+                </div>
+              ))}
+            </div>
+          </Section>
+
+          {/* ── STACK ─────────────────────────────────────── */}
+          <Section label={dict.stack.label} heading={dict.stack.heading}>
+            <p className="mb-6 max-w-[720px] text-[16px] gg-prose-ja text-text-secondary">
+              {dict.stack.lead}
+            </p>
+            <div className="gg-cell-grid grid-cols-1 sm:grid-cols-2">
+              {dict.stack.groups.map(group => (
+                <div key={group.label} className="gg-cell">
+                  <p className="gg-label">{group.label}</p>
+                  <h3 className="mt-3 text-[16px] font-medium text-text-primary">
+                    {group.title}
+                  </h3>
+                  <ul className="mt-3 flex flex-wrap gap-2">
+                    {group.items.map(item => (
+                      <li key={item} className="gg-tag">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               ))}
             </div>
@@ -372,11 +396,11 @@ export function ProfilePage({
             <div className="gg-cell-grid grid-cols-1 lg:grid-cols-2">
               <div className="gg-cell">
                 <p className="gg-label">Credentials</p>
-                <ul className="border-border mt-3 border-t">
+                <ul className="mt-3 border-t border-border">
                   {dict.credentials.certifications.map(item => (
                     <li
                       key={item}
-                      className="border-border text-text-secondary border-b py-2.5 text-[14px]"
+                      className="border-b border-border py-2.5 text-[14px] text-text-secondary"
                     >
                       {item}
                     </li>
@@ -389,20 +413,20 @@ export function ProfilePage({
                   {dict.credentials.speakingLabel} ·{" "}
                   {dict.credentials.speakingDate}
                 </p>
-                <h3 className="text-text-primary mt-3 text-[16px] font-medium">
+                <h3 className="mt-3 text-[16px] font-medium text-text-primary">
                   {dict.credentials.speakingTitle}
                 </h3>
-                <p className="text-text-primary mt-2 text-[14px]">
+                <p className="mt-2 text-[14px] text-text-primary">
                   {dict.credentials.speakingSubtitle}
                 </p>
-                <p className="gg-prose-ja text-text-secondary mt-3 text-[14px]">
+                <p className="mt-3 text-[14px] gg-prose-ja text-text-secondary">
                   {dict.credentials.speakingBody}
                 </p>
                 <a
                   href={SPEAKING_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="gg-link mt-4 inline-block text-[14px]"
+                  className="mt-4 inline-block text-[14px] gg-link"
                 >
                   {dict.credentials.speakingCta}
                   <ExternalArrow />
@@ -418,7 +442,7 @@ export function ProfilePage({
                 const external = url.startsWith("http")
                 const isLast = index === PROFILE_LINKS.length - 1
                 const className = clsx(
-                  "gg-cell gg-cell-hover text-text-secondary hover:text-text-primary flex items-center gap-2 transition-colors",
+                  "gg-cell flex items-center gap-2 gg-cell-hover text-text-secondary transition-colors hover:text-text-primary",
                   // 7件を2列/4列で並べると最終行が余り、gg-cell-grid の
                   // 親背景（罫線色）がそのまま空セルとして露出する。
                   // 最後のセルを残り列数ぶん広げて埋める。

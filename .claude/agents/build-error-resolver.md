@@ -287,52 +287,19 @@ const Component = ({ children }: Props) => {
 }
 ```
 
-### Supabase Client Types
+### Repository Data Types
 ```typescript
-// ❌ ERROR: Type 'any' not assignable
-const { data } = await supabase
-  .from('markets')
-  .select('*')
+// ❌ ERROR: A route component accepts an untyped course value
+const firstCourse = getAllUdemyCourses()[0]
+firstCourse.topics.map(topic => topic.toUpperCase())
 
-// ✅ FIX: Add type annotation
-interface Market {
-  id: string
-  name: string
-  slug: string
-  // ... other fields
-}
+// ✅ FIX: Use the repository's shared model at the boundary
+import { getAllUdemyCourses } from '@/data/udemy-courses'
+import type { UdemyCourse } from '@/types/udemy-course'
 
-const { data } = await supabase
-  .from('markets')
-  .select('*') as { data: Market[] | null, error: any }
-```
-
-### Redis Stack Types
-```typescript
-// ❌ ERROR: Property 'ft' does not exist on type 'RedisClientType'
-const results = await client.ft.search('idx:markets', query)
-
-// ✅ FIX: Use proper Redis Stack types
-import { createClient } from 'redis'
-
-const client = createClient({
-  url: process.env.REDIS_URL
-})
-
-await client.connect()
-
-// Type is inferred correctly now
-const results = await client.ft.search('idx:markets', query)
-```
-
-### Solana Web3.js Types
-```typescript
-// ❌ ERROR: Argument of type 'string' not assignable to 'PublicKey'
-const publicKey = wallet.address
-
-// ✅ FIX: Use PublicKey constructor
-import { PublicKey } from '@solana/web3.js'
-const publicKey = new PublicKey(wallet.address)
+const courses: UdemyCourse[] = getAllUdemyCourses()
+const firstCourse = courses[0]
+firstCourse?.topics.map(topic => topic.toUpperCase())
 ```
 
 ## Minimal Diff Strategy

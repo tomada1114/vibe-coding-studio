@@ -48,7 +48,7 @@ function SectionHeading({
   return (
     <header>
       <p className="gg-label">{label}</p>
-      <h2 className="text-text-primary mt-3 text-[28px] leading-[1.3] font-medium tracking-[-0.015em] sm:text-[36px] sm:leading-[1.2]">
+      <h2 className="mt-3 text-[28px] leading-[1.3] font-medium tracking-[-0.015em] text-text-primary sm:text-[36px] sm:leading-[1.2]">
         {children}
       </h2>
     </header>
@@ -60,25 +60,25 @@ function CommunityHero({ copy }: { copy: CommunityCopy["hero"] }) {
     <div className="gg-glow relative isolate overflow-hidden">
       <div
         aria-hidden="true"
-        className="gg-grid-field pointer-events-none absolute inset-0 -z-10"
+        className="pointer-events-none absolute inset-0 -z-10 gg-grid-field"
       />
       <div className="gg-container pt-16 pb-14 sm:pt-24 sm:pb-20">
         <p className="gg-label">{copy.label}</p>
         {/* display（40px）まで。display-lg（56px）はトップページの氏名／肩書のみ。 */}
-        <h1 className="text-text-primary mt-4 max-w-[800px] text-[40px] leading-[1.2] font-semibold tracking-[-0.02em]">
+        <h1 className="mt-4 max-w-[800px] text-[40px] leading-[1.2] font-semibold tracking-[-0.02em] text-text-primary">
           {copy.title}
         </h1>
-        <p className="gg-prose-ja text-text-secondary mt-6 max-w-[720px] text-[18px]">
+        <p className="mt-6 max-w-[720px] text-[18px] gg-prose-ja text-text-secondary">
           {copy.lead}
         </p>
-        <p className="text-text-primary mt-4 text-[16px] font-medium sm:text-[18px]">
+        <p className="mt-4 text-[16px] font-medium text-text-primary sm:text-[18px]">
           {copy.highlights}
         </p>
 
         <div className="mt-8 max-w-[560px]">
-          <div className="gg-cell border-border border">
+          <div className="gg-cell border border-border">
             <p className="gg-label">MEMBERS</p>
-            <div className="text-text-primary mt-3">
+            <div className="mt-3 text-text-primary">
               <AsyncErrorBoundary fallback={null}>
                 <DiscordMemberCount label={copy.memberLabel} />
               </AsyncErrorBoundary>
@@ -122,22 +122,22 @@ export default function CommunityPage({
             <SectionHeading label={copy.value.label}>
               {copy.value.heading}
             </SectionHeading>
-            <div className="gg-cell-grid mt-6 grid-cols-1 lg:grid-cols-3">
+            <div className="mt-6 gg-cell-grid grid-cols-1 lg:grid-cols-3">
               {copy.value.items.map(proposition => (
                 <article key={proposition.title} className="gg-cell">
                   <p className="gg-label">{proposition.label}</p>
-                  <h3 className="text-text-primary mt-3 text-[20px] leading-[1.5] font-medium">
+                  <h3 className="mt-3 text-[20px] leading-[1.5] font-medium text-text-primary">
                     {proposition.title}
                   </h3>
-                  <p className="text-text-secondary mt-2 text-[14px] leading-[1.7] font-medium">
+                  <p className="mt-2 text-[14px] leading-[1.7] font-medium text-text-secondary">
                     {proposition.description}
                   </p>
-                  <ul className="gg-prose-ja text-text-secondary mt-5 space-y-2 text-[14px]">
+                  <ul className="mt-5 space-y-2 text-[14px] gg-prose-ja text-text-secondary">
                     {proposition.benefits.map(benefit => (
                       <li key={benefit} className="flex items-start gap-2">
                         <span
                           aria-hidden="true"
-                          className="text-accent mt-[0.15em]"
+                          className="mt-[0.15em] text-accent"
                         >
                           /
                         </span>
@@ -154,10 +154,10 @@ export default function CommunityPage({
             <SectionHeading label={copy.about.label}>
               {copy.about.heading}
             </SectionHeading>
-            <p className="gg-prose-ja text-text-secondary mt-5 max-w-[720px] text-[16px] sm:text-[18px]">
+            <p className="mt-5 max-w-[720px] text-[16px] gg-prose-ja text-text-secondary sm:text-[18px]">
               {copy.about.lead}
             </p>
-            <div className="gg-cell-grid mt-6 grid-cols-1 lg:grid-cols-[1fr_280px]">
+            <div className="mt-6 gg-cell-grid grid-cols-1 lg:grid-cols-[1fr_280px]">
               <div className="gg-cell">
                 <Image
                   src="/vcs-logo-wide-transparent.png"
@@ -171,7 +171,7 @@ export default function CommunityPage({
                   {copy.about.paragraphs.map(paragraph => (
                     <p
                       key={paragraph}
-                      className="gg-prose-ja text-text-secondary text-[16px]"
+                      className="text-[16px] gg-prose-ja text-text-secondary"
                     >
                       {paragraph}
                     </p>
@@ -195,13 +195,13 @@ export default function CommunityPage({
             <SectionHeading label={copy.startHere.label}>
               {copy.startHere.heading}
             </SectionHeading>
-            <div className="gg-cell-grid mt-6 grid-cols-1 md:grid-cols-2">
+            <div className="mt-6 gg-cell-grid grid-cols-1 md:grid-cols-2">
               {copy.startHere.items.map(item => (
                 <article key={item.question} className="gg-cell">
-                  <h3 className="text-text-primary text-[18px] leading-[1.5] font-medium">
+                  <h3 className="text-[18px] leading-[1.5] font-medium text-text-primary">
                     {item.question}
                   </h3>
-                  <p className="gg-prose-ja text-text-secondary mt-3 text-[14px]">
+                  <p className="mt-3 text-[14px] gg-prose-ja text-text-secondary">
                     {item.answer}
                   </p>
                 </article>
@@ -213,17 +213,17 @@ export default function CommunityPage({
             <SectionHeading label={copy.channels.label}>
               {copy.channels.heading}
             </SectionHeading>
-            <p className="gg-prose-ja text-text-secondary mt-5 max-w-[720px] text-[16px] sm:text-[18px]">
+            <p className="mt-5 max-w-[720px] text-[16px] gg-prose-ja text-text-secondary sm:text-[18px]">
               {copy.channels.lead}
             </p>
-            <div className="gg-cell-grid mt-6 grid-cols-1 md:grid-cols-2">
+            <div className="mt-6 gg-cell-grid grid-cols-1 md:grid-cols-2">
               {copy.channels.items.map(channel => (
                 <article key={channel.name} className="gg-cell">
                   <p className="gg-label">{channel.label}</p>
-                  <h3 className="text-text-primary mt-3 text-[20px] leading-[1.5] font-medium">
+                  <h3 className="mt-3 text-[20px] leading-[1.5] font-medium text-text-primary">
                     {channel.name}
                   </h3>
-                  <p className="gg-prose-ja text-text-secondary mt-3 text-[14px]">
+                  <p className="mt-3 text-[14px] gg-prose-ja text-text-secondary">
                     {channel.description}
                   </p>
                 </article>
@@ -235,13 +235,13 @@ export default function CommunityPage({
             <SectionHeading label={copy.audience.label}>
               {copy.audience.heading}
             </SectionHeading>
-            <div className="gg-cell-grid mt-6 grid-cols-1 md:grid-cols-2">
+            <div className="mt-6 gg-cell-grid grid-cols-1 md:grid-cols-2">
               {copy.audience.items.map(person => (
                 <div key={person} className="gg-cell flex items-start gap-3">
-                  <span aria-hidden="true" className="text-accent mt-[0.15em]">
+                  <span aria-hidden="true" className="mt-[0.15em] text-accent">
                     /
                   </span>
-                  <p className="gg-prose-ja text-text-secondary text-[16px]">
+                  <p className="text-[16px] gg-prose-ja text-text-secondary">
                     {person}
                   </p>
                 </div>
@@ -253,19 +253,19 @@ export default function CommunityPage({
             <SectionHeading label={copy.faq.label}>
               {copy.faq.heading}
             </SectionHeading>
-            <p className="gg-prose-ja text-text-secondary mt-5 max-w-[720px] text-[16px] sm:text-[18px]">
+            <p className="mt-5 max-w-[720px] text-[16px] gg-prose-ja text-text-secondary sm:text-[18px]">
               {copy.faq.lead}
             </p>
-            <div className="gg-cell-grid mt-6 grid-cols-1">
+            <div className="mt-6 gg-cell-grid grid-cols-1">
               {copy.faq.items.map(item => (
                 <details
                   key={item.question}
                   className="gg-cell open:bg-surface-1"
                 >
-                  <summary className="text-text-primary cursor-pointer list-none pr-8 text-[18px] leading-[1.5] font-medium marker:hidden">
+                  <summary className="cursor-pointer list-none pr-8 text-[18px] leading-[1.5] font-medium text-text-primary marker:hidden">
                     {item.question}
                   </summary>
-                  <p className="gg-prose-ja text-text-secondary mt-4 text-[14px]">
+                  <p className="mt-4 text-[14px] gg-prose-ja text-text-secondary">
                     {item.answer}
                   </p>
                 </details>
@@ -274,12 +274,12 @@ export default function CommunityPage({
           </section>
 
           <section className="mt-16 sm:mt-24">
-            <div className="gg-cell border-border border text-center sm:p-10">
+            <div className="gg-cell border border-border text-center sm:p-10">
               <p className="gg-label">{copy.join.label}</p>
-              <h2 className="text-text-primary mt-3 text-[28px] leading-[1.3] font-medium tracking-[-0.015em] sm:text-[36px] sm:leading-[1.2]">
+              <h2 className="mt-3 text-[28px] leading-[1.3] font-medium tracking-[-0.015em] text-text-primary sm:text-[36px] sm:leading-[1.2]">
                 {copy.join.heading}
               </h2>
-              <p className="gg-prose-ja text-text-secondary mx-auto mt-4 max-w-[560px] text-[16px] sm:text-[18px]">
+              <p className="mx-auto mt-4 max-w-[560px] text-[16px] gg-prose-ja text-text-secondary sm:text-[18px]">
                 {copy.join.lead.map(line => (
                   <span key={line} className="block">
                     {line}
@@ -290,7 +290,7 @@ export default function CommunityPage({
                 href={DISCORD_INVITE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="gg-btn gg-btn-primary mt-7"
+                className="mt-7 gg-btn gg-btn-primary"
               >
                 {copy.join.cta}
               </a>

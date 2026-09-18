@@ -1,3 +1,5 @@
+// Jest loads this configuration as CommonJS, so next/jest must use require.
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const nextJest = require("next/jest")
 
 const createJestConfig = nextJest({
@@ -12,24 +14,18 @@ const customJestConfig = {
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
   },
-  testPathIgnorePatterns: [
-    "/node_modules/",
-    "/.next/",
-    "/e2e/",
-    "/docs-migration/",
-  ],
+  testPathIgnorePatterns: ["/node_modules/", "/.next/"],
   collectCoverageFrom: [
     "src/**/*.{js,jsx,ts,tsx}",
     "!src/**/*.d.ts",
     "!src/**/types.ts",
-    "!src/app/studio/**",
   ],
   coverageThreshold: {
     global: {
-      branches: 70,
-      functions: 70,
-      lines: 70,
-      statements: 70,
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80,
     },
   },
   // Disable watchman to avoid permission issues

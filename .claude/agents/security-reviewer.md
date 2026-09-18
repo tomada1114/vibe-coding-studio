@@ -126,58 +126,23 @@ For each category, check:
 
 ### 3. Example Project-Specific Security Checks
 
-**CRITICAL - Platform Handles Real Money:**
+**CRITICAL - Public Static Site:**
 
 ```
-Financial Security:
-- [ ] All market trades are atomic transactions
-- [ ] Balance checks before any withdrawal/trade
-- [ ] Rate limiting on all financial endpoints
-- [ ] Audit logging for all money movements
-- [ ] Double-entry bookkeeping validation
-- [ ] Transaction signatures verified
-- [ ] No floating-point arithmetic for money
+Public Site Security:
+- [ ] No credentials, tokens, or private configuration are committed
+- [ ] Environment variables are read only on the server where required
+- [ ] User-controlled values are escaped by React and validated at boundaries
+- [ ] External links use the expected target and rel attributes
+- [ ] Public metadata does not expose private values
+- [ ] Error pages do not render sensitive error details in production
+- [ ] Route and metadata changes preserve the intended public surface
 
-Solana/Blockchain Security:
-- [ ] Wallet signatures properly validated
-- [ ] Transaction instructions verified before sending
-- [ ] Private keys never logged or stored
-- [ ] RPC endpoints rate limited
-- [ ] Slippage protection on all trades
-- [ ] MEV protection considerations
-- [ ] Malicious instruction detection
-
-Authentication Security:
-- [ ] Privy authentication properly implemented
-- [ ] JWT tokens validated on every request
-- [ ] Session management secure
-- [ ] No authentication bypass paths
-- [ ] Wallet signature verification
-- [ ] Rate limiting on auth endpoints
-
-Database Security (Supabase):
-- [ ] Row Level Security (RLS) enabled on all tables
-- [ ] No direct database access from client
-- [ ] Parameterized queries only
-- [ ] No PII in logs
-- [ ] Backup encryption enabled
-- [ ] Database credentials rotated regularly
-
-API Security:
-- [ ] All endpoints require authentication (except public)
-- [ ] Input validation on all parameters
-- [ ] Rate limiting per user/IP
-- [ ] CORS properly configured
-- [ ] No sensitive data in URLs
-- [ ] Proper HTTP methods (GET safe, POST/PUT/DELETE idempotent)
-
-Search Security (Redis + OpenAI):
-- [ ] Redis connection uses TLS
-- [ ] OpenAI API key server-side only
-- [ ] Search queries sanitized
-- [ ] No PII sent to OpenAI
-- [ ] Rate limiting on search endpoints
-- [ ] Redis AUTH enabled
+Dependencies and Build:
+- [ ] New packages are necessary and declared in `package.json`
+- [ ] Lockfile changes match the dependency change
+- [ ] `npm run check:all` passes
+- [ ] `npm run build` passes for route or configuration changes
 ```
 
 ## Vulnerability Patterns to Detect

@@ -1,0 +1,38 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    # Matches `min-release-age=7` in .npmrc: a version npm would refuse to
+    # install ahead of schedule must not arrive as a PR either. Dependabot
+    # lifts this for security updates, which is the intended exception — a
+    # human still reviews the diff.
+    cooldown:
+      default-days: 7
+    commit-message:
+      prefix: "deps:"
+    open-pull-requests-limit: 10
+    groups:
+      # Routine updates arrive as one reviewable PR. Majors are deliberately
+      # left out of this group so each gets its own PR and is reviewed on its
+      # own, tracked as an individual issue.
+      npm-minor-and-patch:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    cooldown:
+      default-days: 7
+    commit-message:
+      prefix: "ci:"
+    open-pull-requests-limit: 10
+    groups:
+      # Dependabot rewrites the pinned SHA and the trailing release-tag comment
+      # together, which is how the pins in .github/workflows stay current.
+      actions-minor-and-patch:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
