@@ -7,7 +7,7 @@
  *   - 各セルの上辺に英語の Mono ラベル（`gg-label`）
  *   - グローは 1 ページ 2 個以内・1 ビューポート 1 個・静止（ここではヒーローの 1 個のみ）
  *   - グラデーション罫線（`gg-rule-accent`）は 1 ページ 2 本まで（ここでは 1 本）
- *   - 行の形が違うセクションを混ぜる（数値セル / 2 カラム / 年表 / リスト）
+ *   - 行の形が違うセクションを混ぜる（数値セル / 2 カラム / 年表 / タグ群 / リスト）
  *
  * 詳細は `.claude/skills/geist-grid-design/SKILL.md`。
  */
@@ -359,6 +359,30 @@ export function ProfilePage({
                       </p>
                     </div>
                   </div>
+                </div>
+              ))}
+            </div>
+          </Section>
+
+          {/* ── STACK ─────────────────────────────────────── */}
+          <Section label={dict.stack.label} heading={dict.stack.heading}>
+            <p className="mb-6 max-w-[720px] text-[16px] gg-prose-ja text-text-secondary">
+              {dict.stack.lead}
+            </p>
+            <div className="gg-cell-grid grid-cols-1 sm:grid-cols-2">
+              {dict.stack.groups.map(group => (
+                <div key={group.label} className="gg-cell">
+                  <p className="gg-label">{group.label}</p>
+                  <h3 className="mt-3 text-[16px] font-medium text-text-primary">
+                    {group.title}
+                  </h3>
+                  <ul className="mt-3 flex flex-wrap gap-2">
+                    {group.items.map(item => (
+                      <li key={item} className="gg-tag">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               ))}
             </div>

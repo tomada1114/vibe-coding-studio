@@ -83,6 +83,29 @@ describe("トップページ（/）", () => {
     })
   })
 
+  describe("技術スタックセクション", () => {
+    it("全てのグループの見出しとタグが表示される", () => {
+      render(<Home />)
+      const section = screen
+        .getByRole("heading", { level: 2, name: ja.stack.heading })
+        .closest("section")
+      expect(section).not.toBeNull()
+
+      ja.stack.groups.forEach(group => {
+        expect(within(section!).getByText(group.title)).toBeInTheDocument()
+        group.items.forEach(item => {
+          expect(within(section!).getByText(item)).toBeInTheDocument()
+        })
+      })
+    })
+
+    it("グループのラベルは Mono ラベルに載せるため英数字のみで書かれている", () => {
+      ja.stack.groups.forEach(group => {
+        expect(group.label).toMatch(/^[\x20-\x7e]+$/)
+      })
+    })
+  })
+
   describe("資格・登壇セクション", () => {
     it("全ての取得資格が表示される", () => {
       render(<Home />)
@@ -218,6 +241,18 @@ describe("トップページ（/en）", () => {
     const { container } = render(<EnglishHome />)
     en.career.entries.forEach(entry => {
       expect(within(container).getByText(entry.title)).toBeInTheDocument()
+    })
+  })
+
+  it("技術スタックが英語で表示される", () => {
+    render(<EnglishHome />)
+    const section = screen
+      .getByRole("heading", { level: 2, name: en.stack.heading })
+      .closest("section")
+    expect(section).not.toBeNull()
+
+    en.stack.groups.forEach(group => {
+      expect(within(section!).getByText(group.title)).toBeInTheDocument()
     })
   })
 
