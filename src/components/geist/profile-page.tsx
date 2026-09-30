@@ -172,10 +172,10 @@ export function ProfilePage({
 
               <div className="w-full max-w-[280px] overflow-hidden rounded-[6px] border border-border">
                 <Image
-                  src="/tomada.png"
+                  src="/tomada_cat.jpg"
                   alt={dict.hero.photoAlt}
-                  width={560}
-                  height={560}
+                  width={640}
+                  height={640}
                   priority
                   sizes="(max-width: 1024px) 280px, 280px"
                   className="h-auto w-full"

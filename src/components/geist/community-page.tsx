@@ -180,10 +180,10 @@ export default function CommunityPage({
               </div>
               <div className="gg-cell flex items-center justify-center">
                 <Image
-                  src="/tomada.png"
+                  src="/tomada_cat.jpg"
                   alt={copy.about.profileAlt}
-                  width={560}
-                  height={560}
+                  width={640}
+                  height={640}
                   sizes="(max-width: 1024px) 50vw, 280px"
                   className="h-auto w-full max-w-[280px] rounded-[6px]"
                 />
