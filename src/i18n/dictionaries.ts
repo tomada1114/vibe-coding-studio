@@ -1,7 +1,7 @@
 /**
  * i18n — メッセージ辞書
  *
- * 翻訳対象はヘッダー・フッター・トップページ（個人プロフィール）・講座一覧・コミュニティの 5 面。
+ * 翻訳対象はヘッダー・フッター・トップページ（個人プロフィール）・講座一覧・コミュニティ・経歴の 6 面。
  * `ja` を基準とし、`en` は同じ構造を持つ（型で強制する）。
  *
  * 英訳はオーナーによる校正を前提とした下書き。
@@ -83,6 +83,20 @@ export type Dictionary = {
     primaryCta: string
     secondaryCta: string
     tertiaryCta: string
+    /** 拠点の現在時刻。`{hours}` は時差（時間数の絶対値）に置き換わる */
+    localTime: {
+      /** Mono ラベルに出す拠点名。uppercase 前提なので英語のみ */
+      location: string
+      ahead: string
+      behind: string
+      same: string
+      /** 時計の一時停止トグル（WCAG 2.2.2）のラベル */
+      pause: string
+    }
+  }
+  /** トップページ左余白のページ内目次 */
+  toc: {
+    label: string
   }
   stats: {
     since: string
@@ -117,6 +131,15 @@ export type Dictionary = {
     label: string
     heading: string
     entries: CareerEntry[]
+    /** トップページから経歴ページ（/career）へのリンク */
+    viewAll: string
+    /** 経歴ページ（/career）専用 */
+    page: {
+      metaTitle: string
+      metaDescription: string
+      lead: string
+      backToProfile: string
+    }
   }
   stack: {
     label: string
@@ -246,6 +269,16 @@ const ja: Dictionary = {
     primaryCta: "著書を見る",
     secondaryCta: "Udemy講座",
     tertiaryCta: "YouTube",
+    localTime: {
+      location: "Colorado, US",
+      ahead: "あなたより{hours}時間進み",
+      behind: "あなたより{hours}時間遅れ",
+      same: "あなたと同じ時刻",
+      pause: "時計を一時停止",
+    },
+  },
+  toc: {
+    label: "ページ内目次",
   },
   stats: {
     since: "Since",
@@ -297,6 +330,14 @@ const ja: Dictionary = {
   career: {
     label: "Career",
     heading: "経歴",
+    viewAll: "経歴をすべて見る",
+    page: {
+      metaTitle: "経歴",
+      metaDescription:
+        "とまだ（増山友司）の経歴。2016年にSIerでキャリアを始め、セキュリティベンダー、Webアプリケーション開発、独立を経て、現在はアメリカを拠点にAI駆動開発の実践と教育に取り組んでいます。",
+      lead: "2016年にSIerでキャリアを始めてから、現在までの経歴です。",
+      backToProfile: "プロフィールへ戻る",
+    },
     entries: [
       {
         year: "2016",
@@ -671,6 +712,16 @@ const en: Dictionary = {
     primaryCta: "See the book",
     secondaryCta: "Udemy courses",
     tertiaryCta: "YouTube",
+    localTime: {
+      location: "Colorado, US",
+      ahead: "{hours}h ahead of you",
+      behind: "{hours}h behind you",
+      same: "Same time as you",
+      pause: "Pause the clock",
+    },
+  },
+  toc: {
+    label: "On this page",
   },
   stats: {
     since: "Since",
@@ -722,6 +773,14 @@ const en: Dictionary = {
   career: {
     label: "Career",
     heading: "Career",
+    viewAll: "Full career history",
+    page: {
+      metaTitle: "Career",
+      metaDescription:
+        "Career history of Tomada (Tomoshi Masuyama): from a systems integrator in 2016 through security, web application development and freelancing, to practising and teaching AI-driven development from the U.S.",
+      lead: "From my first job at a systems integrator in 2016 to where I am now.",
+      backToProfile: "Back to profile",
+    },
     entries: [
       {
         year: "2016",

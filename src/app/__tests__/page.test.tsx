@@ -74,11 +74,46 @@ describe("トップページ（/）", () => {
     })
   })
 
-  describe("経歴セクション", () => {
-    it("全ての経歴エントリが表示される", () => {
+  describe("ヒーローの現地時刻", () => {
+    it("拠点の場所ラベルを表示する", () => {
       render(<Home />)
-      ja.career.entries.forEach(entry => {
+      expect(screen.getByText(ja.hero.localTime.location)).toBeInTheDocument()
+    })
+  })
+
+  describe("経歴セクション", () => {
+    // 全文は /career に分割した。トップには直近 3 件だけを置く。
+    const recent = ja.career.entries.slice(-3)
+    const older = ja.career.entries.slice(0, -3)
+
+    it("直近 3 件の経歴だけを表示する", () => {
+      render(<Home />)
+      recent.forEach(entry => {
         expect(screen.getByText(entry.title)).toBeInTheDocument()
+      })
+      older.forEach(entry => {
+        expect(screen.queryByText(entry.title)).not.toBeInTheDocument()
+      })
+    })
+
+    it("経歴ページ全体へのリンクがある", () => {
+      render(<Home />)
+      expect(
+        screen.getByRole("link", { name: ja.career.viewAll })
+      ).toHaveAttribute("href", "/career")
+    })
+  })
+
+  describe("ページ内目次", () => {
+    it("目次の各リンクがページ内に実在するセクションを指す", () => {
+      const { container } = render(<Home />)
+      const nav = screen.getByRole("navigation", { name: ja.toc.label })
+      const links = within(nav).getAllByRole("link")
+
+      expect(links.length).toBeGreaterThan(0)
+      links.forEach(link => {
+        const id = link.getAttribute("href")!.replace(/^#/, "")
+        expect(container.querySelector(`section#${id}`)).toBeInTheDocument()
       })
     })
   })
@@ -96,6 +131,21 @@ describe("トップページ（/）", () => {
         group.items.forEach(item => {
           expect(within(section!).getByText(item)).toBeInTheDocument()
         })
+      })
+    })
+
+    it("すべてのタグにアイコン（ロゴかモノグラム）が付く", () => {
+      render(<Home />)
+      const section = screen
+        .getByRole("heading", { level: 2, name: ja.stack.heading })
+        .closest("section")!
+
+      const tags = within(section).getAllByRole("listitem")
+      expect(tags.length).toBe(
+        ja.stack.groups.reduce((sum, group) => sum + group.items.length, 0)
+      )
+      tags.forEach(tag => {
+        expect(tag.querySelector('[aria-hidden="true"]')).not.toBeNull()
       })
     })
 
@@ -199,11 +249,41 @@ describe("トップページ（/）", () => {
       expect(container.querySelectorAll(".gg-cell").length).toBeGreaterThan(0)
     })
 
+    it("すべてのセルグリッドが罫線スポットライトに参加している", () => {
+      const { container } = render(<Home />)
+      const grids = Array.from(container.querySelectorAll(".gg-cell-grid"))
+
+      expect(grids.length).toBeGreaterThan(0)
+      grids.forEach(grid => {
+        expect(grid).toHaveClass("gg-spotlight")
+        expect(grid).toHaveAttribute("data-spotlight")
+      })
+    })
+
+    it("動きで内容を隠さない（初期状態で透明・非表示のクラスを持たない）", () => {
+      const { container } = render(<Home />)
+      const classNames = Array.from(container.querySelectorAll("*"))
+        .map(el => el.getAttribute("class") ?? "")
+        .join(" ")
+
+      expect(classNames).not.toMatch(/(?:^|\s)(?:opacity-0|invisible)(?:\s|$)/)
+    })
+
     it("グローは 1 ページ 2 個以内", () => {
       const { container } = render(<Home />)
       expect(container.querySelectorAll(".gg-glow").length).toBeLessThanOrEqual(
         2
       )
+    })
+
+    it("方眼の浮かび上がりはヒーローの faint grid に重ねる 1 箇所だけ", () => {
+      const { container } = render(<Home />)
+      const spots = container.querySelectorAll(".gg-grid-spot")
+
+      expect(spots.length).toBe(1)
+      expect(
+        spots[0].parentElement?.querySelector(".gg-grid-field")
+      ).not.toBeNull()
     })
 
     it("グラデーション罫線は 1 ページ 2 本以内", () => {
@@ -237,11 +317,14 @@ describe("トップページ（/en）", () => {
     ).toBeInTheDocument()
   })
 
-  it("経歴が英語で表示される", () => {
+  it("直近の経歴が英語で表示され、英語の経歴ページへリンクする", () => {
     const { container } = render(<EnglishHome />)
-    en.career.entries.forEach(entry => {
+    en.career.entries.slice(-3).forEach(entry => {
       expect(within(container).getByText(entry.title)).toBeInTheDocument()
     })
+    expect(
+      screen.getByRole("link", { name: en.career.viewAll })
+    ).toHaveAttribute("href", "/en/career")
   })
 
   it("技術スタックが英語で表示される", () => {

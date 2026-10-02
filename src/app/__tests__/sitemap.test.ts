@@ -26,6 +26,8 @@ describe("sitemap", () => {
     expect(urls).toContain("https://www.vibecodingstudio.dev/en/community")
     expect(urls).toContain("https://www.vibecodingstudio.dev/courses")
     expect(urls).toContain("https://www.vibecodingstudio.dev/en/courses")
+    expect(urls).toContain("https://www.vibecodingstudio.dev/career")
+    expect(urls).toContain("https://www.vibecodingstudio.dev/en/career")
     expect(urls.some(url => url.includes(removedDocsPrefix))).toBe(false)
     expect(urls.some(url => url.includes(retiredCoursePrefix))).toBe(false)
     expect(

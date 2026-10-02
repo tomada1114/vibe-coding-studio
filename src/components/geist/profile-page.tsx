@@ -8,6 +8,9 @@
  *   - グローは 1 ページ 2 個以内・1 ビューポート 1 個・静止（ここではヒーローの 1 個のみ）
  *   - グラデーション罫線（`gg-rule-accent`）は 1 ページ 2 本まで（ここでは 1 本）
  *   - 行の形が違うセクションを混ぜる（数値セル / 2 カラム / 年表 / タグ群 / リスト）
+ *   - 動きは「反応する方眼紙」: ポインタに反応する罫線スポットライト、ヒーローの
+ *     方眼の浮かび上がり、拠点の現在時刻（常駐の動きはこの 1 つだけ）、目次の現在地。
+ *     どれも内容を隠さない — 全セクションは最初の描画から見えている
  *
  * 詳細は `.claude/skills/geist-grid-design/SKILL.md`。
  */
@@ -17,10 +20,14 @@ import { getAllUdemyCourses } from "@/data/udemy-courses"
 import type { Dictionary } from "@/i18n/dictionaries"
 import type { Locale } from "@/i18n/locale"
 import { localizePath } from "@/i18n/locale"
-import { DISCORD_INVITE_URL } from "@/lib/constants"
+import { DISCORD_INVITE_URL, LOCAL_TIME_ZONE } from "@/lib/constants"
 import { clsx } from "clsx"
 import Image from "next/image"
 import Link from "next/link"
+import { careerEntryId } from "./career-page"
+import { GridSpotlight } from "./grid-spotlight"
+import { LiveClock } from "./live-clock"
+import { SectionIndex } from "./section-index"
 import {
   GitHubIcon,
   LinkedInIcon,
@@ -30,6 +37,7 @@ import {
   XIcon,
   YouTubeIcon,
 } from "./social-icons"
+import { TechIcon } from "./tech-icon"
 
 const YOUTUBE_URL = "https://www.youtube.com/@vibe-coding-studio"
 const SPEAKING_URL = "https://ai-fest-tokyo.connpass.com/event/369543/"
@@ -48,28 +56,49 @@ const PROFILE_LINKS = [
   { name: "Udemy", url: "/courses", Icon: UdemyIcon },
 ] as const
 
-/** 外部リンクの末尾に置く矢印 */
+/** 外部リンクの末尾に置く矢印。親に `group` を付けると hover で右上へ 2px 寄る */
 function ExternalArrow() {
   return (
-    <span aria-hidden="true" className="ml-1 text-[12px] text-text-secondary">
+    <span
+      aria-hidden="true"
+      className="ml-1 inline-block text-[12px] text-text-secondary transition-transform duration-150 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+    >
       ↗
     </span>
   )
 }
 
+/** サイト内の次の階層へ進むリンクの矢印。親に `group` を付けると hover で右へ 2px 寄る */
+function ForwardArrow() {
+  return (
+    <span
+      aria-hidden="true"
+      className="inline-block text-text-secondary transition-transform duration-150 ease-out group-hover:translate-x-0.5"
+    >
+      →
+    </span>
+  )
+}
+
+/** 罫線スポットライトに参加するセルグリッドの共通属性 */
+const spotlight = { "data-spotlight": "" } as const
+
 function Section({
+  id,
   label,
   heading,
   children,
   className,
 }: {
+  /** ページ内目次のアンカー */
+  id: string
   label: string
   heading: string
   children: React.ReactNode
   className?: string
 }) {
   return (
-    <section className={clsx("mt-16 sm:mt-24", className)}>
+    <section id={id} className={clsx("mt-16 scroll-mt-24 sm:mt-24", className)}>
       <div className="flex items-baseline gap-3">
         <p className="gg-label">{label}</p>
         <span aria-hidden="true" className="h-px flex-1 bg-border" />
@@ -110,6 +139,19 @@ export function ProfilePage({
     { label: dict.book.isbnLabel, value: book.isbn },
   ]
 
+  // 経歴の全文は /career に分割した。トップには直近 3 件だけを置く
+  const recentCareer = dict.career.entries.slice(-3)
+  const careerHref = localizePath("/career", locale)
+
+  const sections = [
+    { id: "book", label: dict.book.heading },
+    { id: "teaching", label: dict.teaching.heading },
+    { id: "career", label: dict.career.heading },
+    { id: "stack", label: dict.stack.heading },
+    { id: "credentials", label: dict.credentials.certificationsHeading },
+    { id: "links", label: dict.links.heading },
+  ]
+
   const teachingHrefs = [
     localizePath("/courses", locale),
     YOUTUBE_URL,
@@ -118,18 +160,30 @@ export function ProfilePage({
 
   return (
     <div className="gg-surface">
+      <GridSpotlight />
       <main id="main-content">
         {/* ── HERO ─────────────────────────────────────────────
-            グローはこのページで唯一の 1 個。静止。 */}
-        <div className="gg-glow relative isolate overflow-hidden">
+            グローはこのページで唯一の 1 個。静止。
+            ポインタの周りだけ方眼が浮かび上がる（gg-grid-spot）。 */}
+        <div
+          {...spotlight}
+          className="gg-glow relative isolate overflow-hidden"
+        >
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 -z-10 gg-grid-field"
           />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 -z-10 gg-grid-spot"
+          />
           <div className="gg-container pt-16 pb-12 sm:pt-24 sm:pb-16">
             <div className="grid items-start gap-10 lg:grid-cols-[1fr_auto]">
               <div className="max-w-[720px]">
-                <p className="gg-label">{dict.hero.label}</p>
+                <LiveClock
+                  timeZone={LOCAL_TIME_ZONE}
+                  messages={dict.hero.localTime}
+                />
                 <h1 className="mt-4 text-[40px] leading-[1.15] font-semibold tracking-[-0.02em] text-text-primary sm:text-[56px] sm:leading-[1.1]">
                   {dict.hero.name}
                 </h1>
@@ -162,7 +216,7 @@ export function ProfilePage({
                     href={YOUTUBE_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="gg-btn gg-btn-outline"
+                    className="group gg-btn gg-btn-outline"
                   >
                     {dict.hero.tertiaryCta}
                     <ExternalArrow />
@@ -188,11 +242,23 @@ export function ProfilePage({
         {/* グラデーション罫線。このページで唯一の 1 本。 */}
         <div aria-hidden="true" className="gg-rule-accent" />
 
-        <div className="gg-container pb-24 sm:pb-32">
+        <div className="relative gg-container pb-24 sm:pb-32">
+          {/* ── INDEX ─────────────────────────────────────────
+              コンテナの左外（余白）に追従する目次。余白が目次の幅を
+              確保できる 1440px 以上でだけ出す。 */}
+          <aside className="absolute inset-y-0 right-full mr-5 hidden w-32 min-[1440px]:block">
+            <div className="sticky top-24 pt-12 sm:pt-16">
+              <SectionIndex label={dict.toc.label} items={sections} />
+            </div>
+          </aside>
+
           {/* ── STATS ─────────────────────────────────────── */}
           <section className="mt-12 sm:mt-16">
             <h2 className="sr-only">{dict.hero.label}</h2>
-            <div className="gg-cell-grid grid-cols-1 sm:grid-cols-3">
+            <div
+              {...spotlight}
+              className="gg-spotlight gg-cell-grid grid-cols-1 sm:grid-cols-3"
+            >
               <StatCell
                 label={dict.stats.since}
                 value={dict.stats.sinceValue}
@@ -209,11 +275,18 @@ export function ProfilePage({
           </section>
 
           {/* ── BOOK ──────────────────────────────────────── */}
-          <Section label={dict.book.label} heading={dict.book.heading}>
+          <Section
+            id="book"
+            label={dict.book.label}
+            heading={dict.book.heading}
+          >
             <p className="mb-6 max-w-[720px] text-[18px] gg-prose-ja text-text-secondary">
               {dict.book.lead}
             </p>
-            <div className="gg-cell-grid grid-cols-1 lg:grid-cols-[320px_1fr]">
+            <div
+              {...spotlight}
+              className="gg-spotlight gg-cell-grid grid-cols-1 lg:grid-cols-[320px_1fr]"
+            >
               <div className="gg-cell">
                 <p className="gg-label">Cover</p>
                 <Image
@@ -272,7 +345,7 @@ export function ProfilePage({
                     href={book.publisherUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[14px] gg-link"
+                    className="group text-[14px] gg-link"
                   >
                     {dict.book.tocCta}
                     <ExternalArrow />
@@ -283,8 +356,15 @@ export function ProfilePage({
           </Section>
 
           {/* ── TEACHING ──────────────────────────────────── */}
-          <Section label={dict.teaching.label} heading={dict.teaching.heading}>
-            <div className="gg-cell-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          <Section
+            id="teaching"
+            label={dict.teaching.label}
+            heading={dict.teaching.heading}
+          >
+            <div
+              {...spotlight}
+              className="gg-spotlight gg-cell-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+            >
               {dict.teaching.items.map((item, index) => {
                 const href = teachingHrefs[index]
                 const external = href.startsWith("http")
@@ -312,7 +392,7 @@ export function ProfilePage({
                         href={href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-4 inline-block text-[14px] gg-link"
+                        className="group mt-4 inline-block text-[14px] gg-link"
                       >
                         {item.cta}
                         <ExternalArrow />
@@ -335,7 +415,7 @@ export function ProfilePage({
                 href={DISCORD_INVITE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="gg-link"
+                className="group gg-link"
               >
                 discord.gg
                 <ExternalArrow />
@@ -343,33 +423,56 @@ export function ProfilePage({
             </p>
           </Section>
 
-          {/* ── CAREER ────────────────────────────────────── */}
-          <Section label={dict.career.label} heading={dict.career.heading}>
-            <div className="gg-cell-grid grid-cols-1">
-              {dict.career.entries.map(entry => (
-                <div key={entry.year} className="gg-cell">
-                  <div className="grid gap-3 sm:grid-cols-[96px_1fr] sm:gap-6">
-                    <p className="pt-1 gg-label">{entry.year}</p>
-                    <div>
-                      <h3 className="text-[16px] font-medium text-text-primary">
-                        {entry.title}
-                      </h3>
-                      <p className="mt-2 text-[14px] gg-prose-ja text-text-secondary">
-                        {entry.body}
-                      </p>
-                    </div>
-                  </div>
-                </div>
+          {/* ── CAREER ──────────────────────────────────────
+              全文は /career。ここは直近 3 件の見出しだけを並べる索引で、
+              各行が経歴ページの該当エントリへ飛ぶ。 */}
+          <Section
+            id="career"
+            label={dict.career.label}
+            heading={dict.career.heading}
+          >
+            <div
+              {...spotlight}
+              className="gg-spotlight gg-cell-grid grid-cols-1"
+            >
+              {recentCareer.map(entry => (
+                <Link
+                  key={entry.year}
+                  href={`${careerHref}#${careerEntryId(entry.year)}`}
+                  className="group gg-cell grid gap-2 gg-cell-hover sm:grid-cols-[96px_1fr_auto] sm:items-baseline sm:gap-6"
+                >
+                  <span className="gg-label">{entry.year}</span>
+                  <span className="text-[16px] font-medium text-text-primary">
+                    {entry.title}
+                  </span>
+                  <span className="hidden sm:inline">
+                    <ForwardArrow />
+                  </span>
+                </Link>
               ))}
             </div>
+            <Link
+              href={careerHref}
+              className="group mt-4 gg-btn gg-btn-outline"
+            >
+              {dict.career.viewAll}
+              <ForwardArrow />
+            </Link>
           </Section>
 
           {/* ── STACK ─────────────────────────────────────── */}
-          <Section label={dict.stack.label} heading={dict.stack.heading}>
+          <Section
+            id="stack"
+            label={dict.stack.label}
+            heading={dict.stack.heading}
+          >
             <p className="mb-6 max-w-[720px] text-[16px] gg-prose-ja text-text-secondary">
               {dict.stack.lead}
             </p>
-            <div className="gg-cell-grid grid-cols-1 sm:grid-cols-2">
+            <div
+              {...spotlight}
+              className="gg-spotlight gg-cell-grid grid-cols-1 sm:grid-cols-2"
+            >
               {dict.stack.groups.map(group => (
                 <div key={group.label} className="gg-cell">
                   <p className="gg-label">{group.label}</p>
@@ -378,7 +481,11 @@ export function ProfilePage({
                   </h3>
                   <ul className="mt-3 flex flex-wrap gap-2">
                     {group.items.map(item => (
-                      <li key={item} className="gg-tag">
+                      <li
+                        key={item}
+                        className="gg-tag gap-1.5 transition-colors hover:text-text-primary"
+                      >
+                        <TechIcon name={item} />
                         {item}
                       </li>
                     ))}
@@ -390,10 +497,14 @@ export function ProfilePage({
 
           {/* ── CERTIFICATIONS / SPEAKING ─────────────────── */}
           <Section
+            id="credentials"
             label={dict.credentials.certificationsLabel}
             heading={dict.credentials.certificationsHeading}
           >
-            <div className="gg-cell-grid grid-cols-1 lg:grid-cols-2">
+            <div
+              {...spotlight}
+              className="gg-spotlight gg-cell-grid grid-cols-1 lg:grid-cols-2"
+            >
               <div className="gg-cell">
                 <p className="gg-label">Credentials</p>
                 <ul className="mt-3 border-t border-border">
@@ -426,7 +537,7 @@ export function ProfilePage({
                   href={SPEAKING_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-4 inline-block text-[14px] gg-link"
+                  className="group mt-4 inline-block text-[14px] gg-link"
                 >
                   {dict.credentials.speakingCta}
                   <ExternalArrow />
@@ -436,13 +547,20 @@ export function ProfilePage({
           </Section>
 
           {/* ── LINKS ─────────────────────────────────────── */}
-          <Section label={dict.links.label} heading={dict.links.heading}>
-            <div className="gg-cell-grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7">
+          <Section
+            id="links"
+            label={dict.links.label}
+            heading={dict.links.heading}
+          >
+            <div
+              {...spotlight}
+              className="gg-spotlight gg-cell-grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7"
+            >
               {PROFILE_LINKS.map(({ name, url, Icon }, index) => {
                 const external = url.startsWith("http")
                 const isLast = index === PROFILE_LINKS.length - 1
                 const className = clsx(
-                  "gg-cell flex items-center gap-2 gg-cell-hover text-text-secondary transition-colors hover:text-text-primary",
+                  "group gg-cell flex items-center gap-2 gg-cell-hover text-text-secondary transition-colors hover:text-text-primary",
                   // 7件を2列/4列で並べると最終行が余り、gg-cell-grid の
                   // 親背景（罫線色）がそのまま空セルとして露出する。
                   // 最後のセルを残り列数ぶん広げて埋める。

@@ -9,6 +9,7 @@ describe("locale path helpers", () => {
     expect(localizePath("/", "en")).toBe("/en")
     expect(localizePath("/courses", "en")).toBe("/en/courses")
     expect(localizePath("/community", "en")).toBe("/en/community")
+    expect(localizePath("/career", "en")).toBe("/en/career")
   })
 
   it("keeps the default locale unprefixed and unsupported paths unchanged", () => {
@@ -28,6 +29,10 @@ describe("locale path helpers", () => {
     expect(getLocaleAlternates("/community")).toEqual({
       ja: "/community",
       en: "/en/community",
+    })
+    expect(getLocaleAlternates("/en/career")).toEqual({
+      ja: "/career",
+      en: "/en/career",
     })
   })
 
