@@ -63,6 +63,7 @@ Claude Code は `CLAUDE.md` 経由でこのファイルを読み込む。
 | `changing-gates` | `.github/workflows/*`・`jest.config.js`・`eslint.config.mjs`・`.prettierrc`・`tsconfig.json`・`next.config.mjs` を変更する |
 | `managing-dependencies` | パッケージを追加・更新・削除する、Dependabot の PR を扱う |
 | `triaging-issues` | Issue を起票する、トリアージする、優先度を付ける |
+| `shipping-issues` | 残りの Issue を優先度順に片付ける、次の Issue に着手して実装から PR・CI・マージまで通す |
 | `updating-docs` | その変更がドキュメント更新を要するか判断する |
 
 ## デザイン: Geist Grid
