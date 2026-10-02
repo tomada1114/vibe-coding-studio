@@ -1,6 +1,6 @@
 ---
 name: shipping-issues
-description: >-
+description: >
   Rank open GitHub Issues by their `priority: P0`-`P3` labels — backfilling a missing
   label from how much an issue unblocks and how far its impact spreads — then implement
   the top one, review the branch locally with /code-review, open a PR that auto-closes
@@ -10,11 +10,16 @@ description: >-
   dependency order, independent ones implemented in parallel git worktrees, with PR, CI
   and merge still serialized. Use when asked to ship the remaining issues, take on the
   next issue, or clear the ticket backlog.
-argument-hint: "[all | <issue number> | (empty = one issue)] [parallel N]"
-allowed-tools: Bash(python3 ${CLAUDE_SKILL_DIR}/scripts/*.py:*), Bash(${CLAUDE_SKILL_DIR}/scripts/*.sh:*)
 ---
 
 # Shipping Issues
+
+**扱う:** open Issue を `priority:` ラベル順に選び、実装 → ブランチのローカルレビュー →
+`Closes #N` 付き PR → CI 待ち → マージ → デフォルトブランチへの復帰までを一続きで回す手順。
+run 中に欠けた `priority:` ラベルの補完と follow-up Issue の起票を含む。
+**扱わない:** run の外での Issue 起票・ラベルの意味・Issue 本文の書き方（`triaging-issues`）;
+CI ゲートや品質設定そのものの変更（`changing-gates`）; テストの書き方（`writing-tests`）;
+ドキュメント更新の要否（`updating-docs`）。
 
 **Done means all three:** the PR is merged to the default branch, the issue is
 CLOSED, and nothing was deleted or weakened to get there.
@@ -37,6 +42,8 @@ genuinely tied top two at step 2, and `NO_CHECKS` at step 6.
 - [Stop conditions](#stop-conditions) · [Further reading](#further-reading)
 
 ## Modes
+
+Arguments: `[all | <issue number> | (empty = one issue)] [parallel N]`.
 
 | Argument | Behavior |
 |---|---|
@@ -105,6 +112,13 @@ python3 ${CLAUDE_SKILL_DIR}/scripts/run_record.py --repo <owner>/<repo> \
 ```
 
 **Requires:** `git`, `python3`, `gh`.
+
+**Permissions:** the run's own shell calls are its bundled scripts —
+`python3 ${CLAUDE_SKILL_DIR}/scripts/*.py` and `${CLAUDE_SKILL_DIR}/scripts/*.sh`.
+This repository commits no permissions, so pre-approve those two patterns in a
+personal allowlist (`~/.claude/settings.json` or the gitignored
+`.claude/settings.local.json`); otherwise an unattended run stalls on the first
+script prompt ([Working rules](#working-rules)).
 
 ## Workflow
 
