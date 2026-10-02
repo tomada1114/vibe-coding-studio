@@ -113,6 +113,18 @@
       "ss05" 1;
   }
 
+  /* 動きの安全網: 視差効果を減らす設定では、すべての遷移とアニメーションを
+     実質ゼロにする。状態の変化（色・位置）は残り、そこへ至る動きだけが消える。 */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
   /* Geist の二重リング。全インタラクティブ要素で共通。
      `outline: none` を単独で書かない。 */
   :where(
@@ -281,6 +293,64 @@
   mask-image: radial-gradient(80% 60% at 50% 0%, #000 0%, transparent 100%);
 }
 
+/* 動き担当 A: 罫線スポットライト。`gg-cell-grid` に重ねて使い、`data-spotlight`
+   を付けると GridSpotlight（src/components/geist/grid-spotlight.tsx）がポインタ
+   位置を `--spot-x` / `--spot-y` / `--spot-o` で渡す。
+   セルの地は不透明なので、光は gap（= 罫線）と外周 1px からだけ漏れる。
+   色は無彩色の --border-strong のみ。グローではない（青を使わない）。 */
+@utility gg-spotlight {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    content: "";
+    position: absolute;
+    /* 外周の border の上まで覆う */
+    inset: -1px;
+    z-index: -1;
+    pointer-events: none;
+    /* 半径はセル幅（3 列で約 360px）の半分を超える長さにして、セルの中央に
+       ポインタがあっても周囲の罫線まで光が届くようにする */
+    background: radial-gradient(
+      360px circle at var(--spot-x, -999px) var(--spot-y, -999px),
+      var(--border-strong),
+      transparent 75%
+    );
+    opacity: var(--spot-o, 0);
+    transition: opacity 200ms ease-out;
+  }
+
+  /* JS 側（GridSpotlight）と同じ条件で、CSS 側も光を描かない */
+  @media (prefers-reduced-motion: reduce),
+    not all and (hover: hover) and (pointer: fine) {
+    &::before {
+      display: none;
+    }
+  }
+}
+
+/* 動き担当 B: 方眼の浮かび上がり。ヒーローの faint grid（gg-grid-field）と同じ
+   64px の方眼を --border の濃さで描き、ポインタの周囲だけを見せる。
+   座標は親の `data-spotlight` 要素から CSS 変数で継承する。 */
+@utility gg-grid-spot {
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(
+    200px circle at var(--spot-x, -999px) var(--spot-y, -999px),
+    #000 0%,
+    transparent 100%
+  );
+  opacity: var(--spot-o, 0);
+  transition: opacity 200ms ease-out;
+
+  @media (prefers-reduced-motion: reduce),
+    not all and (hover: hover) and (pointer: fine) {
+    display: none;
+  }
+}
+
 /* 派手さ担当 C: グラデーション罫線。1 ページ 2 本まで。 */
 @utility gg-rule-accent {
   block-size: 1px;
@@ -304,7 +374,13 @@
   transition:
     background-color 150ms ease-out,
     border-color 150ms ease-out,
-    color 150ms ease-out;
+    color 150ms ease-out,
+    transform 90ms ease-out;
+
+  /* 押下のフィードバック。ボタンだけの特権で、セルには使わない。 */
+  &:active {
+    transform: scale(0.98);
+  }
 }
 
 @utility gg-btn-primary {

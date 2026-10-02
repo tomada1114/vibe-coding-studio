@@ -10,6 +10,12 @@
 export const DISCORD_INVITE_URL = "https://discord.gg/qZDRagzbVD" as const
 
 /**
+ * 拠点のタイムゾーン（IANA）。トップページの現在時刻表示に使う。
+ * 拠点を移したらここだけを更新する（表示名は辞書の `hero.localTime.location`）。
+ */
+export const LOCAL_TIME_ZONE = "America/Denver" as const
+
+/**
  * ソーシャルメディアリンク型定義
  */
 export interface SocialLink {
