@@ -50,10 +50,12 @@ src/app/
 ├── sitemap.ts                  # sitemap.xml のメタデータ
 ├── courses/page.tsx            # 日本語講座一覧（/courses）
 ├── community/page.tsx          # 日本語コミュニティ（/community）
+├── career/page.tsx             # 日本語経歴（/career）
 └── en/
     ├── page.tsx                # 英語プロフィール（/en）
     ├── courses/page.tsx        # 英語講座一覧（/en/courses）
-    └── community/page.tsx      # 英語コミュニティ（/en/community）
+    ├── community/page.tsx      # 英語コミュニティ（/en/community）
+    └── career/page.tsx         # 英語経歴（/en/career）
 ```
 
 現在、公開 API の Route Handler はありません。ページの実装は主に `src/components/geist/`

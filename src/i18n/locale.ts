@@ -2,7 +2,7 @@
  * i18n — ロケール定義とパス解決
  *
  * 方式: `/en` プレフィクス。日本語は既定でプレフィクスなし（既存 URL を維持）。
- * 翻訳対象はトップ・講座一覧・コミュニティの 3 面。英語版を持たないページは
+ * 翻訳対象はトップ・講座一覧・コミュニティ・経歴の 4 面。英語版を持たないページは
  * 言語トグルから英語トップへフォールバックする。
  *
  * 将来 next-intl などへ移行する場合も `src/i18n/dictionaries.ts` の
@@ -16,7 +16,12 @@ export type Locale = (typeof LOCALES)[number]
 export const DEFAULT_LOCALE: Locale = "ja"
 
 // 英語版を持つ日本語パス。ここに足すだけで localizePath / getLocaleAlternates が追随する。
-export const EN_ENABLED_PATHS = ["/", "/courses", "/community"] as const
+export const EN_ENABLED_PATHS = [
+  "/",
+  "/courses",
+  "/community",
+  "/career",
+] as const
 
 /** `/en` プレフィクスを持つロケール（既定ロケールはプレフィクスなし） */
 export const LOCALE_PREFIX: Record<Locale, string> = {

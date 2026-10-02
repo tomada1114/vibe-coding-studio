@@ -17,7 +17,7 @@ Claude Code は `CLAUDE.md` 経由でこのファイルを読み込む。
 
 **Vibe Coding Studio** — Next.js 15（App Router）/ React 19 / Tailwind CSS v4 / TypeScript strict の
 静的サイト。プロフィール、Udemy講座、Discordコミュニティを配信する。旧学習ドキュメント（`/docs` / Markdoc）は廃止済み。
-デザインシステムは「Geist Grid」（ダーク既定＋ライト手動切替）。日本語が既定で、トップ・講座・コミュニティに英語版がある。
+デザインシステムは「Geist Grid」（ダーク既定＋ライト手動切替）。日本語が既定で、トップ・講座・コミュニティ・経歴に英語版がある。
 
 ## 開発コマンド
 
@@ -75,7 +75,7 @@ Claude Code は `CLAUDE.md` 経由でこのファイルを読み込む。
 
 このリポジトリ側で判断が要るのは次の 3 点:
 
-- **新規ページは Geist Grid で作る。** 公開ページ（`/`・`/en`・`/courses`・`/en/courses`・`/community`・`/en/community`）、
+- **新規ページは Geist Grid で作る。** 公開ページ（`/`・`/en`・`/courses`・`/en/courses`・`/community`・`/en/community`・`/career`・`/en/career`）、
   共通ヘッダー、フッター、エラーページはすべて Geist Grid に移行済み。
 - 旧学習ドキュメントページは存在しない。新しい表示文言は `src/i18n/dictionaries.ts` の日英両方へ追加し、
   英語版があるパスは `src/i18n/locale.ts` の `EN_ENABLED_PATHS` で管理する。

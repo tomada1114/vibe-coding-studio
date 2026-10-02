@@ -4,16 +4,17 @@ description: |
   サイト共通のデザインシステム「Geist Grid」の正典ガイド。
   ページを新規作成・デザイン刷新・修正するとき、テーマ切替やトークンを扱うときに必ず読む。
   カラートークン（ダーク／ライト）、派手さ予算の数値上限、タイポグラフィ（Geist Sans /
-  Geist Mono / Noto Sans JP）、グリッドセル構造、コンポーネント規則、data-theme による
-  テーマ実装、Do / Don't、実装チェックリストを定義する。
+  Geist Mono / Noto Sans JP）、グリッドセル構造、コンポーネント規則、動きの予算、
+  data-theme によるテーマ実装、Do / Don't、実装チェックリストを定義する。
   Use when ページのデザイン刷新, デザインシステム適用, 新規ページ作成, ダーク/ライトテーマ,
-  テーマトグル, トークン追加, Geist Grid, redesign a page to match the site's design system.
+  テーマトグル, トークン追加, アニメーション・ホバー演出の追加, Geist Grid,
+  redesign a page to match the site's design system.
 ---
 
 # Geist Grid デザインシステム
 
-**扱う:** 色・タイポグラフィ・セル構造・派手さ予算・`data-theme` によるテーマ実装・
-コンポーネントの見た目の規則。
+**扱う:** 色・タイポグラフィ・セル構造・派手さ予算・動きの予算・`data-theme` による
+テーマ実装・コンポーネントの見た目の規則。
 **扱わない:** テストの書き方と置き場所（`writing-tests`）; 表示文言の追加とドキュメント
 更新の要否（`updating-docs`）; `eslint.config.mjs` や `.prettierrc` のようなゲート側
 ファイル（`changing-gates`）。
@@ -32,8 +33,10 @@ description: |
 | テーマトグル・フラッシュ防止スクリプト | `src/components/geist/theme-toggle.tsx` |
 | フッター | `src/components/geist/footer.tsx` |
 | ルートレイアウト（フォント・`data-theme`・共通枠） | `src/app/layout.tsx` |
+| 動き（罫線スポットライト／拠点の現在時刻／ページ内目次） | `src/components/geist/grid-spotlight.tsx` / `live-clock.tsx` / `section-index.tsx` |
+| 技術ロゴ（Simple Icons のスプライト） | `src/components/geist/tech-icon.tsx` + `public/icons/tech-stack.svg` |
 
-**移行ステータス: 公開ページ（`/`・`/en`・`/courses`・`/en/courses`・`/community`・`/en/community`）・共通ヘッダー・共通フッター・エラーページはすべて Geist Grid に移行済み。** 旧学習ドキュメント（`/docs` / Markdoc）は廃止済み。**各ページのルート要素には `gg-surface` を付け、テーマトークンの地を明示する。**
+**移行ステータス: 公開ページ（`/`・`/en`・`/courses`・`/en/courses`・`/community`・`/en/community`・`/career`・`/en/career`）・共通ヘッダー・共通フッター・エラーページはすべて Geist Grid に移行済み。** 旧学習ドキュメント（`/docs` / Markdoc）は廃止済み。**各ページのルート要素には `gg-surface` を付け、テーマトークンの地を明示する。**
 
 ## 設計原則
 
@@ -85,7 +88,7 @@ Geist スケールの意味論（崩さない）: 100–300 = コンポーネン
 | 彩度を持つピクセルのビューポート面積 | **8% 以下** |
 | conic / 線形グラデーションの使用箇所 | **1 ページ最大 2 箇所**。用途は「罫線」「区切り線」「背景テクスチャ」のみ。**面の塗り・ボタン・カード背景は禁止** |
 | faint grid の線 | 色は `--grid-line`、**線幅 1px 固定、セル 64px** |
-| アニメーションするグローの数 | **0**（グローは静止。動くのはホバー時の罫線色のみ）|
+| アニメーションするグローの数 | **0**（グローは静止。動きは次節「動きの予算」の範囲だけ）|
 
 ```css
 .glow-anchor::before { /* A: ヒーローのグロー（1画面に1つまで） */
@@ -101,6 +104,22 @@ Geist スケールの意味論（崩さない）: 100–300 = コンポーネン
   block-size: 1px; opacity: 0.5;
   background: linear-gradient(90deg, transparent 0%, var(--accent-glow) 35%, var(--accent-glow) 65%, transparent 100%); }
 ```
+
+## 動きの予算
+
+北極星の「方眼紙」に沿い、動くのは**読み手の操作に反応する罫線と方眼**だけ。**動きで内容を隠さない。**
+
+| 項目 | 規則 |
+|---|---|
+| 初期表示 | 全内容が最初の描画から見えている。フェードイン・スクロール連動の出現・ローディング演出・タイプライター・カウントアップは禁止。初期状態で `opacity-0` / `invisible` を持たせない |
+| きっかけ | 操作（ポインタ・フォーカス・クリック）への反応のみ。常駐の動きは **1 ページ 1 つ**（トップの拠点の現在時刻）で、止める手段を必ず持つ（WCAG 2.2.2） |
+| 動き担当 A: 罫線スポットライト | `gg-cell-grid` に `gg-spotlight` + `data-spotlight`。光は gap と外周 1px からだけ漏れる。色は `--border-strong` のみ（無彩色。青を使わない）、半径 360px |
+| 動き担当 B: 方眼の浮かび上がり | ヒーローの `gg-grid-field` に重ねる `gg-grid-spot`（線 `--border`、ポインタ周囲 200px）。1 ページ 1 箇所。同じ方眼の重ね描きなので、グラデーション予算では `gg-grid-field` と合わせて 1 箇所と数える |
+| マイクロフィードバック | 色の変化 150ms ease-out。外部リンクの `↗` は右上へ・内部の `→` は右へ 2px（親に `group`）。ボタン押下は `scale(0.98)` 90ms。**セル・カードは移動もスケールもしない** |
+| 状態遷移 | 200ms ease-out（スポットの点灯、目次のインジケータ）。500ms を超える遷移を持たない |
+| ポインタ追従の条件 | `(hover: hover) and (pointer: fine)` のときだけ。タッチ端末では何もしない |
+| 視差効果を減らす設定 | ポインタ追従を止める（JS・CSS の両方。表示中の切り替えにも追従）。時計は秒を出さず分単位。遷移は `tailwind.css` の安全網で実質 0 |
+| `scroll-behavior: smooth` | ページ全体には掛けない（初回のアンカー移動とルート遷移が途中で止まる）。滑らかな移動は目次のクリックに限る |
 
 ## 形状・間隔
 
@@ -150,7 +169,7 @@ spacing base 4px（4/8/12/16/24/32/48/64/96）。element gap 12px、cell padding
 ```
 
 - **セルの角丸は 0。例外なし。** セル内で角丸を持てるのは画像・埋め込みのみ（6px）。
-- hover は地の色変化のみ（150ms ease-out）。**translateY やスケールは使わない。**
+- hover は地の色変化のみ（150ms ease-out）。**translateY やスケールは使わない。** 罫線の反応は `gg-spotlight`（「動きの予算」）で行う。
 - 各セル上辺に `label-mono`（`--text-label`。ライトでの 11px コントラスト確保のため `--text-muted` ではなくこちらを使う）。例: `ROLE`, `SINCE 2019`, `BOOK`, `COURSE 17`, `SOURCE`。**ラベルは必ず英語**（和文は大文字化できない）。
 - 列数: `< 640px` 1 列 / `640–1024px` 2 列 / `> 1024px` 3 列（プロフィール）・2 列（記事一覧）・4 列（一覧）。行ごとに高さが揃うのは正しい。中身の量で行が伸びるのを無理に揃えない。
 - 独立した「カード」コンポーネントは作らない。**全てのカードはセル。**
@@ -174,7 +193,7 @@ spacing base 4px（4/8/12/16/24/32/48/64/96）。element gap 12px、cell padding
 
 **リンク** — 本文中は `--link` + `underline`、`text-underline-offset: 0.2em`、`text-decoration-thickness: 1px`、`text-decoration-color: color-mix(in oklab, var(--link) 40%, transparent)`、hover で不透明。ナビ・一覧タイトルは既定で下線なし、hover で下線。外部リンクは末尾に `↗`（12〜14px、周囲のテキストサイズに合わせる / `--text-secondary`。`--text-muted` を使わない理由は上記の強制ルールを参照）。
 
-**タグ / バッジ** — Mono 11px、地 `--surface-1`、文字 `--text-secondary`、枠なし、radius 6px、`padding: 3px 8px`、hover で地 `--surface-2`。**タグに色を持たせない**（カテゴリ色分け禁止）。状態バッジは 6px ドット前置で `NEW` = `--accent-solid`、`UPDATED` = `--ds-amber-700`（dark `#ffb200` / light `#f90`）の**2 色だけ**。カウントバッジは Mono 11px / tabular-nums / `--text-muted`。
+**タグ / バッジ** — Mono 11px、地 `--surface-1`、文字 `--text-secondary`、枠なし、radius 6px、`padding: 3px 8px`、hover で地 `--surface-2`。**タグに色を持たせない**（カテゴリ色分け禁止）。技術タグはロゴ（12px・`currentColor` の単色、ブランド色禁止）を前置してよい。ロゴの無い技術は 1px 罫線の正方形に頭文字のモノグラムで代用する。状態バッジは 6px ドット前置で `NEW` = `--accent-solid`、`UPDATED` = `--ds-amber-700`（dark `#ffb200` / light `#f90`）の**2 色だけ**。カウントバッジは Mono 11px / tabular-nums / `--text-muted`。
 
 **コードブロック** — 地 `--surface-1`、枠 1px `--border`、radius **0**、Mono 13px / line-height 1.7。上辺に言語ラベル（Mono 11px uppercase）＋ 右端にコピーボタン（Ghost 24×24）。ハイライトは `prism-react-renderer` で**キーワード `--link` / 文字列 `--ds-teal-700` / コメント `--text-muted` / 他 `--text-primary` の 4 色に限定**。インラインコードは地 `--surface-1`、`padding: 1px 5px`、radius 6px、Mono 0.9em。
 
@@ -219,7 +238,7 @@ const themeInit = `(function(){try{
 
 ## i18n（日本語が既定・英語がサブ）
 
-**現状: ライブラリなし。`/en` プレフィクスで、英語版はトップ・講座一覧・コミュニティの 3 面。** 日本語は既存 URL をそのまま使う（プレフィクスなし）。
+**現状: ライブラリなし。`/en` プレフィクスで、英語版はトップ・講座一覧・コミュニティ・経歴の 4 面。** 日本語は既存 URL をそのまま使う（プレフィクスなし）。
 
 | 対象 | パス |
 |---|---|
@@ -228,6 +247,7 @@ const themeInit = `(function(){try{
 | 日本語トップ / 英語トップ | `src/app/page.tsx` / `src/app/en/page.tsx` |
 | 日本語 / 英語の講座一覧 | `src/app/courses/page.tsx` / `src/app/en/courses/page.tsx` |
 | 日本語 / 英語のコミュニティ | `src/app/community/page.tsx` / `src/app/en/community/page.tsx` |
+| 日本語 / 英語の経歴 | `src/app/career/page.tsx` / `src/app/en/career/page.tsx` |
 
 規則:
 
@@ -254,7 +274,7 @@ const themeInit = `(function(){try{
 - 色は必ずセマンティックトークン経由（`var(--text-secondary)` / `text-text-secondary`）。生 hex を書かない。
 - セルの罫線は常に 1px。強調は太さでなく**色**（`--border-strong`）で行う。日付・ID・出典ドメイン・コード・タイムスタンプ・数値メタは Geist Mono。
 - 見出しは 500〜600。グローを置いたら、そのページの他のグローを数える。和文本文は 1.85 / ls 0 / `line-break: strict`。
-- インタラクションは**背景色と罫線色の変化のみ**（150ms ease-out）。フォーカスは必ず Geist の二重リング（`outline: none` を単独で書かない）。
+- インタラクションは**背景色と罫線色の変化**（150ms ease-out）と、「動きの予算」に列挙したものだけ。フォーカスは必ず Geist の二重リング（`outline: none` を単独で書かない）。
 - 画像は `next/image`、radius 6px、必ずキャプションまたは `alt`。自動生成コンテンツは「自動生成である」ことをページ上で明示する。
 
 **Don't**
@@ -289,6 +309,7 @@ const themeInit = `(function(){try{
 - [ ] セルは radius 0、罫線は 1px、交点が 2px になっていない
 - [ ] 各セルに英語の Mono ラベルが付いている
 - [ ] グローは 1 ビューポート 1 個 / 1 ページ 2 個以内、静止、不透明度 0.18 以下。彩度を持つピクセルがビューポート面積の 8% 以下
+- [ ] 動きで内容を隠していない（初期状態の `opacity-0` / `invisible` なし）。セルグリッドは `gg-spotlight` + `data-spotlight`。視差効果を減らす設定で止まる
 - [ ] 見出しウェイトが 500〜600（700 なし）。和文本文が 1.85 / ls 0。日付・コード・数値メタが Geist Mono
 - [ ] **ダーク・ライト両方**でコントラスト表を満たす（ライト muted のサイズ制限を含む）
 - [ ] キーボード操作で全ての操作に到達でき、Geist の二重リングが見える

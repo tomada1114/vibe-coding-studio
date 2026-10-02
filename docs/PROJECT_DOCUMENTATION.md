@@ -17,12 +17,14 @@ site feature.
 
 | Locale | Route | Purpose |
 | --- | --- | --- |
-| Japanese | `/` | Profile, book, teaching, career, and links |
+| Japanese | `/` | Profile, book, teaching, recent career, stack, and links |
 | English | `/en` | English profile and the same public facts |
 | Japanese | `/courses` | Udemy course listing |
 | English | `/en/courses` | English course-list page shell with the source course data |
 | Japanese | `/community` | Discord community information |
 | English | `/en/community` | English Discord community information |
+| Japanese | `/career` | Full career history (split out of the profile page) |
+| English | `/en/career` | English full career history |
 
 Error handling, robots, and sitemap metadata are provided by the App Router files
 `src/app/not-found.tsx`, `src/app/error.tsx`, `src/app/global-error.tsx`,
@@ -33,7 +35,7 @@ Error handling, robots, and sitemap metadata are provided by the App Router file
 ```text
 src/
 ├── app/                    # App Router routes and route metadata
-│   ├── en/                 # English versions of the three public surfaces
+│   ├── en/                 # English versions of the four public surfaces
 │   └── ...
 ├── components/
 │   ├── geist/              # Shared Geist Grid page and shell components

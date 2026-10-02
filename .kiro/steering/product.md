@@ -21,6 +21,7 @@ TypeScript、Tailwind CSS v4、Geist Grid を使い、CMS や認証システム�
 | `/` / `/en` | プロフィール、書籍、活動実績、外部リンク |
 | `/courses` / `/en/courses` | Udemy 講座一覧とトピック |
 | `/community` / `/en/community` | Discord コミュニティへの案内と、取得可能な場合のメンバー数 |
+| `/career` / `/en/career` | 経歴の全文（トップには直近 3 件だけを置く） |
 
 サイトマップと robots メタデータは `src/app/sitemap.ts` と `src/app/robots.ts` で生成します。
 サイトURLは `src/lib/seo/site-url.ts` を通して正規化します。
