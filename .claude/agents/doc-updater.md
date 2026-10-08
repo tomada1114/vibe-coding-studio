@@ -2,7 +2,8 @@
 name: doc-updater
 description: Keep the README, project documentation, and steering documents aligned with the current repository. Use PROACTIVELY when externally visible behavior, setup, structure, or design guidance changes.
 tools: Read, Write, Edit, Bash, Grep, Glob
-model: sonnet
+model: opus
+effort: low
 color: blue
 ---
 

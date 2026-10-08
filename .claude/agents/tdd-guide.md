@@ -2,7 +2,8 @@
 name: tdd-guide
 description: Guide test-first changes for this Next.js site and keep behavior, edge cases, and the repository coverage gate explicit.
 tools: Read, Write, Edit, Bash, Grep
-model: sonnet
+model: opus
+effort: low
 color: green
 ---
 

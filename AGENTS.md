@@ -92,6 +92,10 @@ Claude Code は `CLAUDE.md` 経由でこのファイルを読み込む。
 - コミット前に `npm run check:all` を通す。lint・型・テストのエラーを残したままコミットしない。
 - コミットは小さく原子的に、Conventional Commits で。
 - パスエイリアスは `@/` → `./src/`。
+- 未使用コードの整理やリファクタでも、公開データ（`src/data/book.ts`・`src/data/udemy-courses/`）、
+  ロケールの契約（`src/i18n/dictionaries.ts`・`src/i18n/locale.ts`）、canonical URL の処理
+  （`src/lib/seo/site-url.ts`）、Geist Grid のトークン（`src/styles/tailwind.css`）、`jest.config.js` は
+  参照が見つからなくても消さない。
 
 ## セキュリティと人間の承認
 

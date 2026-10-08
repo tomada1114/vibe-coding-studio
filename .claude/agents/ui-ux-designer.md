@@ -2,7 +2,8 @@
 name: ui-ux-designer
 description: UI/UX design specialist for the Geist Grid design system (Vercel Geist tokens, 1px cell grid, dark-default with manual light theme). Use PROACTIVELY for design reviews, layout composition with cells, token selection, theme and contrast audits, and accessibility checks.
 tools: Read, Write, Edit
-model: sonnet
+model: opus
+effort: high
 color: yellow
 ---
 
