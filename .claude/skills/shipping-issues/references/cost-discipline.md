@@ -1,7 +1,7 @@
 # Cost discipline
 
 What this skill keeps out of the main context, why the run count is what it
-is, and why each spawn gets the model it gets. Read it when deciding whether
+is, and why each spawn goes to the tier it does. Read it when deciding whether
 to delegate a step, before changing a run count, or before picking a
 `/code-review` effort.
 
@@ -10,8 +10,8 @@ to delegate a step, before changing a run count, or before picking a
 - [Code review effort](#code-review-effort)
 - [What the startup costs](#what-the-startup-costs)
 - [Run budget](#run-budget)
-- [Model and effort assignment](#model-and-effort-assignment)
-  - [The foundation exception: `opus` for what the backlog builds on](#the-foundation-exception-opus-for-what-the-backlog-builds-on)
+- [Tier assignment](#tier-assignment)
+  - [The foundation exception: `architect` for what the backlog builds on](#the-foundation-exception-architect-for-what-the-backlog-builds-on)
   - [The floor: too small to delegate](#the-floor-too-small-to-delegate)
 - [What parallel mode costs](#what-parallel-mode-costs)
 
@@ -121,7 +121,7 @@ couple of targeted reads.
 Two things scale that count beyond the issue list itself, both deliberately
 bounded:
 
-- **Background design agents (step 8b)** — one `opus` run per design-blocked
+- **Background design agents (step 8b)** — one `architect` run per design-blocked
   issue, capped at 3 in flight. They cost nothing in wall-clock on the shipping
   path (nothing ever waits on one) and almost nothing in this context: what
   comes back is a verdict and a two-line approach, while the design itself goes
@@ -134,27 +134,27 @@ bounded:
   termination condition and no budget the user agreed to. Depth 1, then stop
   and report.
 
-## Model and effort assignment
+## Tier assignment
 
-Implementation and priority research run on `sonnet` — fully specified work
+Implementation and priority research go to `executor` — fully specified work
 with a clear pass/fail — with one standing exception below. CI repair starts
-on `sonnet` and escalates to `opus`
+on `executor` and escalates to `architect`
 once the same failure survives two attempts in a row — persistent failure is
 a sign the spec (or the fix) needs more judgment, not more mechanical retries.
-The `/code-review` fallback runs on `opus`, since review and bug-finding is
-Opus-class work with genuinely unresolved spec. Design decisions (step 8b) run
-on `opus` for the same reason and more so — deciding an approach nobody has
+The `/code-review` fallback goes to `architect`, since review and bug-finding
+is judgment work with genuinely unresolved spec. Design decisions (step 8b) go
+to `architect` for the same reason and more so — deciding an approach nobody has
 decided is the least mechanical work this skill delegates, and a bad decision
 recorded on an issue outlives the run that made it. It is also the only
 sub-agent here that writes to GitHub (one comment, one label) and the only one
 that writes no code at all.
 
-### The foundation exception: `opus` for what the backlog builds on
+### The foundation exception: `architect` for what the backlog builds on
 
 Some issues are not "fully specified work with a clear pass/fail" even when
 their body is excellent, because what they produce is a **shape other issues
 copy** rather than a behavior a test pins down. Spawn the step 3 implementation
-on **`opus`** when the issue is any of:
+on **`architect`** when the issue is any of:
 
 - **Architecture or a skeleton** — the directory layout, the app/router
   skeleton, the composition root, a zone or module boundary.
@@ -168,30 +168,30 @@ on **`opus`** when the issue is any of:
 
 The test is not difficulty, it is **blast radius**: would a wrong call here be
 cheap to correct in its own follow-up, or would it be copied by every issue
-after it? Only the second earns `opus`.
+after it? Only the second earns `architect`.
 
 Signals visible before spawning, straight off `issue_digest.py`: an
 `unblocks×N` of 2 or more, a `foundation`/`schema`/`interface` signal, or a
 Done-means written as a structure to establish rather than a behavior to
 observe. Any one of those is a reason to look; the blast-radius test decides.
 
-Everything else stays on `sonnet`, which is most of a backlog: bug fixes,
+Everything else stays on `executor`, which is most of a backlog: bug fixes,
 removals, mechanical rewrites, config edits, documentation that follows a shape
 already settled, and any issue whose Done-means is a command that passes. A
-removal-only issue is `sonnet` even when it is `P0` and unblocks the whole
+removal-only issue is `executor` even when it is `P0` and unblocks the whole
 chain — deleting what a decision already condemned carries no design in it.
 
-The same escalation applies to a resume/patch run: it inherits the model the
+The same escalation applies to a resume/patch run: it inherits the tier the
 first run used, because a foundation the first run got half-right is exactly
 where the remaining judgment sits.
 
-The Agent tool used for these spawns takes a `model` but not a per-spawn
-`effort` — a sub-agent's reasoning effort follows this session's own
-configuration, there is no separate dial to set here.
+Spawn each one by its tier name (`subagent_type`), never a bare `model`: each
+tier's definition in `.claude/agents/` pins its own model and effort, which a
+per-spawn `model` cannot carry.
 
-Implementation stays delegated even when the main model is Opus — a
-deliberate exception to the Opus-main "do it yourself" default, bought for
-context isolation: the diff and the repo exploration are never needed in the
+Implementation stays delegated even when this session could do it itself — a
+deliberate exception to the "do it yourself" default, bought for context
+isolation: the diff and the repo exploration are never needed in the
 main context again once this session has judged the result.
 
 ### The floor: too small to delegate
@@ -220,7 +220,7 @@ in the step 10 report that the run implemented it directly, so the choice is
 visible rather than looking like a skipped step.
 
 Everything above that floor — anything with a file to find, a module to read,
-or a test to design — stays delegated, whatever the main model is.
+or a test to design — stays delegated, whatever runs the main session.
 
 ## What parallel mode costs
 
@@ -231,7 +231,7 @@ set up first.
 **Added, per issue in a parallel batch:** one dependency install and one
 baseline verify (`worktree_setup.sh`), both outside this context — the parent
 reads one `verdict:` line each. Plus, per branch with accepted review
-findings, one `sonnet` fix run that serial mode gets for free from
+findings, one `executor` fix run that serial mode gets for free from
 `/code-review --fix`.
 
 **Saved:** the implementations overlap instead of queueing, which is the

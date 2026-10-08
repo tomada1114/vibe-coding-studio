@@ -167,7 +167,7 @@ writes exit 2, so rank from `~P<n>` suggestions and report findings instead.
   ```
 - **more, tangled edges, or a close top-two** — hand
   [agents/priority-research.md](references/agents/priority-research.md) to an
-  independent `sonnet` sub-agent, filled per
+  independent `executor` sub-agent, filled per
   [delegation-templates.md](references/delegation-templates.md). Returns the pick
   with evidence, the order after it, and blocked/unclear lists — never raw issue
   prose.
@@ -236,9 +236,9 @@ from costing three dependency installs instead of one. Judging the four
 log tails, never full output; what the smoke run turns up goes to step 8.
 
 Fill and spawn a sub-agent per issue with
-[agents/implementation.md](references/agents/implementation.md). **`sonnet` by
-default; `opus` when the issue is foundational** — blast radius, not difficulty
-([the foundation exception](references/cost-discipline.md#the-foundation-exception-opus-for-what-the-backlog-builds-on));
+[agents/implementation.md](references/agents/implementation.md). **`executor` by
+default; `architect` when the issue is foundational** — blast radius, not difficulty
+([the foundation exception](references/cost-discipline.md#the-foundation-exception-architect-for-what-the-backlog-builds-on));
 a change small enough that the handoff costs more than the work is implemented
 here rather than spawned
 ([the floor](references/cost-discipline.md#the-floor-too-small-to-delegate)). In
@@ -256,7 +256,7 @@ decision. What each returned field is for:
 | `MEASURE` | [Step 4](#4-review-the-branch) — what review findings are checked against. |
 | `SCOPE-NOTES` / `FOLLOW-UPS` | [Step 8](#8-close-out-the-findings-the-run-turned-up). |
 
-At most **2 resume runs** on top of the first, same model; a third miss is
+At most **2 resume runs** on top of the first, same tier; a third miss is
 `NEEDS-CLARIFICATION`, not another spawn. A run that returned without a report,
 stopped before pushing, or missed or widened the spec:
 [recovery.md](references/recovery.md) — never re-spawn an agent that returned
@@ -286,7 +286,7 @@ escalate:
 
 **`--fix` is serial-mode only** — in parallel mode it would write one branch's
 repairs into the main checkout. Parallel mode reviews without `--fix` and spawns
-one `sonnet` fix run per branch from
+one `executor` fix run per branch from
 [agents/review-fix.md](references/agents/review-fix.md), all in one message; a
 branch with zero accepted findings gets no spawn
 ([why](references/recovery.md#--fix-and-why-it-is-serial-mode-only)). Host won't
@@ -421,13 +421,13 @@ it lands; record (`--event followup`), and pass `--refresh` on the next plan.
 ### 8b. Unblock held designs in the background
 
 Everything filed `--needs-design`, plus the design-blocked issues already in the
-backlog (step 1's `needs-design:`), gets one **`opus`** sub-agent each, from
+backlog (step 1's `needs-design:`), gets one **`architect`** sub-agent each, from
 [agents/design-decision.md](references/agents/design-decision.md).
 
 **Spawn and move on — never block on one.** They run while this session keeps
 shipping, and the Agent tool notifies this session as each returns.
 
-- One agent per issue, always `opus`, all of a round issued **in one message**.
+- One agent per issue, always `architect`, all of a round issued **in one message**.
   Cap **3 in flight**; queue the rest — this run's own filings first, then
   backlog issues highest tier first.
 - **The queue drains on notification, not at a step.** When one returns, record
@@ -549,7 +549,7 @@ implemented, at [step 2b](#2b-decide-a-design-that-gates-the-pick).
 ## Further reading
 
 [cost-discipline.md](references/cost-discipline.md) — context budget, per-issue
-run budget, model and effort assignment, what parallel mode costs against what it
+run budget, tier assignment, what parallel mode costs against what it
 saves · [recovery.md](references/recovery.md) — everything that can go sideways
 between step 3 and step 7 ·
 [delegation-templates.md](references/delegation-templates.md) — the six sub-agent
