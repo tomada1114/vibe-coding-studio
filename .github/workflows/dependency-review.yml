@@ -30,5 +30,18 @@ jobs:
           # allowed, so an unrecognised-but-permissive license does not block a
           # PR that nobody has configured for it yet.
           deny-licenses: AGPL-3.0, GPL-2.0, GPL-3.0, LGPL-2.1, LGPL-3.0, SSPL-1.0
+          # sharp's prebuilt libvips binaries are LGPL-3.0-or-later, dynamically
+          # linked and unmodified, which LGPL permits; the deny stays for the rest.
+          allow-dependencies-licenses: >-
+            pkg:npm/%40img/sharp-libvips-darwin-arm64,
+            pkg:npm/%40img/sharp-libvips-darwin-x64,
+            pkg:npm/%40img/sharp-libvips-linux-arm,
+            pkg:npm/%40img/sharp-libvips-linux-arm64,
+            pkg:npm/%40img/sharp-libvips-linux-ppc64,
+            pkg:npm/%40img/sharp-libvips-linux-riscv64,
+            pkg:npm/%40img/sharp-libvips-linux-s390x,
+            pkg:npm/%40img/sharp-libvips-linux-x64,
+            pkg:npm/%40img/sharp-libvips-linuxmusl-arm64,
+            pkg:npm/%40img/sharp-libvips-linuxmusl-x64
           # No `comment-summary-in-pr`: it needs `pull-requests: write`, which a
           # fork PR's token does not have. The job log is the report.
